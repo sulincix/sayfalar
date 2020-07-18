@@ -78,3 +78,12 @@ Paketleme aşaması
 	    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
 	$ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
         $ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
+
+4. grub.cfg dosyası oluşturalım.
+
+.. code-block:: shell
+
+	$ mkdir -p isowork/boot/grub/
+	$ echo "linux /live/vmlinuz boot=live" > isowork/boot/grub/grub.cfg
+	$ echo "initrd /live/initrd.img" >> isowork/boot/grub/grub.cfg
+	$ echo "boot" >> isowork/boot/grub/grub.cfg
