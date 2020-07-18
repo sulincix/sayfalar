@@ -158,6 +158,17 @@ Paketleme öncesi
 
 	☭ umount -lf -R sid-chroot/* 2>/dev/null
 	
+Temizlik
+^^^^^^^^
+squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir.
+
+.. code-block:: shell
+
+	☭ chroot sid-chroot apt-get clean # apt önbelleğini temizler
+	☭ rm -f sid-chroot/root/.bash_history # iso yaparken oluşturduğunuz historyleri temizler
+	☭ rm -rf sid-chroot/var/lib/apt/lists/* # index dosyalarını temizler
+	☭ find -type f sid-chroot/var/log/ | xargs rm -f # logları siler
+	
 Paketleme aşaması
 ^^^^^^^^^^^^^^^^^
 
