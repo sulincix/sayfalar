@@ -30,7 +30,8 @@ Chroot içine girmek için ön hazırlık
 
         $ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 
-
+Gerekli paketlerin kurulması
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
 
@@ -89,15 +90,18 @@ Chroot içine girmek için ön hazırlık
 	DISTRIB_CODENAME=sid
 	DISTRIB_DESCRIPTION="Custom Debian sid"
 
-Paketleme aşaması
-^^^^^^^^^^^^^^^^^
+Paketleme öncesi
+^^^^^^^^^^^^^^^^
 1.  Öncelikle chroot içerisinden çıkalım. ve ardından **bind** bağlarını kaldıralım.
 
 .. code-block:: shell
 
 	$ umount -lf -R sid-chroot 2>/dev/null
 	
-2. İso taslağı dizini açalım ve **squashfs** imajı alalım. aldığımız imajı daha sonra iso taslağı içinde **live** adında bir dizin açarak içine atalım.
+Paketleme aşaması
+^^^^^^^^^^^^^^^^^
+
+1. İso taslağı dizini açalım ve **squashfs** imajı alalım. aldığımız imajı daha sonra iso taslağı içinde **live** adında bir dizin açarak içine atalım.
 
 .. code-block:: shell
 	
@@ -106,7 +110,7 @@ Paketleme aşaması
 	$ mkdir -p isowork/live
 	$ mv filesystem.squashfs isowork/live/filesystem.squashfs
 
-3. Ardından **vmlinuz** ve **initrd** dosyalarını isowork/boot içerisine atalım.
+2. Ardından **vmlinuz** ve **initrd** dosyalarını isowork/boot içerisine atalım.
 
 .. code-block:: shell
 
@@ -115,7 +119,7 @@ Paketleme aşaması
 	$ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
         $ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
 
-4. **grub.cfg** dosyası oluşturalım.
+3. **grub.cfg** dosyası oluşturalım.
 
 .. code-block:: shell
 
@@ -125,7 +129,7 @@ Paketleme aşaması
 	$ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
 	$ echo '}' >> isowork/boot/grub/grub.cfg
 
-5. Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso **isowork** dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.
+4. Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso **isowork** dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.
 
 .. code-block:: shell
 
@@ -139,7 +143,7 @@ Paketleme aşaması
     	    ├── initrd.img
     	    └── vmlinuz
 
-6. İso dosyası üretelim. 
+5. İso dosyası üretelim. 
 
 .. code-block:: shell
 
