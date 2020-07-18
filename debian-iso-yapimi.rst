@@ -12,3 +12,8 @@
 	mkdir sid-chroot
 	debootstrap sid sid-chroot https://deb.debian.org/debian
 
+3. dev sys proc run bind bağlayın
+::code-block: shell
+
+	for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
+	
