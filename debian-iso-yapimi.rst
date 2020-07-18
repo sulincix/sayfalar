@@ -25,5 +25,5 @@
 .. code-block:: shell
 
 	$ chroot sid-chroot /bin/bash
-	# echo "deb https://deb.debian.org/debian sid main contrib non-free" > /etc/apt/sources.list
-	# apt-get update
+	$$ echo "deb https://deb.debian.org/debian sid main contrib non-free" > /etc/apt/sources.list
+	$$ apt-get update
