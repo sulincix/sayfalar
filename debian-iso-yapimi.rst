@@ -10,8 +10,9 @@ Temel kavramlar
 Terim     Anlamı
 ========  ========
 chroot         Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
-squashfs       Sıkıştırılmış haldeki kök dizin dosyasıdır. oluşturulması donanıma bağlı olarak uzun sürmektedir.
-iso            Kurulum medyası dosyasıdır. Bu dosyayı son üründür.
+squashfs       Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. **Debian** tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.
+iso            Kurulum medyası dosyasıdır. Bu dosya son üründür ve yayınlayabilirsiniz.
+live           Kurulum yapmadan çalışan sisteme **live** adı verilir.
 ========  ========
 
 
