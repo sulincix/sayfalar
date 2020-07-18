@@ -39,3 +39,9 @@
 .. code-block:: shell
 
 	$ apt-get install grub-pc-bin grub-efi
+
+7. live açılış için gereken paketleri kuralım.
+
+.. code-block:: shell
+
+	$ apt-get install live-config live-boot
