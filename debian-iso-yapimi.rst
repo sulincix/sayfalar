@@ -20,10 +20,16 @@
 
 	$ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 	
-4. chroot komutu ile oluşan chroot içerisine girelim. ve ardından sources.list dosyasını düzenleyelim.
+4. chroot komutu ile oluşan chroot içerisine girelim. ve ardından sources.list dosyasını düzenleyelim. bu noktadan sonra chroot içerisinden devam edeceğiz. 
 
 .. code-block:: shell
 
 	$ chroot sid-chroot /bin/bash
 	$ echo "deb https://deb.debian.org/debian sid main contrib non-free" > /etc/apt/sources.list
 	$ apt-get update
+
+5. kernel kuralım.
+
+.. code-block:: shell
+
+	$ apt-get install linux-headers-amd64 linux-image-amd64
