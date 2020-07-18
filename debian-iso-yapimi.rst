@@ -151,6 +151,7 @@ mate         apt-get install mate-desktop-environment-core
 	    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
 	    firmware-siano firmware-ti-connectivity firmware-zd1211 
 
+
 5. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini içtediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
 
 Örneğin: ev dizinine **deneme** adında bir dosya gelmesini isterseniz. *echo "hello world" > sid-chroot/etc/skel/deneme* kullanabilirsiniz.
