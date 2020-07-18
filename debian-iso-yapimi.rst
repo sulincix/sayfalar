@@ -69,3 +69,12 @@ Paketleme aşaması
 	$ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
 	$ mkdir -p isowork/live
 	$ mv filesystem.squashfs isowork/live/filesystem.squashfs
+
+3. Ardından **vmlinuz** ve **initrd** dosyalarını isowork/boot içerisine atalım.
+
+.. code-block:: shell
+
+	$ ls sid-chroot/boot/
+	    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
+	$ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
+        $ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
