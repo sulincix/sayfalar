@@ -62,7 +62,7 @@ Gerekli paketlerin kurulması
 
 1. Dağıtım adını değiştirmek için **/etc/os-release** ve **/etc/lsb-release** dosyalarını düzenleyebilirsiniz.
 
-/etc/os-release
+* /etc/os-release
 
 .. code-block:: shell
 	
@@ -79,7 +79,7 @@ Gerekli paketlerin kurulması
 	VERSION_CODENAME=custom
 	DEBIAN_CODENAME=sid
 
-/etc/lsb-release
+* /etc/lsb-release
 
 .. code-block:: shell
 
