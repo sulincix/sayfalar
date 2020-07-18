@@ -20,9 +20,10 @@
 
 	for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 	
-4. chroot ile oluşan chroot içerisine girelim. 
+4. chroot komutu ile oluşan chroot içerisine girelim. ve ardından sources.list dosyasını düzenleyelim.
 
 .. code-block:: shell
 
 	chroot sid-chroot /bin/bash
-	
+	echo "deb https://deb.debian.org/debian sid main contrib non-free" > /etc/apt/sources.list
+	apt-get update
