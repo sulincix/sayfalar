@@ -58,7 +58,8 @@ Gerekli paketlerin kurulması
 
 1. Dağıtım adını değiştirmek için **/etc/os-release** dosyasını düzenleyebilirsiniz.
 
- /etc/os-release
+/etc/os-release
+
 .. code-block:: shell
 	
 	PRETTY_NAME="Custom debian (sid)"
@@ -74,7 +75,8 @@ Gerekli paketlerin kurulması
 	VERSION_CODENAME=custom
 	DEBIAN_CODENAME=sid
 
- /etc/lsb-release
+/etc/lsb-release
+
 .. code-block:: shell
 
 	DISTRIB_ID=CustomDebian
