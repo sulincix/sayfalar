@@ -151,6 +151,10 @@ mate         apt-get install mate-desktop-environment-core
 	    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
 	    firmware-siano firmware-ti-connectivity firmware-zd1211 
 
+5. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini içtediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
+
+Örneğin: ev dizinine **deneme** adında bir dosya gelmesini isterseniz. *echo "hello world" > sid-chroot/etc/skel/deneme* kullanabilirsiniz.
+
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
 1.  Öncelikle chroot içerisinden çıkalım. ve ardından **bind** bağlarını kaldıralım.
@@ -161,7 +165,7 @@ Paketleme öncesi
 	
 Temizlik
 ^^^^^^^^
-squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir.
+Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu değildir fakat yaptığınız zaman squashfs ve iso boyutunu küçültmektedir.
 
 .. code-block:: shell
 
