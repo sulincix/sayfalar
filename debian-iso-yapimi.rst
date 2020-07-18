@@ -32,7 +32,7 @@ Hazırlık
 .. code-block:: shell
 
 	$ chroot sid-chroot /bin/bash
-	$ echo "deb https://deb.debian.org/debian sid main contrib non-free" > /etc/apt/sources.list
+	$ echo 'deb https://deb.debian.org/debian sid main contrib non-free' > /etc/apt/sources.list
 	$ apt-get update
 
 2. Kernel kuralım.
@@ -84,7 +84,7 @@ Paketleme aşaması
 .. code-block:: shell
 
 	$ mkdir -p isowork/boot/grub/
-	$ echo "menuentry "Start Debian 64-bit" --class debian {" > isowork/boot/grub/grub.cfg
-	$ echo "    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --" >> isowork/boot/grub/grub.cfg
-	$ echo "    initrd /live/initrd.img" >> isowork/boot/grub/grub.cfg
-	$ echo "}" >> isowork/boot/grub/grub.cfg
+	$ echo 'menuentry "Start Debian 64-bit" --class debian {' > isowork/boot/grub/grub.cfg
+	$ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> isowork/boot/grub/grub.cfg
+	$ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
+	$ echo '}' >> isowork/boot/grub/grub.cfg
