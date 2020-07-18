@@ -84,6 +84,7 @@ Paketleme aşaması
 .. code-block:: shell
 
 	$ mkdir -p isowork/boot/grub/
-	$ echo "linux /live/vmlinuz boot=live" > isowork/boot/grub/grub.cfg
-	$ echo "initrd /live/initrd.img" >> isowork/boot/grub/grub.cfg
-	$ echo "boot" >> isowork/boot/grub/grub.cfg
+	echo "menuentry "Start Debian 64-bit" --class debian {" > isowork/boot/grub/grub.cfg
+	$ echo "    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --" >> isowork/boot/grub/grub.cfg
+	$ echo "    initrd /live/initrd.img" >> isowork/boot/grub/grub.cfg
+	$ echo "}" >> isowork/boot/grub/grub.cfg
