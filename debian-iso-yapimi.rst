@@ -55,3 +55,15 @@ Hazırlık
 
 Paketleme aşaması
 ^^^^^^^^^^^^^^^^^
+1.  Öncelikle chroot içerisinden çıkalım. ve ardından bind bağlarını kaldıralım.
+
+.. code-block:: shell
+
+	$ umount -lf -R sid-chroot 2>/dev/null
+	
+2. iso taslağı dizini açalım ve squashfs imajı alalım.
+
+.. code-block:: shell
+	
+	$ mkdir isowork
+	$ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
