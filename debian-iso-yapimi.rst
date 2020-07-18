@@ -4,15 +4,14 @@ Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı 
 
   **Not: Biraz mizah içerir.** Şimdiden **ALLAH** sabır versin :D
 
-
-Temel kavramlar
-
 ========  ========
+Temel kavramlar
+------------------
 Terim     Anlamı
 ========  ========
 chroot         Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
-squashfs         Sıkıştırılmış haldeki kök dizin dosyasıdır. oluşturulması donanıma bağlı olarak uzun sürmektedir.
-iso       Kurulum medyası dosyasıdır. Bu dosyayı son üründür.
+squashfs       Sıkıştırılmış haldeki kök dizin dosyasıdır. oluşturulması donanıma bağlı olarak uzun sürmektedir.
+iso            Kurulum medyası dosyasıdır. Bu dosyayı son üründür.
 ========  ========
 
 
