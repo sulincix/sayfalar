@@ -60,7 +60,7 @@ Gerekli paketlerin kurulması
 Özelleştirme
 ^^^^^^^^^^^^
 
-1. Dağıtım adını değiştirmek için **/etc/os-release** dosyasını düzenleyebilirsiniz.
+1. Dağıtım adını değiştirmek için **/etc/os-release** ve **/etc/lsb-release** dosyalarını düzenleyebilirsiniz.
 
 /etc/os-release
 
