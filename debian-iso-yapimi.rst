@@ -5,13 +5,13 @@ Bu dokümanda debian sid kullanarak özelleşmiş bir live iso yapımı anlatıl
 Hazırlık
 ^^^^^^^^
 
-1. debootstrap kurun
+1. Gerekli paketleri kuralım
 
 .. code-block:: shell
 
-	$ apt install debootstrap
+	$ apt install debootstrap xorriso squashfs-tools
 	
-2. debootstrap ile debian chroot ortamı oluşturalım
+2. Debootstrap ile debian chroot ortamı oluşturalım
 
 .. code-block:: shell
 
@@ -27,7 +27,7 @@ Hazırlık
 Özelleştirme
 ^^^^^^^^^^^^
 
-1. chroot komutu ile oluşan chroot içerisine girelim. ve ardından sources.list dosyasını düzenleyelim. bu noktadan sonra chroot içerisinden devam edeceğiz. 
+1. Chroot komutu ile oluşan chroot içerisine girelim. ve ardından sources.list dosyasını düzenleyelim. bu noktadan sonra chroot içerisinden devam edeceğiz. 
 
 .. code-block:: shell
 
@@ -35,19 +35,19 @@ Hazırlık
 	$ echo "deb https://deb.debian.org/debian sid main contrib non-free" > /etc/apt/sources.list
 	$ apt-get update
 
-2. kernel kuralım.
+2. Kernel kuralım.
 
 .. code-block:: shell
 
 	$ apt-get install linux-headers-amd64 linux-image-amd64
 	
-3. grub kuralım.
+3. Grub kuralım.
 
 .. code-block:: shell
 
 	$ apt-get install grub-pc-bin grub-efi
 
-4. live açılış için gereken paketleri kuralım.
+4. Live açılış için gereken paketleri kuralım.
 
 .. code-block:: shell
 
@@ -61,7 +61,7 @@ Paketleme aşaması
 
 	$ umount -lf -R sid-chroot 2>/dev/null
 	
-2. iso taslağı dizini açalım ve squashfs imajı alalım.
+2. İso taslağı dizini açalım ve squashfs imajı alalım.
 
 .. code-block:: shell
 	
