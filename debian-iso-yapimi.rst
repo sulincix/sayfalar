@@ -61,9 +61,11 @@ Paketleme aşaması
 
 	$ umount -lf -R sid-chroot 2>/dev/null
 	
-2. İso taslağı dizini açalım ve squashfs imajı alalım.
+2. İso taslağı dizini açalım ve squashfs imajı alalım. aldığımız imajı daha sonra iso taslağı içinde live adında bir dizin açarak içine atalım.
 
 .. code-block:: shell
 	
 	$ mkdir isowork
 	$ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
+	$ mkdir -p isowork/live
+	$ mv filesystem.squashfs isowork/live/filesystem.squashfs
