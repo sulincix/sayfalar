@@ -93,14 +93,16 @@ Gerekli paketlerin kurulması
 	
 2. Masaüstü ortamı kurabiliriz.
 
+========     ===========================================
 Masaüstü     Komut
-========     =====
+========     ============================================
 xfce         apt-get install xfce
 lxde         apt-get install lxde
 cinnamon     apt-get install cinnamon
 plasma       apt-get install kde-standard
 gnome        apt-get install gnome-core
 mate         atp-get install mate-desktop-environment-core
+========     =============================================
 
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
