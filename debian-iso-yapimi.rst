@@ -1,24 +1,24 @@
 İso yapımı
 ==========
-Bu dokümanda debian **sid** kullanarak özelleşmiş bir live iso yapımı anlatılacaktır. debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken dokümanda sid yerine stable yazmaktır. Şimdiden kolay gelsin :D
+Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı anlatılacaktır. debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken dokümanda **sid** yerine **stable** yazmaktır. Şimdiden kolay gelsin :D
 
 Hazırlık
 ^^^^^^^^
 
-1. Gerekli paketleri kuralım
+1. Gerekli paketleri kuralım.
 
 .. code-block:: shell
 
 	$ apt install debootstrap xorriso squashfs-tools
 	
-2. **Debootstrap** ile debian chroot ortamı oluşturalım
+2. **Debootstrap** ile debian chroot ortamı oluşturalım.
 
 .. code-block:: shell
 
 	$ mkdir sid-chroot
 	$ debootstrap sid sid-chroot https://deb.debian.org/debian
 
-3. **dev sys proc run** bind bağlayın
+3. **dev sys proc run** bind bağlayalım.
 
 .. code-block:: shell
 
