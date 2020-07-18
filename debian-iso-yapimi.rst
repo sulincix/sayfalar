@@ -9,7 +9,7 @@ Hazırlık
 
 .. code-block:: shell
 
-	$ apt install debootstrap xorriso squashfs-tools
+	☭ apt install debootstrap xorriso squashfs-tools
 	
 Chroot oluşturulması
 ^^^^^^^^^^^^^^^^^^^^
@@ -18,8 +18,8 @@ Chroot oluşturulması
 
 .. code-block:: shell
 
-	$ mkdir sid-chroot
-	$ debootstrap sid sid-chroot https://deb.debian.org/debian
+	☭ mkdir sid-chroot
+	☭ debootstrap sid sid-chroot https://deb.debian.org/debian
 
 Chroot içine girmek için ön hazırlık
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -28,7 +28,7 @@ Chroot içine girmek için ön hazırlık
 
 .. code-block:: shell
 
-        $ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
+        ☭ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 
 Gerekli paketlerin kurulması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -37,27 +37,27 @@ Gerekli paketlerin kurulması
 
 .. code-block:: shell
 
-	$ chroot sid-chroot /bin/bash
-	$ echo 'deb https://deb.debian.org/debian sid main contrib non-free' > /etc/apt/sources.list
-	$ apt-get update
+	☭ chroot sid-chroot /bin/bash
+	☭ echo 'deb https://deb.debian.org/debian sid main contrib non-free' > /etc/apt/sources.list
+	☭ apt-get update
 
 2. Kernel kuralım.
 
 .. code-block:: shell
 
-	$ apt-get install linux-headers-amd64 linux-image-amd64
+	☭ apt-get install linux-headers-amd64 linux-image-amd64
 	
 3. Grub kuralım.
 
 .. code-block:: shell
 
-	$ apt-get install grub-pc-bin grub-efi
+	☭ apt-get install grub-pc-bin grub-efi
 
 4. Live açılış için gereken paketleri kuralım.
 
 .. code-block:: shell
 
-	$ apt-get install live-config live-boot
+	☭ apt-get install live-config live-boot
 
 Özelleştirme
 ^^^^^^^^^^^^
@@ -95,7 +95,7 @@ Gerekli paketlerin kurulması
 
 .. code-block:: shell
 
-	$ apt-get install xorg xinit
+	☭ apt-get install xorg xinit
 
 ========     =====
 Masaüstü     Komut
@@ -112,14 +112,14 @@ mate         apt-get install mate-desktop-environment-core
 
 .. code-block:: shell
 
-	$ git clone https://gitlab.com/ggggggggggggggggg/17g-debian
-	$ cd 17g-debian
-	$ make && make create-deb-debian
-	$ cd ..
-	$ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
-	$ chroot sid-chroot dpkg -i /tmp/build.deb
-	$ chroot sid-chroot apt-get install -f
-	$ rm -f sid-chroot sid-chroot/tmp/build.deb
+	☭ git clone https://gitlab.com/ggggggggggggggggg/17g-debian
+	☭ cd 17g-debian
+	☭ make && make create-deb-debian
+	☭ cd ..
+	☭ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
+	☭ chroot sid-chroot dpkg -i /tmp/build.deb
+	☭ chroot sid-chroot apt-get install -f
+	☭ rm -f sid-chroot sid-chroot/tmp/build.deb
 
 
 Paketleme öncesi
@@ -128,7 +128,7 @@ Paketleme öncesi
 
 .. code-block:: shell
 
-	$ umount -lf -R sid-chroot/* 2>/dev/null
+	☭ umount -lf -R sid-chroot/* 2>/dev/null
 	
 Paketleme aşaması
 ^^^^^^^^^^^^^^^^^
@@ -137,35 +137,35 @@ Paketleme aşaması
 
 .. code-block:: shell
 	
-	$ mkdir isowork
-	$ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
-	$ mkdir -p isowork/live
-	$ mv filesystem.squashfs isowork/live/filesystem.squashfs
+	☭ mkdir isowork
+	☭ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
+	☭ mkdir -p isowork/live
+	☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 
 2. Ardından **vmlinuz** ve **initrd** dosyalarını isowork/boot içerisine atalım.
 
 .. code-block:: shell
 
-	$ ls sid-chroot/boot/
+	☭ ls sid-chroot/boot/
 	    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
-	$ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
-        $ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
+	☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
+        ☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
 
 3. **grub.cfg** dosyası oluşturalım.
 
 .. code-block:: shell
 
-	$ mkdir -p isowork/boot/grub/
-	$ echo 'menuentry "Start Debian 64-bit" --class debian {' > isowork/boot/grub/grub.cfg
-	$ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> isowork/boot/grub/grub.cfg
-	$ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
-	$ echo '}' >> isowork/boot/grub/grub.cfg
+	☭ mkdir -p isowork/boot/grub/
+	☭ echo 'menuentry "Start Debian 64-bit" --class debian {' > isowork/boot/grub/grub.cfg
+	☭ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> isowork/boot/grub/grub.cfg
+	☭ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
+	☭ echo '}' >> isowork/boot/grub/grub.cfg
 
 4. Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso **isowork** dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.
 
 .. code-block:: shell
 
-	$ tree isowork
+	☭ tree isowork
 	    iso-work/
 	    ├── boot
 	    │   └── grub
@@ -179,4 +179,4 @@ Paketleme aşaması
 
 .. code-block:: shell
 
-	$ grub-mkrescue isowork -o debian-live.iso
+	☭ grub-mkrescue isowork -o debian-live.iso
