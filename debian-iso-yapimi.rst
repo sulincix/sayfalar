@@ -12,7 +12,7 @@ Terim         Açıklama
 chroot        Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
 squashfs      Sıkıştırılmış haldeki kök dizin dosyasıdır. oluşturulması donanıma bağlı olarak uzun sürmektedir.
 iso           Kurulum medyası dosyasıdır. Bu dosyayı son üründür.
-
+=====         ========
 
 Hazırlık
 ^^^^^^^^
