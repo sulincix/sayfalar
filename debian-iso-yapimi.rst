@@ -20,3 +20,9 @@
 
 	for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 	
+4. chroot ile oluşan chroot içerisine girelim. 
+
+.. code-block:: shell
+
+	chroot sid-chroot /bin/bash
+	
