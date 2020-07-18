@@ -24,8 +24,8 @@ Hazırlık
 
 	$ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 	
-Özelleştirme
-^^^^^^^^^^^^
+Gerekli paketlerin kurulması
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
 
@@ -52,6 +52,26 @@ Hazırlık
 .. code-block:: shell
 
 	$ apt-get install live-config live-boot
+
+Özelleştirme
+^^^^^^^^^^^^
+
+1. Dağıtım adını değiştirmek için /etc/os-release dosyasını düzenleyebilirsiniz.
+
+.. code-block:: shell
+	
+	PRETTY_NAME="Custom debian (sid)"
+	NAME="CUSTOM"
+	VERSION_ID="1"
+	VERSION="1 (sid)"
+	ID=customdebian
+	ID_LIKE=debian
+	HOME_URL="https://www.example.com/"
+	SUPPORT_URL="https://forums.example.com/"
+	BUG_REPORT_URL="https://example.com/issues/"
+	PRIVACY_POLICY_URL="https://www.example.com/privacy/"
+	VERSION_CODENAME=custom
+	DEBIAN_CODENAME=sid
 
 Paketleme aşaması
 ^^^^^^^^^^^^^^^^^
