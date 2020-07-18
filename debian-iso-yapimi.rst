@@ -7,6 +7,7 @@ Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı 
 Temel kavramlar
 +++++++++++++++
 
+=====         ========
 Terim         Açıklama
 =====         ========
 chroot        Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
