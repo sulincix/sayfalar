@@ -1,5 +1,6 @@
 İso yapımı
 ==========
+Bu dokümanda debian sid kullanarak özelleşmiş bir live iso yapımı anlatılacaktır. debian sid yerine stable kullanmak isterseniz yapmanız gereken dokümanda sid yerine stable yazmaktır. Şimdiden kolay gelsin :D
 
 Hazırlık
 ^^^^^^^^
