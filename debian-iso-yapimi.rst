@@ -89,7 +89,21 @@ Paketleme aşaması
 	$ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
 	$ echo '}' >> isowork/boot/grub/grub.cfg
 
-5. İso dosyası üretelim.
+5. Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso **isowork** dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.
+
+.. code-block:: shell
+
+	$ tree isowork
+	    iso-work/
+	    ├── boot
+	    │   └── grub
+	    │       └── grub.cfg
+	    └── live
+    	    ├── filesystem.squashfs
+    	    ├── initrd.img
+    	    └── vmlinuz
+
+6. İso dosyası üretelim. 
 
 .. code-block:: shell
 
