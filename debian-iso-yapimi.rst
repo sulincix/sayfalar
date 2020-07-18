@@ -136,6 +136,12 @@ mate         apt-get install mate-desktop-environment-core
 	☭ rm -f sid-chroot sid-chroot/tmp/build.deb
 
 
+4. Sürücüleri ekleyebilirsiniz.
+
+.. code-block:: shell
+
+	☭ apt install firmware-amd-graphics firmware-atheros firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netxen firmware-qlogic firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 
+
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
 1.  Öncelikle chroot içerisinden çıkalım. ve ardından **bind** bağlarını kaldıralım.
