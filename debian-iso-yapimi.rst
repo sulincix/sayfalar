@@ -21,9 +21,9 @@ Chroot oluşturulması
 	$ mkdir sid-chroot
 	$ debootstrap sid sid-chroot https://deb.debian.org/debian
 
-	
-Gerekli paketlerin kurulması
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Chroot içine girmek için ön hazırlık
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 1. **dev sys proc run** bind bağlayalım. Bu işlem her chroot ile **sid-chroot** içerisine girileceğinde yapılmalıdır. **sid-chroot** içerisinden çıkıldığında ise  bind bağının sökülmesi gerekmektedir. 
 
 .. code-block:: shell
@@ -31,7 +31,8 @@ Gerekli paketlerin kurulması
         $ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 
 
-2. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
+
+1. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
 
 .. code-block:: shell
 
@@ -39,19 +40,19 @@ Gerekli paketlerin kurulması
 	$ echo 'deb https://deb.debian.org/debian sid main contrib non-free' > /etc/apt/sources.list
 	$ apt-get update
 
-3. Kernel kuralım.
+2. Kernel kuralım.
 
 .. code-block:: shell
 
 	$ apt-get install linux-headers-amd64 linux-image-amd64
 	
-4. Grub kuralım.
+3. Grub kuralım.
 
 .. code-block:: shell
 
 	$ apt-get install grub-pc-bin grub-efi
 
-5. Live açılış için gereken paketleri kuralım.
+4. Live açılış için gereken paketleri kuralım.
 
 .. code-block:: shell
 
