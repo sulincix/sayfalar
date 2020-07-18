@@ -104,13 +104,27 @@ gnome        apt-get install gnome-core
 mate         apt-get install mate-desktop-environment-core
 ========     =====
 
+3. Kurulum aracı ekleyebiliz.
+
+.. code-block:: shell
+
+	$ git clone https://gitlab.com/ggggggggggggggggg/17g-debian
+	$ cd 17g-debian
+	$ make && make create-deb-debian
+	$ cd ..
+	$ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
+	$ chroot sid-chroot dpkg -i /tmp/build.deb
+	$ chroot sid-chroot apt-get install -f
+	$ rm -f sid-chroot sid-chroot/tmp/build.deb
+
+
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
 1.  Öncelikle chroot içerisinden çıkalım. ve ardından **bind** bağlarını kaldıralım.
 
 .. code-block:: shell
 
-	$ umount -lf -R sid-chroot 2>/dev/null
+	$ umount -lf -R sid-chroot/* 2>/dev/null
 	
 Paketleme aşaması
 ^^^^^^^^^^^^^^^^^
