@@ -33,3 +33,9 @@
 .. code-block:: shell
 
 	$ apt-get install linux-headers-amd64 linux-image-amd64
+	
+6. grub kuralım.
+
+.. code-block:: shell
+
+	$ apt-get install grub-pc-bin grub-efi
