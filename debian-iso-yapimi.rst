@@ -11,23 +11,27 @@ Hazırlık
 
 	$ apt install debootstrap xorriso squashfs-tools
 	
-2. **Debootstrap** ile debian chroot ortamı oluşturalım.
+Chroot oluşturulması
+^^^^^^^^^^^^^^^^^^^^
+	
+1. **Debootstrap** ile debian chroot ortamı oluşturalım.
 
 .. code-block:: shell
 
 	$ mkdir sid-chroot
 	$ debootstrap sid sid-chroot https://deb.debian.org/debian
 
-3. **dev sys proc run** bind bağlayalım.
-
-.. code-block:: shell
-
-	$ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 	
 Gerekli paketlerin kurulması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. **dev sys proc run** bind bağlayalım.
 
-1. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
+.. code-block:: shell
+
+        $ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
+
+
+2. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
 
 .. code-block:: shell
 
@@ -35,19 +39,19 @@ Gerekli paketlerin kurulması
 	$ echo 'deb https://deb.debian.org/debian sid main contrib non-free' > /etc/apt/sources.list
 	$ apt-get update
 
-2. Kernel kuralım.
+3. Kernel kuralım.
 
 .. code-block:: shell
 
 	$ apt-get install linux-headers-amd64 linux-image-amd64
 	
-3. Grub kuralım.
+4. Grub kuralım.
 
 .. code-block:: shell
 
 	$ apt-get install grub-pc-bin grub-efi
 
-4. Live açılış için gereken paketleri kuralım.
+5. Live açılış için gereken paketleri kuralım.
 
 .. code-block:: shell
 
