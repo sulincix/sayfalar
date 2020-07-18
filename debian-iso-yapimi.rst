@@ -93,6 +93,10 @@ Gerekli paketlerin kurulması
 	
 2. Masaüstü ortamı kurabiliriz.
 
+.. code-block:: shell
+
+	$ apt-get install xorg xinit
+
 ========     =====
 Masaüstü     Komut
 ========     =====
