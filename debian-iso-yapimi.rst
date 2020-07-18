@@ -74,7 +74,7 @@ Gerekli paketlerin kurulması
 	VERSION_CODENAME=custom
 	DEBIAN_CODENAME=sid
 
-  /etc/lsb-release
+ /etc/lsb-release
 .. code-block:: shell
 
 	DISTRIB_ID=CustomDebian
