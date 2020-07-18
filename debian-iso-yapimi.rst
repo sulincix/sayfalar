@@ -23,7 +23,7 @@ Hazırlık
 
 .. code-block:: shell
 
-	☭ apt install debootstrap xorriso squashfs-tools
+	☭ apt-get install debootstrap xorriso squashfs-tools
 	
 Chroot oluşturulması
 ^^^^^^^^^^^^^^^^^^^^
