@@ -24,7 +24,7 @@ Chroot oluşturulması
 	
 Gerekli paketlerin kurulması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-1. **dev sys proc run** bind bağlayalım.
+1. **dev sys proc run** bind bağlayalım. Bu işlem her chroot ile **sid-chroot** içerisine girileceğinde yapılmalıdır. **sid-chroot** içerisinden çıkıldığında ise  bind bağının sökülmesi gerekmektedir. 
 
 .. code-block:: shell
 
