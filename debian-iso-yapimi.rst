@@ -88,3 +88,9 @@ Paketleme aşaması
 	$ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> isowork/boot/grub/grub.cfg
 	$ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
 	$ echo '}' >> isowork/boot/grub/grub.cfg
+
+5. İso dosyası üretelim.
+
+.. code-block:: shell
+
+	$ grub-mkrescue isowork -o debian-live.iso
