@@ -11,7 +11,7 @@ Terim     Anlamı
 ========  ========
 chroot         Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
 squashfs       Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. **Debian** tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.
-iso            Kurulum medyası dosyasıdır. Bu dosya son üründür ve yayınlayabilirsiniz.
+iso            Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.
 live           Kurulum yapmadan çalışan sisteme **live** adı verilir.
 ========  ========
 
@@ -137,7 +137,7 @@ mate         apt-get install mate-desktop-environment-core
 	☭ rm -f sid-chroot sid-chroot/tmp/build.deb
 
 
-4. Sürücüleri ekleyebilirsiniz.
+4. Sürücüleri ekleyebiliz.
 
 .. code-block:: shell
 
@@ -152,7 +152,7 @@ mate         apt-get install mate-desktop-environment-core
 	    firmware-siano firmware-ti-connectivity firmware-zd1211 
 
 
-5. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini içtediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
+5. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
 
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
