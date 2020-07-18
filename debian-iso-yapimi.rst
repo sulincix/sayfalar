@@ -110,6 +110,7 @@ Gerekli paketlerin kurulması
 .. code-block:: shell
 
 	☭ apt-get install xorg xinit
+	☭ apt-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
 
 ========     =====
 Masaüstü     Komut
