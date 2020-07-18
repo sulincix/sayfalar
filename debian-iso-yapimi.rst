@@ -1,6 +1,9 @@
 İso yapımı
 ==========
 
+Hazırlık
+^^^^^^^^
+
 1. debootstrap kurun
 
 .. code-block:: shell
@@ -20,6 +23,9 @@
 
 	$ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
 	
+Özelleştirme
+^^^^^^^^^^^^
+
 4. chroot komutu ile oluşan chroot içerisine girelim. ve ardından sources.list dosyasını düzenleyelim. bu noktadan sonra chroot içerisinden devam edeceğiz. 
 
 .. code-block:: shell
@@ -45,3 +51,6 @@
 .. code-block:: shell
 
 	$ apt-get install live-config live-boot
+
+Paketleme aşaması
+^^^^^^^^^^^^^^^^^
