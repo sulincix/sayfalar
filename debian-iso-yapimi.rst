@@ -115,7 +115,7 @@ Gerekli paketlerin kurulması
 ========     =====
 Masaüstü     Komut
 ========     =====
-xfce         apt-get install xfce
+xfce         apt-get install xfce4
 lxde         apt-get install lxde
 cinnamon     apt-get install cinnamon
 plasma       apt-get install kde-standard
