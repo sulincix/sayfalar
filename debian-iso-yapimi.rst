@@ -42,7 +42,7 @@ Chroot içine girmek için ön hazırlık
 
 .. code-block:: shell
 
-        ☭ for i in dev dev/pts proc sys;do mount -o bind /$i sid-chroot/$i;done
+        ☭ for i in dev dev/pts proc sys; do mount -o bind /$i sid-chroot/$i; done
 
 Gerekli paketlerin kurulması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
