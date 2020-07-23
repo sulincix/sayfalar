@@ -2,7 +2,7 @@ Qemu-KVM Kullanımı
 ==================
 Bu belgede **qemu-kvm** kullanımı anlatılmaktadır. İşin teknik detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden **sövmeyin** :)
 
-Bu belgede debian **sid** üzerinde olduğunuzu varsayarak anlatım yaptım ama diğer dağıtımlarda da benzer şekilde kullanımı var.
+Bu belgede **debian sid** üzerinde olduğunuzu varsayarak anlatım yaptım ama diğer dağıtımlarda da benzer şekilde kullanımı var.
   
   **Not: Biraz mizah içerir.** 
 
