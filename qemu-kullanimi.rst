@@ -6,7 +6,7 @@ Qemu kullanmak için gui uygulamalar da vardır. Örneğin gnome-boxes ile qemuy
 
 Qemu kurulumu
 ^^^^^^^^^^^^^
-Debian için **apt-get install qemu-kvm** komutunu kullanabiliriz. Uefi bios ile kullanmak için **ovmf** paketine gerek duyulmaktadır.
+Debian için **apt-get install qemu-kvm** komutunu kullanabiliriz. Uefi bios ile kullanmak için **ovmf** paketine gerek duyulmaktadır. onuda debian için **apt-get install ovfm** komutu ile kurabiliriz.
 
 Disk imajı oluşturma
 ^^^^^^^^^^^^^^^^^^^^
@@ -52,6 +52,12 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 .. code-block:: shell
 
   $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
+  
+Uefi bios için ovmf eklememiz gerekir. onun için **-bios /usr/share/ovmf/OVMF.fd** parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)
+
+.. code-block:: shell
+
+  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
   
 Ek parametreler
 ^^^^^^^^^^^^^^^
