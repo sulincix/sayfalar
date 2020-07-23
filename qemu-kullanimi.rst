@@ -4,6 +4,10 @@ Bu belgede qemu-kvm kullanımı anlatılmaktadır. İşin teknit detayından ço
 
 Qemu kullanmak için gui uygulamalar da vardır. Örneğin gnome-boxes ile qemuyu grafik tabanlı olarak kullanabilirsiniz. Bu belgede buna değinmeyeceğiz. terminalden kullanımı üzerine anlatım olacak.
 
+Qemu kurulumu
+^^^^^^^^^^^^^
+Debian için **apt-get install qemu-kvm** komutunu kullanabiliriz. Uefi bios ile kullanmak için **ovmf** paketine gerek duyulmaktadır.
+
 Disk imajı oluşturma
 ^^^^^^^^^^^^^^^^^^^^
 **qemu-img** komutu ile kolay yoldan imaj açabiliriz. boyutunu G M gibi harfler ile ifade ediyoruz. Örneğin:
