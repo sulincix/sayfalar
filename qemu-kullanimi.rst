@@ -45,9 +45,9 @@ Ek parametreler
 ^^^^^^^^^^^^^^^
 Doğrudan tablo şeklinde vermeyi düşündüm.
 
-=========          ======
+==============     ======
 Parametre          Anlamı
-=========          ======
+==============     ======
 -boot d            cdrom ile başlat
 -boot c            hdd ile başlat
 -hdb xx            ikinci hard disk imajı
@@ -57,5 +57,6 @@ Parametre          Anlamı
 -smp cores=2       çift çekirdek kullan.
 -vga cirrus        ekran kartı olarak cirrus göster
 -vga vmware        ekran kartı olarak vmware göster
--display vnc:0     görüntüyü vnc üzerinden al
-=========          ======
+-display vnc:0     görüntüyü vnc üzerinden al (5900 portundan)
+==============     ======
+
