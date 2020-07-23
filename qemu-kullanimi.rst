@@ -15,6 +15,14 @@ Disk imajı oluşturma
   
 Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe dd komutu ile yazıp daha sonra bunu kullanabilirsiniz.
 
+**Raw** yerine **qcow2** formatta oluşturmak isterseniz **-f qcow2** parametresini ekleyebilirsiniz. Örneğin:
+
+.. code-block:: shell
+
+  $ qemu-img create -f qcow2 deneme.qcow2 30G
+  
+Ram imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. qcow2 imajlar ise daha az zararsızdır. ama dd komutu ile doğrudan basıp kullanılamaz.
+
 Sanal makinanın başlatılması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 **qemu-system-x86_64** komutu ile başlatılır. **--enable-kvm** parametresi eklenerek **kvm** etkinleştirilmelidir. yoksa çok kasar. Örnek kullanım:
