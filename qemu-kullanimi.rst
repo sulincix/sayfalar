@@ -41,3 +41,21 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
   $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
   
+Ek parametreler
+^^^^^^^^^^^^^^^
+Doğrudan tablo şeklinde vermeyi düşündüm.
+
+=========          ======
+Parametre          Anlamı
+=========          ======
+-boot d            cdrom ile başlat
+-boot c            hdd ile başlat
+-hdb xx            ikinci hard disk imajı
+-hdc xx            üçüncü hard disk imajı
+-hdd xx            dördüncü disk imajı
+-cpu host          yerel makinadın işlemci ismini kanalda kullan.
+-smp cores=2       çift çekirdek kullan.
+-vga cirrus        ekran kartı olarak cirrus göster
+-vga vmware        ekran kartı olarak vmware göster
+-display vnc:0     görüntüyü vnc üzerinden al
+=========      ======
