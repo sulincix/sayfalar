@@ -64,7 +64,7 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
   
 Bazı Parametreler
 ^^^^^^^^^^^^^^^
-Doğrudan tablo şeklinde vermeyi düşündüm. belgeyi okumaya üşenip buraya bakabilirsiniz.
+Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz. 
 
 ===============================        ======
 Parametre                              Anlamı
