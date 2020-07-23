@@ -13,7 +13,7 @@ Debian için **apt-get install qemu-kvm** komutunu kullanabiliriz. Uefi bios ile
 
 Disk imajı oluşturma
 ^^^^^^^^^^^^^^^^^^^^
-**qemu-img** komutu ile kolay yoldan imaj açabiliriz. boyutunu G M gibi harfler ile ifade ediyoruz. Örneğin:
+**qemu-img** komutu ile kolay yoldan imaj açabiliriz. boyutunu **G** **M** gibi harfler ile ifade ediyoruz. Örneğin:
 
 .. code-block:: shell
 
