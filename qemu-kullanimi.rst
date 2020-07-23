@@ -62,24 +62,29 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
   $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
   
-Ek parametreler
+Bazı Parametreler
 ^^^^^^^^^^^^^^^
-Doğrudan tablo şeklinde vermeyi düşündüm.
+Doğrudan tablo şeklinde vermeyi düşündüm. belgeyi okumaya üşenip buraya bakabilirsiniz.
 
 ===============================        ======
 Parametre                              Anlamı
 ===============================        ======
 -boot d                                cdrom ile başlat
 -boot c                                hdd ile başlat
+-m 3G                                  3gb ram kullan
+--enable-kvm                           KVM etkinleştir
+-cdrom xx                              iso dosyasını cdrom olarak ayarla
+-hda xx                                birinci hard disk imajı
 -hdb xx                                ikinci hard disk imajı
 -hdc xx                                üçüncü hard disk imajı
 -hdd xx                                dördüncü disk imajı
--cpu host                              yerel makinadın işlemci ismini kanalda kullan.
--smp cores=2                           çift çekirdek kullan.
+-cpu host                              yerel makinadın işlemci ismini kanalda kullan
+-smp cores=2                           çift çekirdek kullan
 -vga cirrus                            ekran kartı olarak cirrus göster
 -vga vmware                            ekran kartı olarak vmware göster
 -display vnc:0                         görüntüyü vnc üzerinden al (5900 portundan)
--soundhw ac97                          ses kartı olarak ac97 ekler.
--nic user,hostfwd=tcp::2222-:22        Sanal makinadaki 22 portunu hostun 2222 portuna yönlendirir.
+-soundhw ac97                          ses kartı olarak ac97 ekle
+-nic user,hostfwd=tcp::2222-:22        Sanal makinadaki 22 portunu hostun 2222 portuna yönlendir
+-bios /usr/share/ovmf/OVMF.fd          UEFI olarak başlat
 ===============================        ======
 
