@@ -39,7 +39,7 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G # disk imajını hard disk yaptık ve 2gb ram verdik.
+  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G
   WARNING: Image format was not specified for 'deneme.img' and probing guessed raw.
          Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
          Specify the 'raw' format explicitly to remove the restrictions.
@@ -51,13 +51,16 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
+  $ qemu-system-x86_64 --enable-kvm -hda deneme.img \
+      -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
   
 Uefi bios için ovmf eklememiz gerekir. onun için **-bios /usr/share/ovmf/OVMF.fd** parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
+  $ qemu-system-x86_64 --enable-kvm -hda deneme.img \
+      -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso \
+      -bios /usr/share/ovmf/OVMF.fd
   
 Ek parametreler
 ^^^^^^^^^^^^^^^
