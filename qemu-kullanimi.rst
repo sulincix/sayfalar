@@ -63,19 +63,20 @@ Ek parametreler
 ^^^^^^^^^^^^^^^
 Doğrudan tablo şeklinde vermeyi düşündüm.
 
-==============     ======
-Parametre          Anlamı
-==============     ======
--boot d            cdrom ile başlat
--boot c            hdd ile başlat
--hdb xx            ikinci hard disk imajı
--hdc xx            üçüncü hard disk imajı
--hdd xx            dördüncü disk imajı
--cpu host          yerel makinadın işlemci ismini kanalda kullan.
--smp cores=2       çift çekirdek kullan.
--vga cirrus        ekran kartı olarak cirrus göster
--vga vmware        ekran kartı olarak vmware göster
--display vnc:0     görüntüyü vnc üzerinden al (5900 portundan)
--souundhw ac97     ses kartı olarak ac97 ekler.
-==============     ======
+==============                         ======
+Parametre                              Anlamı
+==============                         ======
+-boot d                                cdrom ile başlat
+-boot c                                hdd ile başlat
+-hdb xx                                ikinci hard disk imajı
+-hdc xx                                üçüncü hard disk imajı
+-hdd xx                                dördüncü disk imajı
+-cpu host                              yerel makinadın işlemci ismini kanalda kullan.
+-smp cores=2                           çift çekirdek kullan.
+-vga cirrus                            ekran kartı olarak cirrus göster
+-vga vmware                            ekran kartı olarak vmware göster
+-display vnc:0                         görüntüyü vnc üzerinden al (5900 portundan)
+-soundhw ac97                          ses kartı olarak ac97 ekler.
+-nic user,hostfwd=tcp::2222-:22        Sanal makinadaki 22 portunu hostun 2222 portuna yönlendirir.
+==============                         ======
 
