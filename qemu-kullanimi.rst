@@ -3,6 +3,8 @@ Qemu-KVM Kullanımı
 Bu belgede **qemu-kvm** kullanımı anlatılmaktadır. İşin teknik detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden **sövmeyin** :)
 
 Bu belgede debian **sid** üzerinde olduğunuzu varsayarak anlatım yaptım ama diğer dağıtımlarda da benzer şekilde kullanımı var.
+  
+  **Not: Biraz mizah içerir.** 
 
 Qemu kullanmak için **gui** uygulamalar da vardır. Örneğin *gnome-boxes* ile qemuyu grafik tabanlı olarak kullanabilirsiniz. Bu belgede buna değinmeyeceğiz. terminalden kullanımı üzerine anlatım olacak.
 
