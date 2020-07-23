@@ -17,7 +17,7 @@ Disk imajı oluşturma
 
 .. code-block:: shell
 
-  $ qemu-img create deneme.img 30G
+  ☭ qemu-img create deneme.img 30G
   Formatting 'deneme.img', fmt=raw size=32212254720
   
 Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe *dd* komutu ile yazıp daha sonra bunu kullanabilirsiniz.
@@ -26,7 +26,7 @@ Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe *dd* komut
 
 .. code-block:: shell
 
-  $ qemu-img create -f qcow2 deneme.qcow2 30G
+  ☭ qemu-img create -f qcow2 deneme.qcow2 30G
   
 **Raw** imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. **Qcow2** imajlar ise daha az zararsızdır ama *dd* komutu ile doğrudan basıp kullanılamaz.
 
@@ -36,13 +36,13 @@ Sanal makinanın başlatılması
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm
+  ☭ qemu-system-x86_64 --enable-kvm
   
 Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız gerekli. onun için de **-hda** parametresi kullanılır. Ayrıca **-m** parametresi ile bellek miktarını **G** **M** gibi semboller ile göstererek belirtmemiz gerekli. Örneğin:
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G
+  ☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G
   WARNING: Image format was not specified for 'deneme.img' and probing guessed raw.
          Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
          Specify the 'raw' format explicitly to remove the restrictions.
@@ -54,13 +54,13 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
+  ☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
   
 **Uefi** bios için **ovmf** eklememiz gerekir. onun için **-bios /usr/share/ovmf/OVMF.fd** parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
+  ☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
   
 Bazı Parametreler
 ^^^^^^^^^^^^^^^
