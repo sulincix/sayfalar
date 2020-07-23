@@ -28,11 +28,11 @@ Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe *dd* komut
 
   $ qemu-img create -f qcow2 deneme.qcow2 30G
   
-Raw imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. **Qcow2** imajlar ise daha az zararsızdır ama *dd* komutu ile doğrudan basıp kullanılamaz.
+**Raw** imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. **Qcow2** imajlar ise daha az zararsızdır ama *dd* komutu ile doğrudan basıp kullanılamaz.
 
 Sanal makinanın başlatılması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-**qemu-system-x86_64** komutu ile başlatılır. **--enable-kvm** parametresi eklenerek **kvm** etkinleştirilmelidir. yoksa çok kasar. Örnek kullanım:
+**qemu-system-x86_64** komutu ile başlatılır. **--enable-kvm** parametresi eklenerek **kvm** etkinleştirilmelidir. yoksa çok kasar. Debianda **kvm** komutu bu komutun kısa halidir. eğer **kvm** komutu yoksa **bashrc** içine **alias** ekleyebilirsiniz. Örnek kullanım:
 
 .. code-block:: shell
 
@@ -78,7 +78,7 @@ Parametre                              Anlamı
 -hdb xx                                ikinci hard disk imajı
 -hdc xx                                üçüncü hard disk imajı
 -hdd xx                                dördüncü disk imajı
--cpu host                              yerel makinadın işlemci ismini kanalda kullan
+-cpu host                              yerel makinadın işlemci ismini sanal makinada kullan
 -smp cores=2                           çift çekirdek kullan
 -vga cirrus                            ekran kartı olarak cirrus göster
 -vga vmware                            ekran kartı olarak vmware göster
