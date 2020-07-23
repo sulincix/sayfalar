@@ -1,12 +1,15 @@
 Qemu-KVM Kullanımı
 ==================
-Bu belgede qemu-kvm kullanımı anlatılmaktadır. İşin teknit detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden **sövmeyin** :)
+Bu belgede **qemu-kvm** kullanımı anlatılmaktadır. İşin teknik detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden **sövmeyin** :)
 
-Qemu kullanmak için gui uygulamalar da vardır. Örneğin gnome-boxes ile qemuyu grafik tabanlı olarak kullanabilirsiniz. Bu belgede buna değinmeyeceğiz. terminalden kullanımı üzerine anlatım olacak.
+Bu belgede debian **sid** üzerinde olduğunuzu varsayarak anlatım yaptım ama diğer dağıtımlarda da benzer şekilde kullanımı var.
+
+Qemu kullanmak için **gui** uygulamalar da vardır. Örneğin *gnome-boxes* ile qemuyu grafik tabanlı olarak kullanabilirsiniz. Bu belgede buna değinmeyeceğiz. terminalden kullanımı üzerine anlatım olacak.
 
 Qemu kurulumu
 ^^^^^^^^^^^^^
 Debian için **apt-get install qemu-kvm** komutunu kullanabiliriz. Uefi bios ile kullanmak için **ovmf** paketine gerek duyulmaktadır. onuda debian için **apt-get install ovfm** komutu ile kurabiliriz.
+
 
 Disk imajı oluşturma
 ^^^^^^^^^^^^^^^^^^^^
@@ -17,7 +20,7 @@ Disk imajı oluşturma
   $ qemu-img create deneme.img 30G
   Formatting 'deneme.img', fmt=raw size=32212254720
   
-Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe dd komutu ile yazıp daha sonra bunu kullanabilirsiniz.
+Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe *dd* komutu ile yazıp daha sonra bunu kullanabilirsiniz.
 
 **Raw** yerine **qcow2** formatta oluşturmak isterseniz **-f qcow2** parametresini ekleyebilirsiniz. Örneğin:
 
@@ -25,7 +28,7 @@ Bu disk imajı **raw** formattadır. yani disk imajını usb belleğe dd komutu 
 
   $ qemu-img create -f qcow2 deneme.qcow2 30G
   
-Ram imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. qcow2 imajlar ise daha az zararsızdır. ama dd komutu ile doğrudan basıp kullanılamaz.
+Raw imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. **Qcow2** imajlar ise daha az zararsızdır ama *dd* komutu ile doğrudan basıp kullanılamaz.
 
 Sanal makinanın başlatılması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -35,7 +38,7 @@ Sanal makinanın başlatılması
 
   $ qemu-system-x86_64 --enable-kvm
   
-Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız gerekli. onun için de **-hda** parametresi kullanılır. Ayrıca **-m** parametresi ile bellek miktarını G M gibi semboller ile göstererek belirtmemiz gerekli. Örneğin:
+Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız gerekli. onun için de **-hda** parametresi kullanılır. Ayrıca **-m** parametresi ile bellek miktarını **G** **M** gibi semboller ile göstererek belirtmemiz gerekli. Örneğin:
 
 .. code-block:: shell
 
@@ -51,16 +54,13 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img \
-      -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
+  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso 
   
-Uefi bios için ovmf eklememiz gerekir. onun için **-bios /usr/share/ovmf/OVMF.fd** parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)
+**Uefi** bios için **ovmf** eklememiz gerekir. onun için **-bios /usr/share/ovmf/OVMF.fd** parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)
 
 .. code-block:: shell
 
-  $ qemu-system-x86_64 --enable-kvm -hda deneme.img \
-      -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso \
-      -bios /usr/share/ovmf/OVMF.fd
+  $ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
   
 Ek parametreler
 ^^^^^^^^^^^^^^^
