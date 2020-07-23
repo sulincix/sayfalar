@@ -58,4 +58,4 @@ Parametre          Anlamı
 -vga cirrus        ekran kartı olarak cirrus göster
 -vga vmware        ekran kartı olarak vmware göster
 -display vnc:0     görüntüyü vnc üzerinden al
-=========      ======
+=========          ======
