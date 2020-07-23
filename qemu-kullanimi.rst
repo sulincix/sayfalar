@@ -63,9 +63,9 @@ Ek parametreler
 ^^^^^^^^^^^^^^^
 Doğrudan tablo şeklinde vermeyi düşündüm.
 
-==============                         ======
+===============================        ======
 Parametre                              Anlamı
-==============                         ======
+===============================        ======
 -boot d                                cdrom ile başlat
 -boot c                                hdd ile başlat
 -hdb xx                                ikinci hard disk imajı
@@ -78,5 +78,5 @@ Parametre                              Anlamı
 -display vnc:0                         görüntüyü vnc üzerinden al (5900 portundan)
 -soundhw ac97                          ses kartı olarak ac97 ekler.
 -nic user,hostfwd=tcp::2222-:22        Sanal makinadaki 22 portunu hostun 2222 portuna yönlendirir.
-==============                         ======
+===============================        ======
 
