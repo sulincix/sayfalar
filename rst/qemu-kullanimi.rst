@@ -65,7 +65,7 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
   ☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
   
 Bazı Parametreler
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz. 
 
 ===============================        ======

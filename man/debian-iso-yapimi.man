@@ -1,0 +1,461 @@
+.\" Man page generated from reStructuredText.
+.
+.TH İSO YAPIMI  "" "" ""
+.SH NAME
+İso yapımı \- 
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.sp
+Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapımı anlatılacaktır. debian \fBsid\fP yerine \fBstable\fP kullanmak isterseniz yapmanız gereken dokümanda \fBsid\fP yerine \fBstable\fP yazmaktır.
+.INDENT 0.0
+.INDENT 3.5
+\fBNot: Biraz mizah içerir.\fP Şimdiden \fBALLAH\fP sabır versin :D
+.UNINDENT
+.UNINDENT
+.TS
+center;
+|l|l|.
+_
+T{
+Temel kavramlar
+T}
+_
+T{
+Terim
+T}	T{
+Anlamı
+T}
+_
+T{
+chroot
+T}	T{
+Oluşturulacak live isonun taslağıdır. içerisine \fBchroot sid\-chroot\fP komutu ile içerisine girebiliriz. çıkmak için ise \fBexit\fP komutu kullanılmalıdır.
+T}
+_
+T{
+squashfs
+T}	T{
+Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. \fBDebian\fP tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.
+T}
+_
+T{
+iso
+T}	T{
+Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.
+T}
+_
+T{
+live
+T}	T{
+Kurulum yapmadan çalışan sisteme \fBlive\fP adı verilir.
+T}
+_
+.TE
+.SH HAZIRLIK
+.INDENT 0.0
+.IP 1. 3
+Gerekli paketleri kuralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install debootstrap xorriso squashfs\-tools
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH CHROOT OLUŞTURULMASI
+.INDENT 0.0
+.IP 1. 3
+\fBDebootstrap\fP ile debian chroot ortamı oluşturalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ mkdir sid\-chroot
+☭ debootstrap sid sid\-chroot https://deb.debian.org/debian
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH CHROOT IÇINE GIRMEK IÇIN ÖN HAZIRLIK
+.INDENT 0.0
+.IP 1. 3
+\fBdev sys proc run\fP bind bağlayalım. Bu işlem her chroot ile \fBsid\-chroot\fP içerisine girileceğinde yapılmalıdır. \fBsid\-chroot\fP içerisinden çıkıldığında ise  bind bağının sökülmesi gerekmektedir.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ for i in dev dev/pts proc sys; do mount \-o bind /$i sid\-chroot/$i; done
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH GEREKLI PAKETLERIN KURULMASI
+.INDENT 0.0
+.IP 1. 3
+Chroot komutu ile oluşan \fBchroot\fP içerisine girelim. ve ardından \fBsources.list\fP dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ chroot sid\-chroot /bin/bash
+☭ echo \(aqdeb https://deb.debian.org/debian sid main contrib non\-free\(aq > /etc/apt/sources.list
+☭ apt\-get update
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+Kernel kuralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install linux\-headers\-amd64 linux\-image\-amd64
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+Grub kuralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install grub\-pc\-bin grub\-efi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 4. 3
+Live açılış için gereken paketleri kuralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install live\-config live\-boot
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH ÖZELLEŞTIRME
+.INDENT 0.0
+.IP 1. 3
+Dağıtım adını değiştirmek için \fB/etc/os\-release\fP ve \fB/etc/lsb\-release\fP dosyalarını düzenleyebilirsiniz.
+.UNINDENT
+.INDENT 0.0
+.IP \(bu 2
+/etc/os\-release
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+PRETTY_NAME="Custom debian (sid)"
+NAME="CUSTOM"
+VERSION_ID="1"
+VERSION="1 (sid)"
+ID=customdebian
+ID_LIKE=debian
+HOME_URL="https://www.example.com/"
+SUPPORT_URL="https://forums.example.com/"
+BUG_REPORT_URL="https://example.com/issues/"
+PRIVACY_POLICY_URL="https://www.example.com/privacy/"
+VERSION_CODENAME=custom
+DEBIAN_CODENAME=sid
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP \(bu 2
+/etc/lsb\-release
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+DISTRIB_ID=CustomDebian
+DISTRIB_RELEASE=1
+DISTRIB_CODENAME=sid
+DISTRIB_DESCRIPTION="Custom Debian sid"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+Masaüstü ortamı kurabiliriz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install xorg xinit
+☭ apt\-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.TS
+center;
+|l|l|.
+_
+T{
+Masaüstü
+T}	T{
+Komut
+T}
+_
+T{
+xfce
+T}	T{
+apt\-get install xfce4
+T}
+_
+T{
+lxde
+T}	T{
+apt\-get install lxde
+T}
+_
+T{
+cinnamon
+T}	T{
+apt\-get install cinnamon
+T}
+_
+T{
+plasma
+T}	T{
+apt\-get install kde\-standard
+T}
+_
+T{
+gnome
+T}	T{
+apt\-get install gnome\-core
+T}
+_
+T{
+mate
+T}	T{
+apt\-get install mate\-desktop\-environment\-core
+T}
+_
+.TE
+.INDENT 0.0
+.IP 3. 3
+Kurulum aracı ekleyebiliz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ git clone https://gitlab.com/ggggggggggggggggg/17g\-debian
+☭ cd 17g\-debian
+☭ make && make create\-deb\-debian
+☭ cd ..
+☭ cp 17g\-debian/build.deb sid\-chroot/tmp/build.deb
+☭ chroot sid\-chroot dpkg \-i /tmp/build.deb
+☭ chroot sid\-chroot apt\-get install \-f
+☭ rm \-f sid\-chroot sid\-chroot/tmp/build.deb
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 4. 3
+Sürücüleri ekleyebiliz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install firmware\-amd\-graphics firmware\-atheros \e
+    firmware\-b43\-installer firmware\-b43legacy\-installer \e
+    firmware\-bnx2 firmware\-bnx2x firmware\-brcm80211  \e
+    firmware\-cavium firmware\-intel\-sound firmware\-intelwimax \e
+    firmware\-ipw2x00 firmware\-ivtv firmware\-iwlwifi \e
+    firmware\-libertas firmware\-linux firmware\-linux\-free \e
+    firmware\-linux\-nonfree firmware\-misc\-nonfree firmware\-myricom \e
+    firmware\-netxen firmware\-qlogic firmware\-realtek firmware\-samsung \e
+    firmware\-siano firmware\-ti\-connectivity firmware\-zd1211
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 5. 3
+Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları \fB/etc/skel\fP içerisine uygun hiyerarşiye göre dizmelisiniz.
+.UNINDENT
+.SH PAKETLEME ÖNCESI
+.INDENT 0.0
+.IP 1. 3
+Öncelikle chroot içerisinden çıkalım. ve ardından \fBbind\fP bağlarını kaldıralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ umount \-lf \-R sid\-chroot/* 2>/dev/null
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH TEMIZLIK
+.sp
+Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu değildir fakat yaptığınız zaman squashfs ve iso boyutunu küçültmektedir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ chroot sid\-chroot apt\-get clean # apt önbelleğini temizler
+☭ rm \-f sid\-chroot/root/.bash_history # iso yaparken oluşturduğunuz historyleri temizler
+☭ rm \-rf sid\-chroot/var/lib/apt/lists/* # index dosyalarını temizler
+☭ find \-type f sid\-chroot/var/log/ | xargs rm \-f # logları siler
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PAKETLEME AŞAMASI
+.INDENT 0.0
+.IP 1. 3
+İso taslağı dizini açalım ve \fBsquashfs\fP imajı alalım. aldığımız imajı daha sonra iso taslağı içinde \fBlive\fP adında bir dizin açarak içine atalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ mkdir isowork
+☭ mksquashfs sid\-chroot filesystem.squashfs \-comp xz \-wildcards
+☭ mkdir \-p isowork/live
+☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/boot içerisine atalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ ls sid\-chroot/boot/
+    config\-5.7.0\-1\-amd64  grub  initrd.img\-5.7.0\-1\-amd64  System.map\-5.7.0\-1\-amd64  vmlinuz\-5.7.0\-1\-amd64
+☭ cp \-pf sid\-chroot/boot/initrd.img\-5.7.0\-1\-amd64 isowork/live/initrd.img
+☭ cp \-pf sid\-chroot/boot/vmlinuz\-5.7.0\-1\-amd64 isowork/live/vmlinuz
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+\fBgrub.cfg\fP dosyası oluşturalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ mkdir \-p isowork/boot/grub/
+☭ echo \(aqmenuentry "Start Debian 64\-bit" \-\-class debian {\(aq > isowork/boot/grub/grub.cfg
+☭ echo \(aq    linux /live/vmlinuz boot=live live\-config live\-media\-path=/live quiet splash \-\-\(aq >> isowork/boot/grub/grub.cfg
+☭ echo \(aq    initrd /live/initrd.img\(aq >> isowork/boot/grub/grub.cfg
+☭ echo \(aq}\(aq >> isowork/boot/grub/grub.cfg
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 4. 3
+Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso \fBisowork\fP dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ tree isowork
+    iso\-work/
+    ├── boot
+    │   └── grub
+    │       └── grub.cfg
+    └── live
+    ├── filesystem.squashfs
+    ├── initrd.img
+    └── vmlinuz
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 5. 3
+İso dosyası üretelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ grub\-mkrescue isowork \-o debian\-live.iso
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.

@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>İso yapımı</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="iso-yapimi">
+<h1 class="title">İso yapımı</h1>
+
+<p>Bu dokümanda <strong>debian sid</strong> kullanarak özelleşmiş bir <strong>live</strong> iso yapımı anlatılacaktır. debian <strong>sid</strong> yerine <strong>stable</strong> kullanmak isterseniz yapmanız gereken dokümanda <strong>sid</strong> yerine <strong>stable</strong> yazmaktır.</p>
+<blockquote>
+<strong>Not: Biraz mizah içerir.</strong> Şimdiden <strong>ALLAH</strong> sabır versin :D</blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" colspan="2">Temel kavramlar</th>
+</tr>
+<tr><th class="head">Terim</th>
+<th class="head">Anlamı</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>chroot</td>
+<td>Oluşturulacak live isonun taslağıdır. içerisine <strong>chroot sid-chroot</strong> komutu ile içerisine girebiliriz. çıkmak için ise <strong>exit</strong> komutu kullanılmalıdır.</td>
+</tr>
+<tr><td>squashfs</td>
+<td>Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. <strong>Debian</strong> tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.</td>
+</tr>
+<tr><td>iso</td>
+<td>Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.</td>
+</tr>
+<tr><td>live</td>
+<td>Kurulum yapmadan çalışan sisteme <strong>live</strong> adı verilir.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="hazirlik">
+<h1>Hazırlık</h1>
+<ol class="arabic simple">
+<li>Gerekli paketleri kuralım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install debootstrap xorriso squashfs-tools
+</pre>
+</div>
+<div class="section" id="chroot-olusturulmasi">
+<h1>Chroot oluşturulması</h1>
+<ol class="arabic simple">
+<li><strong>Debootstrap</strong> ile debian chroot ortamı oluşturalım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ mkdir sid-chroot
+☭ debootstrap sid sid-chroot https://deb.debian.org/debian
+</pre>
+</div>
+<div class="section" id="chroot-icine-girmek-icin-on-hazirlik">
+<h1>Chroot içine girmek için ön hazırlık</h1>
+<ol class="arabic simple">
+<li><strong>dev sys proc run</strong> bind bağlayalım. Bu işlem her chroot ile <strong>sid-chroot</strong> içerisine girileceğinde yapılmalıdır. <strong>sid-chroot</strong> içerisinden çıkıldığında ise  bind bağının sökülmesi gerekmektedir.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ <span class="keyword">for</span> i in dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
+</pre>
+</div>
+<div class="section" id="gerekli-paketlerin-kurulmasi">
+<h1>Gerekli paketlerin kurulması</h1>
+<ol class="arabic simple">
+<li>Chroot komutu ile oluşan <strong>chroot</strong> içerisine girelim. ve ardından <strong>sources.list</strong> dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ chroot sid-chroot /bin/bash
+☭ <span class="name builtin">echo</span> <span class="literal string single">'deb https://deb.debian.org/debian sid main contrib non-free'</span> &gt; /etc/apt/sources.list
+☭ apt-get update
+</pre>
+<ol class="arabic simple" start="2">
+<li>Kernel kuralım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install linux-headers-amd64 linux-image-amd64
+</pre>
+<ol class="arabic simple" start="3">
+<li>Grub kuralım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install grub-pc-bin grub-efi
+</pre>
+<ol class="arabic simple" start="4">
+<li>Live açılış için gereken paketleri kuralım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install live-config live-boot
+</pre>
+</div>
+<div class="section" id="ozellestirme">
+<h1>Özelleştirme</h1>
+<ol class="arabic simple">
+<li>Dağıtım adını değiştirmek için <strong>/etc/os-release</strong> ve <strong>/etc/lsb-release</strong> dosyalarını düzenleyebilirsiniz.</li>
+</ol>
+<ul class="simple">
+<li>/etc/os-release</li>
+</ul>
+<pre class="code shell literal-block">
+<span class="name variable">PRETTY_NAME</span><span class="operator">=</span><span class="literal string double">&quot;Custom debian (sid)&quot;</span>
+<span class="name variable">NAME</span><span class="operator">=</span><span class="literal string double">&quot;CUSTOM&quot;</span>
+<span class="name variable">VERSION_ID</span><span class="operator">=</span><span class="literal string double">&quot;1&quot;</span>
+<span class="name variable">VERSION</span><span class="operator">=</span><span class="literal string double">&quot;1 (sid)&quot;</span>
+<span class="name variable">ID</span><span class="operator">=</span>customdebian
+<span class="name variable">ID_LIKE</span><span class="operator">=</span>debian
+<span class="name variable">HOME_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://www.example.com/&quot;</span>
+<span class="name variable">SUPPORT_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://forums.example.com/&quot;</span>
+<span class="name variable">BUG_REPORT_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://example.com/issues/&quot;</span>
+<span class="name variable">PRIVACY_POLICY_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://www.example.com/privacy/&quot;</span>
+<span class="name variable">VERSION_CODENAME</span><span class="operator">=</span>custom
+<span class="name variable">DEBIAN_CODENAME</span><span class="operator">=</span>sid
+</pre>
+<ul class="simple">
+<li>/etc/lsb-release</li>
+</ul>
+<pre class="code shell literal-block">
+<span class="name variable">DISTRIB_ID</span><span class="operator">=</span>CustomDebian
+<span class="name variable">DISTRIB_RELEASE</span><span class="operator">=</span><span class="literal number">1</span>
+<span class="name variable">DISTRIB_CODENAME</span><span class="operator">=</span>sid
+<span class="name variable">DISTRIB_DESCRIPTION</span><span class="operator">=</span><span class="literal string double">&quot;Custom Debian sid&quot;</span>
+</pre>
+<ol class="arabic simple" start="2">
+<li>Masaüstü ortamı kurabiliriz.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install xorg xinit
+☭ apt-get install lightdm <span class="comment single"># giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.</span>
+</pre>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Masaüstü</th>
+<th class="head">Komut</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>xfce</td>
+<td>apt-get install xfce4</td>
+</tr>
+<tr><td>lxde</td>
+<td>apt-get install lxde</td>
+</tr>
+<tr><td>cinnamon</td>
+<td>apt-get install cinnamon</td>
+</tr>
+<tr><td>plasma</td>
+<td>apt-get install kde-standard</td>
+</tr>
+<tr><td>gnome</td>
+<td>apt-get install gnome-core</td>
+</tr>
+<tr><td>mate</td>
+<td>apt-get install mate-desktop-environment-core</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="3">
+<li>Kurulum aracı ekleyebiliz.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ git clone https://gitlab.com/ggggggggggggggggg/17g-debian
+☭ <span class="name builtin">cd</span> 17g-debian
+☭ make <span class="operator">&amp;&amp;</span> make create-deb-debian
+☭ <span class="name builtin">cd</span> ..
+☭ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
+☭ chroot sid-chroot dpkg -i /tmp/build.deb
+☭ chroot sid-chroot apt-get install -f
+☭ rm -f sid-chroot sid-chroot/tmp/build.deb
+</pre>
+<ol class="arabic simple" start="4">
+<li>Sürücüleri ekleyebiliz.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install firmware-amd-graphics firmware-atheros <span class="literal string escape">\
+</span>    firmware-b43-installer firmware-b43legacy-installer <span class="literal string escape">\
+</span>    firmware-bnx2 firmware-bnx2x firmware-brcm80211  <span class="literal string escape">\
+</span>    firmware-cavium firmware-intel-sound firmware-intelwimax <span class="literal string escape">\
+</span>    firmware-ipw2x00 firmware-ivtv firmware-iwlwifi <span class="literal string escape">\
+</span>    firmware-libertas firmware-linux firmware-linux-free <span class="literal string escape">\
+</span>    firmware-linux-nonfree firmware-misc-nonfree firmware-myricom <span class="literal string escape">\
+</span>    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung <span class="literal string escape">\
+</span>    firmware-siano firmware-ti-connectivity firmware-zd1211
+</pre>
+<ol class="arabic simple" start="5">
+<li>Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları <strong>/etc/skel</strong> içerisine uygun hiyerarşiye göre dizmelisiniz.</li>
+</ol>
+</div>
+<div class="section" id="paketleme-oncesi">
+<h1>Paketleme öncesi</h1>
+<ol class="arabic simple">
+<li>Öncelikle chroot içerisinden çıkalım. ve ardından <strong>bind</strong> bağlarını kaldıralım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ umount -lf -R sid-chroot/* <span class="literal number">2</span>&gt;/dev/null
+</pre>
+</div>
+<div class="section" id="temizlik">
+<h1>Temizlik</h1>
+<p>Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu değildir fakat yaptığınız zaman squashfs ve iso boyutunu küçültmektedir.</p>
+<pre class="code shell literal-block">
+☭ chroot sid-chroot apt-get clean <span class="comment single"># apt önbelleğini temizler
+</span>☭ rm -f sid-chroot/root/.bash_history <span class="comment single"># iso yaparken oluşturduğunuz historyleri temizler
+</span>☭ rm -rf sid-chroot/var/lib/apt/lists/* <span class="comment single"># index dosyalarını temizler
+</span>☭ find -type f sid-chroot/var/log/ <span class="punctuation">|</span> xargs rm -f <span class="comment single"># logları siler</span>
+</pre>
+</div>
+<div class="section" id="paketleme-asamasi">
+<h1>Paketleme aşaması</h1>
+<ol class="arabic simple">
+<li>İso taslağı dizini açalım ve <strong>squashfs</strong> imajı alalım. aldığımız imajı daha sonra iso taslağı içinde <strong>live</strong> adında bir dizin açarak içine atalım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ mkdir isowork
+☭ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
+☭ mkdir -p isowork/live
+☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
+</pre>
+<ol class="arabic simple" start="2">
+<li>Ardından <strong>vmlinuz</strong> ve <strong>initrd</strong> dosyalarını isowork/boot içerisine atalım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ ls sid-chroot/boot/
+    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
+☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
+☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
+</pre>
+<ol class="arabic simple" start="3">
+<li><strong>grub.cfg</strong> dosyası oluşturalım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ mkdir -p isowork/boot/grub/
+☭ <span class="name builtin">echo</span> <span class="literal string single">'menuentry &quot;Start Debian 64-bit&quot; --class debian {'</span> &gt; isowork/boot/grub/grub.cfg
+☭ <span class="name builtin">echo</span> <span class="literal string single">'    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --'</span> &gt;&gt; isowork/boot/grub/grub.cfg
+☭ <span class="name builtin">echo</span> <span class="literal string single">'    initrd /live/initrd.img'</span> &gt;&gt; isowork/boot/grub/grub.cfg
+☭ <span class="name builtin">echo</span> <span class="literal string single">'}'</span> &gt;&gt; isowork/boot/grub/grub.cfg
+</pre>
+<ol class="arabic simple" start="4">
+<li>Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso <strong>isowork</strong> dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ tree isowork
+    iso-work/
+    ├── boot
+    │   └── grub
+    │       └── grub.cfg
+    └── live
+    ├── filesystem.squashfs
+    ├── initrd.img
+    └── vmlinuz
+</pre>
+<ol class="arabic simple" start="5">
+<li>İso dosyası üretelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ grub-mkrescue isowork -o debian-live.iso
+</pre>
+</div>
+</div>
+</body>
+</html>

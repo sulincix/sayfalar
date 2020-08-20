@@ -1,0 +1,248 @@
+.\" Man page generated from reStructuredText.
+.
+.TH QEMU-KVM KULLANIMI  "" "" ""
+.SH NAME
+Qemu-KVM Kullanımı \- 
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.sp
+Bu belgede \fBqemu\-kvm\fP kullanımı anlatılmaktadır. İşin teknik detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden \fBsövmeyin\fP :)
+.sp
+Bu belgede \fBdebian sid\fP üzerinde olduğunuzu varsayarak anlatım yaptım ama diğer dağıtımlarda da benzer şekilde kullanımı var.
+.INDENT 0.0
+.INDENT 3.5
+\fBNot: Biraz mizah içerir.\fP
+.UNINDENT
+.UNINDENT
+.sp
+Qemu kullanmak için \fBgui\fP uygulamalar da vardır. Örneğin \fIgnome\-boxes\fP ile qemuyu grafik tabanlı olarak kullanabilirsiniz. Bu belgede buna değinmeyeceğiz. terminalden kullanımı üzerine anlatım olacak.
+.SH QEMU KURULUMU
+.sp
+Debian için \fBapt\-get install qemu\-kvm\fP komutunu kullanabiliriz. Uefi bios ile kullanmak için \fBovmf\fP paketine gerek duyulmaktadır. onuda debian için \fBapt\-get install ovfm\fP komutu ile kurabiliriz.
+.SH DISK IMAJI OLUŞTURMA
+.sp
+\fBqemu\-img\fP komutu ile kolay yoldan imaj açabiliriz. boyutunu \fBG\fP \fBM\fP gibi harfler ile ifade ediyoruz. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-img create deneme.img 30G
+Formatting \(aqdeneme.img\(aq, fmt=raw size=32212254720
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu disk imajı \fBraw\fP formattadır. yani disk imajını usb belleğe \fIdd\fP komutu ile yazıp daha sonra bunu kullanabilirsiniz.
+.sp
+\fBRaw\fP yerine \fBqcow2\fP formatta oluşturmak isterseniz \fB\-f qcow2\fP parametresini ekleyebilirsiniz. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-img create \-f qcow2 deneme.qcow2 30G
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBRaw\fP imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. \fBQcow2\fP imajlar ise daha az zararsızdır ama \fIdd\fP komutu ile doğrudan basıp kullanılamaz.
+.SH SANAL MAKINANIN BAŞLATILMASI
+.sp
+\fBqemu\-system\-x86_64\fP komutu ile başlatılır. \fB\-\-enable\-kvm\fP parametresi eklenerek \fBkvm\fP etkinleştirilmelidir. yoksa çok kasar. Debianda \fBkvm\fP komutu bu komutun kısa halidir. eğer \fBkvm\fP komutu yoksa \fBbashrc\fP içine \fBalias\fP ekleyebilirsiniz. Örnek kullanım:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-system\-x86_64 \-\-enable\-kvm
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız gerekli. onun için de \fB\-hda\fP parametresi kullanılır. Ayrıca \fB\-m\fP parametresi ile bellek miktarını \fBG\fP \fBM\fP gibi semboller ile göstererek belirtmemiz gerekli. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-system\-x86_64 \-\-enable\-kvm \-hda deneme.img \-m 2G
+WARNING: Image format was not specified for \(aqdeneme.img\(aq and probing guessed raw.
+       Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+       Specify the \(aqraw\(aq format explicitly to remove the restrictions.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örnekteki gibi uyarı vermesinin sebebi raw disk imajı kullanmamızdan dolayı. Çok fantastik şeyler yapmayacaksak çokta önemli değil :D Ayrıca raw imaj yerine usb bellek hard disk gibi şeyleri de kullanabilirsiniz. imaj konumu olarak /dev/sdx vermeniz yeterlidir.
+.sp
+Şimdi sıra geldi sanal makinaya format atmaya. Bunun için iso imajını bağlamak gerekli. bunun için \fB\-cdrom\fP parametresi kullanılmalıdır. Örneğin
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-system\-x86_64 \-\-enable\-kvm \-hda deneme.img \-m 2G \-cdrom debian\-live\-10.4.0\-amd64\-gnome.iso
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBUefi\fP bios için \fBovmf\fP eklememiz gerekir. onun için \fB\-bios /usr/share/ovmf/OVMF.fd\fP parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-system\-x86_64 \-\-enable\-kvm \-hda deneme.img \-m 2G \-cdrom debian\-live\-10.4.0\-amd64\-gnome.iso \-bios /usr/share/ovmf/OVMF.fd
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH BAZI PARAMETRELER
+.sp
+Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz.
+.TS
+center;
+|l|l|.
+_
+T{
+Parametre
+T}	T{
+Anlamı
+T}
+_
+T{
+\-boot d
+T}	T{
+cdrom ile başlat
+T}
+_
+T{
+\-boot c
+T}	T{
+hdd ile başlat
+T}
+_
+T{
+\-m 3G
+T}	T{
+3gb ram kullan
+T}
+_
+T{
+\-\-enable\-kvm
+T}	T{
+KVM etkinleştir
+T}
+_
+T{
+\-cdrom xx
+T}	T{
+iso dosyasını cdrom olarak ayarla
+T}
+_
+T{
+\-hda xx
+T}	T{
+birinci hard disk imajı
+T}
+_
+T{
+\-hdb xx
+T}	T{
+ikinci hard disk imajı
+T}
+_
+T{
+\-hdc xx
+T}	T{
+üçüncü hard disk imajı
+T}
+_
+T{
+\-hdd xx
+T}	T{
+dördüncü disk imajı
+T}
+_
+T{
+\-cpu host
+T}	T{
+yerel makinadın işlemci ismini sanal makinada kullan
+T}
+_
+T{
+\-smp cores=2
+T}	T{
+çift çekirdek kullan
+T}
+_
+T{
+\-vga cirrus
+T}	T{
+ekran kartı olarak cirrus göster
+T}
+_
+T{
+\-vga vmware
+T}	T{
+ekran kartı olarak vmware göster
+T}
+_
+T{
+\-display vnc:0
+T}	T{
+görüntüyü vnc üzerinden al (5900 portundan)
+T}
+_
+T{
+\-soundhw ac97
+T}	T{
+ses kartı olarak ac97 ekle
+T}
+_
+T{
+\-nic user,hostfwd=tcp::2222\-:22
+T}	T{
+Sanal makinadaki 22 portunu hostun 2222 portuna yönlendir
+T}
+_
+T{
+\-bios /usr/share/ovmf/OVMF.fd
+T}	T{
+UEFI olarak başlat
+T}
+_
+.TE
+.\" Generated by docutils manpage writer.
+.
