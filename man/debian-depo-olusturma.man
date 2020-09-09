@@ -33,6 +33,8 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .sp
 Bu dokümanda \fBdebian\fP için depo oluşturma ve depoyu güncelleme konusu anlatılmıştır.
 .SH GEREKLI PAKETLERIN KURULMASI
+.sp
+Aşağıdaki komut ile index almamız için gereken paketi kurabilirsiniz:
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -43,9 +45,66 @@ $ apt\-get instal apt\-ftparchive
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Depoyu ağda paylaşmak için web server gerekmektedir.
+.INDENT 0.0
+.INDENT 3.5
+\fBNginx\fP veya \fBApache\fP kurmalısınız.
+.UNINDENT
+.UNINDENT
+.sp
+Nginx kurmak için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt install nginx
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Apache kurmak için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt install apache2
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH DEPO ILE ILGILI TEMEL KAVRAMLAR
 .sp
-Deponun 2 temel dizini bulunmaktadır \fBpool\fP ve \fBdists\fP
+Deponun 2 temel dizini bulunmaktadır: \fBpool\fP ve \fBdists\fP
+.sp
+Deponun bilgilerini \fBRelease\fP dosyası içinde bulunur.
+.sp
+Deponun temel dizin yapısı şu şekilde özetlenebilir:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+repository/
+|\-\- dists
+|   \(ga\-\- stable
+|       |\-\- Release
+|       |\-\- contrib
+|       |\-\- main
+|       \(ga\-\- non\-free
+\(ga\-\- pool
+    |\-\- contrib
+    |\-\- main
+    \(ga\-\- non\-free
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Depoya \fBpool\fP ve \fBdists\fP dizinleri içinde olmamak şartı ile istediğiniz dosyaları yerleştirebilirsiniz. (örneğin: index.html)
 .SS Dists
 .sp
 \fIdists\fP içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.
@@ -83,7 +142,7 @@ dists/
             |\-\- Packages
             \(ga\-\- Packages.gz
 
-10 directories, 14 files
+10 directories, 13 files
 .ft P
 .fi
 .UNINDENT
@@ -297,6 +356,8 @@ $ gpg \-\-output Release.key \-\-armor \-\-export gpg_id_değeri
 \fBApache\fP veya \fBnginx\fP tavsiye etmekle birlikte \fBbusybox httpd\fP ve \fBpython3 http.server\fP kullanılabilir.
 .sp
 Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)
+.sp
+Eğer http(s) yerine ftp kullanmak istiyorsanız \fBvsftpd\fP veya \fBbusybox ftpd\fP kullanabilirsiniz.
 .SS Deponun kullanıcılar tarafından sisteme eklenmesi
 .sp
 Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.

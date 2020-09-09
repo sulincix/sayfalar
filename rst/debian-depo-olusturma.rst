@@ -4,13 +4,52 @@ Bu dokümanda **debian** için depo oluşturma ve depoyu güncelleme konusu anla
 
 Gerekli paketlerin kurulması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Aşağıdaki komut ile index almamız için gereken paketi kurabilirsiniz:
+
 .. code-block:: shell
 
 	$ apt-get instal apt-ftparchive
+
+Depoyu ağda paylaşmak için web server gerekmektedir.
+
+ **Nginx** veya **Apache** kurmalısınız. 
+	
+Nginx kurmak için:
+
+.. code-block:: shell
+
+	$ apt install nginx
+
+Apache kurmak için:
+
+.. code-block:: shell
+
+	$ apt install apache2
 	
 Depo ile ilgili temel kavramlar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Deponun 2 temel dizini bulunmaktadır **pool** ve **dists**
+Deponun 2 temel dizini bulunmaktadır: **pool** ve **dists**
+
+Deponun bilgilerini **Release** dosyası içinde bulunur.
+
+Deponun temel dizin yapısı şu şekilde özetlenebilir:
+
+.. code-block:: shell
+
+	repository/
+	|-- dists
+	|   `-- stable
+	|       |-- Release
+	|       |-- contrib
+	|       |-- main
+	|       `-- non-free
+	`-- pool
+	    |-- contrib
+	    |-- main
+	    `-- non-free
+
+
+Depoya **pool** ve **dists** dizinleri içinde olmamak şartı ile istediğiniz dosyaları yerleştirebilirsiniz. (örneğin: index.html)
 
 Dists
 #####
@@ -48,7 +87,7 @@ Dists
 	            |-- Packages
 	            `-- Packages.gz
 
-	10 directories, 14 files
+	10 directories, 13 files
 	
 Pool
 ####
@@ -210,6 +249,8 @@ Deponun ağda paylaşılması
 **Apache** veya **nginx** tavsiye etmekle birlikte **busybox httpd** ve **python3 http.server** kullanılabilir.
 
 Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)
+
+Eğer http(s) yerine ftp kullanmak istiyorsanız **vsftpd** veya **busybox ftpd** kullanabilirsiniz.
 
 Deponun kullanıcılar tarafından sisteme eklenmesi
 #################################################
