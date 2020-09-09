@@ -372,9 +372,10 @@ $ apt-get instal apt-ftparchive
 </div>
 <div class="section" id="depo-ile-ilgili-temel-kavramlar">
 <h1>Depo ile ilgili temel kavramlar</h1>
-<p>Deponun 2 temel dizini bulunmaktadır <strong>pool</strong> ve <strong>dists</strong>
-<em>dists</em> içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.
-<em>pool</em> içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.</p>
+<p>Deponun 2 temel dizini bulunmaktadır <strong>pool</strong> ve <strong>dists</strong></p>
+<div class="section" id="dists">
+<h2>Dists</h2>
+<p><em>dists</em> içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.</p>
 <p><strong>dists</strong> dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve <strong>Release</strong> dosyası bulunur.</p>
 <p>Örnek depo <strong>dists</strong> dizin yapısı (imzalanmamış depo):</p>
 <pre class="code shell literal-block">
@@ -405,6 +406,10 @@ dists/
 
 <span class="literal number">10</span> directories, <span class="literal number">14</span> files
 </pre>
+</div>
+<div class="section" id="pool">
+<h2>Pool</h2>
+<p><em>pool</em> içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.</p>
 <p><strong>pool</strong> dizininde bulunan paketler genel bir kural olmaması ile birlikte şu kurallara uygun şekilde dizilmeleri tavsiye edilmektedir:</p>
 <p>Alfabetik kural:</p>
 <ol class="arabic">
@@ -467,6 +472,7 @@ MD5Sum:
   de9e533c25149db7878032320d7d13db  dists/stable/contrib/binary-amd64/Packages.gz
 </pre>
 </div>
+</div>
 <div class="section" id="index-alinmasi">
 <h1>İndex alınması</h1>
 <p><strong>pool</strong> dizini içerisine yukarıda anlatılan hiyerarşilere uygun şekilde paketlerimizi yerleştirmeliyiz. pool içerisinde <strong>main</strong>, <strong>contrib</strong>, <strong>non-free</strong> adında dizinler olmalıdır. Bu isimler ile <strong>dists</strong> dizini içerisindeki isimler aynı olmalıdır.</p>
@@ -478,9 +484,8 @@ $ xz -k dists/stable/main/binary-amd64/Packages
 </pre>
 <p>İlk komut ile pool/main içerisindeki paketlerin indexlerini dists içerisindeki main bölümüne yerleştiriyoruz. Bu işlem contrib ve non-free için benzer şekilde yapılmalıdır. ayrıca eğer i386 veya arm64 veya armhf için de paketler varsa onlar için de tekrarlamanız gerekmektedir.</p>
 <p>İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.</p>
-</div>
 <div class="section" id="release-dosyasinin-yazilmasi">
-<h1>Release dosyasının yazılması</h1>
+<h2>Release dosyasının yazılması</h2>
 <p>Release dosyasını elle yazmak hem uğraştırıcıdır. Başlık kısmındaki değerler değişmeyeceği için onları ayrı bir dosyaya yazıp md5sum değerlerini de komut kullanarak üstüne ekleyebilirsiniz. <em>sed</em> komutu ile de biçimlendirseniz güzel olur :D</p>
 <p>başlık dosyası içeriği şu şekilde olamalı:</p>
 <pre class="code YAML literal-block">
@@ -505,7 +510,7 @@ $ find dists/stable -type f <span class="punctuation">|</span> xargs md5sum <spa
 </pre>
 </div>
 <div class="section" id="deponun-imzalanmasi">
-<h1>Deponun imzalanması</h1>
+<h2>Deponun imzalanması</h2>
 <p>Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:</p>
 <pre class="code shell literal-block">
 $ gpg --clearsign -o InRelease Release
@@ -525,13 +530,13 @@ $ gpg --list-keys
 $ gpg --output Release.key --armor --export gpg_id_değeri
 </pre>
 </div>
+</div>
 <div class="section" id="deponun-agda-paylasilmasi">
 <h1>Deponun ağda paylaşılması</h1>
 <p><strong>Apache</strong> veya <strong>nginx</strong> tavsiye etmekle birlikte <strong>busybox httpd</strong> ve <strong>python3 http.server</strong> kullanılabilir.</p>
 <p>Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)</p>
-</div>
 <div class="section" id="deponun-kullanicilar-tarafindan-sisteme-eklenmesi">
-<h1>Deponun kullanıcılar tarafından sisteme eklenmesi</h1>
+<h2>Deponun kullanıcılar tarafından sisteme eklenmesi</h2>
 <p>Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.</p>
 <ol class="arabic simple">
 <li>Depoyu imzalayan gpg anahtarını içeri aktarmalılar.</li>
@@ -551,6 +556,7 @@ $ <span class="name builtin">echo</span> <span class="literal string double">&qu
 <pre class="code shell literal-block">
 $ apt-get update
 </pre>
+</div>
 </div>
 </div>
 </body>

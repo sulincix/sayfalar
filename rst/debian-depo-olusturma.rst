@@ -11,8 +11,11 @@ Gerekli paketlerin kurulması
 Depo ile ilgili temel kavramlar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Deponun 2 temel dizini bulunmaktadır **pool** ve **dists**
+
+Dists
+#####
+
 *dists* içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.
-*pool* içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.
 
 **dists** dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve **Release** dosyası bulunur. 
 
@@ -47,6 +50,10 @@ Deponun 2 temel dizini bulunmaktadır **pool** ve **dists**
 
 	10 directories, 14 files
 	
+Pool
+####
+*pool* içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.
+
 **pool** dizininde bulunan paketler genel bir kural olmaması ile birlikte şu kurallara uygun şekilde dizilmeleri tavsiye edilmektedir:
 
 Alfabetik kural:
@@ -135,7 +142,7 @@ pool içerisindeki paket yerleştirme işlemi bittikten sonra şu komutu kullana
 İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.
 
 Release dosyasının yazılması
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+############################
 
 Release dosyasını elle yazmak hem uğraştırıcıdır. Başlık kısmındaki değerler değişmeyeceği için onları ayrı bir dosyaya yazıp md5sum değerlerini de komut kullanarak üstüne ekleyebilirsiniz. *sed* komutu ile de biçimlendirseniz güzel olur :D
 
@@ -166,7 +173,7 @@ başlık ile md5sum bilreştirmek için aşağıdakine benzer bir komut kullanab
         $ find dists/stable -type f | xargs md5sum | sed "s/^/  /" >> dists/stable/Release
         
 Deponun imzalanması
-^^^^^^^^^^^^^^^^^^^
+###################
 
 Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:
 
@@ -202,7 +209,7 @@ Deponun ağda paylaşılması
 Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)
 
 Deponun kullanıcılar tarafından sisteme eklenmesi
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#################################################
 
 Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.
 

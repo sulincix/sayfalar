@@ -46,8 +46,9 @@ $ apt\-get instal apt\-ftparchive
 .SH DEPO ILE ILGILI TEMEL KAVRAMLAR
 .sp
 Deponun 2 temel dizini bulunmaktadır \fBpool\fP ve \fBdists\fP
+.SS Dists
+.sp
 \fIdists\fP içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.
-\fIpool\fP içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.
 .sp
 \fBdists\fP dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve \fBRelease\fP dosyası bulunur.
 .sp
@@ -87,6 +88,9 @@ dists/
 .fi
 .UNINDENT
 .UNINDENT
+.SS Pool
+.sp
+\fIpool\fP içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.
 .sp
 \fBpool\fP dizininde bulunan paketler genel bir kural olmaması ile birlikte şu kurallara uygun şekilde dizilmeleri tavsiye edilmektedir:
 .sp
@@ -195,7 +199,7 @@ $ xz \-k dists/stable/main/binary\-amd64/Packages
 İlk komut ile pool/main içerisindeki paketlerin indexlerini dists içerisindeki main bölümüne yerleştiriyoruz. Bu işlem contrib ve non\-free için benzer şekilde yapılmalıdır. ayrıca eğer i386 veya arm64 veya armhf için de paketler varsa onlar için de tekrarlamanız gerekmektedir.
 .sp
 İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.
-.SH RELEASE DOSYASININ YAZILMASI
+.SS Release dosyasının yazılması
 .sp
 Release dosyasını elle yazmak hem uğraştırıcıdır. Başlık kısmındaki değerler değişmeyeceği için onları ayrı bir dosyaya yazıp md5sum değerlerini de komut kullanarak üstüne ekleyebilirsiniz. \fIsed\fP komutu ile de biçimlendirseniz güzel olur :D
 .sp
@@ -235,7 +239,7 @@ $ find dists/stable \-type f | xargs md5sum | sed "s/^/  /" >> dists/stable/Rele
 .fi
 .UNINDENT
 .UNINDENT
-.SH DEPONUN IMZALANMASI
+.SS Deponun imzalanması
 .sp
 Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:
 .INDENT 0.0
@@ -292,7 +296,7 @@ $ gpg \-\-output Release.key \-\-armor \-\-export gpg_id_değeri
 \fBApache\fP veya \fBnginx\fP tavsiye etmekle birlikte \fBbusybox httpd\fP ve \fBpython3 http.server\fP kullanılabilir.
 .sp
 Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)
-.SH DEPONUN KULLANICILAR TARAFINDAN SISTEME EKLENMESI
+.SS Deponun kullanıcılar tarafından sisteme eklenmesi
 .sp
 Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.
 .INDENT 0.0
