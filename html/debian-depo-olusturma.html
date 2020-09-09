@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>Debian için depo oluşturma</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="debian-icin-depo-olusturma">
+<h1 class="title">Debian için depo oluşturma</h1>
+
+<p>Bu dokümanda <strong>debian</strong> için depo oluşturma ve depoyu güncelleme konusu anlatılmıştır.</p>
+<div class="section" id="gerekli-paketlerin-kurulmasi">
+<h1>Gerekli paketlerin kurulması</h1>
+<pre class="code shell literal-block">
+$ apt-get instal apt-ftparchive
+</pre>
+</div>
+<div class="section" id="depo-ile-ilgili-temel-kavramlar">
+<h1>Depo ile ilgili temel kavramlar</h1>
+<p>Deponun 2 temel dizini bulunmaktadır <strong>pool</strong> ve <strong>dists</strong>
+<em>dists</em> içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.
+<em>pool</em> içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.</p>
+<p><strong>dists</strong> dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve <strong>Release</strong> dosyası bulunur.</p>
+<p>Örnek depo <strong>dists</strong> dizin yapısı (imzalanmamış depo):</p>
+<pre class="code shell literal-block">
+dists/
+<span class="literal string backtick">`</span>-- stable
+    <span class="punctuation">|</span>-- Release
+    <span class="punctuation">|</span>-- contrib
+    <span class="punctuation">|</span>   <span class="punctuation">|</span>-- binary-amd64
+    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="punctuation">|</span>-- Packages
+    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- Packages.gz
+    <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- binary-i386
+    <span class="punctuation">|</span>       <span class="punctuation">|</span>-- Packages
+    <span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- Packages.gz
+    <span class="punctuation">|</span>-- main
+    <span class="punctuation">|</span>   <span class="punctuation">|</span>-- binary-amd64
+    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="punctuation">|</span>-- Packages
+    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- Packages.gz
+    <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- binary-i386
+    <span class="punctuation">|</span>       <span class="punctuation">|</span>-- Packages
+    <span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- Packages.gz
+    <span class="literal string backtick">`</span>-- non-free
+        <span class="punctuation">|</span>-- binary-amd64
+        <span class="punctuation">|</span>   <span class="punctuation">|</span>-- Packages
+        <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- Packages.gz
+        <span class="literal string backtick">`</span>-- binary-i386
+            <span class="punctuation">|</span>-- Packages
+            <span class="literal string backtick">`</span>-- Packages.gz
+
+<span class="literal number">10</span> directories, <span class="literal number">14</span> files
+</pre>
+<p><strong>pool</strong> dizininde bulunan paketler genel bir kural olmaması ile birlikte şu kurallara uygun şekilde dizilmeleri tavsiye edilmektedir:</p>
+<p>Alfabetik kural:</p>
+<ol class="arabic">
+<li><p class="first">Paket isminin ilk harfi ile başlayar dizin içerisinde paket adını taşıyan bir dizin olmalı ve paket bu dizinde yer almalı.</p>
+<p>test adındaki bir paket için <strong>pool/t/test/test_1.0_amd64.deb</strong></p>
+</li>
+<li><p class="first">Paket adının başında lib varsa ve kütüphane dosyası ise ilk harf yerine lib kısmından sonraki ilk harf ile beraber alınmalı.</p>
+<p>libncurses paketi için <strong>pool/libn/libncurses/libncurses_6.2-1_amd64.deb</strong></p>
+</li>
+</ol>
+<p>Bölümsel kural:</p>
+<ol class="arabic">
+<li><p class="first">Bölümler belirlenmeli.</p>
+<p><em>system</em>, <em>util</em>, <em>network</em>, <em>optional</em>, <em>appications</em> gibi.</p>
+</li>
+<li><p class="first">Alt bölümler oluşturulabilir.</p>
+<p>bash paketi için <strong>pool/system/shell/bash/bash_5.0_amd64.deb</strong></p>
+</li>
+</ol>
+<p>Küçük depolar için tüm paketleri tek bir dizine yığabilirsiniz.</p>
+<p>Alfabetik kurala göre dizilmiş örnek <strong>pool</strong> dizini:</p>
+<pre class="code shell literal-block">
+pool/
+<span class="punctuation">|</span>-- contrib
+<span class="punctuation">|</span>-- main
+<span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- f
+<span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- foo
+<span class="punctuation">|</span>           <span class="literal string backtick">`</span>-- foo_1.0_all.deb
+<span class="literal string backtick">`</span>-- non-free
+
+<span class="literal number">5</span> directories, <span class="literal number">1</span> file
+</pre>
+<p>Paketler <strong>paket_version_mimari.deb</strong> şeklinde isimlendirilmelidir.</p>
+<p>amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için <strong>test_1.0_amd64.deb</strong></p>
+<p><strong>Release</strong> dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin md5sum değerleri yer alır. Örneğin:</p>
+<pre class="code shell literal-block">
+Origin: Debian
+Label: Debian
+Suite: stable
+Version: <span class="literal number">10</span>.5
+Codename: stable
+Changelogs: https://sulincix.github.io
+Date: Sat, <span class="literal number">01</span> Aug <span class="literal number">2020</span> <span class="literal number">11</span>:04:59 UTC
+Acquire-By-Hash: yes
+Architectures: amd64 i386
+Components: main contrib non-free
+Description: Test repository
+MD5Sum:
+  d3979f7e69655dcb641d283f1af376a7  dists/stable/main/binary-i386/Packages
+  0270b0287abd69d7ba7670c3eb24cbc1  dists/stable/main/binary-i386/Packages.gz
+  d3979f7e69655dcb641d283f1af376a7  dists/stable/main/binary-amd64/Packages
+  0270b0287abd69d7ba7670c3eb24cbc1  dists/stable/main/binary-amd64/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/non-free/binary-i386/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/non-free/binary-i386/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/non-free/binary-amd64/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/non-free/binary-amd64/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/contrib/binary-i386/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/contrib/binary-i386/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/contrib/binary-amd64/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/contrib/binary-amd64/Packages.gz
+</pre>
+</div>
+<div class="section" id="index-alinmasi">
+<h1>İndex alınması</h1>
+<p><strong>pool</strong> dizini içerisine yukarıda anlatılan hiyerarşilere uygun şekilde paketlerimizi yerleştirmeliyiz. pool içerisinde <strong>main</strong>, <strong>contrib</strong>, <strong>non-free</strong> adında dizinler olmalıdır. Bu isimler ile <strong>dists</strong> dizini içerisindeki isimler aynı olmalıdır.</p>
+<p>pool içerisindeki paket yerleştirme işlemi bittikten sonra şu komutu kullanarak index almalıyız:</p>
+<pre class="code shell literal-block">
+$ apt-ftparchive -a amd64 packages pool/main &gt; dists/stable/main/binary-amd64/Packages
+$ gzip -k dists/stable/main/binary-amd64/Packages
+$ xz -k dists/stable/main/binary-amd64/Packages
+</pre>
+<p>İlk komut ile pool/main içerisindeki paketlerin indexlerini dists içerisindeki main bölümüne yerleştiriyoruz. Bu işlem contrib ve non-free için benzer şekilde yapılmalıdır. ayrıca eğer i386 veya arm64 veya armhf için de paketler varsa onlar için de tekrarlamanız gerekmektedir.</p>
+<p>İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.</p>
+</div>
+<div class="section" id="release-dosyasinin-yazilmasi">
+<h1>Release dosyasının yazılması</h1>
+<p>Release dosyasını elle yazmak hem uğraştırıcıdır. Başlık kısmındaki değerler değişmeyeceği için onları ayrı bir dosyaya yazıp md5sum değerlerini de komut kullanarak üstüne ekleyebilirsiniz. <em>sed</em> komutu ile de biçimlendirseniz güzel olur :D</p>
+<p>başlık dosyası içeriği şu şekilde olamalı:</p>
+<pre class="code YAML literal-block">
+<span class="literal scalar plain">$ cat baslik</span>
+<span class="literal scalar plain">Origin</span><span class="punctuation indicator">:</span> <span class="literal scalar plain">Debian</span>
+<span class="name tag">Label</span><span class="punctuation">:</span> <span class="literal scalar plain">Debian</span>
+<span class="name tag">Suite</span><span class="punctuation">:</span> <span class="literal scalar plain">stable</span>
+<span class="name tag">Version</span><span class="punctuation">:</span> <span class="literal scalar plain">10.5</span>
+<span class="name tag">Codename</span><span class="punctuation">:</span> <span class="literal scalar plain">stable</span>
+<span class="name tag">Changelogs</span><span class="punctuation">:</span> <span class="literal scalar plain">https://sulincix.github.io</span>
+<span class="name tag">Date</span><span class="punctuation">:</span> <span class="literal scalar plain">Sat, 01 Aug 2020 11:04:59 UTC</span>
+<span class="name tag">Acquire-By-Hash</span><span class="punctuation">:</span> <span class="literal scalar plain">yes</span>
+<span class="name tag">Architectures</span><span class="punctuation">:</span> <span class="literal scalar plain">amd64 i386</span>
+<span class="name tag">Components</span><span class="punctuation">:</span> <span class="literal scalar plain">main contrib non-free</span>
+<span class="name tag">Description</span><span class="punctuation">:</span> <span class="literal scalar plain">Test repository</span>
+<span class="name tag">MD5Sum</span><span class="punctuation">:</span>
+</pre>
+<p>başlık ile md5sum bilreştirmek için aşağıdakine benzer bir komut kullanabilirsiniz:</p>
+<pre class="code shell literal-block">
+$ cat baslik &gt; dists/stable/Release
+$ find dists/stable -type f <span class="punctuation">|</span> xargs md5sum <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/^/  /&quot;</span> &gt;&gt; dists/stable/Release
+</pre>
+</div>
+<div class="section" id="deponun-imzalanmasi">
+<h1>Deponun imzalanması</h1>
+<p>Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:</p>
+<pre class="code shell literal-block">
+$ gpg --clearsign -o InRelease Release
+$ gpg -abs -o Release.gpg Release
+</pre>
+<p>Eğer gpg anahtarınız yoksa oluşturmak için:</p>
+<pre class="code shell literal-block">
+$ gpg --gen-key
+</pre>
+<p>Oluşturduğumuz gpg anahtarını listelemek için:</p>
+<pre class="code shell literal-block">
+$ gpg --list-keys
+</pre>
+<p>Bu listede gpg anahtarını id değerleri bulunur. Bu değeri kullanarak gpg anahtarımızı dışarı aktarabiliriz. Aktarılan bu anahtar depoyu kullanmak isteyen kullanıcılar tarafından anahtar deposuna eklenmelidir.</p>
+<p>Elimizdeki gpg anahtarını dışarı aktarmak için:</p>
+<pre class="code shell literal-block">
+$ gpg --output Release.key --armor --export gpg_id_değeri
+</pre>
+</div>
+<div class="section" id="deponun-agda-paylasilmasi">
+<h1>Deponun ağda paylaşılması</h1>
+<p><strong>Apache</strong> veya <strong>nginx</strong> tavsiye etmekle birlikte <strong>busybox httpd</strong> ve <strong>python3 http.server</strong> kullanılabilir.</p>
+<p>Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)</p>
+</div>
+<div class="section" id="deponun-kullanicilar-tarafindan-sisteme-eklenmesi">
+<h1>Deponun kullanıcılar tarafından sisteme eklenmesi</h1>
+<p>Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.</p>
+<ol class="arabic simple">
+<li>Depoyu imzalayan gpg anahtarını içeri aktarmalılar.</li>
+</ol>
+<pre class="code shell literal-block">
+$ wget -O - http://depo_sunucusu/depo_konumu/dists/stable/Release.key <span class="punctuation">|</span> apt-key add -
+</pre>
+<ol class="arabic simple" start="2">
+<li>/etc/sources.list.d/ dizinine dosya içerisine eklemeliler. (veya sources.list dosyasına)</li>
+</ol>
+<pre class="code shell literal-block">
+$ <span class="name builtin">echo</span> <span class="literal string double">&quot;deb http://depo_sunucusu/depo_konumu stable main contrib non-free&quot;</span> &gt; /etc/apt/sources.list.d/testrepo.list
+</pre>
+<ol class="arabic simple" start="3">
+<li>Depoyu güncellemeliler.</li>
+</ol>
+<pre class="code shell literal-block">
+$ apt-get update
+</pre>
+</div>
+</div>
+</body>
+</html>

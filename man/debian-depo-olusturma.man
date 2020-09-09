@@ -1,0 +1,341 @@
+.\" Man page generated from reStructuredText.
+.
+.TH DEBIAN IÇIN DEPO OLUŞTURMA  "" "" ""
+.SH NAME
+Debian için depo oluşturma \- 
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.sp
+Bu dokümanda \fBdebian\fP için depo oluşturma ve depoyu güncelleme konusu anlatılmıştır.
+.SH GEREKLI PAKETLERIN KURULMASI
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get instal apt\-ftparchive
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DEPO ILE ILGILI TEMEL KAVRAMLAR
+.sp
+Deponun 2 temel dizini bulunmaktadır \fBpool\fP ve \fBdists\fP
+\fIdists\fP içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.
+\fIpool\fP içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.
+.sp
+\fBdists\fP dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve \fBRelease\fP dosyası bulunur.
+.sp
+Örnek depo \fBdists\fP dizin yapısı (imzalanmamış depo):
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dists/
+\(ga\-\- stable
+    |\-\- Release
+    |\-\- contrib
+    |   |\-\- binary\-amd64
+    |   |   |\-\- Packages
+    |   |   \(ga\-\- Packages.gz
+    |   \(ga\-\- binary\-i386
+    |       |\-\- Packages
+    |       \(ga\-\- Packages.gz
+    |\-\- main
+    |   |\-\- binary\-amd64
+    |   |   |\-\- Packages
+    |   |   \(ga\-\- Packages.gz
+    |   \(ga\-\- binary\-i386
+    |       |\-\- Packages
+    |       \(ga\-\- Packages.gz
+    \(ga\-\- non\-free
+        |\-\- binary\-amd64
+        |   |\-\- Packages
+        |   \(ga\-\- Packages.gz
+        \(ga\-\- binary\-i386
+            |\-\- Packages
+            \(ga\-\- Packages.gz
+
+10 directories, 14 files
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBpool\fP dizininde bulunan paketler genel bir kural olmaması ile birlikte şu kurallara uygun şekilde dizilmeleri tavsiye edilmektedir:
+.sp
+Alfabetik kural:
+.INDENT 0.0
+.IP 1. 3
+Paket isminin ilk harfi ile başlayar dizin içerisinde paket adını taşıyan bir dizin olmalı ve paket bu dizinde yer almalı.
+.sp
+test adındaki bir paket için \fBpool/t/test/test_1.0_amd64.deb\fP
+.IP 2. 3
+Paket adının başında lib varsa ve kütüphane dosyası ise ilk harf yerine lib kısmından sonraki ilk harf ile beraber alınmalı.
+.sp
+libncurses paketi için \fBpool/libn/libncurses/libncurses_6.2\-1_amd64.deb\fP
+.UNINDENT
+.sp
+Bölümsel kural:
+.INDENT 0.0
+.IP 1. 3
+Bölümler belirlenmeli.
+.sp
+\fIsystem\fP, \fIutil\fP, \fInetwork\fP, \fIoptional\fP, \fIappications\fP gibi.
+.IP 2. 3
+Alt bölümler oluşturulabilir.
+.sp
+bash paketi için \fBpool/system/shell/bash/bash_5.0_amd64.deb\fP
+.UNINDENT
+.sp
+Küçük depolar için tüm paketleri tek bir dizine yığabilirsiniz.
+.sp
+Alfabetik kurala göre dizilmiş örnek \fBpool\fP dizini:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+pool/
+|\-\- contrib
+|\-\- main
+|   \(ga\-\- f
+|       \(ga\-\- foo
+|           \(ga\-\- foo_1.0_all.deb
+\(ga\-\- non\-free
+
+5 directories, 1 file
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Paketler \fBpaket_version_mimari.deb\fP şeklinde isimlendirilmelidir.
+.sp
+amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için \fBtest_1.0_amd64.deb\fP
+.sp
+\fBRelease\fP dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin md5sum değerleri yer alır. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Origin: Debian
+Label: Debian
+Suite: stable
+Version: 10\&.5
+Codename: stable
+Changelogs: https://sulincix.github.io
+Date: Sat, 01 Aug 2020 11:04:59 UTC
+Acquire\-By\-Hash: yes
+Architectures: amd64 i386
+Components: main contrib non\-free
+Description: Test repository
+MD5Sum:
+  d3979f7e69655dcb641d283f1af376a7  dists/stable/main/binary\-i386/Packages
+  0270b0287abd69d7ba7670c3eb24cbc1  dists/stable/main/binary\-i386/Packages.gz
+  d3979f7e69655dcb641d283f1af376a7  dists/stable/main/binary\-amd64/Packages
+  0270b0287abd69d7ba7670c3eb24cbc1  dists/stable/main/binary\-amd64/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/non\-free/binary\-i386/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/non\-free/binary\-i386/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/non\-free/binary\-amd64/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/non\-free/binary\-amd64/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/contrib/binary\-i386/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/contrib/binary\-i386/Packages.gz
+  d41d8cd98f00b204e9800998ecf8427e  dists/stable/contrib/binary\-amd64/Packages
+  de9e533c25149db7878032320d7d13db  dists/stable/contrib/binary\-amd64/Packages.gz
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH İNDEX ALINMASI
+.sp
+\fBpool\fP dizini içerisine yukarıda anlatılan hiyerarşilere uygun şekilde paketlerimizi yerleştirmeliyiz. pool içerisinde \fBmain\fP, \fBcontrib\fP, \fBnon\-free\fP adında dizinler olmalıdır. Bu isimler ile \fBdists\fP dizini içerisindeki isimler aynı olmalıdır.
+.sp
+pool içerisindeki paket yerleştirme işlemi bittikten sonra şu komutu kullanarak index almalıyız:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-ftparchive \-a amd64 packages pool/main > dists/stable/main/binary\-amd64/Packages
+$ gzip \-k dists/stable/main/binary\-amd64/Packages
+$ xz \-k dists/stable/main/binary\-amd64/Packages
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+İlk komut ile pool/main içerisindeki paketlerin indexlerini dists içerisindeki main bölümüne yerleştiriyoruz. Bu işlem contrib ve non\-free için benzer şekilde yapılmalıdır. ayrıca eğer i386 veya arm64 veya armhf için de paketler varsa onlar için de tekrarlamanız gerekmektedir.
+.sp
+İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.
+.SH RELEASE DOSYASININ YAZILMASI
+.sp
+Release dosyasını elle yazmak hem uğraştırıcıdır. Başlık kısmındaki değerler değişmeyeceği için onları ayrı bir dosyaya yazıp md5sum değerlerini de komut kullanarak üstüne ekleyebilirsiniz. \fIsed\fP komutu ile de biçimlendirseniz güzel olur :D
+.sp
+başlık dosyası içeriği şu şekilde olamalı:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat baslik
+Origin: Debian
+Label: Debian
+Suite: stable
+Version: 10.5
+Codename: stable
+Changelogs: https://sulincix.github.io
+Date: Sat, 01 Aug 2020 11:04:59 UTC
+Acquire\-By\-Hash: yes
+Architectures: amd64 i386
+Components: main contrib non\-free
+Description: Test repository
+MD5Sum:
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+başlık ile md5sum bilreştirmek için aşağıdakine benzer bir komut kullanabilirsiniz:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat baslik > dists/stable/Release
+$ find dists/stable \-type f | xargs md5sum | sed "s/^/  /" >> dists/stable/Release
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DEPONUN IMZALANMASI
+.sp
+Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gpg \-\-clearsign \-o InRelease Release
+$ gpg \-abs \-o Release.gpg Release
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer gpg anahtarınız yoksa oluşturmak için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gpg \-\-gen\-key
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Oluşturduğumuz gpg anahtarını listelemek için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gpg \-\-list\-keys
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu listede gpg anahtarını id değerleri bulunur. Bu değeri kullanarak gpg anahtarımızı dışarı aktarabiliriz. Aktarılan bu anahtar depoyu kullanmak isteyen kullanıcılar tarafından anahtar deposuna eklenmelidir.
+.sp
+Elimizdeki gpg anahtarını dışarı aktarmak için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gpg \-\-output Release.key \-\-armor \-\-export gpg_id_değeri
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DEPONUN AĞDA PAYLAŞILMASI
+.sp
+\fBApache\fP veya \fBnginx\fP tavsiye etmekle birlikte \fBbusybox httpd\fP ve \fBpython3 http.server\fP kullanılabilir.
+.sp
+Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)
+.SH DEPONUN KULLANICILAR TARAFINDAN SISTEME EKLENMESI
+.sp
+Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.
+.INDENT 0.0
+.IP 1. 3
+Depoyu imzalayan gpg anahtarını içeri aktarmalılar.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ wget \-O \- http://depo_sunucusu/depo_konumu/dists/stable/Release.key | apt\-key add \-
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+/etc/sources.list.d/ dizinine dosya içerisine eklemeliler. (veya sources.list dosyasına)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ echo "deb http://depo_sunucusu/depo_konumu stable main contrib non\-free" > /etc/apt/sources.list.d/testrepo.list
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+Depoyu güncellemeliler.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get update
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.
