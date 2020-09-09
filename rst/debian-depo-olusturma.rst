@@ -96,6 +96,9 @@ Paketler **paket_version_mimari.deb** şeklinde isimlendirilmelidir.
 
 amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için **test_1.0_amd64.deb**
 
+Release
+#######
+
 **Release** dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin md5sum değerleri yer alır. Örneğin:
 
 .. code-block:: shell
