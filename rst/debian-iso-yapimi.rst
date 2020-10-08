@@ -134,7 +134,7 @@ mate         apt-get install mate-desktop-environment-core
 	☭ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
 	☭ chroot sid-chroot dpkg -i /tmp/build.deb
 	☭ chroot sid-chroot apt-get install -f
-	☭ rm -f sid-chroot sid-chroot/tmp/build.deb
+	☭ rm -f sid-chroot/tmp/build.deb
 
 
 4. Sürücüleri ekleyebiliz.
