@@ -102,7 +102,7 @@ Gerekli paketleri kuralım.
 .nf
 .ft C
 ☭ mkdir sid\-chroot
-☭ debootstrap sid sid\-chroot https://deb.debian.org/debian
+☭ debootstrap \-\-no\-merged\-usr sid sid\-chroot https://deb.debian.org/debian
 .ft P
 .fi
 .UNINDENT

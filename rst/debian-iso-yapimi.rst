@@ -33,7 +33,7 @@ Chroot oluşturulması
 .. code-block:: shell
 
 	☭ mkdir sid-chroot
-	☭ debootstrap sid sid-chroot https://deb.debian.org/debian
+	☭ debootstrap --no-merged-usr sid sid-chroot https://deb.debian.org/debian
 
 Chroot içine girmek için ön hazırlık
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
