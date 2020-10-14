@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
+<title>AppImage paketleme</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="appimage-paketleme">
+<h1 class="title">AppImage paketleme</h1>
+
+<p>Bu belgede bir <strong>AppDir</strong> oluşturup ardından <strong>AppImage</strong> dosyası üretmeyi anlatacağız.</p>
+<div class="section" id="appdir-olusturma">
+<h1>AppDir oluşturma</h1>
+<p>Proje dizinimize aşağıdakine benzer proje dizini açarak işe başlayalım.</p>
+<pre class="code shell literal-block">
+MyApp.AppDir/
+MyApp.AppDir/AppRun
+MyApp.AppDir/myapp.desktop
+MyApp.AppDir/myapp.png
+MyApp.AppDir/usr/bin/myapp
+MyApp.AppDir/usr/lib/libfoo.so.0
+</pre>
+<p>Bu doküman boyunca <strong>MyApp.AppDir</strong> dizinini proje dizini olarak kuıllanacağım.</p>
+<div class="section" id="desktop-dosyasi">
+<h2>Desktop Dosyası</h2>
+<p>Bu dosya uygulama ile ilgili bilgileri içerir. (Uygulama simgesi adı vb.) Deneme amaçlı bu dosyadan bir dane oluşturalım.</p>
+<pre class="code shell literal-block">
+$ cat &gt; myapp.desktop <span class="literal string">&lt;&lt; EOF
+&gt; [Desktop Entry]
+&gt; Name=MyApp
+&gt; Exec=myapp
+&gt; Icon=myapp
+&gt; Type=Application
+&gt; Categories=Utility;
+&gt; EOF</span>
+</pre>
+</div>
+<div class="section" id="uygulama-simgesi">
+<h2>Uygulama simgesi</h2>
+<p>Bu dosyanın adı desktop dosyası ile aynı olmalıdır. Uygulama simgesini belirlemeye yarar. Deneme amaçlı boş dosya açsak işimizi görür :)</p>
+<pre class="code shell literal-block">
+$ touch myapp.png
+</pre>
+</div>
+<div class="section" id="apprun-dosyasi">
+<h2>AppRun Dosyası</h2>
+<p>AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve <strong>$PATH</strong> değerini ayarlamak zorunda. AppImage dosyası çalıştırıldığında <strong>$APPDIR</strong> değişkeni ile ifade edilen dizinine bağlanır ve <strong>AppRun</strong> dosyası çalıştırılır. Deneme amaçlı AppRun dosyası oluşturalım. Ekrana çalıştırınca <em>Hello World</em> yazdırsın.</p>
+<pre class="code shell literal-block">
+$ cat &gt; AppRun <span class="literal string">&lt;&lt; EOF
+&gt; #!/bin/bash
+&gt; echo &quot;Hello Word&quot;
+&gt; EOF</span>
+</pre>
+<p>Eğer script dili ile çalışan <strong>AppRun</strong> yazıyorsanız başına interpreter belirtecini <strong>(#!/bin/bash)</strong> eklemeyi unutmayın. Genellikle bash scriptleri tercih edilir.</p>
+<pre class="code shell literal-block">
+$ chmod +x AppRun
+</pre>
+<p>AppRun dosyasında en sona aşağıdaki ifadeyi eklerseniz desktop dosyasındaki <strong>Exec</strong> değerini kullanarak asıl uygulamayı başlatır.</p>
+<pre class="code shell literal-block">
+$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+&gt; EXEC=$(grep -e &quot;^Exec=.*&quot; &quot;${HERE}&quot;/*.desktop | head -n 1 | cut -d &quot;=&quot; -f 2 | cut -d &quot; &quot; -f 1)'
+&gt; exec &quot;${EXEC}&quot; &quot;$&#64;&quot;
+&gt; EOF</span>
+</pre>
+</div>
+</div>
+<div class="section" id="paketleme-asamasi">
+<h1>Paketleme aşaması</h1>
+<p><a class="reference external" href="https://github.com/AppImage/AppImageKit/releases">appimagetool</a> indirin ve çalıştırılabilir yapın.</p>
+<p>Ardından <strong>appimagetool</strong> ile projenizi örnekteki gibi paketleyin.</p>
+<p>Kullanımı <em>ARCH=x86_64 appimagetool [proje dizini]</em></p>
+<pre class="code shell literal-block">
+$ <span class="name variable">ARCH</span><span class="operator">=</span>x86_64 ./appimagetool-x86_64.AppImage MyApp.AppDir/
+appimagetool, continuous build <span class="operator">(</span>commit effcebc<span class="operator">)</span>, build <span class="literal number">2084</span> built on <span class="literal number">2019</span>-05-01 <span class="literal number">21</span>:02:41 UTC
+Using architecture x86_64
+/home/a/test/MyApp.AppDir should be packaged as MyApp-x86_64.AppImage
+Deleting pre-existing .DirIcon
+Creating .DirIcon symlink based on information from desktop file
+WARNING: AppStream upstream metadata is missing, please consider creating it
+         in usr/share/metainfo/myapp.appdata.xml
+         Please see https://www.freedesktop.org/software/appstream/docs/chap-Quickstart.html#sect-Quickstart-DesktopApps
+         <span class="keyword">for</span> more information or use the generator at http://output.jsbin.com/qoqukof.
+Generating squashfs...
+Parallel mksquashfs: Using <span class="literal number">4</span> processors
+Creating <span class="literal number">4</span>.0 filesystem on MyApp-x86_64.AppImage, block size <span class="literal number">131072</span>.
+<span class="operator">[===================================================================</span><span class="punctuation">|</span><span class="operator">]</span> <span class="literal number">2</span>/2 <span class="literal number">100</span>%
+
+Exportable Squashfs <span class="literal number">4</span>.0 filesystem, gzip compressed, data block size <span class="literal number">131072</span>
+    compressed data, compressed metadata, compressed fragments, compressed xattrs
+    duplicates are removed
+Filesystem size <span class="literal number">0</span>.46 Kbytes <span class="operator">(</span><span class="literal number">0</span>.00 Mbytes<span class="operator">)</span>
+    <span class="literal number">78</span>.26% of uncompressed filesystem size <span class="operator">(</span><span class="literal number">0</span>.58 Kbytes<span class="operator">)</span>
+Inode table size <span class="literal number">97</span> bytes <span class="operator">(</span><span class="literal number">0</span>.09 Kbytes<span class="operator">)</span>
+    <span class="literal number">49</span>.74% of uncompressed inode table size <span class="operator">(</span><span class="literal number">195</span> bytes<span class="operator">)</span>
+Directory table size <span class="literal number">97</span> bytes <span class="operator">(</span><span class="literal number">0</span>.09 Kbytes<span class="operator">)</span>
+    <span class="literal number">87</span>.39% of uncompressed directory table size <span class="operator">(</span><span class="literal number">111</span> bytes<span class="operator">)</span>
+Number of duplicate files found <span class="literal number">2</span>
+Number of inodes <span class="literal number">6</span>
+Number of files <span class="literal number">4</span>
+Number of fragments <span class="literal number">1</span>
+Number of symbolic links  <span class="literal number">1</span>
+Number of device nodes <span class="literal number">0</span>
+Number of fifo nodes <span class="literal number">0</span>
+Number of socket nodes <span class="literal number">0</span>
+Number of directories <span class="literal number">1</span>
+Number of ids <span class="operator">(</span>unique uids + gids<span class="operator">)</span> <span class="literal number">1</span>
+Number of uids <span class="literal number">1</span>
+    root <span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span>
+Number of gids <span class="literal number">1</span>
+    root <span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span>
+Embedding ELF...
+Marking the AppImage as executable...
+Embedding MD5 digest
+Success
+
+Please consider submitting your AppImage to AppImageHub, the crowd-sourced
+central directory of available AppImages, by opening a pull request
+at https://github.com/AppImage/appimage.github.io
+</pre>
+<p>Oluşan <strong>AppImage</strong> dosyamızı çalıştıralım.</p>
+<pre class="code shell literal-block">
+$ ./MyApp-x86_64.AppImage
+Hello Word
+</pre>
+</div>
+<div class="section" id="appimage-paketi-icin-onemli-notlar">
+<h1>AppImage paketi için önemli notlar</h1>
+<div class="section" id="hardcoded-konumlar">
+<h2>Hardcoded konumlar</h2>
+<p>İkili dosyalarda hardcoded konum bulunmamalı. Eğer bulunuyorsa yama atılmalı.</p>
+<p>Aşağıdaki komutla hardcoded konum var mı öğrenebiliriz:</p>
+<pre class="code shell literal-block">
+$ strings MyApp.AppDir/usr/bin/myapp <span class="punctuation">|</span> grep /usr
+</pre>
+<p>Aşağıdaki komutla yama atabiliriz:</p>
+<pre class="code shell literal-block">
+$ sed -i -e <span class="literal string single">'s#/usr#././#g'</span> MyApp.AppDir/usr/bin/myapp
+</pre>
+<p>Burada ././ 4 karakterlidir (/usr ile aynı uzunlukta) ve burası anlamına gelmektedir. Farklı bir konumu tarif ettirmeyiniz.</p>
+</div>
+<div class="section" id="glib-semalari">
+<h2>GLib şemaları</h2>
+<p>Uygulamanız eğer <strong>glib şeması</strong> içeriyorsa <strong>AppRun</strong> dosyanızda şema konumunu tanımlamalısınız. Ayrıca paketlemeden önce şemayı derlemeniz gerekmektedir.</p>
+<p>Aşağıdaki ifadeyi <strong>AppRun</strong> içerisine yazın:</p>
+<pre class="code shell literal-block">
+$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+&gt; export GSETTINGS_SCHEMA_DIR=&quot;${HERE}/usr/share/glib-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}&quot;
+&gt; EOF</span>
+</pre>
+<p><strong>glib şemasını</strong> derlemek için aşağıdaki komutu kullanın:</p>
+<pre class="code shell literal-block">
+$ glib-compile-schemas MyApp.AppDir/usr/share/glib-2.0/schemas/
+</pre>
+</div>
+<div class="section" id="bazi-gerekli-cevresel-degiskenler">
+<h2>Bazı gerekli çevresel değişkenler</h2>
+<p>Uygulamaların düzgün çalışabilmesi için <strong>LD_LIBRARY_PATH</strong> <strong>PATH</strong> <strong>PYTHON_PATH</strong> değişkenlerinin ayarlanması gerekir. Aşağıdaki ifadeyi <strong>AppRun</strong> içerisine yazın:</p>
+<pre class="code shell literal-block">
+$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+&gt; export SELF=$(readlink -f &quot;$0&quot;)
+&gt; export HERE=${SELF%/*}
+&gt; export LD_LIBRARY_PATH=&quot;${HERE}/usr/lib/:${HERE}/usr/lib/i386-linux-gnu/:${HERE}/usr/lib/x86_64-linux-gnu/:${HERE}/usr/lib32/:${HERE}/usr/lib64/:${HERE}/lib/:${HERE}/lib/i386-linux-gnu/:${HERE}/lib/x86_64-linux-gnu/:${HERE}/lib32/:${HERE}/lib64/${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&quot;'
+&gt; export PATH=&quot;${HERE}/usr/bin/:${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}&quot;
+&gt; export PYTHONPATH=&quot;${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}&quot;
+&gt; export PERLLIB=&quot;${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}&quot;
+&gt; EOF</span>
+</pre>
+</div>
+<div class="section" id="xdg-dizinleri">
+<h2>Xdg dizinleri</h2>
+<p>Uygulamanızın <strong>xdg dizinleri</strong> varsa onları da tanımlamanız gereklidir. (örneğin <em>/usr/share</em>)</p>
+<p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
+<pre class="code shell literal-block">
+$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+&gt; export XDG_DATA_DIRS=&quot;${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}&quot;
+&gt; EOF</span>
+</pre>
+</div>
+<div class="section" id="qt-plugin-dizinleri">
+<h2>Qt plugin dizinleri</h2>
+<p>Uygulamanız <strong>qt</strong> tabanlı ise <strong>qt plugin</strong> dizinlerini tanımlamalısınız.</p>
+<p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
+<pre class="code shell literal-block">
+$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+&gt; export QT_PLUGIN_PATH=&quot;${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt4/plugins/:${HERE}/usr/lib/x86_64-linux-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64-linux-gnu/qt5/plugins/:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}&quot;
+&gt; EOF</span>
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

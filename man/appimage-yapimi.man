@@ -1,0 +1,320 @@
+.\" Man page generated from reStructuredText.
+.
+.TH APPIMAGE PAKETLEME  "" "" ""
+.SH NAME
+AppImage paketleme \- 
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.sp
+Bu belgede bir \fBAppDir\fP oluşturup ardından \fBAppImage\fP dosyası üretmeyi anlatacağız.
+.SH APPDIR OLUŞTURMA
+.sp
+Proje dizinimize aşağıdakine benzer proje dizini açarak işe başlayalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+MyApp.AppDir/
+MyApp.AppDir/AppRun
+MyApp.AppDir/myapp.desktop
+MyApp.AppDir/myapp.png
+MyApp.AppDir/usr/bin/myapp
+MyApp.AppDir/usr/lib/libfoo.so.0
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu doküman boyunca \fBMyApp.AppDir\fP dizinini proje dizini olarak kuıllanacağım.
+.SS Desktop Dosyası
+.sp
+Bu dosya uygulama ile ilgili bilgileri içerir. (Uygulama simgesi adı vb.) Deneme amaçlı bu dosyadan bir dane oluşturalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat > myapp.desktop << EOF
+> [Desktop Entry]
+> Name=MyApp
+> Exec=myapp
+> Icon=myapp
+> Type=Application
+> Categories=Utility;
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Uygulama simgesi
+.sp
+Bu dosyanın adı desktop dosyası ile aynı olmalıdır. Uygulama simgesini belirlemeye yarar. Deneme amaçlı boş dosya açsak işimizi görür :)
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ touch myapp.png
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS AppRun Dosyası
+.sp
+AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve \fB$PATH\fP değerini ayarlamak zorunda. AppImage dosyası çalıştırıldığında \fB$APPDIR\fP değişkeni ile ifade edilen dizinine bağlanır ve \fBAppRun\fP dosyası çalıştırılır. Deneme amaçlı AppRun dosyası oluşturalım. Ekrana çalıştırınca \fIHello World\fP yazdırsın.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat > AppRun << EOF
+> #!/bin/bash
+> echo "Hello Word"
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer script dili ile çalışan \fBAppRun\fP yazıyorsanız başına interpreter belirtecini \fB(#!/bin/bash)\fP eklemeyi unutmayın. Genellikle bash scriptleri tercih edilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ chmod +x AppRun
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+AppRun dosyasında en sona aşağıdaki ifadeyi eklerseniz desktop dosyasındaki \fBExec\fP değerini kullanarak asıl uygulamayı başlatır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat >> AppRun << EOF
+> EXEC=$(grep \-e "^Exec=.*" "${HERE}"/*.desktop | head \-n 1 | cut \-d "=" \-f 2 | cut \-d " " \-f 1)\(aq
+> exec "${EXEC}" "$@"
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PAKETLEME AŞAMASI
+.sp
+\fI\%appimagetool\fP indirin ve çalıştırılabilir yapın.
+.sp
+Ardından \fBappimagetool\fP ile projenizi örnekteki gibi paketleyin.
+.sp
+Kullanımı \fIARCH=x86_64 appimagetool [proje dizini]\fP
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ ARCH=x86_64 ./appimagetool\-x86_64.AppImage MyApp.AppDir/
+appimagetool, continuous build (commit effcebc), build 2084 built on 2019\-05\-01 21:02:41 UTC
+Using architecture x86_64
+/home/a/test/MyApp.AppDir should be packaged as MyApp\-x86_64.AppImage
+Deleting pre\-existing .DirIcon
+Creating .DirIcon symlink based on information from desktop file
+WARNING: AppStream upstream metadata is missing, please consider creating it
+         in usr/share/metainfo/myapp.appdata.xml
+         Please see https://www.freedesktop.org/software/appstream/docs/chap\-Quickstart.html#sect\-Quickstart\-DesktopApps
+         for more information or use the generator at http://output.jsbin.com/qoqukof.
+Generating squashfs...
+Parallel mksquashfs: Using 4 processors
+Creating 4\&.0 filesystem on MyApp\-x86_64.AppImage, block size 131072\&.
+[===================================================================|] 2/2 100%
+
+Exportable Squashfs 4\&.0 filesystem, gzip compressed, data block size 131072
+    compressed data, compressed metadata, compressed fragments, compressed xattrs
+    duplicates are removed
+Filesystem size 0\&.46 Kbytes (0\&.00 Mbytes)
+    78\&.26% of uncompressed filesystem size (0\&.58 Kbytes)
+Inode table size 97 bytes (0\&.09 Kbytes)
+    49\&.74% of uncompressed inode table size (195 bytes)
+Directory table size 97 bytes (0\&.09 Kbytes)
+    87\&.39% of uncompressed directory table size (111 bytes)
+Number of duplicate files found 2
+Number of inodes 6
+Number of files 4
+Number of fragments 1
+Number of symbolic links  1
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 1
+Number of ids (unique uids + gids) 1
+Number of uids 1
+    root (0)
+Number of gids 1
+    root (0)
+Embedding ELF...
+Marking the AppImage as executable...
+Embedding MD5 digest
+Success
+
+Please consider submitting your AppImage to AppImageHub, the crowd\-sourced
+central directory of available AppImages, by opening a pull request
+at https://github.com/AppImage/appimage.github.io
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Oluşan \fBAppImage\fP dosyamızı çalıştıralım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ ./MyApp\-x86_64.AppImage
+Hello Word
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH APPIMAGE PAKETI IÇIN ÖNEMLI NOTLAR
+.SS Hardcoded konumlar
+.sp
+İkili dosyalarda hardcoded konum bulunmamalı. Eğer bulunuyorsa yama atılmalı.
+.sp
+Aşağıdaki komutla hardcoded konum var mı öğrenebiliriz:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ strings MyApp.AppDir/usr/bin/myapp | grep /usr
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Aşağıdaki komutla yama atabiliriz:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ sed \-i \-e \(aqs#/usr#././#g\(aq MyApp.AppDir/usr/bin/myapp
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada ././ 4 karakterlidir (/usr ile aynı uzunlukta) ve burası anlamına gelmektedir. Farklı bir konumu tarif ettirmeyiniz.
+.SS GLib şemaları
+.sp
+Uygulamanız eğer \fBglib şeması\fP içeriyorsa \fBAppRun\fP dosyanızda şema konumunu tanımlamalısınız. Ayrıca paketlemeden önce şemayı derlemeniz gerekmektedir.
+.sp
+Aşağıdaki ifadeyi \fBAppRun\fP içerisine yazın:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat >> AppRun << EOF
+> export GSETTINGS_SCHEMA_DIR="${HERE}/usr/share/glib\-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}"
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBglib şemasını\fP derlemek için aşağıdaki komutu kullanın:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ glib\-compile\-schemas MyApp.AppDir/usr/share/glib\-2.0/schemas/
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Bazı gerekli çevresel değişkenler
+.sp
+Uygulamaların düzgün çalışabilmesi için \fBLD_LIBRARY_PATH\fP \fBPATH\fP \fBPYTHON_PATH\fP değişkenlerinin ayarlanması gerekir. Aşağıdaki ifadeyi \fBAppRun\fP içerisine yazın:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat >> AppRun << EOF
+> export SELF=$(readlink \-f "$0")
+> export HERE=${SELF%/*}
+> export LD_LIBRARY_PATH="${HERE}/usr/lib/:${HERE}/usr/lib/i386\-linux\-gnu/:${HERE}/usr/lib/x86_64\-linux\-gnu/:${HERE}/usr/lib32/:${HERE}/usr/lib64/:${HERE}/lib/:${HERE}/lib/i386\-linux\-gnu/:${HERE}/lib/x86_64\-linux\-gnu/:${HERE}/lib32/:${HERE}/lib64/${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"\(aq
+> export PATH="${HERE}/usr/bin/:${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}"
+> export PYTHONPATH="${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}"
+> export PERLLIB="${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}"
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Xdg dizinleri
+.sp
+Uygulamanızın \fBxdg dizinleri\fP varsa onları da tanımlamanız gereklidir. (örneğin \fI/usr/share\fP)
+.sp
+Aşağıdaki ifadeyi \fBAppRun\fP içine yazın:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat >> AppRun << EOF
+> export XDG_DATA_DIRS="${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}"
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Qt plugin dizinleri
+.sp
+Uygulamanız \fBqt\fP tabanlı ise \fBqt plugin\fP dizinlerini tanımlamalısınız.
+.sp
+Aşağıdaki ifadeyi \fBAppRun\fP içine yazın:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat >> AppRun << EOF
+> export QT_PLUGIN_PATH="${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386\-linux\-gnu/qt4/plugins/:${HERE}/usr/lib/x86_64\-linux\-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/:${HERE}/usr/lib/i386\-linux\-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64\-linux\-gnu/qt5/plugins/:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
+> EOF
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.
