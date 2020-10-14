@@ -8,7 +8,7 @@ AppDir oluşturma
 ^^^^^^^^^^^^^^^^^^^^
 Proje dizinimize aşağıdakine benzer dizinler açarak işe başlayalım
 
-.. code-block: shell
+.. code-block:: shell
 
 	MyApp.AppDir/
 	MyApp.AppDir/AppRun
@@ -21,7 +21,7 @@ AppRun Dosyası
 ^^^^^^^^^^^^^^^^^^^^^
 AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve :code:`$PATH` değerini ayarlamak zorunda. AppImage dosyası çalıştırıldığında :code:`$APPDIR` değişkeni ile ifade edilen dizinine bağlanır ve AppRun dosyası çalıştırılır. Deneme amaçlı AppRun dosyası oluşturalım. Ekrana çalıştırınca *Hello World* yazdırsın.
 
-.. code-block: shell
+.. code-block:: shell
 
     a@pardus:~/test/proj$ cat > AppRun << EOF
     > echo "Hello Word"
@@ -32,7 +32,7 @@ Desktop Dosyası
 ^^^^^^^^^^^^^^^^^^^^^
 Bu dosya appimage ile ilgili bilgileri içerir. (Uygulama simgesi adı vb.) Deneme amaçlı bu dosyadan bir dane oluşturalım.
 
-.. code-block: shell
+.. code-block:: shell
 
     a@pardus:~/test/proj$ cat > myapp.desktop << EOF
     > [Desktop Entry]
