@@ -26,7 +26,10 @@ AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve :code:`$PATH` değ
     a@pardus:~/test/proj$ cat > AppRun << EOF
     > echo "Hello Word"
     > EOF
-    a@pardus:~/test/proj$ chmod +x AppRun
+   
+.. code-block:: shell
+   
+   a@pardus:~/test/proj$ chmod +x AppRun
 
 Desktop Dosyası
 ^^^^^^^^^^^^^^^^^^^^^
