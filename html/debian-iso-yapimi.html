@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
 <title>İso yapımı</title>
 <style type="text/css">
 
@@ -566,7 +566,7 @@ ul.auto-toc {
 ☭ chroot sid-chroot apt-get clean <span class="comment single"># apt önbelleğini temizler
 </span>☭ rm -f sid-chroot/root/.bash_history <span class="comment single"># iso yaparken oluşturduğunuz historyleri temizler
 </span>☭ rm -rf sid-chroot/var/lib/apt/lists/* <span class="comment single"># index dosyalarını temizler
-</span>☭ find -type f sid-chroot/var/log/ <span class="punctuation">|</span> xargs rm -f <span class="comment single"># logları siler</span>
+</span>☭ find sid-chroot/var/log/ -type f <span class="punctuation">|</span> xargs rm -f <span class="comment single"># logları siler</span>
 </pre>
 </div>
 <div class="section" id="paketleme-asamasi">

@@ -363,7 +363,7 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 ☭ chroot sid\-chroot apt\-get clean # apt önbelleğini temizler
 ☭ rm \-f sid\-chroot/root/.bash_history # iso yaparken oluşturduğunuz historyleri temizler
 ☭ rm \-rf sid\-chroot/var/lib/apt/lists/* # index dosyalarını temizler
-☭ find \-type f sid\-chroot/var/log/ | xargs rm \-f # logları siler
+☭ find sid\-chroot/var/log/ \-type f | xargs rm \-f # logları siler
 .ft P
 .fi
 .UNINDENT
