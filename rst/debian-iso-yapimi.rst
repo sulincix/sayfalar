@@ -178,10 +178,13 @@ Paketleme aşaması
 
 1. İso taslağı dizini açalım ve **squashfs** imajı alalım. aldığımız imajı daha sonra iso taslağı içinde **live** adında bir dizin açarak içine atalım.
 
+  **Not:** *-comp* parametresinden sonra *xz* veya *gzip* kullanabiliriz. *xz* kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. *gzip* kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
+  Debianda varsayılan sıkıştırma formatı *xz* olmasına ramen ben sizlere *gzip* kullanmanızı öneririm.
+
 .. code-block:: shell
 	
 	☭ mkdir isowork
-	☭ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
+	☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
 	☭ mkdir -p isowork/live
 	☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 

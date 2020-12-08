@@ -375,11 +375,17 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
+\fBNot:\fP \fI\-comp\fP parametresinden sonra \fIxz\fP veya \fIgzip\fP kullanabiliriz. \fIxz\fP kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. \fIgzip\fP kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
+Debianda varsayılan sıkıştırma formatı \fIxz\fP olmasına ramen ben sizlere \fIgzip\fP kullanmanızı öneririm.
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
 .sp
 .nf
 .ft C
 ☭ mkdir isowork
-☭ mksquashfs sid\-chroot filesystem.squashfs \-comp xz \-wildcards
+☭ mksquashfs sid\-chroot filesystem.squashfs \-comp gzip \-wildcards
 ☭ mkdir \-p isowork/live
 ☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 .ft P

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
 <title>İso yapımı</title>
 <style type="text/css">
 
@@ -574,9 +574,12 @@ ul.auto-toc {
 <ol class="arabic simple">
 <li>İso taslağı dizini açalım ve <strong>squashfs</strong> imajı alalım. aldığımız imajı daha sonra iso taslağı içinde <strong>live</strong> adında bir dizin açarak içine atalım.</li>
 </ol>
+<blockquote>
+<strong>Not:</strong> <em>-comp</em> parametresinden sonra <em>xz</em> veya <em>gzip</em> kullanabiliriz. <em>xz</em> kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. <em>gzip</em> kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
+Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben sizlere <em>gzip</em> kullanmanızı öneririm.</blockquote>
 <pre class="code shell literal-block">
 ☭ mkdir isowork
-☭ mksquashfs sid-chroot filesystem.squashfs -comp xz -wildcards
+☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
 ☭ mkdir -p isowork/live
 ☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 </pre>
