@@ -87,7 +87,7 @@ Chroot dışındaki kurulum aşamaları
 
 	$ debootstrap --arch amd64 --no-merged-usr sid /mnt https://deb.debian.org/debian
 
-3. Oluşturduğumuz **rootfs** içine **dev sys proc** run dizinlerini bağlayalım.
+3. Oluşturduğumuz **rootfs** içine **dev sys proc run** dizinlerini bağlayalım.
 
 .. code-block:: shell
 

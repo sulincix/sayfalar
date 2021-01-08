@@ -184,7 +184,7 @@ $ debootstrap \-\-arch amd64 \-\-no\-merged\-usr sid /mnt https://deb.debian.org
 .UNINDENT
 .INDENT 0.0
 .IP 3. 3
-Oluşturduğumuz \fBrootfs\fP içine \fBdev sys proc\fP run dizinlerini bağlayalım.
+Oluşturduğumuz \fBrootfs\fP içine \fBdev sys proc run\fP dizinlerini bağlayalım.
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5

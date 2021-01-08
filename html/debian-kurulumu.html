@@ -451,7 +451,7 @@ $ mount /dev/sda2 /mnt
 $ debootstrap --arch amd64 --no-merged-usr sid /mnt https://deb.debian.org/debian
 </pre>
 <ol class="arabic simple" start="3">
-<li>Oluşturduğumuz <strong>rootfs</strong> içine <strong>dev sys proc</strong> run dizinlerini bağlayalım.</li>
+<li>Oluşturduğumuz <strong>rootfs</strong> içine <strong>dev sys proc run</strong> dizinlerini bağlayalım.</li>
 </ol>
 <pre class="code shell literal-block">
 $ <span class="keyword">for</span> i in dev dev/pts proc sys run<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> mnt/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
