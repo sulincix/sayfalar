@@ -1,0 +1,386 @@
+.\" Man page generated from reStructuredText.
+.
+.TH DEBIAN KURULUMU  "" "" ""
+.SH NAME
+debian kurulumu \- 
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.sp
+Bu dokümanda debianı \fBdebootstrap\fP ile kurma konusu anlatılacaktır. \fBBu dokümandaki komutları kendi kurulumunuza göre uyarlayarak yazın.\fP
+.sp
+Bu dokümanda \fBdebian sid\fP kurulumu anlatılmıştır. \fBsid\fP yerine \fBstable\fP kullanmak isterseniz dokümanda \fIsid\fP gördüğünüz yerlere \fIstable\fP yazmanız gerekir.
+.sp
+Not: \fBUefi\fP kurulum için \fBefi\fP bölümü \fB/dev/sda1\fP, her iki kurulum türü için \fB/dev/sda2\fP kök dizin olarak ele alıp anlatacağım.
+.sp
+Not: Bu dokümandaki yazılanları uygulamadan dolayı oluşabilecek zarar veya veri kayıplarından dokümanın yazarı sorumlu tutulamaz.
+.TS
+center;
+|l|l|.
+_
+T{
+Temel kavramlar
+T}
+_
+T{
+Terim
+T}	T{
+Anlamı
+T}
+_
+T{
+rootfs
+T}	T{
+Kurulumu yapılan sistemin taslağıdır. \fBchroot\fP komutu ile içerisine girebiliriz. çıkmak için ise \fBexit\fP komutu kullanılmalıdır.
+T}
+_
+T{
+debootstrap
+T}	T{
+\fBrootfs\fP oluşturmak için kullanılan komuttur. Debiana ait bir araçtır fakat debian dışında da kullanılabilir.
+T}
+_
+T{
+efi bölümü
+T}	T{
+Sadece \fBUefi\fP kullanan sistemlerde bulunan ve açılış için gereken dosyaların bulunduğu bölümdür.
+T}
+_
+T{
+kök dizin
+T}	T{
+Kurulumu yapılan sistemin kurulacağı yerdir.
+T}
+_
+.TE
+.SH GEREKENLER
+.sp
+\fBDebian\fP tabanlı herhangi bir dağıtım isosu (\fIubuntu debian pardus mint fark etmez\fP)
+.sp
+Eğer debian tabanlı olmayan bir dağıtım varsa ona debootstrap kurmalısınız.
+.sp
+Kaynak kodu derlemeden önce bir tane yamaya ihtiyacınız olabilir.
+.sp
+Kaynak kod: \fI\%https://salsa.debian.org/installer\-team/debootstrap\fP
+.sp
+Yama: \fI\%https://gitlab.com/sulinos/repositories/SulinRepository/\-/raw/master/system/devel/debootstrap/files/0001\-remove\-dpkg\-support.patch\fP
+.SH HAZIRLIK AŞAMASI
+.sp
+Elinizdeki isoyu yazdırıp \fBlive\fP olarak açın. Tüm işlemi \fBlive\fP modda halleceğiz.
+Tüm işlemi \fBroot\fP yetkisi ile yapacağız. \fBsudo su\fP yazarak önce \fBroot\fP yetkisi alın.
+.INDENT 0.0
+.IP 1. 3
+\fBdebootstrap\fP paketini kurun:
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get update
+$ apt\-get install debootstrap
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+\fBUefi\fP mi yoksa \fBlegacy\fP mi kullandığınızı öğrenin:
+.UNINDENT
+.sp
+Eğer \fB/sys/firmware/efi\fP adında bir dizin varsa \fBuefi\fP kullanıyorsunuzdur. Aşağıdaki komutun çıktısı da aynı bilgiyi verecektir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+[ \-d /sys/firmware/efi ] && echo UEFI || echo legacy
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+Kurulum yapılacak diski bölümlendirelim. \fBUefi\fP için \fB100mb efi bölümü\fP ve bir \fBkök dizin\fP oluşturalım. (\fIben sda1 efi sda2 kök olarak anlatacağım\fP) \fBlegacy\fP için sadece \fBkök dizin\fP açmamız yeterlidir.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cfdisk /dev/sda # Bunun yerine gparted gibi gui araçları da kullanabilirsiniz.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 4. 3
+Diskleri biçimlendirelim:
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ mkfs.ext4 /dev/sda2 # kök dizin
+$ mkfs.vfat /dev/sda1 # efi bölümü (sadece uefi kullananlar yapmalı)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KURULUM AŞAMASI
+.SS Chroot dışındaki kurulum aşamaları
+.INDENT 0.0
+.IP 1. 3
+Diskleri hazırladıktan sonra kuruluma geçebiliriz. Bunun için ilk \fBkök dizin\fP olacak yeri \fB/mnt\fP içine bağlayalım. Bağlanıp bağlanmadığını \fBlsblk\fP veya \fBdf\fP komutları ile kontrol edebilirsiniz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ mount /dev/sda2 /mnt
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+\fBDebootstrap\fP ile diskin içine \fBrootfs\fP oluşturalım. Debian tabanı dışındaki dağıtımlarda \fB\-\-arch amd64\fP parametresini yazmak zorundasınız.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ debootstrap \-\-arch amd64 \-\-no\-merged\-usr sid /mnt https://deb.debian.org/debian
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+Oluşturduğumuz \fBrootfs\fP içine \fBdev sys proc\fP run dizinlerini bağlayalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ for i in dev dev/pts proc sys run; do mount \-o bind /$i mnt/$i; done
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 4. 3
+\fBRootfs\fP içerisine \fBchroot\fP ile girelim. Bu aşamadan sonraki tüm adımlar \fBchroot\fP içerisinde yapılacaktır.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ chroot /mnt /bin/bash
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Chroot içindeki kurulum aşamaları
+.INDENT 0.0
+.IP 5. 3
+\fBKerneli\fP ve \fBgrubu\fP kuralım. \fBUefi\fP kullananlar \fBefi\fP bölümünü \fB/boot/efi\fP dizinine bağlamalılar.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# sadece uefi kullananların yapması gereken kısım
+$ mkdir \-p /boot/efi
+$ mount /dev/sda1 /boot/efi
+# uefi ve legacy için ortak olan kısım
+$ apt\-get update
+$ apt\-get install grub\-pc\-bin grub\-efi linux\-image\-amd64 linux\-headers\-amd64
+$ grub\-install /dev/sda
+$ grub\-mkconfig \-o /boot/grub/grub.cfg
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 6. 3
+\fBNon\-free\fP ve \fBContrib\fP depolarını etkinleştirelim (\fIisteğe bağlı\fP)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ echo \(aqdeb https://deb.debian.org/debian sid main contrib non\-free\(aq > /etc/apt/sources.list
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 7. 3
+Sürücüleri kuralım (\fIisteğe bağlı\fP)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get install firmware\-amd\-graphics firmware\-atheros \e
+    firmware\-b43\-installer firmware\-b43legacy\-installer \e
+    firmware\-bnx2 firmware\-bnx2x firmware\-brcm80211  \e
+    firmware\-cavium firmware\-intel\-sound firmware\-intelwimax \e
+    firmware\-ipw2x00 firmware\-ivtv firmware\-iwlwifi \e
+    firmware\-libertas firmware\-linux firmware\-linux\-free \e
+    firmware\-linux\-nonfree firmware\-misc\-nonfree firmware\-myricom \e
+    firmware\-netxen firmware\-qlogic firmware\-realtek firmware\-samsung \e
+    firmware\-siano firmware\-ti\-connectivity firmware\-zd1211
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 8. 3
+\fB/etc/fstab\fP dosyasını düzenleyelim. Not: \fBUefi\fP kullananlar \fBefi\fP bölümünü de ekleyebilirler. Ben şahsen gerekli görmüyorum.
+.UNINDENT
+.sp
+içeriği şu şekilde olmalı:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# UNCONFIGURED FSTAB FOR BASE SYSTEM
+/dev/sda2 / ext4 defaults,rw 0 0
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 9. 3
+Masaüstü ortamı kuralım (\fIisteğe bağlı\fP)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get install xorg xinit
+$ apt\-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.TS
+center;
+|l|l|.
+_
+T{
+Masaüstü
+T}	T{
+Komut
+T}
+_
+T{
+xfce
+T}	T{
+apt\-get install xfce4
+T}
+_
+T{
+lxde
+T}	T{
+apt\-get install lxde
+T}
+_
+T{
+cinnamon
+T}	T{
+apt\-get install cinnamon
+T}
+_
+T{
+plasma
+T}	T{
+apt\-get install kde\-standard
+T}
+_
+T{
+gnome
+T}	T{
+apt\-get install gnome\-core
+T}
+_
+T{
+mate
+T}	T{
+apt\-get install mate\-desktop\-environment\-core
+T}
+_
+.TE
+.INDENT 0.0
+.IP 10. 3
+Yeni \fBkullanıcı\fP oluşturalım ve \fBparola\fP atayalım. Not: \fBSudo\fP kurmadığınızda \fBroot\fP yetkisi almak için \fBsu\fP komutu kullanmanız gerekir.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ useradd \-m kullanıcıadı \-G netdev,lpadmin,audio,video,plugdev,scanner,floppy \-s /bin/bash
+$ passwd kullanıcıadı # kullanıcıya parola atamak için
+$ passwd root # root kullancısına parola atamak için
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KURULUMU SONRASI AŞAMA
+.INDENT 0.0
+.IP 1. 3
+Temizlik yapalım:
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get clean
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+\fBChroot\fP içinden çıkalım ve artık yeniden başlatabiliriz. Eğer hatalı bir şey yapmadıysanız sisteminiz düzgünce açılacaktır.
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.
