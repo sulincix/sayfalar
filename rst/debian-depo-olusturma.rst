@@ -138,7 +138,7 @@ amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için **test_1.
 Release
 #######
 
-**Release** dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin md5sum değerleri yer alır. Örneğin:
+**Release** dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin hash değerleri yer alır. Örneğin:
 
 .. code-block:: shell
 
