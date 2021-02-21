@@ -131,7 +131,7 @@ mate         apt-get install mate-desktop-environment-core
 
 3. Kurulum aracı ekleyebiliz.
 
-* git, make ve gettext paketini kuralım.
+* Öncesinde git, make ve gettext paketini kuralım.
 
 .. code-block:: shell
 
