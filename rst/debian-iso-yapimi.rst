@@ -1,4 +1,4 @@
-İso yapımı
+Iso yapımı
 ==========
 Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı anlatılacaktır. debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken dokümanda **sid** yerine **stable** yazmaktır. 
 
@@ -34,6 +34,12 @@ Chroot oluşturulması
 
 	☭ mkdir sid-chroot
 	☭ debootstrap --no-merged-usr sid sid-chroot https://deb.debian.org/debian
+
+Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız **chroot** dizininin sahibini **root** olarak değiştirip tekrar denemenizi öneriririz.
+
+.. code-block:: shell
+
+	☭ chowm root sid-chroot
 
 Chroot içine girmek için ön hazırlık
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -125,17 +131,18 @@ mate         apt-get install mate-desktop-environment-core
 
 3. Kurulum aracı ekleyebiliz.
 
+* git, make ve gettext paketini kuralım.
+
 .. code-block:: shell
 
-	☭ git clone https://gitlab.com/ggggggggggggggggg/17g-debian
-	☭ cd 17g-debian
-	☭ make && make create-deb-debian
-	☭ cd ..
-	☭ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
-	☭ chroot sid-chroot dpkg -i /tmp/build.deb
-	☭ chroot sid-chroot apt-get install -f
-	☭ rm -f sid-chroot/tmp/build.deb
+	☭ apt-get install git make gettext
 
+.. code-block:: shell
+
+	☭ git clone https://gitlab.com/ggggggggggggggggg/17g
+	☭ cd 17g
+	☭ make & make install
+	☭ rm -rf 17g
 
 4. Sürücüleri ekleyebiliz.
 
@@ -176,7 +183,7 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 Paketleme aşaması
 ^^^^^^^^^^^^^^^^^
 
-1. İso taslağı dizini açalım ve **squashfs** imajı alalım. aldığımız imajı daha sonra iso taslağı içinde **live** adında bir dizin açarak içine atalım.
+1. Iso taslağı dizini açalım ve **squashfs** imajı alalım. aldığımız imajı daha sonra iso taslağı içinde **live** adında bir dizin açarak içine atalım.
 
   **Not:** *-comp* parametresinden sonra *xz* veya *gzip* kullanabiliriz. *xz* kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. *gzip* kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
   Debianda varsayılan sıkıştırma formatı *xz* olmasına ramen ben sizlere *gzip* kullanmanızı öneririm.
@@ -221,7 +228,7 @@ Paketleme aşaması
     	    ├── initrd.img
     	    └── vmlinuz
 
-5. İso dosyası üretelim. 
+5. Iso dosyası üretelim. 
 
 .. code-block:: shell
 
