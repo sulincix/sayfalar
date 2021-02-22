@@ -219,7 +219,7 @@ Paketleme aşaması
 .. code-block:: shell
 
 	☭ tree isowork
-	    iso-work/
+	    isowork/
 	    ├── boot
 	    │   └── grub
 	    │       └── grub.cfg
