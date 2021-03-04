@@ -137,7 +137,7 @@ mate         apt-get install mate-desktop-environment-core
 
 	☭ apt-get devscripts
 
-Daha sonra kaynak kodu bir dizine çekip deb paketi haline getirelim.
+Daha sonra kaynak kodu bir dizine çekip **deb** paketi haline getirelim.
 
 .. code-block:: shell
 
@@ -146,7 +146,7 @@ Daha sonra kaynak kodu bir dizine çekip deb paketi haline getirelim.
 	☭ mk-build-deps --install
 	☭ debuild -us -uc -b
 
-bir üst dizinde oluşturulan deb paketini chroot içerisindeki tmp dizinine atıp chroot içerisindeyken kurabilirsiniz.
+Bir üst dizinde oluşturulan **deb** paketini **chroot** içerisindeki **tmp** dizinine atıp chroot içerisindeyken kurabilirsiniz.
 
 4. Sürücüleri ekleyebiliz.
 
