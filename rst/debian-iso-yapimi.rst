@@ -131,18 +131,22 @@ mate         apt-get install mate-desktop-environment-core
 
 3. Kurulum aracı ekleyebiliz.
 
-* Öncesinde git, make ve gettext paketini kuralım.
+Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
 
 .. code-block:: shell
 
-	☭ apt-get install git make gettext
+	☭ apt-get devscripts
+
+Daha sonra kaynak kodu bir dizine çekip deb paketi haline getirelim.
 
 .. code-block:: shell
 
 	☭ git clone https://gitlab.com/ggggggggggggggggg/17g
 	☭ cd 17g
-	☭ make & make install
-	☭ rm -rf 17g
+	☭ mk-build-deps --install
+	☭ debuild -us -uc -b
+
+bir üst dizinde oluşturulan deb paketini chroot içerisindeki tmp dizinine atıp chroot içerisindeyken kurabilirsiniz.
 
 4. Sürücüleri ekleyebiliz.
 
