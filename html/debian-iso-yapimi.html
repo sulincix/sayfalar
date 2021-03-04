@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
-<title>İso yapımı</title>
+<title>Iso yapımı</title>
 <style type="text/css">
 
 /*
@@ -361,7 +361,7 @@ ul.auto-toc {
 </head>
 <body>
 <div class="document" id="iso-yapimi">
-<h1 class="title">İso yapımı</h1>
+<h1 class="title">Iso yapımı</h1>
 
 <p>Bu dokümanda <strong>debian sid</strong> kullanarak özelleşmiş bir <strong>live</strong> iso yapımı anlatılacaktır. debian <strong>sid</strong> yerine <strong>stable</strong> kullanmak isterseniz yapmanız gereken dokümanda <strong>sid</strong> yerine <strong>stable</strong> yazmaktır.</p>
 <blockquote>
@@ -410,6 +410,10 @@ ul.auto-toc {
 <pre class="code shell literal-block">
 ☭ mkdir sid-chroot
 ☭ debootstrap --no-merged-usr sid sid-chroot https://deb.debian.org/debian
+</pre>
+<p>Eğer &quot;Unpacking the base system...&quot; sırasında sorun yaşıyorsanız <strong>chroot</strong> dizininin sahibini <strong>root</strong> olarak değiştirip tekrar denemenizi öneriririz.</p>
+<pre class="code shell literal-block">
+☭ chowm root sid-chroot
 </pre>
 </div>
 <div class="section" id="chroot-icine-girmek-icin-on-hazirlik">
@@ -522,16 +526,18 @@ ul.auto-toc {
 <ol class="arabic simple" start="3">
 <li>Kurulum aracı ekleyebiliz.</li>
 </ol>
+<p>Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:</p>
 <pre class="code shell literal-block">
-☭ git clone https://gitlab.com/ggggggggggggggggg/17g-debian
-☭ <span class="name builtin">cd</span> 17g-debian
-☭ make <span class="operator">&amp;&amp;</span> make create-deb-debian
-☭ <span class="name builtin">cd</span> ..
-☭ cp 17g-debian/build.deb sid-chroot/tmp/build.deb
-☭ chroot sid-chroot dpkg -i /tmp/build.deb
-☭ chroot sid-chroot apt-get install -f
-☭ rm -f sid-chroot/tmp/build.deb
+☭ apt-get devscripts
 </pre>
+<p>Daha sonra kaynak kodu bir dizine çekip <strong>deb</strong> paketi haline getirelim.</p>
+<pre class="code shell literal-block">
+☭ git clone https://gitlab.com/ggggggggggggggggg/17g
+☭ <span class="name builtin">cd</span> 17g
+☭ mk-build-deps --install
+☭ debuild -us -uc -b
+</pre>
+<p>Bir üst dizinde oluşturulan <strong>deb</strong> paketini <strong>chroot</strong> içerisindeki <strong>tmp</strong> dizinine atıp chroot içerisindeyken kurabilirsiniz.</p>
 <ol class="arabic simple" start="4">
 <li>Sürücüleri ekleyebiliz.</li>
 </ol>
@@ -572,7 +578,7 @@ ul.auto-toc {
 <div class="section" id="paketleme-asamasi">
 <h1>Paketleme aşaması</h1>
 <ol class="arabic simple">
-<li>İso taslağı dizini açalım ve <strong>squashfs</strong> imajı alalım. aldığımız imajı daha sonra iso taslağı içinde <strong>live</strong> adında bir dizin açarak içine atalım.</li>
+<li>Iso taslağı dizini açalım ve <strong>squashfs</strong> imajı alalım. aldığımız imajı daha sonra iso taslağı içinde <strong>live</strong> adında bir dizin açarak içine atalım.</li>
 </ol>
 <blockquote>
 <strong>Not:</strong> <em>-comp</em> parametresinden sonra <em>xz</em> veya <em>gzip</em> kullanabiliriz. <em>xz</em> kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. <em>gzip</em> kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
@@ -607,7 +613,7 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 </ol>
 <pre class="code shell literal-block">
 ☭ tree isowork
-    iso-work/
+    isowork/
     ├── boot
     │   └── grub
     │       └── grub.cfg
@@ -617,7 +623,7 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
     └── vmlinuz
 </pre>
 <ol class="arabic simple" start="5">
-<li>İso dosyası üretelim.</li>
+<li>Iso dosyası üretelim.</li>
 </ol>
 <pre class="code shell literal-block">
 ☭ grub-mkrescue isowork -o debian-live.iso

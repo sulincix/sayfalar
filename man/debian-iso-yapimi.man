@@ -1,8 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
-.TH İSO YAPIMI  "" "" ""
+.TH ISO YAPIMI  "" "" ""
 .SH NAME
-İso yapımı \- 
+Iso yapımı \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -103,6 +103,18 @@ Gerekli paketleri kuralım.
 .ft C
 ☭ mkdir sid\-chroot
 ☭ debootstrap \-\-no\-merged\-usr sid sid\-chroot https://deb.debian.org/debian
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız \fBchroot\fP dizininin sahibini \fBroot\fP olarak değiştirip tekrar denemenizi öneriririz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ chowm root sid\-chroot
 .ft P
 .fi
 .UNINDENT
@@ -294,23 +306,35 @@ _
 .IP 3. 3
 Kurulum aracı ekleyebiliz.
 .UNINDENT
+.sp
+Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-☭ git clone https://gitlab.com/ggggggggggggggggg/17g\-debian
-☭ cd 17g\-debian
-☭ make && make create\-deb\-debian
-☭ cd ..
-☭ cp 17g\-debian/build.deb sid\-chroot/tmp/build.deb
-☭ chroot sid\-chroot dpkg \-i /tmp/build.deb
-☭ chroot sid\-chroot apt\-get install \-f
-☭ rm \-f sid\-chroot/tmp/build.deb
+☭ apt\-get devscripts
 .ft P
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Daha sonra kaynak kodu bir dizine çekip \fBdeb\fP paketi haline getirelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ git clone https://gitlab.com/ggggggggggggggggg/17g
+☭ cd 17g
+☭ mk\-build\-deps \-\-install
+☭ debuild \-us \-uc \-b
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir üst dizinde oluşturulan \fBdeb\fP paketini \fBchroot\fP içerisindeki \fBtmp\fP dizinine atıp chroot içerisindeyken kurabilirsiniz.
 .INDENT 0.0
 .IP 4. 3
 Sürücüleri ekleyebiliz.
@@ -371,7 +395,7 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 .SH PAKETLEME AŞAMASI
 .INDENT 0.0
 .IP 1. 3
-İso taslağı dizini açalım ve \fBsquashfs\fP imajı alalım. aldığımız imajı daha sonra iso taslağı içinde \fBlive\fP adında bir dizin açarak içine atalım.
+Iso taslağı dizini açalım ve \fBsquashfs\fP imajı alalım. aldığımız imajı daha sonra iso taslağı içinde \fBlive\fP adında bir dizin açarak içine atalım.
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
@@ -437,7 +461,7 @@ Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca i
 .nf
 .ft C
 ☭ tree isowork
-    iso\-work/
+    isowork/
     ├── boot
     │   └── grub
     │       └── grub.cfg
@@ -451,7 +475,7 @@ Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca i
 .UNINDENT
 .INDENT 0.0
 .IP 5. 3
-İso dosyası üretelim.
+Iso dosyası üretelim.
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
