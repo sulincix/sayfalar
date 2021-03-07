@@ -135,7 +135,7 @@ mate         apt-get install mate-desktop-environment-core
 
 .. code-block:: shell
 
-	☭ apt-get devscripts
+	☭ apt-get install devscripts
 
 Daha sonra kaynak kodu bir dizine çekip **deb** paketi haline getirelim.
 
