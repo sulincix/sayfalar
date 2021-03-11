@@ -313,7 +313,7 @@ Kurulum aracı ekleyebiliz.
 .sp
 .nf
 .ft C
-☭ apt\-get devscripts
+☭ apt\-get install devscripts
 .ft P
 .fi
 .UNINDENT
