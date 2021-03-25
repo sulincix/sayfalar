@@ -199,7 +199,7 @@ Paketleme aşaması
 	☭ mkdir -p isowork/live
 	☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 
-2. Ardından **vmlinuz** ve **initrd** dosyalarını isowork/boot içerisine atalım.
+2. Ardından **vmlinuz** ve **initrd** dosyalarını isowork/live içerisine atalım.
 
 .. code-block:: shell
 

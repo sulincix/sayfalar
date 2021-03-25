@@ -418,7 +418,7 @@ Debianda varsayılan sıkıştırma formatı \fIxz\fP olmasına ramen ben sizler
 .UNINDENT
 .INDENT 0.0
 .IP 2. 3
-Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/boot içerisine atalım.
+Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine atalım.
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
