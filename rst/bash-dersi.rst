@@ -20,6 +20,8 @@ Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı
 	chmod +x ders1.sh
 	./ders1.sh
 
+**:** komutu hiçbir iş yapmayan komuttur. Bu komutu açıklama niyetine kullanabilirsiniz. **true** komutu ile aynı anlama gelmektedir.
+
 Ekrana yazı yazalım
 ===================
 Ekrana yazı yazmak için **echo** ifadesi kulanılır.
@@ -29,9 +31,25 @@ Ekrana yazı yazmak için **echo** ifadesi kulanılır.
 	echo Merhaba dünya
 	-> Merhaba dünya
 
+Parametreler
+============
+Bir bash betiği çalıştırılırken verilen parametreleri **$** ifadesinden sonra gelen sayı ile kullanabiliriz.
+**$#** bize kaç tane parametre olduğunu verir.
+**$@** ifadesi ile de parametrelerin toplamını elde edebiliriz.
+
+.. code-block:: shell
+
+	echo "$1 - $# - $@"
+	
+	./ders1.sh merhaba dünya
+	-> merhaba - 2 - merhaba dünya
+	
+
 Değişkenler ve Sabitler
 =======================
 Değişkenler ve sabitler programımızın içerisinde kullanılan verilerdir. Değişkenler tanımlandıktan sonra değiştirilebilirken sabitler tanımlandıktan sonra değiştirilemez.
+
+Değişkenler sayı ile başlayamaz, Türkçe karakter içeremez ve `/*[($` gibi özel karakterleri içeremez. 
 
 Normal Değişkenler aşağıdaki gibi tanımlanır.
 
@@ -54,7 +72,7 @@ Sabitler daha sonradan değeri değiştirilemeyen verilerdir. Sabit tanımlamak 
 	declare -r yazi="merhaba"
 	declade -r sayi=23
 	
-Değişkenler ve sabitler kullanılırken **${}** işareti içine alınırlar.
+Değişkenler ve sabitler kullanılırken **${}** işareti içine alınırlar veya başına **$** işareti gelir. Bu doküman boyunca ilk kullanım biçimi üzerinden gideceğim.
 
 .. code-block:: shell
 
@@ -207,6 +225,19 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
      - [ .... && .... ] veya [ .... ] && [ .... ]
 
 
+**true** komutu her zaman doğru **false** komutu ile her zaman yanlış çıkış verir. 
+
+Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım yapılabilir.
+
+.. code-block:: shell
+
+	[ 12 -eq ${a} ] && echo "12ye eşit." || echo "12ye eşit değil"
+	#bunun ile aynı anlama gelir:
+	if [ 12 -eq ${a} ] ; then
+	    echo "12ye eşit"
+	else
+	    echo "12ye eşit değil"
+	fi
 
 Döngüler
 ========
@@ -258,4 +289,47 @@ Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.
 	done
 	echo
 	-> 1 2 3 4 5 6 7 8 9 10 
+
+Buradaki özel kullanımları aşağıda tablo halinde belirttim.
+
+.. list-table:: **küme parantezli ifadeler ve anlamları**
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - İfade
+     - Anlamı
+     - eşleniği
+
+   * - {1..5}
+     - aralık belirtir
+     - 1 2 3 4 5
+
+   * - {1..7..2}
+     - adımlı aralık belirtir
+     - 1 3 5 7
+     
+   * - {a,ve}li
+     - kurala uygun küme belirtir
+     - ali veli
+
+Fonksionlar
+===========
+Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksionu aşağıdaki gibi tanımlayabiliriz.
+
+.. code-block:: shell
+
+	isim(){
+	    eylem
+	}
 	
+Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sabit ve değişkenleri kullanabilirler.
+
+.. code-block:: shell
+
+	sayi=12
+	topla(){
+	    echo $((${sayi}+$1))
+	}
+	topla 1
+	-> 13
+
