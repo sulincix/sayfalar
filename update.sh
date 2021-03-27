@@ -11,7 +11,7 @@ done
 sed -i 's|</head|<link rel="stylesheet" href="main.css">\n</head|g' html/*.html
 cat main.css > html/main.css
 echo "<head><title>Sayfalar</title></head><body>" > index.html
-for i in $(ls html | sed "s/.html//g" | sort)
+for i in $(ls html | grep ".html$" | sed "s/.html//g" | sort)
 do
 	echo -e "=> <a href=\"html/$i.html\">$i</a><br>" >> index.html
 done
