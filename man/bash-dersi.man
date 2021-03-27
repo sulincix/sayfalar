@@ -947,7 +947,7 @@ T}
 _
 .TE
 .sp
-Ayrıca çıktı girişleri için de aşağıda örnekler verilmiştir:
+Ayrıca dosyadan veri girişleri için de aşağıda örnekler verilmiştir:
 .INDENT 0.0
 .INDENT 3.5
 .sp

@@ -575,7 +575,7 @@ Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.
      - çıktıyı yönlendir (stdout ve stderr)
      - echo "$(cat /olmayan/dosya) deneme" &> dosya.txt
      
-Ayrıca çıktı girişleri için de aşağıda örnekler verilmiştir:
+Ayrıca dosyadan veri girişleri için de aşağıda örnekler verilmiştir:
 
 
 .. code-block:: shell

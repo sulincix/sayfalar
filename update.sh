@@ -1,5 +1,5 @@
 #!/bin/bash
-for j in man odt html
+for j in man odt
 do
 	rm -rf $j
 	mkdir -p $j
@@ -8,7 +8,14 @@ do
 		rst2$j rst/$i.rst > $j/$i.$j
 	done
 done
-sed -i 's|</head|<link rel="stylesheet" href="main.css">\n</head|g' html/*.html
+rm -rf html
+mkdir -p html
+for i in $(ls rst/*.rst | sed "s/.rst$//g" | sed "s/rst\///g" | sort)
+do
+	rst2html --link-stylesheet rst/$i.rst > html/$i.html
+done
+sed -i 's|href=.*.css|href=\"main.css|g' html/*.html
+
 cat main.css > html/main.css
 echo "<head><title>Sayfalar</title></head><body>" > index.html
 for i in $(ls html | grep ".html$" | sed "s/.html//g" | sort)

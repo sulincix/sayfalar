@@ -1,4 +1,63 @@
 body {
-max-width: 1000px;
-margin: auto;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    color: #111111;
+    padding: 10px;
+}
+.document{
+    border-color: #e1e4e8;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0px 40px 0px 40px;
+    border-radius: 12px;
+}
+pre{
+    font-family: monospace;
+    margin-left: 30px;
+    background: #f6f8fa;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.title{
+    text-align: center;
+}
+
+.literal{
+    color: black;
+}
+.name, .variable, .operator, .interpol{
+    color: black;
+}
+.number{
+    color: red;
+}
+.builtin, .double{
+    color: #0760c6;
+}
+.keyword{
+    color: #d73c4b;
+}
+.double {
+    color: #093466;
+}
+.comment{
+    color: #7c848e;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+table th {
+  text-align: left;
+  color: black;
 }
