@@ -231,7 +231,7 @@ echo ${sayi}
 .UNINDENT
 .UNINDENT
 .sp
-Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0dan başlar. Negatif değerler sondan saymaya başlar.
+Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0\(aqdan başlar. Negatif değerler sondan saymaya başlar.
 .SH DEĞIŞKENE MÜDAHALE (VAR="MERHABA")
 .TS
 center;
@@ -372,15 +372,15 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 .ft C
 read veri
 if [[ ${veri} \-lt 10 ]] ; then
-    echo "Veri 10dan küçük"
+    echo "Veri 10\(aqdan küçük"
 else
-    echo "Veri 10dan büyük veya 10a eşit"
+    echo "Veri 10\(aqdan büyük veya 10a eşit"
 fi
 
 <\- 9
-\-> Veri 10dan küçük
+\-> Veri 10\(aqdan küçük
 <\- 15
-\-> Veri 10dan büyük veya 10a eşit
+\-> Veri 10\(aqdan büyük veya 10a eşit
 .ft P
 .fi
 .UNINDENT
@@ -720,9 +720,9 @@ ali veli
 T}
 _
 .TE
-.SH FONKSIONLAR
+.SH FONKSIYONLAR
 .sp
-Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksionu aşağıdaki gibi tanımlayabiliriz.
+Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksiyonu aşağıdaki gibi tanımlayabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -742,7 +742,7 @@ function isim(){
 .UNINDENT
 .UNINDENT
 .sp
-Burada \fBreturn\fP ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
+Burada \fBreturn\fP ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksiyon tamamlanır ve ana programdan devam edilir.
 .sp
 Bu yazı boyunca ilkini tercih edeceğiz.
 .sp

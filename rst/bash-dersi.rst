@@ -429,7 +429,7 @@ Buradaki özel kullanımları aşağıda tablo halinde belirttim.
 
 
 Fonksiyonlar
-===========
+============
 Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksiyonu aşağıdaki gibi tanımlayabiliriz.
 
 .. code-block:: shell

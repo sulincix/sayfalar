@@ -109,7 +109,7 @@ declade -r <span class="name variable">sayi</span><span class="operator">=</span
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span>
 -&gt; <span class="literal number">6</span>
 </pre>
-<p>Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0dan başlar. Negatif değerler sondan saymaya başlar.</p>
+<p>Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0'dan başlar. Negatif değerler sondan saymaya başlar.</p>
 <table border="1" class="colwidths-given docutils">
 <caption><strong>Değişkene müdahale (var=&quot;Merhaba&quot;)</strong></caption>
 <colgroup>
@@ -205,15 +205,15 @@ declade -r <span class="name variable">sayi</span><span class="operator">=</span
 <pre class="code shell literal-block">
 <span class="name builtin">read</span> veri
 <span class="keyword">if</span> <span class="operator">[[</span> <span class="literal string interpol">${</span><span class="name variable">veri</span><span class="literal string interpol">}</span> -lt <span class="literal number">10</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">then</span>
-    <span class="name builtin">echo</span> <span class="literal string double">&quot;Veri 10dan küçük&quot;</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;Veri 10'dan küçük&quot;</span>
 <span class="keyword">else</span>
-    <span class="name builtin">echo</span> <span class="literal string double">&quot;Veri 10dan büyük veya 10a eşit&quot;</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;Veri 10'dan büyük veya 10a eşit&quot;</span>
 <span class="keyword">fi</span>
 
 &lt;- <span class="literal number">9</span>
--&gt; Veri 10dan küçük
-&lt;- <span class="literal number">15</span>
--&gt; Veri 10dan büyük veya 10a eşit
+-&gt; Veri <span class="literal number">10</span><span class="literal string single">'dan küçük
+&lt;- 15
+-&gt; Veri 10'</span>dan büyük veya 10a eşit
 </pre>
 <p><strong>[[</strong> komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.</p>
 <table border="1" class="colwidths-given docutils">
@@ -416,9 +416,9 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
 </tbody>
 </table>
 </div>
-<div class="section" id="fonksionlar">
-<h1>Fonksionlar</h1>
-<p>Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksionu aşağıdaki gibi tanımlayabiliriz.</p>
+<div class="section" id="fonksiyonlar">
+<h1>Fonksiyonlar</h1>
+<p>Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksiyonu aşağıdaki gibi tanımlayabiliriz.</p>
 <pre class="code shell literal-block">
 isim<span class="operator">(){</span>
     eylem
@@ -430,7 +430,7 @@ isim<span class="operator">(){</span>
     <span class="keyword">return</span> sonuç
 <span class="operator">}</span>
 </pre>
-<p>Burada <strong>return</strong> ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.</p>
+<p>Burada <strong>return</strong> ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksiyon tamamlanır ve ana programdan devam edilir.</p>
 <p>Bu yazı boyunca ilkini tercih edeceğiz.</p>
 <p>Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sabit ve değişkenleri kullanabilirler.</p>
 <pre class="code shell literal-block">
