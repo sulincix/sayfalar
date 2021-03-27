@@ -156,7 +156,22 @@ Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Kara
      - erh yerine abc koy
      - Mabcaba
 
+Diziler
+=======
+Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler aşağıdaki gibi tanımların ve kullanılır.
 
+.. code-block:: shell
+
+	dizi=(muz elma limon armut)
+	echo ${dizi[1]}
+	-> elma
+	echo ${#dizi[@]}
+	-> 4
+	echo ${dizi[@]:2:4}
+	-> limon armut
+	dizi+=(kiraz)
+	echo ${dizi[-1]}
+	-> kiraz
 
 Klavyeden değer alma
 ====================
