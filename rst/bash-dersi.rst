@@ -60,7 +60,7 @@ Değişkenler ve Sabitler
 =======================
 Değişkenler ve sabitler programımızın içerisinde kullanılan verilerdir. Değişkenler tanımlandıktan sonra değiştirilebilirken sabitler tanımlandıktan sonra değiştirilemez.
 
-Değişkenler sayı ile başlayamaz, Türkçe karakter içeremez ve `/*[($` gibi özel karakterleri içeremez. 
+Değişkenler sayı ile başlayamaz, Türkçe karakter içeremez ve `/*[[($` gibi özel karakterleri içeremez. 
 
 Normal Değişkenler aşağıdaki gibi tanımlanır.
 
@@ -173,12 +173,12 @@ Koşullar **if** ile **fi** ile biter.  Koşul ifadesi sonrası **then** kullan�
 	fi
 	
 
-Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru döndürmüyorsa yalnış olarak değerlendirilir. **[** komutu ile büyük-küçük-eşit kıyaslaması, dosya veya dizin varlığı vb. gibi sorgulamalar yapılabilir.
+Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru döndürmüyorsa yalnış olarak değerlendirilir. **[[** veya **[** ile büyük-küçük-eşit kıyaslaması, dosya veya dizin varlığı vb. gibi sorgulamalar yapılabilir. Bu yazıda **[[** kullanılacaktır.
 
 .. code-block:: shell
 
 	read veri
-	if [ ${veri} -lt 10 ] ; then
+	if [[ ${veri} -lt 10 ]] ; then
 	    echo "Veri 10dan küçük"
 	else
 	    echo "Veri 10dan büyük veya 10a eşit"
@@ -189,9 +189,9 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 	<- 15
 	-> Veri 10dan büyük veya 10a eşit
 	
-**[** komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.
+**[[** komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.
 
-.. list-table:: **[ ifadeleri ve kullanımları**
+.. list-table:: **[[ ifadeleri ve kullanımları**
    :widths: 25 25 50
    :header-rows: 1
 
@@ -201,75 +201,75 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 
    * - -lt
      - küçüktür
-     - [ ${a} -lt 5 ]
+     - [[ ${a} -lt 5 ]]
 
    * - -gt
      - büyüktür
-     - [ ${a} -gt 5 ]
+     - [[ ${a} -gt 5 ]]
 
    * - -eq
      - eşittir
-     - [ ${a} -eq 5 ]
+     - [[ ${a} -eq 5 ]]
 
    * - -le
      - küçük eşittir
-     - [ ${a} -le 5 ]
+     - [[ ${a} -le 5 ]]
 
    * - -ge
      - büyük eşittir
-     - [ ${a} -ge 5 ]
+     - [[ ${a} -ge 5 ]]
 
    * - -f
      - dosyadır
-     - [ -f /etc/os-release ]
+     - [[ -f /etc/os-release ]]
 
    * - -d 
      - dizindir
-     - [ -d /etc ]
+     - [[ -d /etc ]]
 
    * - -e
      - vardır (dosya veya dizindir)
-     - [ -e /bin/bash ]
+     - [[ -e /bin/bash ]]
 
    * - -L 
      - sembolik bağdır
-     - [ -L /lib ] 
+     - [[ -L /lib ]] 
 
    * - -n
      - uzunluğu 0 değildir
-     - [ -n ${a} ]
+     - [[ -n ${a} ]]
 
    * - -z
      - uzunluğu 0dır
-     - [ -z ${a} ]
+     - [[ -z ${a} ]]
 
    * - !
      - ifadenin tersini alır.
-     - [ ! .... veya ! [ ....
+     - [[ ! .... veya ! [[ ....
 
    * - > 
      - alfabeti olarak büyüktür
-     - [ "portakal" > "elma" ]
+     - [[ "portakal" > "elma" ]]
 
    * - < 
      - alfabetik olarak küçüktür
-     - [ "elma" < "limon" ]
+     - [[ "elma" < "limon" ]]
 
    * - ==
      - alfabetik eşittir
-     - [ "nane" == "nane" ]
+     - [[ "nane" == "nane" ]]
 
    * - != 
      - alfabetik eşit değildir
-     - [ "name" != "limon" ]
+     - [[ "name" != "limon" ]]
 
    * - ||
      - mantıksal veya bağlacı
-     - [ .... || .... ] veya [ .... ] || [ .... ]
+     - [[ .... || .... ]] veya [[ .... ]] || [[ .... ]]
 
    * - &&
      - mantıksal ve bağlacı
-     - [ .... && .... ] veya [ .... ] && [ .... ]
+     - [[ .... && .... ]] veya [[ .... ]] && [[ .... ]]
 
 
 **true** komutu her zaman doğru **false** komutu ile her zaman yanlış çıkış verir. 
@@ -278,9 +278,9 @@ Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım
 
 .. code-block:: shell
 
-	[ 12 -eq ${a} ] && echo "12ye eşit." || echo "12ye eşit değil"
+	[[ 12 -eq ${a} ]] && echo "12ye eşit." || echo "12ye eşit değil"
 	#bunun ile aynı anlama gelir:
-	if [ 12 -eq ${a} ] ; then
+	if [[ 12 -eq ${a} ]] ; then
 	    echo "12ye eşit"
 	else
 	    echo "12ye eşit değil"
@@ -302,7 +302,7 @@ Döngülerde **while** ifadesi sonrası koşul gelir. **do** ile devam eder ve e
 .. code-block:: shell
 
 	i=1
-	while [ ${i} -le 10 ] ; do
+	while [[ ${i} -le 10 ]] ; do
 	    echo -n "$i " # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
 	    i=$((${i}+1)) # sayıya 1 ekledik
 	done
