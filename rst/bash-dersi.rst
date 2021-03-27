@@ -6,6 +6,7 @@ Açıklama satırı ve dosya başlangıcı
 ===================================
 
 Açıklamalar **#** ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına **#!/bin/bash** eklememiz gerekmektedir. Bash betikleri genellikle **.sh** uzantılı olur.
+Bash betikleri girintilemeye duyarlı değildir. Bash betiği yazarken girintileme için 4 boşluk veya tek tab kullanmanızı öneririm.
 
 .. code-block:: shell
 
@@ -228,5 +229,33 @@ Döngülerde **while** ifadesi sonrası koşul gelir. **do** ile devam eder ve e
 	    i=$((${i}+1)) # sayıya 1 ekledik
 	done
 	echo # en son alt satıra geçmesi için
+	-> 1 2 3 4 5 6 7 8 9 10 
+	
+**for** ifadesinde değişken adından sonra **in** kullanılır daha sonra dizi yer alır. diziden sonra **do** ve bitişte de **done** kullanılır.
+
+.. code-block:: shell
+
+	for degisken in dizi ; do
+	    eylem
+	done
+
+Ayrı örneğin for ile yapılmış hali
+
+.. code-block:: shell
+
+	for i in 1 2 3 4 5 6 7 8 9 10 ; do
+	    echo -n "${i} "
+	done
+	echo
+	-> 1 2 3 4 5 6 7 8 9 10 
+	
+Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.
+
+.. code-block:: shell
+
+	for i in {1..10} ; do
+	    echo -n "${i} "
+	done
+	echo
 	-> 1 2 3 4 5 6 7 8 9 10 
 	
