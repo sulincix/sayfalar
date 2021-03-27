@@ -222,9 +222,9 @@ Döngülerde **while** ifadesi sonrası koşul gelir. **do** ile devam eder ve e
 
 .. code-block:: shell
 
-	sayi=1
-	while [ ${sayi} -le 10 ] ; do
-	    echo -n "$sayi " # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
+	i=1
+	while [ ${i} -le 10 ] ; do
+	    echo -n "$i " # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
 	    i=$((${i}+1)) # sayıya 1 ekledik
 	done
 	echo # en son alt satıra geçmesi için
