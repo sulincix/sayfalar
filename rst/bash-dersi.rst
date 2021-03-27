@@ -1,6 +1,6 @@
 Bash dersi
 ^^^^^^^^^^^^^^^^^^^
-Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karışmaması için girdilerin olduğu satırlar *<-* ile çıktıların olduğu satırlar *->* ile işaretlenmiştir.
+Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar *<-* ile çıktıların olduğu satırlar *->* ile işaretlenmiştir.
 
 Açıklama satırı ve dosya başlangıcı
 ===================================
@@ -112,7 +112,7 @@ Değişkenler ve sabitler kullanılırken **${}** işareti içine alınırlar ve
 	echo ${deneme}
 	-> abc123
 
-sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için **"** işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
+Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için **"** işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
 
 .. code-block:: shell
 
@@ -121,7 +121,7 @@ sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek 
 	echo "${sayi}${karpuz} limon"
 	-> 11karpuz limon
 
-sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. `(+-*/ işlemleri için geçerlidir.)`
+Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. `(+-*/ işlemleri için geçerlidir.)`
 
 .. code-block:: shell
 
@@ -411,7 +411,7 @@ Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yapt�
 	    return sonuç
 	}
 	
-burada **return** ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
+Burada **return** ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
 
 Bu yazı boyunca ilkini tercih edeceğiz.
 	
