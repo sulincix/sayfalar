@@ -39,17 +39,20 @@ h2 {
 .literal{
     color: black;
 }
-.name, .variable, .operator, .interpol{
+.name{
     color: black;
 }
 .number{
-    color: red;
+    color: #096634;
 }
 .builtin, .double{
     color: #0760c6;
 }
-.keyword{
+.keyword, .operator, .interpol{
     color: #d73c4b;
+}
+.variable{
+    color: #663409;
 }
 .double {
     color: #093466;
