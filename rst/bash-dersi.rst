@@ -322,6 +322,37 @@ Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım
 	    echo "12ye eşit değil"
 	fi
 
+case yapısı
+===========
+**case** yapısı case ile başlar değerden sonra gelen **in** ile devam eder ve koşullardan sonra gelen **esac** ile tamamlanır.
+case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısaltabiliriz.
+
+.. code-block:: shell
+
+	case deger in 
+	    elma | kiraz)
+	        echo "meyve"
+	        ;;
+	    patates | soğan)
+	        echo "sebze"
+	        ;;
+	    balık)
+	        echo "hayvan"
+	    *)
+	        echo "hiçbiri"
+	        ;;
+	esac
+	# Şununla aynıdır:
+	if [[ "${deger}" == "elma" || "${deger}" == "kiraz" ]] ; then
+	    echo "meyve"
+	elif [[ "${deger}" == "patates" || "${deger}" == "soğan" ]] ; then
+	    echo "sebze"
+	elif [[ "${değer}" == "balık" ]] ; then
+	    echo "hayvan"
+	else
+	    echo "hiçbiri"
+	fi
+
 Döngüler
 ========
 
@@ -395,6 +426,8 @@ Buradaki özel kullanımları aşağıda tablo halinde belirttim.
      - kurala uygun küme belirtir
      - ali veli
 
+
+
 Fonksionlar
 ===========
 Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksionu aşağıdaki gibi tanımlayabiliriz.
@@ -430,7 +463,7 @@ Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sab
 
 **local** ifadesi sadece fonksionun içinde tanımlanan fonksion bitiminde silinen değişkenler için kullanılır.
 	
-Fonstionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
+Fonksionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
 
 .. code-block:: shell
 
@@ -623,3 +656,5 @@ Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için 
 	-> Merhaba dünya
 	-> 50
 	-> 100
+	
+

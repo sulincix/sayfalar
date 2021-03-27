@@ -669,6 +669,36 @@ declade -r <span class="name variable">sayi</span><span class="operator">=</span
 <span class="keyword">fi</span>
 </pre>
 </div>
+<div class="section" id="case-yapisi">
+<h1>case yapısı</h1>
+<p><strong>case</strong> yapısı case ile başlar değerden sonra gelen <strong>in</strong> ile devam eder ve koşullardan sonra gelen <strong>esac</strong> ile tamamlanır.
+case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısaltabiliriz.</p>
+<pre class="code shell literal-block">
+<span class="keyword">case</span> deger in
+    elma <span class="punctuation">|</span> kiraz<span class="operator">)</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;meyve&quot;</span>
+        <span class="punctuation">;;</span>
+    patates <span class="punctuation">|</span> soğan<span class="operator">)</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;sebze&quot;</span>
+        <span class="punctuation">;;</span>
+    balık<span class="operator">)</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;hayvan&quot;</span>
+    *<span class="operator">)</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;hiçbiri&quot;</span>
+        <span class="punctuation">;;</span>
+<span class="keyword">esac</span>
+<span class="comment single"># Şununla aynıdır:
+</span><span class="keyword">if</span> <span class="operator">[[</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">deger</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span> <span class="operator">==</span> <span class="literal string double">&quot;elma&quot;</span> <span class="operator">||</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">deger</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span> <span class="operator">==</span> <span class="literal string double">&quot;kiraz&quot;</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">then</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;meyve&quot;</span>
+<span class="keyword">elif</span> <span class="operator">[[</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">deger</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span> <span class="operator">==</span> <span class="literal string double">&quot;patates&quot;</span> <span class="operator">||</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">deger</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span> <span class="operator">==</span> <span class="literal string double">&quot;soğan&quot;</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">then</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;sebze&quot;</span>
+<span class="keyword">elif</span> <span class="operator">[[</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">değer</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span> <span class="operator">==</span> <span class="literal string double">&quot;balık&quot;</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">then</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;hayvan&quot;</span>
+<span class="keyword">else</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;hiçbiri&quot;</span>
+<span class="keyword">fi</span>
+</pre>
+</div>
 <div class="section" id="donguler">
 <h1>Döngüler</h1>
 <p>Döngülerde <strong>while</strong> ifadesi sonrası koşul gelir. <strong>do</strong> ile devam eder ve eylemden sonra <strong>done</strong> ifadesi ile biter. Döngülerde ifade doğru olduğu sürece eylem sürekli olarak tekrar eder.</p>
@@ -767,7 +797,7 @@ topla <span class="literal number">1</span>
 -&gt; <span class="literal number">13</span>
 </pre>
 <p><strong>local</strong> ifadesi sadece fonksionun içinde tanımlanan fonksion bitiminde silinen değişkenler için kullanılır.</p>
-<p>Fonstionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.</p>
+<p>Fonksionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.</p>
 <pre class="code shell literal-block">
 <span class="name builtin">read</span> sayi
 teksayi<span class="operator">(){</span>

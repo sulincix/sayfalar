@@ -565,6 +565,42 @@ fi
 .fi
 .UNINDENT
 .UNINDENT
+.SH CASE YAPISI
+.sp
+\fBcase\fP yapısı case ile başlar değerden sonra gelen \fBin\fP ile devam eder ve koşullardan sonra gelen \fBesac\fP ile tamamlanır.
+case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısaltabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+case deger in
+    elma | kiraz)
+        echo "meyve"
+        ;;
+    patates | soğan)
+        echo "sebze"
+        ;;
+    balık)
+        echo "hayvan"
+    *)
+        echo "hiçbiri"
+        ;;
+esac
+# Şununla aynıdır:
+if [[ "${deger}" == "elma" || "${deger}" == "kiraz" ]] ; then
+    echo "meyve"
+elif [[ "${deger}" == "patates" || "${deger}" == "soğan" ]] ; then
+    echo "sebze"
+elif [[ "${değer}" == "balık" ]] ; then
+    echo "hayvan"
+else
+    echo "hiçbiri"
+fi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH DÖNGÜLER
 .sp
 Döngülerde \fBwhile\fP ifadesi sonrası koşul gelir. \fBdo\fP ile devam eder ve eylemden sonra \fBdone\fP ifadesi ile biter. Döngülerde ifade doğru olduğu sürece eylem sürekli olarak tekrar eder.
@@ -731,7 +767,7 @@ topla 1
 .sp
 \fBlocal\fP ifadesi sadece fonksionun içinde tanımlanan fonksion bitiminde silinen değişkenler için kullanılır.
 .sp
-Fonstionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
+Fonksionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
