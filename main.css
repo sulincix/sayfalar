@@ -10,7 +10,7 @@ body {
     border-color: #e1e4e8;
     border-style: solid;
     border-width: 1px;
-    padding: 0px 40px 0px 40px;
+    padding: 0px 40px 31px 40px;
     border-radius: 12px;
 }
 pre{
@@ -21,8 +21,19 @@ pre{
     border-radius: 8px;
 }
 
+h1 {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 14px;
+}
+
 .title{
     text-align: center;
+    font-size: 32px;
 }
 
 .literal{

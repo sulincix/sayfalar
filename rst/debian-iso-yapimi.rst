@@ -228,9 +228,9 @@ Paketleme aşaması
 	    │   └── grub
 	    │       └── grub.cfg
 	    └── live
-    	    ├── filesystem.squashfs
-    	    ├── initrd.img
-    	    └── vmlinuz
+    	        ├── filesystem.squashfs
+    	        ├── initrd.img
+    	        └── vmlinuz
 
 5. Iso dosyası üretelim. 
 
