@@ -358,6 +358,7 @@ ul.auto-toc {
   list-style-type: none }
 
 </style>
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div class="document" id="appimage-paketleme">
@@ -514,8 +515,10 @@ $ glib-compile-schemas MyApp.AppDir/usr/share/glib-2.0/schemas/
 $ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
 &gt; export SELF=$(readlink -f &quot;$0&quot;)
 &gt; export HERE=${SELF%/*}
-&gt; export LD_LIBRARY_PATH=&quot;${HERE}/usr/lib/:${HERE}/usr/lib/i386-linux-gnu/:${HERE}/usr/lib/x86_64-linux-gnu/:${HERE}/usr/lib32/:${HERE}/usr/lib64/:${HERE}/lib/:${HERE}/lib/i386-linux-gnu/:${HERE}/lib/x86_64-linux-gnu/:${HERE}/lib32/:${HERE}/lib64/${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&quot;'
-&gt; export PATH=&quot;${HERE}/usr/bin/:${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}&quot;
+&gt; export LD_LIBRARY_PATH=&quot;${HERE}/usr/lib/:${HERE}/usr/lib/i386-linux-gnu/:${HERE}/usr/lib/x86_64-linux-gnu/&quot;
+&gt; export LD_LIBRARY_PATH+=&quot;${HERE}/usr/lib32/:${HERE}/usr/lib64/:${HERE}/lib/:${HERE}/lib/i386-linux-gnu/&quot;
+&gt; export LD_LIBRARY_PATH+=&quot;:${HERE}/lib/x86_64-linux-gnu/:${HERE}/lib32/:${HERE}/lib64/${HERE}/usr/bin/&quot;
+&gt; export PATH=&quot;:${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}&quot;
 &gt; export PYTHONPATH=&quot;${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}&quot;
 &gt; export PERLLIB=&quot;${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}&quot;
 &gt; EOF</span>
@@ -537,7 +540,11 @@ $ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
 <pre class="code shell literal-block">
 $ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
-&gt; export QT_PLUGIN_PATH=&quot;${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt4/plugins/:${HERE}/usr/lib/x86_64-linux-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64-linux-gnu/qt5/plugins/:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}&quot;
+&gt; export QT_PLUGIN_PATH=&quot;${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt4/plugins/&quot;
+&gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib/x86_64-linux-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/&quot;
+&gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/&quot;
+&gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib/i386-linux-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64-linux-gnu/qt5/plugins/&quot;
+&gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}&quot;
 &gt; EOF</span>
 </pre>
 </div>

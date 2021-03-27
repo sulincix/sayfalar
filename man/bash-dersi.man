@@ -1,0 +1,762 @@
+.\" Man page generated from reStructuredText.
+.
+.TH HIZLI BASH DERSLERI  "" "" ""
+.SH NAME
+Hızlı bash dersleri \- 
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.sp
+Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karışmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
+.SH AÇIKLAMA SATIRI VE DOSYA BAŞLANGICI
+.sp
+Açıklamalar \fB#\fP ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına \fB#!/bin/bash\fP eklememiz gerekmektedir. Bash betikleri genellikle \fB\&.sh\fP uzantılı olur.
+Bash betikleri girintilemeye duyarlı değildir. Bash betiği yazarken girintileme için 4 boşluk veya tek tab kullanmanızı öneririm.
+.sp
+Bash betiklerinde alt satıra geçmek yerine \fB;\fP kullanabiliriz. Bu sayede kaynak kod daha düzenli tutulabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#!/bin/bash
+#Bu bir açıklama satırıdır.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı ve sonrasında aşağıdaki gibi çalıştırılmalıdır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+chmod +x ders1.sh
+\&./ders1.sh
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fB:\fP komutu hiçbir iş yapmayan komuttur. Bu komutu açıklama niyetine kullanabilirsiniz. \fBtrue\fP komutu ile aynı anlama gelmektedir.
+.sp
+Çoklu açımlama satırı için aşağıdaki gibi bir ifade kullanabilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+: "
+Bu bir açıklama satıdırıdır.
+Bu da diğer açıklama satırıdır.
+Bu da sonunca açıklama satırıdır.
+"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH EKRANA YAZI YAZALIM
+.sp
+Ekrana yazı yazmak için \fBecho\fP ifadesi kulanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+echo Merhaba dünya
+\-> Merhaba dünya
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PARAMETRELER
+.sp
+Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden sonra gelen sayı ile kullanabiliriz.
+\fB$#\fP bize kaç tane parametre olduğunu verir.
+\fB$@\fP ifadesi ile de parametrelerin toplamını elde edebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+echo "$1 \- $# \- $@"
+
+\&./ders1.sh merhaba dünya
+\-> merhaba \- 2 \- merhaba dünya
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DEĞIŞKENLER VE SABITLER
+.sp
+Değişkenler ve sabitler programımızın içerisinde kullanılan verilerdir. Değişkenler tanımlandıktan sonra değiştirilebilirken sabitler tanımlandıktan sonra değiştirilemez.
+.sp
+Değişkenler sayı ile başlayamaz, Türkçe karakter içeremez ve \fI/*[[($\fP gibi özel karakterleri içeremez.
+.sp
+Normal Değişkenler aşağıdaki gibi tanımlanır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+sayı=23
+yazi="merhaba"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fB+=\fP ifadesi var olan değişkene ekleme yapmak için kullanılır. Değişkenin türünü belirlemeden tanımlamışsak yazı olarak ele alır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+typeset \-i a # Değişkeni sayı olarak belirttik.
+a=1 ; b=1
+a+=1 ; b+=1
+echo "$a $b"
+\-> 2 11
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çevresel değişkenler tüm alt programlarda da geçerlidir. Çevresel değişken tanımlamak için başına \fBexport\fP ifadesi yerleştirilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+export sayi=23
+export yazi="merhaba"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Sabitler daha sonradan değeri değiştirilemeyen verilerdir. Sabit tanımlamak için başına \fBdecrale \-r\fP ifadesi yerleştirilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+declare \-r yazi="merhaba"
+declade \-r sayi=23
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Değişkenler ve sabitler kullanılırken \fB${}\fP işareti içine alınırlar veya başına \fB$\fP işareti gelir. Bu doküman boyunca ilk kullanım biçimi üzerinden gideceğim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+deneme="abc123"
+echo ${deneme}
+\-> abc123
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için \fB"\fP işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+sayi=11
+yazi="karpuz"
+echo "${sayi}${karpuz} limon"
+\-> 11karpuz limon
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. \fI(+\-*/ işlemleri için geçerlidir.)\fP
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+sayi=12
+sayi=$((${sayi}/2))
+echo ${sayi}
+\-> 6
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0dan başlar. Negatif değerler sondan saymaya başlar.
+.SH DEĞIŞKENE MÜDAHALE (VAR="MERHABA")
+.TS
+center;
+|l|l|l|.
+_
+T{
+İfade
+T}	T{
+Anlamı
+T}	T{
+Eşleniği
+T}
+_
+T{
+${var%aba}
+T}	T{
+sondaki ifadeyi sil
+T}	T{
+Merh
+T}
+_
+T{
+${var#Mer}
+T}	T{
+baştaki ifadeyi sil
+T}	T{
+haba
+T}
+_
+T{
+${var:1:4}
+T}	T{
+.INDENT 0.0
+.IP 1. 3
+.INDENT 3.0
+.IP 4. 3
+karakterler arası
+.UNINDENT
+.UNINDENT
+T}	T{
+erha
+T}
+_
+T{
+${var::4}
+T}	T{
+.INDENT 0.0
+.IP 4. 3
+karaktere kadar
+.UNINDENT
+T}	T{
+Merha
+T}
+_
+T{
+${var:4}
+T}	T{
+.INDENT 0.0
+.IP 4. 3
+karakterden sonrası
+.UNINDENT
+T}	T{
+aba
+T}
+_
+T{
+${var/erh/abc}
+T}	T{
+erh yerine abc koy
+T}	T{
+Mabcaba
+T}
+_
+.TE
+.SH DIZILER
+.sp
+Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler aşağıdaki gibi tanımların ve kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dizi=(muz elma limon armut)
+echo ${dizi[1]}
+\-> elma
+echo ${#dizi[@]}
+\-> 4
+echo ${dizi[@]:2:4}
+\-> limon armut
+dizi+=(kiraz)
+echo ${dizi[\-1]}
+\-> kiraz
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KLAVYEDEN DEĞER ALMA
+.sp
+Klavyeden değer almak için \fBread\fP komutu kullanılır. Alınan değer değişken olarak tanımlanır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+read deger
+<\- merhaba
+echo $deger
+\-> merhaba
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KOŞULLAR
+.sp
+Koşullar \fBif\fP ile \fBfi\fP ile biter.  Koşul ifadesi sonrası \fBthen\fP kullanılır. ilk koşul sağlanmıyorsa \fBelif\fP ifadesi ile ikinci koşul sorgulanabilir. Eğer hiçbir koşul sağlanmıyorsa \fBelse\fP ifadesi içerisindeki eylem gerçekleştirilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+if ifade ; then
+    eylem
+elif ifade ; then
+    eylem
+else
+    eylem
+fi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru döndürmüyorsa yalnış olarak değerlendirilir. \fB[[\fP veya \fB[\fP ile büyük\-küçük\-eşit kıyaslaması, dosya veya dizin varlığı vb. gibi sorgulamalar yapılabilir. Bu yazıda \fB[[\fP kullanılacaktır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+read veri
+if [[ ${veri} \-lt 10 ]] ; then
+    echo "Veri 10dan küçük"
+else
+    echo "Veri 10dan büyük veya 10a eşit"
+fi
+
+<\- 9
+\-> Veri 10dan küçük
+<\- 15
+\-> Veri 10dan büyük veya 10a eşit
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fB[[\fP komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.
+.SH [[ IFADELERI VE KULLANIMLARI
+.TS
+center;
+|l|l|l|.
+_
+T{
+İfade
+T}	T{
+Anlamı
+T}	T{
+Kullanım şekli
+T}
+_
+T{
+\-lt
+T}	T{
+küçüktür
+T}	T{
+[[ ${a} \-lt 5 ]]
+T}
+_
+T{
+\-gt
+T}	T{
+büyüktür
+T}	T{
+[[ ${a} \-gt 5 ]]
+T}
+_
+T{
+\-eq
+T}	T{
+eşittir
+T}	T{
+[[ ${a} \-eq 5 ]]
+T}
+_
+T{
+\-le
+T}	T{
+küçük eşittir
+T}	T{
+[[ ${a} \-le 5 ]]
+T}
+_
+T{
+\-ge
+T}	T{
+büyük eşittir
+T}	T{
+[[ ${a} \-ge 5 ]]
+T}
+_
+T{
+\-f
+T}	T{
+dosyadır
+T}	T{
+[[ \-f /etc/os\-release ]]
+T}
+_
+T{
+\-d
+T}	T{
+dizindir
+T}	T{
+[[ \-d /etc ]]
+T}
+_
+T{
+\-e
+T}	T{
+vardır (dosya veya dizindir)
+T}	T{
+[[ \-e /bin/bash ]]
+T}
+_
+T{
+\-L
+T}	T{
+sembolik bağdır
+T}	T{
+[[ \-L /lib ]]
+T}
+_
+T{
+\-n
+T}	T{
+uzunluğu 0 değildir
+T}	T{
+[[ \-n ${a} ]]
+T}
+_
+T{
+\-z
+T}	T{
+uzunluğu 0dır
+T}	T{
+[[ \-z ${a} ]]
+T}
+_
+T{
+!
+T}	T{
+ifadenin tersini alır.
+T}	T{
+[[ ! .... veya ! [[ ....
+T}
+_
+T{
+>
+T}	T{
+alfabeti olarak büyüktür
+T}	T{
+[[ "portakal" > "elma" ]]
+T}
+_
+T{
+<
+T}	T{
+alfabetik olarak küçüktür
+T}	T{
+[[ "elma" < "limon" ]]
+T}
+_
+T{
+==
+T}	T{
+alfabetik eşittir
+T}	T{
+[[ "nane" == "nane" ]]
+T}
+_
+T{
+!=
+T}	T{
+alfabetik eşit değildir
+T}	T{
+[[ "name" != "limon" ]]
+T}
+_
+T{
+||
+T}	T{
+mantıksal veya bağlacı
+T}	T{
+[[ .... || .... ]] veya [[ .... ]] || [[ .... ]]
+T}
+_
+T{
+&&
+T}	T{
+mantıksal ve bağlacı
+T}	T{
+[[ .... && .... ]] veya [[ .... ]] && [[ .... ]]
+T}
+_
+.TE
+.sp
+\fBtrue\fP komutu her zaman doğru \fBfalse\fP komutu ile her zaman yanlış çıkış verir.
+.sp
+Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım yapılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+[[ 12 \-eq ${a} ]] && echo "12ye eşit." || echo "12ye eşit değil"
+#bunun ile aynı anlama gelir:
+if [[ 12 \-eq ${a} ]] ; then
+    echo "12ye eşit"
+else
+    echo "12ye eşit değil"
+fi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DÖNGÜLER
+.sp
+Döngülerde \fBwhile\fP ifadesi sonrası koşul gelir. \fBdo\fP ile devam eder ve eylemden sonra \fBdone\fP ifadesi ile biter. Döngülerde ifade doğru olduğu sürece eylem sürekli olarak tekrar eder.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+while ifade ; do
+    eylem
+done
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örneğin 1den 10a kadar sayıları ekrana yan yana yazdıralım. Eğer echo komutumuzda \fB\-n\fP parametresi verilirse alt satıra geçmeden yazmaya devam eder.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+i=1
+while [[ ${i} \-le 10 ]] ; do
+    echo \-n "$i " # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
+    i=$((${i}+1)) # sayıya 1 ekledik
+done
+echo # en son alt satıra geçmesi için
+\-> 1 2 3 4 5 6 7 8 9 10
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBfor\fP ifadesinde değişken adından sonra \fBin\fP kullanılır daha sonra dizi yer alır. diziden sonra \fBdo\fP ve bitişte de \fBdone\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+for degisken in dizi ; do
+    eylem
+done
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ayrı örneğin for ile yapılmış hali
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+for i in 1 2 3 4 5 6 7 8 9 10 ; do
+    echo \-n "${i} "
+done
+echo
+\-> 1 2 3 4 5 6 7 8 9 10
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+for i in {1\&..10} ; do
+    echo \-n "${i} "
+done
+echo
+\-> 1 2 3 4 5 6 7 8 9 10
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Buradaki özel kullanımları aşağıda tablo halinde belirttim.
+.SH KÜME PARANTEZLI IFADELER VE ANLAMLARI
+.TS
+center;
+|l|l|l|.
+_
+T{
+İfade
+T}	T{
+Anlamı
+T}	T{
+eşleniği
+T}
+_
+T{
+{1..5}
+T}	T{
+aralık belirtir
+T}	T{
+1 2 3 4 5
+T}
+_
+T{
+{1..7..2}
+T}	T{
+adımlı aralık belirtir
+T}	T{
+1 3 5 7
+T}
+_
+T{
+{a,ve}li
+T}	T{
+kurala uygun küme belirtir
+T}	T{
+ali veli
+T}
+_
+.TE
+.SH FONKSIONLAR
+.sp
+Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksionu aşağıdaki gibi tanımlayabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+isim(){
+    eylem
+    return sonuç
+}
+# veya
+function isim(){
+    eylem
+    return sonuç
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+burada \fBreturn\fP ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
+.sp
+Bu yazı boyunca ilkini tercih edeceğiz.
+.sp
+Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sabit ve değişkenleri kullanabilirler.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+sayi=12
+topla(){
+    echo $((${sayi}+$1))
+    return 0
+    echo "Bu satır çalışmaz"
+}
+topla 1
+\-> 13
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBlocal\fP ifadesi sadece fonksionun içinde tanımlanan fonksion bitiminde silinen değişkenler için kullanılır.
+.sp
+Fonstionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+read sayi
+teksayi(){
+    local i=$(($1+1)) # sayıya 1 ekledik ve yerel hale getirdik.
+    return $((${i}%2))  # sayının 2 ile bölümünden kalanı döndürdük
+}
+if teksayi ${sayi} ; then
+    echo "tek sayıdır"
+else
+    echo "çift sayıdır"
+fi
+
+<\- 12
+\-> çift sayıdır
+<\- 5
+\-> tek sayıdır
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir fonksionun çıktısını değişkene \fB$(isim)\fP ifadesi yadımı ile atayabiliriz. Aynı durum komutlar için de geçerlidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+yaz(){
+    echo "Merhaba"
+}
+echo "$(yaz) dünya"
+\-> Merhaba dünya
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.

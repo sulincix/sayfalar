@@ -8,6 +8,8 @@ do
 		rst2$j rst/$i.rst > $j/$i.$j
 	done
 done
+sed -i 's|</head|<link rel="stylesheet" href="main.css">\n</head|g' html/*.html
+cat main.css > html/main.css
 echo "<head><title>Sayfalar</title></head><body>" > index.html
 for i in $(ls html | sed "s/.html//g" | sort)
 do
