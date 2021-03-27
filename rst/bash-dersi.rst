@@ -12,7 +12,7 @@ Bash betikleri girintilemeye duyarlı değildir. Bash betiği yazarken girintile
 
 	#!/bin/bash
 	#Bu bir açıklama satırıdır.
-
+	
 Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı ve sonrasında aşağıdaki gibi çalıştırılmalıdır.
 
 .. code-block:: shell
@@ -21,6 +21,17 @@ Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı
 	./ders1.sh
 
 **:** komutu hiçbir iş yapmayan komuttur. Bu komutu açıklama niyetine kullanabilirsiniz. **true** komutu ile aynı anlama gelmektedir.
+
+Çoklu açımlama satırı için aşağıdaki gibi bir ifade kullanabilirsiniz.
+
+.. code-block:: shell
+
+	: "
+	Bu bir açıklama satıdırıdır.
+	Bu da diğer açıklama satırıdır.
+	Bu da sonunca açıklama satırıdır.
+	"
+
 
 Ekrana yazı yazalım
 ===================
@@ -97,6 +108,42 @@ sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifa
 	sayi=$((${sayi}/2))
 	echo ${sayi}
 	-> 6
+
+
+Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0dan başlar. Negatif değerler sondan saymaya başlar.
+
+.. list-table:: **Değişkene müdahale (var="Merhaba")**
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - İfade
+     - Anlamı
+     - Eşleniği
+     
+   * - ${var%aba}
+     - sondaki ifadeyi sil
+     - Merh
+     
+   * - ${var#Mer}
+     - baştaki ifadeyi sil
+     - haba
+     
+   * - ${var:1:4}
+     - 1. 4. karakterler arası
+     - erha
+
+   * - ${var::4}
+     - 4. karaktere kadar
+     - Merha
+     
+   * - ${var:4}
+     - 4. karakterden sonrası
+     - aba
+
+   * - ${var/erh/abc}
+     - erh yerine abc koy
+     - Mabcaba
+
 
 
 Klavyeden değer alma
@@ -320,7 +367,17 @@ Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yapt�
 
 	isim(){
 	    eylem
+	    return sonuç
 	}
+	# veya
+	function isim(){
+	    eylem
+	    return sonuç
+	}
+	
+burada **return** ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
+
+Bu yazı boyunca ilkini tercih edeceğiz.
 	
 Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sabit ve değişkenleri kullanabilirler.
 
@@ -329,7 +386,40 @@ Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sab
 	sayi=12
 	topla(){
 	    echo $((${sayi}+$1))
+	    return 0
+	    echo "Bu satır çalışmaz"
 	}
 	topla 1
 	-> 13
 
+**local** ifadesi sadece fonksionun içinde tanımlanan fonksion bitiminde silinen değişkenler için kullanılır.
+	
+Fonstionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
+
+.. code-block:: shell
+
+	read sayi
+	teksayi(){
+	    local i=$(($1+1)) # sayıya 1 ekledik ve yerel hale getirdik.
+	    return $((${i}%2))  # sayının 2 ile bölümünden kalanı döndürdük
+	}
+	if teksayi ${sayi} ; then
+	    echo "tek sayıdır"
+	else
+	    echo "çift sayıdır"
+	fi
+	
+	<- 12
+	-> çift sayıdır
+	<- 5
+	-> tek sayıdır
+
+Bir fonksionun çıktısını değişkene **$(isim)** ifadesi yadımı ile atayabiliriz. Aynı durum komutlar için de geçerlidir.
+
+.. code-block:: shell
+
+	yaz(){
+	    echo "Merhaba"
+	}
+	echo "$(yaz) dünya"
+	-> Merhaba dünya
