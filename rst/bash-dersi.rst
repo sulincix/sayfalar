@@ -8,6 +8,8 @@ Açıklama satırı ve dosya başlangıcı
 Açıklamalar **#** ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına **#!/bin/bash** eklememiz gerekmektedir. Bash betikleri genellikle **.sh** uzantılı olur.
 Bash betikleri girintilemeye duyarlı değildir. Bash betiği yazarken girintileme için 4 boşluk veya tek tab kullanmanızı öneririm.
 
+Bash betiklerinde alt satıra geçmek yerine **;** kullanabiliriz. Bu sayede kaynak kod daha düzenli tutulabilir.
+
 .. code-block:: shell
 
 	#!/bin/bash
@@ -68,6 +70,16 @@ Normal Değişkenler aşağıdaki gibi tanımlanır.
 
 	sayı=23
 	yazi="merhaba"
+	
+**+=** ifadesi var olan değişkene ekleme yapmak için kullanılır. Değişkenin türünü belirlemeden tanımlamışsak yazı olarak ele alır.
+
+.. code-block:: shell
+
+	typeset -i a # Değişkeni sayı olarak belirttik.
+	a=1 ; b=1
+	a+=1 ; b+=1
+	echo "$a $b"
+	-> 2 11
 
 Çevresel değişkenler tüm alt programlarda da geçerlidir. Çevresel değişken tanımlamak için başına **export** ifadesi yerleştirilir.
 
