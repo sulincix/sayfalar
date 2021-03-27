@@ -31,7 +31,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
 .sp
-Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karışmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
+Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
 .SH AÇIKLAMA SATIRI VE DOSYA BAŞLANGICI
 .sp
 Açıklamalar \fB#\fP ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına \fB#!/bin/bash\fP eklememiz gerekmektedir. Bash betikleri genellikle \fB\&.sh\fP uzantılı olur.
@@ -201,7 +201,7 @@ echo ${deneme}
 .UNINDENT
 .UNINDENT
 .sp
-sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için \fB"\fP işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
+Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için \fB"\fP işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -216,7 +216,7 @@ echo "${sayi}${karpuz} limon"
 .UNINDENT
 .UNINDENT
 .sp
-sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. \fI(+\-*/ işlemleri için geçerlidir.)\fP
+Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. \fI(+\-*/ işlemleri için geçerlidir.)\fP
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -706,7 +706,7 @@ function isim(){
 .UNINDENT
 .UNINDENT
 .sp
-burada \fBreturn\fP ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
+Burada \fBreturn\fP ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
 .sp
 Bu yazı boyunca ilkini tercih edeceğiz.
 .sp

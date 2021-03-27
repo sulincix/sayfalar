@@ -364,7 +364,7 @@ ul.auto-toc {
 <div class="document" id="bash-dersi">
 <h1 class="title">Bash dersi</h1>
 
-<p>Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karışmaması için girdilerin olduğu satırlar <em>&lt;-</em> ile çıktıların olduğu satırlar <em>-&gt;</em> ile işaretlenmiştir.</p>
+<p>Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar <em>&lt;-</em> ile çıktıların olduğu satırlar <em>-&gt;</em> ile işaretlenmiştir.</p>
 <div class="section" id="aciklama-satiri-ve-dosya-baslangici">
 <h1>Açıklama satırı ve dosya başlangıcı</h1>
 <p>Açıklamalar <strong>#</strong> ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına <strong>#!/bin/bash</strong> eklememiz gerekmektedir. Bash betikleri genellikle <strong>.sh</strong> uzantılı olur.
@@ -448,14 +448,14 @@ declade -r <span class="name variable">sayi</span><span class="operator">=</span
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">deneme</span><span class="literal string interpol">}</span>
 -&gt; abc123
 </pre>
-<p>sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için <strong>&quot;</strong> işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.</p>
+<p>Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için <strong>&quot;</strong> işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.</p>
 <pre class="code shell literal-block">
 <span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">11</span>
 <span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;karpuz&quot;</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}${</span><span class="name variable">karpuz</span><span class="literal string interpol">}</span><span class="literal string double"> limon&quot;</span>
 -&gt; 11karpuz limon
 </pre>
-<p>sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. <cite>(+-*/ işlemleri için geçerlidir.)</cite></p>
+<p>Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. <cite>(+-*/ işlemleri için geçerlidir.)</cite></p>
 <pre class="code shell literal-block">
 <span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">12</span>
 <span class="name variable">sayi</span><span class="operator">=</span><span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span><span class="operator">/</span><span class="literal number">2</span><span class="keyword">))</span>
@@ -753,7 +753,7 @@ isim<span class="operator">(){</span>
     <span class="keyword">return</span> sonuç
 <span class="operator">}</span>
 </pre>
-<p>burada <strong>return</strong> ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.</p>
+<p>Burada <strong>return</strong> ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.</p>
 <p>Bu yazı boyunca ilkini tercih edeceğiz.</p>
 <p>Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sabit ve değişkenleri kullanabilirler.</p>
 <pre class="code shell literal-block">
