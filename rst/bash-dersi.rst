@@ -131,7 +131,7 @@ Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifa
 	-> 6
 
 
-Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0dan başlar. Negatif değerler sondan saymaya başlar.
+Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0'dan başlar. Negatif değerler sondan saymaya başlar.
 
 .. list-table:: **Değişkene müdahale (var="Merhaba")**
    :widths: 25 25 50
@@ -215,15 +215,15 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 
 	read veri
 	if [[ ${veri} -lt 10 ]] ; then
-	    echo "Veri 10dan küçük"
+	    echo "Veri 10'dan küçük"
 	else
-	    echo "Veri 10dan büyük veya 10a eşit"
+	    echo "Veri 10'dan büyük veya 10a eşit"
 	fi
 	
 	<- 9
-	-> Veri 10dan küçük
+	-> Veri 10'dan küçük
 	<- 15
-	-> Veri 10dan büyük veya 10a eşit
+	-> Veri 10'dan büyük veya 10a eşit
 	
 **[[** komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.
 
@@ -428,9 +428,9 @@ Buradaki özel kullanımları aşağıda tablo halinde belirttim.
 
 
 
-Fonksionlar
+Fonksiyonlar
 ===========
-Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksionu aşağıdaki gibi tanımlayabiliriz.
+Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksiyonu aşağıdaki gibi tanımlayabiliriz.
 
 .. code-block:: shell
 
@@ -444,7 +444,7 @@ Fonksionlar alt programları oluşturur ve çağırıldığında işlerini yapt�
 	    return sonuç
 	}
 	
-Burada **return** ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksion tamamlanır ve ana programdan devam edilir.
+Burada **return** ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksiyon tamamlanır ve ana programdan devam edilir.
 
 Bu yazı boyunca ilkini tercih edeceğiz.
 	
