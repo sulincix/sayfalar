@@ -1,8 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
-.TH HIZLI BASH DERSLERI  "" "" ""
+.TH BASH DERSI  "" "" ""
 .SH NAME
-Hızlı bash dersleri \- 
+Bash dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -963,7 +963,7 @@ sayiyaz(){
 .UNINDENT
 .SH BIRDEN ÇOK DOSYA ILE ÇALIŞMAK
 .sp
-Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBsource\fP yad \fB\&.\fP ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
+Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBsource\fP yada \fB\&.\fP ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
 .sp
 Örneğin deneme.sh dosyamızın içeriği aşağıdaki gibi olsun:
 .INDENT 0.0

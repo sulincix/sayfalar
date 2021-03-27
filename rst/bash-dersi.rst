@@ -1,4 +1,4 @@
-Hızlı bash dersleri
+Bash dersi
 ^^^^^^^^^^^^^^^^^^^
 Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karışmaması için girdilerin olduğu satırlar *<-* ile çıktıların olduğu satırlar *->* ile işaretlenmiştir.
 
@@ -588,7 +588,7 @@ Bash betiklerinde **stdin** yerine bir önceki komutun çıktısını kullanmak 
 Birden çok dosya ile çalışmak
 =============================
 
-Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için **source** yad **.** ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
+Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için **source** yada **.** ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
 
 Örneğin deneme.sh dosyamızın içeriği aşağıdaki gibi olsun:
 
