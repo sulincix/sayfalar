@@ -94,6 +94,20 @@ echo Merhaba dünya
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Ekrana özel karakterleri yazmak için \fB\-e\fP parametresi kullanmamız gerekmektedir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+echo \-e "Merhaba\endünya"
+\-> Merhaba
+\-> dünya
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH PARAMETRELER
 .sp
 Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden sonra gelen sayı ile kullanabiliriz.
@@ -754,6 +768,247 @@ yaz(){
 }
 echo "$(yaz) dünya"
 \-> Merhaba dünya
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DOSYA IŞLEMLERI
+.sp
+Bash betiklerinde \fBstdout\fP \fBstderr\fP ve \fBstdin\fP olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stdin ve stdout beraber yazılır.
+.SH DOSYA IFADELERI VE ANLAMLARI
+.TS
+center;
+|l|l|l|.
+_
+T{
+İfade
+T}	T{
+Türü
+T}	T{
+Anlamı
+T}
+_
+T{
+stdin
+T}	T{
+Girdi
+T}	T{
+Klavyeden girilen değerler.
+T}
+_
+T{
+stdout
+T}	T{
+Çıktı
+T}	T{
+Sıradan çıktılardır.
+T}
+_
+T{
+stderr
+T}	T{
+Çıktı
+T}	T{
+Hata çıktılarıdır.
+T}
+_
+.TE
+.sp
+\fBcat\fP komutu ile dosya içeriğini ekrana yazdırabiliriz. Dosya içeriğini \fB$(cat dosya.txt)\fP kullanarak değişkene atabiliriz.
+.sp
+dosya.txt içeriğinin aşağıdaki gibi olduğunu varsayalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Merhaba dünya
+Selam dünya
+sayı:123
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişkeni ekrana yazdırdık.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+icerik=$(cat ./dosya.txt)
+echo "${icerik}"
+\-> Merhaba dünya
+\-> Selam dünya
+\-> sayı:123
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBgrep "sözcük" dosya.txt\fP ile dosya içerisinde sözcük gezen satırları filitreleyebiliriz. Eğer grep komutuna \fB\-v\fP paraketresi eklersek sadece içermeyenleri filitreler.
+Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+grep "dünya" dosya.txt
+\-> Merhaba dünya
+\-> Selam dünya
+grep \-v "dünya" dosya.txt
+\-> sayi:123
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.
+.SH DOSYA IFADELERI VE ANLAMLARI
+.TS
+center;
+|l|l|l|.
+_
+T{
+İfade
+T}	T{
+Anlamı
+T}	T{
+Kullanım şekli
+T}
+_
+T{
+>
+T}	T{
+çıktıyı dosyaya yönlendir (stdout)
+T}	T{
+echo "Merhaba dünya" > dosya.txt
+T}
+_
+T{
+2>
+T}	T{
+çıktıyı dosyaya yönlendir (stderr)
+T}	T{
+ls /olmayan/dizin 2> dosya.txt
+T}
+_
+T{
+>>
+T}	T{
+çıktıyı dosyaya ekle
+T}	T{
+echo \-n "Merhaba" > dosya.txt && echo "dünya" >> dosya.txt
+T}
+_
+T{
+&>
+T}	T{
+çıktıyı yönlendir (stdout ve stderr)
+T}	T{
+echo "$(cat /olmayan/dosya) deneme" &> dosya.txt
+T}
+_
+.TE
+.sp
+Ayrıca çıktı girişleri için de aşağıda örnekler verilmiştir:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# <<EOF:
+# EOF ifadesi gelene kadar olan kısmı girdi olarak kullanır:
+cat > dosya.txt <<EOF
+Merhaba
+dünya
+EOF
+# < dosya.txt
+# Bir dosyayı girdi olarak kullanır:
+while read line ; do
+    echo ${line:2:5}
+done < dosxa.txt
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fB/dev/null\fP içine atılan çıktılar yok edilir. \fB/dev/stderr\fP içine atılan çıktılar ise hata çıktısı olur.
+.SH BORU HATTI
+.sp
+Bash betiklerinde \fBstdin\fP yerine bir önceki komutun çıktısını kullanmak için boru hattı açabiliriz. Boru hattı açmak için iki komutun arasına \fB|\fP işareti koyulur. Boru hattında soldan sağa doğru çıktı akışı vardır. Boru hattından sadece \fBstdout\fP çıktısı geçmektedir. Eğer \fBstderr\fP çıktısını da boru hattından geçirmek istiyorsanız \fB|&\fP kullanmalısınız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+topla(){
+    read sayi1
+    read sayi2
+    echo $((${sayi1}+${sayi2}))
+}
+topla
+<\- 12
+<\- 25
+\-> 37
+sayiyaz(){
+    echo 12
+    echo 25
+}
+ sayiyaz | topla
+\-> 37
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH BIRDEN ÇOK DOSYA ILE ÇALIŞMAK
+.sp
+Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBsource\fP yad \fB\&.\fP ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
+.sp
+Örneğin deneme.sh dosyamızın içeriği aşağıdaki gibi olsun:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+mesaj="Selam"
+merhaba(){
+    echo ${mesaj}
+}
+echo "deneme yüklendi"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Asıl betiğimizin içeriği de aşağıdaki gibi olsun.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+source deneme.sh # deneme.sh dosyası çalıştırılır.
+merhaba
+\-> deneme yüklendi
+\-> Selam
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için \fB<(komut)\fP ifadesi kullanılır. Aşağıda bununla ilgili bir örnek verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+source <(curl https://gitlab.com/sulincix/outher/\-/raw/gh\-pages/deneme.sh) # Örnekteki adrese takılmayın :D
+merhaba
+merhaba2
+echo ${sayi}
+\-> Merhaba dünya
+\-> 50
+\-> 100
 .ft P
 .fi
 .UNINDENT

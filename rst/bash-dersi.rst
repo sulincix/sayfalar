@@ -44,6 +44,15 @@ Ekrana yazı yazmak için **echo** ifadesi kulanılır.
 	echo Merhaba dünya
 	-> Merhaba dünya
 
+Ekrana özel karakterleri yazmak için **-e** parametresi kullanmamız gerekmektedir.
+
+.. code-block:: shell
+
+	echo -e "Merhaba\ndünya"
+	-> Merhaba
+	-> dünya
+
+
 Parametreler
 ============
 Bir bash betiği çalıştırılırken verilen parametreleri **$** ifadesinden sonra gelen sayı ile kullanabiliriz.
@@ -450,3 +459,167 @@ Bir fonksionun çıktısını değişkene **$(isim)** ifadesi yadımı ile ataya
 	}
 	echo "$(yaz) dünya"
 	-> Merhaba dünya
+	
+Dosya işlemleri
+===============
+
+Bash betiklerinde **stdout** **stderr** ve **stdin** olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stdin ve stdout beraber yazılır.
+
+.. list-table:: **dosya ifadeleri ve anlamları**
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - İfade
+     - Türü
+     - Anlamı
+
+   * - stdin
+     - Girdi
+     - Klavyeden girilen değerler.
+     
+   * - stdout
+     - Çıktı
+     - Sıradan çıktılardır.
+     
+   * - stderr
+     - Çıktı
+     - Hata çıktılarıdır.
+
+**cat** komutu ile dosya içeriğini ekrana yazdırabiliriz. Dosya içeriğini **$(cat dosya.txt)** kullanarak değişkene atabiliriz.
+
+dosya.txt içeriğinin aşağıdaki gibi olduğunu varsayalım.
+
+.. code-block:: shell
+
+	Merhaba dünya
+	Selam dünya
+	sayı:123
+
+Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişkeni ekrana yazdırdık.
+	
+.. code-block:: shell
+
+	icerik=$(cat ./dosya.txt)
+	echo "${icerik}"
+	-> Merhaba dünya
+	-> Selam dünya
+	-> sayı:123
+
+**grep "sözcük" dosya.txt** ile dosya içerisinde sözcük gezen satırları filitreleyebiliriz. Eğer grep komutuna **-v** paraketresi eklersek sadece içermeyenleri filitreler.
+Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.
+
+.. code-block:: shell
+
+	grep "dünya" dosya.txt
+	-> Merhaba dünya
+	-> Selam dünya
+	grep -v "dünya" dosya.txt
+	-> sayi:123
+
+Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.
+
+.. list-table:: **dosya ifadeleri ve anlamları**
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - İfade
+     - Anlamı
+     - Kullanım şekli
+
+   * - >
+     - çıktıyı dosyaya yönlendir (stdout)
+     - echo "Merhaba dünya" > dosya.txt
+     
+   * - 2>
+     - çıktıyı dosyaya yönlendir (stderr)
+     - ls /olmayan/dizin 2> dosya.txt
+   
+   * - >>
+     - çıktıyı dosyaya ekle
+     - echo -n "Merhaba" > dosya.txt && echo "dünya" >> dosya.txt
+       
+   * - &>
+     - çıktıyı yönlendir (stdout ve stderr)
+     - echo "$(cat /olmayan/dosya) deneme" &> dosya.txt
+     
+Ayrıca çıktı girişleri için de aşağıda örnekler verilmiştir:
+
+
+.. code-block:: shell
+
+	# <<EOF:
+	# EOF ifadesi gelene kadar olan kısmı girdi olarak kullanır:
+	cat > dosya.txt <<EOF
+	Merhaba
+	dünya
+	EOF
+	# < dosya.txt
+	# Bir dosyayı girdi olarak kullanır:
+	while read line ; do
+	    echo ${line:2:5}
+	done < dosxa.txt
+	
+
+**/dev/null** içine atılan çıktılar yok edilir. **/dev/stderr** içine atılan çıktılar ise hata çıktısı olur.
+
+Boru hattı
+==========
+
+Bash betiklerinde **stdin** yerine bir önceki komutun çıktısını kullanmak için boru hattı açabiliriz. Boru hattı açmak için iki komutun arasına **|** işareti koyulur. Boru hattında soldan sağa doğru çıktı akışı vardır. Boru hattından sadece **stdout** çıktısı geçmektedir. Eğer **stderr** çıktısını da boru hattından geçirmek istiyorsanız **|&** kullanmalısınız.
+
+.. code-block:: shell
+
+	topla(){
+	    read sayi1
+	    read sayi2
+	    echo $((${sayi1}+${sayi2}))
+	}
+	topla
+	<- 12
+	<- 25
+	-> 37
+	sayiyaz(){
+	    echo 12
+	    echo 25
+	}
+	 sayiyaz | topla
+	-> 37
+	
+Birden çok dosya ile çalışmak
+=============================
+
+Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için **source** yad **.** ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
+
+Örneğin deneme.sh dosyamızın içeriği aşağıdaki gibi olsun:
+
+
+.. code-block:: shell
+
+	mesaj="Selam"
+	merhaba(){
+	    echo ${mesaj}
+	}
+	echo "deneme yüklendi"
+	
+Asıl betiğimizin içeriği de aşağıdaki gibi olsun.
+
+
+.. code-block:: shell
+
+	source deneme.sh # deneme.sh dosyası çalıştırılır.
+	merhaba
+	-> deneme yüklendi
+	-> Selam
+	
+Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için **<(komut)** ifadesi kullanılır. Aşağıda bununla ilgili bir örnek verilmiştir.
+
+
+.. code-block:: shell
+
+	source <(curl https://gitlab.com/sulincix/outher/-/raw/gh-pages/deneme.sh) # Örnekteki adrese takılmayın :D
+	merhaba
+	merhaba2
+	echo ${sayi}
+	-> Merhaba dünya
+	-> 50
+	-> 100

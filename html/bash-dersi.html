@@ -396,6 +396,12 @@ Bu da sonunca açıklama satırıdır.
 <span class="name builtin">echo</span> Merhaba dünya
 -&gt; Merhaba dünya
 </pre>
+<p>Ekrana özel karakterleri yazmak için <strong>-e</strong> parametresi kullanmamız gerekmektedir.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> -e <span class="literal string double">&quot;Merhaba\ndünya&quot;</span>
+-&gt; Merhaba
+-&gt; dünya
+</pre>
 </div>
 <div class="section" id="parametreler">
 <h1>Parametreler</h1>
@@ -786,6 +792,160 @@ yaz<span class="operator">(){</span>
 <span class="operator">}</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="keyword">$(</span>yaz<span class="keyword">)</span><span class="literal string double"> dünya&quot;</span>
 -&gt; Merhaba dünya
+</pre>
+</div>
+<div class="section" id="dosya-islemleri">
+<h1>Dosya işlemleri</h1>
+<p>Bash betiklerinde <strong>stdout</strong> <strong>stderr</strong> ve <strong>stdin</strong> olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stdin ve stdout beraber yazılır.</p>
+<table border="1" class="colwidths-given docutils">
+<caption><strong>dosya ifadeleri ve anlamları</strong></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Türü</th>
+<th class="head">Anlamı</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>stdin</td>
+<td>Girdi</td>
+<td>Klavyeden girilen değerler.</td>
+</tr>
+<tr><td>stdout</td>
+<td>Çıktı</td>
+<td>Sıradan çıktılardır.</td>
+</tr>
+<tr><td>stderr</td>
+<td>Çıktı</td>
+<td>Hata çıktılarıdır.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>cat</strong> komutu ile dosya içeriğini ekrana yazdırabiliriz. Dosya içeriğini <strong>$(cat dosya.txt)</strong> kullanarak değişkene atabiliriz.</p>
+<p>dosya.txt içeriğinin aşağıdaki gibi olduğunu varsayalım.</p>
+<pre class="code shell literal-block">
+Merhaba dünya
+Selam dünya
+sayı:123
+</pre>
+<p>Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişkeni ekrana yazdırdık.</p>
+<pre class="code shell literal-block">
+<span class="name variable">icerik</span><span class="operator">=</span><span class="keyword">$(</span>cat ./dosya.txt<span class="keyword">)</span>
+<span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">icerik</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span>
+-&gt; Merhaba dünya
+-&gt; Selam dünya
+-&gt; sayı:123
+</pre>
+<p><strong>grep &quot;sözcük&quot; dosya.txt</strong> ile dosya içerisinde sözcük gezen satırları filitreleyebiliriz. Eğer grep komutuna <strong>-v</strong> paraketresi eklersek sadece içermeyenleri filitreler.
+Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.</p>
+<pre class="code shell literal-block">
+grep <span class="literal string double">&quot;dünya&quot;</span> dosya.txt
+-&gt; Merhaba dünya
+-&gt; Selam dünya
+grep -v <span class="literal string double">&quot;dünya&quot;</span> dosya.txt
+-&gt; sayi:123
+</pre>
+<p>Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.</p>
+<table border="1" class="colwidths-given docutils">
+<caption><strong>dosya ifadeleri ve anlamları</strong></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Anlamı</th>
+<th class="head">Kullanım şekli</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&gt;</td>
+<td>çıktıyı dosyaya yönlendir (stdout)</td>
+<td>echo &quot;Merhaba dünya&quot; &gt; dosya.txt</td>
+</tr>
+<tr><td>2&gt;</td>
+<td>çıktıyı dosyaya yönlendir (stderr)</td>
+<td>ls /olmayan/dizin 2&gt; dosya.txt</td>
+</tr>
+<tr><td>&gt;&gt;</td>
+<td>çıktıyı dosyaya ekle</td>
+<td>echo -n &quot;Merhaba&quot; &gt; dosya.txt &amp;&amp; echo &quot;dünya&quot; &gt;&gt; dosya.txt</td>
+</tr>
+<tr><td>&amp;&gt;</td>
+<td>çıktıyı yönlendir (stdout ve stderr)</td>
+<td>echo &quot;$(cat /olmayan/dosya) deneme&quot; &amp;&gt; dosya.txt</td>
+</tr>
+</tbody>
+</table>
+<p>Ayrıca çıktı girişleri için de aşağıda örnekler verilmiştir:</p>
+<pre class="code shell literal-block">
+<span class="comment single"># &lt;&lt;EOF:
+# EOF ifadesi gelene kadar olan kısmı girdi olarak kullanır:
+</span>cat &gt; dosya.txt <span class="literal string">&lt;&lt;EOF
+Merhaba
+dünya
+EOF</span>
+<span class="comment single"># &lt; dosya.txt
+# Bir dosyayı girdi olarak kullanır:
+</span><span class="keyword">while</span> <span class="name builtin">read</span> line <span class="punctuation">;</span> <span class="keyword">do</span>
+    <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">line</span><span class="punctuation">:</span><span class="name variable">2</span><span class="punctuation">:</span><span class="name variable">5</span><span class="literal string interpol">}</span>
+<span class="keyword">done</span> &lt; dosxa.txt
+</pre>
+<p><strong>/dev/null</strong> içine atılan çıktılar yok edilir. <strong>/dev/stderr</strong> içine atılan çıktılar ise hata çıktısı olur.</p>
+</div>
+<div class="section" id="boru-hatti">
+<h1>Boru hattı</h1>
+<p>Bash betiklerinde <strong>stdin</strong> yerine bir önceki komutun çıktısını kullanmak için boru hattı açabiliriz. Boru hattı açmak için iki komutun arasına <strong>|</strong> işareti koyulur. Boru hattında soldan sağa doğru çıktı akışı vardır. Boru hattından sadece <strong>stdout</strong> çıktısı geçmektedir. Eğer <strong>stderr</strong> çıktısını da boru hattından geçirmek istiyorsanız <strong>|&amp;</strong> kullanmalısınız.</p>
+<pre class="code shell literal-block">
+topla<span class="operator">(){</span>
+    <span class="name builtin">read</span> sayi1
+    <span class="name builtin">read</span> sayi2
+    <span class="name builtin">echo</span> <span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi1</span><span class="literal string interpol">}</span><span class="operator">+</span><span class="literal string interpol">${</span><span class="name variable">sayi2</span><span class="literal string interpol">}</span><span class="keyword">))</span>
+<span class="operator">}</span>
+topla
+&lt;- <span class="literal number">12</span>
+&lt;- <span class="literal number">25</span>
+-&gt; <span class="literal number">37</span>
+sayiyaz<span class="operator">(){</span>
+    <span class="name builtin">echo</span> <span class="literal number">12</span>
+    <span class="name builtin">echo</span> <span class="literal number">25</span>
+<span class="operator">}</span>
+ sayiyaz <span class="punctuation">|</span> topla
+-&gt; <span class="literal number">37</span>
+</pre>
+</div>
+<div class="section" id="birden-cok-dosya-ile-calismak">
+<h1>Birden çok dosya ile çalışmak</h1>
+<p>Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için <strong>source</strong> yad <strong>.</strong> ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.</p>
+<p>Örneğin deneme.sh dosyamızın içeriği aşağıdaki gibi olsun:</p>
+<pre class="code shell literal-block">
+<span class="name variable">mesaj</span><span class="operator">=</span><span class="literal string double">&quot;Selam&quot;</span>
+merhaba<span class="operator">(){</span>
+    <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">mesaj</span><span class="literal string interpol">}</span>
+<span class="operator">}</span>
+<span class="name builtin">echo</span> <span class="literal string double">&quot;deneme yüklendi&quot;</span>
+</pre>
+<p>Asıl betiğimizin içeriği de aşağıdaki gibi olsun.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">source</span> deneme.sh <span class="comment single"># deneme.sh dosyası çalıştırılır.
+</span>merhaba
+-&gt; deneme yüklendi
+-&gt; Selam
+</pre>
+<p>Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için <strong>&lt;(komut)</strong> ifadesi kullanılır. Aşağıda bununla ilgili bir örnek verilmiştir.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">source</span> &lt;<span class="operator">(</span>curl https://gitlab.com/sulincix/outher/-/raw/gh-pages/deneme.sh<span class="operator">)</span> <span class="comment single"># Örnekteki adrese takılmayın :D
+</span>merhaba
+merhaba2
+<span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span>
+-&gt; Merhaba dünya
+-&gt; <span class="literal number">50</span>
+-&gt; <span class="literal number">100</span>
 </pre>
 </div>
 </div>
