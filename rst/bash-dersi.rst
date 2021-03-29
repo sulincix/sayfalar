@@ -496,7 +496,7 @@ Bir fonksionun çıktısını değişkene **$(isim)** ifadesi yadımı ile ataya
 Dosya işlemleri
 ===============
 
-Bash betiklerinde **stdout** **stderr** ve **stdin** olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stdin ve stdout beraber yazılır.
+Bash betiklerinde **stdout** **stderr** ve **stdin** olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stderr ve stdout beraber yazılır.
 
 .. list-table:: **dosya ifadeleri ve anlamları**
    :widths: 25 25 50

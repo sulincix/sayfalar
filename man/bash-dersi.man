@@ -810,7 +810,7 @@ echo "$(yaz) dünya"
 .UNINDENT
 .SH DOSYA IŞLEMLERI
 .sp
-Bash betiklerinde \fBstdout\fP \fBstderr\fP ve \fBstdin\fP olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stdin ve stdout beraber yazılır.
+Bash betiklerinde \fBstdout\fP \fBstderr\fP ve \fBstdin\fP olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stderr ve stdout beraber yazılır.
 .SH DOSYA IFADELERI VE ANLAMLARI
 .TS
 center;
