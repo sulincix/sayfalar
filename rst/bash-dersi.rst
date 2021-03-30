@@ -621,7 +621,7 @@ Bash betiklerinde **stdin** yerine bir önceki komutun çıktısını kullanmak 
 Kod bloğu
 =========
 
-**{** ile **}** arasına yazılan kodlar bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
+**{** ile **}** arasına yazılan kodlar birer kod bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
 
 .. code-block:: shell
 

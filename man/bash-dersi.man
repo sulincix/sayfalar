@@ -999,7 +999,7 @@ sayiyaz(){
 .UNINDENT
 .SH KOD BLOĞU
 .sp
-\fB{\fP ile \fB}\fP arasına yazılan kodlar bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
+\fB{\fP ile \fB}\fP arasına yazılan kodlar birer kod bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
