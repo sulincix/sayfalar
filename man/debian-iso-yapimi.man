@@ -34,6 +34,8 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapımı anlatılacaktır. debian \fBsid\fP yerine \fBstable\fP kullanmak isterseniz yapmanız gereken dokümanda \fBsid\fP yerine \fBstable\fP yazmaktır.
 .INDENT 0.0
 .INDENT 3.5
+\fBNot:\fP Bu dokümanla ilgili soru ve önerileriniz için : \fI\%https://t.me/iso_calismalari\fP
+.sp
 \fBNot: Biraz mizah içerir.\fP Şimdiden \fBALLAH\fP sabır versin :D
 .UNINDENT
 .UNINDENT
@@ -307,6 +309,8 @@ _
 Kurulum aracı ekleyebiliz.
 .UNINDENT
 .sp
+Derleme işlemini başlamadan önce yapmanızı tavsiye ederim.
+.sp
 Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
 .INDENT 0.0
 .INDENT 3.5
@@ -425,7 +429,7 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .sp
 .nf
 .ft C
-☭ ls sid\-chroot/boot/
+☭ ls sid\-chroot/boot/ # dosyalarımızın adını öğrenmek için
     config\-5.7.0\-1\-amd64  grub  initrd.img\-5.7.0\-1\-amd64  System.map\-5.7.0\-1\-amd64  vmlinuz\-5.7.0\-1\-amd64
 ☭ cp \-pf sid\-chroot/boot/initrd.img\-5.7.0\-1\-amd64 isowork/live/initrd.img
 ☭ cp \-pf sid\-chroot/boot/vmlinuz\-5.7.0\-1\-amd64 isowork/live/vmlinuz

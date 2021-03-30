@@ -2,6 +2,8 @@ Iso yapımı
 ==========
 Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı anlatılacaktır. debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken dokümanda **sid** yerine **stable** yazmaktır. 
 
+  **Not:** Bu dokümanla ilgili soru ve önerileriniz için : https://t.me/iso_calismalari
+
   **Not: Biraz mizah içerir.** Şimdiden **ALLAH** sabır versin :D
 
 ========  ========
@@ -129,7 +131,9 @@ gnome        apt-get install gnome-core
 mate         apt-get install mate-desktop-environment-core
 ========     =====
 
-3. Kurulum aracı ekleyebiliz.
+3. Kurulum aracı ekleyebiliz. 
+
+Derleme işlemini başlamadan önce yapmanızı tavsiye ederim.
 
 Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
 
@@ -147,6 +151,7 @@ Daha sonra kaynak kodu bir dizine çekip **deb** paketi haline getirelim.
 	☭ debuild -us -uc -b
 
 Bir üst dizinde oluşturulan **deb** paketini **chroot** içerisindeki **tmp** dizinine atıp chroot içerisindeyken kurabilirsiniz.
+
 
 4. Sürücüleri ekleyebiliz.
 
@@ -203,7 +208,7 @@ Paketleme aşaması
 
 .. code-block:: shell
 
-	☭ ls sid-chroot/boot/
+	☭ ls sid-chroot/boot/ # dosyalarımızın adını öğrenmek için
 	    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
 	☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
         ☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz

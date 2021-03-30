@@ -13,7 +13,9 @@
 
 <p>Bu dokümanda <strong>debian sid</strong> kullanarak özelleşmiş bir <strong>live</strong> iso yapımı anlatılacaktır. debian <strong>sid</strong> yerine <strong>stable</strong> kullanmak isterseniz yapmanız gereken dokümanda <strong>sid</strong> yerine <strong>stable</strong> yazmaktır.</p>
 <blockquote>
-<strong>Not: Biraz mizah içerir.</strong> Şimdiden <strong>ALLAH</strong> sabır versin :D</blockquote>
+<p><strong>Not:</strong> Bu dokümanla ilgili soru ve önerileriniz için : <a class="reference external" href="https://t.me/iso_calismalari">https://t.me/iso_calismalari</a></p>
+<p><strong>Not: Biraz mizah içerir.</strong> Şimdiden <strong>ALLAH</strong> sabır versin :D</p>
+</blockquote>
 <table border="1" class="docutils">
 <colgroup>
 <col width="5%" />
@@ -174,6 +176,7 @@
 <ol class="arabic simple" start="3">
 <li>Kurulum aracı ekleyebiliz.</li>
 </ol>
+<p>Derleme işlemini başlamadan önce yapmanızı tavsiye ederim.</p>
 <p>Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:</p>
 <pre class="code shell literal-block">
 ☭ apt-get install devscripts
@@ -241,8 +244,8 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 <li>Ardından <strong>vmlinuz</strong> ve <strong>initrd</strong> dosyalarını isowork/live içerisine atalım.</li>
 </ol>
 <pre class="code shell literal-block">
-☭ ls sid-chroot/boot/
-    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
+☭ ls sid-chroot/boot/ <span class="comment single"># dosyalarımızın adını öğrenmek için
+</span>    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
 ☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
 ☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
 </pre>
