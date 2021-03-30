@@ -997,6 +997,35 @@ sayiyaz(){
 .fi
 .UNINDENT
 .UNINDENT
+.SH KOD BLOĞU
+.sp
+\fB{\fP ile \fB}\fP arasına yazılan kodlar bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+cikart(){
+    read sayi1
+    read sayi2
+    echo $((${sayi1}\-${sayi2}))
+}
+topla
+<\- 25
+<\- 12
+\-> 13
+{
+    echo 25
+    echo 12
+} | cikart
+\-> 13
+# veya kısaca şu şekilde de yapılabilir.
+{ echo 25 ; echo 12 ; } | cikart
+\-> 13
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH BIRDEN ÇOK DOSYA ILE ÇALIŞMAK
 .sp
 Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBsource\fP yada \fB\&.\fP ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.

@@ -617,7 +617,32 @@ Bash betiklerinde **stdin** yerine bir önceki komutun çıktısını kullanmak 
 	}
 	 sayiyaz | topla
 	-> 37
-	
+
+Kod bloğu
+=========
+
+**{** ile **}** arasına yazılan kodlar bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
+
+.. code-block:: shell
+
+	cikart(){
+	    read sayi1
+	    read sayi2
+	    echo $((${sayi1}-${sayi2}))
+	}
+	topla
+	<- 25
+	<- 12
+	-> 13
+	{
+	    echo 25
+	    echo 12
+	} | cikart
+	-> 13
+	# veya kısaca şu şekilde de yapılabilir.
+	{ echo 25 ; echo 12 ; } | cikart
+	-> 13
+
 Birden çok dosya ile çalışmak
 =============================
 

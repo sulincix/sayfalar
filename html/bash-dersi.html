@@ -596,6 +596,29 @@ sayiyaz<span class="operator">(){</span>
 -&gt; <span class="literal number">37</span>
 </pre>
 </div>
+<div class="section" id="kod-blogu">
+<h1>Kod bloğu</h1>
+<p><strong>{</strong> ile <strong>}</strong> arasına yazılan kodlar bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.</p>
+<pre class="code shell literal-block">
+cikart<span class="operator">(){</span>
+    <span class="name builtin">read</span> sayi1
+    <span class="name builtin">read</span> sayi2
+    <span class="name builtin">echo</span> <span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi1</span><span class="literal string interpol">}</span><span class="operator">-</span><span class="literal string interpol">${</span><span class="name variable">sayi2</span><span class="literal string interpol">}</span><span class="keyword">))</span>
+<span class="operator">}</span>
+topla
+&lt;- <span class="literal number">25</span>
+&lt;- <span class="literal number">12</span>
+-&gt; <span class="literal number">13</span>
+<span class="operator">{</span>
+    <span class="name builtin">echo</span> <span class="literal number">25</span>
+    <span class="name builtin">echo</span> <span class="literal number">12</span>
+<span class="operator">}</span> <span class="punctuation">|</span> cikart
+-&gt; <span class="literal number">13</span>
+<span class="comment single"># veya kısaca şu şekilde de yapılabilir.
+</span><span class="operator">{</span> <span class="name builtin">echo</span> <span class="literal number">25</span> <span class="punctuation">;</span> <span class="name builtin">echo</span> <span class="literal number">12</span> <span class="punctuation">;</span> <span class="operator">}</span> <span class="punctuation">|</span> cikart
+-&gt; <span class="literal number">13</span>
+</pre>
+</div>
 <div class="section" id="birden-cok-dosya-ile-calismak">
 <h1>Birden çok dosya ile çalışmak</h1>
 <p>Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için <strong>source</strong> yada <strong>.</strong> ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.</p>
