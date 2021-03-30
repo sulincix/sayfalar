@@ -470,6 +470,29 @@ yaz<span class="operator">(){</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="keyword">$(</span>yaz<span class="keyword">)</span><span class="literal string double"> dünya&quot;</span>
 -&gt; Merhaba dünya
 </pre>
+<p>Tanımlı bir fonksionu silmek için <strong>unset -f</strong> ifadesini kullanmamız gereklidir.</p>
+<pre class="code shell literal-block">
+yaz<span class="operator">(){</span>
+    <span class="name builtin">echo</span> <span class="literal string double">&quot;Merhaba&quot;</span>
+<span class="operator">}</span>
+<span class="name builtin">unset</span> -f yaz
+<span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="keyword">$(</span>yaz<span class="keyword">)</span><span class="literal string double"> dünya&quot;</span>
+-&gt; bash: yaz: komut yok
+-&gt; dünya
+</pre>
+<p>Burada dikkat ederseniz olmayan fonksionu çalıştırmaya çalıştığımız için hata mesajı verdi fakat çalışmaya devam etti. Eğer herhangi bir hata durumunda betiğin durmasını istiyorsak <strong>set -e</strong> bu durumun tam tersi için <strong>set +e</strong> ifadesini kullanmalıyız.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> <span class="literal string double">&quot;satır 1&quot;</span>
+acho <span class="literal string double">&quot;satır 2&quot;</span> <span class="comment single"># yanlış yazılan satır fakat devam edecek
+</span><span class="name builtin">echo</span> <span class="literal string double">&quot;satır 3&quot;</span>
+<span class="name builtin">set</span> -e
+acho <span class="literal string double">&quot;satır 4&quot;</span> <span class="comment single"># yanlış yazılan satır çalışmayı durduracak
+</span><span class="name builtin">echo</span> <span class="literal string double">&quot;satır 5&quot;</span> <span class="comment single"># bu satır çalışmayacak
+</span>-&gt; satır <span class="literal number">1</span>
+-&gt; bash: acho: komut yok
+-&gt; satır <span class="literal number">3</span>
+-&gt; bash: acho: komut yok
+</pre>
 </div>
 <div class="section" id="dosya-islemleri">
 <h1>Dosya işlemleri</h1>

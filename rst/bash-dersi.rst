@@ -493,6 +493,34 @@ Bir fonksionun çıktısını değişkene **$(isim)** ifadesi yadımı ile ataya
 	echo "$(yaz) dünya"
 	-> Merhaba dünya
 	
+Tanımlı bir fonksionu silmek için **unset -f** ifadesini kullanmamız gereklidir.
+
+.. code-block:: shell
+
+	yaz(){
+	    echo "Merhaba"
+	}
+	unset -f yaz
+	echo "$(yaz) dünya"
+	-> bash: yaz: komut yok
+        -> dünya
+        
+Burada dikkat ederseniz olmayan fonksionu çalıştırmaya çalıştığımız için hata mesajı verdi fakat çalışmaya devam etti. Eğer herhangi bir hata durumunda betiğin durmasını istiyorsak **set -e** bu durumun tam tersi için **set +e** ifadesini kullanmalıyız.
+
+.. code-block:: shell
+
+	echo "satır 1"
+	acho "satır 2" # yanlış yazılan satır fakat devam edecek
+	echo "satır 3"
+	set -e
+	acho "satır 4" # yanlış yazılan satır çalışmayı durduracak
+	echo "satır 5" # bu satır çalışmayacak
+	-> satır 1
+	-> bash: acho: komut yok
+	-> satır 3
+	-> bash: acho: komut yok
+
+	
 Dosya işlemleri
 ===============
 

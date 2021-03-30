@@ -808,6 +808,45 @@ echo "$(yaz) dünya"
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Tanımlı bir fonksionu silmek için \fBunset \-f\fP ifadesini kullanmamız gereklidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+yaz(){
+    echo "Merhaba"
+}
+unset \-f yaz
+echo "$(yaz) dünya"
+\-> bash: yaz: komut yok
+\-> dünya
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada dikkat ederseniz olmayan fonksionu çalıştırmaya çalıştığımız için hata mesajı verdi fakat çalışmaya devam etti. Eğer herhangi bir hata durumunda betiğin durmasını istiyorsak \fBset \-e\fP bu durumun tam tersi için \fBset +e\fP ifadesini kullanmalıyız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+echo "satır 1"
+acho "satır 2" # yanlış yazılan satır fakat devam edecek
+echo "satır 3"
+set \-e
+acho "satır 4" # yanlış yazılan satır çalışmayı durduracak
+echo "satır 5" # bu satır çalışmayacak
+\-> satır 1
+\-> bash: acho: komut yok
+\-> satır 3
+\-> bash: acho: komut yok
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH DOSYA IŞLEMLERI
 .sp
 Bash betiklerinde \fBstdout\fP \fBstderr\fP ve \fBstdin\fP olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stderr ve stdout beraber yazılır.
