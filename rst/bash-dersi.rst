@@ -630,7 +630,7 @@ Kod bloğu
 	    read sayi2
 	    echo $((${sayi1}-${sayi2}))
 	}
-	topla
+	cikart
 	<- 25
 	<- 12
 	-> 13
