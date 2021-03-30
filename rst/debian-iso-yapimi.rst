@@ -11,10 +11,11 @@ Temel kavramlar
 ------------------
 Terim     Anlamı
 ========  ========
-chroot         Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
-squashfs       Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. **Debian** tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.
-iso            Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.
-live           Kurulum yapmadan çalışan sisteme **live** adı verilir.
+chroot    Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
+squashfs  Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. **Debian** tabanlı dağıtımlarda **gzip** formatında sıkıştırma önerilir.
+iso       Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.
+live      Kurulum yapmadan çalışan sisteme **live** adı verilir.
+17g       Dağıtımdan bağımsız canlı sistem kurulum aracıdır.
 ========  ========
 
 
@@ -129,7 +130,12 @@ cinnamon     apt-get install cinnamon
 plasma       apt-get install kde-standard
 gnome        apt-get install gnome-core
 mate         apt-get install mate-desktop-environment-core
+budgie       apt-get install budgie-desktop
 ========     =====
+
+  **Not:** xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için **network-manager-gnome** paketini kurmalısınız.
+
+Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.
 
 3. Kurulum aracı ekleyebiliz. 
 
@@ -219,7 +225,7 @@ Paketleme aşaması
 
 	☭ mkdir -p isowork/boot/grub/
 	☭ echo 'menuentry "Start Debian 64-bit" --class debian {' > isowork/boot/grub/grub.cfg
-	☭ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> isowork/boot/grub/grub.cfg
+	☭ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live --' >> isowork/boot/grub/grub.cfg
 	☭ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
 	☭ echo '}' >> isowork/boot/grub/grub.cfg
 

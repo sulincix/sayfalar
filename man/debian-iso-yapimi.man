@@ -62,7 +62,7 @@ _
 T{
 squashfs
 T}	T{
-Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. \fBDebian\fP tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.
+Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. \fBDebian\fP tabanlı dağıtımlarda \fBgzip\fP formatında sıkıştırma önerilir.
 T}
 _
 T{
@@ -75,6 +75,12 @@ T{
 live
 T}	T{
 Kurulum yapmadan çalışan sisteme \fBlive\fP adı verilir.
+T}
+_
+T{
+17g
+T}	T{
+Dağıtımdan bağımsız canlı sistem kurulum aracıdır.
 T}
 _
 .TE
@@ -303,7 +309,20 @@ T}	T{
 apt\-get install mate\-desktop\-environment\-core
 T}
 _
+T{
+budgie
+T}	T{
+apt\-get install budgie\-desktop
+T}
+_
 .TE
+.INDENT 0.0
+.INDENT 3.5
+\fBNot:\fP xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için \fBnetwork\-manager\-gnome\fP paketini kurmalısınız.
+.UNINDENT
+.UNINDENT
+.sp
+Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.
 .INDENT 0.0
 .IP 3. 3
 Kurulum aracı ekleyebiliz.
@@ -448,7 +467,7 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .ft C
 ☭ mkdir \-p isowork/boot/grub/
 ☭ echo \(aqmenuentry "Start Debian 64\-bit" \-\-class debian {\(aq > isowork/boot/grub/grub.cfg
-☭ echo \(aq    linux /live/vmlinuz boot=live live\-config live\-media\-path=/live quiet splash \-\-\(aq >> isowork/boot/grub/grub.cfg
+☭ echo \(aq    linux /live/vmlinuz boot=live live\-config live\-media\-path=/live \-\-\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    initrd /live/initrd.img\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq}\(aq >> isowork/boot/grub/grub.cfg
 .ft P

@@ -18,8 +18,8 @@
 </blockquote>
 <table border="1" class="docutils">
 <colgroup>
-<col width="5%" />
-<col width="95%" />
+<col width="4%" />
+<col width="96%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head" colspan="2">Temel kavramlar</th>
@@ -33,13 +33,16 @@
 <td>Oluşturulacak live isonun taslağıdır. içerisine <strong>chroot sid-chroot</strong> komutu ile içerisine girebiliriz. çıkmak için ise <strong>exit</strong> komutu kullanılmalıdır.</td>
 </tr>
 <tr><td>squashfs</td>
-<td>Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. <strong>Debian</strong> tabanlı dağıtımlarda xz formatında sıkıştırma önerilir.</td>
+<td>Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. <strong>Debian</strong> tabanlı dağıtımlarda <strong>gzip</strong> formatında sıkıştırma önerilir.</td>
 </tr>
 <tr><td>iso</td>
 <td>Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.</td>
 </tr>
 <tr><td>live</td>
 <td>Kurulum yapmadan çalışan sisteme <strong>live</strong> adı verilir.</td>
+</tr>
+<tr><td>17g</td>
+<td>Dağıtımdan bağımsız canlı sistem kurulum aracıdır.</td>
 </tr>
 </tbody>
 </table>
@@ -171,8 +174,14 @@
 <tr><td>mate</td>
 <td>apt-get install mate-desktop-environment-core</td>
 </tr>
+<tr><td>budgie</td>
+<td>apt-get install budgie-desktop</td>
+</tr>
 </tbody>
 </table>
+<blockquote>
+<strong>Not:</strong> xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için <strong>network-manager-gnome</strong> paketini kurmalısınız.</blockquote>
+<p>Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.</p>
 <ol class="arabic simple" start="3">
 <li>Kurulum aracı ekleyebiliz.</li>
 </ol>
@@ -255,7 +264,7 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 <pre class="code shell literal-block">
 ☭ mkdir -p isowork/boot/grub/
 ☭ <span class="name builtin">echo</span> <span class="literal string single">'menuentry &quot;Start Debian 64-bit&quot; --class debian {'</span> &gt; isowork/boot/grub/grub.cfg
-☭ <span class="name builtin">echo</span> <span class="literal string single">'    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --'</span> &gt;&gt; isowork/boot/grub/grub.cfg
+☭ <span class="name builtin">echo</span> <span class="literal string single">'    linux /live/vmlinuz boot=live live-config live-media-path=/live --'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 ☭ <span class="name builtin">echo</span> <span class="literal string single">'    initrd /live/initrd.img'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 ☭ <span class="name builtin">echo</span> <span class="literal string single">'}'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 </pre>

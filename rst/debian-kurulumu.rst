@@ -14,10 +14,10 @@ Temel kavramlar
 ------------------------
 Terim            Anlamı
 ===========     ========
-rootfs           Kurulumu yapılan sistemin taslağıdır. **chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
-debootstrap      **rootfs** oluşturmak için kullanılan komuttur. Debiana ait bir araçtır fakat debian dışında da kullanılabilir.
-efi bölümü       Sadece **Uefi** kullanan sistemlerde bulunan ve açılış için gereken dosyaların bulunduğu bölümdür.
-kök dizin        Kurulumu yapılan sistemin kurulacağı yerdir.
+rootfs          Kurulumu yapılan sistemin taslağıdır. **chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
+debootstrap     **rootfs** oluşturmak için kullanılan komuttur. Debiana ait bir araçtır fakat debian dışında da kullanılabilir.
+efi bölümü      Sadece **Uefi** kullanan sistemlerde bulunan ve açılış için gereken dosyaların bulunduğu bölümdür.
+kök dizin       Kurulumu yapılan sistemin kurulacağı yerdir.
 ===========     ========
 
 Gerekenler
