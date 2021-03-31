@@ -109,6 +109,15 @@ declade -r <span class="name variable">sayi</span><span class="operator">=</span
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span>
 -&gt; <span class="literal number">6</span>
 </pre>
+<p>Bununla birlikte matematiksel işlemler için şunlar da kullanılabilir.</p>
+<pre class="code shell literal-block">
+expr <span class="literal number">3</span> + <span class="literal number">5</span> <span class="comment single"># her piri arasında boşluk gerekli
+</span>-&gt; <span class="literal number">8</span>
+<span class="name builtin">echo</span> <span class="literal number">6</span>-1 <span class="punctuation">|</span> bc -l <span class="comment single"># Burada -l virgüllü sayılar için kullanılır.
+</span>-&gt; <span class="literal number">5</span>
+python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
+-&gt; <span class="literal number">5</span>.0
+</pre>
 <p>Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0'dan başlar. Negatif değerler sondan saymaya başlar.</p>
 <table border="1" class="colwidths-given docutils">
 <caption><strong>Değişkene müdahale (var=&quot;Merhaba&quot;)</strong></caption>

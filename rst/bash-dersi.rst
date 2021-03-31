@@ -130,6 +130,16 @@ Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifa
 	echo ${sayi}
 	-> 6
 
+Bununla birlikte matematiksel işlemler için şunlar da kullanılabilir.
+
+.. code-block:: shell
+
+	expr 3 + 5 # her piri arasında boşluk gerekli
+	-> 8
+	echo 6-1 | bc -l # Burada -l virgüllü sayılar için kullanılır.
+	-> 5
+	python3 -c "print(10/2)"
+	-> 5.0
 
 Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0'dan başlar. Negatif değerler sondan saymaya başlar.
 

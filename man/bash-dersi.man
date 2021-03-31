@@ -231,6 +231,23 @@ echo ${sayi}
 .UNINDENT
 .UNINDENT
 .sp
+Bununla birlikte matematiksel işlemler için şunlar da kullanılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+expr 3 + 5 # her piri arasında boşluk gerekli
+\-> 8
+echo 6\-1 | bc \-l # Burada \-l virgüllü sayılar için kullanılır.
+\-> 5
+python3 \-c "print(10/2)"
+\-> 5\&.0
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
 Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0\(aqdan başlar. Negatif değerler sondan saymaya başlar.
 .SH DEĞIŞKENE MÜDAHALE (VAR="MERHABA")
 .TS
