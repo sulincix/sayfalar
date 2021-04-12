@@ -49,6 +49,97 @@ Bu da sonunca açıklama satırıdır.
 -&gt; Merhaba
 -&gt; dünya
 </pre>
+<p>Ekrana renkli yazı da yazdırabiliriz. Bunun için <strong>\033[x;..;ym</strong> ifadesini kullanırız. Burada <strong>x</strong> ve <strong>y</strong> özellik belirtir. Örneğin:</p>
+<pre class="code shell literal-block">
+<span class="comment single"># Mavi renkli kalın merhaba ile normal dünya yazdırır.
+</span><span class="name builtin">echo</span> -e <span class="literal string double">&quot;\033[34;1mMerhaba\033[0m Dünya&quot;</span>
+</pre>
+<p>Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.</p>
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Özellik numarası ve anlamları</strong></caption>
+<colgroup>
+<col width="11%" />
+<col width="22%" />
+<col width="11%" />
+<col width="22%" />
+<col width="11%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Özellik</th>
+<th class="head">Anlamı</th>
+<th class="head">Özellik</th>
+<th class="head">Anlamı</th>
+<th class="head">Özellik</th>
+<th class="head">Anlamı</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>0</td>
+<td>Sıfırla</td>
+<td>30</td>
+<td>Siyah yazı</td>
+<td>40</td>
+<td>Siyah arka plan</td>
+</tr>
+<tr><td>1</td>
+<td>Aydınlık</td>
+<td>31</td>
+<td>Kırmızı yazı</td>
+<td>41</td>
+<td>Kırmızı arka plan</td>
+</tr>
+<tr><td>2</td>
+<td>Sönük</td>
+<td>32</td>
+<td>Yeşil yazı</td>
+<td>42</td>
+<td>Yeşil arka plan</td>
+</tr>
+<tr><td>3</td>
+<td>İtalik</td>
+<td>33</td>
+<td>Sarı yazı</td>
+<td>43</td>
+<td>Sarı arka plan</td>
+</tr>
+<tr><td>4</td>
+<td>Altı çizili</td>
+<td>34</td>
+<td>Mavi yazı</td>
+<td>44</td>
+<td>Mavi arka plan</td>
+</tr>
+<tr><td>5</td>
+<td>Yanıp sönen</td>
+<td>35</td>
+<td>Magenta yazı</td>
+<td>45</td>
+<td>Magenta arkaplan</td>
+</tr>
+<tr><td>6</td>
+<td>Yanıp sönen</td>
+<td>36</td>
+<td>Turkuaz yazı</td>
+<td>46</td>
+<td>Turkuaz arka plan</td>
+</tr>
+<tr><td>7</td>
+<td>Ters çevirilmiş</td>
+<td>37</td>
+<td>Beyaz yazı</td>
+<td>47</td>
+<td>Beyaz arka plan</td>
+</tr>
+<tr><td>8</td>
+<td>Gizli</td>
+<td>39</td>
+<td>Varsayılan yazı</td>
+<td>49</td>
+<td>Varsayılan arkaplan</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="parametreler">
 <h1>Parametreler</h1>

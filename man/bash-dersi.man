@@ -108,6 +108,167 @@ echo \-e "Merhaba\endünya"
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Ekrana renkli yazı da yazdırabiliriz. Bunun için \fB\e033[x;..;ym\fP ifadesini kullanırız. Burada \fBx\fP ve \fBy\fP özellik belirtir. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# Mavi renkli kalın merhaba ile normal dünya yazdırır.
+echo \-e "\e033[34;1mMerhaba\e033[0m Dünya"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.
+.SH ÖZELLIK NUMARASI VE ANLAMLARI
+.TS
+center;
+|l|l|l|l|l|l|.
+_
+T{
+Özellik
+T}	T{
+Anlamı
+T}	T{
+Özellik
+T}	T{
+Anlamı
+T}	T{
+Özellik
+T}	T{
+Anlamı
+T}
+_
+T{
+0
+T}	T{
+Sıfırla
+T}	T{
+30
+T}	T{
+Siyah yazı
+T}	T{
+40
+T}	T{
+Siyah arka plan
+T}
+_
+T{
+1
+T}	T{
+Aydınlık
+T}	T{
+31
+T}	T{
+Kırmızı yazı
+T}	T{
+41
+T}	T{
+Kırmızı arka plan
+T}
+_
+T{
+2
+T}	T{
+Sönük
+T}	T{
+32
+T}	T{
+Yeşil yazı
+T}	T{
+42
+T}	T{
+Yeşil arka plan
+T}
+_
+T{
+3
+T}	T{
+İtalik
+T}	T{
+33
+T}	T{
+Sarı yazı
+T}	T{
+43
+T}	T{
+Sarı arka plan
+T}
+_
+T{
+4
+T}	T{
+Altı çizili
+T}	T{
+34
+T}	T{
+Mavi yazı
+T}	T{
+44
+T}	T{
+Mavi arka plan
+T}
+_
+T{
+5
+T}	T{
+Yanıp sönen
+T}	T{
+35
+T}	T{
+Magenta yazı
+T}	T{
+45
+T}	T{
+Magenta arkaplan
+T}
+_
+T{
+6
+T}	T{
+Yanıp sönen
+T}	T{
+36
+T}	T{
+Turkuaz yazı
+T}	T{
+46
+T}	T{
+Turkuaz arka plan
+T}
+_
+T{
+7
+T}	T{
+Ters çevirilmiş
+T}	T{
+37
+T}	T{
+Beyaz yazı
+T}	T{
+47
+T}	T{
+Beyaz arka plan
+T}
+_
+T{
+8
+T}	T{
+Gizli
+T}	T{
+39
+T}	T{
+Varsayılan yazı
+T}	T{
+49
+T}	T{
+Varsayılan arkaplan
+T}
+_
+.TE
 .SH PARAMETRELER
 .sp
 Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden sonra gelen sayı ile kullanabiliriz.

@@ -34,7 +34,6 @@ Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı
 	Bu da sonunca açıklama satırıdır.
 	"
 
-
 Ekrana yazı yazalım
 ===================
 Ekrana yazı yazmak için **echo** ifadesi kulanılır.
@@ -51,6 +50,89 @@ Ekrana özel karakterleri yazmak için **-e** parametresi kullanmamız gerekmekt
 	echo -e "Merhaba\ndünya"
 	-> Merhaba
 	-> dünya
+
+Ekrana renkli yazı da yazdırabiliriz. Bunun için **\\033[x;..;ym** ifadesini kullanırız. Burada **x** ve **y** özellik belirtir. Örneğin:
+
+.. code-block:: shell
+
+	# Mavi renkli kalın merhaba ile normal dünya yazdırır.
+	echo -e "\033[34;1mMerhaba\033[0m Dünya"
+
+Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.
+
+.. list-table:: **Özellik numarası ve anlamları**
+   :widths: 25 50 25 50 25 50
+   :header-rows: 1
+
+   * - Özellik
+     - Anlamı
+     - Özellik
+     - Anlamı
+     - Özellik
+     - Anlamı
+     
+   * - 0
+     - Sıfırla
+     - 30
+     - Siyah yazı
+     - 40
+     - Siyah arka plan
+     
+   * - 1
+     - Aydınlık
+     - 31
+     - Kırmızı yazı
+     - 41
+     - Kırmızı arka plan
+     
+   * - 2
+     - Sönük
+     - 32
+     - Yeşil yazı
+     - 42
+     - Yeşil arka plan
+     
+   * - 3
+     - İtalik
+     - 33
+     - Sarı yazı
+     - 43
+     - Sarı arka plan
+     
+   * - 4
+     - Altı çizili
+     - 34
+     - Mavi yazı
+     - 44
+     - Mavi arka plan
+     
+   * - 5
+     - Yanıp sönen
+     - 35
+     - Magenta yazı
+     - 45
+     - Magenta arkaplan
+     
+   * - 6
+     - Yanıp sönen
+     - 36
+     - Turkuaz yazı
+     - 46
+     - Turkuaz arka plan
+     
+   * - 7
+     - Ters çevirilmiş
+     - 37
+     - Beyaz yazı
+     - 47
+     - Beyaz arka plan
+     
+   * - 8
+     - Gizli
+     - 39
+     - Varsayılan yazı
+     - 49
+     - Varsayılan arkaplan
 
 
 Parametreler
