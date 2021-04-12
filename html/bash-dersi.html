@@ -213,9 +213,9 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 <table border="1" class="colwidths-given docutils">
 <caption><strong>Değişkene müdahale (var=&quot;Merhaba&quot;)</strong></caption>
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="50%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">İfade</th>
@@ -225,35 +225,23 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 </thead>
 <tbody valign="top">
 <tr><td>${var%aba}</td>
-<td>sondaki ifadeyi sil</td>
+<td>Sondaki ifadeyi sil</td>
 <td>Merh</td>
 </tr>
 <tr><td>${var#Mer}</td>
-<td>baştaki ifadeyi sil</td>
+<td>Baştaki ifadeyi sil</td>
 <td>haba</td>
 </tr>
 <tr><td>${var:1:4}</td>
-<td><ol class="first last arabic simple">
-<li><ol class="first arabic" start="4">
-<li>karakterler arası</li>
-</ol>
-</li>
-</ol>
-</td>
+<td>Baştan 1. 4. karakterler arası</td>
 <td>erha</td>
 </tr>
 <tr><td>${var::4}</td>
-<td><ol class="first last arabic simple" start="4">
-<li>karaktere kadar</li>
-</ol>
-</td>
+<td>Baştan 4. karaktere kadar</td>
 <td>Merha</td>
 </tr>
 <tr><td>${var:4}</td>
-<td><ol class="first last arabic simple" start="4">
-<li>karakterden sonrası</li>
-</ol>
-</td>
+<td>Baştan 4. karakterden sonrası</td>
 <td>aba</td>
 </tr>
 <tr><td>${var/erh/abc}</td>
@@ -653,9 +641,9 @@ grep -v <span class="literal string double">&quot;dünya&quot;</span> dosya.txt
 <table border="1" class="colwidths-given docutils">
 <caption><strong>dosya ifadeleri ve anlamları</strong></caption>
 <colgroup>
+<col width="10%" />
 <col width="25%" />
-<col width="25%" />
-<col width="50%" />
+<col width="65%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">İfade</th>

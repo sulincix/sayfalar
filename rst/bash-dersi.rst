@@ -226,7 +226,7 @@ Bununla birlikte matematiksel işlemler için şunlar da kullanılabilir.
 Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0'dan başlar. Negatif değerler sondan saymaya başlar.
 
 .. list-table:: **Değişkene müdahale (var="Merhaba")**
-   :widths: 25 25 50
+   :widths: 33 33 33
    :header-rows: 1
 
    * - İfade
@@ -234,23 +234,23 @@ Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Kara
      - Eşleniği
      
    * - ${var%aba}
-     - sondaki ifadeyi sil
+     - Sondaki ifadeyi sil
      - Merh
      
    * - ${var#Mer}
-     - baştaki ifadeyi sil
+     - Baştaki ifadeyi sil
      - haba
      
    * - ${var:1:4}
-     - 1. 4. karakterler arası
+     - Baştan 1. 4. karakterler arası
      - erha
 
    * - ${var::4}
-     - 4. karaktere kadar
+     - Baştan 4. karaktere kadar
      - Merha
      
    * - ${var:4}
-     - 4. karakterden sonrası
+     - Baştan 4. karakterden sonrası
      - aba
 
    * - ${var/erh/abc}
@@ -672,7 +672,7 @@ Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.
 Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.
 
 .. list-table:: **dosya ifadeleri ve anlamları**
-   :widths: 25 25 50
+   :widths: 10 25 65
    :header-rows: 1
 
    * - İfade
