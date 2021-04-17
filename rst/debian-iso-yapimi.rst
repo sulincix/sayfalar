@@ -313,9 +313,15 @@ Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak
 
 	☭ chroot sid-chroot /bin/bash
 
-3. Düzenlemek istediğimiz yapalım.
+3. Düzenlemek istediğimiz yapalım. Ve ardından chroot içinden çıkalım.
 
-4. Tekrar **squashfs** dosyası üretelim ve güncelleyelim.
+4. Chroot içerisindeki **bind** bağlarını kaldıralım.
+
+.. code-block:: shell
+
+	☭ umount -lf -R sid-chroot/* 2>/dev/null
+
+5. Tekrar **squashfs** dosyası üretelim ve güncelleyelim.
 
 .. code-block:: shell
 
@@ -323,7 +329,7 @@ Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak
 	☭ rm -f isowork/live/filesystem.squashfs
 	☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 
-5. Eğer kernelle ilgili bir değişiklik yaptıysak **isowork** içerisindeki live dizininde bulunan dosyaları güncelleyelim. 
+6. Eğer kernelle ilgili bir değişiklik yaptıysak **isowork** içerisindeki live dizininde bulunan dosyaları güncelleyelim. 
 
 .. code-block:: shell
 
@@ -331,7 +337,7 @@ Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak
 	☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
         ☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
         
-6. Yeni iso dosyasını üretelim.
+7. Yeni iso dosyasını üretelim.
 
 .. code-block:: shell
 

@@ -635,8 +635,22 @@ Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak
 .UNINDENT
 .INDENT 0.0
 .IP 3. 3
-Düzenlemek istediğimiz yapalım.
+Düzenlemek istediğimiz yapalım. Ve ardından chroot içinden çıkalım.
 .IP 4. 3
+Chroot içerisindeki \fBbind\fP bağlarını kaldıralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ umount \-lf \-R sid\-chroot/* 2>/dev/null
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 5. 3
 Tekrar \fBsquashfs\fP dosyası üretelim ve güncelleyelim.
 .UNINDENT
 .INDENT 0.0
@@ -652,7 +666,7 @@ Tekrar \fBsquashfs\fP dosyası üretelim ve güncelleyelim.
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
-.IP 5. 3
+.IP 6. 3
 Eğer kernelle ilgili bir değişiklik yaptıysak \fBisowork\fP içerisindeki live dizininde bulunan dosyaları güncelleyelim.
 .UNINDENT
 .INDENT 0.0
@@ -668,7 +682,7 @@ Eğer kernelle ilgili bir değişiklik yaptıysak \fBisowork\fP içerisindeki li
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
-.IP 6. 3
+.IP 7. 3
 Yeni iso dosyasını üretelim.
 .UNINDENT
 .INDENT 0.0

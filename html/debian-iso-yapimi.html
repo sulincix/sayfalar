@@ -345,7 +345,13 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 ☭ chroot sid-chroot /bin/bash
 </pre>
 <ol class="arabic simple" start="3">
-<li>Düzenlemek istediğimiz yapalım.</li>
+<li>Düzenlemek istediğimiz yapalım. Ve ardından chroot içinden çıkalım.</li>
+<li>Chroot içerisindeki <strong>bind</strong> bağlarını kaldıralım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ umount -lf -R sid-chroot/* <span class="literal number">2</span>&gt;/dev/null
+</pre>
+<ol class="arabic simple" start="5">
 <li>Tekrar <strong>squashfs</strong> dosyası üretelim ve güncelleyelim.</li>
 </ol>
 <pre class="code shell literal-block">
@@ -353,7 +359,7 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 ☭ rm -f isowork/live/filesystem.squashfs
 ☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
 </pre>
-<ol class="arabic simple" start="5">
+<ol class="arabic simple" start="6">
 <li>Eğer kernelle ilgili bir değişiklik yaptıysak <strong>isowork</strong> içerisindeki live dizininde bulunan dosyaları güncelleyelim.</li>
 </ol>
 <pre class="code shell literal-block">
@@ -361,7 +367,7 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 ☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
 ☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
 </pre>
-<ol class="arabic simple" start="6">
+<ol class="arabic simple" start="7">
 <li>Yeni iso dosyasını üretelim.</li>
 </ol>
 <pre class="code shell literal-block">
