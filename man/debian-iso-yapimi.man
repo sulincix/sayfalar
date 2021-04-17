@@ -31,7 +31,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
 .sp
-Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapımı anlatılacaktır. debian \fBsid\fP yerine \fBstable\fP kullanmak isterseniz yapmanız gereken dokümanda \fBsid\fP yerine \fBstable\fP yazmaktır.
+Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapımı anlatılacaktır.
+.sp
+Debian \fBsid\fP yerine \fBstable\fP kullanmak isterseniz yapmanız gereken dokümanda \fBsid\fP yerine \fBstable\fP yazmaktır.
 .INDENT 0.0
 .INDENT 3.5
 \fBNot:\fP Bu dokümanla ilgili soru ve önerileriniz için : \fI\%https://t.me/iso_calismalari\fP
@@ -99,6 +101,39 @@ Gerekli paketleri kuralım.
 .fi
 .UNINDENT
 .UNINDENT
+.INDENT 0.0
+.IP 2. 3
+Kurulum aracını derleyelim. (İsteğe bağlı)
+.UNINDENT
+.sp
+Öncelikle kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install devscripts
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Daha sonra kaynak kodu bir dizine çekip \fBdeb\fP paketi haline getirelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ git clone https://gitlab.com/ggggggggggggggggg/17g
+☭ cd 17g
+☭ mk\-build\-deps \-\-install
+☭ debuild \-us \-uc \-b
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir üst dizinde kurulum aracına ait \fBdeb\fP paketi oluşacakdır.
 .SH CHROOT OLUŞTURULMASI
 .INDENT 0.0
 .IP 1. 3
@@ -110,7 +145,7 @@ Gerekli paketleri kuralım.
 .nf
 .ft C
 ☭ mkdir sid\-chroot
-☭ debootstrap \-\-no\-merged\-usr sid sid\-chroot https://deb.debian.org/debian
+☭ debootstrap \-\-arch=amd64 \-\-no\-merged\-usr sid sid\-chroot https://deb.debian.org/debian
 .ft P
 .fi
 .UNINDENT
@@ -122,7 +157,66 @@ Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız \fBchroot
 .sp
 .nf
 .ft C
-☭ chowm root sid\-chroot
+☭ chown root sid\-chroot
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+Eğer apt ile ilgili \fBsandbox\fP hatası alırsanız aşağıdaki komutu kullanın.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ echo "APT::Sandbox::User root;" > sid\-chroot/etc/apt/apt.conf.d/99sandboxroot
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer sıfırdan debootstrap kullanarak chroot oluşturmak yerine mevcut bir debian tabanlı isoyu açmak istiyorsak aşağıdaki adımları uygulayın.
+.INDENT 0.0
+.IP 1. 3
+Iso dosyamızı bir dizine bağlayalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ mount \-o loop debian\-live\-orijinal.iso /mnt
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+Iso içerisindeki \fBlive/filesystem.squashfs\fP dosyasını açalım. ve adını \fBsid\-chroot\fP olarak değiştirelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ unsquashfs /mnt/live/filesystem.squashfs
+☭ mv squashfs\-root sid\-chroot
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+Iso dosyamızın bağını sökelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ umount \-f /mnt
 .ft P
 .fi
 .UNINDENT
@@ -143,6 +237,8 @@ Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız \fBchroot
 .UNINDENT
 .UNINDENT
 .SH GEREKLI PAKETLERIN KURULMASI
+.sp
+Mevcut bir iso dosyasını düzenleyenler Bu aşamayı atlayabilirler.
 .INDENT 0.0
 .IP 1. 3
 Chroot komutu ile oluşan \fBchroot\fP içerisine girelim. ve ardından \fBsources.list\fP dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
@@ -173,6 +269,19 @@ Kernel kuralım.
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (isteğe bağlı)
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ bash <(https://liquorix.net/add\-liquorix\-repo.sh)
+☭ apt\-get install linux\-image\-liquorix\-amd64 linux\-headers\-liquorix\-amd64
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .INDENT 0.0
 .IP 3. 3
 Grub kuralım.
@@ -182,7 +291,7 @@ Grub kuralım.
 .sp
 .nf
 .ft C
-☭ apt\-get install grub\-pc\-bin grub\-efi
+☭ apt\-get install grub\-pc\-bin grub\-efi\-ia32\-bin grub\-efi
 .ft P
 .fi
 .UNINDENT
@@ -325,41 +434,6 @@ _
 Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.
 .INDENT 0.0
 .IP 3. 3
-Kurulum aracı ekleyebiliz.
-.UNINDENT
-.sp
-Derleme işlemini başlamadan önce yapmanızı tavsiye ederim.
-.sp
-Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-☭ apt\-get install devscripts
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Daha sonra kaynak kodu bir dizine çekip \fBdeb\fP paketi haline getirelim.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-☭ git clone https://gitlab.com/ggggggggggggggggg/17g
-☭ cd 17g
-☭ mk\-build\-deps \-\-install
-☭ debuild \-us \-uc \-b
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Bir üst dizinde oluşturulan \fBdeb\fP paketini \fBchroot\fP içerisindeki \fBtmp\fP dizinine atıp chroot içerisindeyken kurabilirsiniz.
-.INDENT 0.0
-.IP 4. 3
 Sürücüleri ekleyebiliz.
 .UNINDENT
 .INDENT 0.0
@@ -381,13 +455,28 @@ Sürücüleri ekleyebiliz.
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
-.IP 5. 3
+.IP 4. 3
 Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları \fB/etc/skel\fP içerisine uygun hiyerarşiye göre dizmelisiniz.
+.IP 5. 3
+Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğumuz \fBdeb\fP dosyasını chroot içindeki \fB/tmp\fP dizinine kopyalayalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ dpkg \-i /tmp/17g\-installer.deb # dosya adını uygun şekilde yazınız.
+☭ apt\-get install \-f # eksik bağımlılıkları tamamlaması için.
+.ft P
+.fi
+.UNINDENT
 .UNINDENT
 .SH PAKETLEME ÖNCESI
 .INDENT 0.0
 .IP 1. 3
-Öncelikle chroot içerisinden çıkalım. ve ardından \fBbind\fP bağlarını kaldıralım.
+Öncelikle chroot içerisinden çıkalım. İşlemin bundan sonraki aşaması chrootun dışarısında gerçekleşecektir.
+.IP 2. 3
+Chroot içerisindeki \fBbind\fP bağlarını kaldıralım.
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
@@ -407,6 +496,7 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 .sp
 .nf
 .ft C
+☭ chroot sid\-chroot apt\-get autoremove # boşta kalan paketleri temizler
 ☭ chroot sid\-chroot apt\-get clean # apt önbelleğini temizler
 ☭ rm \-f sid\-chroot/root/.bash_history # iso yaparken oluşturduğunuz historyleri temizler
 ☭ rm \-rf sid\-chroot/var/lib/apt/lists/* # index dosyalarını temizler
@@ -426,6 +516,8 @@ Iso taslağı dizini açalım ve \fBsquashfs\fP imajı alalım. aldığımız im
 Debianda varsayılan sıkıştırma formatı \fIxz\fP olmasına ramen ben sizlere \fIgzip\fP kullanmanızı öneririm.
 .UNINDENT
 .UNINDENT
+.sp
+\fBNot:\fP Ubuntu tabanında \fBlive\fP dizini yerine \fBcasper\fP dizini blunmaktadır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -505,6 +597,86 @@ Iso dosyası üretelim.
 .sp
 .nf
 .ft C
+☭ grub\-mkrescue isowork \-o debian\-live.iso
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH ISO ÜZERINDE DÜZENLEME YAPMA
+.sp
+Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak veya birkaç ekleme daha yapmak istiyorsak Sırası ile şunları yapmalıyız.
+.INDENT 0.0
+.IP 1. 3
+\fBsid\-chroot\fP dizinine tekrar bind bağı atalım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ for i in dev dev/pts proc sys; do mount \-o bind /$i sid\-chroot/$i; done
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 2. 3
+\fBsid\-chroot\fP içine tekrar girelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ chroot sid\-chroot /bin/bash
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 3. 3
+Düzenlemek istediğimiz yapalım.
+.IP 4. 3
+Tekrar \fBsquashfs\fP dosyası üretelim ve güncelleyelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ mksquashfs sid\-chroot filesystem.squashfs \-comp gzip \-wildcards
+☭ rm \-f isowork/live/filesystem.squashfs
+☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 5. 3
+Eğer kernelle ilgili bir değişiklik yaptıysak \fBisowork\fP içerisindeki live dizininde bulunan dosyaları güncelleyelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ rm \-f isowork/live/initrd.img isowork/live/vmlinuz
+☭ cp \-pf sid\-chroot/boot/initrd.img\-5.7.0\-1\-amd64 isowork/live/initrd.img
+☭ cp \-pf sid\-chroot/boot/vmlinuz\-5.7.0\-1\-amd64 isowork/live/vmlinuz
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 6. 3
+Yeni iso dosyasını üretelim.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ mv debian\-live.iso debian\-live\-eski.iso
 ☭ grub\-mkrescue isowork \-o debian\-live.iso
 .ft P
 .fi

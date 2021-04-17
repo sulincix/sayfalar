@@ -1,6 +1,8 @@
 Iso yapımı
 ==========
-Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı anlatılacaktır. debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken dokümanda **sid** yerine **stable** yazmaktır. 
+Bu dokümanda **debian sid** kullanarak özelleşmiş bir **live** iso yapımı anlatılacaktır.
+
+Debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken dokümanda **sid** yerine **stable** yazmaktır. 
 
   **Not:** Bu dokümanla ilgili soru ve önerileriniz için : https://t.me/iso_calismalari
 
@@ -28,6 +30,25 @@ Hazırlık
 
 	☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi
 	
+2. Kurulum aracını derleyelim. (İsteğe bağlı)
+
+Öncelikle kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
+
+.. code-block:: shell
+
+	☭ apt-get install devscripts
+
+Daha sonra kaynak kodu bir dizine çekip **deb** paketi haline getirelim.
+
+.. code-block:: shell
+
+	☭ git clone https://gitlab.com/ggggggggggggggggg/17g
+	☭ cd 17g
+	☭ mk-build-deps --install
+	☭ debuild -us -uc -b
+
+Bir üst dizinde kurulum aracına ait **deb** paketi oluşacakdır.
+	
 Chroot oluşturulması
 ^^^^^^^^^^^^^^^^^^^^
 	
@@ -36,13 +57,40 @@ Chroot oluşturulması
 .. code-block:: shell
 
 	☭ mkdir sid-chroot
-	☭ debootstrap --no-merged-usr sid sid-chroot https://deb.debian.org/debian
+	☭ debootstrap --arch=amd64 --no-merged-usr sid sid-chroot https://deb.debian.org/debian
 
 Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız **chroot** dizininin sahibini **root** olarak değiştirip tekrar denemenizi öneriririz.
 
 .. code-block:: shell
 
-	☭ chowm root sid-chroot
+	☭ chown root sid-chroot
+	
+2. Eğer apt ile ilgili **sandbox** hatası alırsanız aşağıdaki komutu kullanın.
+
+.. code-block:: shell
+
+	☭ echo "APT::Sandbox::User root;" > sid-chroot/etc/apt/apt.conf.d/99sandboxroot
+	
+Eğer sıfırdan debootstrap kullanarak chroot oluşturmak yerine mevcut bir debian tabanlı isoyu açmak istiyorsak aşağıdaki adımları uygulayın.
+
+1. Iso dosyamızı bir dizine bağlayalım.
+
+.. code-block:: shell
+
+	☭ mount -o loop debian-live-orijinal.iso /mnt
+	
+2. Iso içerisindeki **live/filesystem.squashfs** dosyasını açalım. ve adını **sid-chroot** olarak değiştirelim.
+
+.. code-block:: shell
+
+	☭ unsquashfs /mnt/live/filesystem.squashfs
+	☭ mv squashfs-root sid-chroot
+
+3. Iso dosyamızın bağını sökelim.
+
+.. code-block:: shell
+
+	☭ umount -f /mnt
 
 Chroot içine girmek için ön hazırlık
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -55,6 +103,8 @@ Chroot içine girmek için ön hazırlık
 
 Gerekli paketlerin kurulması
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Mevcut bir iso dosyasını düzenleyenler Bu aşamayı atlayabilirler. 
 
 1. Chroot komutu ile oluşan **chroot** içerisine girelim. ve ardından **sources.list** dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.
 
@@ -69,12 +119,19 @@ Gerekli paketlerin kurulması
 .. code-block:: shell
 
 	☭ apt-get install linux-headers-amd64 linux-image-amd64
+
+Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (isteğe bağlı)
+
+.. code-block:: shell
+
+	☭ bash <(https://liquorix.net/add-liquorix-repo.sh)
+	☭ apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
 	
 3. Grub kuralım.
 
 .. code-block:: shell
 
-	☭ apt-get install grub-pc-bin grub-efi
+	☭ apt-get install grub-pc-bin grub-efi-ia32-bin grub-efi
 
 4. Live açılış için gereken paketleri kuralım.
 
@@ -137,29 +194,7 @@ budgie       apt-get install budgie-desktop
 
 Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.
 
-3. Kurulum aracı ekleyebiliz. 
-
-Derleme işlemini başlamadan önce yapmanızı tavsiye ederim.
-
-Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:
-
-.. code-block:: shell
-
-	☭ apt-get install devscripts
-
-Daha sonra kaynak kodu bir dizine çekip **deb** paketi haline getirelim.
-
-.. code-block:: shell
-
-	☭ git clone https://gitlab.com/ggggggggggggggggg/17g
-	☭ cd 17g
-	☭ mk-build-deps --install
-	☭ debuild -us -uc -b
-
-Bir üst dizinde oluşturulan **deb** paketini **chroot** içerisindeki **tmp** dizinine atıp chroot içerisindeyken kurabilirsiniz.
-
-
-4. Sürücüleri ekleyebiliz.
+3. Sürücüleri ekleyebiliz.
 
 .. code-block:: shell
 
@@ -174,11 +209,20 @@ Bir üst dizinde oluşturulan **deb** paketini **chroot** içerisindeki **tmp** 
 	    firmware-siano firmware-ti-connectivity firmware-zd1211 
 
 
-5. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
+4. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
+
+5. Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğumuz **deb** dosyasını chroot içindeki **/tmp** dizinine kopyalayalım.
+
+.. code-block:: shell
+
+	☭ dpkg -i /tmp/17g-installer.deb # dosya adını uygun şekilde yazınız.
+	☭ apt-get install -f # eksik bağımlılıkları tamamlaması için.
 
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
-1.  Öncelikle chroot içerisinden çıkalım. ve ardından **bind** bağlarını kaldıralım.
+1. Öncelikle chroot içerisinden çıkalım. İşlemin bundan sonraki aşaması chrootun dışarısında gerçekleşecektir.
+
+2. Chroot içerisindeki **bind** bağlarını kaldıralım.
 
 .. code-block:: shell
 
@@ -190,6 +234,7 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 
 .. code-block:: shell
 
+	☭ chroot sid-chroot apt-get autoremove # boşta kalan paketleri temizler
 	☭ chroot sid-chroot apt-get clean # apt önbelleğini temizler
 	☭ rm -f sid-chroot/root/.bash_history # iso yaparken oluşturduğunuz historyleri temizler
 	☭ rm -rf sid-chroot/var/lib/apt/lists/* # index dosyalarını temizler
@@ -202,6 +247,8 @@ Paketleme aşaması
 
   **Not:** *-comp* parametresinden sonra *xz* veya *gzip* kullanabiliriz. *xz* kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. *gzip* kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
   Debianda varsayılan sıkıştırma formatı *xz* olmasına ramen ben sizlere *gzip* kullanmanızı öneririm.
+
+**Not:** Ubuntu tabanında **live** dizini yerine **casper** dizini blunmaktadır.
 
 .. code-block:: shell
 	
@@ -247,4 +294,46 @@ Paketleme aşaması
 
 .. code-block:: shell
 
+	☭ grub-mkrescue isowork -o debian-live.iso
+
+Iso üzerinde düzenleme yapma
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak veya birkaç ekleme daha yapmak istiyorsak Sırası ile şunları yapmalıyız.
+
+1. **sid-chroot** dizinine tekrar bind bağı atalım.
+
+.. code-block:: shell
+
+	☭ for i in dev dev/pts proc sys; do mount -o bind /$i sid-chroot/$i; done
+        
+2. **sid-chroot** içine tekrar girelim.
+
+.. code-block:: shell
+
+	☭ chroot sid-chroot /bin/bash
+
+3. Düzenlemek istediğimiz yapalım.
+
+4. Tekrar **squashfs** dosyası üretelim ve güncelleyelim.
+
+.. code-block:: shell
+
+	☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
+	☭ rm -f isowork/live/filesystem.squashfs
+	☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
+
+5. Eğer kernelle ilgili bir değişiklik yaptıysak **isowork** içerisindeki live dizininde bulunan dosyaları güncelleyelim. 
+
+.. code-block:: shell
+
+	☭ rm -f isowork/live/initrd.img isowork/live/vmlinuz 
+	☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
+        ☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
+        
+6. Yeni iso dosyasını üretelim.
+
+.. code-block:: shell
+
+	☭ mv debian-live.iso debian-live-eski.iso
 	☭ grub-mkrescue isowork -o debian-live.iso

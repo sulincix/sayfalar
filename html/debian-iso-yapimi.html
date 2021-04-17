@@ -11,7 +11,8 @@
 <div class="document" id="iso-yapimi">
 <h1 class="title">Iso yapımı</h1>
 
-<p>Bu dokümanda <strong>debian sid</strong> kullanarak özelleşmiş bir <strong>live</strong> iso yapımı anlatılacaktır. debian <strong>sid</strong> yerine <strong>stable</strong> kullanmak isterseniz yapmanız gereken dokümanda <strong>sid</strong> yerine <strong>stable</strong> yazmaktır.</p>
+<p>Bu dokümanda <strong>debian sid</strong> kullanarak özelleşmiş bir <strong>live</strong> iso yapımı anlatılacaktır.</p>
+<p>Debian <strong>sid</strong> yerine <strong>stable</strong> kullanmak isterseniz yapmanız gereken dokümanda <strong>sid</strong> yerine <strong>stable</strong> yazmaktır.</p>
 <blockquote>
 <p><strong>Not:</strong> Bu dokümanla ilgili soru ve önerileriniz için : <a class="reference external" href="https://t.me/iso_calismalari">https://t.me/iso_calismalari</a></p>
 <p><strong>Not: Biraz mizah içerir.</strong> Şimdiden <strong>ALLAH</strong> sabır versin :D</p>
@@ -54,6 +55,21 @@
 <pre class="code shell literal-block">
 ☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi
 </pre>
+<ol class="arabic simple" start="2">
+<li>Kurulum aracını derleyelim. (İsteğe bağlı)</li>
+</ol>
+<p>Öncelikle kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:</p>
+<pre class="code shell literal-block">
+☭ apt-get install devscripts
+</pre>
+<p>Daha sonra kaynak kodu bir dizine çekip <strong>deb</strong> paketi haline getirelim.</p>
+<pre class="code shell literal-block">
+☭ git clone https://gitlab.com/ggggggggggggggggg/17g
+☭ <span class="name builtin">cd</span> 17g
+☭ mk-build-deps --install
+☭ debuild -us -uc -b
+</pre>
+<p>Bir üst dizinde kurulum aracına ait <strong>deb</strong> paketi oluşacakdır.</p>
 </div>
 <div class="section" id="chroot-olusturulmasi">
 <h1>Chroot oluşturulması</h1>
@@ -62,11 +78,37 @@
 </ol>
 <pre class="code shell literal-block">
 ☭ mkdir sid-chroot
-☭ debootstrap --no-merged-usr sid sid-chroot https://deb.debian.org/debian
+☭ debootstrap --arch<span class="operator">=</span>amd64 --no-merged-usr sid sid-chroot https://deb.debian.org/debian
 </pre>
 <p>Eğer &quot;Unpacking the base system...&quot; sırasında sorun yaşıyorsanız <strong>chroot</strong> dizininin sahibini <strong>root</strong> olarak değiştirip tekrar denemenizi öneriririz.</p>
 <pre class="code shell literal-block">
-☭ chowm root sid-chroot
+☭ chown root sid-chroot
+</pre>
+<ol class="arabic simple" start="2">
+<li>Eğer apt ile ilgili <strong>sandbox</strong> hatası alırsanız aşağıdaki komutu kullanın.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ <span class="name builtin">echo</span> <span class="literal string double">&quot;APT::Sandbox::User root;&quot;</span> &gt; sid-chroot/etc/apt/apt.conf.d/99sandboxroot
+</pre>
+<p>Eğer sıfırdan debootstrap kullanarak chroot oluşturmak yerine mevcut bir debian tabanlı isoyu açmak istiyorsak aşağıdaki adımları uygulayın.</p>
+<ol class="arabic simple">
+<li>Iso dosyamızı bir dizine bağlayalım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ mount -o loop debian-live-orijinal.iso /mnt
+</pre>
+<ol class="arabic simple" start="2">
+<li>Iso içerisindeki <strong>live/filesystem.squashfs</strong> dosyasını açalım. ve adını <strong>sid-chroot</strong> olarak değiştirelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ unsquashfs /mnt/live/filesystem.squashfs
+☭ mv squashfs-root sid-chroot
+</pre>
+<ol class="arabic simple" start="3">
+<li>Iso dosyamızın bağını sökelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ umount -f /mnt
 </pre>
 </div>
 <div class="section" id="chroot-icine-girmek-icin-on-hazirlik">
@@ -80,6 +122,7 @@
 </div>
 <div class="section" id="gerekli-paketlerin-kurulmasi">
 <h1>Gerekli paketlerin kurulması</h1>
+<p>Mevcut bir iso dosyasını düzenleyenler Bu aşamayı atlayabilirler.</p>
 <ol class="arabic simple">
 <li>Chroot komutu ile oluşan <strong>chroot</strong> içerisine girelim. ve ardından <strong>sources.list</strong> dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.</li>
 </ol>
@@ -94,11 +137,16 @@
 <pre class="code shell literal-block">
 ☭ apt-get install linux-headers-amd64 linux-image-amd64
 </pre>
+<p>Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (isteğe bağlı)</p>
+<pre class="code shell literal-block">
+☭ bash &lt;<span class="operator">(</span>https://liquorix.net/add-liquorix-repo.sh<span class="operator">)</span>
+☭ apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
+</pre>
 <ol class="arabic simple" start="3">
 <li>Grub kuralım.</li>
 </ol>
 <pre class="code shell literal-block">
-☭ apt-get install grub-pc-bin grub-efi
+☭ apt-get install grub-pc-bin grub-efi-ia32-bin grub-efi
 </pre>
 <ol class="arabic simple" start="4">
 <li>Live açılış için gereken paketleri kuralım.</li>
@@ -183,22 +231,6 @@
 <strong>Not:</strong> xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için <strong>network-manager-gnome</strong> paketini kurmalısınız.</blockquote>
 <p>Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.</p>
 <ol class="arabic simple" start="3">
-<li>Kurulum aracı ekleyebiliz.</li>
-</ol>
-<p>Derleme işlemini başlamadan önce yapmanızı tavsiye ederim.</p>
-<p>Öncelikle chrootun dışında bir yerde kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:</p>
-<pre class="code shell literal-block">
-☭ apt-get install devscripts
-</pre>
-<p>Daha sonra kaynak kodu bir dizine çekip <strong>deb</strong> paketi haline getirelim.</p>
-<pre class="code shell literal-block">
-☭ git clone https://gitlab.com/ggggggggggggggggg/17g
-☭ <span class="name builtin">cd</span> 17g
-☭ mk-build-deps --install
-☭ debuild -us -uc -b
-</pre>
-<p>Bir üst dizinde oluşturulan <strong>deb</strong> paketini <strong>chroot</strong> içerisindeki <strong>tmp</strong> dizinine atıp chroot içerisindeyken kurabilirsiniz.</p>
-<ol class="arabic simple" start="4">
 <li>Sürücüleri ekleyebiliz.</li>
 </ol>
 <pre class="code shell literal-block">
@@ -212,14 +244,20 @@
 </span>    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung <span class="literal string escape">\
 </span>    firmware-siano firmware-ti-connectivity firmware-zd1211
 </pre>
-<ol class="arabic simple" start="5">
+<ol class="arabic simple" start="4">
 <li>Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları <strong>/etc/skel</strong> içerisine uygun hiyerarşiye göre dizmelisiniz.</li>
+<li>Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğumuz <strong>deb</strong> dosyasını chroot içindeki <strong>/tmp</strong> dizinine kopyalayalım.</li>
 </ol>
+<pre class="code shell literal-block">
+☭ dpkg -i /tmp/17g-installer.deb <span class="comment single"># dosya adını uygun şekilde yazınız.
+</span>☭ apt-get install -f <span class="comment single"># eksik bağımlılıkları tamamlaması için.</span>
+</pre>
 </div>
 <div class="section" id="paketleme-oncesi">
 <h1>Paketleme öncesi</h1>
 <ol class="arabic simple">
-<li>Öncelikle chroot içerisinden çıkalım. ve ardından <strong>bind</strong> bağlarını kaldıralım.</li>
+<li>Öncelikle chroot içerisinden çıkalım. İşlemin bundan sonraki aşaması chrootun dışarısında gerçekleşecektir.</li>
+<li>Chroot içerisindeki <strong>bind</strong> bağlarını kaldıralım.</li>
 </ol>
 <pre class="code shell literal-block">
 ☭ umount -lf -R sid-chroot/* <span class="literal number">2</span>&gt;/dev/null
@@ -229,7 +267,8 @@
 <h1>Temizlik</h1>
 <p>Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu değildir fakat yaptığınız zaman squashfs ve iso boyutunu küçültmektedir.</p>
 <pre class="code shell literal-block">
-☭ chroot sid-chroot apt-get clean <span class="comment single"># apt önbelleğini temizler
+☭ chroot sid-chroot apt-get autoremove <span class="comment single"># boşta kalan paketleri temizler
+</span>☭ chroot sid-chroot apt-get clean <span class="comment single"># apt önbelleğini temizler
 </span>☭ rm -f sid-chroot/root/.bash_history <span class="comment single"># iso yaparken oluşturduğunuz historyleri temizler
 </span>☭ rm -rf sid-chroot/var/lib/apt/lists/* <span class="comment single"># index dosyalarını temizler
 </span>☭ find sid-chroot/var/log/ -type f <span class="punctuation">|</span> xargs rm -f <span class="comment single"># logları siler</span>
@@ -243,6 +282,7 @@
 <blockquote>
 <strong>Not:</strong> <em>-comp</em> parametresinden sonra <em>xz</em> veya <em>gzip</em> kullanabiliriz. <em>xz</em> kullanırsak daha yüksek oranda sıkıştırır fakat kurulum daha uzun sürer. <em>gzip</em> kullanırsak iso boyutu daha büyük olur fakat daha hızlı kurar.
 Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben sizlere <em>gzip</em> kullanmanızı öneririm.</blockquote>
+<p><strong>Not:</strong> Ubuntu tabanında <strong>live</strong> dizini yerine <strong>casper</strong> dizini blunmaktadır.</p>
 <pre class="code shell literal-block">
 ☭ mkdir isowork
 ☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
@@ -286,6 +326,46 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 <li>Iso dosyası üretelim.</li>
 </ol>
 <pre class="code shell literal-block">
+☭ grub-mkrescue isowork -o debian-live.iso
+</pre>
+</div>
+<div class="section" id="iso-uzerinde-duzenleme-yapma">
+<h1>Iso üzerinde düzenleme yapma</h1>
+<p>Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak veya birkaç ekleme daha yapmak istiyorsak Sırası ile şunları yapmalıyız.</p>
+<ol class="arabic simple">
+<li><strong>sid-chroot</strong> dizinine tekrar bind bağı atalım.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ <span class="keyword">for</span> i in dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
+</pre>
+<ol class="arabic simple" start="2">
+<li><strong>sid-chroot</strong> içine tekrar girelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ chroot sid-chroot /bin/bash
+</pre>
+<ol class="arabic simple" start="3">
+<li>Düzenlemek istediğimiz yapalım.</li>
+<li>Tekrar <strong>squashfs</strong> dosyası üretelim ve güncelleyelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
+☭ rm -f isowork/live/filesystem.squashfs
+☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
+</pre>
+<ol class="arabic simple" start="5">
+<li>Eğer kernelle ilgili bir değişiklik yaptıysak <strong>isowork</strong> içerisindeki live dizininde bulunan dosyaları güncelleyelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ rm -f isowork/live/initrd.img isowork/live/vmlinuz
+☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
+☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz
+</pre>
+<ol class="arabic simple" start="6">
+<li>Yeni iso dosyasını üretelim.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ mv debian-live.iso debian-live-eski.iso
 ☭ grub-mkrescue isowork -o debian-live.iso
 </pre>
 </div>
