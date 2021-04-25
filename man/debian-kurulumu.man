@@ -191,7 +191,7 @@ Oluşturduğumuz \fBrootfs\fP içine \fBdev sys proc run\fP dizinlerini bağlaya
 .sp
 .nf
 .ft C
-$ for i in dev dev/pts proc sys run; do mount \-o bind /$i mnt/$i; done
+$ for i in dev dev/pts proc sys run; do mount \-o bind /$i /mnt/$i; done
 .ft P
 .fi
 .UNINDENT

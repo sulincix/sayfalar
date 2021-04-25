@@ -91,7 +91,7 @@ Chroot dışındaki kurulum aşamaları
 
 .. code-block:: shell
 
-        $ for i in dev dev/pts proc sys run; do mount -o bind /$i mnt/$i; done
+        $ for i in dev dev/pts proc sys run; do mount -o bind /$i /mnt/$i; done
 
 4. **Rootfs** içerisine **chroot** ile girelim. Bu aşamadan sonraki tüm adımlar **chroot** içerisinde yapılacaktır.
 
