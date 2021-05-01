@@ -801,5 +801,14 @@ Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için 
 	-> Merhaba dünya
 	-> 50
 	-> 100
-	
 
+Hata ayıklama
+=============
+
+**bash** komutuna farklı parametreler vererek kolayca script'inizi derleyebilirsiniz. Örneğin **-n** parametresi kodu çalıştırmayıp sadece hata kontrolü yapacaktır, **-v** komutları çalıştırmadan yazdıracak, **-x** ise işlem bittikten sonra kodları yazdıracaktır.
+
+.. code-block:: shell
+
+    bash -n script_adi.sh
+    bash -v script_adi.sh
+    bash -x script_adi.sh
