@@ -1168,7 +1168,7 @@ EOF
 # Bir dosyayı girdi olarak kullanır:
 while read line ; do
     echo ${line:2:5}
-done < dosxa.txt
+done < dosya.txt
 .ft P
 .fi
 .UNINDENT

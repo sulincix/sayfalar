@@ -710,7 +710,7 @@ Ayrıca dosyadan veri girişleri için de aşağıda örnekler verilmiştir:
 	# Bir dosyayı girdi olarak kullanır:
 	while read line ; do
 	    echo ${line:2:5}
-	done < dosxa.txt
+	done < dosya.txt
 	
 
 **/dev/null** içine atılan çıktılar yok edilir. **/dev/stderr** içine atılan çıktılar ise hata çıktısı olur.
