@@ -80,6 +80,7 @@
 ☭ mkdir sid-chroot
 ☭ debootstrap --arch<span class="operator">=</span>amd64 --no-merged-usr sid sid-chroot https://deb.debian.org/debian
 </pre>
+<p>Eğer debian yerine devuan kullanmak istiyorsanız depo adresi olarak <em>https://pkgmaster.devuan.org/merged</em> koymalısınız.</p>
 <p>Eğer &quot;Unpacking the base system...&quot; sırasında sorun yaşıyorsanız <strong>chroot</strong> dizininin sahibini <strong>root</strong> olarak değiştirip tekrar denemenizi öneriririz.</p>
 <pre class="code shell literal-block">
 ☭ chown root sid-chroot

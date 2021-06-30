@@ -151,6 +151,8 @@ Bir üst dizinde kurulum aracına ait \fBdeb\fP paketi oluşacakdır.
 .UNINDENT
 .UNINDENT
 .sp
+Eğer debian yerine devuan kullanmak istiyorsanız depo adresi olarak \fIhttps://pkgmaster.devuan.org/merged\fP koymalısınız.
+.sp
 Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız \fBchroot\fP dizininin sahibini \fBroot\fP olarak değiştirip tekrar denemenizi öneriririz.
 .INDENT 0.0
 .INDENT 3.5

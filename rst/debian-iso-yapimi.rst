@@ -59,6 +59,8 @@ Chroot oluşturulması
 	☭ mkdir sid-chroot
 	☭ debootstrap --arch=amd64 --no-merged-usr sid sid-chroot https://deb.debian.org/debian
 
+Eğer debian yerine devuan kullanmak istiyorsanız depo adresi olarak *https://pkgmaster.devuan.org/merged* koymalısınız.
+
 Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız **chroot** dizininin sahibini **root** olarak değiştirip tekrar denemenizi öneriririz.
 
 .. code-block:: shell
