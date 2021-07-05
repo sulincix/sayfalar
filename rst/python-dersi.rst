@@ -165,6 +165,13 @@ Integer değişkenlerin kuvvetlerini almak için ****** kullanılır.
 	print(sayi)
 	-> 8
 
+String türünden bir değişkeni integer haline getirmek için **int** fonksionu kullanılır.
+
+.. code-block:: python
+
+	print(int("12")/2)
+	-> 6
+
 Float
 *****
 
@@ -188,6 +195,14 @@ Bir float değişkenini integer haline getirmek için **int** fonksionu kullanı
 	-> 3
 
 **Not:** float ile string çarpılamaz.
+
+String türünden bir değişkeni float haline getirmek için **float** fonksionu kullanılır.
+
+.. code-block:: python
+
+	print(float("2.2")/2)
+	-> 1.1
+
 
 Boolean
 *******
@@ -224,6 +239,28 @@ Bir string türünden değişkenin içinde başka bir string türünden değişk
 	veri2 = "ny" in "Dünya"
 	print(veri,veri2)
 	-> False True
+
+Klavyeden değer alma
+====================
+
+Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için **input** fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.
+
+.. code-block:: python
+
+	a = input("Bir değer girin >")
+	print(a,type(a))
+	<- 12
+	-> 12 <class 'str'>
+
+String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak **eval** fonksionunu kullanabiliriz.
+
+.. code-block:: python
+
+	a = eval("12/2 == 16-10") # string ifade çalıştırılır ve sonucu aktarılır.
+	print(a)
+	-> True
+
+**Not:** Bu fonksion tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
 
 Koşullar
 ========

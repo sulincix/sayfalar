@@ -276,6 +276,19 @@ print(sayi)
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+String türünden bir değişkeni integer haline getirmek için \fBint\fP fonksionu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+print(int("12")/2)
+\-> 6
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SS Float
 .sp
 Float türünden değişkenler virgüllü sayılardır. Aynı integer sayılar gibi dört işleme sokulabilirler. İki integer değişkenin birbirine bölümü ile float oluşabilir.
@@ -310,6 +323,19 @@ print(sayi2)
 .UNINDENT
 .sp
 \fBNot:\fP float ile string çarpılamaz.
+.sp
+String türünden bir değişkeni float haline getirmek için \fBfloat\fP fonksionu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+print(float("2.2")/2)
+\-> 1.1
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SS Boolean
 .sp
 Boolean değişkenler sadece \fBTrue\fP veya \fBFalse\fP değerlerini alabilir. Bu değişken daha çok koşullarda ve döngülerde kullanılır. iki değişkenin eşitliği sorgulanarak boolean üretilebilir.
@@ -362,6 +388,38 @@ print(veri,veri2)
 .fi
 .UNINDENT
 .UNINDENT
+.SH KLAVYEDEN DEĞER ALMA
+.sp
+Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için \fBinput\fP fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+a = input("Bir değer girin >")
+print(a,type(a))
+<\- 12
+\-> 12 <class \(aqstr\(aq>
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak \fBeval\fP fonksionunu kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+a = eval("12/2 == 16\-10") # string ifade çalıştırılır ve sonucu aktarılır.
+print(a)
+\-> True
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBNot:\fP Bu fonksion tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
 .SH KOŞULLAR
 .sp
 Koşul tanımı yapmak için \fBif\fP ifadesi kullanılır. Koşul sağlanmıyorsa \fBelif\fP ifadesi ile yeni bir koşul tanımlanabilir veya \fBelse\fP ifadesi ile koşulun sağlanmadığı durum tanımlanabilir.

@@ -135,6 +135,11 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">8</span>
 </pre>
+<p>String türünden bir değişkeni integer haline getirmek için <strong>int</strong> fonksionu kullanılır.</p>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">int</span><span class="punctuation">(</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">6</span>
+</pre>
 </div>
 <div class="section" id="float">
 <h2>Float</h2>
@@ -154,6 +159,11 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="operator">-&gt;</span> <span class="literal number integer">3</span>
 </pre>
 <p><strong>Not:</strong> float ile string çarpılamaz.</p>
+<p>String türünden bir değişkeni float haline getirmek için <strong>float</strong> fonksionu kullanılır.</p>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">float</span><span class="punctuation">(</span><span class="literal string double">&quot;2.2&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number float">1.1</span>
+</pre>
 </div>
 <div class="section" id="boolean">
 <h2>Boolean</h2>
@@ -185,6 +195,23 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="operator">-&gt;</span> <span class="keyword constant">False</span> <span class="keyword constant">True</span>
 </pre>
 </div>
+</div>
+<div class="section" id="klavyeden-deger-alma">
+<h1>Klavyeden değer alma</h1>
+<p>Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için <strong>input</strong> fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.</p>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Bir değer girin &gt;&quot;</span><span class="punctuation">)</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name builtin">type</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">))</span>
+<span class="operator">&lt;-</span> <span class="literal number integer">12</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span>
+</pre>
+<p>String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak <strong>eval</strong> fonksionunu kullanabiliriz.</p>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="name builtin">eval</span><span class="punctuation">(</span><span class="literal string double">&quot;12/2 == 16-10&quot;</span><span class="punctuation">)</span> <span class="comment single"># string ifade çalıştırılır ve sonucu aktarılır.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="keyword constant">True</span>
+</pre>
+<p><strong>Not:</strong> Bu fonksion tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D</p>
 </div>
 <div class="section" id="kosullar">
 <h1>Koşullar</h1>
