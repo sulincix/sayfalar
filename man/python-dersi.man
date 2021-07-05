@@ -32,6 +32,33 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 Python dersi \- 
 .sp
 Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
+.SH AÇIKLAMA SATIRLARI
+.sp
+Python programlama dilinde açıklamalar \fB#\fP işaretinden sonrası için geçerlidir. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#bu bir açıklama satırıdır.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bununla birlikte çoklu açıklama satırı yapmak için \fB"""\fP işareti arasına alabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+""" Bu bir açıklama satırı
+Bu diğer açıklama satırı
+Bu son açıklama satırı """
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH TEMEL BILGILER
 .sp
 Python programlarının ilk satırında \fB#!/usr/bin/python3\fP satırı bulunmalıdır.
@@ -76,33 +103,6 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 f = 12 # f sayısını 12ye eşitledik
 if f == 12: # f sayısı 12ye eşit mi diye sorguladık
     print("eşit") # ekrana yazı yazdırık
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.SH AÇIKLAMA SATIRLARI
-.sp
-Python programlama dilinde açıklamalar \fB#\fP işaretinden sonrası için geçerlidir. Örneğin:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-#bu bir açıklama satırıdır.
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Bununla birlikte çoklu açıklama satırı yapmak için \fB"""\fP işareti arasına alabiliriz.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-""" Bu bir açıklama satırı
-Bu diğer açıklama satırı
-Bu son açıklama satırı """
 .ft P
 .fi
 .UNINDENT
@@ -183,6 +183,21 @@ print(turu)
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Boş bir değişken tanımlamak için onun değerine \fBNone\fP atayabiliriz. Bu sayede değişken tanımlanmış fakar değeri atanmamış olur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = None
+tur = type(veri)
+print(tur)
+\-> <class \(aqNoneType\(aq>
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SS String
 .sp
 String türünden değişkenler yazı içerir. \fB"\fP veya \fB\(aq\fP veya \fB"""\fP arasına yazılırarak tanımlanır.
@@ -257,6 +272,142 @@ Integer değişkenlerin kuvvetlerini almak için \fB**\fP kullanılır.
 sayi = 2**3
 print(sayi)
 \-> 8
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Float
+.sp
+Float türünden değişkenler virgüllü sayılardır. Aynı integer sayılar gibi dört işleme sokulabilirler. İki integer değişkenin birbirine bölümü ile float oluşabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+sayi = 1/2 # sayi = 0.5 şeklinde de tanımlanabilir.
+print(sayi)
+\-> 0.5
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir float değişkenini integer haline getirmek için \fBint\fP fonksionu kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+sayi = 3.2
+print(sayi)
+sayi2 = int(3.2)
+print(sayi2)
+\-> 3.2
+\-> 3
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBNot:\fP float ile string çarpılamaz.
+.SS Boolean
+.sp
+Boolean değişkenler sadece \fBTrue\fP veya \fBFalse\fP değerlerini alabilir. Bu değişken daha çok koşullarda ve döngülerde kullanılır. iki değişkenin eşitliği sorgulanarak boolean üretilebilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+bool = 12 == 13
+"""
+== eşit
+!= eşit değil
+<  küçük
+>  büyük
+<= küçük eşit
+>= büyük eşit
+"""
+print(bool)
+\-> False
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+boolean değişkeninin tersini almak için \fBnot\fP ifadesi kullanılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = not True
+print(veri)
+\-> False
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir string türünden değişkenin içinde başka bir string türünden değişken var mı diye kontrol etmek için \fBin\fP ifadesi kullanılır. Bu ifadenin sonucu boolean üretir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = "ef" in "Dünya"
+veri2 = "ny" in "Dünya"
+print(veri,veri2)
+\-> False True
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KOŞULLAR
+.sp
+Koşul tanımı yapmak için \fBif\fP ifadesi kullanılır. Koşul sağlanmıyorsa \fBelif\fP ifadesi ile yeni bir koşul tanımlanabilir veya \fBelse\fP ifadesi ile koşulun sağlanmadığı durum tanımlanabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+if koşul:
+    durum
+elif koşul:
+    durum
+else:
+    durum
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örneğin bir integer değişkenin çift olup olup olmadığını bulalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+if 13 % 2 == 0 : # % işareti bölümden kalanı bulmaya yarar.
+    print("Çift sayı")
+else:
+    print("Tek sayı")
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Değeri olmayan (None) değişkenler koşul ifadelerinde \fBFalse\fP olarak kabul edilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = None
+if veri:
+    print("Tanımlı")
+else:
+    print("Tanımsız")
+\-> Tanımsız
 .ft P
 .fi
 .UNINDENT

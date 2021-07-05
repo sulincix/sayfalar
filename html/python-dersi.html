@@ -12,6 +12,19 @@
 <h1 class="title">Python dersi</h1>
 
 <p>Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar <em>&lt;-</em> ile çıktıların olduğu satırlar <em>-&gt;</em> ile işaretlenmiştir.</p>
+<div class="section" id="aciklama-satirlari">
+<h1>Açıklama satırları</h1>
+<p>Python programlama dilinde açıklamalar <strong>#</strong> işaretinden sonrası için geçerlidir. Örneğin:</p>
+<pre class="code python literal-block">
+<span class="comment single">#bu bir açıklama satırıdır.</span>
+</pre>
+<p>Bununla birlikte çoklu açıklama satırı yapmak için <strong>&quot;&quot;&quot;</strong> işareti arasına alabiliriz.</p>
+<pre class="code python literal-block">
+<span class="literal string doc">&quot;&quot;&quot; Bu bir açıklama satırı
+Bu diğer açıklama satırı
+Bu son açıklama satırı &quot;&quot;&quot;</span>
+</pre>
+</div>
 <div class="section" id="temel-bilgiler">
 <h1>Temel bilgiler</h1>
 <p>Python programlarının ilk satırında <strong>#!/usr/bin/python3</strong> satırı bulunmalıdır.
@@ -35,19 +48,6 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="name">f</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="comment single"># f sayısını 12ye eşitledik</span>
 <span class="keyword">if</span> <span class="name">f</span> <span class="operator">==</span> <span class="literal number integer">12</span><span class="punctuation">:</span> <span class="comment single"># f sayısı 12ye eşit mi diye sorguladık</span>
     <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit&quot;</span><span class="punctuation">)</span> <span class="comment single"># ekrana yazı yazdırık</span>
-</pre>
-</div>
-<div class="section" id="aciklama-satirlari">
-<h1>Açıklama satırları</h1>
-<p>Python programlama dilinde açıklamalar <strong>#</strong> işaretinden sonrası için geçerlidir. Örneğin:</p>
-<pre class="code python literal-block">
-<span class="comment single">#bu bir açıklama satırıdır.</span>
-</pre>
-<p>Bununla birlikte çoklu açıklama satırı yapmak için <strong>&quot;&quot;&quot;</strong> işareti arasına alabiliriz.</p>
-<pre class="code python literal-block">
-<span class="literal string doc">&quot;&quot;&quot; Bu bir açıklama satırı
-Bu diğer açıklama satırı
-Bu son açıklama satırı &quot;&quot;&quot;</span>
 </pre>
 </div>
 <div class="section" id="yazi-yazdirma">
@@ -86,6 +86,13 @@ Bu son açıklama satırı &quot;&quot;&quot;</span>
 <span class="name">turu</span> <span class="operator">=</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">turu</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span>
+</pre>
+<p>Boş bir değişken tanımlamak için onun değerine <strong>None</strong> atayabiliriz. Bu sayede değişken tanımlanmış fakar değeri atanmamış olur.</p>
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="keyword constant">None</span>
+<span class="name">tur</span> <span class="operator">=</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">tur</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">NoneType</span><span class="literal string single">'&gt;</span>
 </pre>
 <div class="section" id="string">
 <h2>String</h2>
@@ -129,6 +136,83 @@ Bu son açıklama satırı &quot;&quot;&quot;</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">8</span>
 </pre>
 </div>
+<div class="section" id="float">
+<h2>Float</h2>
+<p>Float türünden değişkenler virgüllü sayılardır. Aynı integer sayılar gibi dört işleme sokulabilirler. İki integer değişkenin birbirine bölümü ile float oluşabilir.</p>
+<pre class="code python literal-block">
+<span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">1</span><span class="operator">/</span><span class="literal number integer">2</span> <span class="comment single"># sayi = 0.5 şeklinde de tanımlanabilir.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number float">0.5</span>
+</pre>
+<p>Bir float değişkenini integer haline getirmek için <strong>int</strong> fonksionu kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.</p>
+<pre class="code python literal-block">
+<span class="name">sayi</span> <span class="operator">=</span> <span class="literal number float">3.2</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
+<span class="name">sayi2</span> <span class="operator">=</span> <span class="name builtin">int</span><span class="punctuation">(</span><span class="literal number float">3.2</span><span class="punctuation">)</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi2</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number float">3.2</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">3</span>
+</pre>
+<p><strong>Not:</strong> float ile string çarpılamaz.</p>
+</div>
+<div class="section" id="boolean">
+<h2>Boolean</h2>
+<p>Boolean değişkenler sadece <strong>True</strong> veya <strong>False</strong> değerlerini alabilir. Bu değişken daha çok koşullarda ve döngülerde kullanılır. iki değişkenin eşitliği sorgulanarak boolean üretilebilir.</p>
+<pre class="code python literal-block">
+<span class="name builtin">bool</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">13</span>
+<span class="literal string doc">&quot;&quot;&quot;
+== eşit
+!= eşit değil
+&lt;  küçük
+&gt;  büyük
+&lt;= küçük eşit
+&gt;= büyük eşit
+&quot;&quot;&quot;</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">bool</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="keyword constant">False</span>
+</pre>
+<p>boolean değişkeninin tersini almak için <strong>not</strong> ifadesi kullanılabilir.</p>
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="operator word">not</span> <span class="keyword constant">True</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="keyword constant">False</span>
+</pre>
+<p>Bir string türünden değişkenin içinde başka bir string türünden değişken var mı diye kontrol etmek için <strong>in</strong> ifadesi kullanılır. Bu ifadenin sonucu boolean üretir.</p>
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;ef&quot;</span> <span class="operator word">in</span> <span class="literal string double">&quot;Dünya&quot;</span>
+<span class="name">veri2</span> <span class="operator">=</span> <span class="literal string double">&quot;ny&quot;</span> <span class="operator word">in</span> <span class="literal string double">&quot;Dünya&quot;</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">,</span><span class="name">veri2</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="keyword constant">False</span> <span class="keyword constant">True</span>
+</pre>
+</div>
+</div>
+<div class="section" id="kosullar">
+<h1>Koşullar</h1>
+<p>Koşul tanımı yapmak için <strong>if</strong> ifadesi kullanılır. Koşul sağlanmıyorsa <strong>elif</strong> ifadesi ile yeni bir koşul tanımlanabilir veya <strong>else</strong> ifadesi ile koşulun sağlanmadığı durum tanımlanabilir.</p>
+<pre class="code python literal-block">
+<span class="keyword">if</span> <span class="name">koşul</span><span class="punctuation">:</span>
+    <span class="name">durum</span>
+<span class="keyword">elif</span> <span class="name">koşul</span><span class="punctuation">:</span>
+    <span class="name">durum</span>
+<span class="keyword">else</span><span class="punctuation">:</span>
+    <span class="name">durum</span>
+</pre>
+<p>Örneğin bir integer değişkenin çift olup olup olmadığını bulalım.</p>
+<pre class="code python literal-block">
+<span class="keyword">if</span> <span class="literal number integer">13</span> <span class="operator">%</span> <span class="literal number integer">2</span> <span class="operator">==</span> <span class="literal number integer">0</span> <span class="punctuation">:</span> <span class="comment single"># % işareti bölümden kalanı bulmaya yarar.</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Çift sayı&quot;</span><span class="punctuation">)</span>
+<span class="keyword">else</span><span class="punctuation">:</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tek sayı&quot;</span><span class="punctuation">)</span>
+</pre>
+<p>Değeri olmayan (None) değişkenler koşul ifadelerinde <strong>False</strong> olarak kabul edilir.</p>
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="keyword constant">None</span>
+<span class="keyword">if</span> <span class="name">veri</span><span class="punctuation">:</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tanımlı&quot;</span><span class="punctuation">)</span>
+<span class="keyword">else</span><span class="punctuation">:</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tanımsız&quot;</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="name">Tanımsız</span>
+</pre>
 </div>
 </div>
 </body>
