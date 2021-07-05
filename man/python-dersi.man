@@ -185,7 +185,7 @@ print(turu)
 .UNINDENT
 .SS String
 .sp
-String türünden değişkenler yazı içerir. \fB"\fP, \fB\(aq\fP veya \fB"""\fP arasına yazılırarak tanımlanır.
+String türünden değişkenler yazı içerir. \fB"\fP veya \fB\(aq\fP veya \fB"""\fP arasına yazılırarak tanımlanır.
 .INDENT 0.0
 .INDENT 3.5
 .sp

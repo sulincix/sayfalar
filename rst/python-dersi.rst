@@ -106,7 +106,7 @@ Bir değişkenin türünü öğrenmek için **type** fonksionunu kullanabiliriz.
 String
 ******
 
-String türünden değişkenler yazı içerir. **"**, **'** veya **"""** arasına yazılırarak tanımlanır.
+String türünden değişkenler yazı içerir. **"** veya **'** veya **"""** arasına yazılırarak tanımlanır.
 
 .. code-block:: python
 
