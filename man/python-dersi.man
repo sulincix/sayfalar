@@ -41,6 +41,7 @@ Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
 .sp
 .nf
 .ft C
+#!/usr/bin/python3
 # Çalıştırma izni vererek çalıştırabiliriz.
 chmod +x dosya.py
 \&./dosya.py
