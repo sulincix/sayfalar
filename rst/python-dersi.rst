@@ -121,4 +121,36 @@ String türünden değişkenler **+** işareti ile uc uca eklenebilir.
 	yazi = "merhaba" + ' ' + """dünya"""
 	print(yazi)
 	-> merhaba dünya
-	
+
+Değişkeni birden çok kez toplamak için ***** işareti kullanılabilir.
+
+.. code-block:: python
+
+	yazi = "ali"*5 
+	print(yazi)
+	-> alialialialiali
+
+Integer
+*******
+
+Integer türünden değişkenler tam sayı belirtir. Dört işlem işaretleri ile işleme sokulabilirler. 
+
+.. code-block:: python
+
+	sayi = (((24/2)+4)*2)-1
+	"""
+	24/2 = 12
+	12+4 = 16
+	16*2 = 32
+	32-1 = 31
+	"""
+	print(sayi)
+	-> 31
+
+Integer değişkenlerin kuvvetlerini almak için ****** kullanılır.
+
+.. code-block:: python
+
+	sayi = 2**3
+	print(sayi)
+	-> 8
