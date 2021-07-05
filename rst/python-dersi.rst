@@ -69,3 +69,24 @@ Birden çok ifadeyi yazdırmak için **print** fonksionuna birden çok girdi ver
 	print("Merhaba",12,"Dünya",True)
 	-> Merhaba 12 Dünya True
 
+Değişkenler
+===========
+
+Değişkenler tanımlanırken ** degisken = deger** şeklinde bir ifade kulanılır.
+
+.. code-block:: python
+
+	i = 12
+	yazi = "merhaba dünya"
+	k = 1.2
+	hmm = True
+
+Değişken adları sayı ile başlayamaz, Türkçe karakter içeremez ve sadece harfler, sayılar ve **-** **_** karakterlerinden oluşur.
+
+Değişkenler kullanılırken başına herhangi bir işaret almasına gerek yoktur. Örneğin:
+
+.. code-block:: python
+
+	i = 12
+	print(i)
+	-> 12
