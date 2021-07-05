@@ -90,3 +90,14 @@ Değişkenler kullanılırken başına herhangi bir işaret almasına gerek yokt
 	i = 12
 	print(i)
 	-> 12
+
+Değişkenler tanımlanırken her ne kadar türlerini belirtmesek bile birer türe sahip olarak tanımlanır. Bunlar başlıca **integer**, **float**, **string**, **boolean** türleridir.
+
+Bir değişkenin türünü öğrenmek için **type** fonksionunu kullanabiliriz.
+
+.. code-block:: python
+
+	veri = "abc123"
+	turu = type(veri)
+	print(turu)
+	-> <class 'str'>
