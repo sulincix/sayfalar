@@ -267,6 +267,22 @@ if not koşul:
 <span class="operator">-&gt;</span> <span class="name">eşit</span> <span class="name">değildir</span>
 </pre>
 </div>
+<div class="section" id="while-dongusu">
+<h1>While döngüsü</h1>
+<p>Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca <strong>while</strong> döngüsü ile <strong>if</strong> arasındaki fark <strong>while</strong> içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.</p>
+<pre class="code python literal-block">
+<span class="keyword">while</span> <span class="name">koşul</span><span class="punctuation">:</span>
+    <span class="name">durum</span>
+</pre>
+<p>Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda <em>i</em> sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır.</p>
+<pre class="code python literal-block">
+<span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">1</span>
+<span class="keyword">while</span> <span class="name">i</span> <span class="operator">&lt;</span> <span class="literal number integer">10</span><span class="punctuation">:</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">)</span>
+    <span class="name">i</span><span class="operator">+=</span><span class="literal number integer">1</span> <span class="comment single"># i = i + 1 ile aynı anlama gelir.</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">1</span> <span class="literal number integer">2</span> <span class="literal number integer">3</span> <span class="literal number integer">4</span> <span class="literal number integer">5</span> <span class="literal number integer">6</span> <span class="literal number integer">7</span> <span class="literal number integer">8</span> <span class="literal number integer">9</span> <span class="punctuation">(</span><span class="name">Bunu</span> <span class="name">alt</span> <span class="name">alta</span> <span class="name">yazdığını</span> <span class="name">hayal</span> <span class="name">edin</span> <span class="punctuation">:</span><span class="name">D</span> <span class="punctuation">)</span>
+</pre>
+</div>
 </div>
 </body>
 </html>

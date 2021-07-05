@@ -329,3 +329,25 @@ Bu konunun daha iyi anlaşılması için:
 	12 == 14 or print("eşit değildir")
 	-> eşittir
 	-> eşit değildir
+	
+While döngüsü
+=============
+
+Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca **while** döngüsü ile **if** arasındaki fark **while** içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.
+
+.. code-block:: python
+
+	while koşul:
+	    durum
+
+Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda *i* sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır. 
+
+.. code-block:: python
+
+	i = 1
+	while i < 10:
+	    print(i)
+	    i+=1 # i = i + 1 ile aynı anlama gelir.
+	-> 1 2 3 4 5 6 7 8 9 (Bunu alt alta yazdığını hayal edin :D )
+
+
