@@ -225,6 +225,7 @@ Boolean değişkenler sadece **True** veya **False** değerlerini alabilir. Bu d
 
 boolean değişkeninin tersini almak için **not** ifadesi kullanılabilir.
 
+
 .. code-block:: python
 
 	veri = not True
@@ -239,6 +240,15 @@ Bir string türünden değişkenin içinde başka bir string türünden değişk
 	veri2 = "ny" in "Dünya"
 	print(veri,veri2)
 	-> False True
+
+Boolean değişkenlerde mantıksal işlemler **and** ve **or** ifadeleri ile yapılır.
+
+.. code-block:: python
+
+	veri = 12 < 6 or 4 > 2 # False or True = True
+	print(veri)
+	-> True
+
 
 Klavyeden değer alma
 ====================
@@ -276,7 +286,7 @@ Koşul tanımı yapmak için **if** ifadesi kullanılır. Koşul sağlanmıyorsa
 	else:
 	    durum
 
-Örneğin bir integer değişkenin çift olup olup olmadığını bulalım.
+Örneğin bir integer değişkenin çift olup olmadığını bulalım.
 
 .. code-block:: python
 
@@ -296,3 +306,26 @@ Değeri olmayan (None) değişkenler koşul ifadelerinde **False** olarak kabul 
 	    print("Tanımsız")
 	-> Tanımsız
 
+Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:
+
+.. code-block:: python
+
+	koşul and durum
+	""" Şununla aynıdır:
+	if koşul:
+	    durum
+	"""
+	koşul or durum
+	""" Şununla aynıdır:
+	if not koşul:
+	    durum
+	"""
+
+Bu konunun daha iyi anlaşılması için:
+
+.. code-block:: python
+
+	12 == 12 and print("eşittir")
+	12 == 14 or print("eşit değildir")
+	-> eşittir
+	-> eşit değildir

@@ -194,6 +194,12 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">,</span><span class="name">veri2</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="keyword constant">False</span> <span class="keyword constant">True</span>
 </pre>
+<p>Boolean değişkenlerde mantıksal işlemler <strong>and</strong> ve <strong>or</strong> ifadeleri ile yapılır.</p>
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span> <span class="literal number integer">6</span> <span class="operator word">or</span> <span class="literal number integer">4</span> <span class="operator">&gt;</span> <span class="literal number integer">2</span> <span class="comment single"># False or True = True</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="keyword constant">True</span>
+</pre>
 </div>
 </div>
 <div class="section" id="klavyeden-deger-alma">
@@ -224,7 +230,7 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="keyword">else</span><span class="punctuation">:</span>
     <span class="name">durum</span>
 </pre>
-<p>Örneğin bir integer değişkenin çift olup olup olmadığını bulalım.</p>
+<p>Örneğin bir integer değişkenin çift olup olmadığını bulalım.</p>
 <pre class="code python literal-block">
 <span class="keyword">if</span> <span class="literal number integer">13</span> <span class="operator">%</span> <span class="literal number integer">2</span> <span class="operator">==</span> <span class="literal number integer">0</span> <span class="punctuation">:</span> <span class="comment single"># % işareti bölümden kalanı bulmaya yarar.</span>
     <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Çift sayı&quot;</span><span class="punctuation">)</span>
@@ -239,6 +245,26 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="keyword">else</span><span class="punctuation">:</span>
     <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tanımsız&quot;</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="name">Tanımsız</span>
+</pre>
+<p>Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:</p>
+<pre class="code python literal-block">
+<span class="name">koşul</span> <span class="operator word">and</span> <span class="name">durum</span>
+<span class="literal string doc">&quot;&quot;&quot; Şununla aynıdır:
+if koşul:
+    durum
+&quot;&quot;&quot;</span>
+<span class="name">koşul</span> <span class="operator word">or</span> <span class="name">durum</span>
+<span class="literal string doc">&quot;&quot;&quot; Şununla aynıdır:
+if not koşul:
+    durum
+&quot;&quot;&quot;</span>
+</pre>
+<p>Bu konunun daha iyi anlaşılması için:</p>
+<pre class="code python literal-block">
+<span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">12</span> <span class="operator word">and</span> <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşittir&quot;</span><span class="punctuation">)</span>
+<span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">14</span> <span class="operator word">or</span> <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit değildir&quot;</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="name">eşittir</span>
+<span class="operator">-&gt;</span> <span class="name">eşit</span> <span class="name">değildir</span>
 </pre>
 </div>
 </div>

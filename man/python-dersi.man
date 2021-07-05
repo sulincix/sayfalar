@@ -388,6 +388,20 @@ print(veri,veri2)
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Boolean değişkenlerde mantıksal işlemler \fBand\fP ve \fBor\fP ifadeleri ile yapılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = 12 < 6 or 4 > 2 # False or True = True
+print(veri)
+\-> True
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
 .sp
 Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için \fBinput\fP fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.
@@ -439,7 +453,7 @@ else:
 .UNINDENT
 .UNINDENT
 .sp
-Örneğin bir integer değişkenin çift olup olup olmadığını bulalım.
+Örneğin bir integer değişkenin çift olup olmadığını bulalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -466,6 +480,42 @@ if veri:
 else:
     print("Tanımsız")
 \-> Tanımsız
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+koşul and durum
+""" Şununla aynıdır:
+if koşul:
+    durum
+"""
+koşul or durum
+""" Şununla aynıdır:
+if not koşul:
+    durum
+"""
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu konunun daha iyi anlaşılması için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+12 == 12 and print("eşittir")
+12 == 14 or print("eşit değildir")
+\-> eşittir
+\-> eşit değildir
 .ft P
 .fi
 .UNINDENT
