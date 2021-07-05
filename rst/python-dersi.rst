@@ -11,6 +11,7 @@ Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
 
 .. code-block:: shell
 
+	#!/usr/bin/python3
 	# Çalıştırma izni vererek çalıştırabiliriz.
 	chmod +x dosya.py
 	./dosya.py
