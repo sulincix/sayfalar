@@ -72,7 +72,7 @@ Birden çok ifadeyi yazdırmak için **print** fonksionuna birden çok girdi ver
 Değişkenler
 ===========
 
-Değişkenler tanımlanırken ** degisken = deger** şeklinde bir ifade kulanılır.
+Değişkenler tanımlanırken **degisken = deger** şeklinde bir ifade kulanılır.
 
 .. code-block:: python
 
