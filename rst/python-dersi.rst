@@ -102,3 +102,23 @@ Bir değişkenin türünü öğrenmek için **type** fonksionunu kullanabiliriz.
 	turu = type(veri)
 	print(turu)
 	-> <class 'str'>
+
+String
+******
+
+String türünden değişkenler yazı içerir. **"**, **'** veya **"""** arasına yazılırarak tanımlanır.
+
+.. code-block:: python
+
+	yazi1 = "merhaba"
+	yazi2 = 'yazım'
+	yazi3 = """dünya"""
+
+String türünden değişkenler **+** işareti ile uc uca eklenebilir. 
+
+.. code-block:: python
+
+	yazi = "merhaba" + ' ' + """dünya"""
+	print(yazi)
+	-> merhaba dünya
+	
