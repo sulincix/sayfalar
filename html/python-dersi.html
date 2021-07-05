@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<title>Python dersi</title>
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<div class="document" id="python-dersi">
+<h1 class="title">Python dersi</h1>
+
+<p>Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar <em>&lt;-</em> ile çıktıların olduğu satırlar <em>-&gt;</em> ile işaretlenmiştir.</p>
+<div class="section" id="temel-bilgiler">
+<h1>Temel bilgiler</h1>
+<p>Python programlarının ilk satırında <strong>#!/usr/bin/python3</strong> satırı bulunmalıdır.
+Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.</p>
+<pre class="code shell literal-block">
+<span class="comment single"># Çalıştırma izni vererek çalıştırabiliriz.
+</span>chmod +x dosya.py
+./dosya.py
+<span class="comment single"># Veya doğrudan çalıştırabiliriz.
+</span>python3 dosya.py
+</pre>
+<p>Python programlama dilinde satır sonuna <strong>;</strong> koyulmaz.</p>
+<p>Python programlarında işler fonksionlar üzerinden yürür. fonksionların girdileri ve çıktıları bulunur.</p>
+<pre class="code shell literal-block">
+<span class="name variable">cikti</span> <span class="operator">=</span> fonksion<span class="operator">(</span>girdi1, girdi2<span class="operator">)</span>
+</pre>
+<p>Pythonda girintileme olayı için de <strong>{</strong> ve <strong>}</strong> kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda <strong>:</strong> işareti bulunur. Örneğin:
+Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.</p>
+<pre class="code python literal-block">
+<span class="name">f</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="comment single"># f sayısını 12ye eşitledik</span>
+<span class="keyword">if</span> <span class="name">f</span> <span class="operator">==</span> <span class="literal number integer">12</span><span class="punctuation">:</span> <span class="comment single"># f sayısı 12ye eşit mi diye sorguladık</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit&quot;</span><span class="punctuation">)</span> <span class="comment single"># ekrana yazı yazdırık</span>
+</pre>
+</div>
+<div class="section" id="aciklama-satirlari">
+<h1>Açıklama satırları</h1>
+<p>Python programlama dilinde açıklamalar <strong>#</strong> işaretinden sonrası için geçerlidir. Örneğin:</p>
+<pre class="code python literal-block">
+<span class="comment single">#bu bir açıklama satırıdır.</span>
+</pre>
+<p>Bununla birlikte çoklu açıklama satırı yapmak için <strong>&quot;&quot;&quot;</strong> işareti arasına alabiliriz.</p>
+<pre class="code python literal-block">
+<span class="literal string doc">&quot;&quot;&quot; Bu bir açıklama satırı
+Bu diğer açıklama satırı
+Bu son açıklama satırı &quot;&quot;&quot;</span>
+</pre>
+</div>
+<div class="section" id="yazi-yazdirma">
+<h1>Yazı yazdırma</h1>
+<p>Pythonda ekrana yazı yazmak için <strong>print</strong> fonksionunu kullanıyoruz.</p>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba Dünya&quot;</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="name">Dünya</span>
+</pre>
+<p>Birden çok ifadeyi yazdırmak için <strong>print</strong> fonksionuna birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.</p>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal string double">&quot;Dünya&quot;</span><span class="punctuation">,</span><span class="keyword constant">True</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="literal number integer">12</span> <span class="name">Dünya</span> <span class="keyword constant">True</span>
+</pre>
+</div>
+</div>
+</body>
+</html>
