@@ -350,4 +350,47 @@ Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdi
 	    i+=1 # i = i + 1 ile aynı anlama gelir.
 	-> 1 2 3 4 5 6 7 8 9 (Bunu alt alta yazdığını hayal edin :D )
 
+Diziler
+=======
+
+Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki gibi tanımlanır:
+
+.. code-block:: python
+
+	a = [1, 3, "merhaba", True, 1.2, None]
+
+Dizilerin elemanlarının türü aynı olmak zorunda değildir. Hatta None bile olabilir.
+
+Dizilerde eleman eklemek için **append** veya **insert** fonksionunu eleman silmek için ise **remove**  veya **pop** fonksionu kullanılır. Örneğin:
+
+.. code-block:: python
+
+	a = [22]
+	print(a)
+	a.append("Merhaba") # Sona ekleme yapar.
+	a.insert(0,12) # 0 elemanın ekleneceği yeri ifade eder.
+	print(a)
+	a.remove(22) # 22 elemanını siler
+	print(a)
+	a.pop(0) # 0. elemanı siler.
+	print(a)
+	-> [22]
+	-> [12, 22, 'Merhaba']
+	-> [12, 'Merhaba']
+	-> ['Merhaba']
+	
+Dizileri sıralamak için **sort** boşaltmak için ise **clear** fonksionları kullanılır.  Bir dizinin istenilen elemanını öğrenmek için **liste[index]** şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.
+
+.. code-block:: python
+
+	a = [ 1 3 6 4 7 9 2 ]
+	print(a[2],a[-3])
+	a.sort()
+	print(a)
+	a.clear()
+	print(a)
+	-> 3
+	-> 7
+	-> [1, 2, 3, 4, 6, 7, 9]
+	-> []
 

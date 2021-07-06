@@ -283,6 +283,43 @@ if not koşul:
 <span class="operator">-&gt;</span> <span class="literal number integer">1</span> <span class="literal number integer">2</span> <span class="literal number integer">3</span> <span class="literal number integer">4</span> <span class="literal number integer">5</span> <span class="literal number integer">6</span> <span class="literal number integer">7</span> <span class="literal number integer">8</span> <span class="literal number integer">9</span> <span class="punctuation">(</span><span class="name">Bunu</span> <span class="name">alt</span> <span class="name">alta</span> <span class="name">yazdığını</span> <span class="name">hayal</span> <span class="name">edin</span> <span class="punctuation">:</span><span class="name">D</span> <span class="punctuation">)</span>
 </pre>
 </div>
+<div class="section" id="diziler">
+<h1>Diziler</h1>
+<p>Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki gibi tanımlanır:</p>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal string double">&quot;merhaba&quot;</span><span class="punctuation">,</span> <span class="keyword constant">True</span><span class="punctuation">,</span> <span class="literal number float">1.2</span><span class="punctuation">,</span> <span class="keyword constant">None</span><span class="punctuation">]</span>
+</pre>
+<p>Dizilerin elemanlarının türü aynı olmak zorunda değildir. Hatta None bile olabilir.</p>
+<p>Dizilerde eleman eklemek için <strong>append</strong> veya <strong>insert</strong> fonksionunu eleman silmek için ise <strong>remove</strong>  veya <strong>pop</strong> fonksionu kullanılır. Örneğin:</p>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">22</span><span class="punctuation">]</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="name">a</span><span class="operator">.</span><span class="name">append</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">)</span> <span class="comment single"># Sona ekleme yapar.</span>
+<span class="name">a</span><span class="operator">.</span><span class="name">insert</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">)</span> <span class="comment single"># 0 elemanın ekleneceği yeri ifade eder.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="name">a</span><span class="operator">.</span><span class="name">remove</span><span class="punctuation">(</span><span class="literal number integer">22</span><span class="punctuation">)</span> <span class="comment single"># 22 elemanını siler</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="name">a</span><span class="operator">.</span><span class="name">pop</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">)</span> <span class="comment single"># 0. elemanı siler.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">22</span><span class="punctuation">]</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal number integer">22</span><span class="punctuation">,</span> <span class="literal string single">'Merhaba'</span><span class="punctuation">]</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal string single">'Merhaba'</span><span class="punctuation">]</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal string single">'Merhaba'</span><span class="punctuation">]</span>
+</pre>
+<p>Dizileri sıralamak için <strong>sort</strong> boşaltmak için ise <strong>clear</strong> fonksionları kullanılır.  Bir dizinin istenilen elemanını öğrenmek için <strong>liste[index]</strong> şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.</p>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span> <span class="literal number integer">1</span> <span class="literal number integer">3</span> <span class="literal number integer">6</span> <span class="literal number integer">4</span> <span class="literal number integer">7</span> <span class="literal number integer">9</span> <span class="literal number integer">2</span> <span class="punctuation">]</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">],</span><span class="name">a</span><span class="punctuation">[</span><span class="operator">-</span><span class="literal number integer">3</span><span class="punctuation">])</span>
+<span class="name">a</span><span class="operator">.</span><span class="name">sort</span><span class="punctuation">()</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="name">a</span><span class="operator">.</span><span class="name">clear</span><span class="punctuation">()</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">3</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">7</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">]</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[]</span>
+</pre>
+</div>
 </div>
 </body>
 </html>
