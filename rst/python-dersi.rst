@@ -37,11 +37,11 @@ Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
 
 Python programlama dilinde satır sonuna **;** koyulmaz.
 
-Python programlarında işler fonksionlar üzerinden yürür. fonksionların girdileri ve çıktıları bulunur. 
+Python programlarında işler işlevler üzerinden yürür. işlevlerin girdileri ve çıktıları bulunur. 
 
 .. code-block:: shell
 
-	cikti = fonksion(girdi1, girdi2)
+	cikti = islev(girdi1, girdi2)
 
 
 Pythonda girintileme olayı için de **{** ve **}** kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda **:** işareti bulunur. Örneğin:
@@ -56,14 +56,14 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 Yazı yazdırma
 =============
 
-Pythonda ekrana yazı yazmak için **print** fonksionunu kullanıyoruz. 
+Pythonda ekrana yazı yazmak için **print** işlevini kullanıyoruz. 
 
 .. code-block:: python
 
 	print("Merhaba Dünya")
 	-> Merhaba Dünya
 
-Birden çok ifadeyi yazdırmak için **print** fonksionuna birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.
+Birden çok ifadeyi yazdırmak için **print** işlevine birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.
 
 .. code-block:: python
 
@@ -94,7 +94,7 @@ Değişkenler kullanılırken başına herhangi bir işaret almasına gerek yokt
 
 Değişkenler tanımlanırken her ne kadar türlerini belirtmesek bile birer türe sahip olarak tanımlanır. Bunlar başlıca **integer**, **float**, **string**, **boolean** türleridir.
 
-Bir değişkenin türünü öğrenmek için **type** fonksionunu kullanabiliriz.
+Bir değişkenin türünü öğrenmek için **type** işlevini kullanabiliriz.
 
 .. code-block:: python
 
@@ -165,7 +165,7 @@ Integer değişkenlerin kuvvetlerini almak için ****** kullanılır.
 	print(sayi)
 	-> 8
 
-String türünden bir değişkeni integer haline getirmek için **int** fonksionu kullanılır.
+String türünden bir değişkeni integer haline getirmek için **int** işlevi kullanılır.
 
 .. code-block:: python
 
@@ -183,7 +183,7 @@ Float türünden değişkenler virgüllü sayılardır. Aynı integer sayılar g
 	print(sayi)
 	-> 0.5
 	
-Bir float değişkenini integer haline getirmek için **int** fonksionu kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.
+Bir float değişkenini integer haline getirmek için **int** işlevi kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.
 
 .. code-block:: python
 
@@ -196,7 +196,7 @@ Bir float değişkenini integer haline getirmek için **int** fonksionu kullanı
 
 **Not:** float ile string çarpılamaz.
 
-String türünden bir değişkeni float haline getirmek için **float** fonksionu kullanılır.
+String türünden bir değişkeni float haline getirmek için **float** işlevi kullanılır.
 
 .. code-block:: python
 
@@ -253,7 +253,7 @@ Boolean değişkenlerde mantıksal işlemler **and** ve **or** ifadeleri ile yap
 Klavyeden değer alma
 ====================
 
-Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için **input** fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.
+Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için **input** işlevi kullanılır. Bu işlevin çıkışı string türündendir.
 
 .. code-block:: python
 
@@ -262,7 +262,7 @@ Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerin
 	<- 12
 	-> 12 <class 'str'>
 
-String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak **eval** fonksionunu kullanabiliriz.
+String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak **eval** işlevini kullanabiliriz.
 
 .. code-block:: python
 
@@ -270,7 +270,7 @@ String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak
 	print(a)
 	-> True
 
-**Not:** Bu fonksion tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
+**Not:** Bu işlev tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
 
 Koşullar
 ========
@@ -361,7 +361,7 @@ Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki 
 
 Dizilerin elemanlarının türü aynı olmak zorunda değildir. Hatta None bile olabilir.
 
-Dizilerde eleman eklemek için **append** veya **insert** fonksionunu eleman silmek için ise **remove**  veya **pop** fonksionu kullanılır. Örneğin:
+Dizilerde eleman eklemek için **append** veya **insert** işlevini eleman silmek için ise **remove**  veya **pop** işlevi kullanılır. Örneğin:
 
 .. code-block:: python
 
@@ -379,11 +379,11 @@ Dizilerde eleman eklemek için **append** veya **insert** fonksionunu eleman sil
 	-> [12, 'Merhaba']
 	-> ['Merhaba']
 	
-Dizileri sıralamak için **sort** boşaltmak için ise **clear** fonksionları kullanılır.  Bir dizinin istenilen elemanını öğrenmek için **liste[index]** şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.
+Dizileri sıralamak için **sort** boşaltmak için ise **clear** işlevi kullanılır.  Bir dizinin istenilen elemanını öğrenmek için **liste[index]** şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.
 
 .. code-block:: python
 
-	a = [ 1 3 6 4 7 9 2 ]
+	a = [1, 3, 6, 4, 7, 9, 2]
 	print(a[2],a[-3])
 	a.sort()
 	print(a)
@@ -393,4 +393,13 @@ Dizileri sıralamak için **sort** boşaltmak için ise **clear** fonksionları 
 	-> 7
 	-> [1, 2, 3, 4, 6, 7, 9]
 	-> []
+Dizideki bir elemanın uzunluğunu bulmak için **len** işlevi, elemanın dizinin kaçıncısı olduğunu bulmak için ise **index** işlevi kullanılır.
 
+.. code-block:: python
+
+	a = [12, "hmm", 3.2]
+	sayi = len(a)
+	sayi2 = a.index(3.2)
+	print(sayi,sayi2)
+	-> 3
+	-> 2

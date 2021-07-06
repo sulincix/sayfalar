@@ -38,9 +38,9 @@ Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
 </span>python3 dosya.py
 </pre>
 <p>Python programlama dilinde satır sonuna <strong>;</strong> koyulmaz.</p>
-<p>Python programlarında işler fonksionlar üzerinden yürür. fonksionların girdileri ve çıktıları bulunur.</p>
+<p>Python programlarında işler işlevler üzerinden yürür. işlevlerin girdileri ve çıktıları bulunur.</p>
 <pre class="code shell literal-block">
-<span class="name variable">cikti</span> <span class="operator">=</span> fonksion<span class="operator">(</span>girdi1, girdi2<span class="operator">)</span>
+<span class="name variable">cikti</span> <span class="operator">=</span> islev<span class="operator">(</span>girdi1, girdi2<span class="operator">)</span>
 </pre>
 <p>Pythonda girintileme olayı için de <strong>{</strong> ve <strong>}</strong> kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda <strong>:</strong> işareti bulunur. Örneğin:
 Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.</p>
@@ -52,12 +52,12 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 </div>
 <div class="section" id="yazi-yazdirma">
 <h1>Yazı yazdırma</h1>
-<p>Pythonda ekrana yazı yazmak için <strong>print</strong> fonksionunu kullanıyoruz.</p>
+<p>Pythonda ekrana yazı yazmak için <strong>print</strong> işlevini kullanıyoruz.</p>
 <pre class="code python literal-block">
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba Dünya&quot;</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="name">Dünya</span>
 </pre>
-<p>Birden çok ifadeyi yazdırmak için <strong>print</strong> fonksionuna birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.</p>
+<p>Birden çok ifadeyi yazdırmak için <strong>print</strong> işlevine birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.</p>
 <pre class="code python literal-block">
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal string double">&quot;Dünya&quot;</span><span class="punctuation">,</span><span class="keyword constant">True</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="literal number integer">12</span> <span class="name">Dünya</span> <span class="keyword constant">True</span>
@@ -80,7 +80,7 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="operator">-&gt;</span> <span class="literal number integer">12</span>
 </pre>
 <p>Değişkenler tanımlanırken her ne kadar türlerini belirtmesek bile birer türe sahip olarak tanımlanır. Bunlar başlıca <strong>integer</strong>, <strong>float</strong>, <strong>string</strong>, <strong>boolean</strong> türleridir.</p>
-<p>Bir değişkenin türünü öğrenmek için <strong>type</strong> fonksionunu kullanabiliriz.</p>
+<p>Bir değişkenin türünü öğrenmek için <strong>type</strong> işlevini kullanabiliriz.</p>
 <pre class="code python literal-block">
 <span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;abc123&quot;</span>
 <span class="name">turu</span> <span class="operator">=</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span>
@@ -135,7 +135,7 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">8</span>
 </pre>
-<p>String türünden bir değişkeni integer haline getirmek için <strong>int</strong> fonksionu kullanılır.</p>
+<p>String türünden bir değişkeni integer haline getirmek için <strong>int</strong> işlevi kullanılır.</p>
 <pre class="code python literal-block">
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">int</span><span class="punctuation">(</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">6</span>
@@ -149,7 +149,7 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number float">0.5</span>
 </pre>
-<p>Bir float değişkenini integer haline getirmek için <strong>int</strong> fonksionu kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.</p>
+<p>Bir float değişkenini integer haline getirmek için <strong>int</strong> işlevi kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.</p>
 <pre class="code python literal-block">
 <span class="name">sayi</span> <span class="operator">=</span> <span class="literal number float">3.2</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
@@ -159,7 +159,7 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 <span class="operator">-&gt;</span> <span class="literal number integer">3</span>
 </pre>
 <p><strong>Not:</strong> float ile string çarpılamaz.</p>
-<p>String türünden bir değişkeni float haline getirmek için <strong>float</strong> fonksionu kullanılır.</p>
+<p>String türünden bir değişkeni float haline getirmek için <strong>float</strong> işlevi kullanılır.</p>
 <pre class="code python literal-block">
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">float</span><span class="punctuation">(</span><span class="literal string double">&quot;2.2&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number float">1.1</span>
@@ -204,20 +204,20 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 </div>
 <div class="section" id="klavyeden-deger-alma">
 <h1>Klavyeden değer alma</h1>
-<p>Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için <strong>input</strong> fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.</p>
+<p>Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için <strong>input</strong> işlevi kullanılır. Bu işlevin çıkışı string türündendir.</p>
 <pre class="code python literal-block">
 <span class="name">a</span> <span class="operator">=</span> <span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Bir değer girin &gt;&quot;</span><span class="punctuation">)</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name builtin">type</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">))</span>
 <span class="operator">&lt;-</span> <span class="literal number integer">12</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span>
 </pre>
-<p>String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak <strong>eval</strong> fonksionunu kullanabiliriz.</p>
+<p>String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak <strong>eval</strong> işlevini kullanabiliriz.</p>
 <pre class="code python literal-block">
 <span class="name">a</span> <span class="operator">=</span> <span class="name builtin">eval</span><span class="punctuation">(</span><span class="literal string double">&quot;12/2 == 16-10&quot;</span><span class="punctuation">)</span> <span class="comment single"># string ifade çalıştırılır ve sonucu aktarılır.</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="keyword constant">True</span>
 </pre>
-<p><strong>Not:</strong> Bu fonksion tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D</p>
+<p><strong>Not:</strong> Bu işlev tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D</p>
 </div>
 <div class="section" id="kosullar">
 <h1>Koşullar</h1>
@@ -290,7 +290,7 @@ if not koşul:
 <span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal string double">&quot;merhaba&quot;</span><span class="punctuation">,</span> <span class="keyword constant">True</span><span class="punctuation">,</span> <span class="literal number float">1.2</span><span class="punctuation">,</span> <span class="keyword constant">None</span><span class="punctuation">]</span>
 </pre>
 <p>Dizilerin elemanlarının türü aynı olmak zorunda değildir. Hatta None bile olabilir.</p>
-<p>Dizilerde eleman eklemek için <strong>append</strong> veya <strong>insert</strong> fonksionunu eleman silmek için ise <strong>remove</strong>  veya <strong>pop</strong> fonksionu kullanılır. Örneğin:</p>
+<p>Dizilerde eleman eklemek için <strong>append</strong> veya <strong>insert</strong> işlevini eleman silmek için ise <strong>remove</strong>  veya <strong>pop</strong> işlevi kullanılır. Örneğin:</p>
 <pre class="code python literal-block">
 <span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">22</span><span class="punctuation">]</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
@@ -306,9 +306,9 @@ if not koşul:
 <span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal string single">'Merhaba'</span><span class="punctuation">]</span>
 <span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal string single">'Merhaba'</span><span class="punctuation">]</span>
 </pre>
-<p>Dizileri sıralamak için <strong>sort</strong> boşaltmak için ise <strong>clear</strong> fonksionları kullanılır.  Bir dizinin istenilen elemanını öğrenmek için <strong>liste[index]</strong> şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.</p>
+<p>Dizileri sıralamak için <strong>sort</strong> boşaltmak için ise <strong>clear</strong> işlevi kullanılır.  Bir dizinin istenilen elemanını öğrenmek için <strong>liste[index]</strong> şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.</p>
 <pre class="code python literal-block">
-<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span> <span class="literal number integer">1</span> <span class="literal number integer">3</span> <span class="literal number integer">6</span> <span class="literal number integer">4</span> <span class="literal number integer">7</span> <span class="literal number integer">9</span> <span class="literal number integer">2</span> <span class="punctuation">]</span>
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">]</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">],</span><span class="name">a</span><span class="punctuation">[</span><span class="operator">-</span><span class="literal number integer">3</span><span class="punctuation">])</span>
 <span class="name">a</span><span class="operator">.</span><span class="name">sort</span><span class="punctuation">()</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
@@ -318,6 +318,18 @@ if not koşul:
 <span class="operator">-&gt;</span> <span class="literal number integer">7</span>
 <span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">]</span>
 <span class="operator">-&gt;</span> <span class="punctuation">[]</span>
+</pre>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">rst/python-dersi.rst</tt>, line 396)</p>
+Explicit markup ends without a blank line; unexpected unindent.</div>
+<p>Dizideki bir elemanın uzunluğunu bulmak için <strong>len</strong> işlevi, elemanın dizinin kaçıncısı olduğunu bulmak için ise <strong>index</strong> işlevi kullanılır.</p>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal string double">&quot;hmm&quot;</span><span class="punctuation">,</span> <span class="literal number float">3.2</span><span class="punctuation">]</span>
+<span class="name">sayi</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="name">sayi2</span> <span class="operator">=</span> <span class="name">a</span><span class="operator">.</span><span class="name">index</span><span class="punctuation">(</span><span class="literal number float">3.2</span><span class="punctuation">)</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">3</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">2</span>
 </pre>
 </div>
 </div>

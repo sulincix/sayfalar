@@ -81,13 +81,13 @@ python3 dosya.py
 .sp
 Python programlama dilinde satır sonuna \fB;\fP koyulmaz.
 .sp
-Python programlarında işler fonksionlar üzerinden yürür. fonksionların girdileri ve çıktıları bulunur.
+Python programlarında işler işlevler üzerinden yürür. işlevlerin girdileri ve çıktıları bulunur.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-cikti = fonksion(girdi1, girdi2)
+cikti = islev(girdi1, girdi2)
 .ft P
 .fi
 .UNINDENT
@@ -109,7 +109,7 @@ if f == 12: # f sayısı 12ye eşit mi diye sorguladık
 .UNINDENT
 .SH YAZI YAZDIRMA
 .sp
-Pythonda ekrana yazı yazmak için \fBprint\fP fonksionunu kullanıyoruz.
+Pythonda ekrana yazı yazmak için \fBprint\fP işlevini kullanıyoruz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -122,7 +122,7 @@ print("Merhaba Dünya")
 .UNINDENT
 .UNINDENT
 .sp
-Birden çok ifadeyi yazdırmak için \fBprint\fP fonksionuna birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.
+Birden çok ifadeyi yazdırmak için \fBprint\fP işlevine birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -169,7 +169,7 @@ print(i)
 .sp
 Değişkenler tanımlanırken her ne kadar türlerini belirtmesek bile birer türe sahip olarak tanımlanır. Bunlar başlıca \fBinteger\fP, \fBfloat\fP, \fBstring\fP, \fBboolean\fP türleridir.
 .sp
-Bir değişkenin türünü öğrenmek için \fBtype\fP fonksionunu kullanabiliriz.
+Bir değişkenin türünü öğrenmek için \fBtype\fP işlevini kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -277,7 +277,7 @@ print(sayi)
 .UNINDENT
 .UNINDENT
 .sp
-String türünden bir değişkeni integer haline getirmek için \fBint\fP fonksionu kullanılır.
+String türünden bir değişkeni integer haline getirmek için \fBint\fP işlevi kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -305,7 +305,7 @@ print(sayi)
 .UNINDENT
 .UNINDENT
 .sp
-Bir float değişkenini integer haline getirmek için \fBint\fP fonksionu kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.
+Bir float değişkenini integer haline getirmek için \fBint\fP işlevi kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -324,7 +324,7 @@ print(sayi2)
 .sp
 \fBNot:\fP float ile string çarpılamaz.
 .sp
-String türünden bir değişkeni float haline getirmek için \fBfloat\fP fonksionu kullanılır.
+String türünden bir değişkeni float haline getirmek için \fBfloat\fP işlevi kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -404,7 +404,7 @@ print(veri)
 .UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
 .sp
-Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için \fBinput\fP fonksionu kullanılır. Bu fonksionun çıkışı string türündendir.
+Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için \fBinput\fP işlevi kullanılır. Bu işlevin çıkışı string türündendir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -419,7 +419,7 @@ print(a,type(a))
 .UNINDENT
 .UNINDENT
 .sp
-String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak \fBeval\fP fonksionunu kullanabiliriz.
+String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak \fBeval\fP işlevini kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -433,7 +433,7 @@ print(a)
 .UNINDENT
 .UNINDENT
 .sp
-\fBNot:\fP Bu fonksion tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
+\fBNot:\fP Bu işlev tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
 .SH KOŞULLAR
 .sp
 Koşul tanımı yapmak için \fBif\fP ifadesi kullanılır. Koşul sağlanmıyorsa \fBelif\fP ifadesi ile yeni bir koşul tanımlanabilir veya \fBelse\fP ifadesi ile koşulun sağlanmadığı durum tanımlanabilir.
@@ -566,7 +566,7 @@ a = [1, 3, "merhaba", True, 1.2, None]
 .sp
 Dizilerin elemanlarının türü aynı olmak zorunda değildir. Hatta None bile olabilir.
 .sp
-Dizilerde eleman eklemek için \fBappend\fP veya \fBinsert\fP fonksionunu eleman silmek için ise \fBremove\fP  veya \fBpop\fP fonksionu kullanılır. Örneğin:
+Dizilerde eleman eklemek için \fBappend\fP veya \fBinsert\fP işlevini eleman silmek için ise \fBremove\fP  veya \fBpop\fP işlevi kullanılır. Örneğin:
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -590,13 +590,13 @@ print(a)
 .UNINDENT
 .UNINDENT
 .sp
-Dizileri sıralamak için \fBsort\fP boşaltmak için ise \fBclear\fP fonksionları kullanılır.  Bir dizinin istenilen elemanını öğrenmek için \fBliste[index]\fP şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.
+Dizileri sıralamak için \fBsort\fP boşaltmak için ise \fBclear\fP işlevi kullanılır.  Bir dizinin istenilen elemanını öğrenmek için \fBliste[index]\fP şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-a = [ 1 3 6 4 7 9 2 ]
+a = [1, 3, 6, 4, 7, 9, 2]
 print(a[2],a[\-3])
 a\&.sort()
 print(a)
@@ -606,6 +606,25 @@ print(a)
 \-> 7
 \-> [1, 2, 3, 4, 6, 7, 9]
 \-> []
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.IP "System Message: WARNING/2 (rst/python-dersi.rst:, line 396)"
+Explicit markup ends without a blank line; unexpected unindent.
+.sp
+Dizideki bir elemanın uzunluğunu bulmak için \fBlen\fP işlevi, elemanın dizinin kaçıncısı olduğunu bulmak için ise \fBindex\fP işlevi kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+a = [12, "hmm", 3.2]
+sayi = len(a)
+sayi2 = a\&.index(3.2)
+print(sayi,sayi2)
+\-> 3
+\-> 2
 .ft P
 .fi
 .UNINDENT
