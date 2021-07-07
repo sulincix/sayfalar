@@ -805,8 +805,6 @@ print(toplam)
 .fi
 .UNINDENT
 .UNINDENT
-.IP "System Message: WARNING/2 (rst/python-dersi.rst:, line 528)"
-Explicit markup ends without a blank line; unexpected unindent.
 .sp
 Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.
 .INDENT 0.0
@@ -824,6 +822,45 @@ print(yazi)
 \->   File "ders.py", line 5, in <module>
 \->     print(yazi)
 \-> NameError: name \(aqyazi\(aq is not defined
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir işlevin ne işe yaradığını öğrenmek için \fBhelp\fP işlevi kullanılır. işlevin ne işe yaradığını tanımlamak için ise ilk satıra \fB"""\fP içerisine yazabiliriz. Bunu tanımlamak programınızı inceleyen diğer insanlar için yararlı olacaktır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+def abc(sayi):
+    """Girilen sayıyı 10dan çıkartır"""
+    return 10\-sayi
+help(abc)
+\->  Help on function abc in module __main__:
+\->
+\->  abc(sayi)
+\->      Girilen sayıyı 10dan çıkartır
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir işlevin birden çok çıktısı olabilir. Bunun için \fBreturn\fP ifadesini virgülle ayrılmış olarak birden çok değişken ile kullanmalıyız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+def yer_degistir(a,b):
+    """Girilen değişkenlerin yerini değiştirir"""
+    return b,a
+c = 12
+d = 31
+c,d = yer_degistir(c,d)
+# Bunun yerine doğrudan c,d = d,c kullanılabilirdi.
+print(c,d)
+\-> 31 12
 .ft P
 .fi
 .UNINDENT

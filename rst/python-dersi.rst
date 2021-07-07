@@ -525,6 +525,7 @@ işlevlerde çıktı sonucu olarak bir değişken döndürmek için **return** i
 	toplam = topla(3,5)
 	print(toplam)
 	-> 8
+
 Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.
 
 .. code-block:: python
@@ -540,3 +541,29 @@ Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken iş
 	->     print(yazi)
 	-> NameError: name 'yazi' is not defined
 
+Bir işlevin ne işe yaradığını öğrenmek için **help** işlevi kullanılır. işlevin ne işe yaradığını tanımlamak için ise ilk satıra **"""** içerisine yazabiliriz. Bunu tanımlamak programınızı inceleyen diğer insanlar için yararlı olacaktır. 
+
+.. code-block:: python
+
+	def abc(sayi):
+	    """Girilen sayıyı 10dan çıkartır"""
+	    return 10-sayi
+	help(abc)
+	->  Help on function abc in module __main__:
+	->
+  	->  abc(sayi)
+	->      Girilen sayıyı 10dan çıkartır
+
+Bir işlevin birden çok çıktısı olabilir. Bunun için **return** ifadesini virgülle ayrılmış olarak birden çok değişken ile kullanmalıyız.
+
+.. code-block:: python
+
+	def yer_degistir(a,b):
+	    """Girilen değişkenlerin yerini değiştirir"""
+	    return b,a
+	c = 12
+	d = 31
+	c,d = yer_degistir(c,d)
+	# Bunun yerine doğrudan c,d = d,c kullanılabilirdi.
+	print(c,d)
+	-> 31 12

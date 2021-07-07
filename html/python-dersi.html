@@ -429,9 +429,6 @@ if not koşul:
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">toplam</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">8</span>
 </pre>
-<div class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">rst/python-dersi.rst</tt>, line 528)</p>
-Explicit markup ends without a blank line; unexpected unindent.</div>
 <p>Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.</p>
 <pre class="code python literal-block">
 <span class="keyword">def</span> <span class="name function">yazdir</span><span class="punctuation">():</span>
@@ -444,6 +441,29 @@ Explicit markup ends without a blank line; unexpected unindent.</div>
 <span class="operator">-&gt;</span>   <span class="name">File</span> <span class="literal string double">&quot;ders.py&quot;</span><span class="punctuation">,</span> <span class="name">line</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="operator word">in</span> <span class="operator">&lt;</span><span class="name">module</span><span class="operator">&gt;</span>
 <span class="operator">-&gt;</span>     <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="name exception">NameError</span><span class="punctuation">:</span> <span class="name">name</span> <span class="literal string single">'yazi'</span> <span class="operator word">is</span> <span class="operator word">not</span> <span class="name">defined</span>
+</pre>
+<p>Bir işlevin ne işe yaradığını öğrenmek için <strong>help</strong> işlevi kullanılır. işlevin ne işe yaradığını tanımlamak için ise ilk satıra <strong>&quot;&quot;&quot;</strong> içerisine yazabiliriz. Bunu tanımlamak programınızı inceleyen diğer insanlar için yararlı olacaktır.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">abc</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">):</span>
+    <span class="literal string doc">&quot;&quot;&quot;Girilen sayıyı 10dan çıkartır&quot;&quot;&quot;</span>
+    <span class="keyword">return</span> <span class="literal number integer">10</span><span class="operator">-</span><span class="name">sayi</span>
+<span class="name">help</span><span class="punctuation">(</span><span class="name">abc</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span>  <span class="name">Help</span> <span class="name">on</span> <span class="name">function</span> <span class="name">abc</span> <span class="operator word">in</span> <span class="name">module</span> <span class="name">__main__</span><span class="punctuation">:</span>
+<span class="operator">-&gt;</span>
+<span class="operator">-&gt;</span>  <span class="name">abc</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span>      <span class="name">Girilen</span> <span class="name">sayıyı</span> <span class="literal number integer">10</span><span class="name">dan</span> <span class="name">çıkartır</span>
+</pre>
+<p>Bir işlevin birden çok çıktısı olabilir. Bunun için <strong>return</strong> ifadesini virgülle ayrılmış olarak birden çok değişken ile kullanmalıyız.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">yer_degistir</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">):</span>
+    <span class="literal string doc">&quot;&quot;&quot;Girilen değişkenlerin yerini değiştirir&quot;&quot;&quot;</span>
+    <span class="keyword">return</span> <span class="name">b</span><span class="punctuation">,</span><span class="name">a</span>
+<span class="name">c</span> <span class="operator">=</span> <span class="literal number integer">12</span>
+<span class="name">d</span> <span class="operator">=</span> <span class="literal number integer">31</span>
+<span class="name">c</span><span class="punctuation">,</span><span class="name">d</span> <span class="operator">=</span> <span class="name">yer_degistir</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">,</span><span class="name">d</span><span class="punctuation">)</span>
+<span class="comment single"># Bunun yerine doğrudan c,d = d,c kullanılabilirdi.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">,</span><span class="name">d</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">31</span> <span class="literal number integer">12</span>
 </pre>
 </div>
 </div>
