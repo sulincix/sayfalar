@@ -567,3 +567,36 @@ Bir işlevin birden çok çıktısı olabilir. Bunun için **return** ifadesini 
 	# Bunun yerine doğrudan c,d = d,c kullanılabilirdi.
 	print(c,d)
 	-> 31 12
+
+Sınıflar
+========
+
+Sınıf kavramı işlevlerin ve değişkenlerin guruplanarak nesneler haline getirilmesinden meydana gelir. Yani bir sınıf ona bağlı işlevlerden ve değişkenlerden oluşur. Sınıflar aşağıdaki gibi tanımlanırlar.
+
+.. code-block:: python
+
+	class sinif:
+	    def __init__(self,girdi):
+	        eylem
+	    def islev(self,girdi):
+	        eylem
+
+Burada **__init__** işlevi sınıfı oluştururken çalıştırılan ilk eylemleri tanımlamak için kullanılır. sınıf işlevleri tanımlanırken ilk girdi olarak **self** kullanılmalıdır. Bu ifade sınıfın kendisi anlamına gelir. Örneğin bir sınıf tanımlayalım ve bu sınıftaki işlevler ile girdideki sayılara toplama ve çıkartma işlemi uygulayalım.
+
+.. code-block:: python
+
+	class sayi_isle:
+	    def __init__(self,sayi1,sayi2):
+	        self.sayi1 = sayi1
+	        self.sayi2 = sayi2
+	    def topla():
+	        return self.sayi1 + self.sayi2
+	    def cikart():
+	        return self.sayi1 - self.sayi2
+	        
+	nesne = sayi_isle(12,3)
+	a = nesne.topla()
+	b = nesne.cikart()
+	print(a,b)
+	-> 15 9
+

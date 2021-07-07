@@ -466,6 +466,34 @@ if not koşul:
 <span class="operator">-&gt;</span> <span class="literal number integer">31</span> <span class="literal number integer">12</span>
 </pre>
 </div>
+<div class="section" id="siniflar">
+<h1>Sınıflar</h1>
+<p>Sınıf kavramı işlevlerin ve değişkenlerin guruplanarak nesneler haline getirilmesinden meydana gelir. Yani bir sınıf ona bağlı işlevlerden ve değişkenlerden oluşur. Sınıflar aşağıdaki gibi tanımlanırlar.</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">sinif</span><span class="punctuation">:</span>
+    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">girdi</span><span class="punctuation">):</span>
+        <span class="name">eylem</span>
+    <span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">girdi</span><span class="punctuation">):</span>
+        <span class="name">eylem</span>
+</pre>
+<p>Burada <strong>__init__</strong> işlevi sınıfı oluştururken çalıştırılan ilk eylemleri tanımlamak için kullanılır. sınıf işlevleri tanımlanırken ilk girdi olarak <strong>self</strong> kullanılmalıdır. Bu ifade sınıfın kendisi anlamına gelir. Örneğin bir sınıf tanımlayalım ve bu sınıftaki işlevler ile girdideki sayılara toplama ve çıkartma işlemi uygulayalım.</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">sayi_isle</span><span class="punctuation">:</span>
+    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">sayi1</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">=</span> <span class="name">sayi1</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="name">sayi2</span>
+    <span class="keyword">def</span> <span class="name function">topla</span><span class="punctuation">():</span>
+        <span class="keyword">return</span> <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">+</span> <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span>
+    <span class="keyword">def</span> <span class="name function">cikart</span><span class="punctuation">():</span>
+        <span class="keyword">return</span> <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">-</span> <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span>
+
+<span class="name">nesne</span> <span class="operator">=</span> <span class="name">sayi_isle</span><span class="punctuation">(</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal number integer">3</span><span class="punctuation">)</span>
+<span class="name">a</span> <span class="operator">=</span> <span class="name">nesne</span><span class="operator">.</span><span class="name">topla</span><span class="punctuation">()</span>
+<span class="name">b</span> <span class="operator">=</span> <span class="name">nesne</span><span class="operator">.</span><span class="name">cikart</span><span class="punctuation">()</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">15</span> <span class="literal number integer">9</span>
+</pre>
+</div>
 </div>
 </body>
 </html>
