@@ -495,6 +495,22 @@ if not koşul:
 </pre>
 <p>Burada işlevlere <strong>nesne.islev()</strong> ifadesi ile erişebiliyoruz. Aynı zamanda değişkenlere de <strong>nesne.degisken</strong> ifadesi ile erişmemiz ve değiştirmemiz mümkündür. Sınıf içerisinden ise <strong>self.islev()</strong> ve <strong>self.degisken</strong> şeklinde bir ifade kullanmamız gerekmektedir.</p>
 </div>
+<div class="section" id="dosya-islemleri">
+<h1>Dosya işlemleri</h1>
+<p>Bir dosyayı açmak için <strong>open</strong> işlevi kullanılır. Açılan dosyadan satır okumak için <strong>readline</strong> işlevi, tamamını okumak için <strong>read</strong> işlevi, tüm satırları okuyup dizi haline getirmek için ise <strong>readlines</strong> işlevi kullanılır.</p>
+<p>deneme.txt adında içeriği aşağıdaki gibi olan bir doysamız olsun:</p>
+<pre class="code text literal-block">
+Merhaba dünya
+Selam dünya
+sayı:123
+</pre>
+<p>Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.</p>
+<pre class="code python literal-block">
+<span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span> <span class="comment single"># okumak için r yazmak için w üzerine eklemek için a kullanılır.</span>
+<span class="name">ilksatir</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">readline</span><span class="punctuation">()</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">ilksatir</span><span class="punctuation">)</span>
+</pre>
+</div>
 </div>
 </body>
 </html>

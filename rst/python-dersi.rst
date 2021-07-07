@@ -602,4 +602,24 @@ Burada **__init__** işlevi sınıfı oluştururken çalıştırılan ilk eyleml
 
 Burada işlevlere **nesne.islev()** ifadesi ile erişebiliyoruz. Aynı zamanda değişkenlere de **nesne.degisken** ifadesi ile erişmemiz ve değiştirmemiz mümkündür. Sınıf içerisinden ise **self.islev()** ve **self.degisken** şeklinde bir ifade kullanmamız gerekmektedir. 
 
+Dosya işlemleri
+===============
 
+Bir dosyayı açmak için **open** işlevi kullanılır. Açılan dosyadan satır okumak için **readline** işlevi, tamamını okumak için **read** işlevi, tüm satırları okuyup dizi haline getirmek için ise **readlines** işlevi kullanılır.
+
+deneme.txt adında içeriği aşağıdaki gibi olan bir doysamız olsun:
+
+.. code-block:: text
+
+	Merhaba dünya
+	Selam dünya
+	sayı:123
+
+Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.
+
+.. code-block:: python
+
+	dosya = open("dosya.txt","r") # okumak için r yazmak için w üzerine eklemek için a kullanılır.
+	ilksatir = dosya.readline()
+	print(ilksatir)
+	
