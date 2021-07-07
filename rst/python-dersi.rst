@@ -402,8 +402,7 @@ Dizileri sıralamak için **sort** boşaltmak için ise **clear** işlevi kullan
 	print(a)
 	a.clear()
 	print(a)
-	-> 3
-	-> 7
+	-> 3 7
 	-> [1, 2, 3, 4, 6, 7, 9]
 	-> []
 
