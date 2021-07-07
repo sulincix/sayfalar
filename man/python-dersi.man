@@ -757,9 +757,18 @@ print(toplam)
 .sp
 .nf
 .ft C
-asallar = [] # boş asal sayılar dizisi
+asallar = [2] # ilk asal sayıyı elle yazdık.
 i = 2 # Şu anki sayı
-while
+while i < 60: # 100e kadar say
+    hmm = True # asal sayı mı diye bakılan değişken
+    for e in asallar: # asal sayılar listesi elemanları
+        if i % e == 0: # tam bölünüyor mu
+            hmm = False # asal sayı değildir
+    if hmm: # Asal sayıysa diziye ekleyelim
+        asallar\&.append(i)
+    i += 1 # mevcut sayımızı 1 arttıralım.
+print(asallar) # 60a kadar olan asal sayılar dizisini yazalım.
+\-> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
 .ft P
 .fi
 .UNINDENT

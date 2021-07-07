@@ -398,9 +398,18 @@ if not koşul:
 </pre>
 <p>Şimdiye kadarki anlatılanların daha iyi anlaşılması için asal sayı hesaplayan bir python kodu yazalım:</p>
 <pre class="code python literal-block">
-<span class="name">asallar</span> <span class="operator">=</span> <span class="punctuation">[]</span> <span class="comment single"># boş asal sayılar dizisi</span>
+<span class="name">asallar</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">]</span> <span class="comment single"># ilk asal sayıyı elle yazdık.</span>
 <span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">2</span> <span class="comment single"># Şu anki sayı</span>
-<span class="keyword">while</span>
+<span class="keyword">while</span> <span class="name">i</span> <span class="operator">&lt;</span> <span class="literal number integer">60</span><span class="punctuation">:</span> <span class="comment single"># 100e kadar say</span>
+    <span class="name">hmm</span> <span class="operator">=</span> <span class="keyword constant">True</span> <span class="comment single"># asal sayı mı diye bakılan değişken</span>
+    <span class="keyword">for</span> <span class="name">e</span> <span class="operator word">in</span> <span class="name">asallar</span><span class="punctuation">:</span> <span class="comment single"># asal sayılar listesi elemanları</span>
+        <span class="keyword">if</span> <span class="name">i</span> <span class="operator">%</span> <span class="name">e</span> <span class="operator">==</span> <span class="literal number integer">0</span><span class="punctuation">:</span> <span class="comment single"># tam bölünüyor mu</span>
+            <span class="name">hmm</span> <span class="operator">=</span> <span class="keyword constant">False</span> <span class="comment single"># asal sayı değildir</span>
+    <span class="keyword">if</span> <span class="name">hmm</span><span class="punctuation">:</span> <span class="comment single"># Asal sayıysa diziye ekleyelim</span>
+        <span class="name">asallar</span><span class="operator">.</span><span class="name">append</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">)</span>
+    <span class="name">i</span> <span class="operator">+=</span> <span class="literal number integer">1</span> <span class="comment single"># mevcut sayımızı 1 arttıralım.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">asallar</span><span class="punctuation">)</span> <span class="comment single"># 60a kadar olan asal sayılar dizisini yazalım.</span>
+<span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">11</span><span class="punctuation">,</span> <span class="literal number integer">13</span><span class="punctuation">,</span> <span class="literal number integer">17</span><span class="punctuation">,</span> <span class="literal number integer">19</span><span class="punctuation">,</span> <span class="literal number integer">23</span><span class="punctuation">,</span> <span class="literal number integer">29</span><span class="punctuation">,</span> <span class="literal number integer">31</span><span class="punctuation">,</span> <span class="literal number integer">37</span><span class="punctuation">,</span> <span class="literal number integer">41</span><span class="punctuation">,</span> <span class="literal number integer">43</span><span class="punctuation">,</span> <span class="literal number integer">47</span><span class="punctuation">,</span> <span class="literal number integer">53</span><span class="punctuation">,</span> <span class="literal number integer">59</span><span class="punctuation">]</span>
 </pre>
 </div>
 </div>
