@@ -506,9 +506,44 @@ sayı:123
 </pre>
 <p>Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.</p>
 <pre class="code python literal-block">
-<span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span> <span class="comment single"># okumak için r yazmak için w üzerine eklemek için a kullanılır.</span>
+<span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span> <span class="comment single"># okumak için r kullanılır.</span>
 <span class="name">ilksatir</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">readline</span><span class="punctuation">()</span>
-<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">ilksatir</span><span class="punctuation">)</span>
+<span class="name">tumu</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span>
+<span class="name">satirlar</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">readlines</span><span class="punctuation">()</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">satirlar</span><span class="punctuation">))</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">3</span>
+</pre>
+<p>Dosyaya yazmak için ise <strong>write</strong> işlevi kullanılır. Okuma ve yazma işlemleri bittikten sonra <strong>close</strong> işlevi ile dosya kapatılmalıdır. Dosyayı kapatmadan değişiklikleri diske işletmek için <strong>flush</strong> işlevi kullanılır.</p>
+<pre class="code python literal-block">
+<span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;w&quot;</span><span class="punctuation">)</span> <span class="comment single"># yazmak için w eklemek için a kullanılır.</span>
+<span class="name">dosya</span><span class="operator">.</span><span class="name">write</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba dünya</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">)</span>
+<span class="name">dosya</span><span class="operator">.</span><span class="name">write</span><span class="punctuation">(</span><span class="literal string double">&quot;Selam dünya</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">)</span>
+<span class="name">dosya</span><span class="operator">.</span><span class="name">write</span><span class="punctuation">(</span><span class="literal string double">&quot;sayı:123</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">)</span>
+<span class="name">dosya</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="moduller">
+<h1>Modüller</h1>
+<p>Python programlarında kodların markaşıklaşmasını önlemek ve daha kullanışlı hale getirmek amacıyla modüller bulunur. Modüller <strong>import</strong> ifadesi ile çağırılır. Modüller aslında birer Birer python kütüphanesidir ve sınıf sayılırlar. Örneğin deneme.py dosyamızda aşağıdaki kodlar bulunsun:</p>
+<pre class="code python literal-block">
+<span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span>
+<span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">12</span>
+<span class="keyword">def</span> <span class="name function">yazdir</span><span class="punctuation">():</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span>
+<span class="keyword">class</span> <span class="name class">sinif</span><span class="punctuation">:</span>
+    <span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span>
+        <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;selam&quot;</span><span class="punctuation">)</span>
+</pre>
+<p>Şimdi bu modülümüzü çağırıp içerisindeki işlevleri ve değişkenleri kullanalım.</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">deneme</span> <span class="comment single"># deneme modülünü çağırdık</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">deneme</span><span class="operator">.</span><span class="name">yazi</span><span class="punctuation">)</span> <span class="comment single"># değişkeni kullandık</span>
+<span class="name">deneme</span><span class="operator">.</span><span class="name">yazdir</span><span class="punctuation">()</span> <span class="comment single"># işlevi kullandık.</span>
+<span class="name">deneme</span><span class="operator">.</span><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">76</span> <span class="comment single"># değişkeni değiştirdik</span>
+<span class="name">nesne</span> <span class="operator">=</span> <span class="name">deneme</span><span class="operator">.</span><span class="name">sinif</span><span class="punctuation">()</span> <span class="comment single"># sınıftan nesne oluşturduk</span>
+<span class="name">nesne</span><span class="operator">.</span><span class="name">islev</span><span class="punctuation">()</span> <span class="comment single"># nesneyi kullandık</span>
+<span class="operator">-&gt;</span> <span class="name">Merhaba</span>
+<span class="operator">-&gt;</span> <span class="name">selam</span>
 </pre>
 </div>
 </div>

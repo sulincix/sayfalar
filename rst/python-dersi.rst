@@ -619,7 +619,49 @@ Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.
 
 .. code-block:: python
 
-	dosya = open("dosya.txt","r") # okumak için r yazmak için w üzerine eklemek için a kullanılır.
+	dosya = open("dosya.txt","r") # okumak için r kullanılır.
 	ilksatir = dosya.readline()
-	print(ilksatir)
-	
+	tumu = dosya.read()
+	satirlar = dosya.readlines()
+	print(len(satirlar))
+	-> 3
+
+Dosyaya yazmak için ise **write** işlevi kullanılır. Okuma ve yazma işlemleri bittikten sonra **close** işlevi ile dosya kapatılmalıdır. Dosyayı kapatmadan değişiklikleri diske işletmek için **flush** işlevi kullanılır.
+
+.. code-block:: python
+
+	dosya = open("dosya.txt","w") # yazmak için w eklemek için a kullanılır.
+	dosya.write("Merhaba dünya\n")
+	dosya.write("Selam dünya\n")
+	dosya.write("sayı:123\n")
+	dosya.close()
+
+Modüller
+========
+
+Python programlarında kodların markaşıklaşmasını önlemek ve daha kullanışlı hale getirmek amacıyla modüller bulunur. Modüller **import** ifadesi ile çağırılır. Modüller aslında birer Birer python kütüphanesidir ve sınıf sayılırlar. Örneğin deneme.py dosyamızda aşağıdaki kodlar bulunsun:
+
+.. code-block:: python
+
+	yazi = "Merhaba"
+	sayi = 12
+	def yazdir():
+	    print(yazi)
+	class sinif:
+	    def islev(self):
+	        print("selam")
+
+Şimdi bu modülümüzü çağırıp içerisindeki işlevleri ve değişkenleri kullanalım.
+
+.. code-block:: python
+
+	import deneme # deneme modülünü çağırdık
+	print(deneme.yazi) # değişkeni kullandık
+	deneme.yazdir() # işlevi kullandık.
+	deneme.sayi = 76 # değişkeni değiştirdik
+	nesne = deneme.sinif() # sınıftan nesne oluşturduk
+	nesne.islev() # nesneyi kullandık
+	-> Merhaba
+	-> selam
+
+
