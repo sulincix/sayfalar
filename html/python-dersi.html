@@ -413,6 +413,22 @@ if not koşul:
 <span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">11</span><span class="punctuation">,</span> <span class="literal number integer">13</span><span class="punctuation">,</span> <span class="literal number integer">17</span><span class="punctuation">,</span> <span class="literal number integer">19</span><span class="punctuation">,</span> <span class="literal number integer">23</span><span class="punctuation">,</span> <span class="literal number integer">29</span><span class="punctuation">,</span> <span class="literal number integer">31</span><span class="punctuation">,</span> <span class="literal number integer">37</span><span class="punctuation">,</span> <span class="literal number integer">41</span><span class="punctuation">,</span> <span class="literal number integer">43</span><span class="punctuation">,</span> <span class="literal number integer">47</span><span class="punctuation">,</span> <span class="literal number integer">53</span><span class="punctuation">,</span> <span class="literal number integer">59</span><span class="punctuation">]</span>
 </pre>
 </div>
+<div class="section" id="islevler">
+<h1>İşlevler</h1>
+<p>Python programlarken işlev tanımlayıp daha sonra bu işlevi kullanabiliriz. İşlevler aşağıdaki gibi tanımlanırlar:</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name">girdi1</span><span class="punctuation">,</span><span class="name">girdi2</span><span class="punctuation">):</span>
+    <span class="name">eylem</span>
+</pre>
+<p>işlevlerde çıktı sonucu olarak bir değişken döndürmek için <strong>return</strong> ifadesi kullanılır. Örneğin girdideki sayıları toplayan işlev yazalım.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">topla</span><span class="punctuation">(</span><span class="name">sayi1</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">):</span>
+    <span class="keyword">return</span> <span class="name">sayi1</span> <span class="operator">+</span> <span class="name">sayi2</span>
+<span class="name">toplam</span> <span class="operator">=</span> <span class="name">topla</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="operator">+</span><span class="literal number integer">5</span><span class="punctuation">)</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">toplam</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">8</span>
+</pre>
+</div>
 </div>
 </body>
 </html>

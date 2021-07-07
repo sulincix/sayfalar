@@ -504,3 +504,24 @@ Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringi
 	    i += 1 # mevcut sayımızı 1 arttıralım.
 	print(asallar) # 60a kadar olan asal sayılar dizisini yazalım.
 	-> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
+	
+İşlevler
+========
+
+Python programlarken işlev tanımlayıp daha sonra bu işlevi kullanabiliriz. İşlevler aşağıdaki gibi tanımlanırlar:
+
+.. code-block:: python
+
+	def islev(girdi1,girdi2):
+	    eylem
+
+işlevlerde çıktı sonucu olarak bir değişken döndürmek için **return** ifadesi kullanılır. Örneğin girdideki sayıları toplayan işlev yazalım.
+
+.. code-block:: python
+
+	def topla(sayi1,sayi2):
+	    return sayi1 + sayi2
+	toplam = topla(3+5)
+	print(toplam)
+	-> 8
+
