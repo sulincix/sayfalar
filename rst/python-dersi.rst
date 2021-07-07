@@ -663,4 +663,63 @@ Python programlarında kodların markaşıklaşmasını önlemek ve daha kullan�
 	-> Merhaba
 	-> selam
 
+Şimdiye kadar anlatılanların daha iyi anlaşılması için aşağıda ini parser örneği yapalım. Örnek bir ini dosyası aşağıdaki gibidir:
+
+.. code-block:: ini
+
+	[bölüm1]
+	veri1=deger1
+	veri2=deger2
+	[bölüm2]
+	veri3=deger3
+	veri4=deger4
+
+Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki değeri bulalım ve döndürelim. 
+
+.. code-block:: python
+
+	[Merhaba]
+	dünya=12
+	selam=44
+	[hmm]
+	veri=abc123x
+	sayı=44
+	
+
+.. code-block:: python
+
+	# iniparser.py içeriği
+	dosya = None # boş dosya nesnesi
+	class inidosya: 
+	    def __init__(self,yol):
+	        self.icerik = open(yol,"r").read() # dosya içeriğini okuduk
+	def deger_al(bolum,veri): 
+	    etkin = False # istenilen yere gelene kadar etkisiz kal
+	    for satir in dosya.icerik.split("\n"):
+	        if "[" + bolum + "]" in satir: # okunan satırda istenilen bölümün başı mı
+	            etkin = True # etkinleştir
+	        if etkin:
+	            if satir.split("=")[0] == veri: # = işaretine göre 0. eleman aranan mı
+	                return satir.split("=")[0].strip() # = işaretine göre böl . elemanı al
+
+.. code-block:: python
+
+	# main.py dosyası içeriği
+	import iniparser # modülü yükle
+	test.dosya = test.inidosya("dosya") # ini dosyasını yükle
+	deger=test.deger_al("hmm","veri") # değeri al
+	print(deger) # değeri yazdır
+	-> abc123x
+
+
+
+
+
+
+
+
+
+
+
+
 

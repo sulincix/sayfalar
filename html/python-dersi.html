@@ -544,6 +544,47 @@ sayı:123
 <span class="operator">-&gt;</span> <span class="name">Merhaba</span>
 <span class="operator">-&gt;</span> <span class="name">selam</span>
 </pre>
+<p>Şimdiye kadar anlatılanların daha iyi anlaşılması için aşağıda ini parser örneği yapalım. Örnek bir ini dosyası aşağıdaki gibidir:</p>
+<pre class="code ini literal-block">
+<span class="keyword">[bölüm1]</span>
+<span class="name attribute">veri1</span><span class="operator">=</span><span class="literal string">deger1</span>
+<span class="name attribute">veri2</span><span class="operator">=</span><span class="literal string">deger2</span>
+<span class="keyword">[bölüm2]</span>
+<span class="name attribute">veri3</span><span class="operator">=</span><span class="literal string">deger3</span>
+<span class="name attribute">veri4</span><span class="operator">=</span><span class="literal string">deger4</span>
+</pre>
+<p>Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki değeri bulalım ve döndürelim.</p>
+<pre class="code python literal-block">
+<span class="punctuation">[</span><span class="name">Merhaba</span><span class="punctuation">]</span>
+<span class="name">dünya</span><span class="operator">=</span><span class="literal number integer">12</span>
+<span class="name">selam</span><span class="operator">=</span><span class="literal number integer">44</span>
+<span class="punctuation">[</span><span class="name">hmm</span><span class="punctuation">]</span>
+<span class="name">veri</span><span class="operator">=</span><span class="name">abc123x</span>
+<span class="name">sayı</span><span class="operator">=</span><span class="literal number integer">44</span>
+</pre>
+<pre class="code python literal-block">
+<span class="comment single"># iniparser.py içeriği</span>
+<span class="name">dosya</span> <span class="operator">=</span> <span class="keyword constant">None</span> <span class="comment single"># boş dosya nesnesi</span>
+<span class="keyword">class</span> <span class="name class">inidosya</span><span class="punctuation">:</span>
+    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">yol</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">icerik</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="name">yol</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span> <span class="comment single"># dosya içeriğini okuduk</span>
+<span class="keyword">def</span> <span class="name function">deger_al</span><span class="punctuation">(</span><span class="name">bolum</span><span class="punctuation">,</span><span class="name">veri</span><span class="punctuation">):</span>
+    <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">False</span> <span class="comment single"># istenilen yere gelene kadar etkisiz kal</span>
+    <span class="keyword">for</span> <span class="name">satir</span> <span class="operator word">in</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">icerik</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">):</span>
+        <span class="keyword">if</span> <span class="literal string double">&quot;[&quot;</span> <span class="operator">+</span> <span class="name">bolum</span> <span class="operator">+</span> <span class="literal string double">&quot;]&quot;</span> <span class="operator word">in</span> <span class="name">satir</span><span class="punctuation">:</span> <span class="comment single"># okunan satırda istenilen bölümün başı mı</span>
+            <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">True</span> <span class="comment single"># etkinleştir</span>
+        <span class="keyword">if</span> <span class="name">etkin</span><span class="punctuation">:</span>
+            <span class="keyword">if</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="name">veri</span><span class="punctuation">:</span> <span class="comment single"># = işaretine göre 0. eleman aranan mı</span>
+                <span class="keyword">return</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span><span class="operator">.</span><span class="name">strip</span><span class="punctuation">()</span> <span class="comment single"># = işaretine göre böl . elemanı al</span>
+</pre>
+<pre class="code python literal-block">
+<span class="comment single"># main.py dosyası içeriği</span>
+<span class="keyword namespace">import</span> <span class="name namespace">iniparser</span> <span class="comment single"># modülü yükle</span>
+<span class="name">test</span><span class="operator">.</span><span class="name">dosya</span> <span class="operator">=</span> <span class="name">test</span><span class="operator">.</span><span class="name">inidosya</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya&quot;</span><span class="punctuation">)</span> <span class="comment single"># ini dosyasını yükle</span>
+<span class="name">deger</span><span class="operator">=</span><span class="name">test</span><span class="operator">.</span><span class="name">deger_al</span><span class="punctuation">(</span><span class="literal string double">&quot;hmm&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;veri&quot;</span><span class="punctuation">)</span> <span class="comment single"># değeri al</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">deger</span><span class="punctuation">)</span> <span class="comment single"># değeri yazdır</span>
+<span class="operator">-&gt;</span> <span class="name">abc123x</span>
+</pre>
 </div>
 </div>
 </body>
