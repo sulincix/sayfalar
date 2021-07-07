@@ -140,6 +140,15 @@ Değişkeni birden çok kez toplamak için ***** işareti kullanılabilir.
 	print(yazi)
 	-> alialialialiali
 
+String türünden bir değişkenin içerisindeki bir bölümü başka bir şey ile değiştirmek için **replace** işlevi kullanılınabilir.
+
+.. code-block:: python
+
+	veri = "Merhaba"
+	veri2 = veri.replace("rha","123")
+	print(veri2)
+	-> Me123ba
+
 Integer
 *******
 
@@ -280,11 +289,11 @@ Koşul tanımı yapmak için **if** ifadesi kullanılır. Koşul sağlanmıyorsa
 .. code-block:: python
 
 	if koşul:
-	    durum
+	    eylem
 	elif koşul:
-	    durum
+	    eylem
 	else:
-	    durum
+	    eylem
 
 Örneğin bir integer değişkenin çift olup olmadığını bulalım.
 
@@ -310,15 +319,15 @@ Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:
 
 .. code-block:: python
 
-	koşul and durum
+	koşul and eylem
 	""" Şununla aynıdır:
 	if koşul:
-	    durum
+	    eylem
 	"""
-	koşul or durum
+	koşul or eylem
 	""" Şununla aynıdır:
 	if not koşul:
-	    durum
+	    eylem
 	"""
 
 Bu konunun daha iyi anlaşılması için:
@@ -338,7 +347,7 @@ Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdi
 .. code-block:: python
 
 	while koşul:
-	    durum
+	    eylem
 
 Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda *i* sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır. 
 
@@ -415,3 +424,62 @@ Dizilerin elemanlarını **+** kullanarak birleştirebiliriz.
 	print(c)
 	-> [1, 2, 3, 4, 5, 6]
 
+Dizilerin bir bölümünü aşağıdakine benzer yolla kesebiliriz:
+
+.. code-block:: python
+
+	a = [1, 3, 5, 7, 9, 12, 44, 31, 16]
+	b = a[:2] # baştan 3. elemana kadar.
+	c = a[4:] # 4. elemandan sonrası
+	d = a[3:6] # 4. elemandan 6. elemana kadar (dahil)
+
+String türünden bir değişkeni belli bir harf veya harf öbeğine göre bölmek için **split** işlevini kullanırız. Ayrıca string türünden bir değişkenin başındaki ve sonundaki boşlukları temizlemek için **strip** işlevini kullanırız.
+
+.. code-block:: python
+
+	veri="   Bu bir yazıdır   "
+	veri2 = veri.strip()
+	print(len(veri),len(veri2))
+	liste = veri2.split(" ")
+	print(liste)
+	-> 20 14
+	-> ['Bu', 'bir', 'yazıdır']
+
+For döngüsü
+===========
+
+For döngüsü while ile benzerdir fakat koşul aranmak yerine iteration yapar. Bu işlemde bir dizinin bütün elemanları tek tek işleme koyulur. Aşağıdaki gibi bir kullanımı vardır:
+
+.. code-block:: python
+
+	for eleman in dizi:
+	    eylem
+	# Şununla aynıdır
+	i = 0
+	toplam = len(dizi)
+	while i < toplam: # eleman yerine dizi[i] kullanabilirsiniz.
+	    eylem
+	    i += 1
+
+Örneğin bir integer değişkenlerden oluşan dizi oluşturalım ve elemanlarını 2ye bölerek ayrı bir diziye ekleyelim.
+
+.. code-block:: python
+
+	a = [2, 4, 6, 8, 10] # dizi tanımladık
+	b = [] # diğer diziyi tanımladık
+	for i in a: # a elemanları i içine atılacak
+	    b.append(i/2) # b içine elemanın yarısını ekledik.
+	print(b)
+	-> [1, 2, 3, 4, 5]
+
+Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringin harfleri olacaktır. Aşağıdaki örnekte string içerisinde kaç tane a veya e harfi bulunduğunu hesaplayalım.
+
+.. code-block:: python
+
+	veri = "Merhaba Dünya"
+	toplam = 0
+	for i in veri:
+	    if i == "a" or i == "e":
+	        toplam += 1
+	print(toplam)
+	-> 4

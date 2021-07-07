@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH PYTHON DERSI  "" "" ""
-.SH NAME
-Python dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "PYTHON DERSI"  "" "" ""
+.SH NAME
+Python dersi \- 
 .sp
 Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
 .SH AÇIKLAMA SATIRLARI
@@ -241,6 +241,21 @@ print(yazi)
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+String türünden bir değişkenin içerisindeki bir bölümü başka bir şey ile değiştirmek için \fBreplace\fP işlevi kullanılınabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = "Merhaba"
+veri2 = veri\&.replace("rha","123")
+print(veri2)
+\-> Me123ba
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SS Integer
 .sp
 Integer türünden değişkenler tam sayı belirtir. Dört işlem işaretleri ile işleme sokulabilirler.
@@ -443,11 +458,11 @@ Koşul tanımı yapmak için \fBif\fP ifadesi kullanılır. Koşul sağlanmıyor
 .nf
 .ft C
 if koşul:
-    durum
+    eylem
 elif koşul:
-    durum
+    eylem
 else:
-    durum
+    eylem
 .ft P
 .fi
 .UNINDENT
@@ -491,15 +506,15 @@ Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:
 .sp
 .nf
 .ft C
-koşul and durum
+koşul and eylem
 """ Şununla aynıdır:
 if koşul:
-    durum
+    eylem
 """
-koşul or durum
+koşul or eylem
 """ Şununla aynıdır:
 if not koşul:
-    durum
+    eylem
 """
 .ft P
 .fi
@@ -529,7 +544,7 @@ Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdi
 .nf
 .ft C
 while koşul:
-    durum
+    eylem
 .ft P
 .fi
 .UNINDENT
@@ -639,6 +654,94 @@ b = [4, 5, 6]
 c = a + b
 print(c)
 \-> [1, 2, 3, 4, 5, 6]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dizilerin bir bölümünü aşağıdakine benzer yolla kesebiliriz:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+a = [1, 3, 5, 7, 9, 12, 44, 31, 16]
+b = a[:2] # baştan 3. elemana kadar.
+c = a[4:] # 4. elemandan sonrası
+d = a[3:6] # 4. elemandan 6. elemana kadar (dahil)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+String türünden bir değişkeni belli bir harf veya harf öbeğine göre bölmek için \fBsplit\fP işlevini kullanırız. Ayrıca string türünden bir değişkenin başındaki ve sonundaki boşlukları temizlemek için \fBstrip\fP işlevini kullanırız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri="   Bu bir yazıdır   "
+veri2 = veri\&.strip()
+print(len(veri),len(veri2))
+liste = veri2\&.split(" ")
+print(liste)
+\-> 20 14
+\-> [\(aqBu\(aq, \(aqbir\(aq, \(aqyazıdır\(aq]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH FOR DÖNGÜSÜ
+.sp
+For döngüsü while ile benzerdir fakat koşul aranmak yerine iteration yapar. Bu işlemde bir dizinin bütün elemanları tek tek işleme koyulur. Aşağıdaki gibi bir kullanımı vardır:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+for eleman in dizi:
+    eylem
+# Şununla aynıdır
+i = 0
+toplam = len(dizi)
+while i < toplam: # eleman yerine dizi[i] kullanabilirsiniz.
+    eylem
+    i += 1
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örneğin bir integer değişkenlerden oluşan dizi oluşturalım ve elemanlarını 2ye bölerek ayrı bir diziye ekleyelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+a = [2, 4, 6, 8, 10] # dizi tanımladık
+b = [] # diğer diziyi tanımladık
+for i in a: # a elemanları i içine atılacak
+    b\&.append(i/2) # b içine elemanın yarısını ekledik.
+print(b)
+\-> [1, 2, 3, 4, 5]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringin harfleri olacaktır. Aşağıdaki örnekte string içerisinde kaç tane a veya e harfi bulunduğunu hesaplayalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+veri = "Merhaba Dünya"
+toplam = 0
+for i in veri:
+    if i == "a" or i == "e":
+        toplam += 1
+print(toplam)
+\-> 4
 .ft P
 .fi
 .UNINDENT
