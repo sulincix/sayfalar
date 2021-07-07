@@ -797,9 +797,33 @@ işlevlerde çıktı sonucu olarak bir değişken döndürmek için \fBreturn\fP
 .ft C
 def topla(sayi1,sayi2):
     return sayi1 + sayi2
+    print("Merhaba") # bu satır çalıştırılmaz
 toplam = topla(3,5)
 print(toplam)
 \-> 8
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.IP "System Message: WARNING/2 (rst/python-dersi.rst:, line 528)"
+Explicit markup ends without a blank line; unexpected unindent.
+.sp
+Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+def yazdir():
+    yazi = "Merhaba"
+    print(yazi)
+yazdir()
+print(yazi)
+\-> Merhaba
+\-> Traceback (most recent call last):
+\->   File "ders.py", line 5, in <module>
+\->     print(yazi)
+\-> NameError: name \(aqyazi\(aq is not defined
 .ft P
 .fi
 .UNINDENT

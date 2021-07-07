@@ -424,9 +424,26 @@ if not koşul:
 <pre class="code python literal-block">
 <span class="keyword">def</span> <span class="name function">topla</span><span class="punctuation">(</span><span class="name">sayi1</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">):</span>
     <span class="keyword">return</span> <span class="name">sayi1</span> <span class="operator">+</span> <span class="name">sayi2</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">)</span> <span class="comment single"># bu satır çalıştırılmaz</span>
 <span class="name">toplam</span> <span class="operator">=</span> <span class="name">topla</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">,</span><span class="literal number integer">5</span><span class="punctuation">)</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">toplam</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">8</span>
+</pre>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">rst/python-dersi.rst</tt>, line 528)</p>
+Explicit markup ends without a blank line; unexpected unindent.</div>
+<p>Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">yazdir</span><span class="punctuation">():</span>
+    <span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span>
+    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span>
+<span class="name">yazdir</span><span class="punctuation">()</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="name">Merhaba</span>
+<span class="operator">-&gt;</span> <span class="name">Traceback</span> <span class="punctuation">(</span><span class="name">most</span> <span class="name">recent</span> <span class="name">call</span> <span class="name">last</span><span class="punctuation">):</span>
+<span class="operator">-&gt;</span>   <span class="name">File</span> <span class="literal string double">&quot;ders.py&quot;</span><span class="punctuation">,</span> <span class="name">line</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="operator word">in</span> <span class="operator">&lt;</span><span class="name">module</span><span class="operator">&gt;</span>
+<span class="operator">-&gt;</span>     <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="name exception">NameError</span><span class="punctuation">:</span> <span class="name">name</span> <span class="literal string single">'yazi'</span> <span class="operator word">is</span> <span class="operator word">not</span> <span class="name">defined</span>
 </pre>
 </div>
 </div>

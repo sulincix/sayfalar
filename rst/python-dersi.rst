@@ -521,7 +521,22 @@ işlevlerde çıktı sonucu olarak bir değişken döndürmek için **return** i
 
 	def topla(sayi1,sayi2):
 	    return sayi1 + sayi2
+	    print("Merhaba") # bu satır çalıştırılmaz
 	toplam = topla(3,5)
 	print(toplam)
 	-> 8
+Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.
+
+.. code-block:: python
+
+	def yazdir():
+	    yazi = "Merhaba"
+	    print(yazi)
+	yazdir()
+	print(yazi)
+	-> Merhaba
+	-> Traceback (most recent call last):
+	->   File "ders.py", line 5, in <module>
+	->     print(yazi)
+	-> NameError: name 'yazi' is not defined
 
