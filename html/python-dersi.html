@@ -479,9 +479,9 @@ if not koşul:
 <p>Burada <strong>__init__</strong> işlevi sınıfı oluştururken çalıştırılan ilk eylemleri tanımlamak için kullanılır. sınıf işlevleri tanımlanırken ilk girdi olarak <strong>self</strong> kullanılmalıdır. Bu ifade sınıfın kendisi anlamına gelir. Örneğin bir sınıf tanımlayalım ve bu sınıftaki işlevler ile girdideki sayılara toplama ve çıkartma işlemi uygulayalım.</p>
 <pre class="code python literal-block">
 <span class="keyword">class</span> <span class="name class">sayi_isle</span><span class="punctuation">:</span>
-    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">sayi1</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">):</span>
-        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">=</span> <span class="name">sayi1</span>
-        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="name">sayi2</span>
+    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">ilk</span><span class="punctuation">,</span><span class="name">ikinci</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">=</span> <span class="name">ilk</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="name">ikinci</span>
     <span class="keyword">def</span> <span class="name function">topla</span><span class="punctuation">():</span>
         <span class="keyword">return</span> <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">+</span> <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span>
     <span class="keyword">def</span> <span class="name function">cikart</span><span class="punctuation">():</span>
@@ -493,6 +493,7 @@ if not koşul:
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">15</span> <span class="literal number integer">9</span>
 </pre>
+<p>Burada işlevlere <strong>nesne.islev()</strong> ifadesi ile erişebiliyoruz. Aynı zamanda değişkenlere de <strong>nesne.degisken</strong> ifadesi ile erişmemiz ve değiştirmemiz mümkündür. Sınıf içerisinden ise <strong>self.islev()</strong> ve <strong>self.degisken</strong> şeklinde bir ifade kullanmamız gerekmektedir.</p>
 </div>
 </div>
 </body>

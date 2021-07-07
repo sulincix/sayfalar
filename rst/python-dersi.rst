@@ -586,9 +586,9 @@ Burada **__init__** işlevi sınıfı oluştururken çalıştırılan ilk eyleml
 .. code-block:: python
 
 	class sayi_isle:
-	    def __init__(self,sayi1,sayi2):
-	        self.sayi1 = sayi1
-	        self.sayi2 = sayi2
+	    def __init__(self,ilk,ikinci):
+	        self.sayi1 = ilk
+	        self.sayi2 = ikinci
 	    def topla():
 	        return self.sayi1 + self.sayi2
 	    def cikart():
@@ -599,4 +599,7 @@ Burada **__init__** işlevi sınıfı oluştururken çalıştırılan ilk eyleml
 	b = nesne.cikart()
 	print(a,b)
 	-> 15 9
+
+Burada işlevlere **nesne.islev()** ifadesi ile erişebiliyoruz. Aynı zamanda değişkenlere de **nesne.degisken** ifadesi ile erişmemiz ve değiştirmemiz mümkündür. Sınıf içerisinden ise **self.islev()** ve **self.degisken** şeklinde bir ifade kullanmamız gerekmektedir. 
+
 
