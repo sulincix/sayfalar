@@ -494,7 +494,7 @@ Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringi
 
 	asallar = [2] # ilk asal sayıyı elle yazdık.
 	i = 2 # Şu anki sayı
-	while i < 60: # 100e kadar say
+	while i < 60: # 60a kadar say
 	    hmm = True # asal sayı mı diye bakılan değişken
 	    for e in asallar: # asal sayılar listesi elemanları
 	        if i % e == 0: # tam bölünüyor mu
