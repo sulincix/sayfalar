@@ -45,13 +45,14 @@ Python programlarında işler işlevler üzerinden yürür. işlevlerin girdiler
 
 
 Pythonda girintileme olayı için de **{** ve **}** kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda **:** işareti bulunur. Örneğin:
-Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.
 
 .. code-block:: python
 
 	f = 12 # f sayısını 12ye eşitledik
 	if f == 12: # f sayısı 12ye eşit mi diye sorguladık
 	    print("eşit") # ekrana yazı yazdırık
+
+Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.
 
 Yazı yazdırma
 =============
@@ -67,6 +68,9 @@ Birden çok ifadeyi yazdırmak için **print** işlevine birden çok girdi vereb
 
 .. code-block:: python
 
+	# Yazılar tırnak içine alınır.
+	# Sayılar tırnak içine alınmaz.
+	# True ve False doğruluk belirtir.
 	print("Merhaba",12,"Dünya",True)
 	-> Merhaba 12 Dünya True
 
@@ -483,3 +487,11 @@ Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringi
 	        toplam += 1
 	print(toplam)
 	-> 4
+	
+Şimdiye kadarki anlatılanların daha iyi anlaşılması için asal sayı hesaplayan bir python kodu yazalım:
+
+.. code-block:: python
+
+	asallar = [] # boş asal sayılar dizisi 
+	i = 2 # Şu anki sayı
+	while 

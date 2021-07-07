@@ -94,7 +94,6 @@ cikti = islev(girdi1, girdi2)
 .UNINDENT
 .sp
 Pythonda girintileme olayı için de \fB{\fP ve \fB}\fP kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda \fB:\fP işareti bulunur. Örneğin:
-Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -107,6 +106,8 @@ if f == 12: # f sayısı 12ye eşit mi diye sorguladık
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.
 .SH YAZI YAZDIRMA
 .sp
 Pythonda ekrana yazı yazmak için \fBprint\fP işlevini kullanıyoruz.
@@ -128,6 +129,9 @@ Birden çok ifadeyi yazdırmak için \fBprint\fP işlevine birden çok girdi ver
 .sp
 .nf
 .ft C
+# Yazılar tırnak içine alınır.
+# Sayılar tırnak içine alınmaz.
+# True ve False doğruluk belirtir.
 print("Merhaba",12,"Dünya",True)
 \-> Merhaba 12 Dünya True
 .ft P
@@ -742,6 +746,20 @@ for i in veri:
         toplam += 1
 print(toplam)
 \-> 4
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Şimdiye kadarki anlatılanların daha iyi anlaşılması için asal sayı hesaplayan bir python kodu yazalım:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+asallar = [] # boş asal sayılar dizisi
+i = 2 # Şu anki sayı
+while
 .ft P
 .fi
 .UNINDENT

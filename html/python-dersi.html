@@ -42,13 +42,13 @@ Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
 <pre class="code shell literal-block">
 <span class="name variable">cikti</span> <span class="operator">=</span> islev<span class="operator">(</span>girdi1, girdi2<span class="operator">)</span>
 </pre>
-<p>Pythonda girintileme olayı için de <strong>{</strong> ve <strong>}</strong> kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda <strong>:</strong> işareti bulunur. Örneğin:
-Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.</p>
+<p>Pythonda girintileme olayı için de <strong>{</strong> ve <strong>}</strong> kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda <strong>:</strong> işareti bulunur. Örneğin:</p>
 <pre class="code python literal-block">
 <span class="name">f</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="comment single"># f sayısını 12ye eşitledik</span>
 <span class="keyword">if</span> <span class="name">f</span> <span class="operator">==</span> <span class="literal number integer">12</span><span class="punctuation">:</span> <span class="comment single"># f sayısı 12ye eşit mi diye sorguladık</span>
     <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit&quot;</span><span class="punctuation">)</span> <span class="comment single"># ekrana yazı yazdırık</span>
 </pre>
+<p>Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.</p>
 </div>
 <div class="section" id="yazi-yazdirma">
 <h1>Yazı yazdırma</h1>
@@ -59,6 +59,9 @@ Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıd
 </pre>
 <p>Birden çok ifadeyi yazdırmak için <strong>print</strong> işlevine birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.</p>
 <pre class="code python literal-block">
+<span class="comment single"># Yazılar tırnak içine alınır.</span>
+<span class="comment single"># Sayılar tırnak içine alınmaz.</span>
+<span class="comment single"># True ve False doğruluk belirtir.</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal string double">&quot;Dünya&quot;</span><span class="punctuation">,</span><span class="keyword constant">True</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="literal number integer">12</span> <span class="name">Dünya</span> <span class="keyword constant">True</span>
 </pre>
@@ -392,6 +395,12 @@ if not koşul:
         <span class="name">toplam</span> <span class="operator">+=</span> <span class="literal number integer">1</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">toplam</span><span class="punctuation">)</span>
 <span class="operator">-&gt;</span> <span class="literal number integer">4</span>
+</pre>
+<p>Şimdiye kadarki anlatılanların daha iyi anlaşılması için asal sayı hesaplayan bir python kodu yazalım:</p>
+<pre class="code python literal-block">
+<span class="name">asallar</span> <span class="operator">=</span> <span class="punctuation">[]</span> <span class="comment single"># boş asal sayılar dizisi</span>
+<span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">2</span> <span class="comment single"># Şu anki sayı</span>
+<span class="keyword">while</span>
 </pre>
 </div>
 </div>
