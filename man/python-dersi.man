@@ -140,6 +140,7 @@ print("Merhaba",12,"Dünya",True)
 .UNINDENT
 .SH DEĞIŞKENLER
 .sp
+Değişkenler içerisinde veri bulunduran ve ihtiyaç durumunda bu veriyi düzenleme imkanı tanıyan kavramlardır.
 Değişkenler tanımlanırken \fBdegisken = deger\fP şeklinde bir ifade kulanılır.
 .INDENT 0.0
 .INDENT 3.5

@@ -76,7 +76,7 @@ Birden çok ifadeyi yazdırmak için **print** işlevine birden çok girdi vereb
 
 Değişkenler
 ===========
-
+Değişkenler içerisinde veri bulunduran ve ihtiyaç durumunda bu veriyi düzenleme imkanı tanıyan kavramlardır. 
 Değişkenler tanımlanırken **degisken = deger** şeklinde bir ifade kulanılır.
 
 .. code-block:: python
