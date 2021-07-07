@@ -521,7 +521,7 @@ işlevlerde çıktı sonucu olarak bir değişken döndürmek için **return** i
 
 	def topla(sayi1,sayi2):
 	    return sayi1 + sayi2
-	toplam = topla(3+5)
+	toplam = topla(3,5)
 	print(toplam)
 	-> 8
 
