@@ -393,6 +393,7 @@ Dizileri sıralamak için **sort** boşaltmak için ise **clear** işlevi kullan
 	-> 7
 	-> [1, 2, 3, 4, 6, 7, 9]
 	-> []
+
 Dizideki bir elemanın uzunluğunu bulmak için **len** işlevi, elemanın dizinin kaçıncısı olduğunu bulmak için ise **index** işlevi kullanılır.
 
 .. code-block:: python
@@ -403,3 +404,14 @@ Dizideki bir elemanın uzunluğunu bulmak için **len** işlevi, elemanın dizin
 	print(sayi,sayi2)
 	-> 3
 	-> 2
+
+Dizilerin elemanlarını **+** kullanarak birleştirebiliriz. 
+
+.. code-block:: python
+
+	a = [1, 2, 3]
+	b = [4, 5, 6]
+	c = a + b
+	print(c)
+	-> [1, 2, 3, 4, 5, 6]
+

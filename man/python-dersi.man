@@ -1,5 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
+.TH PYTHON DERSI  "" "" ""
+.SH NAME
+Python dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -27,9 +30,6 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "PYTHON DERSI"  "" "" ""
-.SH NAME
-Python dersi \- 
 .sp
 Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
 .SH AÇIKLAMA SATIRLARI
@@ -610,8 +610,6 @@ print(a)
 .fi
 .UNINDENT
 .UNINDENT
-.IP "System Message: WARNING/2 (rst/python-dersi.rst:, line 396)"
-Explicit markup ends without a blank line; unexpected unindent.
 .sp
 Dizideki bir elemanın uzunluğunu bulmak için \fBlen\fP işlevi, elemanın dizinin kaçıncısı olduğunu bulmak için ise \fBindex\fP işlevi kullanılır.
 .INDENT 0.0
@@ -625,6 +623,22 @@ sayi2 = a\&.index(3.2)
 print(sayi,sayi2)
 \-> 3
 \-> 2
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dizilerin elemanlarını \fB+\fP kullanarak birleştirebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+a = [1, 2, 3]
+b = [4, 5, 6]
+c = a + b
+print(c)
+\-> [1, 2, 3, 4, 5, 6]
 .ft P
 .fi
 .UNINDENT

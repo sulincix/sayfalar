@@ -1,5 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
+.TH DEBIAN KURULUMU  "" "" ""
+.SH NAME
+debian kurulumu \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -27,9 +30,6 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "DEBIAN KURULUMU"  "" "" ""
-.SH NAME
-debian kurulumu \- 
 .sp
 Bu dokümanda debianı \fBdebootstrap\fP ile kurma konusu anlatılacaktır. \fBBu dokümandaki komutları kendi kurulumunuza göre uyarlayarak yazın.\fP
 .sp
