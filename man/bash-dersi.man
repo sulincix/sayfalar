@@ -494,6 +494,31 @@ echo ${dizi[\-1]}
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Diziler eleman indisleri ile kullanmanın yanında şu şekilde de tanımlanabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+declare \-A dizi
+dizi=([kirmizi]=elma [sari]=muz [yesil]=limon [turuncu]=portakal)
+for isim in ${!dizi[@]} ; do
+    echo \-n "$isim "
+done
+echo
+\-> turuncu yesil sari kirmizi
+for isim in ${dizi[@]} ; do
+    echo \-n "$isim "
+done
+echo
+\-> portakal limon muz elma
+echo ${dizi[kirmizi]}
+\-> elma
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
 .sp
 Klavyeden değer almak için \fBread\fP komutu kullanılır. Alınan değer değişken olarak tanımlanır.

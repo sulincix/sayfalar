@@ -274,6 +274,25 @@ Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler a
 	echo ${dizi[-1]}
 	-> kiraz
 
+Diziler eleman indisleri ile kullanmanın yanında şu şekilde de tanımlanabilir.
+
+.. code-block:: shell
+
+	declare -A dizi
+	dizi=([kirmizi]=elma [sari]=muz [yesil]=limon [turuncu]=portakal)
+	for isim in ${!dizi[@]} ; do
+	    echo -n "$isim "
+	done
+	echo
+	-> turuncu yesil sari kirmizi
+	for isim in ${dizi[@]} ; do
+	    echo -n "$isim "
+	done
+	echo
+	-> portakal limon muz elma
+	echo ${dizi[kirmizi]}
+	-> elma
+
 Klavyeden değer alma
 ====================
 Klavyeden değer almak için **read** komutu kullanılır. Alınan değer değişken olarak tanımlanır.

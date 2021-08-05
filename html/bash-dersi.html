@@ -266,6 +266,23 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[-1]</span><span class="literal string interpol">}</span>
 -&gt; kiraz
 </pre>
+<p>Diziler eleman indisleri ile kullanmanın yanında şu şekilde de tanımlanabilir.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">declare</span> -A dizi
+<span class="name variable">dizi</span><span class="operator">=([</span>kirmizi<span class="operator">]=</span>elma <span class="operator">[</span>sari<span class="operator">]=</span>muz <span class="operator">[</span>yesil<span class="operator">]=</span>limon <span class="operator">[</span>turuncu<span class="operator">]=</span>portakal<span class="operator">)</span>
+<span class="keyword">for</span> isim in <span class="literal string interpol">${</span><span class="punctuation">!dizi[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+    <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="name variable">$isim</span><span class="literal string double"> &quot;</span>
+<span class="keyword">done</span>
+<span class="name builtin">echo</span>
+-&gt; turuncu yesil sari kirmizi
+<span class="keyword">for</span> isim in <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+    <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="name variable">$isim</span><span class="literal string double"> &quot;</span>
+<span class="keyword">done</span>
+<span class="name builtin">echo</span>
+-&gt; portakal limon muz elma
+<span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[kirmizi]</span><span class="literal string interpol">}</span>
+-&gt; elma
+</pre>
 </div>
 <div class="section" id="klavyeden-deger-alma">
 <h1>Klavyeden değer alma</h1>
