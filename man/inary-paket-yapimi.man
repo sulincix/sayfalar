@@ -1,0 +1,325 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "INARY PAKET YAPIMI"  "" "" ""
+.SH NAME
+Inary paket yapımı \- 
+.sp
+Bu anlatımda inary paketi oluşturma anlatılacaktır. Örnek paket olarak bash paketi üzerinden anlatılacakdır.
+.sp
+Tüm adımlar root yetkisi gerektirir.
+.SH GEREKENLER
+.sp
+Nosystemd bir dağıtım üzerinde chroot içerisinden çalışan sulin yada kurulu bir sulin gerekmektedir.
+.sp
+Paket yapmak isteyen kişinin python3 programlama dili bilmesi gerekmektedir.
+.sp
+Derleme yapacak bilgisayarın yeterince güçlü bir işlemciye sahip olması gereklidir.
+.SH DERLEME ORTAMININ HAZIRLANMASI
+.sp
+İlk olarak inary\-devel kaynaktan derlenecektir. Kaynak kodu git üzerinden çekip kuralım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+git clone https://gitlab.com/sulinos/inary \-b develop
+cd inary
+make && make install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ardından \fBsystem.devel\fP componentini kuralım. Burada temel derleyiciler bulunur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+inary it \-c system.devel
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Derleme işlemleri /var/inary dizini içerisinde gerçekleşecektir. Buraya isterseniz farklı bir disk bağlayabilirsiniz.
+Derlemenin hızlı olması ve diske yüklenmemesi için buraya ramdisk bağlamanızı öneririm. Ram miktarının yeteri kadar fazla olduğundan emin olur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+mkdir /var/inary
+mount \-t tmpfs tmpfs /var/inary
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH TASLAK HAZIRLAMA
+.sp
+\fBinary\-template\fP komutunu kullanarak şablon oluşturalım. İsim ve adres zorunlu parametredir.
+Nasıl kullanıldığını öğrenmek için \fIinary\-template \-\-help\fP çalıştırın.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+inary\-template \-n bash \-a "https://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz" \-v "5.1.8"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bize otomatik olarak 3 tane dosya üretti.
+.INDENT 0.0
+.IP \(bu 2
+\fBactions.py\fP dosyası nasıl derleneceğini anlatan dosyadır.
+.IP \(bu 2
+\fBpspec.xml\fP dosyası paket bilgisinin bulunduğu dosyadır. Inary bu dosyayı kullanır.
+.IP \(bu 2
+\fBpspec.py\fP dosyası xml üretmek için kullanılabilen ek dosyadır. \fBgenpspec\fP komutu ile xml haline çevirilebilir.
+.UNINDENT
+.sp
+pspec.py formatı inary tarafından kullanılmaz. Bu yüzden bu dosyayı düzenledikten sonra pspec.xml dosyasını güncellemelisiniz. Bu dosyayı kullanmayıp elle pspec.xml dosyasını düzenleyebilirsiniz. SulinOS kaynak depolarında pspec.py formatındaki dosyalar mevcut değildir.
+.sp
+pspec.xml dosyasını kullanarak pspec.py üretmek için ise \fBrevpspec\fP komutunu kullanmalısınız. Bu komut kısmen kararlı değildir.
+.sp
+Derlemeye hazır hale gelmiş talimatları \fBinary bi\fP kullanarak dertiriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+inary bi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBinary\-template\fP ile üretilen pspec.xml veya pspec.py dosyalarını düzenlemek kolay olduğu için içeriği ile ilgili detaylı bilgilere yazının devamında değineceğim. \fBactions.py\fP dosyasının yapısını ve \fBactionsapi\fP kütüphanesini anlatarak devam edelim.
+.SH ACTIONS.PY DOSYASI
+.sp
+Bu dosyada python3 ile yazılır. Sırasıyla \fBsetup build check install\fP fonksionları mevcutsa çalıştırılır. Bu dosyada derleme işlemi yapılırken \fBactionsapi\fP adı verilen inary kaynak kodu ile beraber gelen bir kütüphane kullanılır. Bash derlemek için aşağıdakine benzer bir actions dosyası yazılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+from inary.actionsapi import inarytools
+from inary.actionsapi import autotools
+
+def setup():
+    autotools\&.configure()
+
+def build():
+    autotools\&.make()
+
+def build():
+    autotools\&.install()
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte kullanımı zorunlu değildir. Bu actions dosyamız aşağıdakine benzer şekilde bir komut çalıştırarak derleme yapar.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&./configure \-\-prefix=/usr # autotools.configure()
+make \-j$(nproc) # autotools.make()
+make install DESTDIR=/paketleme/dizini # autotools.install()
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Actionsapi içerisindeki her aracın birer \fBconfigure\fP, \fBmake\fP ve \fBinstall\fP fonksionu bulunur. kullanım şekilleri de aynıdır. Bu sayede kopyala yapıştır mantığı ile ilerleyerek hızlıca onlarca paket yapabilirsiniz. (Araçtan kasıt: autotools cmaketools mesontools ...)
+.sp
+Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan \fIget_actionsapi_functions\fP betiğini çalıştırınız.
+.SH 0. SHELLTOOLS
+.sp
+Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.
+.sp
+Dizin değiştirmek için \fBcd\fP dizin içeriği listesi almak için \fBls\fP Komut çalıştırmak için ise \fBsystem\fP fonksionları kullanılır. Çevresel değişken ayarı için ise export kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- cd(directoryName=\(aq\(aq):
+\- ls(source):
+\- system(command):
+\- export(key, value):
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dizin veya dosya isimleri ile ilgili işlemler için aşağıdaki fonksionlar kullanılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- realPath(filePath):
+\- baseName(filePath):
+\- dirName(filePath):
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Erişim ve varlık kontrolleri aşağıdaki fonksionlar ile yapılır. Bunlar boolean değer döndürür.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- can_access_file(filePath):
+\- can_access_directory(destinationDirectory):
+\- isLink(filePath):
+\- isFile(filePath):
+\- isDirectory(filePath):
+\- isEmpty(filePath):
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dizin oluşturmak için \fBmakedirs\fP kullanılır. Bu fonksion eğer alt dizinler yoksa onlarla beraber oluşturur. (bir nevi mkdir \-p gibi)
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- makedirs(destinationDirectory):
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- echo(destionationFile, content):
+\- chmod(filePath, mode=0o755):
+\- chown(filePath, uid=\(aqroot\(aq, gid=\(aqroot\(aq):
+\- sym(source, destination):
+\- unlink(pattern):
+\- unlinkDir(sourceDirectory):
+\- move(source, destination):
+\- copy(source, destination, sym=True):
+\- copytree(source, destination, sym=True):
+\- touch(filePath):
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH 1. AUTOTOOLS
+.sp
+Autotools kütüphanesi \fI\&./configure\fP, \fImake\fP, \fImake install\fP şeklinde derlenen kaynaklar için kullanılır.
+.sp
+Autotools fonksionları aşağıdaki gibidir:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+inary/actionsapi/autotools.py:
+  \- configure(parameters=\(aq\(aq): ./configure \-\-prefix=/usr ...
+  \- rawConfigure(parameters=\(aq\(aq): prefix olmadan configure
+  \- compile(parameters=\(aq\(aq): gcc kullanarak derleme yapar (gcc ...)
+  \- make(parameters=\(aq\(aq): make komutunu çalıştırır
+  \- fixInfoDir(): paketleme dizinindeki /usr/share/info/dir dizinini siler
+  \- fixpc(): 32bit pkgconfig dosyalarının konumunu düzeltir
+  \- install(parameters=\(aq\(aq, argument=\(aqinstall\(aq): make install çalıştırır
+  \- rawInstall(parameters=\(aq\(aq, argument=\(aqinstall\(aq): destdir olmadan install
+  \- aclocal(parameters=\(aq\(aq): aclocal.m4 dosyalı üretir
+  \- autogen(noconfigure=True): bash autogen.sh
+  \- autoconf(parameters=\(aq\(aq): autoconf çalıştırır
+  \- autoreconf(parameters=\(aq\(aq): autoreconf çalıştırır
+  \- automake(parameters=\(aq\(aq): automake çalıştırır
+  \- autoheader(parameters=\(aq\(aq): autoheader çalıştırır
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH 2. MESONTOOLS
+.sp
+Mesontools kütüphanesi \fImeson build\fP, \fIninja \-C build\fP, \fIninja \-C build install\fP şeklinde derlenen kaynaklar için kullanılır.
+.sp
+Mesontools fonksionları aşağıdaki gibidir:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+inary/actionsapi/mesontools.py:
+  \- fixpc(): 32bit pkgconfig dosyalarının konumunu düzeltir
+  \- configure(parameters="", type="meson"): cmake yada meson kullanarak configure işlemi (varsayılan meson)
+  \- meson_configure(parameters=""): meson build
+  \- cmake_configure(parameters=""): mkdir build && cd build && cmake \-G ninja ..
+  \- ninja_build(parameters=""): ninja \-C build
+  \- make(parameters=""): ninja_build ile aynı
+  \- ninja_install(parameters=""): ninja \-C install
+  \- install(parameters=""):  ninja_install ile aynı
+  \- ninja_check(): ninja \-C build check
+  \- check(): ninja_check ile aynı
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH 3. CMAKETOOLS
+.sp
+Cmaketools kütüphanesi \fIcmake ..\fP, \fImake\fP, \fImake install\fP şeklinde derlenen kaynaklar için kullanılır.
+.sp
+Cmake fonksionları aşağıdaki gibidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+inary/actionsapi/cmaketools.py:
+  \- configure(parameters=\(aq\(aq,installPrefix=\(aq\(aq, sourceDir=\(aq.\(aq): cmake kullanarak configure işlemi
+  \- make(parameters=\(aq\(aq): make çalıştırır
+  \- fixInfoDir(): paketleme dizinindeki /usr/share/info/dir dizinini siler
+  \- install(parameters=\(aq\(aq, argument=\(aqinstall\(aq): make install çalıştırır
+  \- rawInstall(parameters=\(aq\(aq, argument=\(aqinstall\(aq): destdir olmadan make install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.

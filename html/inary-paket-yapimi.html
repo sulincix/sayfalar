@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<title>Inary paket yapımı</title>
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<div class="document" id="inary-paket-yapimi">
+<h1 class="title">Inary paket yapımı</h1>
+
+<p>Bu anlatımda inary paketi oluşturma anlatılacaktır. Örnek paket olarak bash paketi üzerinden anlatılacakdır.</p>
+<p>Tüm adımlar root yetkisi gerektirir.</p>
+<div class="section" id="gerekenler">
+<h1>Gerekenler</h1>
+<p>Nosystemd bir dağıtım üzerinde chroot içerisinden çalışan sulin yada kurulu bir sulin gerekmektedir.</p>
+<p>Paket yapmak isteyen kişinin python3 programlama dili bilmesi gerekmektedir.</p>
+<p>Derleme yapacak bilgisayarın yeterince güçlü bir işlemciye sahip olması gereklidir.</p>
+</div>
+<div class="section" id="derleme-ortaminin-hazirlanmasi">
+<h1>Derleme ortamının hazırlanması</h1>
+<p>İlk olarak inary-devel kaynaktan derlenecektir. Kaynak kodu git üzerinden çekip kuralım.</p>
+<pre class="code shell literal-block">
+git clone https://gitlab.com/sulinos/inary -b develop
+<span class="name builtin">cd</span> inary
+make <span class="operator">&amp;&amp;</span> make install
+</pre>
+<p>Ardından <strong>system.devel</strong> componentini kuralım. Burada temel derleyiciler bulunur.</p>
+<pre class="code shell literal-block">
+inary it -c system.devel
+</pre>
+<p>Derleme işlemleri /var/inary dizini içerisinde gerçekleşecektir. Buraya isterseniz farklı bir disk bağlayabilirsiniz.
+Derlemenin hızlı olması ve diske yüklenmemesi için buraya ramdisk bağlamanızı öneririm. Ram miktarının yeteri kadar fazla olduğundan emin olur.</p>
+<pre class="code shell literal-block">
+mkdir /var/inary
+mount -t tmpfs tmpfs /var/inary
+</pre>
+</div>
+<div class="section" id="taslak-hazirlama">
+<h1>Taslak hazırlama</h1>
+<p><strong>inary-template</strong> komutunu kullanarak şablon oluşturalım. İsim ve adres zorunlu parametredir.
+Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çalıştırın.</p>
+<pre class="code shell literal-block">
+inary-template -n bash -a <span class="literal string double">&quot;https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz&quot;</span> -v <span class="literal string double">&quot;5.1.8&quot;</span>
+</pre>
+<p>Bize otomatik olarak 3 tane dosya üretti.</p>
+<ul class="simple">
+<li><strong>actions.py</strong> dosyası nasıl derleneceğini anlatan dosyadır.</li>
+<li><strong>pspec.xml</strong> dosyası paket bilgisinin bulunduğu dosyadır. Inary bu dosyayı kullanır.</li>
+<li><strong>pspec.py</strong> dosyası xml üretmek için kullanılabilen ek dosyadır. <strong>genpspec</strong> komutu ile xml haline çevirilebilir.</li>
+</ul>
+<p>pspec.py formatı inary tarafından kullanılmaz. Bu yüzden bu dosyayı düzenledikten sonra pspec.xml dosyasını güncellemelisiniz. Bu dosyayı kullanmayıp elle pspec.xml dosyasını düzenleyebilirsiniz. SulinOS kaynak depolarında pspec.py formatındaki dosyalar mevcut değildir.</p>
+<p>pspec.xml dosyasını kullanarak pspec.py üretmek için ise <strong>revpspec</strong> komutunu kullanmalısınız. Bu komut kısmen kararlı değildir.</p>
+<p>Derlemeye hazır hale gelmiş talimatları <strong>inary bi</strong> kullanarak dertiriz.</p>
+<pre class="code shell literal-block">
+inary bi
+</pre>
+<p><strong>inary-template</strong> ile üretilen pspec.xml veya pspec.py dosyalarını düzenlemek kolay olduğu için içeriği ile ilgili detaylı bilgilere yazının devamında değineceğim. <strong>actions.py</strong> dosyasının yapısını ve <strong>actionsapi</strong> kütüphanesini anlatarak devam edelim.</p>
+</div>
+<div class="section" id="actions-py-dosyasi">
+<h1>Actions.py dosyası</h1>
+<p>Bu dosyada python3 ile yazılır. Sırasıyla <strong>setup build check install</strong> fonksionları mevcutsa çalıştırılır. Bu dosyada derleme işlemi yapılırken <strong>actionsapi</strong> adı verilen inary kaynak kodu ile beraber gelen bir kütüphane kullanılır. Bash derlemek için aşağıdakine benzer bir actions dosyası yazılabilir.</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span>
+<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span>
+
+<span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span>
+    <span class="name">autotools</span><span class="operator">.</span><span class="name">configure</span><span class="punctuation">()</span>
+
+<span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
+    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span>
+
+<span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
+    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span>
+</pre>
+<p>Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte kullanımı zorunlu değildir. Bu actions dosyamız aşağıdakine benzer şekilde bir komut çalıştırarak derleme yapar.</p>
+<pre class="code shell literal-block">
+./configure --prefix<span class="operator">=</span>/usr <span class="comment single"># autotools.configure()
+</span>make -j<span class="keyword">$(</span>nproc<span class="keyword">)</span> <span class="comment single"># autotools.make()
+</span>make install <span class="name variable">DESTDIR</span><span class="operator">=</span>/paketleme/dizini <span class="comment single"># autotools.install()</span>
+</pre>
+<p>Actionsapi içerisindeki her aracın birer <strong>configure</strong>, <strong>make</strong> ve <strong>install</strong> fonksionu bulunur. kullanım şekilleri de aynıdır. Bu sayede kopyala yapıştır mantığı ile ilerleyerek hızlıca onlarca paket yapabilirsiniz. (Araçtan kasıt: autotools cmaketools mesontools ...)</p>
+<p>Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan <cite>get_actionsapi_functions</cite> betiğini çalıştırınız.</p>
+</div>
+<div class="section" id="shelltools">
+<h1>0. Shelltools</h1>
+<p>Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.</p>
+<p>Dizin değiştirmek için <strong>cd</strong> dizin içeriği listesi almak için <strong>ls</strong> Komut çalıştırmak için ise <strong>system</strong> fonksionları kullanılır. Çevresel değişken ayarı için ise export kullanılır.</p>
+<pre class="code shell literal-block">
+- cd<span class="operator">(</span><span class="name variable">directoryName</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:
+- ls<span class="operator">(</span><span class="name builtin">source</span><span class="operator">)</span>:
+- system<span class="operator">(</span><span class="name builtin">command</span><span class="operator">)</span>:
+- export<span class="operator">(</span>key, value<span class="operator">)</span>:
+</pre>
+<p>Dizin veya dosya isimleri ile ilgili işlemler için aşağıdaki fonksionlar kullanılabilir.</p>
+<pre class="code shell literal-block">
+- realPath<span class="operator">(</span>filePath<span class="operator">)</span>:
+- baseName<span class="operator">(</span>filePath<span class="operator">)</span>:
+- dirName<span class="operator">(</span>filePath<span class="operator">)</span>:
+</pre>
+<p>Erişim ve varlık kontrolleri aşağıdaki fonksionlar ile yapılır. Bunlar boolean değer döndürür.</p>
+<pre class="code shell literal-block">
+- can_access_file<span class="operator">(</span>filePath<span class="operator">)</span>:
+- can_access_directory<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:
+- isLink<span class="operator">(</span>filePath<span class="operator">)</span>:
+- isFile<span class="operator">(</span>filePath<span class="operator">)</span>:
+- isDirectory<span class="operator">(</span>filePath<span class="operator">)</span>:
+- isEmpty<span class="operator">(</span>filePath<span class="operator">)</span>:
+</pre>
+<p>Dizin oluşturmak için <strong>makedirs</strong> kullanılır. Bu fonksion eğer alt dizinler yoksa onlarla beraber oluşturur. (bir nevi mkdir -p gibi)</p>
+<pre class="code shell literal-block">
+- makedirs<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:
+</pre>
+<p>Dosya işlemleri için aşağıdaki fonksionlar kullanılır.</p>
+<pre class="code shell literal-block">
+- echo<span class="operator">(</span>destionationFile, content<span class="operator">)</span>:
+- chmod<span class="operator">(</span>filePath, <span class="name variable">mode</span><span class="operator">=</span>0o755<span class="operator">)</span>:
+- chown<span class="operator">(</span>filePath, <span class="name variable">uid</span><span class="operator">=</span><span class="literal string single">'root'</span>, <span class="name variable">gid</span><span class="operator">=</span><span class="literal string single">'root'</span><span class="operator">)</span>:
+- sym<span class="operator">(</span>source, destination<span class="operator">)</span>:
+- unlink<span class="operator">(</span>pattern<span class="operator">)</span>:
+- unlinkDir<span class="operator">(</span>sourceDirectory<span class="operator">)</span>:
+- move<span class="operator">(</span>source, destination<span class="operator">)</span>:
+- copy<span class="operator">(</span>source, destination, <span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:
+- copytree<span class="operator">(</span>source, destination, <span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:
+- touch<span class="operator">(</span>filePath<span class="operator">)</span>:
+</pre>
+</div>
+<div class="section" id="autotools">
+<h1>1. Autotools</h1>
+<p>Autotools kütüphanesi <cite>./configure</cite>, <cite>make</cite>, <cite>make install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
+<p>Autotools fonksionları aşağıdaki gibidir:</p>
+<pre class="code shell literal-block">
+inary/actionsapi/autotools.py:
+  - configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: ./configure --prefix<span class="operator">=</span>/usr ...
+  - rawConfigure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: prefix olmadan configure
+  - compile<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: gcc kullanarak derleme yapar <span class="operator">(</span>gcc ...<span class="operator">)</span>
+  - make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: make komutunu çalıştırır
+  - fixInfoDir<span class="operator">()</span>: paketleme dizinindeki /usr/share/info/dir dizinini siler
+  - fixpc<span class="operator">()</span>: 32bit pkgconfig dosyalarının konumunu düzeltir
+  - install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: make install çalıştırır
+  - rawInstall<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: destdir olmadan install
+  - aclocal<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: aclocal.m4 dosyalı üretir
+  - autogen<span class="operator">(</span><span class="name variable">noconfigure</span><span class="operator">=</span>True<span class="operator">)</span>: bash autogen.sh
+  - autoconf<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: autoconf çalıştırır
+  - autoreconf<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: autoreconf çalıştırır
+  - automake<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: automake çalıştırır
+  - autoheader<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: autoheader çalıştırır
+</pre>
+</div>
+<div class="section" id="mesontools">
+<h1>2. Mesontools</h1>
+<p>Mesontools kütüphanesi <cite>meson build</cite>, <cite>ninja -C build</cite>, <cite>ninja -C build install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
+<p>Mesontools fonksionları aşağıdaki gibidir:</p>
+<pre class="code shell literal-block">
+inary/actionsapi/mesontools.py:
+  - fixpc<span class="operator">()</span>: 32bit pkgconfig dosyalarının konumunu düzeltir
+  - configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span>, <span class="name variable">type</span><span class="operator">=</span><span class="literal string double">&quot;meson&quot;</span><span class="operator">)</span>: cmake yada meson kullanarak configure işlemi <span class="operator">(</span>varsayılan meson<span class="operator">)</span>
+  - meson_configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: meson build
+  - cmake_configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: mkdir build <span class="operator">&amp;&amp;</span> <span class="name builtin">cd</span> build <span class="operator">&amp;&amp;</span> cmake -G ninja ..
+  - ninja_build<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: ninja -C build
+  - make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: ninja_build ile aynı
+  - ninja_install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: ninja -C install
+  - install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:  ninja_install ile aynı
+  - ninja_check<span class="operator">()</span>: ninja -C build check
+  - check<span class="operator">()</span>: ninja_check ile aynı
+</pre>
+</div>
+<div class="section" id="cmaketools">
+<h1>3. Cmaketools</h1>
+<p>Cmaketools kütüphanesi <cite>cmake ..</cite>, <cite>make</cite>, <cite>make install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
+<p>Cmake fonksionları aşağıdaki gibidir.</p>
+<pre class="code shell literal-block">
+inary/actionsapi/cmaketools.py:
+  - configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,installPrefix<span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">sourceDir</span><span class="operator">=</span><span class="literal string single">'.'</span><span class="operator">)</span>: cmake kullanarak configure işlemi
+  - make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: make çalıştırır
+  - fixInfoDir<span class="operator">()</span>: paketleme dizinindeki /usr/share/info/dir dizinini siler
+  - install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: make install çalıştırır
+  - rawInstall<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: destdir olmadan make install
+</pre>
+</div>
+</div>
+</body>
+</html>
