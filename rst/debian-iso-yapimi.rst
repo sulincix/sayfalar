@@ -125,8 +125,8 @@ Mevcut bir iso dosyasını düzenleyenler Bu aşamayı atlayabilirler.
 Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (isteğe bağlı)
 
 .. code-block:: shell
-
-	☭ bash <(https://liquorix.net/add-liquorix-repo.sh)
+	☭ apt-get install curl
+	☭ bash <(curl -L https://liquorix.net/add-liquorix-repo.sh)
 	☭ apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
 	
 3. Grub kuralım.
