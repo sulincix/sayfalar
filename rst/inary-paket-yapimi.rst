@@ -91,10 +91,52 @@ Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte k
 
 Actionsapi içerisindeki her aracın birer **configure**, **make** ve **install** fonksionu bulunur. kullanım şekilleri de aynıdır. Bu sayede kopyala yapıştır mantığı ile ilerleyerek hızlıca onlarca paket yapabilirsiniz. (Araçtan kasıt: autotools cmaketools mesontools ...)
 
+Actions ile inary paket sistemi arasında çevresel değişkenler yardımı ile bağlantı kurulur. Bazı önemli çevresel değişkenler ve örnek değerleri aşağıda verilmiştir.
+
+.. code-block:: shell
+
+	SRCDIR=/tmp/inary/test-1.0.0-1/work
+	SRC_RELEASE=1
+	OPERATION=setup
+	INSTALL_DIR=/var/inary/test-1.0.0-1/install
+	PKG_DIR=/var/inary/test-1.0.0-1
+	WORK_DIR=/var/inary/test-1.0.0-1/work
+	SRC_VERSION=1.0.0
+	INARY_BUILD_TYPE=
+	SRC_NAME=test
+
+Burada **WORK_DIR** çevresel değişkeni inary tarafından otomatik olarak belirlenir. Bunu değiştirmek için actions betiğinin başına **WorkDir=dizinyolu** şeklinde belirtmelisiniz. **INARY_BUILD_TYPE** çevresel değişkeni kullanarak bir paket ile birden çok türde veya yapılandırmada paket üretmek mümkündür. Örneğin Sulin depolarında 32bit kütüphaneleri üretmek için emul32 adında özel bir değer tanımlanır. Inary her tanımlanan build type için tüm fonksionları tekrar çalıştırır. Bu değeri kontrol ederek kodu istediğiniz yönte ayarlayabilirsiniz. Örneğin aşağıda bir paketin 32bit kütüphanesini de derlemek için:
+
+
+.. code-block:: python
+
+	from inary.actionsapi import inarytools
+	from inary.actionsapi import autotools
+	from inary.actionsapi import get
+	
+	def setup():
+	    opts = "--prefix=/usr" # parametreler
+	    if get.buildTYPE() == "emul32": # build type türünü çeker
+	        shelltools.export("CC","{} -m32".format(get.CC())) # derleyiciyi 32bit moduna alır
+	        shelltools.export("CXX","{} -m32".format(get.CXX())) # derleyiciyi 32bit moduna alır
+	        opts += " --libdir=/usr/lib32"
+	    autotools.rawConfigure(opts)
+	    
+	def build():
+	    autotools.make()
+	    
+	def build():
+	    autotools.install()
+	    if get.buildTYPE() == "emul32":
+	        inarytools.removeDir("/usr/bin") # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.
+
+
+Burada önce **emul32** için çalıştırılır. Sonra tanımlanmamış olan varsayılan tür için çalıştırılır. Yukarıdakö örnekte derleyiciyi 32bit olarak ayarlayıp derleme yaptırdık. daha sonra 32bit olarak derlenen kısımdaki /usr/bin/ dizinini sildik.
+
 Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan `get_actionsapi_functions` betiğini çalıştırınız.
 
 0. Shelltools
-^^^^^^^^^^^^^
+"""""""""""""
 Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.
 
 Dizin değiştirmek için **cd** dizin içeriği listesi almak için **ls** Komut çalıştırmak için ise **system** fonksionları kullanılır. Çevresel değişken ayarı için ise export kullanılır.
@@ -150,7 +192,7 @@ Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
 
 
 1. Autotools
-^^^^^^^^^^^^
+""""""""""""
 Autotools kütüphanesi `./configure`, `make`, `make install` şeklinde derlenen kaynaklar için kullanılır.
 
 Autotools fonksionları aşağıdaki gibidir:
@@ -174,8 +216,7 @@ Autotools fonksionları aşağıdaki gibidir:
 	  - autoheader(parameters=''): autoheader çalıştırır
 
 2. Mesontools
-^^^^^^^^^^^^^
-
+"""""""""""""
 Mesontools kütüphanesi `meson build`, `ninja -C build`, `ninja -C build install` şeklinde derlenen kaynaklar için kullanılır.
 
 Mesontools fonksionları aşağıdaki gibidir:
@@ -195,7 +236,7 @@ Mesontools fonksionları aşağıdaki gibidir:
 	  - check(): ninja_check ile aynı
 
 3. Cmaketools
-^^^^^^^^^^^^^
+"""""""""""""
 Cmaketools kütüphanesi `cmake ..`, `make`, `make install` şeklinde derlenen kaynaklar için kullanılır.
 
 Cmake fonksionları aşağıdaki gibidir.
@@ -208,4 +249,112 @@ Cmake fonksionları aşağıdaki gibidir.
 	  - fixInfoDir(): paketleme dizinindeki /usr/share/info/dir dizinini siler
 	  - install(parameters='', argument='install'): make install çalıştırır
 	  - rawInstall(parameters='', argument='install'): destdir olmadan make install
+
+4. Inarytools
+"""""""""""""
+Inarytools kütüphanesi derleme işlemine yardımcı olan bir araçtır. Dosya işlemleri ve bazı uzun kodları kısatlma amaçlı yapılmıştır. 
+
+Destination konumlarını tanımlarken paket içeriğindeki yollarını yazmamız yeterlidir.
+
+Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örneklerini kaynak koddan bulabilirsiniz.
+
+.. code-block:: shell
+
+	  - executable_insinto(destinationDirectory, *sourceFiles):
+	  - readable_insinto(destinationDirectory, *sourceFiles):
+	  - lib_insinto(sourceFile, destinationDirectory, permission=644):
+	  - dobin(sourceFile, destinationDirectory='/usr/bin'):
+	  - dopixmaps(sourceFile, destinationDirectory='/usr/share/pixmaps'):
+	  - dodir(destinationDirectory):
+	  - dodoc(*sourceFiles, **kw):
+	  - dohtml(*sourceFiles, **kw):
+	  - doinfo(*sourceFiles):
+	  - dolib(sourceFile, destinationDirectory='/usr/lib', mode=755):
+	  - doman(*sourceFiles, pageDirectory=None):
+	  - domo(sourceFile, locale, destinationFile,
+	  - domove(sourceFile, destination, destinationFile=''):
+	  - rename(sourceFile, destinationFile):
+	  - dosed(sources, findPattern, replacePattern='', deleteLine=False, level=-1):
+	  - dosbin(sourceFile, destinationDirectory='/usr/sbin'):
+	  - dosym(sourceFile, destinationFile):
+	  - insinto(destinationDirectory, sourceFile, destinationFile='', sym=True):
+	  - newdoc(sourceFile, destinationFile):
+	  - newman(sourceFile, destinationFile):
+	  - remove(sourceFile):
+	  - removeDir(destinationDirectory):
+
+5. Get
+""""""
+Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. get fonksionları parametre almaz ve string türünden değer döndürür.
+
+.. code-block:: shell
+
+	  - curDIR():         - docDIR():            - srcVERSION():     - qtDIR():
+  	  - curKERNEL():      - sbinDIR():           - srcRELEASE():     - existBinary(bin):
+	  - curPYTHON():      - infoDIR():           - srcTAG():         - getBinutilsInfo(util):
+	  - curPERL():        - manDIR():            - srcDIR():         - AR():
+	  - ENV(environ):     - dataDIR():           - ARCH():           - AS():
+	  - pkgDIR():         - confDIR():           - HOST():           - CC():
+	  - workDIR():        - localstateDIR():     - CHOST():          - CXX():
+	  - operation():      - libexecDIR():        - CFLAGS():         - LD():
+	  - installDIR():     - libDIR():            - CXXFLAGS():       - NM():
+	  - lsbINFO():        - defaultprefixDIR():  - LDFLAGS():        - RANLIB():
+	  - kernelVERSION():  - emul32prefixDIR():   - makeJOBS():       - F77():
+	  - srcNAME():        - kdeDIR():            - buildTYPE():      - GCJ():
+
+Pspec.xml dosyası
+^^^^^^^^^^^^^^^^^
+Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunarak gereken değerler alınarak derleme işlemi yapılır. **Source**, **Package** ve **History** olmak üzere 3 bölümden oluşur.
+
+Örneğin aşağıda örnek pspec dosyası verilmiştir.
+
+.. code-block:: xml
+
+	<?xml version="1.0" ?>
+	<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd">
+	<INARY>
+	    <Source>
+	        <Name>bash</Name>
+	        <Homepage>https://www.gnu.org/software/bash</Homepage>
+	        <Packager>
+	             <Name>Ali Rıza KESKİN</Name>
+	             <Email>paledega@yandex.ru</Email>
+	        </Packager>
+	        <License>GPLv2</License>
+	        <IsA>app:console</IsA>
+	        <PartOf>system.base</PartOf>
+	        <Summary>Bourne-Again shell</Summary>
+	        <Description>GNU bash shell</Description>
+	        <Archive sha1sum="d116b469b9e6ea5264a74661d3a4c797da7f997b">https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz</Archive>
+	        <BuildDependencies>
+	            <Dependency>ncurses-devel</Dependency>
+	            <Dependency>readline-devel</Dependency>
+	        </BuildDependencies>
+	    </Source>
+
+	    <Package>
+	        <Name>bash</Name>
+	        <RuntimeDependencies>
+	            <Dependency>ncurses</Dependency>
+	        </RuntimeDependencies>
+	        <Files>
+	            <Path fileType="config">/etc</Path>
+	            <Path fileType="executable">/bin</Path>
+	            <Path fileType="executable">/usr/bin</Path>
+	            <Path fileType="info">/usr/share/info</Path>
+	            <Path fileType="header">/usr/include</Path>
+	            <Path fileType="library">/usr/lib/</Path>
+	            <Path fileType="localedata">/usr/share/locale</Path>
+	        </Files>
+	    </Package>
+	    <History>
+	        <Update release="1">
+	            <Date>2019-01-17</Date>
+	            <Version>5.0</Version>
+	            <Comment>First release</Comment>
+	            <Name>Ali Rıza KESKİN</Name>
+	            <Email>paledega@yandex.ru</Email>
+	        </Update>
+	    </History>
+	</INARY>
 

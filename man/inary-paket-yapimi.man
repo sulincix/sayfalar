@@ -164,8 +164,60 @@ make install DESTDIR=/paketleme/dizini # autotools.install()
 .sp
 Actionsapi içerisindeki her aracın birer \fBconfigure\fP, \fBmake\fP ve \fBinstall\fP fonksionu bulunur. kullanım şekilleri de aynıdır. Bu sayede kopyala yapıştır mantığı ile ilerleyerek hızlıca onlarca paket yapabilirsiniz. (Araçtan kasıt: autotools cmaketools mesontools ...)
 .sp
+Actions ile inary paket sistemi arasında çevresel değişkenler yardımı ile bağlantı kurulur. Bazı önemli çevresel değişkenler ve örnek değerleri aşağıda verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+SRCDIR=/tmp/inary/test\-1.0.0\-1/work
+SRC_RELEASE=1
+OPERATION=setup
+INSTALL_DIR=/var/inary/test\-1.0.0\-1/install
+PKG_DIR=/var/inary/test\-1.0.0\-1
+WORK_DIR=/var/inary/test\-1.0.0\-1/work
+SRC_VERSION=1\&.0.0
+INARY_BUILD_TYPE=
+SRC_NAME=test
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada \fBWORK_DIR\fP çevresel değişkeni inary tarafından otomatik olarak belirlenir. Bunu değiştirmek için actions betiğinin başına \fBWorkDir=dizinyolu\fP şeklinde belirtmelisiniz. \fBINARY_BUILD_TYPE\fP çevresel değişkeni kullanarak bir paket ile birden çok türde veya yapılandırmada paket üretmek mümkündür. Örneğin Sulin depolarında 32bit kütüphaneleri üretmek için emul32 adında özel bir değer tanımlanır. Inary her tanımlanan build type için tüm fonksionları tekrar çalıştırır. Bu değeri kontrol ederek kodu istediğiniz yönte ayarlayabilirsiniz. Örneğin aşağıda bir paketin 32bit kütüphanesini de derlemek için:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+from inary.actionsapi import inarytools
+from inary.actionsapi import autotools
+from inary.actionsapi import get
+
+def setup():
+    opts = "\-\-prefix=/usr" # parametreler
+    if get\&.buildTYPE() == "emul32": # build type türünü çeker
+        shelltools\&.export("CC","{} \-m32"\&.format(get\&.CC())) # derleyiciyi 32bit moduna alır
+        shelltools\&.export("CXX","{} \-m32"\&.format(get\&.CXX())) # derleyiciyi 32bit moduna alır
+        opts += " \-\-libdir=/usr/lib32"
+    autotools\&.rawConfigure(opts)
+
+def build():
+    autotools\&.make()
+
+def build():
+    autotools\&.install()
+    if get\&.buildTYPE() == "emul32":
+        inarytools\&.removeDir("/usr/bin") # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada önce \fBemul32\fP için çalıştırılır. Sonra tanımlanmamış olan varsayılan tür için çalıştırılır. Yukarıdakö örnekte derleyiciyi 32bit olarak ayarlayıp derleme yaptırdık. daha sonra 32bit olarak derlenen kısımdaki /usr/bin/ dizinini sildik.
+.sp
 Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan \fIget_actionsapi_functions\fP betiğini çalıştırınız.
-.SH 0. SHELLTOOLS
+.SS 0. Shelltools
 .sp
 Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.
 .sp
@@ -247,7 +299,7 @@ Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
 .fi
 .UNINDENT
 .UNINDENT
-.SH 1. AUTOTOOLS
+.SS 1. Autotools
 .sp
 Autotools kütüphanesi \fI\&./configure\fP, \fImake\fP, \fImake install\fP şeklinde derlenen kaynaklar için kullanılır.
 .sp
@@ -276,7 +328,7 @@ inary/actionsapi/autotools.py:
 .fi
 .UNINDENT
 .UNINDENT
-.SH 2. MESONTOOLS
+.SS 2. Mesontools
 .sp
 Mesontools kütüphanesi \fImeson build\fP, \fIninja \-C build\fP, \fIninja \-C build install\fP şeklinde derlenen kaynaklar için kullanılır.
 .sp
@@ -301,7 +353,7 @@ inary/actionsapi/mesontools.py:
 .fi
 .UNINDENT
 .UNINDENT
-.SH 3. CMAKETOOLS
+.SS 3. Cmaketools
 .sp
 Cmaketools kütüphanesi \fIcmake ..\fP, \fImake\fP, \fImake install\fP şeklinde derlenen kaynaklar için kullanılır.
 .sp
@@ -317,6 +369,129 @@ inary/actionsapi/cmaketools.py:
   \- fixInfoDir(): paketleme dizinindeki /usr/share/info/dir dizinini siler
   \- install(parameters=\(aq\(aq, argument=\(aqinstall\(aq): make install çalıştırır
   \- rawInstall(parameters=\(aq\(aq, argument=\(aqinstall\(aq): destdir olmadan make install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS 4. Inarytools
+.sp
+Inarytools kütüphanesi derleme işlemine yardımcı olan bir araçtır. Dosya işlemleri ve bazı uzun kodları kısatlma amaçlı yapılmıştır.
+.sp
+Destination konumlarını tanımlarken paket içeriğindeki yollarını yazmamız yeterlidir.
+.sp
+Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örneklerini kaynak koddan bulabilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- executable_insinto(destinationDirectory, *sourceFiles):
+\- readable_insinto(destinationDirectory, *sourceFiles):
+\- lib_insinto(sourceFile, destinationDirectory, permission=644):
+\- dobin(sourceFile, destinationDirectory=\(aq/usr/bin\(aq):
+\- dopixmaps(sourceFile, destinationDirectory=\(aq/usr/share/pixmaps\(aq):
+\- dodir(destinationDirectory):
+\- dodoc(*sourceFiles, **kw):
+\- dohtml(*sourceFiles, **kw):
+\- doinfo(*sourceFiles):
+\- dolib(sourceFile, destinationDirectory=\(aq/usr/lib\(aq, mode=755):
+\- doman(*sourceFiles, pageDirectory=None):
+\- domo(sourceFile, locale, destinationFile,
+\- domove(sourceFile, destination, destinationFile=\(aq\(aq):
+\- rename(sourceFile, destinationFile):
+\- dosed(sources, findPattern, replacePattern=\(aq\(aq, deleteLine=False, level=\-1):
+\- dosbin(sourceFile, destinationDirectory=\(aq/usr/sbin\(aq):
+\- dosym(sourceFile, destinationFile):
+\- insinto(destinationDirectory, sourceFile, destinationFile=\(aq\(aq, sym=True):
+\- newdoc(sourceFile, destinationFile):
+\- newman(sourceFile, destinationFile):
+\- remove(sourceFile):
+\- removeDir(destinationDirectory):
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS 5. Get
+.sp
+Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. get fonksionları parametre almaz ve string türünden değer döndürür.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\- curDIR():         \- docDIR():            \- srcVERSION():     \- qtDIR():
+\- curKERNEL():      \- sbinDIR():           \- srcRELEASE():     \- existBinary(bin):
+\- curPYTHON():      \- infoDIR():           \- srcTAG():         \- getBinutilsInfo(util):
+\- curPERL():        \- manDIR():            \- srcDIR():         \- AR():
+\- ENV(environ):     \- dataDIR():           \- ARCH():           \- AS():
+\- pkgDIR():         \- confDIR():           \- HOST():           \- CC():
+\- workDIR():        \- localstateDIR():     \- CHOST():          \- CXX():
+\- operation():      \- libexecDIR():        \- CFLAGS():         \- LD():
+\- installDIR():     \- libDIR():            \- CXXFLAGS():       \- NM():
+\- lsbINFO():        \- defaultprefixDIR():  \- LDFLAGS():        \- RANLIB():
+\- kernelVERSION():  \- emul32prefixDIR():   \- makeJOBS():       \- F77():
+\- srcNAME():        \- kdeDIR():            \- buildTYPE():      \- GCJ():
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PSPEC.XML DOSYASI
+.sp
+Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunarak gereken değerler alınarak derleme işlemi yapılır. \fBSource\fP, \fBPackage\fP ve \fBHistory\fP olmak üzere 3 bölümden oluşur.
+.sp
+Örneğin aşağıda örnek pspec dosyası verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+<?xml version="1.0" ?>
+<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary\-spec.dtd">
+<INARY>
+    <Source>
+        <Name>bash</Name>
+        <Homepage>https://www.gnu.org/software/bash</Homepage>
+        <Packager>
+             <Name>Ali Rıza KESKİN</Name>
+             <Email>paledega@yandex.ru</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <PartOf>system.base</PartOf>
+        <Summary>Bourne\-Again shell</Summary>
+        <Description>GNU bash shell</Description>
+        <Archive sha1sum="d116b469b9e6ea5264a74661d3a4c797da7f997b">https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>ncurses\-devel</Dependency>
+            <Dependency>readline\-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>bash</Name>
+        <RuntimeDependencies>
+            <Dependency>ncurses</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2019\-01\-17</Date>
+            <Version>5.0</Version>
+            <Comment>First release</Comment>
+            <Name>Ali Rıza KESKİN</Name>
+            <Email>paledega@yandex.ru</Email>
+        </Update>
+    </History>
+</INARY>
 .ft P
 .fi
 .UNINDENT
