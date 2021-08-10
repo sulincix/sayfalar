@@ -491,6 +491,7 @@ Archive türü ikili dosyaysa veya açılmayacaksa \fBtype="binary"\fP eklemeniz
        </Packager>
        <License>GPLv2</License>
        <IsA>app:console</IsA>
+       <!\-\-<Rfp>Bu paket deneyseldir</Rfp>\-\->
        <PartOf>system.base</PartOf>
        <Summary>Bourne\-Again shell</Summary>
        <Description>GNU bash shell</Description>
@@ -504,6 +505,8 @@ Archive türü ikili dosyaysa veya açılmayacaksa \fBtype="binary"\fP eklemeniz
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Eğer \fBRfp\fP tagı kullanırsanız paket \fBRfp\fP olarak oluşturulur. Bu paketler kararlı olmayan veya deneysel paketlerdir. Derlenirken ve kurulurken onay ister. Onay mesajını bu tagın arasına yazmalısınız. \fBRfp\fP paketler Sulin deposunda bulunmaz.
 .SH PACKAGE BÖLÜMÜ
 .sp
 Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. \fBName\fP, \fBFiles\fP kısımları zorunludur.

@@ -351,6 +351,7 @@ Archive türü ikili dosyaysa veya açılmayacaksa **type="binary"** eklemeniz g
 	        </Packager>
 	        <License>GPLv2</License>
 	        <IsA>app:console</IsA>
+	        <!--<Rfp>Bu paket deneyseldir</Rfp>-->
 	        <PartOf>system.base</PartOf>
 	        <Summary>Bourne-Again shell</Summary>
 	        <Description>GNU bash shell</Description>
@@ -360,6 +361,8 @@ Archive türü ikili dosyaysa veya açılmayacaksa **type="binary"** eklemeniz g
 	            <Dependency>readline-devel</Dependency>
 	        </BuildDependencies>
 	    </Source>
+
+Eğer **Rfp** tagı kullanırsanız paket **Rfp** olarak oluşturulur. Bu paketler kararlı olmayan veya deneysel paketlerdir. Derlenirken ve kurulurken onay ister. Onay mesajını bu tagın arasına yazmalısınız. **Rfp** paketler Sulin deposunda bulunmaz.
 
 Package bölümü
 ^^^^^^^^^^^^^^
