@@ -58,9 +58,8 @@ inary-template -n bash -a <span class="literal string double">&quot;https://ftp.
 inary bi
 </pre>
 <p><strong>inary-template</strong> ile üretilen pspec.xml veya pspec.py dosyalarını düzenlemek kolay olduğu için içeriği ile ilgili detaylı bilgilere yazının devamında değineceğim. <strong>actions.py</strong> dosyasının yapısını ve <strong>actionsapi</strong> kütüphanesini anlatarak devam edelim.</p>
-</div>
 <div class="section" id="actions-py-dosyasi">
-<h1>Actions.py dosyası</h1>
+<h2>Actions.py dosyası</h2>
 <p>Bu dosyada python3 ile yazılır. Sırasıyla <strong>setup build check install</strong> fonksionları mevcutsa çalıştırılır. Bu dosyada derleme işlemi yapılırken <strong>actionsapi</strong> adı verilen inary kaynak kodu ile beraber gelen bir kütüphane kullanılır. Bash derlemek için aşağıdakine benzer bir actions dosyası yazılabilir.</p>
 <pre class="code python literal-block">
 <span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span>
@@ -118,8 +117,10 @@ inary bi
 </pre>
 <p>Burada önce <strong>emul32</strong> için çalıştırılır. Sonra tanımlanmamış olan varsayılan tür için çalıştırılır. Yukarıdakö örnekte derleyiciyi 32bit olarak ayarlayıp derleme yaptırdık. daha sonra 32bit olarak derlenen kısımdaki /usr/bin/ dizinini sildik.</p>
 <p>Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan <cite>get_actionsapi_functions</cite> betiğini çalıştırınız.</p>
+</div>
+</div>
 <div class="section" id="shelltools">
-<h2>0. Shelltools</h2>
+<h1>0. Shelltools</h1>
 <p>Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.</p>
 <p>Dizin değiştirmek için <strong>cd</strong> dizin içeriği listesi almak için <strong>ls</strong> Komut çalıştırmak için ise <strong>system</strong> fonksionları kullanılır. Çevresel değişken ayarı için ise export kullanılır.</p>
 <pre class="code shell literal-block">
@@ -162,7 +163,7 @@ inary bi
 </pre>
 </div>
 <div class="section" id="autotools">
-<h2>1. Autotools</h2>
+<h1>1. Autotools</h1>
 <p>Autotools kütüphanesi <cite>./configure</cite>, <cite>make</cite>, <cite>make install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
 <p>Autotools fonksionları aşağıdaki gibidir:</p>
 <pre class="code shell literal-block">
@@ -184,7 +185,7 @@ inary/actionsapi/autotools.py:
 </pre>
 </div>
 <div class="section" id="mesontools">
-<h2>2. Mesontools</h2>
+<h1>2. Mesontools</h1>
 <p>Mesontools kütüphanesi <cite>meson build</cite>, <cite>ninja -C build</cite>, <cite>ninja -C build install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
 <p>Mesontools fonksionları aşağıdaki gibidir:</p>
 <pre class="code shell literal-block">
@@ -202,7 +203,7 @@ inary/actionsapi/mesontools.py:
 </pre>
 </div>
 <div class="section" id="cmaketools">
-<h2>3. Cmaketools</h2>
+<h1>3. Cmaketools</h1>
 <p>Cmaketools kütüphanesi <cite>cmake ..</cite>, <cite>make</cite>, <cite>make install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
 <p>Cmake fonksionları aşağıdaki gibidir.</p>
 <pre class="code shell literal-block">
@@ -215,7 +216,7 @@ inary/actionsapi/cmaketools.py:
 </pre>
 </div>
 <div class="section" id="inarytools">
-<h2>4. Inarytools</h2>
+<h1>4. Inarytools</h1>
 <p>Inarytools kütüphanesi derleme işlemine yardımcı olan bir araçtır. Dosya işlemleri ve bazı uzun kodları kısatlma amaçlı yapılmıştır.</p>
 <p>Destination konumlarını tanımlarken paket içeriğindeki yollarını yazmamız yeterlidir.</p>
 <p>Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örneklerini kaynak koddan bulabilirsiniz.</p>
@@ -245,7 +246,7 @@ inary/actionsapi/cmaketools.py:
 </pre>
 </div>
 <div class="section" id="get">
-<h2>5. Get</h2>
+<h1>5. Get</h1>
 <p>Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. get fonksionları parametre almaz ve string türünden değer döndürür.</p>
 <pre class="code shell literal-block">
 - curDIR<span class="operator">()</span>:         - docDIR<span class="operator">()</span>:            - srcVERSION<span class="operator">()</span>:     - qtDIR<span class="operator">()</span>:
@@ -261,10 +262,8 @@ inary/actionsapi/cmaketools.py:
 - kernelVERSION<span class="operator">()</span>:  - emul32prefixDIR<span class="operator">()</span>:   - makeJOBS<span class="operator">()</span>:       - F77<span class="operator">()</span>:
 - srcNAME<span class="operator">()</span>:        - kdeDIR<span class="operator">()</span>:            - buildTYPE<span class="operator">()</span>:      - GCJ<span class="operator">()</span>:
 </pre>
-</div>
-</div>
 <div class="section" id="pspec-xml-dosyasi">
-<h1>Pspec.xml dosyası</h1>
+<h2>Pspec.xml dosyası</h2>
 <p>Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunarak gereken değerler alınarak derleme işlemi yapılır. <strong>Source</strong>, <strong>Package</strong> ve <strong>History</strong> olmak üzere 3 bölümden oluşur.</p>
 <p>Örneğin aşağıda örnek pspec dosyası verilmiştir.</p>
 <pre class="code xml literal-block">
@@ -272,49 +271,91 @@ inary/actionsapi/cmaketools.py:
 <span class="comment preproc">&lt;!DOCTYPE INARY SYSTEM &quot;https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd&quot;&gt;</span>
 <span class="name tag">&lt;INARY&gt;</span>
     <span class="name tag">&lt;Source&gt;</span>
-        <span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span>
-        <span class="name tag">&lt;Homepage&gt;</span>https://www.gnu.org/software/bash<span class="name tag">&lt;/Homepage&gt;</span>
-        <span class="name tag">&lt;Packager&gt;</span>
-             <span class="name tag">&lt;Name&gt;</span>Ali Rıza KESKİN<span class="name tag">&lt;/Name&gt;</span>
-             <span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span>
-        <span class="name tag">&lt;/Packager&gt;</span>
-        <span class="name tag">&lt;License&gt;</span>GPLv2<span class="name tag">&lt;/License&gt;</span>
-        <span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span>
-        <span class="name tag">&lt;PartOf&gt;</span>system.base<span class="name tag">&lt;/PartOf&gt;</span>
-        <span class="name tag">&lt;Summary&gt;</span>Bourne-Again shell<span class="name tag">&lt;/Summary&gt;</span>
-        <span class="name tag">&lt;Description&gt;</span>GNU bash shell<span class="name tag">&lt;/Description&gt;</span>
-        <span class="name tag">&lt;Archive</span> <span class="name attribute">sha1sum=</span><span class="literal string">&quot;d116b469b9e6ea5264a74661d3a4c797da7f997b&quot;</span><span class="name tag">&gt;</span>https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz<span class="name tag">&lt;/Archive&gt;</span>
-        <span class="name tag">&lt;BuildDependencies&gt;</span>
-            <span class="name tag">&lt;Dependency&gt;</span>ncurses-devel<span class="name tag">&lt;/Dependency&gt;</span>
-            <span class="name tag">&lt;Dependency&gt;</span>readline-devel<span class="name tag">&lt;/Dependency&gt;</span>
-        <span class="name tag">&lt;/BuildDependencies&gt;</span>
+        ... <span class="comment">&lt;!--Burası source bölümüdür.--&gt;</span>
     <span class="name tag">&lt;/Source&gt;</span>
 
     <span class="name tag">&lt;Package&gt;</span>
-        <span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span>
-        <span class="name tag">&lt;RuntimeDependencies&gt;</span>
-            <span class="name tag">&lt;Dependency&gt;</span>ncurses<span class="name tag">&lt;/Dependency&gt;</span>
-        <span class="name tag">&lt;/RuntimeDependencies&gt;</span>
-        <span class="name tag">&lt;Files&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;config&quot;</span><span class="name tag">&gt;</span>/etc<span class="name tag">&lt;/Path&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/bin<span class="name tag">&lt;/Path&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/usr/bin<span class="name tag">&lt;/Path&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;info&quot;</span><span class="name tag">&gt;</span>/usr/share/info<span class="name tag">&lt;/Path&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;header&quot;</span><span class="name tag">&gt;</span>/usr/include<span class="name tag">&lt;/Path&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;library&quot;</span><span class="name tag">&gt;</span>/usr/lib/<span class="name tag">&lt;/Path&gt;</span>
-            <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;localedata&quot;</span><span class="name tag">&gt;</span>/usr/share/locale<span class="name tag">&lt;/Path&gt;</span>
-        <span class="name tag">&lt;/Files&gt;</span>
+        ... <span class="comment">&lt;!--Burası package bölümüdür.--&gt;</span>
     <span class="name tag">&lt;/Package&gt;</span>
+
+    <span class="name tag">&lt;Package&gt;</span>
+        ... <span class="comment">&lt;!--Burası diğer package bölümüdür.--&gt;</span>
+    <span class="name tag">&lt;/Package&gt;</span>
+
     <span class="name tag">&lt;History&gt;</span>
-        <span class="name tag">&lt;Update</span> <span class="name attribute">release=</span><span class="literal string">&quot;1&quot;</span><span class="name tag">&gt;</span>
-            <span class="name tag">&lt;Date&gt;</span>2019-01-17<span class="name tag">&lt;/Date&gt;</span>
-            <span class="name tag">&lt;Version&gt;</span>5.0<span class="name tag">&lt;/Version&gt;</span>
-            <span class="name tag">&lt;Comment&gt;</span>First release<span class="name tag">&lt;/Comment&gt;</span>
-            <span class="name tag">&lt;Name&gt;</span>Ali Rıza KESKİN<span class="name tag">&lt;/Name&gt;</span>
-            <span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span>
-        <span class="name tag">&lt;/Update&gt;</span>
+        ... <span class="comment">&lt;!--Burası history bölümüdür.--&gt;</span>
     <span class="name tag">&lt;/History&gt;</span>
 <span class="name tag">&lt;/INARY&gt;</span>
+</pre>
+</div>
+</div>
+<div class="section" id="source-bolumu">
+<h1>Source bölümü</h1>
+<p>Bu bölümde kaynağın özellikleri belirtilir. <strong>Name</strong>, <strong>Homepage</strong>, <strong>*Packager</strong>, <strong>Summary</strong>, <strong>Description</strong>, <strong>Archive</strong> kısımları zorunludur.</p>
+<p><strong>Archive</strong> kısmı birden fazla olabilir.</p>
+<p>Archive türü ikili dosyaysa veya açılmayacaksa <strong>type=&quot;binary&quot;</strong> eklemeniz gerekmektedir. (<cite>&lt;Archive sha1sum=&quot;...&quot; type=&quot;archive&quot;&gt;https://.../file.bin&lt;/Archive&gt;</cite>)</p>
+<p><strong>BuildDependency</strong> kısmında yazılan paketler derleme öncesi kurulur. Oluşturulan paketlere bağımlılık olarak eklenmez.</p>
+<pre class="code xml literal-block">
+<span class="name tag">&lt;Source&gt;</span>
+       <span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span>
+       <span class="name tag">&lt;Homepage&gt;</span>https://www.gnu.org/software/bash<span class="name tag">&lt;/Homepage&gt;</span>
+       <span class="name tag">&lt;Packager&gt;</span>
+            <span class="name tag">&lt;Name&gt;</span>Ali Rıza KESKİN<span class="name tag">&lt;/Name&gt;</span>
+            <span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span>
+       <span class="name tag">&lt;/Packager&gt;</span>
+       <span class="name tag">&lt;License&gt;</span>GPLv2<span class="name tag">&lt;/License&gt;</span>
+       <span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span>
+       <span class="name tag">&lt;PartOf&gt;</span>system.base<span class="name tag">&lt;/PartOf&gt;</span>
+       <span class="name tag">&lt;Summary&gt;</span>Bourne-Again shell<span class="name tag">&lt;/Summary&gt;</span>
+       <span class="name tag">&lt;Description&gt;</span>GNU bash shell<span class="name tag">&lt;/Description&gt;</span>
+       <span class="name tag">&lt;Archive</span> <span class="name attribute">sha1sum=</span><span class="literal string">&quot;d116b469b9e6ea5264a74661d3a4c797da7f997b&quot;</span><span class="name tag">&gt;</span>https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz<span class="name tag">&lt;/Archive&gt;</span>
+       <span class="name tag">&lt;BuildDependencies&gt;</span>
+           <span class="name tag">&lt;Dependency&gt;</span>ncurses-devel<span class="name tag">&lt;/Dependency&gt;</span>
+           <span class="name tag">&lt;Dependency&gt;</span>readline-devel<span class="name tag">&lt;/Dependency&gt;</span>
+       <span class="name tag">&lt;/BuildDependencies&gt;</span>
+   <span class="name tag">&lt;/Source&gt;</span>
+</pre>
+</div>
+<div class="section" id="package-bolumu">
+<h1>Package bölümü</h1>
+<p>Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. <strong>Name</strong>, <strong>Files</strong> kısımları zorunludur.</p>
+<p><strong>File</strong> kısmında en az 1 tane <strong>Path</strong> bulunmalıdır ve <strong>fileType</strong> değeri belirtilmek zorundadır. Bu değer <strong>config</strong>, <strong>executable</strong>, <strong>library</strong>, <strong>header</strong>, <strong>localedata</strong>, <strong>data</strong>, <strong>info</strong> alabilir.</p>
+<pre class="code xml literal-block">
+<span class="name tag">&lt;Package&gt;</span>
+       <span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span>
+       <span class="name tag">&lt;IsA&gt;</span>postOps<span class="name tag">&lt;/IsA&gt;</span>
+       <span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span>
+       <span class="name tag">&lt;RuntimeDependencies&gt;</span>
+           <span class="name tag">&lt;Dependency&gt;</span>ncurses<span class="name tag">&lt;/Dependency&gt;</span>
+       <span class="name tag">&lt;/RuntimeDependencies&gt;</span>
+       <span class="name tag">&lt;Files&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;config&quot;</span><span class="name tag">&gt;</span>/etc<span class="name tag">&lt;/Path&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/bin<span class="name tag">&lt;/Path&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/usr/bin<span class="name tag">&lt;/Path&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;info&quot;</span><span class="name tag">&gt;</span>/usr/share/info<span class="name tag">&lt;/Path&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;header&quot;</span><span class="name tag">&gt;</span>/usr/include<span class="name tag">&lt;/Path&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;library&quot;</span><span class="name tag">&gt;</span>/usr/lib/<span class="name tag">&lt;/Path&gt;</span>
+           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;localedata&quot;</span><span class="name tag">&gt;</span>/usr/share/locale<span class="name tag">&lt;/Path&gt;</span>
+       <span class="name tag">&lt;/Files&gt;</span>
+   <span class="name tag">&lt;/Package&gt;</span>
+</pre>
+<p><strong>RuntimeDependencies</strong> kısmında yazılan paketler paketlere bağımlılık olarak eklenir. Derleme öncesi kurulacak listesine eklenmez.</p>
+<p><strong>fileType</strong> türüne <strong>config</strong> verirseniz o dizindeki dosyaları ayar dosyası olarak ekler. Paket güncelleme esnasında configleri kullanıcılar isterse güncellemeyebilir.</p>
+<p><strong>IsA</strong> değerini <strong>postOps</strong> ayarlarsanız paketin içine <strong>postoperations.py</strong> dosyası eklenir. Bu dosya kurulum aşamasında çalıştırılacak betik dosyasıdır.</p>
+</div>
+<div class="section" id="history-bolumu">
+<h1>History bölümü</h1>
+<p>Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanın sürümü olarak alınır. <strong>Update</strong> kısmı birden çok kez bulunabilir ve en az 1 tane bulunmalıdır.</p>
+<pre class="code xml literal-block">
+<span class="name tag">&lt;History&gt;</span>
+    <span class="name tag">&lt;Update</span> <span class="name attribute">release=</span><span class="literal string">&quot;1&quot;</span><span class="name tag">&gt;</span>
+           <span class="name tag">&lt;Date&gt;</span>2019-01-17<span class="name tag">&lt;/Date&gt;</span>
+           <span class="name tag">&lt;Version&gt;</span>5.0<span class="name tag">&lt;/Version&gt;</span>
+           <span class="name tag">&lt;Comment&gt;</span>First release<span class="name tag">&lt;/Comment&gt;</span>
+           <span class="name tag">&lt;Name&gt;</span>Ali Rıza KESKİN<span class="name tag">&lt;/Name&gt;</span>
+           <span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span>
+    <span class="name tag">&lt;/Update&gt;</span>
+<span class="name tag">&lt;/History&gt;</span>
 </pre>
 </div>
 </div>

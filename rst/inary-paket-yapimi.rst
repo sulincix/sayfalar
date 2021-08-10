@@ -1,5 +1,5 @@
 Inary paket yapımı
-==================
+""""""""""""""""""
 Bu anlatımda inary paketi oluşturma anlatılacaktır. Örnek paket olarak bash paketi üzerinden anlatılacakdır. 
 
 Tüm adımlar root yetkisi gerektirir.
@@ -64,7 +64,7 @@ Derlemeye hazır hale gelmiş talimatları **inary bi** kullanarak dertiriz.
 **inary-template** ile üretilen pspec.xml veya pspec.py dosyalarını düzenlemek kolay olduğu için içeriği ile ilgili detaylı bilgilere yazının devamında değineceğim. **actions.py** dosyasının yapısını ve **actionsapi** kütüphanesini anlatarak devam edelim.
 
 Actions.py dosyası
-^^^^^^^^^^^^^^^^^^
+==================
 Bu dosyada python3 ile yazılır. Sırasıyla **setup build check install** fonksionları mevcutsa çalıştırılır. Bu dosyada derleme işlemi yapılırken **actionsapi** adı verilen inary kaynak kodu ile beraber gelen bir kütüphane kullanılır. Bash derlemek için aşağıdakine benzer bir actions dosyası yazılabilir.
 
 .. code-block:: python
@@ -136,7 +136,7 @@ Burada önce **emul32** için çalıştırılır. Sonra tanımlanmamış olan va
 Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan `get_actionsapi_functions` betiğini çalıştırınız.
 
 0. Shelltools
-"""""""""""""
+^^^^^^^^^^^^^
 Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.
 
 Dizin değiştirmek için **cd** dizin içeriği listesi almak için **ls** Komut çalıştırmak için ise **system** fonksionları kullanılır. Çevresel değişken ayarı için ise export kullanılır.
@@ -192,7 +192,7 @@ Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
 
 
 1. Autotools
-""""""""""""
+^^^^^^^^^^^^
 Autotools kütüphanesi `./configure`, `make`, `make install` şeklinde derlenen kaynaklar için kullanılır.
 
 Autotools fonksionları aşağıdaki gibidir:
@@ -216,7 +216,7 @@ Autotools fonksionları aşağıdaki gibidir:
 	  - autoheader(parameters=''): autoheader çalıştırır
 
 2. Mesontools
-"""""""""""""
+^^^^^^^^^^^^^
 Mesontools kütüphanesi `meson build`, `ninja -C build`, `ninja -C build install` şeklinde derlenen kaynaklar için kullanılır.
 
 Mesontools fonksionları aşağıdaki gibidir:
@@ -236,7 +236,7 @@ Mesontools fonksionları aşağıdaki gibidir:
 	  - check(): ninja_check ile aynı
 
 3. Cmaketools
-"""""""""""""
+^^^^^^^^^^^^^
 Cmaketools kütüphanesi `cmake ..`, `make`, `make install` şeklinde derlenen kaynaklar için kullanılır.
 
 Cmake fonksionları aşağıdaki gibidir.
@@ -251,7 +251,7 @@ Cmake fonksionları aşağıdaki gibidir.
 	  - rawInstall(parameters='', argument='install'): destdir olmadan make install
 
 4. Inarytools
-"""""""""""""
+^^^^^^^^^^^^^
 Inarytools kütüphanesi derleme işlemine yardımcı olan bir araçtır. Dosya işlemleri ve bazı uzun kodları kısatlma amaçlı yapılmıştır. 
 
 Destination konumlarını tanımlarken paket içeriğindeki yollarını yazmamız yeterlidir.
@@ -284,7 +284,7 @@ Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örnekle
 	  - removeDir(destinationDirectory):
 
 5. Get
-""""""
+^^^^^^
 Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. get fonksionları parametre almaz ve string türünden değer döndürür.
 
 .. code-block:: shell
@@ -303,7 +303,7 @@ Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. 
 	  - srcNAME():        - kdeDIR():            - buildTYPE():      - GCJ():
 
 Pspec.xml dosyası
-^^^^^^^^^^^^^^^^^
+=================
 Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunarak gereken değerler alınarak derleme işlemi yapılır. **Source**, **Package** ve **History** olmak üzere 3 bölümden oluşur.
 
 Örneğin aşağıda örnek pspec dosyası verilmiştir.
@@ -314,6 +314,35 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 	<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd">
 	<INARY>
 	    <Source>
+	        ... <!--Burası source bölümüdür.-->
+	    </Source>
+
+	    <Package>
+	        ... <!--Burası package bölümüdür.-->
+	    </Package>
+
+	    <Package>
+	        ... <!--Burası diğer package bölümüdür.-->
+	    </Package>
+
+	    <History>
+	        ... <!--Burası history bölümüdür.-->
+	    </History>
+	</INARY>
+
+Source bölümü
+^^^^^^^^^^^^^
+Bu bölümde kaynağın özellikleri belirtilir. **Name**, **Homepage**, ***Packager**, **Summary**, **Description**, **Archive** kısımları zorunludur.
+
+**Archive** kısmı birden fazla olabilir.
+
+Archive türü ikili dosyaysa veya açılmayacaksa **type="binary"** eklemeniz gerekmektedir. (`<Archive sha1sum="..." type="archive">https://.../file.bin</Archive>`)
+
+**BuildDependency** kısmında yazılan paketler derleme öncesi kurulur. Oluşturulan paketlere bağımlılık olarak eklenmez.
+
+.. code-block:: xml
+
+	 <Source>
 	        <Name>bash</Name>
 	        <Homepage>https://www.gnu.org/software/bash</Homepage>
 	        <Packager>
@@ -332,8 +361,18 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 	        </BuildDependencies>
 	    </Source>
 
-	    <Package>
+Package bölümü
+^^^^^^^^^^^^^^
+Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. **Name**, **Files** kısımları zorunludur.
+
+**File** kısmında en az 1 tane **Path** bulunmalıdır ve **fileType** değeri belirtilmek zorundadır. Bu değer **config**, **executable**, **library**, **header**, **localedata**, **data**, **info** alabilir.
+
+.. code-block:: xml
+
+	 <Package>
 	        <Name>bash</Name>
+	        <IsA>postOps</IsA>
+	        <IsA>app:console</IsA>
 	        <RuntimeDependencies>
 	            <Dependency>ncurses</Dependency>
 	        </RuntimeDependencies>
@@ -347,14 +386,27 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 	            <Path fileType="localedata">/usr/share/locale</Path>
 	        </Files>
 	    </Package>
-	    <History>
-	        <Update release="1">
-	            <Date>2019-01-17</Date>
-	            <Version>5.0</Version>
-	            <Comment>First release</Comment>
-	            <Name>Ali Rıza KESKİN</Name>
-	            <Email>paledega@yandex.ru</Email>
-	        </Update>
-	    </History>
-	</INARY>
+	    
+**RuntimeDependencies** kısmında yazılan paketler paketlere bağımlılık olarak eklenir. Derleme öncesi kurulacak listesine eklenmez.
+
+**fileType** türüne **config** verirseniz o dizindeki dosyaları ayar dosyası olarak ekler. Paket güncelleme esnasında configleri kullanıcılar isterse güncellemeyebilir.
+
+**IsA** değerini **postOps** ayarlarsanız paketin içine **postoperations.py** dosyası eklenir. Bu dosya kurulum aşamasında çalıştırılacak betik dosyasıdır.
+
+History bölümü
+^^^^^^^^^^^^^^
+Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanın sürümü olarak alınır. **Update** kısmı birden çok kez bulunabilir ve en az 1 tane bulunmalıdır.
+
+.. code-block:: xml
+
+	<History>
+	    <Update release="1">
+	           <Date>2019-01-17</Date>
+	           <Version>5.0</Version>
+	           <Comment>First release</Comment>
+	           <Name>Ali Rıza KESKİN</Name>
+	           <Email>paledega@yandex.ru</Email>
+	    </Update>
+	</History>
+
 
