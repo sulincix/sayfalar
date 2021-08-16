@@ -412,4 +412,18 @@ Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanı
 	    </Update>
 	</History>
 
+Postoperations.py dosyası
+=========================
 
+Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar **postInstall**, **preInstall**, **postRemove**, **preRemove** şeklindedir. Bu fonksionlar argument almazlar.
+
+.. code-block:: python
+
+	 def postInstall(): # paket kurulduktan sonra çalıştırılır.
+	 def postRemove(): # paket silindikten sonra çalıştırılır.
+	 def preInstall(): # paket kurulmadan önce çalıştırılır.
+	 def preRemove(): # paket silinmeden önce çalıştırılır.
+
+Bu dosyada bununan **postInstall** fonksionu aynı zamanda paketler yeniden yapılandırılmaya çalışılırken de çalıştırılır. Bu betiklerde actionsapi kullanımı ile ilgili herhangi bir kısıtlama bulunmamasına karşın kullanımı tavsiye edilmemektedir.
+
+Inary komutu her çalıştırıldığında işlem bitiminde sysconf modülü tetiklenir. Bu modül dosya sistemindeki değişiklikleri baz alarak çalışır ve önbellek dosyalarını güncelleme gibi bazı işleri otomatik olarak yerine getirir. Bu sebeple postoperations betiklerine nadiren ihtiyaç duyulur.

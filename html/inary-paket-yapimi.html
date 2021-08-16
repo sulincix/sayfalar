@@ -359,6 +359,18 @@ inary/actionsapi/cmaketools.py:
     <span class="name tag">&lt;/Update&gt;</span>
 <span class="name tag">&lt;/History&gt;</span>
 </pre>
+<div class="section" id="postoperations-py-dosyasi">
+<h2>Postoperations.py dosyası</h2>
+<p>Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar <strong>postInstall</strong>, <strong>preInstall</strong>, <strong>postRemove</strong>, <strong>preRemove</strong> şeklindedir. Bu fonksionlar argument almazlar.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">postInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulduktan sonra çalıştırılır.</span>
+<span class="keyword">def</span> <span class="name function">postRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silindikten sonra çalıştırılır.</span>
+<span class="keyword">def</span> <span class="name function">preInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulmadan önce çalıştırılır.</span>
+<span class="keyword">def</span> <span class="name function">preRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silinmeden önce çalıştırılır.</span>
+</pre>
+<p>Bu dosyada bununan <strong>postInstall</strong> fonksionu aynı zamanda paketler yeniden yapılandırılmaya çalışılırken de çalıştırılır. Bu betiklerde actionsapi kullanımı ile ilgili herhangi bir kısıtlama bulunmamasına karşın kullanımı tavsiye edilmemektedir.</p>
+<p>Inary komutu her çalıştırıldığında işlem bitiminde sysconf modülü tetiklenir. Bu modül dosya sistemindeki değişiklikleri baz alarak çalışır ve önbellek dosyalarını güncelleme gibi bazı işleri otomatik olarak yerine getirir. Bu sebeple postoperations betiklerine nadiren ihtiyaç duyulur.</p>
+</div>
 </div>
 </div>
 </body>
