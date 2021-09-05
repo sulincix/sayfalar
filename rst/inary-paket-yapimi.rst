@@ -412,6 +412,73 @@ Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanı
 	    </Update>
 	</History>
 
+Pspec.py dosyası
+================
+Bu dosya doğrudan kullanılmaz. Bu dosyayı **pspec.xml** üretmek için kullanırız. Bu dosyanın bulunduğu dizinde **genpspec** komutunu çalıştırarak **pspec.xml** dosyasını üretebilirsiniz.
+Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.
+
+.. code-block:: python
+
+	class inary:
+	    class source:
+	        # Source bölümü
+	    class pkg_bash:
+	        # Package bölümü
+	    class history:
+	        # History bölümü
+
+Source bölümü
+^^^^^^^^^^^^^
+Bu bölümde kaynağın özellikleri belirtilir. **packages** dizisindeki elemanların adına sahip olan sınıflar **pspec.xml** oluşturulurken kullanılır. 
+
+.. code-block:: python
+
+	class source:
+	    name = "bash"
+	    homepage = "http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html"
+	    class packager:
+	        name = "Süleyman POYRAZ"
+	        email = "zaryob.dev@gmail.com"
+	    license = ['GPLv2']
+	    isa = ['app:console']
+	    partof = "system.base"
+	    summary = "Bourne-Again shell"
+	    description = "GNU bash shell"
+	    archive = [
+	        ("6399bd1f9ef4dd0d901c7b76737bc409de73c77a","https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz"),
+	    ]
+	    builddependencies = ['ncurses-devel', 'readline-devel']
+	    packages = ['pkg_bash', 'pkg_bash_devel', 'pkg_bash_docs', 'pkg_bash_pages']
+
+
+Package bölümü
+^^^^^^^^^^^^^^
+Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını **Source** bölümündeki **packages** dizisi içine eklediğinizde buradaki değerler kullanılır. 
+
+.. code-block:: python
+
+	class pkg_bash
+	    name = "bash"
+	    runtimedependencies = ["ncurses"]
+	    files = [
+	        ("config","/etc"),
+	        ("executable","/bin"),
+	        ("info","/usr/share/info"),
+	        ("library","/lib"),
+	        ("localedata","/usr/share/locale"),
+	    ]
+
+History bölümü
+^^^^^^^^^^^^^^
+Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine release bilgisi otomatik olarak hesaplanır. **update** dizisine dizi halinde eklenir.
+
+.. code-block:: python
+
+	class history:
+	    update = [
+	        ["2021-08-29","5.1.8","First release","Süleyman POYRAZ","zaryob.dev@gmail.com"],
+	    ]
+
 Postoperations.py dosyası
 =========================
 

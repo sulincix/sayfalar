@@ -359,6 +359,68 @@ inary/actionsapi/cmaketools.py:
     <span class="name tag">&lt;/Update&gt;</span>
 <span class="name tag">&lt;/History&gt;</span>
 </pre>
+<div class="section" id="pspec-py-dosyasi">
+<h2>Pspec.py dosyası</h2>
+<p>Bu dosya doğrudan kullanılmaz. Bu dosyayı <strong>pspec.xml</strong> üretmek için kullanırız. Bu dosyanın bulunduğu dizinde <strong>genpspec</strong> komutunu çalıştırarak <strong>pspec.xml</strong> dosyasını üretebilirsiniz.
+Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">inary</span><span class="punctuation">:</span>
+    <span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span>
+        <span class="comment single"># Source bölümü</span>
+    <span class="keyword">class</span> <span class="name class">pkg_bash</span><span class="punctuation">:</span>
+        <span class="comment single"># Package bölümü</span>
+    <span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span>
+        <span class="comment single"># History bölümü</span>
+</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>Source bölümü</h1>
+<p>Bu bölümde kaynağın özellikleri belirtilir. <strong>packages</strong> dizisindeki elemanların adına sahip olan sınıflar <strong>pspec.xml</strong> oluşturulurken kullanılır.</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span>
+    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span>
+    <span class="name">homepage</span> <span class="operator">=</span> <span class="literal string double">&quot;http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html&quot;</span>
+    <span class="keyword">class</span> <span class="name class">packager</span><span class="punctuation">:</span>
+        <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;Süleyman POYRAZ&quot;</span>
+        <span class="name">email</span> <span class="operator">=</span> <span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span>
+    <span class="name">license</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'GPLv2'</span><span class="punctuation">]</span>
+    <span class="name">isa</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'app:console'</span><span class="punctuation">]</span>
+    <span class="name">partof</span> <span class="operator">=</span> <span class="literal string double">&quot;system.base&quot;</span>
+    <span class="name">summary</span> <span class="operator">=</span> <span class="literal string double">&quot;Bourne-Again shell&quot;</span>
+    <span class="name">description</span> <span class="operator">=</span> <span class="literal string double">&quot;GNU bash shell&quot;</span>
+    <span class="name">archive</span> <span class="operator">=</span> <span class="punctuation">[</span>
+        <span class="punctuation">(</span><span class="literal string double">&quot;6399bd1f9ef4dd0d901c7b76737bc409de73c77a&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz&quot;</span><span class="punctuation">),</span>
+    <span class="punctuation">]</span>
+    <span class="name">builddependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'ncurses-devel'</span><span class="punctuation">,</span> <span class="literal string single">'readline-devel'</span><span class="punctuation">]</span>
+    <span class="name">packages</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'pkg_bash'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_devel'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_docs'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_pages'</span><span class="punctuation">]</span>
+</pre>
+</div>
+<div class="section" id="id2">
+<h1>Package bölümü</h1>
+<p>Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını <strong>Source</strong> bölümündeki <strong>packages</strong> dizisi içine eklediğinizde buradaki değerler kullanılır.</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">pkg_bash</span>
+    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span>
+    <span class="name">runtimedependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string double">&quot;ncurses&quot;</span><span class="punctuation">]</span>
+    <span class="name">files</span> <span class="operator">=</span> <span class="punctuation">[</span>
+        <span class="punctuation">(</span><span class="literal string double">&quot;config&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/etc&quot;</span><span class="punctuation">),</span>
+        <span class="punctuation">(</span><span class="literal string double">&quot;executable&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/bin&quot;</span><span class="punctuation">),</span>
+        <span class="punctuation">(</span><span class="literal string double">&quot;info&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/usr/share/info&quot;</span><span class="punctuation">),</span>
+        <span class="punctuation">(</span><span class="literal string double">&quot;library&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/lib&quot;</span><span class="punctuation">),</span>
+        <span class="punctuation">(</span><span class="literal string double">&quot;localedata&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/usr/share/locale&quot;</span><span class="punctuation">),</span>
+    <span class="punctuation">]</span>
+</pre>
+</div>
+<div class="section" id="id3">
+<h1>History bölümü</h1>
+<p>Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine release bilgisi otomatik olarak hesaplanır. <strong>update</strong> dizisine dizi halinde eklenir.</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span>
+    <span class="name">update</span> <span class="operator">=</span> <span class="punctuation">[</span>
+        <span class="punctuation">[</span><span class="literal string double">&quot;2021-08-29&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;5.1.8&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;First release&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;Süleyman POYRAZ&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span><span class="punctuation">],</span>
+    <span class="punctuation">]</span>
+</pre>
 <div class="section" id="postoperations-py-dosyasi">
 <h2>Postoperations.py dosyası</h2>
 <p>Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar <strong>postInstall</strong>, <strong>preInstall</strong>, <strong>postRemove</strong>, <strong>preRemove</strong> şeklindedir. Bu fonksionlar argument almazlar.</p>

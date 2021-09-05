@@ -270,12 +270,12 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 <pre class="code shell literal-block">
 <span class="name builtin">declare</span> -A dizi
 <span class="name variable">dizi</span><span class="operator">=([</span>kirmizi<span class="operator">]=</span>elma <span class="operator">[</span>sari<span class="operator">]=</span>muz <span class="operator">[</span>yesil<span class="operator">]=</span>limon <span class="operator">[</span>turuncu<span class="operator">]=</span>portakal<span class="operator">)</span>
-<span class="keyword">for</span> isim in <span class="literal string interpol">${</span><span class="punctuation">!dizi[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<span class="keyword">for</span> isim <span class="keyword">in</span> <span class="literal string interpol">${</span><span class="punctuation">!dizi[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="name variable">$isim</span><span class="literal string double"> &quot;</span>
 <span class="keyword">done</span>
 <span class="name builtin">echo</span>
 -&gt; turuncu yesil sari kirmizi
-<span class="keyword">for</span> isim in <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<span class="keyword">for</span> isim <span class="keyword">in</span> <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="name variable">$isim</span><span class="literal string double"> &quot;</span>
 <span class="keyword">done</span>
 <span class="name builtin">echo</span>
@@ -426,7 +426,7 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 <p><strong>case</strong> yapısı case ile başlar değerden sonra gelen <strong>in</strong> ile devam eder ve koşullardan sonra gelen <strong>esac</strong> ile tamamlanır.
 case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısaltabiliriz.</p>
 <pre class="code shell literal-block">
-<span class="keyword">case</span> deger in
+<span class="keyword">case</span> deger <span class="keyword">in</span>
     elma <span class="punctuation">|</span> kiraz<span class="operator">)</span>
         <span class="name builtin">echo</span> <span class="literal string double">&quot;meyve&quot;</span>
         <span class="punctuation">;;</span>
@@ -471,13 +471,13 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
 </pre>
 <p><strong>for</strong> ifadesinde değişken adından sonra <strong>in</strong> kullanılır daha sonra dizi yer alır. diziden sonra <strong>do</strong> ve bitişte de <strong>done</strong> kullanılır.</p>
 <pre class="code shell literal-block">
-<span class="keyword">for</span> degisken in dizi <span class="punctuation">;</span> <span class="keyword">do</span>
+<span class="keyword">for</span> degisken <span class="keyword">in</span> dizi <span class="punctuation">;</span> <span class="keyword">do</span>
     eylem
 <span class="keyword">done</span>
 </pre>
 <p>Ayrı örneğin for ile yapılmış hali</p>
 <pre class="code shell literal-block">
-<span class="keyword">for</span> i in <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span><span class="literal string double"> &quot;</span>
 <span class="keyword">done</span>
 <span class="name builtin">echo</span>
@@ -485,7 +485,7 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
 </pre>
 <p>Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.</p>
 <pre class="code shell literal-block">
-<span class="keyword">for</span> i in <span class="operator">{</span><span class="literal number">1</span>..10<span class="operator">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="operator">{</span><span class="literal number">1</span>..10<span class="operator">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span><span class="literal string double"> &quot;</span>
 <span class="keyword">done</span>
 <span class="name builtin">echo</span>

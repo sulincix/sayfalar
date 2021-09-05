@@ -565,6 +565,92 @@ Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanı
 .fi
 .UNINDENT
 .UNINDENT
+.SS Pspec.py dosyası
+.sp
+Bu dosya doğrudan kullanılmaz. Bu dosyayı \fBpspec.xml\fP üretmek için kullanırız. Bu dosyanın bulunduğu dizinde \fBgenpspec\fP komutunu çalıştırarak \fBpspec.xml\fP dosyasını üretebilirsiniz.
+Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+class inary:
+    class source:
+        # Source bölümü
+    class pkg_bash:
+        # Package bölümü
+    class history:
+        # History bölümü
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH SOURCE BÖLÜMÜ
+.sp
+Bu bölümde kaynağın özellikleri belirtilir. \fBpackages\fP dizisindeki elemanların adına sahip olan sınıflar \fBpspec.xml\fP oluşturulurken kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+class source:
+    name = "bash"
+    homepage = "http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html"
+    class packager:
+        name = "Süleyman POYRAZ"
+        email = "zaryob.dev@gmail.com"
+    license = [\(aqGPLv2\(aq]
+    isa = [\(aqapp:console\(aq]
+    partof = "system.base"
+    summary = "Bourne\-Again shell"
+    description = "GNU bash shell"
+    archive = [
+        ("6399bd1f9ef4dd0d901c7b76737bc409de73c77a","https://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz"),
+    ]
+    builddependencies = [\(aqncurses\-devel\(aq, \(aqreadline\-devel\(aq]
+    packages = [\(aqpkg_bash\(aq, \(aqpkg_bash_devel\(aq, \(aqpkg_bash_docs\(aq, \(aqpkg_bash_pages\(aq]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PACKAGE BÖLÜMÜ
+.sp
+Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını \fBSource\fP bölümündeki \fBpackages\fP dizisi içine eklediğinizde buradaki değerler kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+class pkg_bash
+    name = "bash"
+    runtimedependencies = ["ncurses"]
+    files = [
+        ("config","/etc"),
+        ("executable","/bin"),
+        ("info","/usr/share/info"),
+        ("library","/lib"),
+        ("localedata","/usr/share/locale"),
+    ]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH HISTORY BÖLÜMÜ
+.sp
+Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine release bilgisi otomatik olarak hesaplanır. \fBupdate\fP dizisine dizi halinde eklenir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+class history:
+    update = [
+        ["2021\-08\-29","5.1.8","First release","Süleyman POYRAZ","zaryob.dev@gmail.com"],
+    ]
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SS Postoperations.py dosyası
 .sp
 Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar \fBpostInstall\fP, \fBpreInstall\fP, \fBpostRemove\fP, \fBpreRemove\fP şeklindedir. Bu fonksionlar argument almazlar.
