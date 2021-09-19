@@ -269,6 +269,22 @@ Varsayılan arkaplan
 T}
 _
 .TE
+.sp
+Çift tırnak (\fB"\fP) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (\fB\(aq\fP) içindekiler işlenmez. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+var=12
+echo "$var"
+echo \(aq$var\(aq
+\-> 12
+\-> $var
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH PARAMETRELER
 .sp
 Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden sonra gelen sayı ile kullanabiliriz.

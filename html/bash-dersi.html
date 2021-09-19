@@ -140,6 +140,14 @@ Bu da sonunca açıklama satırıdır.
 </tr>
 </tbody>
 </table>
+<p>Çift tırnak (<strong>&quot;</strong>) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (<strong>'</strong>) içindekiler işlenmez. Örneğin:</p>
+<pre class="code shell literal-block">
+<span class="name variable">var</span><span class="operator">=</span><span class="literal number">12</span>
+<span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="name variable">$var</span><span class="literal string double">&quot;</span>
+<span class="name builtin">echo</span> <span class="literal string single">'$var'</span>
+-&gt; <span class="literal number">12</span>
+-&gt; <span class="name variable">$var</span>
+</pre>
 </div>
 <div class="section" id="parametreler">
 <h1>Parametreler</h1>
