@@ -256,6 +256,13 @@ Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Kara
    * - ${var/erh/abc}
      - erh yerine abc koy
      - Mabcaba
+   * - ${var,,}
+     - hepsini küçük harf yap
+     - merhaba
+
+   * - ${var^^}
+     - hepsini büyük parf yap
+     - MERHABA
 
 Diziler
 =======
@@ -336,7 +343,7 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 	<- 15
 	-> Veri 10'dan büyük veya 10a eşit
 	
-**[[** komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.
+**[[** yerleşiği ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim. **[** bir komutken **[[** bir yerleşiktir. **[** ayrı bir süreç olarak çalıştırılır. Bu yüzden **[[** kullanmanızı tavsiye ederim. 
 
 .. list-table:: **[[ ifadeleri ve kullanımları**
    :widths: 25 25 50
@@ -821,6 +828,23 @@ Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için 
 	-> 50
 	-> 100
 
+exec komutu
+===========
+
+**exec** komutu betiğin bundan sonraki bölümünü çalıştırmak yerine hedefteki komut ile değiştirilmesini sağlar. **exec** ile çalıştırılmış olan komut tamamlandığında betik tamamlanmış olur.
+
+.. code-block:: shell
+
+	echo $$ # pid değeri yazdırır
+	bash -c 'echo $$' # yeni süreç oluşturduğu için pid değeri farklıdır.
+	exec bash -c 'echo $$' # mevcut komut ile değiştirildiği için pid değeri değişmez
+	echo "hmm" # Bu kısım çalıştırılamaz.
+	-> 5755
+	-> 5756
+	-> 5755
+
+**exec** komutunu doğrudan terminalde çalıştırırsanız ve komut tamamlanırsa terminaldeki süreç kapanacağı için terminal doğal olarak kapanacaktır.
+
 Hata ayıklama
 =============
 
@@ -828,6 +852,6 @@ Hata ayıklama
 
 .. code-block:: shell
 
-    bash -n script_adi.sh
-    bash -v script_adi.sh
-    bash -x script_adi.sh
+	bash -n script_adi.sh
+	bash -v script_adi.sh
+	bash -x script_adi.sh

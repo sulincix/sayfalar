@@ -471,6 +471,22 @@ T}	T{
 Mabcaba
 T}
 _
+T{
+${var,,}
+T}	T{
+hepsini küçük harf yap
+T}	T{
+merhaba
+T}
+_
+T{
+${var^^}
+T}	T{
+hepsini büyük parf yap
+T}	T{
+MERHABA
+T}
+_
 .TE
 .SH DIZILER
 .sp
@@ -577,7 +593,7 @@ fi
 .UNINDENT
 .UNINDENT
 .sp
-\fB[[\fP komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.
+\fB[[\fP yerleşiği ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim. \fB[\fP bir komutken \fB[[\fP bir yerleşiktir. \fB[\fP ayrı bir süreç olarak çalıştırılır. Bu yüzden \fB[[\fP kullanmanızı tavsiye ederim.
 .SH [[ IFADELERI VE KULLANIMLARI
 .TS
 center;
@@ -1308,6 +1324,27 @@ echo ${sayi}
 .fi
 .UNINDENT
 .UNINDENT
+.SH EXEC KOMUTU
+.sp
+\fBexec\fP komutu betiğin bundan sonraki bölümünü çalıştırmak yerine hedefteki komut ile değiştirilmesini sağlar. \fBexec\fP ile çalıştırılmış olan komut tamamlandığında betik tamamlanmış olur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+echo $$ # pid değeri yazdırır
+bash \-c \(aqecho $$\(aq # yeni süreç oluşturduğu için pid değeri farklıdır.
+exec bash \-c \(aqecho $$\(aq # mevcut komut ile değiştirildiği için pid değeri değişmez
+echo "hmm" # Bu kısım çalıştırılamaz.
+\-> 5755
+\-> 5756
+\-> 5755
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBexec\fP komutunu doğrudan terminalde çalıştırırsanız ve komut tamamlanırsa terminaldeki süreç kapanacağı için terminal doğal olarak kapanacaktır.
 .SH HATA AYIKLAMA
 .sp
 \fBbash\fP komutuna farklı parametreler vererek kolayca script\(aqinizi derleyebilirsiniz. Örneğin \fB\-n\fP parametresi kodu çalıştırmayıp sadece hata kontrolü yapacaktır, \fB\-v\fP komutları çalıştırmadan yazdıracak, \fB\-x\fP ise işlem bittikten sonra kodları yazdıracaktır.

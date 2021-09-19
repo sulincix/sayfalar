@@ -248,6 +248,14 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 <td>erh yerine abc koy</td>
 <td>Mabcaba</td>
 </tr>
+<tr><td>${var,,}</td>
+<td>hepsini küçük harf yap</td>
+<td>merhaba</td>
+</tr>
+<tr><td>${var^^}</td>
+<td>hepsini büyük parf yap</td>
+<td>MERHABA</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -320,7 +328,7 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 &lt;- 15
 -&gt; Veri 10'</span>dan büyük veya 10a eşit
 </pre>
-<p><strong>[[</strong> komutu ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim.</p>
+<p><strong>[[</strong> yerleşiği ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim. <strong>[</strong> bir komutken <strong>[[</strong> bir yerleşiktir. <strong>[</strong> ayrı bir süreç olarak çalıştırılır. Bu yüzden <strong>[[</strong> kullanmanızı tavsiye ederim.</p>
 <table border="1" class="colwidths-given docutils">
 <caption><strong>[[ ifadeleri ve kullanımları</strong></caption>
 <colgroup>
@@ -775,6 +783,20 @@ merhaba2
 -&gt; <span class="literal number">50</span>
 -&gt; <span class="literal number">100</span>
 </pre>
+</div>
+<div class="section" id="exec-komutu">
+<h1>exec komutu</h1>
+<p><strong>exec</strong> komutu betiğin bundan sonraki bölümünü çalıştırmak yerine hedefteki komut ile değiştirilmesini sağlar. <strong>exec</strong> ile çalıştırılmış olan komut tamamlandığında betik tamamlanmış olur.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> <span class="name variable">$$</span> <span class="comment single"># pid değeri yazdırır
+</span>bash -c <span class="literal string single">'echo $$'</span> <span class="comment single"># yeni süreç oluşturduğu için pid değeri farklıdır.
+</span><span class="name builtin">exec</span> bash -c <span class="literal string single">'echo $$'</span> <span class="comment single"># mevcut komut ile değiştirildiği için pid değeri değişmez
+</span><span class="name builtin">echo</span> <span class="literal string double">&quot;hmm&quot;</span> <span class="comment single"># Bu kısım çalıştırılamaz.
+</span>-&gt; <span class="literal number">5755</span>
+-&gt; <span class="literal number">5756</span>
+-&gt; <span class="literal number">5755</span>
+</pre>
+<p><strong>exec</strong> komutunu doğrudan terminalde çalıştırırsanız ve komut tamamlanırsa terminaldeki süreç kapanacağı için terminal doğal olarak kapanacaktır.</p>
 </div>
 <div class="section" id="hata-ayiklama">
 <h1>Hata ayıklama</h1>
