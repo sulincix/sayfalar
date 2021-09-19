@@ -135,6 +135,16 @@ Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.
      - Varsayılan arkaplan
 
 
+Çift tırnak (**"**) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (**'**) içindekiler işlenmez. Örneğin:
+
+.. code-block:: shell
+
+	var=12
+	echo "$var"
+	echo '$var'
+	-> 12
+	-> $var
+
 Parametreler
 ============
 Bir bash betiği çalıştırılırken verilen parametreleri **$** ifadesinden sonra gelen sayı ile kullanabiliriz.
