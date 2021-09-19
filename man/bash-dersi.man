@@ -498,7 +498,7 @@ _
 T{
 ${var^^}
 T}	T{
-hepsini büyük parf yap
+hepsini büyük harf yap
 T}	T{
 MERHABA
 T}

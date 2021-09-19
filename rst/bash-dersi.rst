@@ -271,7 +271,7 @@ Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Kara
      - merhaba
 
    * - ${var^^}
-     - hepsini büyük parf yap
+     - hepsini büyük harf yap
      - MERHABA
 
 Diziler
