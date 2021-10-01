@@ -1,0 +1,237 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "DEBIAN PAKET YAPIMI"  "" "" ""
+.SH NAME
+Debian paket yapımı \- 
+.sp
+Bu anlatımda debian tabanı için deb paketi yapmayı anlatacağım. Tüm adımlar root ile gerçekleştirilmiştir. Debian tabanlı bir dağıtım yada debootstrap ile kurulmuş bir chroot kullanmanız gerekmektedir.
+.sp
+Bu yazının ikinci kısmında da elimizdeki bir paketi açıp üzerinde değişiklik yapıp tekrar paketlemeyi anlatacağım.x
+.SH HAZIRLIK
+.sp
+Aşağıdaki paketleri kurarak paket derleme aşaması için gereken araçları yüklemeniz gerekmektedir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get install build\-essential
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PAKET TALIMATI HAZIRLANMASI
+.sp
+Debian tabanında paketlerin derleme talimatı \fBdebian\fP dizininde bulunur. Bu dizinde \fBsource/format\fP, \fBcopyright\fP, \fBcontrol\fP, \fBrules\fP, \fBcompat\fP dosyaları bulunur. \fBcopyright\fP dosyasında lisans metnimiz yer alır. \fIhttp://www.debian.org/doc/packaging\-manuals/copyright\-format/1.0/\fP adresindeki formata uygun şekilde yazarız. Aşağıda örnek bir \fBcopyright\fP dosyası yer almaktadır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Format: http://www.debian.org/doc/packaging\-manuals/copyright\-format/1.0/
+Upstream\-Name: test
+Source: https://example.org
+
+Files: *
+Copyright: 2021 user name <user@example.org>
+License: GPL\-3.0+
+
+License: GPL\-3.0+
+ This program is free software: you can redistribute it ...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBsource/format\fP dosyası paketin kaynak formatını belirtir. Bu dosya içerisine \fB3.0 (native)\fP yazabilirsiniz.
+.sp
+\fBcompat\fP dosyası içerisinde paketin hangi sürüme uyumlu olacağı yazılmıştır. Bu yazıyı yazarken en son sürüm olarak \fB11\fP olduğu için dosyaya \fB11\fP yazabiliriz.
+.sp
+\fBcontrol\fP dosyası içerisinde paketin adı bağımlılıkları gibi değerleri taşır. Aşağıda örnek control dosyası verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Source: example
+Section: utils
+Priority: optional
+Maintainer: user name <user@example.org>
+Build\-Depends: package1, package2
+Standards\-Version: 4.3.0
+Homepage: https://example.org
+
+Package: example
+Architecture: any
+Depends: package3,
+         package4
+
+Description: example package
+ Example package for sayfalar documentation
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer \fBArchitecture\fP değerine any yazarsanız paket derlediğiniz mimariye bağımlı olur. Eğer all yazarsanız tümünde çalışabilir.
+.sp
+\fBrules\fP dosyası derleme yapılırken kullanılan dosyadır. Bu dosyanın türü genellikle \fBMakefile\fP olur fakat istediğiniz herhangi bir dille de yazabilirsiniz.
+.sp
+\fBmake && make install\fP şeklinde derlenip kurulan bir kaynak kodu rules dosyasında aşağıdaki gibi belirtebiliriz. Bunun için \fBdh\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#!/usr/bin/make \-f
+
+%:
+        dh $@
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer \fB\&./configure\fP işlemimiz de varsa aşağıdakini rules içine ekleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+override_dh_auto_configure:
+        ./configre \-\-prefix=/usr
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada sırasıyla rules dosyasına aşağıdaki gibi komut yollanır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&./debian/rules clean # dh clean
+\&./debian/rules build # dh build
+\&./debian/rules binary # dh binary
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Biraz önceki rules dosyamızı biraz değiştirerek tekrar yazalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#!/usr/bin/make \-f
+
+clean:
+        dh clean
+build:
+        ./configure \-\-prefix=/usr
+        : dh build yerine aşağıdaki komutları yazabiliriz.
+        make
+        make install DESTDIR=debian/example # DESTDIR konumu debian/paketadı şeklinde olmalıdır.
+binary:
+        dh binary
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada \fBdh clean\fP komutu kaynağı temizlemek için kullanılır. \fBdh binary\fP ise paketleme işlemi için gereken komuttur.
+.sp
+\fBchangelog\fP dosyası ise paketin sürüm numarası ve değişikliklerini belirtir. Aşağıda örnek \fBchangelog\fP dosyası yer almaktadır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+example (0\&.3.1) stable; urgency=medium
+  [ user name ]
+  * Initial commit
+
+ \-\- user name  <user@example.org>  Mon, 31 Dec 2021 13:31:31 +0000
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PAKETIN DERLENMESI
+.sp
+\fBdpkg\-buildpackage \-b\fP komutunu derlenecek olan paketin kaynağının bulunduğu dizinde çalıştırın.
+.sp
+Paket dosyaları kaynağın bulunduğu dizinin bir öncesinde oluşturulur. \fBdeb\fP uzantılı dosyalarımızı eğer varsa depoya atabiliriz.
+.SH PAKET KAYAĞININ TEMIZLENMESI
+.sp
+\fBdh clean\fP komutunu kullanabilirsiniz.
+.SH POST INSTALL BETIKLERI
+.sp
+debian dizini içine atacağımız \fBpostinst\fP, \fBpreinst\fP, \fBprerm\fP, \fBpostrm\fP dosyaları paketin içerisine eklenir ve gerektiği yerde çalıştırılır. Genellikle bash betiğidir fakat istediğiniz dille yazabilirsiniz.
+.SH PAKET PARÇALAMA IŞLEMI
+.sp
+Bir deb dosyasını parçalamak için öncelikle \fBar\fP komutu kullanarak paketin dosyaları açılır. Bu işlemde karşımıza 3 tane dosya çıkar. data.tar.xz dosyası paketin dosyalarını barındırır. debian\-binary dosyası paket formatını gösterir. Bu dosyayı silebiliriz. control.tar.xz dosyası paket bilgisi içerir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ ar x paket.deb
+$ ls
+\-> control.tar.xz  data.tar.xz  debian\-binary  paket.deb
+$ tar \-xf data.tar.xz && rm \-f data.tar.xz debian\-binary paket.deb
+$ mkdir DEBIAN
+$ mv control.tar.xz DEBIAN
+$ cd DEBIAN
+$ tar \-xf control.tar.xz && rm \-f control.tar.xz
+$ cd ..
+$ ls
+\-> DEBIAN/ usr/ etc/
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PARÇALANAN PAKETIN TEKRAR PAKETLENMESI
+.sp
+Parçalanan paketin tekrar paketlenmesi için aşağıdaki komutu kullanabiliriz. Burada paket yolunu tam yol olarak vermeniz gerekmektedir. Paket dizininin dışında çalıştırılmalıdır. Paket adı dizinin adı şeklinde ayarlanmaktadır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ dpkg \-b /home/sulincix/test/example
+\-> dpkg\-deb: building package \(aqexample\(aq in \(aqexample.deb\(aq\&.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.
