@@ -2,7 +2,7 @@ Debian paket yapımı
 ^^^^^^^^^^^^^^^^^^^
 Bu anlatımda debian tabanı için deb paketi yapmayı anlatacağım. Tüm adımlar root ile gerçekleştirilmiştir. Debian tabanlı bir dağıtım yada debootstrap ile kurulmuş bir chroot kullanmanız gerekmektedir. 
 
-Bu yazının ikinci kısmında da elimizdeki bir paketi açıp üzerinde değişiklik yapıp tekrar paketlemeyi anlatacağım.x
+Bu yazının ikinci kısmında da elimizdeki bir paketi açıp üzerinde değişiklik yapıp tekrar paketlemeyi anlatacağım.
 
 Hazırlık
 ========
