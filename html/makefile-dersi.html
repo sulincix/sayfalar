@@ -70,12 +70,10 @@
         <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span>
 </pre>
 <p>Eğer <strong>$</strong> işareti kullanmanız gereken bir durum oluşursa <strong>$$</strong> ifadesi kullanabilirsiniz. Örneğin:</p>
-<blockquote>
-<dl class="docutils">
-<dt>hello:</dt>
-<dd>bash -c &quot;echo $$HOME&quot;</dd>
-</dl>
-</blockquote>
+<pre class="code makefile literal-block">
+<span class="name function">hello</span><span class="operator">:</span>
+        bash -c <span class="literal string double">&quot;echo </span><span class="name variable">$$</span><span class="literal string double">HOME&quot;</span>
+</pre>
 </div>
 <div class="section" id="bolumler">
 <h1>Bölümler</h1>

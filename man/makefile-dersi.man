@@ -148,11 +148,13 @@ hello:
 Eğer \fB$\fP işareti kullanmanız gereken bir durum oluşursa \fB$$\fP ifadesi kullanabilirsiniz. Örneğin:
 .INDENT 0.0
 .INDENT 3.5
-.INDENT 0.0
-.TP
-.B hello:
-bash \-c "echo $$HOME"
-.UNINDENT
+.sp
+.nf
+.ft C
+hello:
+        bash \-c "echo $$HOME"
+.ft P
+.fi
 .UNINDENT
 .UNINDENT
 .SH BÖLÜMLER

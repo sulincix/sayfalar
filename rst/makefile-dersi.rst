@@ -82,6 +82,8 @@ Var olan bir değişkene ekleme yapmak için **+=** ifadesi kullanılır.
 
 Eğer **$** işareti kullanmanız gereken bir durum oluşursa **$$** ifadesi kullanabilirsiniz. Örneğin:
 
+.. code-block:: makefile
+
 	hello:
 		bash -c "echo $$HOME"
 		
