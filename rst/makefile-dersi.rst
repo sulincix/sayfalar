@@ -71,14 +71,16 @@ Değişken tanımlamak için **variable=value** şeklinde tanımlanabilir. deği
 
 Bu değişkeni **make yazi=deneme123** şeklinde komut vererek değiştirebiliriz.
 
-Var olan bir değişkene ekleme yapmak için **+=** ifadesi kullanılır. 
+Var olan bir değişkene ekleme yapmak için **+=** ifadesi kullanılır.  **:=** ifadesi eğer tanımlama varsa ekleme yapar. **?=** sadece daha önceden tanımlanmışsa ekleme yapar.
 
 .. code-block:: makefile
 
 	yazi=hello
 	yazi+=world
+	sayi:=$(shell ls)
 	hello:
 		echo $(yazi)
+
 
 Eğer **$** işareti kullanmanız gereken bir durum oluşursa **$$** ifadesi kullanabilirsiniz. Örneğin:
 
@@ -86,7 +88,8 @@ Eğer **$** işareti kullanmanız gereken bir durum oluşursa **$$** ifadesi kul
 
 	hello:
 		bash -c "echo $$HOME"
-		
+
+
 Bölümler
 ========
 Makefile yazarken bölümler tanımlanır ve eğer bölümün adı belirtilmemişse ilk bölüm çalıştırılır. Bölümler arası bağımlılık vermek için aşağıdaki gibi bir kullanım yapılmalıdır.

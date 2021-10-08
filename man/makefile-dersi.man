@@ -130,7 +130,7 @@ hello:
 .sp
 Bu değişkeni \fBmake yazi=deneme123\fP şeklinde komut vererek değiştirebiliriz.
 .sp
-Var olan bir değişkene ekleme yapmak için \fB+=\fP ifadesi kullanılır.
+Var olan bir değişkene ekleme yapmak için \fB+=\fP ifadesi kullanılır.  \fB:=\fP ifadesi eğer tanımlama varsa ekleme yapar. \fB?=\fP sadece daha önceden tanımlanmışsa ekleme yapar.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -138,6 +138,7 @@ Var olan bir değişkene ekleme yapmak için \fB+=\fP ifadesi kullanılır.
 .ft C
 yazi=hello
 yazi+=world
+sayi:=$(shell ls)
 hello:
         echo $(yazi)
 .ft P

@@ -62,10 +62,11 @@
         <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span>
 </pre>
 <p>Bu değişkeni <strong>make yazi=deneme123</strong> şeklinde komut vererek değiştirebiliriz.</p>
-<p>Var olan bir değişkene ekleme yapmak için <strong>+=</strong> ifadesi kullanılır.</p>
+<p>Var olan bir değişkene ekleme yapmak için <strong>+=</strong> ifadesi kullanılır.  <strong>:=</strong> ifadesi eğer tanımlama varsa ekleme yapar. <strong>?=</strong> sadece daha önceden tanımlanmışsa ekleme yapar.</p>
 <pre class="code makefile literal-block">
 <span class="name variable">yazi</span><span class="operator">=</span>hello
 <span class="name variable">yazi</span><span class="operator">+=</span>world
+<span class="name variable">sayi</span><span class="operator">:=</span><span class="keyword">$(</span>shell ls<span class="keyword">)</span>
 <span class="name function">hello</span><span class="operator">:</span>
         <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span>
 </pre>
