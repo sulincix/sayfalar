@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<title>makefile dersi</title>
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<div class="document" id="makefile-dersi">
+<h1 class="title">makefile dersi</h1>
+
+<p>makefile formatı yazılan bir kaynak kodu derlemek ve yüklemek için kullanılan ne yaygın derleme talimatı formatlarından biridir.</p>
+<p>Bu yazıda sizlere makefile dosyası nasıl yazılır anlatacağım.</p>
+<div class="section" id="genel-bakis">
+<h1>Genel bakış</h1>
+<p>Örneğin aşağıdaki gibi bir <strong>C</strong> kodumuz olsun</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">puts</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world!</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Bunu aşağıdaki komutu kulanarak derleriz ve kurarız.</p>
+<pre class="code C literal-block">
+<span class="name">$</span><span class="whitespace"> </span><span class="name">gcc</span><span class="whitespace"> </span><span class="operator">-</span><span class="name">o</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="name">hello</span><span class="punctuation">.</span><span class="name">c</span><span class="whitespace">
+</span><span class="name">$</span><span class="whitespace"> </span><span class="name">install</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="operator">/</span><span class="name">usr</span><span class="operator">/</span><span class="name">bin</span><span class="operator">/</span><span class="name">hello</span>
+</pre>
+<p>Makefile dosyalarının bölüm tanımlamalarında girintileme amaçlı <strong>Tab</strong> kullanılır.</p>
+<p>Şimdi aşağıdaki makefile dosyasını inceleyelim.</p>
+<pre class="code makefile literal-block">
+<span class="name variable">PREFIX</span><span class="operator">=</span>/usr
+<span class="name function">build</span><span class="operator">:</span>
+        <span class="keyword">$(</span>CC<span class="keyword">)</span> -o hello hello.c
+
+<span class="name function">install</span><span class="operator">:</span>
+        install hello <span class="keyword">$(</span>DESTDIR<span class="keyword">)</span>/<span class="keyword">$(</span>PREFIX<span class="keyword">)</span>/bin/hello
+</pre>
+<p>Burada <strong>PREFIX</strong>, <strong>CC</strong>, <strong>DESTDIR</strong> gibi parametreler değişkendir. Bu değişkenler derleme esnasında değiştirilebilir.</p>
+<p>Bu makefile dosyasını kullanarak derlemeyi ve yüklemeyi aşağıdaki gibi yaparız.</p>
+<pre class="code C literal-block">
+<span class="name">$</span><span class="whitespace"> </span><span class="name">make</span><span class="whitespace">
+</span><span class="name">$</span><span class="whitespace"> </span><span class="name">make</span><span class="whitespace"> </span><span class="name">install</span>
+</pre>
+<p>Görüldüğü gibi derleme ve yükleme işlemi daha kolay ve nasıl derleneceğini basitçe belirtmiş olduk.</p>
+<p>Burada kullandığımız değişkenler şu şekilde açılnabilir.</p>
+<ul class="simple">
+<li>PREFIX = /usr olarak tanımladık.</li>
+<li>DESTDIR = paket sistemleri paket yaparken bu değişkeni otomatik olarak değiştirir. Kurulacak kök dizin konumudur.</li>
+<li>CC = derleyicinin adıdır. Bu değişkeni ayarlayarak derleyiciyi değiştirebilirsiniz.</li>
+</ul>
+<p>Make komutuna eğer hiç parametre verimezsek ilk baştaki bölümü çalıştırır. Biz ilk başta <strong>build</strong> tanımladığımız için make komutu build çalıştırır. make komutuna parametre olarak bölüm verirsek o bölüm çalıştırılır.</p>
+</div>
+<div class="section" id="degisken-islemleri">
+<h1>Değişken işlemleri</h1>
+<p>Değişken tanımlamak için <strong>variable=value</strong> şeklinde tanımlanabilir. değişkeni kullanırken de <strong>$()</strong> işareti arasına alınır. Örneğin:</p>
+<pre class="code makefile literal-block">
+<span class="name variable">yazi</span><span class="operator">=</span>hello world
+<span class="name function">hello</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span>
+</pre>
+<p>Bu değişkeni <strong>make yazi=deneme123</strong> şeklinde komut vererek değiştirebiliriz.</p>
+<p>Var olan bir değişkene ekleme yapmak için <strong>+=</strong> ifadesi kullanılır.</p>
+<pre class="code makefile literal-block">
+<span class="name variable">yazi</span><span class="operator">=</span>hello
+<span class="name variable">yazi</span><span class="operator">+=</span>world
+<span class="name function">hello</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span>
+</pre>
+<p>Eğer <strong>$</strong> işareti kullanmanız gereken bir durum oluşursa <strong>$$</strong> ifadesi kullanabilirsiniz. Örneğin:</p>
+<blockquote>
+<dl class="docutils">
+<dt>hello:</dt>
+<dd>bash -c &quot;echo $$HOME&quot;</dd>
+</dl>
+</blockquote>
+</div>
+<div class="section" id="bolumler">
+<h1>Bölümler</h1>
+<p>Makefile yazarken bölümler tanımlanır ve eğer bölümün adı belirtilmemişse ilk bölüm çalıştırılır. Bölümler arası bağımlılık vermek için aşağıdaki gibi bir kullanım yapılmalıdır.</p>
+<pre class="code makefile literal-block">
+<span class="name function">yazi</span><span class="operator">:</span> <span class="name">sayi</span> <span class="name">test</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;Hello world&quot;</span>
+<span class="name function">sayi</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> <span class="literal number">12</span>
+<span class="name function">test</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> test123
+</pre>
+<p>Yukarıdaki dosyayı çalıştırdığımızda sırasıyla <strong>sayi</strong> -&gt; <strong>test</strong> -&gt; <strong>yazi</strong> bölümleri çalıştırılır.</p>
+</div>
+</div>
+</body>
+</html>
