@@ -253,6 +253,12 @@
 ☭ dpkg -i /tmp/17g-installer.deb <span class="comment single"># dosya adını uygun şekilde yazınız.
 </span>☭ apt-get install -f <span class="comment single"># eksik bağımlılıkları tamamlaması için.</span>
 </pre>
+<ol class="arabic simple" start="6">
+<li>Network manager gvfs-backends gibi bazı paketlere ihtiyacımız olabilir. Bunları kuralbilirsiniz.</li>
+</ol>
+<pre class="code shell literal-block">
+☭ apt-get install network-manager-gnome gvfs-backends pavucontrol chromium
+</pre>
 </div>
 <div class="section" id="paketleme-oncesi">
 <h1>Paketleme öncesi</h1>

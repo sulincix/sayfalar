@@ -473,6 +473,20 @@ Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğ
 .fi
 .UNINDENT
 .UNINDENT
+.INDENT 0.0
+.IP 6. 3
+Network manager gvfs\-backends gibi bazı paketlere ihtiyacımız olabilir. Bunları kuralbilirsiniz.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ apt\-get install network\-manager\-gnome gvfs\-backends pavucontrol chromium
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH PAKETLEME ÖNCESI
 .INDENT 0.0
 .IP 1. 3

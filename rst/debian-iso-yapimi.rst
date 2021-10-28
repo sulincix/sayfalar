@@ -141,6 +141,7 @@ Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (iste
 
 	☭ apt-get install live-config live-boot
 
+
 Özelleştirme
 ^^^^^^^^^^^^
 
@@ -219,6 +220,12 @@ Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurab
 
 	☭ dpkg -i /tmp/17g-installer.deb # dosya adını uygun şekilde yazınız.
 	☭ apt-get install -f # eksik bağımlılıkları tamamlaması için.
+
+6. Network manager gvfs-backends gibi bazı paketlere ihtiyacımız olabilir. Bunları kuralbilirsiniz.
+
+.. code-block:: shell
+
+	☭ apt-get install network-manager-gnome gvfs-backends pavucontrol chromium
 
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^
