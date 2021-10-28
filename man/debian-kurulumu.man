@@ -357,7 +357,7 @@ Yeni \fBkullanıcı\fP oluşturalım ve \fBparola\fP atayalım. Not: \fBSudo\fP 
 .sp
 .nf
 .ft C
-$ useradd \-m kullanıcıadı \-G netdev,lpadmin,audio,video,plugdev,scanner,floppy \-s /bin/bash
+$ useradd \-m kullanıcıadı \-G netdev,audio,video,plugdev,floppy \-s /bin/bash
 $ passwd kullanıcıadı # kullanıcıya parola atamak için
 $ passwd root # root kullancısına parola atamak için
 .ft P

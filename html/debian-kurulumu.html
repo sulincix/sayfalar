@@ -197,7 +197,7 @@ $ apt-get install lightdm <span class="comment single"># giriş ekranı olarak l
 <li>Yeni <strong>kullanıcı</strong> oluşturalım ve <strong>parola</strong> atayalım. Not: <strong>Sudo</strong> kurmadığınızda <strong>root</strong> yetkisi almak için <strong>su</strong> komutu kullanmanız gerekir.</li>
 </ol>
 <pre class="code shell literal-block">
-$ useradd -m kullanıcıadı -G netdev,lpadmin,audio,video,plugdev,scanner,floppy -s /bin/bash
+$ useradd -m kullanıcıadı -G netdev,audio,video,plugdev,floppy -s /bin/bash
 $ passwd kullanıcıadı <span class="comment single"># kullanıcıya parola atamak için
 </span>$ passwd root <span class="comment single"># root kullancısına parola atamak için</span>
 </pre>

@@ -167,7 +167,7 @@ mate         apt-get install mate-desktop-environment-core
 
 .. code-block:: shell
 
-	$ useradd -m kullanıcıadı -G netdev,lpadmin,audio,video,plugdev,scanner,floppy -s /bin/bash
+	$ useradd -m kullanıcıadı -G netdev,audio,video,plugdev,floppy -s /bin/bash
 	$ passwd kullanıcıadı # kullanıcıya parola atamak için
 	$ passwd root # root kullancısına parola atamak için
 
