@@ -364,6 +364,23 @@ $ passwd root # root kullancısına parola atamak için
 .fi
 .UNINDENT
 .UNINDENT
+.INDENT 0.0
+.IP 11. 4
+Network\-manager kuralım.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# Bunu tüm kullanıcılar kurmalıdır.
+$ apt\-get install network\-manager
+# Bunu kde ve gnome kullanıcılarının kurmasına gerek yok.
+$ apt\-get install network\-manager\-gnome
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH KURULUMU SONRASI AŞAMA
 .INDENT 0.0
 .IP 1. 3

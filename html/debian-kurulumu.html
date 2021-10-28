@@ -201,6 +201,15 @@ $ useradd -m kullanıcıadı -G netdev,audio,video,plugdev,floppy -s /bin/bash
 $ passwd kullanıcıadı <span class="comment single"># kullanıcıya parola atamak için
 </span>$ passwd root <span class="comment single"># root kullancısına parola atamak için</span>
 </pre>
+<ol class="arabic simple" start="11">
+<li>Network-manager kuralım.</li>
+</ol>
+<pre class="code shell literal-block">
+<span class="comment single"># Bunu tüm kullanıcılar kurmalıdır.
+</span>$ apt-get install network-manager
+<span class="comment single"># Bunu kde ve gnome kullanıcılarının kurmasına gerek yok.
+</span>$ apt-get install network-manager-gnome
+</pre>
 </div>
 </div>
 <div class="section" id="kurulumu-sonrasi-asama">
