@@ -171,6 +171,15 @@ mate         apt-get install mate-desktop-environment-core
 	$ passwd kullanıcıadı # kullanıcıya parola atamak için
 	$ passwd root # root kullancısına parola atamak için
 
+11. Network-manager kuralım.
+
+.. code-block:: shell
+
+	# Bunu tüm kullanıcılar kurmalıdır.
+	$ apt-get install network-manager
+	# Bunu kde ve gnome kullanıcılarının kurmasına gerek yok.
+	$ apt-get install network-manager-gnome
+
 Kurulumu sonrası aşama
 ^^^^^^^^^^^^^^^^^^^^^^
 
