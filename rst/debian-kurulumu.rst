@@ -109,6 +109,7 @@ Chroot içindeki kurulum aşamaları
 	# sadece uefi kullananların yapması gereken kısım
 	$ mkdir -p /boot/efi
 	$ mount /dev/sda1 /boot/efi
+	$ mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 	# uefi ve legacy için ortak olan kısım
 	$ apt-get update
 	$ apt-get install grub-pc-bin grub-efi linux-image-amd64 linux-headers-amd64
