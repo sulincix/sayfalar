@@ -1,5 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
+.TH ISO YAPIMI  "" "" ""
+.SH NAME
+Iso yapımı \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -27,9 +30,6 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "ISO YAPIMI"  "" "" ""
-.SH NAME
-Iso yapımı \- 
 .sp
 Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapımı anlatılacaktır.
 .sp
@@ -459,6 +459,12 @@ Sürücüleri ekleyebiliz.
 .INDENT 0.0
 .IP 4. 3
 Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları \fB/etc/skel\fP içerisine uygun hiyerarşiye göre dizmelisiniz.
+.UNINDENT
+.sp
+Burada dikkat etmezin gerekek nokta ev dizinindeki bütün dosyaları olduğu gibi kopyalarsanız açık olan kullanıcı hesabı bilgileri de dahil edileceği için tehlikeli olabilir. Bu dosyaları tek tek kontrol ederek koymanızı şiddetle tavsiye ederim.
+.sp
+Yapmış olduğunuz duvar kağıdı simge teması gibi özelleştirmeler iso içerisinde de aynı konumda bulunmalıdır. Bu sebeple sadece iso içerisindeki görselleri ve temaları kullanmalısınız.
+.INDENT 0.0
 .IP 5. 3
 Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğumuz \fBdeb\fP dosyasını chroot içindeki \fB/tmp\fP dizinine kopyalayalım.
 .UNINDENT
@@ -482,7 +488,7 @@ Network manager gvfs\-backends gibi bazı paketlere ihtiyacımız olabilir. Bunl
 .sp
 .nf
 .ft C
-☭ apt\-get install network\-manager\-gnome gvfs\-backends pavucontrol chromium
+☭ apt\-get install network\-manager\-gnome gvfs\-backends pavucontrol chromium vlc
 .ft P
 .fi
 .UNINDENT

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
 <title>makefile dersi</title>
 <link rel="stylesheet" href="main.css" />
 </head>
@@ -17,16 +17,16 @@
 <h1>Genel bakış</h1>
 <p>Örneğin aşağıdaki gibi bir <strong>C</strong> kodumuz olsun</p>
 <pre class="code C literal-block">
-<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
-</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
-    </span><span class="name">puts</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world!</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">);</span><span class="whitespace">
-    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
-</span><span class="punctuation">}</span>
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">int</span> <span class="name function">main</span><span class="punctuation">(){</span>
+    <span class="name">puts</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world!</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">);</span>
+    <span class="keyword">return</span> <span class="literal number integer">0</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
 </pre>
 <p>Bunu aşağıdaki komutu kulanarak derleriz ve kurarız.</p>
 <pre class="code C literal-block">
-<span class="name">$</span><span class="whitespace"> </span><span class="name">gcc</span><span class="whitespace"> </span><span class="operator">-</span><span class="name">o</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="name">hello</span><span class="punctuation">.</span><span class="name">c</span><span class="whitespace">
-</span><span class="name">$</span><span class="whitespace"> </span><span class="name">install</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="operator">/</span><span class="name">usr</span><span class="operator">/</span><span class="name">bin</span><span class="operator">/</span><span class="name">hello</span>
+<span class="error">$</span> <span class="name">gcc</span> <span class="operator">-</span><span class="name">o</span> <span class="name">hello</span> <span class="name">hello</span><span class="punctuation">.</span><span class="name">c</span>
+<span class="error">$</span> <span class="name">install</span> <span class="name">hello</span> <span class="operator">/</span><span class="name">usr</span><span class="operator">/</span><span class="name">bin</span><span class="operator">/</span><span class="name">hello</span>
 </pre>
 <p>Makefile dosyalarının bölüm tanımlamalarında girintileme amaçlı <strong>Tab</strong> kullanılır.</p>
 <p>Şimdi aşağıdaki makefile dosyasını inceleyelim.</p>
@@ -41,8 +41,8 @@
 <p>Burada <strong>PREFIX</strong>, <strong>CC</strong>, <strong>DESTDIR</strong> gibi parametreler değişkendir. Bu değişkenler derleme esnasında değiştirilebilir.</p>
 <p>Bu makefile dosyasını kullanarak derlemeyi ve yüklemeyi aşağıdaki gibi yaparız.</p>
 <pre class="code C literal-block">
-<span class="name">$</span><span class="whitespace"> </span><span class="name">make</span><span class="whitespace">
-</span><span class="name">$</span><span class="whitespace"> </span><span class="name">make</span><span class="whitespace"> </span><span class="name">install</span>
+<span class="error">$</span> <span class="name">make</span>
+<span class="error">$</span> <span class="name">make</span> <span class="name">install</span>
 </pre>
 <p>Görüldüğü gibi derleme ve yükleme işlemi daha kolay ve nasıl derleneceğini basitçe belirtmiş olduk.</p>
 <p>Burada kullandığımız değişkenler şu şekilde açılnabilir.</p>

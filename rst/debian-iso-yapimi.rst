@@ -214,6 +214,10 @@ Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurab
 
 4. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.
 
+Burada dikkat etmezin gerekek nokta ev dizinindeki bütün dosyaları olduğu gibi kopyalarsanız açık olan kullanıcı hesabı bilgileri de dahil edileceği için tehlikeli olabilir. Bu dosyaları tek tek kontrol ederek koymanızı şiddetle tavsiye ederim.
+
+Yapmış olduğunuz duvar kağıdı simge teması gibi özelleştirmeler iso içerisinde de aynı konumda bulunmalıdır. Bu sebeple sadece iso içerisindeki görselleri ve temaları kullanmalısınız.
+
 5. Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğumuz **deb** dosyasını chroot içindeki **/tmp** dizinine kopyalayalım.
 
 .. code-block:: shell
@@ -225,7 +229,7 @@ Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurab
 
 .. code-block:: shell
 
-	☭ apt-get install network-manager-gnome gvfs-backends pavucontrol chromium
+	☭ apt-get install network-manager-gnome gvfs-backends pavucontrol chromium vlc
 
 Paketleme öncesi
 ^^^^^^^^^^^^^^^^

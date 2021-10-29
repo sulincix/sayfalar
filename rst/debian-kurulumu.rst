@@ -93,11 +93,12 @@ Chroot dışındaki kurulum aşamaları
 
         $ for i in dev dev/pts proc sys run; do mount -o bind /$i /mnt/$i; done
 
-4. **Rootfs** içerisine **chroot** ile girelim. Bu aşamadan sonraki tüm adımlar **chroot** içerisinde yapılacaktır.
+4. **Rootfs** içerisine **chroot** ile girelim. Bu aşamadan sonraki tüm adımlar **chroot** içerisinde yapılacaktır. Chroota girdikten hemen sonra **profile** dosyamızı etkin hale getirelim. 
 
 .. code-block:: shell
 
 	$ chroot /mnt /bin/bash
+	$ source /etc/profile # (Bu komut chroot içerisinde çalıştırılmalı)
 
 Chroot içindeki kurulum aşamaları
 *********************************
@@ -158,6 +159,7 @@ Masaüstü     Komut
 xfce         apt-get install xfce4
 lxde         apt-get install lxde
 cinnamon     apt-get install cinnamon
+budgie       apt-get install budige-desktop
 plasma       apt-get install kde-standard
 gnome        apt-get install gnome-core
 mate         apt-get install mate-desktop-environment-core
@@ -179,6 +181,28 @@ mate         apt-get install mate-desktop-environment-core
 	$ apt-get install network-manager
 	# Bunu kde ve gnome kullanıcılarının kurmasına gerek yok.
 	$ apt-get install network-manager-gnome
+
+12. Sudo kurulumu ve ayarlamasını yapabilirsiniz (Tavsiye etmem :D)
+
+.. code-block:: shell
+
+	$ apt-get install sudo
+	$ usermod -aG sudo kullanıcıadı
+
+13. Dil ve klavye ayarlarını yapabiliriz. Türkçe Q klavye için klavye varyantı boş bırakılmalıdır. Türkçe F klavye için varyant kısmına f yazılmalıdır.
+
+.. code-block:: shell
+
+	$ dpkg-reconfigure locales # dil ayarı için
+	$ nano /etc/default/keyboard # bu dosyayı düzenleyin ve kaydedin.
+
+14. Grub ekranındaki bekleme süresini kapatabilirsiniz. (isteğe bağlı)
+
+Eğer **0** ayarlarsanız grub ekranı gözükmez. **-1** yaparsanız siz tuşa basana kadar sürekli olarak gözükür.
+
+.. code-block:: shell
+
+	$ sed -i "s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/g" /etc/default/grub
 
 Kurulumu sonrası aşama
 ^^^^^^^^^^^^^^^^^^^^^^

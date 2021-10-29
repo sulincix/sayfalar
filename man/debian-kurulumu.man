@@ -1,5 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
+.TH DEBIAN KURULUMU  "" "" ""
+.SH NAME
+debian kurulumu \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -27,9 +30,6 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "DEBIAN KURULUMU"  "" "" ""
-.SH NAME
-debian kurulumu \- 
 .sp
 Bu dokümanda debianı \fBdebootstrap\fP ile kurma konusu anlatılacaktır. \fBBu dokümandaki komutları kendi kurulumunuza göre uyarlayarak yazın.\fP
 .sp
@@ -198,7 +198,7 @@ $ for i in dev dev/pts proc sys run; do mount \-o bind /$i /mnt/$i; done
 .UNINDENT
 .INDENT 0.0
 .IP 4. 3
-\fBRootfs\fP içerisine \fBchroot\fP ile girelim. Bu aşamadan sonraki tüm adımlar \fBchroot\fP içerisinde yapılacaktır.
+\fBRootfs\fP içerisine \fBchroot\fP ile girelim. Bu aşamadan sonraki tüm adımlar \fBchroot\fP içerisinde yapılacaktır. Chroota girdikten hemen sonra \fBprofile\fP dosyamızı etkin hale getirelim.
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
@@ -206,6 +206,7 @@ $ for i in dev dev/pts proc sys run; do mount \-o bind /$i /mnt/$i; done
 .nf
 .ft C
 $ chroot /mnt /bin/bash
+$ source /etc/profile # (Bu komut chroot içerisinde çalıştırılmalı)
 .ft P
 .fi
 .UNINDENT
@@ -330,6 +331,12 @@ apt\-get install cinnamon
 T}
 _
 T{
+budgie
+T}	T{
+apt\-get install budige\-desktop
+T}
+_
+T{
 plasma
 T}	T{
 apt\-get install kde\-standard
@@ -377,6 +384,52 @@ Network\-manager kuralım.
 $ apt\-get install network\-manager
 # Bunu kde ve gnome kullanıcılarının kurmasına gerek yok.
 $ apt\-get install network\-manager\-gnome
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 12. 4
+Sudo kurulumu ve ayarlamasını yapabilirsiniz (Tavsiye etmem :D)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt\-get install sudo
+$ usermod \-aG sudo kullanıcıadı
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 13. 4
+Dil ve klavye ayarlarını yapabiliriz. Türkçe Q klavye için klavye varyantı boş bırakılmalıdır. Türkçe F klavye için varyant kısmına f yazılmalıdır.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ dpkg\-reconfigure locales # dil ayarı için
+$ nano /etc/default/keyboard # bu dosyayı düzenleyin ve kaydedin.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 14. 4
+Grub ekranındaki bekleme süresini kapatabilirsiniz. (isteğe bağlı)
+.UNINDENT
+.sp
+Eğer \fB0\fP ayarlarsanız grub ekranı gözükmez. \fB\-1\fP yaparsanız siz tuşa basana kadar sürekli olarak gözükür.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ sed \-i "s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/g" /etc/default/grub
 .ft P
 .fi
 .UNINDENT

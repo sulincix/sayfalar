@@ -714,13 +714,3 @@ Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki d
 
 
 
-
-
-
-
-
-
-
-
-
-
