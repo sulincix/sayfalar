@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <title>debian kurulumu</title>
 <link rel="stylesheet" href="main.css" />
 </head>
@@ -102,7 +102,7 @@ $ debootstrap --arch amd64 --no-merged-usr sid /mnt https://deb.debian.org/debia
 <li>Oluşturduğumuz <strong>rootfs</strong> içine <strong>dev sys proc run</strong> dizinlerini bağlayalım.</li>
 </ol>
 <pre class="code shell literal-block">
-$ <span class="keyword">for</span> i in dev dev/pts proc sys run<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> /mnt/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
+$ <span class="keyword">for</span> i <span class="keyword">in</span> dev dev/pts proc sys run<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> /mnt/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
 </pre>
 <ol class="arabic simple" start="4">
 <li><strong>Rootfs</strong> içerisine <strong>chroot</strong> ile girelim. Bu aşamadan sonraki tüm adımlar <strong>chroot</strong> içerisinde yapılacaktır. Chroota girdikten hemen sonra <strong>profile</strong> dosyamızı etkin hale getirelim.</li>

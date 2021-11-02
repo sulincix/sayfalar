@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH MAKEFILE DERSI  "" "" ""
-.SH NAME
-makefile dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "MAKEFILE DERSI"  "" "" ""
+.SH NAME
+makefile dersi \- 
 .sp
 makefile formatı yazılan bir kaynak kodu derlemek ve yüklemek için kullanılan ne yaygın derleme talimatı formatlarından biridir.
 .sp

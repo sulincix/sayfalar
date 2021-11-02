@@ -274,6 +274,10 @@ Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Kara
      - hepsini büyük harf yap
      - MERHABA
 
+   * - ${var:+abc}
+     - var tanımlıysı abc dördürür.
+     - abc
+
 Diziler
 =======
 Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler aşağıdaki gibi tanımların ve kullanılır.

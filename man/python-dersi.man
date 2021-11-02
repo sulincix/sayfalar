@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH PYTHON DERSI  "" "" ""
-.SH NAME
-Python dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "PYTHON DERSI"  "" "" ""
+.SH NAME
+Python dersi \- 
 .sp
 Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
 .SH AÇIKLAMA SATIRLARI

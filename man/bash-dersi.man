@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH BASH DERSI  "" "" ""
-.SH NAME
-Bash dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "BASH DERSI"  "" "" ""
+.SH NAME
+Bash dersi \- 
 .sp
 Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
 .SH AÇIKLAMA SATIRI VE DOSYA BAŞLANGICI
@@ -501,6 +501,14 @@ T}	T{
 hepsini büyük harf yap
 T}	T{
 MERHABA
+T}
+_
+T{
+${var:+abc}
+T}	T{
+var tanımlıysı abc dördürür.
+T}	T{
+abc
 T}
 _
 .TE
