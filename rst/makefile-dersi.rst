@@ -104,3 +104,130 @@ Makefile yazarken bölümler tanımlanır ve eğer bölümün adı belirtilmemi�
 		echo test123
 		
 Yukarıdaki dosyayı çalıştırdığımızda sırasıyla **sayi** -> **test** -> **yazi** bölümleri çalıştırılır.
+
+Aynı işi yapan birden çok bölüm şu şekilde tanımlanabilir.
+
+.. code-block:: makefile
+
+	bol1 bol2:
+		echo Merhaba
+	# Şuna eşittir.
+	bol1:
+		echo Merhaba
+	bol2:
+		echo Merhaba
+
+Bölümün adını **$@** kullanarak öğrenebiliriz.
+
+.. code-block:: makefile
+
+	bolum:
+		echo $@
+
+Bölümün tüm bağımlılıklarını almak için için **$^** kullanabiliriz.
+
+.. code-block:: makefile
+
+	bolum: bol1 bol2
+		echo $^
+	bol1 bol2:
+		true
+
+**$?** ifadesi **$^** ile benzerdir fakat sadece geçerli bölümden sonra tanımlanan bölümleri döndürür.
+
+.. code-block:: makefile
+
+	bol1:
+		true
+	bolum: bol1 bol2
+		echo $?
+	bol2:
+		true
+
+**$<** ifadesi sadece ilk bağımlılığı almak için kullanılır.
+
+.. code-block:: makefile
+
+	bol1 bol2:
+		true
+	bolum: bol1 bol2
+		echo $<
+
+Eğer **xxxx.o** şeklinde bir kural tanımlarsanız bu kural çalıştırıldıktan sonra gcc ile kural adındaki dosya derlenir.
+
+.. code-block:: makefile
+
+	main: main.o
+	main.o: main.c test.c
+
+	main.c:
+		echo "int main(){}" > main.c
+	%.c:
+		touch $@
+		
+Burada main.c dosyası var olmayan bir dosyadır ve derleme esnasında oluşturulur. test.c dosyası ise daha önceden var olan bir dosyadır ve o dosyaya bir şey yapılmaz. main.c kuralı sadece main.c için çalıştırılırken **%.c** şeklinde belirtilen kular hem main.c hem test.c için çalıştırılır.
+**main** ile belirttiğimiz kuralda main.o bağımlılığı olduğu için bi derlemenin sonucu olarak main adında bir derlenmiş dosya üretilmektedir.
+
+
+wildcard ve shell
+=================
+
+Wildcard ifadesi eşleşen dosyaları döndürür.
+
+.. code-block:: makefile
+
+	files := $(wildcard *.c)
+	main:
+		gcc -o main $(files)
+
+Shell ifadesi ise komut çalıştırarak sonucunu döndürür.
+
+.. code-block:: makefile
+
+	files := $(shell find -type f -iname "*.c")
+	main:
+		gcc -o main $(files)
+
+Birden çok dosya ile çalışma
+============================
+**make -C xxx** şeklinde alt dizindeki bir makefile dosyasını çalıştırabilirsiniz.
+
+.. code-block:: makefile
+
+	build:
+		make -C src
+
+Ayrıca **include** kullanarak başka bir dosyada bulunan kuralları kullanabilirsiniz.
+
+.. code-block:: makefile
+
+	# Makefile dosyası
+	include build.mk
+	build: main
+		gcc main.c -o main
+	# build.mk dosyası
+	main:
+		echo "int main(){return 0;}" > main.c
+
+Koşullar
+========
+**ifeq** ifadesi ile koşul tanımlanabilir.  aşağıdaki ifadeşi **make CC=clang** şeklinde çalıştırırkanız clang yazdırır, parametresiz bir şekilde çalıştırırsanız gcc yazdırır. Burada dikkat edilmesi gereken konu **ifeq**, **else**, **endif** girintilenmeden yazılır.
+
+.. code-block:: makefile
+
+	build:
+	ifeq ($(CC),clang)
+		echo "clang"
+	else
+		echo "gcc"
+	endif
+
+Komut özellik ifadeleri
+=======================
+Eğer komutun başına **@** işareti koyarsanız komut ekrana yazılmadan çalıştırılır. **-** yazarsanız komut hata alsa bile geri kalan kısımlar çalışmaya devam eder.
+
+.. code-block:: makefile
+
+	build:
+		@echo "Merhaba dünya"
+		-gcc main.c -o main

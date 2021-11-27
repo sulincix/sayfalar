@@ -88,6 +88,110 @@
         <span class="name builtin">echo</span> test123
 </pre>
 <p>Yukarıdaki dosyayı çalıştırdığımızda sırasıyla <strong>sayi</strong> -&gt; <strong>test</strong> -&gt; <strong>yazi</strong> bölümleri çalıştırılır.</p>
+<p>Aynı işi yapan birden çok bölüm şu şekilde tanımlanabilir.</p>
+<pre class="code makefile literal-block">
+<span class="name function">bol1 bol2</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> Merhaba
+<span class="comment"># Şuna eşittir.
+</span><span class="name function">bol1</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> Merhaba
+<span class="name function">bol2</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> Merhaba
+</pre>
+<p>Bölümün adını <strong>$&#64;</strong> kullanarak öğrenebiliriz.</p>
+<pre class="code makefile literal-block">
+<span class="name function">bolum</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> <span class="name variable">$&#64;</span>
+</pre>
+<p>Bölümün tüm bağımlılıklarını almak için için <strong>$^</strong> kullanabiliriz.</p>
+<pre class="code makefile literal-block">
+<span class="name function">bolum</span><span class="operator">:</span> <span class="name">bol</span>1 <span class="name">bol</span>2
+        <span class="name builtin">echo</span> $^
+<span class="name function">bol1 bol2</span><span class="operator">:</span>
+        <span class="name builtin">true</span>
+</pre>
+<p><strong>$?</strong> ifadesi <strong>$^</strong> ile benzerdir fakat sadece geçerli bölümden sonra tanımlanan bölümleri döndürür.</p>
+<pre class="code makefile literal-block">
+<span class="name function">bol1</span><span class="operator">:</span>
+        <span class="name builtin">true</span>
+<span class="name function">bolum</span><span class="operator">:</span> <span class="name">bol</span>1 <span class="name">bol</span>2
+        <span class="name builtin">echo</span> <span class="name variable">$?</span>
+<span class="name function">bol2</span><span class="operator">:</span>
+        <span class="name builtin">true</span>
+</pre>
+<p><strong>$&lt;</strong> ifadesi sadece ilk bağımlılığı almak için kullanılır.</p>
+<pre class="code makefile literal-block">
+<span class="name function">bol1 bol2</span><span class="operator">:</span>
+        <span class="name builtin">true</span>
+<span class="name function">bolum</span><span class="operator">:</span> <span class="name">bol</span>1 <span class="name">bol</span>2
+        <span class="name builtin">echo</span> $&lt;
+</pre>
+<p>Eğer <strong>xxxx.o</strong> şeklinde bir kural tanımlarsanız bu kural çalıştırıldıktan sonra gcc ile kural adındaki dosya derlenir.</p>
+<pre class="code makefile literal-block">
+<span class="name function">main</span><span class="operator">:</span> <span class="name">main</span>.<span class="name">o</span>
+<span class="name function">main.o</span><span class="operator">:</span> <span class="name">main</span>.<span class="name">c</span> <span class="name">test</span>.<span class="name">c</span>
+
+<span class="name function">main.c</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;int main(){}&quot;</span> &gt; main.c
+<span class="name function">%.c</span><span class="operator">:</span>
+        touch <span class="name variable">$&#64;</span>
+</pre>
+<p>Burada main.c dosyası var olmayan bir dosyadır ve derleme esnasında oluşturulur. test.c dosyası ise daha önceden var olan bir dosyadır ve o dosyaya bir şey yapılmaz. main.c kuralı sadece main.c için çalıştırılırken <strong>%.c</strong> şeklinde belirtilen kular hem main.c hem test.c için çalıştırılır.
+<strong>main</strong> ile belirttiğimiz kuralda main.o bağımlılığı olduğu için bi derlemenin sonucu olarak main adında bir derlenmiş dosya üretilmektedir.</p>
+</div>
+<div class="section" id="wildcard-ve-shell">
+<h1>wildcard ve shell</h1>
+<p>Wildcard ifadesi eşleşen dosyaları döndürür.</p>
+<pre class="code makefile literal-block">
+<span class="name variable">files</span> <span class="operator">:=</span> <span class="keyword">$(</span>wildcard *.c<span class="keyword">)</span>
+<span class="name function">main</span><span class="operator">:</span>
+        gcc -o main <span class="keyword">$(</span>files<span class="keyword">)</span>
+</pre>
+<p>Shell ifadesi ise komut çalıştırarak sonucunu döndürür.</p>
+<pre class="code makefile literal-block">
+<span class="name variable">files</span> <span class="operator">:=</span> <span class="keyword">$(</span>shell find -type f -iname <span class="literal string double">&quot;*.c&quot;</span><span class="keyword">)</span>
+<span class="name function">main</span><span class="operator">:</span>
+        gcc -o main <span class="keyword">$(</span>files<span class="keyword">)</span>
+</pre>
+</div>
+<div class="section" id="birden-cok-dosya-ile-calisma">
+<h1>Birden çok dosya ile çalışma</h1>
+<p><strong>make -C xxx</strong> şeklinde alt dizindeki bir makefile dosyasını çalıştırabilirsiniz.</p>
+<pre class="code makefile literal-block">
+<span class="name function">build</span><span class="operator">:</span>
+        make -C src
+</pre>
+<p>Ayrıca <strong>include</strong> kullanarak başka bir dosyada bulunan kuralları kullanabilirsiniz.</p>
+<pre class="code makefile literal-block">
+<span class="comment"># Makefile dosyası
+</span><span class="comment preproc">include build.mk
+</span><span class="name function">build</span><span class="operator">:</span> <span class="name">main</span>
+        gcc main.c -o main
+<span class="comment"># build.mk dosyası
+</span><span class="name function">main</span><span class="operator">:</span>
+        <span class="name builtin">echo</span> <span class="literal string double">&quot;int main(){return 0;}&quot;</span> &gt; main.c
+</pre>
+</div>
+<div class="section" id="kosullar">
+<h1>Koşullar</h1>
+<p><strong>ifeq</strong> ifadesi ile koşul tanımlanabilir.  aşağıdaki ifadeşi <strong>make CC=clang</strong> şeklinde çalıştırırkanız clang yazdırır, parametresiz bir şekilde çalıştırırsanız gcc yazdırır. Burada dikkat edilmesi gereken konu <strong>ifeq</strong>, <strong>else</strong>, <strong>endif</strong> girintilenmeden yazılır.</p>
+<pre class="code makefile literal-block">
+<span class="name function">build</span><span class="operator">:</span>
+<span class="comment preproc">ifeq ($(CC),clang)
+</span>        <span class="name builtin">echo</span> <span class="literal string double">&quot;clang&quot;</span>
+<span class="comment preproc">else
+</span>        <span class="name builtin">echo</span> <span class="literal string double">&quot;gcc&quot;</span>
+<span class="comment preproc">endif</span>
+</pre>
+</div>
+<div class="section" id="komut-ozellik-ifadeleri">
+<h1>Komut özellik ifadeleri</h1>
+<p>Eğer komutun başına <strong>&#64;</strong> işareti koyarsanız komut ekrana yazılmadan çalıştırılır. <strong>-</strong> yazarsanız komut hata alsa bile geri kalan kısımlar çalışmaya devam eder.</p>
+<pre class="code makefile literal-block">
+<span class="name function">build</span><span class="operator">:</span>
+        &#64;echo <span class="literal string double">&quot;Merhaba dünya&quot;</span>
+        -gcc main.c -o main
+</pre>
 </div>
 </div>
 </body>
