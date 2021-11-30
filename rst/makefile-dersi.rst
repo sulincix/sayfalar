@@ -231,3 +231,15 @@ Eğer komutun başına **@** işareti koyarsanız komut ekrana yazılmadan çal�
 	build:
 		@echo "Merhaba dünya"
 		-gcc main.c -o main
+
+while ve for kullanımı
+======================
+Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna **\** işareti eklenirb do dışındaki satırların sonuna da **;** işareti koyulur.
+
+.. code-block:: shell
+
+	build:
+		@for sayi in 1 2 3 $(dizi) ; do \
+		    echo $$sayi ; \
+		    echo "diger satir" ; \
+		done
