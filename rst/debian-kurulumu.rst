@@ -87,6 +87,11 @@ Chroot dışındaki kurulum aşamaları
 
 	$ debootstrap --arch amd64 --no-merged-usr sid /mnt https://deb.debian.org/debian
 
+* Burada debian yerine devuan yapmak isterseniz depo adresi olarak **https://pkgmaster.devuan.org/merged** yazabilirsiniz.
+* Bazı durumlarda gpg hatası alabilirsiniz. Bunu gidermek için **--no-check-gpg** parametresini eklemeniz gerekir.
+* Burada debian yerine ubuntu yapmak isterseniz depo adresi olarak **http://archive.ubuntu.com/ubuntu/** yazabilirsiniz. Kod adını da ona uygun olarak değiştirmelisiniz.
+* **--no-merged-usr** parametresi **usrmerge** olarak kurulmasını engeller. Usrmerge kapatmanızı öneririm. Eğer daha sonra açmak isterseniz usrmerge paketini kurabilirsiniz.
+
 3. Oluşturduğumuz **rootfs** içine **dev sys proc run** dizinlerini bağlayalım.
 
 .. code-block:: shell

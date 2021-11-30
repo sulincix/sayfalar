@@ -98,6 +98,12 @@ $ mount /dev/sda2 /mnt
 <pre class="code shell literal-block">
 $ debootstrap --arch amd64 --no-merged-usr sid /mnt https://deb.debian.org/debian
 </pre>
+<ul class="simple">
+<li>Burada debian yerine devuan yapmak isterseniz depo adresi olarak <strong>https://pkgmaster.devuan.org/merged</strong> yazabilirsiniz.</li>
+<li>Bazı durumlarda gpg hatası alabilirsiniz. Bunu gidermek için <strong>--no-check-gpg</strong> parametresini eklemeniz gerekir.</li>
+<li>Burada debian yerine ubuntu yapmak isterseniz depo adresi olarak <strong>http://archive.ubuntu.com/ubuntu/</strong> yazabilirsiniz. Kod adını da ona uygun olarak değiştirmelisiniz.</li>
+<li><strong>--no-merged-usr</strong> parametresi <strong>usrmerge</strong> olarak kurulmasını engeller. Usrmerge kapatmanızı öneririm. Eğer daha sonra açmak isterseniz usrmerge paketini kurabilirsiniz.</li>
+</ul>
 <ol class="arabic simple" start="3">
 <li>Oluşturduğumuz <strong>rootfs</strong> içine <strong>dev sys proc run</strong> dizinlerini bağlayalım.</li>
 </ol>

@@ -183,6 +183,16 @@ $ debootstrap \-\-arch amd64 \-\-no\-merged\-usr sid /mnt https://deb.debian.org
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
+.IP \(bu 2
+Burada debian yerine devuan yapmak isterseniz depo adresi olarak \fBhttps://pkgmaster.devuan.org/merged\fP yazabilirsiniz.
+.IP \(bu 2
+Bazı durumlarda gpg hatası alabilirsiniz. Bunu gidermek için \fB\-\-no\-check\-gpg\fP parametresini eklemeniz gerekir.
+.IP \(bu 2
+Burada debian yerine ubuntu yapmak isterseniz depo adresi olarak \fBhttp://archive.ubuntu.com/ubuntu/\fP yazabilirsiniz. Kod adını da ona uygun olarak değiştirmelisiniz.
+.IP \(bu 2
+\fB\-\-no\-merged\-usr\fP parametresi \fBusrmerge\fP olarak kurulmasını engeller. Usrmerge kapatmanızı öneririm. Eğer daha sonra açmak isterseniz usrmerge paketini kurabilirsiniz.
+.UNINDENT
+.INDENT 0.0
 .IP 3. 3
 Oluşturduğumuz \fBrootfs\fP içine \fBdev sys proc run\fP dizinlerini bağlayalım.
 .UNINDENT
