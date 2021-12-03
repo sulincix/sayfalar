@@ -196,12 +196,23 @@
 <div class="section" id="while-ve-for-kullanimi">
 <h1>while ve for kullanımı</h1>
 <p>Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna <strong>** işareti eklenirb do dışındaki satırların sonuna da **;</strong> işareti koyulur.</p>
-<pre class="code shell literal-block">
-build:
+<pre class="code makefile literal-block">
+<span class="name function">build</span><span class="operator">:</span>
         &#64;for sayi <span class="keyword">in</span> <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="keyword">$(</span>dizi<span class="keyword">)</span> <span class="punctuation">;</span> <span class="keyword">do</span> <span class="literal string escape">\
 </span>            <span class="name builtin">echo</span> <span class="name variable">$$</span>sayi <span class="punctuation">;</span> <span class="literal string escape">\
 </span>            <span class="name builtin">echo</span> <span class="literal string double">&quot;diger satir&quot;</span> <span class="punctuation">;</span> <span class="literal string escape">\
 </span>        <span class="keyword">done</span>
+</pre>
+</div>
+<div class="section" id="shell-degiskeni">
+<h1>SHELL değişkeni</h1>
+<p><strong>SHELL</strong> değişkeni makefile altındaki komutların hangi shell kullanılarak çalıştırılacağını belirtir. Varsayılan değeri <strong>/bin/sh</strong> olarak belirlenmiştir. Örneğin debian tabanlı dağıtımlarda /bin/sh konumu /bin/dash bağlıyken archlinuxta /bin/bash bağlıdır. <strong>dash</strong> <strong>[[</strong> kullanımını desteklemezken <strong>bash</strong> destekler. Bu sebeple uyumluluğu arttırmak için <strong>SHELL</strong> değişkenini zorla /bin/bash olarak değiştirebiliriz. Aşağıdaki örnekle konuyu daha iyi anlamak için SHELL değişkenini python3 ayarladık ve python kodu yazdık.</p>
+<pre class="code makefile literal-block">
+<span class="name variable">SHELL</span><span class="operator">=</span>/usr/bin/python3
+<span class="name function">build</span><span class="operator">:</span>
+        import os <span class="punctuation">;</span><span class="literal string escape">\
+</span>        <span class="name variable">liste</span> <span class="operator">=</span> os.listdir<span class="operator">(</span><span class="literal string double">&quot;/&quot;</span><span class="operator">)</span> <span class="punctuation">;</span><span class="literal string escape">\
+</span>        print<span class="operator">(</span>liste<span class="operator">[</span><span class="literal number">0</span><span class="operator">])</span>
 </pre>
 </div>
 </div>

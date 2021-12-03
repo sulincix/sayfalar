@@ -56,7 +56,6 @@ Burada kullandığımız değişkenler şu şekilde açılnabilir.
 
 Make komutuna eğer hiç parametre verimezsek ilk baştaki bölümü çalıştırır. Biz ilk başta **build** tanımladığımız için make komutu build çalıştırır. make komutuna parametre olarak bölüm verirsek o bölüm çalıştırılır. 
 
-
 Değişken işlemleri
 ==================
 
@@ -236,10 +235,23 @@ while ve for kullanımı
 ======================
 Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna **\** işareti eklenirb do dışındaki satırların sonuna da **;** işareti koyulur.
 
-.. code-block:: shell
+.. code-block:: makefile
 
 	build:
 		@for sayi in 1 2 3 $(dizi) ; do \
 		    echo $$sayi ; \
 		    echo "diger satir" ; \
 		done
+
+SHELL değişkeni
+===============
+**SHELL** değişkeni makefile altındaki komutların hangi shell kullanılarak çalıştırılacağını belirtir. Varsayılan değeri **/bin/sh** olarak belirlenmiştir. Örneğin debian tabanlı dağıtımlarda /bin/sh konumu /bin/dash bağlıyken archlinuxta /bin/bash bağlıdır. **dash** **[[** kullanımını desteklemezken **bash** destekler. Bu sebeple uyumluluğu arttırmak için **SHELL** değişkenini zorla /bin/bash olarak değiştirebiliriz. Aşağıdaki örnekle konuyu daha iyi anlamak için SHELL değişkenini python3 ayarladık ve python kodu yazdık.
+
+.. code-block:: makefile
+
+	SHELL=/usr/bin/python3
+	build:
+		import os ;\
+		liste = os.listdir("/") ;\
+		print(liste[0])
+
