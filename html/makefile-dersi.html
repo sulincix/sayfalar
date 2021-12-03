@@ -195,7 +195,7 @@
 </div>
 <div class="section" id="while-ve-for-kullanimi">
 <h1>while ve for kullanımı</h1>
-<p>Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna <strong>** işareti eklenirb do dışındaki satırların sonuna da **;</strong> işareti koyulur.</p>
+<p>Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna <strong>\</strong> işareti eklenir, do dışındaki satırların sonuna da <strong>;</strong> işareti koyulur.</p>
 <pre class="code makefile literal-block">
 <span class="name function">build</span><span class="operator">:</span>
         &#64;for sayi <span class="keyword">in</span> <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="keyword">$(</span>dizi<span class="keyword">)</span> <span class="punctuation">;</span> <span class="keyword">do</span> <span class="literal string escape">\

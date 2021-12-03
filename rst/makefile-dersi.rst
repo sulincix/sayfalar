@@ -233,7 +233,7 @@ Eğer komutun başına **@** işareti koyarsanız komut ekrana yazılmadan çal�
 
 while ve for kullanımı
 ======================
-Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna **\** işareti eklenirb do dışındaki satırların sonuna da **;** işareti koyulur.
+Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna **\\** işareti eklenir, do dışındaki satırların sonuna da **;** işareti koyulur.
 
 .. code-block:: makefile
 

@@ -373,7 +373,7 @@ build:
 .UNINDENT
 .SH WHILE VE FOR KULLANIMI
 .sp
-Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna \fB** işareti eklenirb do dışındaki satırların sonuna da **;\fP işareti koyulur.
+Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna \fB\e\fP işareti eklenir, do dışındaki satırların sonuna da \fB;\fP işareti koyulur.
 .INDENT 0.0
 .INDENT 3.5
 .sp
