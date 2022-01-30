@@ -27,9 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "ISO YAPIMI"  "" "" ""
+.TH "TERIMLER VE ANLAMLARI"  "" "" ""
 .SH NAME
-Iso yapımı \- 
+Terimler ve Anlamları \- 
 .sp
 Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapımı anlatılacaktır.
 .sp
@@ -44,10 +44,6 @@ Debian \fBsid\fP yerine \fBstable\fP kullanmak isterseniz yapmanız gereken dok�
 .TS
 center;
 |l|l|.
-_
-T{
-Temel kavramlar
-T}
 _
 T{
 Terim
@@ -96,7 +92,7 @@ Gerekli paketleri kuralım.
 .sp
 .nf
 .ft C
-☭ apt\-get install debootstrap xorriso squashfs\-tools mtools grub\-pc\-bin grub\-efi
+☭ apt\-get install debootstrap xorriso squashfs\-tools mtools grub\-pc\-bin grub\-efi\-ia32\-bin grub\-efi
 .ft P
 .fi
 .UNINDENT
@@ -312,6 +308,41 @@ Live açılış için gereken paketleri kuralım.
 .fi
 .UNINDENT
 .UNINDENT
+.INDENT 0.0
+.IP 5. 3
+Debian tabanlı sistemlerde önerilen paketler varsayılan olarak paket kurulumu esnasında kurulur. Bu durum gereksiz paketlerin de gelmesine sebep olabilmektedir. Önerilen paketleri kapatmak için aşağıdaki yolu uygulayabilirsiniz. (İsteğe bağlı)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# /etc/apt/apt.conf.d/01norecommend adında bir dosya açın ve içine şunu yazın
+APT::Install\-Recommends "0";
+APT::Install\-Suggests "0";
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.IP 6. 3
+Eğer dil dosyaları, man dosyaları gibi şeylere ihtiyacınız yoksa ve bunların gereksiz olduğunu düşünüyorsanız Bunları paket kurduktan sonra otomatik silen ayarı aşağıdaki gibi yapabilirsiniz. (Tavsiye edilmez. / İsteğe bağlı.)
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# /etc/apt/apt.conf.d/02antibloat adında dosya açın ve içine şunu yazın
+DPkg::Post\-Invoke {"rm \-rf /usr/share/locale || true";};
+DPkg::Post\-Invoke {"rm \-rf /usr/share/man || true";};
+DPkg::Post\-Invoke {"rm \-rf /usr/share/help || true";};
+DPkg::Post\-Invoke {"rm \-rf /usr/share/doc || true";};
+DPkg::Post\-Invoke {"rm \-rf /usr/share/info || true";};
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH ÖZELLEŞTIRME
 .INDENT 0.0
 .IP 1. 3
@@ -374,6 +405,7 @@ Masaüstü ortamı kurabiliriz.
 .fi
 .UNINDENT
 .UNINDENT
+.SH MASAÜSTÜ KURULUMU
 .TS
 center;
 |l|l|.
@@ -427,11 +459,8 @@ apt\-get install budgie\-desktop
 T}
 _
 .TE
-.INDENT 0.0
-.INDENT 3.5
+.sp
 \fBNot:\fP xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için \fBnetwork\-manager\-gnome\fP paketini kurmalısınız.
-.UNINDENT
-.UNINDENT
 .sp
 Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.
 .INDENT 0.0
@@ -580,7 +609,8 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .nf
 .ft C
 ☭ mkdir \-p isowork/boot/grub/
-☭ echo \(aqmenuentry "Start Debian 64\-bit" \-\-class debian {\(aq > isowork/boot/grub/grub.cfg
+☭ echo \(aqinsmod all_video\(aq > isowork/boot/grub/grub.cfg
+☭ echo \(aqmenuentry "Start Debian 64\-bit" \-\-class debian {\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    linux /live/vmlinuz boot=live live\-config live\-media\-path=/live \-\-\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    initrd /live/initrd.img\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq}\(aq >> isowork/boot/grub/grub.cfg
@@ -588,6 +618,74 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Burada \fBlinux\fP ile başlayan satırın sonuna ekleyeceğimiz ek ayarlar ile sistemin dilini ve klavye düzeni gibi şeyleri ayarlayabilirsiniz. Aşağıda Bu parametreler ve anlamları verilmiştir.
+.SH PARAMETRE VE ANLAMLARI
+.TS
+center;
+|l|l|l|l|.
+_
+T{
+Örnek parametre
+T}	T{
+Anlamı
+T}	T{
+Örnek parametre
+T}	T{
+Anlamı
+T}
+_
+T{
+timezone=Europe/Istanbul
+T}	T{
+Zaman dilimi ayarı
+T}	T{
+locales=tr_TR.UTF\-8
+T}	T{
+Dil ayarı
+T}
+_
+T{
+keyboard\-layouts=tr
+T}	T{
+Klavye ayarı
+T}	T{
+username=debian
+T}	T{
+Kullanıcı adı ayarı
+T}
+_
+T{
+hostname=live
+T}	T{
+Makina adı ayarı
+T}	T{
+user\-fullname=DebianLive
+T}	T{
+Kullanıcı gözüken adı ayarı
+T}
+_
+T{
+quiet
+T}	T{
+Açılışta yazı basmaz
+T}	T{
+splash
+T}	T{
+Varsa açılış animasyonunu gösterir.
+T}
+_
+T{
+keyboard\-variants=f
+T}	T{
+Klavye varyantı ayarı
+T}	T{
+nomodeset
+T}	T{
+Uyumluluk modu ayarı
+T}
+_
+.TE
 .INDENT 0.0
 .IP 4. 3
 Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso \fBisowork\fP dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.

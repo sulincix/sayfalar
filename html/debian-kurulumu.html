@@ -15,14 +15,13 @@
 <p>Bu dokümanda <strong>debian sid</strong> kurulumu anlatılmıştır. <strong>sid</strong> yerine <strong>stable</strong> kullanmak isterseniz dokümanda <em>sid</em> gördüğünüz yerlere <em>stable</em> yazmanız gerekir.</p>
 <p>Not: <strong>Uefi</strong> kurulum için <strong>efi</strong> bölümü <strong>/dev/sda1</strong>, her iki kurulum türü için <strong>/dev/sda2</strong> kök dizin olarak ele alıp anlatacağım.</p>
 <p>Not: Bu dokümandaki yazılanları uygulamadan dolayı oluşabilecek zarar veya veri kayıplarından dokümanın yazarı sorumlu tutulamaz.</p>
-<table border="1" class="docutils">
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Temel Kavramlar</strong></caption>
 <colgroup>
-<col width="8%" />
-<col width="92%" />
+<col width="25%" />
+<col width="75%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head" colspan="2">Temel kavramlar</th>
-</tr>
 <tr><th class="head">Terim</th>
 <th class="head">Anlamı</th>
 </tr>
@@ -169,10 +168,11 @@ $ apt-get install firmware-amd-graphics firmware-atheros <span class="literal st
 $ apt-get install xorg xinit
 $ apt-get install lightdm <span class="comment single"># giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.</span>
 </pre>
-<table border="1" class="docutils">
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Masaüstü kurulumu</strong></caption>
 <colgroup>
-<col width="15%" />
-<col width="85%" />
+<col width="25%" />
+<col width="75%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">Masaüstü</th>
@@ -189,9 +189,6 @@ $ apt-get install lightdm <span class="comment single"># giriş ekranı olarak l
 <tr><td>cinnamon</td>
 <td>apt-get install cinnamon</td>
 </tr>
-<tr><td>budgie</td>
-<td>apt-get install budige-desktop</td>
-</tr>
 <tr><td>plasma</td>
 <td>apt-get install kde-standard</td>
 </tr>
@@ -200,6 +197,9 @@ $ apt-get install lightdm <span class="comment single"># giriş ekranı olarak l
 </tr>
 <tr><td>mate</td>
 <td>apt-get install mate-desktop-environment-core</td>
+</tr>
+<tr><td>budgie</td>
+<td>apt-get install budgie-desktop</td>
 </tr>
 </tbody>
 </table>

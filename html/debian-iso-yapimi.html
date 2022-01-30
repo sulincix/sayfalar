@@ -17,14 +17,13 @@
 <p><strong>Not:</strong> Bu dokümanla ilgili soru ve önerileriniz için : <a class="reference external" href="https://t.me/iso_calismalari">https://t.me/iso_calismalari</a></p>
 <p><strong>Not: Biraz mizah içerir.</strong> Şimdiden <strong>ALLAH</strong> sabır versin :D</p>
 </blockquote>
-<table border="1" class="docutils">
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Terimler ve Anlamları</strong></caption>
 <colgroup>
-<col width="4%" />
-<col width="96%" />
+<col width="25%" />
+<col width="75%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head" colspan="2">Temel kavramlar</th>
-</tr>
 <tr><th class="head">Terim</th>
 <th class="head">Anlamı</th>
 </tr>
@@ -53,7 +52,7 @@
 <li>Gerekli paketleri kuralım.</li>
 </ol>
 <pre class="code shell literal-block">
-☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi
+☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi-ia32-bin grub-efi
 </pre>
 <ol class="arabic simple" start="2">
 <li>Kurulum aracını derleyelim. (İsteğe bağlı)</li>
@@ -155,6 +154,25 @@
 <pre class="code shell literal-block">
 ☭ apt-get install live-config live-boot
 </pre>
+<ol class="arabic simple" start="5">
+<li>Debian tabanlı sistemlerde önerilen paketler varsayılan olarak paket kurulumu esnasında kurulur. Bu durum gereksiz paketlerin de gelmesine sebep olabilmektedir. Önerilen paketleri kapatmak için aşağıdaki yolu uygulayabilirsiniz. (İsteğe bağlı)</li>
+</ol>
+<pre class="code shell literal-block">
+<span class="comment single"># /etc/apt/apt.conf.d/01norecommend adında bir dosya açın ve içine şunu yazın
+</span>APT::Install-Recommends <span class="literal string double">&quot;0&quot;</span><span class="punctuation">;</span>
+APT::Install-Suggests <span class="literal string double">&quot;0&quot;</span><span class="punctuation">;</span>
+</pre>
+<ol class="arabic simple" start="6">
+<li>Eğer dil dosyaları, man dosyaları gibi şeylere ihtiyacınız yoksa ve bunların gereksiz olduğunu düşünüyorsanız Bunları paket kurduktan sonra otomatik silen ayarı aşağıdaki gibi yapabilirsiniz. (Tavsiye edilmez. / İsteğe bağlı.)</li>
+</ol>
+<pre class="code shell literal-block">
+<span class="comment single"># /etc/apt/apt.conf.d/02antibloat adında dosya açın ve içine şunu yazın
+</span>DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/locale || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
+DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/man || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
+DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/help || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
+DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/doc || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
+DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/info || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
+</pre>
 </div>
 <div class="section" id="ozellestirme">
 <h1>Özelleştirme</h1>
@@ -194,10 +212,11 @@
 ☭ apt-get install xorg xinit
 ☭ apt-get install lightdm <span class="comment single"># giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.</span>
 </pre>
-<table border="1" class="docutils">
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Masaüstü kurulumu</strong></caption>
 <colgroup>
-<col width="15%" />
-<col width="85%" />
+<col width="25%" />
+<col width="75%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">Masaüstü</th>
@@ -228,8 +247,7 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<strong>Not:</strong> xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için <strong>network-manager-gnome</strong> paketini kurmalısınız.</blockquote>
+<p><strong>Not:</strong> xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için <strong>network-manager-gnome</strong> paketini kurmalısınız.</p>
 <p>Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.</p>
 <ol class="arabic simple" start="3">
 <li>Sürücüleri ekleyebiliz.</li>
@@ -314,11 +332,56 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 </ol>
 <pre class="code shell literal-block">
 ☭ mkdir -p isowork/boot/grub/
-☭ <span class="name builtin">echo</span> <span class="literal string single">'menuentry &quot;Start Debian 64-bit&quot; --class debian {'</span> &gt; isowork/boot/grub/grub.cfg
+☭ <span class="name builtin">echo</span> <span class="literal string single">'insmod all_video'</span> &gt; isowork/boot/grub/grub.cfg
+☭ <span class="name builtin">echo</span> <span class="literal string single">'menuentry &quot;Start Debian 64-bit&quot; --class debian {'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 ☭ <span class="name builtin">echo</span> <span class="literal string single">'    linux /live/vmlinuz boot=live live-config live-media-path=/live --'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 ☭ <span class="name builtin">echo</span> <span class="literal string single">'    initrd /live/initrd.img'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 ☭ <span class="name builtin">echo</span> <span class="literal string single">'}'</span> &gt;&gt; isowork/boot/grub/grub.cfg
 </pre>
+<p>Burada <strong>linux</strong> ile başlayan satırın sonuna ekleyeceğimiz ek ayarlar ile sistemin dilini ve klavye düzeni gibi şeyleri ayarlayabilirsiniz. Aşağıda Bu parametreler ve anlamları verilmiştir.</p>
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Parametre ve anlamları</strong></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Örnek parametre</th>
+<th class="head">Anlamı</th>
+<th class="head">Örnek parametre</th>
+<th class="head">Anlamı</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>timezone=Europe/Istanbul</td>
+<td>Zaman dilimi ayarı</td>
+<td>locales=tr_TR.UTF-8</td>
+<td>Dil ayarı</td>
+</tr>
+<tr><td>keyboard-layouts=tr</td>
+<td>Klavye ayarı</td>
+<td>username=debian</td>
+<td>Kullanıcı adı ayarı</td>
+</tr>
+<tr><td>hostname=live</td>
+<td>Makina adı ayarı</td>
+<td>user-fullname=DebianLive</td>
+<td>Kullanıcı gözüken adı ayarı</td>
+</tr>
+<tr><td>quiet</td>
+<td>Açılışta yazı basmaz</td>
+<td>splash</td>
+<td>Varsa açılış animasyonunu gösterir.</td>
+</tr>
+<tr><td>keyboard-variants=f</td>
+<td>Klavye varyantı ayarı</td>
+<td>nomodeset</td>
+<td>Uyumluluk modu ayarı</td>
+</tr>
+</tbody>
+</table>
 <ol class="arabic simple" start="4">
 <li>Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso <strong>isowork</strong> dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.</li>
 </ol>

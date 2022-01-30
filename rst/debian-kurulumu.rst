@@ -9,16 +9,25 @@ Not: **Uefi** kurulum için **efi** bölümü **/dev/sda1**, her iki kurulum tü
 
 Not: Bu dokümandaki yazılanları uygulamadan dolayı oluşabilecek zarar veya veri kayıplarından dokümanın yazarı sorumlu tutulamaz.
 
-===========     ========
-Temel kavramlar
-------------------------
-Terim            Anlamı
-===========     ========
-rootfs          Kurulumu yapılan sistemin taslağıdır. **chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
-debootstrap     **rootfs** oluşturmak için kullanılan komuttur. Debiana ait bir araçtır fakat debian dışında da kullanılabilir.
-efi bölümü      Sadece **Uefi** kullanan sistemlerde bulunan ve açılış için gereken dosyaların bulunduğu bölümdür.
-kök dizin       Kurulumu yapılan sistemin kurulacağı yerdir.
-===========     ========
+
+.. list-table:: **Temel Kavramlar**
+   :widths: 25 75
+   :header-rows: 1
+   
+   * - Terim
+     - Anlamı
+
+   * - rootfs
+     - Kurulumu yapılan sistemin taslağıdır. **chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
+
+   * - debootstrap
+     - **rootfs** oluşturmak için kullanılan komuttur. Debiana ait bir araçtır fakat debian dışında da kullanılabilir.
+
+   * - efi bölümü
+     - Sadece **Uefi** kullanan sistemlerde bulunan ve açılış için gereken dosyaların bulunduğu bölümdür.
+
+   * - kök dizin
+     - Kurulumu yapılan sistemin kurulacağı yerdir.
 
 Gerekenler
 ^^^^^^^^^^
@@ -158,17 +167,35 @@ içeriği şu şekilde olmalı:
 	$ apt-get install xorg xinit
 	$ apt-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
 
-========     =====
-Masaüstü     Komut
-========     =====
-xfce         apt-get install xfce4
-lxde         apt-get install lxde
-cinnamon     apt-get install cinnamon
-budgie       apt-get install budige-desktop
-plasma       apt-get install kde-standard
-gnome        apt-get install gnome-core
-mate         apt-get install mate-desktop-environment-core
-========     =====
+.. list-table:: **Masaüstü kurulumu**
+   :widths: 25 75
+   :header-rows: 1
+   
+   * - Masaüstü
+     - Komut
+
+   * - xfce
+     - apt-get install xfce4
+
+   * - lxde
+     - apt-get install lxde
+
+   * - cinnamon
+     - apt-get install cinnamon
+
+   * - plasma
+     - apt-get install kde-standard
+
+   * - gnome
+     - apt-get install gnome-core
+
+   * - mate
+     - apt-get install mate-desktop-environment-core
+
+   * - budgie
+     - apt-get install budgie-desktop
+
+
 
 10. Yeni **kullanıcı** oluşturalım ve **parola** atayalım. Not: **Sudo** kurmadığınızda **root** yetkisi almak için **su** komutu kullanmanız gerekir. 
 

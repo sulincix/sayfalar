@@ -27,9 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "DEBIAN KURULUMU"  "" "" ""
+.TH "TEMEL KAVRAMLAR"  "" "" ""
 .SH NAME
-debian kurulumu \- 
+Temel Kavramlar \- 
 .sp
 Bu dokümanda debianı \fBdebootstrap\fP ile kurma konusu anlatılacaktır. \fBBu dokümandaki komutları kendi kurulumunuza göre uyarlayarak yazın.\fP
 .sp
@@ -41,10 +41,6 @@ Not: Bu dokümandaki yazılanları uygulamadan dolayı oluşabilecek zarar veya 
 .TS
 center;
 |l|l|.
-_
-T{
-Temel kavramlar
-T}
 _
 T{
 Terim
@@ -312,6 +308,7 @@ $ apt\-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi 
 .fi
 .UNINDENT
 .UNINDENT
+.SS \fBMasaüstü kurulumu\fP
 .TS
 center;
 |l|l|.
@@ -341,12 +338,6 @@ apt\-get install cinnamon
 T}
 _
 T{
-budgie
-T}	T{
-apt\-get install budige\-desktop
-T}
-_
-T{
 plasma
 T}	T{
 apt\-get install kde\-standard
@@ -362,6 +353,12 @@ T{
 mate
 T}	T{
 apt\-get install mate\-desktop\-environment\-core
+T}
+_
+T{
+budgie
+T}	T{
+apt\-get install budgie\-desktop
 T}
 _
 .TE

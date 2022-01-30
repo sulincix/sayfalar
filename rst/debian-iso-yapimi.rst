@@ -8,17 +8,27 @@ Debian **sid** yerine **stable** kullanmak isterseniz yapmanız gereken doküman
 
   **Not: Biraz mizah içerir.** Şimdiden **ALLAH** sabır versin :D
 
-========  ========
-Temel kavramlar
-------------------
-Terim     Anlamı
-========  ========
-chroot    Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
-squashfs  Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. **Debian** tabanlı dağıtımlarda **gzip** formatında sıkıştırma önerilir.
-iso       Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.
-live      Kurulum yapmadan çalışan sisteme **live** adı verilir.
-17g       Dağıtımdan bağımsız canlı sistem kurulum aracıdır.
-========  ========
+.. list-table:: **Terimler ve Anlamları**
+   :widths: 25 75
+   :header-rows: 1
+   
+   * - Terim
+     - Anlamı
+
+   * - chroot
+     - Oluşturulacak live isonun taslağıdır. içerisine **chroot sid-chroot** komutu ile içerisine girebiliriz. çıkmak için ise **exit** komutu kullanılmalıdır.
+
+   * - squashfs
+     - Sıkıştırılmış haldeki kök dizin dosyasıdır. Oluşturulması donanıma bağlı olarak uzun sürmektedir. **Debian** tabanlı dağıtımlarda **gzip** formatında sıkıştırma önerilir.
+
+   * - iso
+     - Kurulum medyası dosyasıdır. Bu dosya son üründür ve bunu yayınlayabilirsiniz.
+
+   * - live
+     - Kurulum yapmadan çalışan sisteme **live** adı verilir.
+
+   * - 17g
+     - Dağıtımdan bağımsız canlı sistem kurulum aracıdır.
 
 
 Hazırlık
@@ -28,7 +38,7 @@ Hazırlık
 
 .. code-block:: shell
 
-	☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi
+	☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi-ia32-bin grub-efi
 	
 2. Kurulum aracını derleyelim. (İsteğe bağlı)
 
@@ -141,6 +151,24 @@ Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (iste
 
 	☭ apt-get install live-config live-boot
 
+5. Debian tabanlı sistemlerde önerilen paketler varsayılan olarak paket kurulumu esnasında kurulur. Bu durum gereksiz paketlerin de gelmesine sebep olabilmektedir. Önerilen paketleri kapatmak için aşağıdaki yolu uygulayabilirsiniz. (İsteğe bağlı)
+
+.. code-block:: shell
+
+	# /etc/apt/apt.conf.d/01norecommend adında bir dosya açın ve içine şunu yazın
+	APT::Install-Recommends "0";
+	APT::Install-Suggests "0";
+
+6. Eğer dil dosyaları, man dosyaları gibi şeylere ihtiyacınız yoksa ve bunların gereksiz olduğunu düşünüyorsanız Bunları paket kurduktan sonra otomatik silen ayarı aşağıdaki gibi yapabilirsiniz. (Tavsiye edilmez. / İsteğe bağlı.)
+
+.. code-block:: shell
+
+	# /etc/apt/apt.conf.d/02antibloat adında dosya açın ve içine şunu yazın
+	DPkg::Post-Invoke {"rm -rf /usr/share/locale || true";};
+	DPkg::Post-Invoke {"rm -rf /usr/share/man || true";};
+	DPkg::Post-Invoke {"rm -rf /usr/share/help || true";};
+	DPkg::Post-Invoke {"rm -rf /usr/share/doc || true";};
+	DPkg::Post-Invoke {"rm -rf /usr/share/info || true";};
 
 Özelleştirme
 ^^^^^^^^^^^^
@@ -181,19 +209,36 @@ Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (iste
 	☭ apt-get install xorg xinit
 	☭ apt-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
 
-========     =====
-Masaüstü     Komut
-========     =====
-xfce         apt-get install xfce4
-lxde         apt-get install lxde
-cinnamon     apt-get install cinnamon
-plasma       apt-get install kde-standard
-gnome        apt-get install gnome-core
-mate         apt-get install mate-desktop-environment-core
-budgie       apt-get install budgie-desktop
-========     =====
+.. list-table:: **Masaüstü kurulumu**
+   :widths: 25 75
+   :header-rows: 1
+   
+   * - Masaüstü
+     - Komut
 
-  **Not:** xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için **network-manager-gnome** paketini kurmalısınız.
+   * - xfce
+     - apt-get install xfce4
+
+   * - lxde
+     - apt-get install lxde
+
+   * - cinnamon
+     - apt-get install cinnamon
+
+   * - plasma
+     - apt-get install kde-standard
+
+   * - gnome
+     - apt-get install gnome-core
+
+   * - mate
+     - apt-get install mate-desktop-environment-core
+
+   * - budgie
+     - apt-get install budgie-desktop
+
+
+**Not:** xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için **network-manager-gnome** paketini kurmalısınız.
 
 Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurabilirsiniz.
 
@@ -284,10 +329,48 @@ Paketleme aşaması
 .. code-block:: shell
 
 	☭ mkdir -p isowork/boot/grub/
-	☭ echo 'menuentry "Start Debian 64-bit" --class debian {' > isowork/boot/grub/grub.cfg
+	☭ echo 'insmod all_video' > isowork/boot/grub/grub.cfg
+	☭ echo 'menuentry "Start Debian 64-bit" --class debian {' >> isowork/boot/grub/grub.cfg
 	☭ echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live --' >> isowork/boot/grub/grub.cfg
 	☭ echo '    initrd /live/initrd.img' >> isowork/boot/grub/grub.cfg
 	☭ echo '}' >> isowork/boot/grub/grub.cfg
+
+Burada **linux** ile başlayan satırın sonuna ekleyeceğimiz ek ayarlar ile sistemin dilini ve klavye düzeni gibi şeyleri ayarlayabilirsiniz. Aşağıda Bu parametreler ve anlamları verilmiştir.
+
+.. list-table:: **Parametre ve anlamları**
+   :widths: 25 25 25 25
+   :header-rows: 1
+   
+   * - Örnek parametre
+     - Anlamı
+     - Örnek parametre
+     - Anlamı
+   
+   * - timezone=Europe/Istanbul
+     - Zaman dilimi ayarı
+     - locales=tr_TR.UTF-8
+     - Dil ayarı
+
+   * - keyboard-layouts=tr
+     - Klavye ayarı
+     - username=debian
+     - Kullanıcı adı ayarı
+
+   * - hostname=live
+     - Makina adı ayarı
+     - user-fullname=DebianLive
+     - Kullanıcı gözüken adı ayarı
+     
+   * - quiet
+     - Açılışta yazı basmaz
+     - splash
+     - Varsa açılış animasyonunu gösterir.
+
+   * - keyboard-variants=f
+     - Klavye varyantı ayarı
+     - nomodeset
+     - Uyumluluk modu ayarı
+     
 
 4. Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso **isowork** dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.
 
