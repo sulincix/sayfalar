@@ -1,5 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
+.TH PYTHON DERSI  "" "" ""
+.SH NAME
+Python dersi \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -27,9 +30,6 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "PYTHON DERSI"  "" "" ""
-.SH NAME
-Python dersi \- 
 .sp
 Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
 .SH AÇIKLAMA SATIRLARI
@@ -1041,14 +1041,14 @@ class inidosya:
     def __init__(self,yol):
         ini = open(yol,"r") # ini dosyasını açtık
         self\&.icerik = ini\&.read() # dosya içeriğini okuduk
-def deger_al(bolum,veri):
-    etkin = False # istenilen yere gelene kadar etkisiz kal
-    for satir in dosya\&.icerik\&.split("\en"):
-        if "[" + bolum + "]" in satir: # okunan satırda istenilen bölümün başı mı
-            etkin = True # etkinleştir
-        if etkin and "=" in satir: # etkinse ve satırda = bulunuyorsa
-            if satir\&.split("=")[0] == veri: # = işaretine göre 0. eleman aranan mı
-                return satir\&.split("=")[0] # = işaretine göre böl . elemanı al
+    def deger_al(bolum,veri):
+        etkin = False # istenilen yere gelene kadar etkisiz kal
+        for satir in dosya\&.icerik\&.split("\en"):
+            if "[" + bolum + "]" in satir: # okunan satırda istenilen bölümün başı mı
+                etkin = True # etkinleştir
+            if etkin and "=" in satir: # etkinse ve satırda = bulunuyorsa
+                if satir\&.split("=")[0] == veri: # = işaretine göre 0. eleman aranan mı
+                    return satir\&.split("=")[0] # = işaretine göre böl . elemanı al
 .ft P
 .fi
 .UNINDENT
@@ -1064,6 +1064,43 @@ iniparser\&.dosya = iniparser\&.inidosya("dosya") # ini dosyasını yükle
 deger=iniparser\&.deger_al("hmm","veri") # değeri al
 print(deger\&.strip()) # değerin başında sonunda boşluk varsa sil ve yaz
 \-> abc123x
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir modülü diğer bir modülün genişletilmişi olarak tanımlayabiliriz. Gelişletilen modül asıl modüldeki tüm fonksiyonlara ve değişkenlere sahip olur. Aşağıdaki örnekteki gibi \fBsuper().__init__()\fP kullanarak üst modülümüzdeki tüm tanımlamalara sahip olmasını sağlayabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# ornek.py dosyası
+class deneme:
+    def __init__(self):
+        self\&.sayi = 13
+    def hmm(self,yazi):
+        print(yazi)
+
+class genis(deneme):
+    def __init__(self):
+        super()\&.__init__()
+        self\&.sayi2 = 44
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# main.py dosyası
+from ornek import genis as g # ornek.py dosyasındaki genis sınıfını g olarak içeri aldık.
+print(g\&.sayi, g\&.sayi2)
+g\&.hmm("abc123")
+\-> 13 44
+\-> abc123
 .ft P
 .fi
 .UNINDENT

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
 <title>Python dersi</title>
 <link rel="stylesheet" href="main.css" />
 </head>
@@ -569,14 +569,14 @@ sayı:123
     <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">yol</span><span class="punctuation">):</span>
         <span class="name">ini</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="name">yol</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span> <span class="comment single"># ini dosyasını açtık</span>
         <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">icerik</span> <span class="operator">=</span> <span class="name">ini</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span> <span class="comment single"># dosya içeriğini okuduk</span>
-<span class="keyword">def</span> <span class="name function">deger_al</span><span class="punctuation">(</span><span class="name">bolum</span><span class="punctuation">,</span><span class="name">veri</span><span class="punctuation">):</span>
-    <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">False</span> <span class="comment single"># istenilen yere gelene kadar etkisiz kal</span>
-    <span class="keyword">for</span> <span class="name">satir</span> <span class="operator word">in</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">icerik</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">):</span>
-        <span class="keyword">if</span> <span class="literal string double">&quot;[&quot;</span> <span class="operator">+</span> <span class="name">bolum</span> <span class="operator">+</span> <span class="literal string double">&quot;]&quot;</span> <span class="operator word">in</span> <span class="name">satir</span><span class="punctuation">:</span> <span class="comment single"># okunan satırda istenilen bölümün başı mı</span>
-            <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">True</span> <span class="comment single"># etkinleştir</span>
-        <span class="keyword">if</span> <span class="name">etkin</span> <span class="operator word">and</span> <span class="literal string double">&quot;=&quot;</span> <span class="operator word">in</span> <span class="name">satir</span><span class="punctuation">:</span> <span class="comment single"># etkinse ve satırda = bulunuyorsa</span>
-            <span class="keyword">if</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="name">veri</span><span class="punctuation">:</span> <span class="comment single"># = işaretine göre 0. eleman aranan mı</span>
-                <span class="keyword">return</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="comment single"># = işaretine göre böl . elemanı al</span>
+    <span class="keyword">def</span> <span class="name function">deger_al</span><span class="punctuation">(</span><span class="name">bolum</span><span class="punctuation">,</span><span class="name">veri</span><span class="punctuation">):</span>
+        <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">False</span> <span class="comment single"># istenilen yere gelene kadar etkisiz kal</span>
+        <span class="keyword">for</span> <span class="name">satir</span> <span class="operator word">in</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">icerik</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">):</span>
+            <span class="keyword">if</span> <span class="literal string double">&quot;[&quot;</span> <span class="operator">+</span> <span class="name">bolum</span> <span class="operator">+</span> <span class="literal string double">&quot;]&quot;</span> <span class="operator word">in</span> <span class="name">satir</span><span class="punctuation">:</span> <span class="comment single"># okunan satırda istenilen bölümün başı mı</span>
+                <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">True</span> <span class="comment single"># etkinleştir</span>
+            <span class="keyword">if</span> <span class="name">etkin</span> <span class="operator word">and</span> <span class="literal string double">&quot;=&quot;</span> <span class="operator word">in</span> <span class="name">satir</span><span class="punctuation">:</span> <span class="comment single"># etkinse ve satırda = bulunuyorsa</span>
+                <span class="keyword">if</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="name">veri</span><span class="punctuation">:</span> <span class="comment single"># = işaretine göre 0. eleman aranan mı</span>
+                    <span class="keyword">return</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="comment single"># = işaretine göre böl . elemanı al</span>
 </pre>
 <pre class="code python literal-block">
 <span class="comment single"># main.py dosyası içeriği</span>
@@ -585,6 +585,28 @@ sayı:123
 <span class="name">deger</span><span class="operator">=</span><span class="name">iniparser</span><span class="operator">.</span><span class="name">deger_al</span><span class="punctuation">(</span><span class="literal string double">&quot;hmm&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;veri&quot;</span><span class="punctuation">)</span> <span class="comment single"># değeri al</span>
 <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">deger</span><span class="operator">.</span><span class="name">strip</span><span class="punctuation">())</span> <span class="comment single"># değerin başında sonunda boşluk varsa sil ve yaz</span>
 <span class="operator">-&gt;</span> <span class="name">abc123x</span>
+</pre>
+<p>Bir modülü diğer bir modülün genişletilmişi olarak tanımlayabiliriz. Gelişletilen modül asıl modüldeki tüm fonksiyonlara ve değişkenlere sahip olur. Aşağıdaki örnekteki gibi <strong>super().__init__()</strong> kullanarak üst modülümüzdeki tüm tanımlamalara sahip olmasını sağlayabiliriz.</p>
+<pre class="code python literal-block">
+<span class="comment single"># ornek.py dosyası</span>
+<span class="keyword">class</span> <span class="name class">deneme</span><span class="punctuation">:</span>
+    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">13</span>
+    <span class="keyword">def</span> <span class="name function">hmm</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">yazi</span><span class="punctuation">):</span>
+        <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span>
+
+<span class="keyword">class</span> <span class="name class">genis</span><span class="punctuation">(</span><span class="name">deneme</span><span class="punctuation">):</span>
+    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span>
+        <span class="name builtin">super</span><span class="punctuation">()</span><span class="operator">.</span><span class="name function magic">__init__</span><span class="punctuation">()</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="literal number integer">44</span>
+</pre>
+<pre class="code python literal-block">
+<span class="comment single"># main.py dosyası</span>
+<span class="keyword namespace">from</span> <span class="name namespace">ornek</span> <span class="keyword namespace">import</span> <span class="name">genis</span> <span class="keyword">as</span> <span class="name">g</span> <span class="comment single"># ornek.py dosyasındaki genis sınıfını g olarak içeri aldık.</span>
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name">g</span><span class="operator">.</span><span class="name">sayi</span><span class="punctuation">,</span> <span class="name">g</span><span class="operator">.</span><span class="name">sayi2</span><span class="punctuation">)</span>
+<span class="name">g</span><span class="operator">.</span><span class="name">hmm</span><span class="punctuation">(</span><span class="literal string double">&quot;abc123&quot;</span><span class="punctuation">)</span>
+<span class="operator">-&gt;</span> <span class="literal number integer">13</span> <span class="literal number integer">44</span>
+<span class="operator">-&gt;</span> <span class="name">abc123</span>
 </pre>
 </div>
 </div>

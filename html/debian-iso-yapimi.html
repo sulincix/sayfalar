@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
 <title>Iso yapımı</title>
 <link rel="stylesheet" href="main.css" />
 </head>
@@ -117,7 +117,7 @@
 <li><strong>dev sys proc run</strong> bind bağlayalım. Bu işlem her chroot ile <strong>sid-chroot</strong> içerisine girileceğinde yapılmalıdır. <strong>sid-chroot</strong> içerisinden çıkıldığında ise  bind bağının sökülmesi gerekmektedir.</li>
 </ol>
 <pre class="code shell literal-block">
-☭ <span class="keyword">for</span> i <span class="keyword">in</span> dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
+☭ <span class="keyword">for</span> i in dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
 </pre>
 </div>
 <div class="section" id="gerekli-paketlerin-kurulmasi">
@@ -410,7 +410,7 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 <li><strong>sid-chroot</strong> dizinine tekrar bind bağı atalım.</li>
 </ol>
 <pre class="code shell literal-block">
-☭ <span class="keyword">for</span> i <span class="keyword">in</span> dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
+☭ <span class="keyword">for</span> i in dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
 </pre>
 <ol class="arabic simple" start="2">
 <li><strong>sid-chroot</strong> içine tekrar girelim.</li>

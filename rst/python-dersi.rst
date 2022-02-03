@@ -694,14 +694,14 @@ Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki d
 	    def __init__(self,yol):
 	        ini = open(yol,"r") # ini dosyasını açtık
 	        self.icerik = ini.read() # dosya içeriğini okuduk
-	def deger_al(bolum,veri): 
-	    etkin = False # istenilen yere gelene kadar etkisiz kal
-	    for satir in dosya.icerik.split("\n"):
-	        if "[" + bolum + "]" in satir: # okunan satırda istenilen bölümün başı mı
-	            etkin = True # etkinleştir
-	        if etkin and "=" in satir: # etkinse ve satırda = bulunuyorsa
-	            if satir.split("=")[0] == veri: # = işaretine göre 0. eleman aranan mı
-	                return satir.split("=")[0] # = işaretine göre böl . elemanı al
+	    def deger_al(bolum,veri): 
+	        etkin = False # istenilen yere gelene kadar etkisiz kal
+	        for satir in dosya.icerik.split("\n"):
+	            if "[" + bolum + "]" in satir: # okunan satırda istenilen bölümün başı mı
+	                etkin = True # etkinleştir
+	            if etkin and "=" in satir: # etkinse ve satırda = bulunuyorsa
+	                if satir.split("=")[0] == veri: # = işaretine göre 0. eleman aranan mı
+	                    return satir.split("=")[0] # = işaretine göre böl . elemanı al
 
 .. code-block:: python
 
@@ -713,4 +713,30 @@ Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki d
 	-> abc123x
 
 
+
+Bir modülü diğer bir modülün genişletilmişi olarak tanımlayabiliriz. Gelişletilen modül asıl modüldeki tüm fonksiyonlara ve değişkenlere sahip olur. Aşağıdaki örnekteki gibi **super().__init__()** kullanarak üst modülümüzdeki tüm tanımlamalara sahip olmasını sağlayabiliriz.
+
+.. code-block:: python
+
+	# ornek.py dosyası
+	class deneme:
+	    def __init__(self):
+	        self.sayi = 13
+	    def hmm(self,yazi):
+	        print(yazi)
+	
+	class genis(deneme):
+	    def __init__(self):
+	        super().__init__()
+	        self.sayi2 = 44
+
+.. code-block:: python
+
+	# main.py dosyası
+	from ornek import genis as g # ornek.py dosyasındaki genis sınıfını g olarak içeri aldık.
+	print(g.sayi, g.sayi2)
+	g.hmm("abc123")
+	-> 13 44
+	-> abc123
+	    
 
