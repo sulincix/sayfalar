@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH QEMU-KVM KULLANIMI  "" "" ""
-.SH NAME
-Qemu-KVM Kullanımı \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "QEMU-KVM KULLANIMI"  "" "" ""
+.SH NAME
+Qemu-KVM Kullanımı \- 
 .sp
 Bu belgede \fBqemu\-kvm\fP kullanımı anlatılmaktadır. İşin teknik detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden \fBsövmeyin\fP :)
 .sp

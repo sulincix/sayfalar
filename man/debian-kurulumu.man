@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH TEMEL KAVRAMLAR  "" "" ""
-.SH NAME
-Temel Kavramlar \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "TEMEL KAVRAMLAR"  "" "" ""
+.SH NAME
+Temel Kavramlar \- 
 .sp
 Bu dokümanda debianı \fBdebootstrap\fP ile kurma konusu anlatılacaktır. \fBBu dokümandaki komutları kendi kurulumunuza göre uyarlayarak yazın.\fP
 .sp
@@ -263,15 +263,14 @@ Sürücüleri kuralım (\fIisteğe bağlı\fP)
 .sp
 .nf
 .ft C
-$ apt\-get install firmware\-amd\-graphics firmware\-atheros \e
-    firmware\-b43\-installer firmware\-b43legacy\-installer \e
-    firmware\-bnx2 firmware\-bnx2x firmware\-brcm80211  \e
-    firmware\-cavium firmware\-intel\-sound firmware\-intelwimax \e
-    firmware\-ipw2x00 firmware\-ivtv firmware\-iwlwifi \e
-    firmware\-libertas firmware\-linux firmware\-linux\-free \e
-    firmware\-linux\-nonfree firmware\-misc\-nonfree firmware\-myricom \e
-    firmware\-netxen firmware\-qlogic firmware\-realtek firmware\-samsung \e
-    firmware\-siano firmware\-ti\-connectivity firmware\-zd1211
+$ apt\-get install bluez\-firmware firmware\-amd\-graphics firmware\-atheros \e
+      firmware\-b43\-installer firmware\-b43legacy\-installer firmware\-bnx2 \e
+      firmware\-bnx2x firmware\-brcm80211 firmware\-cavium firmware\-intel\-sound \e
+      firmware\-intelwimax firmware\-ipw2x00 firmware\-ivtv firmware\-iwlwifi \e
+      firmware\-libertas firmware\-linux firmware\-linux\-free firmware\-linux\-nonfree \e
+      firmware\-misc\-nonfree firmware\-myricom firmware\-netxen firmware\-qlogic \e
+      firmware\-ralink firmware\-realtek firmware\-samsung firmware\-siano \e
+      firmware\-ti\-connectivity firmware\-zd1211 zd1211\-firmware
 .ft P
 .fi
 .UNINDENT

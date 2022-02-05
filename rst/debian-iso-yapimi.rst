@@ -246,15 +246,14 @@ Bu aşamada kurulu gelmesini istediğiniz başka paketler varsa onları da kurab
 
 .. code-block:: shell
 
-	☭ apt-get install firmware-amd-graphics firmware-atheros \
-	    firmware-b43-installer firmware-b43legacy-installer \
-	    firmware-bnx2 firmware-bnx2x firmware-brcm80211  \
-	    firmware-cavium firmware-intel-sound firmware-intelwimax \
-	    firmware-ipw2x00 firmware-ivtv firmware-iwlwifi \
-	    firmware-libertas firmware-linux firmware-linux-free \
-	    firmware-linux-nonfree firmware-misc-nonfree firmware-myricom \
-	    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
-	    firmware-siano firmware-ti-connectivity firmware-zd1211 
+	☭ apt-get install bluez-firmware firmware-amd-graphics firmware-atheros \
+	      firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 \
+	      firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound \
+	      firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi \
+	      firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree \
+	      firmware-misc-nonfree firmware-myricom firmware-netxen firmware-qlogic \
+	      firmware-ralink firmware-realtek firmware-samsung firmware-siano \
+	      firmware-ti-connectivity firmware-zd1211 zd1211-firmware
 
 
 4. Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları **/etc/skel** içerisine uygun hiyerarşiye göre dizmelisiniz.

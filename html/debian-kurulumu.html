@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <title>debian kurulumu</title>
 <link rel="stylesheet" href="main.css" />
 </head>
@@ -107,7 +107,7 @@ $ debootstrap --arch amd64 --no-merged-usr sid /mnt https://deb.debian.org/debia
 <li>Oluşturduğumuz <strong>rootfs</strong> içine <strong>dev sys proc run</strong> dizinlerini bağlayalım.</li>
 </ol>
 <pre class="code shell literal-block">
-$ <span class="keyword">for</span> i in dev dev/pts proc sys run<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> /mnt/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
+$ <span class="keyword">for</span> i <span class="keyword">in</span> dev dev/pts proc sys run<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> /mnt/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span>
 </pre>
 <ol class="arabic simple" start="4">
 <li><strong>Rootfs</strong> içerisine <strong>chroot</strong> ile girelim. Bu aşamadan sonraki tüm adımlar <strong>chroot</strong> içerisinde yapılacaktır. Chroota girdikten hemen sonra <strong>profile</strong> dosyamızı etkin hale getirelim.</li>
@@ -143,15 +143,14 @@ $ <span class="name builtin">echo</span> <span class="literal string single">'de
 <li>Sürücüleri kuralım (<em>isteğe bağlı</em>)</li>
 </ol>
 <pre class="code shell literal-block">
-$ apt-get install firmware-amd-graphics firmware-atheros <span class="literal string escape">\
-</span>    firmware-b43-installer firmware-b43legacy-installer <span class="literal string escape">\
-</span>    firmware-bnx2 firmware-bnx2x firmware-brcm80211  <span class="literal string escape">\
-</span>    firmware-cavium firmware-intel-sound firmware-intelwimax <span class="literal string escape">\
-</span>    firmware-ipw2x00 firmware-ivtv firmware-iwlwifi <span class="literal string escape">\
-</span>    firmware-libertas firmware-linux firmware-linux-free <span class="literal string escape">\
-</span>    firmware-linux-nonfree firmware-misc-nonfree firmware-myricom <span class="literal string escape">\
-</span>    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung <span class="literal string escape">\
-</span>    firmware-siano firmware-ti-connectivity firmware-zd1211
+$ apt-get install bluez-firmware firmware-amd-graphics firmware-atheros <span class="literal string escape">\
+</span>      firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 <span class="literal string escape">\
+</span>      firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound <span class="literal string escape">\
+</span>      firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi <span class="literal string escape">\
+</span>      firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree <span class="literal string escape">\
+</span>      firmware-misc-nonfree firmware-myricom firmware-netxen firmware-qlogic <span class="literal string escape">\
+</span>      firmware-ralink firmware-realtek firmware-samsung firmware-siano <span class="literal string escape">\
+</span>      firmware-ti-connectivity firmware-zd1211 zd1211-firmware
 </pre>
 <ol class="arabic simple" start="8">
 <li><strong>/etc/fstab</strong> dosyasını düzenleyelim. Not: <strong>Uefi</strong> kullananlar <strong>efi</strong> bölümünü de ekleyebilirler. Ben şahsen gerekli görmüyorum.</li>

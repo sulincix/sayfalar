@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH DEBIAN PAKET YAPIMI  "" "" ""
-.SH NAME
-Debian paket yapımı \- 
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "DEBIAN PAKET YAPIMI"  "" "" ""
+.SH NAME
+Debian paket yapımı \- 
 .sp
 Bu anlatımda debian tabanı için deb paketi yapmayı anlatacağım. Tüm adımlar root ile gerçekleştirilmiştir. Debian tabanlı bir dağıtım yada debootstrap ile kurulmuş bir chroot kullanmanız gerekmektedir.
 .sp
