@@ -431,6 +431,10 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
      - alfabetik eşit değildir
      - [[ "name" != "limon" ]]
 
+   * - =~
+     - regex kuralına göre eşittir
+     - [[ "elma1" =~ ^[a-z]l.*[1]$ ]]
+
    * - ||
      - mantıksal veya bağlacı
      - [[ .... || .... ]] veya [[ .... ]] || [[ .... ]]
@@ -802,6 +806,29 @@ Kod bloğu
 	# veya kısaca şu şekilde de yapılabilir.
 	{ echo 25 ; echo 12 ; } | cikart
 	-> 13
+
+select komutu
+=============
+**select** kullanarak basit menü oluşturabiliriz.
+
+.. code-block:: shell
+
+	select deger in ali veli 49 59 ; do
+	    echo $REPLY # seçilen sayıyı verir
+	    echo $deger # seçilen elemanı verir
+	    break
+	done
+
+	-> 1) ali
+	-> 2) veli
+	-> 3) 49
+	-> 4) 59
+	-> #?
+	<- 1
+	-> 1
+	-> ali
+
+Bu örnekde **REPLY** değişkeni seçtiğimiz sayıyı **deger** değişkeni ise seçtiğimiz elemanı ifade eder. **select** komutu sürekli olarak döngü halinde çalışır. Döngüden çıkmak için **break** kullandık.
 
 Birden çok dosya ile çalışmak
 =============================

@@ -760,6 +760,14 @@ T}	T{
 T}
 _
 T{
+=~
+T}	T{
+regex kuralına göre eşittir
+T}	T{
+[[ "elma1" =~ ^[a\-z]l.*[1]$ ]]
+T}
+_
+T{
 ||
 T}	T{
 mantıksal veya bağlacı
@@ -1296,6 +1304,34 @@ cikart
 .fi
 .UNINDENT
 .UNINDENT
+.SH SELECT KOMUTU
+.sp
+\fBselect\fP kullanarak basit menü oluşturabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+select deger in ali veli 49 59 ; do
+    echo $REPLY # seçilen sayıyı verir
+    echo $deger # seçilen elemanı verir
+    break
+done
+
+\-> 1) ali
+\-> 2) veli
+\-> 3) 49
+\-> 4) 59
+\-> #?
+<\- 1
+\-> 1
+\-> ali
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu örnekde \fBREPLY\fP değişkeni seçtiğimiz sayıyı \fBdeger\fP değişkeni ise seçtiğimiz elemanı ifade eder. \fBselect\fP komutu sürekli olarak döngü halinde çalışır. Döngüden çıkmak için \fBbreak\fP kullandık.
 .SH BIRDEN ÇOK DOSYA ILE ÇALIŞMAK
 .sp
 Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBsource\fP yada \fB\&.\fP ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.

@@ -1,130 +1,120 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <title>Qemu-KVM Kullanımı</title>
 <link rel="stylesheet" href="main.css" />
+<link rel="stylesheet" href="main.css" />
 </head>
 <body>
-<div class="document" id="qemu-kvm-kullanimi">
+<main id="qemu-kvm-kullanimi">
 <h1 class="title">Qemu-KVM Kullanımı</h1>
 
 <p>Bu belgede <strong>qemu-kvm</strong> kullanımı anlatılmaktadır. İşin teknik detayından çok kullanmak isteyenlerin işini görmesi için basitleştirerek anlatmaya çalışacağız. O yüzden <strong>sövmeyin</strong> :)</p>
 <p>Bu belgede <strong>debian sid</strong> üzerinde olduğunuzu varsayarak anlatım yaptım ama diğer dağıtımlarda da benzer şekilde kullanımı var.</p>
 <blockquote>
-<strong>Not: Biraz mizah içerir.</strong></blockquote>
+<p><strong>Not: Biraz mizah içerir.</strong></p>
+</blockquote>
 <p>Qemu kullanmak için <strong>gui</strong> uygulamalar da vardır. Örneğin <em>gnome-boxes</em> ile qemuyu grafik tabanlı olarak kullanabilirsiniz. Bu belgede buna değinmeyeceğiz. terminalden kullanımı üzerine anlatım olacak.</p>
-<div class="section" id="qemu-kurulumu">
-<h1>Qemu kurulumu</h1>
+<section id="qemu-kurulumu">
+<h2>Qemu kurulumu</h2>
 <p>Debian için <strong>apt-get install qemu-kvm</strong> komutunu kullanabiliriz. Uefi bios ile kullanmak için <strong>ovmf</strong> paketine gerek duyulmaktadır. onuda debian için <strong>apt-get install ovfm</strong> komutu ile kurabiliriz.</p>
-</div>
-<div class="section" id="disk-imaji-olusturma">
-<h1>Disk imajı oluşturma</h1>
+</section>
+<section id="disk-imaji-olusturma">
+<h2>Disk imajı oluşturma</h2>
 <p><strong>qemu-img</strong> komutu ile kolay yoldan imaj açabiliriz. boyutunu <strong>G</strong> <strong>M</strong> gibi harfler ile ifade ediyoruz. Örneğin:</p>
-<pre class="code shell literal-block">
-☭ qemu-img create deneme.img 30G
-Formatting <span class="literal string single">'deneme.img'</span>, <span class="name variable">fmt</span><span class="operator">=</span>raw <span class="name variable">size</span><span class="operator">=</span><span class="literal number">32212254720</span>
-</pre>
+<pre class="code shell literal-block"><code>☭ qemu-img create deneme.img 30G
+Formatting <span class="literal string single">'deneme.img'</span>, <span class="name variable">fmt</span><span class="operator">=</span>raw <span class="name variable">size</span><span class="operator">=</span><span class="literal number">32212254720</span></code></pre>
 <p>Bu disk imajı <strong>raw</strong> formattadır. yani disk imajını usb belleğe <em>dd</em> komutu ile yazıp daha sonra bunu kullanabilirsiniz.</p>
 <p><strong>Raw</strong> yerine <strong>qcow2</strong> formatta oluşturmak isterseniz <strong>-f qcow2</strong> parametresini ekleyebilirsiniz. Örneğin:</p>
-<pre class="code shell literal-block">
-☭ qemu-img create -f qcow2 deneme.qcow2 30G
-</pre>
+<pre class="code shell literal-block"><code>☭ qemu-img create -f qcow2 deneme.qcow2 30G</code></pre>
 <p><strong>Raw</strong> imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. <strong>Qcow2</strong> imajlar ise daha az zararsızdır ama <em>dd</em> komutu ile doğrudan basıp kullanılamaz.</p>
-</div>
-<div class="section" id="sanal-makinanin-baslatilmasi">
-<h1>Sanal makinanın başlatılması</h1>
+</section>
+<section id="sanal-makinanin-baslatilmasi">
+<h2>Sanal makinanın başlatılması</h2>
 <p><strong>qemu-system-x86_64</strong> komutu ile başlatılır. <strong>--enable-kvm</strong> parametresi eklenerek <strong>kvm</strong> etkinleştirilmelidir. yoksa çok kasar. Debianda <strong>kvm</strong> komutu bu komutun kısa halidir. eğer <strong>kvm</strong> komutu yoksa <strong>bashrc</strong> içine <strong>alias</strong> ekleyebilirsiniz. Örnek kullanım:</p>
-<pre class="code shell literal-block">
-☭ qemu-system-x86_64 --enable-kvm
-</pre>
+<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm</code></pre>
 <p>Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız gerekli. onun için de <strong>-hda</strong> parametresi kullanılır. Ayrıca <strong>-m</strong> parametresi ile bellek miktarını <strong>G</strong> <strong>M</strong> gibi semboller ile göstererek belirtmemiz gerekli. Örneğin:</p>
-<pre class="code shell literal-block">
-☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G
+<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G
 WARNING: Image format was not specified <span class="keyword">for</span> <span class="literal string single">'deneme.img'</span> and probing guessed raw.
        Automatically detecting the format is dangerous <span class="keyword">for</span> raw images, write operations on block <span class="literal number">0</span> will be restricted.
-       Specify the <span class="literal string single">'raw'</span> format explicitly to remove the restrictions.
-</pre>
+       Specify the <span class="literal string single">'raw'</span> format explicitly to remove the restrictions.</code></pre>
 <p>Örnekteki gibi uyarı vermesinin sebebi raw disk imajı kullanmamızdan dolayı. Çok fantastik şeyler yapmayacaksak çokta önemli değil :D Ayrıca raw imaj yerine usb bellek hard disk gibi şeyleri de kullanabilirsiniz. imaj konumu olarak /dev/sdx vermeniz yeterlidir.</p>
 <p>Şimdi sıra geldi sanal makinaya format atmaya. Bunun için iso imajını bağlamak gerekli. bunun için <strong>-cdrom</strong> parametresi kullanılmalıdır. Örneğin</p>
-<pre class="code shell literal-block">
-☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso
-</pre>
+<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso</code></pre>
 <p><strong>Uefi</strong> bios için <strong>ovmf</strong> eklememiz gerekir. onun için <strong>-bios /usr/share/ovmf/OVMF.fd</strong> parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)</p>
-<pre class="code shell literal-block">
-☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
-</pre>
-</div>
-<div class="section" id="bazi-parametreler">
-<h1>Bazı Parametreler</h1>
+<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd</code></pre>
+</section>
+<section id="bazi-parametreler">
+<h2>Bazı Parametreler</h2>
 <p>Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz.</p>
-<table border="1" class="docutils">
+<table>
 <colgroup>
-<col width="35%" />
-<col width="65%" />
+<col style="width: 35%" />
+<col style="width: 65%" />
 </colgroup>
-<thead valign="bottom">
-<tr><th class="head">Parametre</th>
-<th class="head">Anlamı</th>
+<thead>
+<tr><th class="head"><p>Parametre</p></th>
+<th class="head"><p>Anlamı</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr><td>-boot d</td>
-<td>cdrom ile başlat</td>
+<tbody>
+<tr><td><p>-boot d</p></td>
+<td><p>cdrom ile başlat</p></td>
 </tr>
-<tr><td>-boot c</td>
-<td>hdd ile başlat</td>
+<tr><td><p>-boot c</p></td>
+<td><p>hdd ile başlat</p></td>
 </tr>
-<tr><td>-m 3G</td>
-<td>3gb ram kullan</td>
+<tr><td><p>-m 3G</p></td>
+<td><p>3gb ram kullan</p></td>
 </tr>
-<tr><td>--enable-kvm</td>
-<td>KVM etkinleştir</td>
+<tr><td><p>--enable-kvm</p></td>
+<td><p>KVM etkinleştir</p></td>
 </tr>
-<tr><td>-cdrom xx</td>
-<td>iso dosyasını cdrom olarak ayarla</td>
+<tr><td><p>-cdrom xx</p></td>
+<td><p>iso dosyasını cdrom olarak ayarla</p></td>
 </tr>
-<tr><td>-hda xx</td>
-<td>birinci hard disk imajı</td>
+<tr><td><p>-hda xx</p></td>
+<td><p>birinci hard disk imajı</p></td>
 </tr>
-<tr><td>-hdb xx</td>
-<td>ikinci hard disk imajı</td>
+<tr><td><p>-hdb xx</p></td>
+<td><p>ikinci hard disk imajı</p></td>
 </tr>
-<tr><td>-hdc xx</td>
-<td>üçüncü hard disk imajı</td>
+<tr><td><p>-hdc xx</p></td>
+<td><p>üçüncü hard disk imajı</p></td>
 </tr>
-<tr><td>-hdd xx</td>
-<td>dördüncü disk imajı</td>
+<tr><td><p>-hdd xx</p></td>
+<td><p>dördüncü disk imajı</p></td>
 </tr>
-<tr><td>-cpu host</td>
-<td>yerel makinadın işlemci ismini sanal makinada kullan</td>
+<tr><td><p>-cpu host</p></td>
+<td><p>yerel makinadın işlemci ismini sanal makinada kullan</p></td>
 </tr>
-<tr><td>-smp cores=2</td>
-<td>çift çekirdek kullan</td>
+<tr><td><p>-smp cores=2</p></td>
+<td><p>çift çekirdek kullan</p></td>
 </tr>
-<tr><td>-vga cirrus</td>
-<td>ekran kartı olarak cirrus göster</td>
+<tr><td><p>-vga cirrus</p></td>
+<td><p>ekran kartı olarak cirrus göster</p></td>
 </tr>
-<tr><td>-vga vmware</td>
-<td>ekran kartı olarak vmware göster</td>
+<tr><td><p>-vga vmware</p></td>
+<td><p>ekran kartı olarak vmware göster</p></td>
 </tr>
-<tr><td>-display vnc:0</td>
-<td>görüntüyü vnc üzerinden al (5900 portundan)</td>
+<tr><td><p>-display vnc:0</p></td>
+<td><p>görüntüyü vnc üzerinden al (5900 portundan)</p></td>
 </tr>
-<tr><td>-soundhw ac97</td>
-<td>ses kartı olarak ac97 ekle</td>
+<tr><td><p>-soundhw ac97</p></td>
+<td><p>ses kartı olarak ac97 ekle</p></td>
 </tr>
-<tr><td>-nic user,hostfwd=tcp::2222-:22</td>
-<td>Sanal makinadaki 22 portunu hostun 2222 portuna yönlendir</td>
+<tr><td><p>-nic user,hostfwd=tcp::2222-:22</p></td>
+<td><p>Sanal makinadaki 22 portunu hostun 2222 portuna yönlendir</p></td>
 </tr>
-<tr><td>-bios /usr/share/ovmf/OVMF.fd</td>
-<td>UEFI olarak başlat</td>
+<tr><td><p>-bios /usr/share/ovmf/OVMF.fd</p></td>
+<td><p>UEFI olarak başlat</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
+</section>
+</main>
 </body>
 </html>
