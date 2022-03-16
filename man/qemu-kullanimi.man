@@ -128,6 +128,22 @@ WARNING: Image format was not specified for \(aqdeneme.img\(aq and probing guess
 .fi
 .UNINDENT
 .UNINDENT
+.SH SNAPSHOT ÖZELLIĞI
+.sp
+Sanal makinanın imajını almak için \fBqemu\-img snapshot\fP kullanabiliriz. Örnek kullanım:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+☭ qemu\-img snapshot \-c temiz\-kurulum deneme.img # snapshot üretmek için
+☭ qemu\-img snapshot \-l deneme.img # snapshot listelemek için
+☭ qemu\-img snapshot \-a temiz\-kurulum deneme.img # snapshot geri dönmek için
+☭ qemu\-img snapshot \-d temiz\-kurulum deneme.img # snapshot silmek için
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH BAZI PARAMETRELER
 .sp
 Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz.

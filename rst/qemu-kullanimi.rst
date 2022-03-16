@@ -64,6 +64,18 @@ Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız g
 
   ☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd
   
+
+Snapshot özelliği
+^^^^^^^^^^^^^^^^^
+Sanal makinanın imajını almak için **qemu-img snapshot** kullanabiliriz. Örnek kullanım:
+
+.. code-block:: shell
+
+  ☭ qemu-img snapshot -c temiz-kurulum deneme.img # snapshot üretmek için
+  ☭ qemu-img snapshot -l deneme.img # snapshot listelemek için
+  ☭ qemu-img snapshot -a temiz-kurulum deneme.img # snapshot geri dönmek için
+  ☭ qemu-img snapshot -d temiz-kurulum deneme.img # snapshot silmek için
+
 Bazı Parametreler
 ^^^^^^^^^^^^^^^^^
 Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz. 

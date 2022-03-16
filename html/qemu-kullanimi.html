@@ -47,6 +47,14 @@ WARNING: Image format was not specified <span class="keyword">for</span> <span c
 <p><strong>Uefi</strong> bios için <strong>ovmf</strong> eklememiz gerekir. onun için <strong>-bios /usr/share/ovmf/OVMF.fd</strong> parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)</p>
 <pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd</code></pre>
 </section>
+<section id="snapshot-ozelligi">
+<h2>Snapshot özelliği</h2>
+<p>Sanal makinanın imajını almak için <strong>qemu-img snapshot</strong> kullanabiliriz. Örnek kullanım:</p>
+<pre class="code shell literal-block"><code>☭ qemu-img snapshot -c temiz-kurulum deneme.img <span class="comment single"># snapshot üretmek için
+</span>☭ qemu-img snapshot -l deneme.img <span class="comment single"># snapshot listelemek için
+</span>☭ qemu-img snapshot -a temiz-kurulum deneme.img <span class="comment single"># snapshot geri dönmek için
+</span>☭ qemu-img snapshot -d temiz-kurulum deneme.img <span class="comment single"># snapshot silmek için</span></code></pre>
+</section>
 <section id="bazi-parametreler">
 <h2>Bazı Parametreler</h2>
 <p>Doğrudan tablo şeklinde vermeyi düşündüm. Bu belgeyi okumaya üşenip buraya bakabilirsiniz.</p>
