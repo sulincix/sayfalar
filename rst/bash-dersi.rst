@@ -886,6 +886,32 @@ exec komutu
 
 **exec** komutunu doğrudan terminalde çalıştırırsanız ve komut tamamlanırsa terminaldeki süreç kapanacağı için terminal doğal olarak kapanacaktır.
 
+**exec** komutunu kullanarak yönlendirmeler yapabilirsiniz.
+
+.. code-block:: shell
+
+	exec > log.txt # bütün çıktıları log.txt içine yazdırır.
+	echo "merhaba" # ekrana değil dosyaya yazılır.
+	exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
+
+fd kavramı
+==========
+
+**bash** programında birden çok **fd** kullanılabilir. var olan fdlere ulaşmak için **/proc/$$/fd/** konumuna bakabiliriz. 0 stdin 1 stdout 2 stderr olarak çalışır. 
+
+**Not:** **$$** mevcut sürecin pid değerini verir.
+
+.. code-block:: shell
+
+	exec 3> log.txt # yazmak için boş bir 3 numaralı fd açmak için.
+	echo "deneme" >&3
+	exec 3>& - # açık olan 3 nuramalı fd kapatmak için.
+	exec 2>&1 # stderr içine atılanı stdout içine aktarır.
+	exec 4< input.txt # okumak için 4 numaralı fd açmak için.
+	echo "hmm" > input.txt # girdi dosyamıza yazı yazalım.
+	read line <&4 # 3 nuramalı fd içinden değir okur.
+	exec 4<&- # 4 numaralı fd kapatmak için.
+
 Hata ayıklama
 =============
 

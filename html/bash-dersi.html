@@ -1,249 +1,281 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <title>Bash dersi</title>
 <link rel="stylesheet" href="main.css" />
-<link rel="stylesheet" href="main.css" />
 </head>
 <body>
-<main id="bash-dersi">
+<div class="document" id="bash-dersi">
 <h1 class="title">Bash dersi</h1>
 
 <p>Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar <em>&lt;-</em> ile çıktıların olduğu satırlar <em>-&gt;</em> ile işaretlenmiştir.</p>
-<section id="aciklama-satiri-ve-dosya-baslangici">
-<h2>Açıklama satırı ve dosya başlangıcı</h2>
+<div class="section" id="aciklama-satiri-ve-dosya-baslangici">
+<h1>Açıklama satırı ve dosya başlangıcı</h1>
 <p>Açıklamalar <strong>#</strong> ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına <strong>#!/bin/bash</strong> eklememiz gerekmektedir. Bash betikleri genellikle <strong>.sh</strong> uzantılı olur.
 Bash betikleri girintilemeye duyarlı değildir. Bash betiği yazarken girintileme için 4 boşluk veya tek tab kullanmanızı öneririm.</p>
 <p>Bash betiklerinde alt satıra geçmek yerine <strong>;</strong> kullanabiliriz. Bu sayede kaynak kod daha düzenli tutulabilir.</p>
-<pre class="code shell literal-block"><code><span class="comment hashbang">#!/bin/bash
-</span><span class="comment single">#Bu bir açıklama satırıdır.</span></code></pre>
+<pre class="code shell literal-block">
+<span class="comment hashbang">#!/bin/bash
+</span><span class="comment single">#Bu bir açıklama satırıdır.</span>
+</pre>
 <p>Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı ve sonrasında aşağıdaki gibi çalıştırılmalıdır.</p>
-<pre class="code shell literal-block"><code>chmod +x ders1.sh
-./ders1.sh</code></pre>
+<pre class="code shell literal-block">
+chmod +x ders1.sh
+./ders1.sh
+</pre>
 <p><strong>:</strong> komutu hiçbir iş yapmayan komuttur. Bu komutu açıklama niyetine kullanabilirsiniz. <strong>true</strong> komutu ile aynı anlama gelmektedir.</p>
 <p>Çoklu açımlama satırı için aşağıdaki gibi bir ifade kullanabilirsiniz.</p>
-<pre class="code shell literal-block"><code>: <span class="literal string double">&quot;
+<pre class="code shell literal-block">
+: <span class="literal string double">&quot;
 Bu bir açıklama satıdırıdır.
 Bu da diğer açıklama satırıdır.
 Bu da sonunca açıklama satırıdır.
-&quot;</span></code></pre>
-</section>
-<section id="ekrana-yazi-yazalim">
-<h2>Ekrana yazı yazalım</h2>
+&quot;</span>
+</pre>
+</div>
+<div class="section" id="ekrana-yazi-yazalim">
+<h1>Ekrana yazı yazalım</h1>
 <p>Ekrana yazı yazmak için <strong>echo</strong> ifadesi kulanılır.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">echo</span> Merhaba dünya
--&gt; Merhaba dünya</code></pre>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> Merhaba dünya
+-&gt; Merhaba dünya
+</pre>
 <p>Ekrana özel karakterleri yazmak için <strong>-e</strong> parametresi kullanmamız gerekmektedir.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">echo</span> -e <span class="literal string double">&quot;Merhaba\ndünya&quot;</span>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> -e <span class="literal string double">&quot;Merhaba\ndünya&quot;</span>
 -&gt; Merhaba
--&gt; dünya</code></pre>
+-&gt; dünya
+</pre>
 <p>Ekrana renkli yazı da yazdırabiliriz. Bunun için <strong>\033[x;..;ym</strong> ifadesini kullanırız. Burada <strong>x</strong> ve <strong>y</strong> özellik belirtir. Örneğin:</p>
-<pre class="code shell literal-block"><code><span class="comment single"># Mavi renkli kalın merhaba ile normal dünya yazdırır.
-</span><span class="name builtin">echo</span> -e <span class="literal string double">&quot;\033[34;1mMerhaba\033[0m Dünya&quot;</span></code></pre>
+<pre class="code shell literal-block">
+<span class="comment single"># Mavi renkli kalın merhaba ile normal dünya yazdırır.
+</span><span class="name builtin">echo</span> -e <span class="literal string double">&quot;\033[34;1mMerhaba\033[0m Dünya&quot;</span>
+</pre>
 <p>Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.</p>
-<table class="colwidths-given">
+<table border="1" class="colwidths-given docutils">
 <caption><strong>Özellik numarası ve anlamları</strong></caption>
 <colgroup>
-<col style="width: 11%" />
-<col style="width: 22%" />
-<col style="width: 11%" />
-<col style="width: 22%" />
-<col style="width: 11%" />
-<col style="width: 22%" />
+<col width="11%" />
+<col width="22%" />
+<col width="11%" />
+<col width="22%" />
+<col width="11%" />
+<col width="22%" />
 </colgroup>
-<thead>
-<tr><th class="head"><p>Özellik</p></th>
-<th class="head"><p>Anlamı</p></th>
-<th class="head"><p>Özellik</p></th>
-<th class="head"><p>Anlamı</p></th>
-<th class="head"><p>Özellik</p></th>
-<th class="head"><p>Anlamı</p></th>
+<thead valign="bottom">
+<tr><th class="head">Özellik</th>
+<th class="head">Anlamı</th>
+<th class="head">Özellik</th>
+<th class="head">Anlamı</th>
+<th class="head">Özellik</th>
+<th class="head">Anlamı</th>
 </tr>
 </thead>
-<tbody>
-<tr><td><p>0</p></td>
-<td><p>Sıfırla</p></td>
-<td><p>30</p></td>
-<td><p>Siyah yazı</p></td>
-<td><p>40</p></td>
-<td><p>Siyah arka plan</p></td>
+<tbody valign="top">
+<tr><td>0</td>
+<td>Sıfırla</td>
+<td>30</td>
+<td>Siyah yazı</td>
+<td>40</td>
+<td>Siyah arka plan</td>
 </tr>
-<tr><td><p>1</p></td>
-<td><p>Aydınlık</p></td>
-<td><p>31</p></td>
-<td><p>Kırmızı yazı</p></td>
-<td><p>41</p></td>
-<td><p>Kırmızı arka plan</p></td>
+<tr><td>1</td>
+<td>Aydınlık</td>
+<td>31</td>
+<td>Kırmızı yazı</td>
+<td>41</td>
+<td>Kırmızı arka plan</td>
 </tr>
-<tr><td><p>2</p></td>
-<td><p>Sönük</p></td>
-<td><p>32</p></td>
-<td><p>Yeşil yazı</p></td>
-<td><p>42</p></td>
-<td><p>Yeşil arka plan</p></td>
+<tr><td>2</td>
+<td>Sönük</td>
+<td>32</td>
+<td>Yeşil yazı</td>
+<td>42</td>
+<td>Yeşil arka plan</td>
 </tr>
-<tr><td><p>3</p></td>
-<td><p>İtalik</p></td>
-<td><p>33</p></td>
-<td><p>Sarı yazı</p></td>
-<td><p>43</p></td>
-<td><p>Sarı arka plan</p></td>
+<tr><td>3</td>
+<td>İtalik</td>
+<td>33</td>
+<td>Sarı yazı</td>
+<td>43</td>
+<td>Sarı arka plan</td>
 </tr>
-<tr><td><p>4</p></td>
-<td><p>Altı çizili</p></td>
-<td><p>34</p></td>
-<td><p>Mavi yazı</p></td>
-<td><p>44</p></td>
-<td><p>Mavi arka plan</p></td>
+<tr><td>4</td>
+<td>Altı çizili</td>
+<td>34</td>
+<td>Mavi yazı</td>
+<td>44</td>
+<td>Mavi arka plan</td>
 </tr>
-<tr><td><p>5</p></td>
-<td><p>Yanıp sönen</p></td>
-<td><p>35</p></td>
-<td><p>Magenta yazı</p></td>
-<td><p>45</p></td>
-<td><p>Magenta arkaplan</p></td>
+<tr><td>5</td>
+<td>Yanıp sönen</td>
+<td>35</td>
+<td>Magenta yazı</td>
+<td>45</td>
+<td>Magenta arkaplan</td>
 </tr>
-<tr><td><p>6</p></td>
-<td><p>Yanıp sönen</p></td>
-<td><p>36</p></td>
-<td><p>Turkuaz yazı</p></td>
-<td><p>46</p></td>
-<td><p>Turkuaz arka plan</p></td>
+<tr><td>6</td>
+<td>Yanıp sönen</td>
+<td>36</td>
+<td>Turkuaz yazı</td>
+<td>46</td>
+<td>Turkuaz arka plan</td>
 </tr>
-<tr><td><p>7</p></td>
-<td><p>Ters çevirilmiş</p></td>
-<td><p>37</p></td>
-<td><p>Beyaz yazı</p></td>
-<td><p>47</p></td>
-<td><p>Beyaz arka plan</p></td>
+<tr><td>7</td>
+<td>Ters çevirilmiş</td>
+<td>37</td>
+<td>Beyaz yazı</td>
+<td>47</td>
+<td>Beyaz arka plan</td>
 </tr>
-<tr><td><p>8</p></td>
-<td><p>Gizli</p></td>
-<td><p>39</p></td>
-<td><p>Varsayılan yazı</p></td>
-<td><p>49</p></td>
-<td><p>Varsayılan arkaplan</p></td>
+<tr><td>8</td>
+<td>Gizli</td>
+<td>39</td>
+<td>Varsayılan yazı</td>
+<td>49</td>
+<td>Varsayılan arkaplan</td>
 </tr>
 </tbody>
 </table>
 <p>Çift tırnak (<strong>&quot;</strong>) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (<strong>'</strong>) içindekiler işlenmez. Örneğin:</p>
-<pre class="code shell literal-block"><code><span class="name variable">var</span><span class="operator">=</span><span class="literal number">12</span>
+<pre class="code shell literal-block">
+<span class="name variable">var</span><span class="operator">=</span><span class="literal number">12</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="name variable">$var</span><span class="literal string double">&quot;</span>
 <span class="name builtin">echo</span> <span class="literal string single">'$var'</span>
 -&gt; <span class="literal number">12</span>
--&gt; <span class="name variable">$var</span></code></pre>
-</section>
-<section id="parametreler">
-<h2>Parametreler</h2>
+-&gt; <span class="name variable">$var</span>
+</pre>
+</div>
+<div class="section" id="parametreler">
+<h1>Parametreler</h1>
 <p>Bir bash betiği çalıştırılırken verilen parametreleri <strong>$</strong> ifadesinden sonra gelen sayı ile kullanabiliriz.
 <strong>$#</strong> bize kaç tane parametre olduğunu verir.
 <strong>$&#64;</strong> ifadesi ile de parametrelerin toplamını elde edebiliriz.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="name variable">$1</span><span class="literal string double"> - </span><span class="name variable">$#</span><span class="literal string double"> - </span><span class="name variable">$&#64;</span><span class="literal string double">&quot;</span>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="name variable">$1</span><span class="literal string double"> - </span><span class="name variable">$#</span><span class="literal string double"> - </span><span class="name variable">$&#64;</span><span class="literal string double">&quot;</span>
 
 ./ders1.sh merhaba dünya
--&gt; merhaba - <span class="literal number">2</span> - merhaba dünya</code></pre>
-</section>
-<section id="degiskenler-ve-sabitler">
-<h2>Değişkenler ve Sabitler</h2>
+-&gt; merhaba - <span class="literal number">2</span> - merhaba dünya
+</pre>
+</div>
+<div class="section" id="degiskenler-ve-sabitler">
+<h1>Değişkenler ve Sabitler</h1>
 <p>Değişkenler ve sabitler programımızın içerisinde kullanılan verilerdir. Değişkenler tanımlandıktan sonra değiştirilebilirken sabitler tanımlandıktan sonra değiştirilemez.</p>
 <p>Değişkenler sayı ile başlayamaz, Türkçe karakter içeremez ve <cite>/*[[($</cite> gibi özel karakterleri içeremez.</p>
 <p>Normal Değişkenler aşağıdaki gibi tanımlanır.</p>
-<pre class="code shell literal-block"><code><span class="name variable">sayı</span><span class="operator">=</span><span class="literal number">23</span>
-<span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;merhaba&quot;</span></code></pre>
+<pre class="code shell literal-block">
+<span class="name variable">sayı</span><span class="operator">=</span><span class="literal number">23</span>
+<span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;merhaba&quot;</span>
+</pre>
 <p><strong>+=</strong> ifadesi var olan değişkene ekleme yapmak için kullanılır. Değişkenin türünü belirlemeden tanımlamışsak yazı olarak ele alır.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">typeset</span> -i a <span class="comment single"># Değişkeni sayı olarak belirttik.
+<pre class="code shell literal-block">
+<span class="name builtin">typeset</span> -i a <span class="comment single"># Değişkeni sayı olarak belirttik.
 </span><span class="name variable">a</span><span class="operator">=</span><span class="literal number">1</span> <span class="punctuation">;</span> <span class="name variable">b</span><span class="operator">=</span><span class="literal number">1</span>
 <span class="name variable">a</span><span class="operator">+=</span><span class="literal number">1</span> <span class="punctuation">;</span> <span class="name variable">b</span><span class="operator">+=</span><span class="literal number">1</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="name variable">$a</span><span class="literal string double"> </span><span class="name variable">$b</span><span class="literal string double">&quot;</span>
--&gt; <span class="literal number">2</span> <span class="literal number">11</span></code></pre>
+-&gt; <span class="literal number">2</span> <span class="literal number">11</span>
+</pre>
 <p>Çevresel değişkenler tüm alt programlarda da geçerlidir. Çevresel değişken tanımlamak için başına <strong>export</strong> ifadesi yerleştirilir.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">export</span> <span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">23</span>
-<span class="name builtin">export</span> <span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;merhaba&quot;</span></code></pre>
+<pre class="code shell literal-block">
+<span class="name builtin">export</span> <span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">23</span>
+<span class="name builtin">export</span> <span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;merhaba&quot;</span>
+</pre>
 <p>Sabitler daha sonradan değeri değiştirilemeyen verilerdir. Sabit tanımlamak için başına <strong>decrale -r</strong> ifadesi yerleştirilir.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">declare</span> -r <span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;merhaba&quot;</span>
-declade -r <span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">23</span></code></pre>
+<pre class="code shell literal-block">
+<span class="name builtin">declare</span> -r <span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;merhaba&quot;</span>
+declade -r <span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">23</span>
+</pre>
 <p>Değişkenler ve sabitler kullanılırken <strong>${}</strong> işareti içine alınırlar veya başına <strong>$</strong> işareti gelir. Bu doküman boyunca ilk kullanım biçimi üzerinden gideceğim.</p>
-<pre class="code shell literal-block"><code><span class="name variable">deneme</span><span class="operator">=</span><span class="literal string double">&quot;abc123&quot;</span>
+<pre class="code shell literal-block">
+<span class="name variable">deneme</span><span class="operator">=</span><span class="literal string double">&quot;abc123&quot;</span>
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">deneme</span><span class="literal string interpol">}</span>
--&gt; abc123</code></pre>
+-&gt; abc123
+</pre>
 <p>Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için <strong>&quot;</strong> işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.</p>
-<pre class="code shell literal-block"><code><span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">11</span>
+<pre class="code shell literal-block">
+<span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">11</span>
 <span class="name variable">yazi</span><span class="operator">=</span><span class="literal string double">&quot;karpuz&quot;</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}${</span><span class="name variable">karpuz</span><span class="literal string interpol">}</span><span class="literal string double"> limon&quot;</span>
--&gt; 11karpuz limon</code></pre>
+-&gt; 11karpuz limon
+</pre>
 <p>Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifade kullanılır. <cite>(+-*/ işlemleri için geçerlidir.)</cite></p>
-<pre class="code shell literal-block"><code><span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">12</span>
+<pre class="code shell literal-block">
+<span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">12</span>
 <span class="name variable">sayi</span><span class="operator">=</span><span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span><span class="operator">/</span><span class="literal number">2</span><span class="keyword">))</span>
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span>
--&gt; <span class="literal number">6</span></code></pre>
+-&gt; <span class="literal number">6</span>
+</pre>
 <p>Bununla birlikte matematiksel işlemler için şunlar da kullanılabilir.</p>
-<pre class="code shell literal-block"><code>expr <span class="literal number">3</span> + <span class="literal number">5</span> <span class="comment single"># her piri arasında boşluk gerekli
+<pre class="code shell literal-block">
+expr <span class="literal number">3</span> + <span class="literal number">5</span> <span class="comment single"># her piri arasında boşluk gerekli
 </span>-&gt; <span class="literal number">8</span>
 <span class="name builtin">echo</span> <span class="literal number">6</span>-1 <span class="punctuation">|</span> bc -l <span class="comment single"># Burada -l virgüllü sayılar için kullanılır.
 </span>-&gt; <span class="literal number">5</span>
 python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
--&gt; <span class="literal number">5</span>.0</code></pre>
+-&gt; <span class="literal number">5</span>.0
+</pre>
 <p>Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0'dan başlar. Negatif değerler sondan saymaya başlar.</p>
-<table class="colwidths-given">
+<table border="1" class="colwidths-given docutils">
 <caption><strong>Değişkene müdahale (var=&quot;Merhaba&quot;)</strong></caption>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
-<thead>
-<tr><th class="head"><p>İfade</p></th>
-<th class="head"><p>Anlamı</p></th>
-<th class="head"><p>Eşleniği</p></th>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Anlamı</th>
+<th class="head">Eşleniği</th>
 </tr>
 </thead>
-<tbody>
-<tr><td><p>${var%aba}</p></td>
-<td><p>Sondaki ifadeyi sil</p></td>
-<td><p>Merh</p></td>
+<tbody valign="top">
+<tr><td>${var%aba}</td>
+<td>Sondaki ifadeyi sil</td>
+<td>Merh</td>
 </tr>
-<tr><td><p>${var#Mer}</p></td>
-<td><p>Baştaki ifadeyi sil</p></td>
-<td><p>haba</p></td>
+<tr><td>${var#Mer}</td>
+<td>Baştaki ifadeyi sil</td>
+<td>haba</td>
 </tr>
-<tr><td><p>${var:1:4}</p></td>
-<td><p>Baştan 1. 4. karakterler arası</p></td>
-<td><p>erha</p></td>
+<tr><td>${var:1:4}</td>
+<td>Baştan 1. 4. karakterler arası</td>
+<td>erha</td>
 </tr>
-<tr><td><p>${var::4}</p></td>
-<td><p>Baştan 4. karaktere kadar</p></td>
-<td><p>Merha</p></td>
+<tr><td>${var::4}</td>
+<td>Baştan 4. karaktere kadar</td>
+<td>Merha</td>
 </tr>
-<tr><td><p>${var:4}</p></td>
-<td><p>Baştan 4. karakterden sonrası</p></td>
-<td><p>aba</p></td>
+<tr><td>${var:4}</td>
+<td>Baştan 4. karakterden sonrası</td>
+<td>aba</td>
 </tr>
-<tr><td><p>${var/erh/abc}</p></td>
-<td><p>erh yerine abc koy</p></td>
-<td><p>Mabcaba</p></td>
+<tr><td>${var/erh/abc}</td>
+<td>erh yerine abc koy</td>
+<td>Mabcaba</td>
 </tr>
-<tr><td><p>${var,,}</p></td>
-<td><p>hepsini küçük harf yap</p></td>
-<td><p>merhaba</p></td>
+<tr><td>${var,,}</td>
+<td>hepsini küçük harf yap</td>
+<td>merhaba</td>
 </tr>
-<tr><td><p>${var^^}</p></td>
-<td><p>hepsini büyük harf yap</p></td>
-<td><p>MERHABA</p></td>
+<tr><td>${var^^}</td>
+<td>hepsini büyük harf yap</td>
+<td>MERHABA</td>
 </tr>
-<tr><td><p>${var:+abc}</p></td>
-<td><p>var tanımlıysı abc dördürür.</p></td>
-<td><p>abc</p></td>
+<tr><td>${var:+abc}</td>
+<td>var tanımlıysı abc dördürür.</td>
+<td>abc</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="diziler">
-<h2>Diziler</h2>
+</div>
+<div class="section" id="diziler">
+<h1>Diziler</h1>
 <p>Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler aşağıdaki gibi tanımların ve kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="name variable">dizi</span><span class="operator">=(</span>muz elma limon armut<span class="operator">)</span>
+<pre class="code shell literal-block">
+<span class="name variable">dizi</span><span class="operator">=(</span>muz elma limon armut<span class="operator">)</span>
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[1]</span><span class="literal string interpol">}</span>
 -&gt; elma
 <span class="name builtin">echo</span> <span class="literal string interpol">${#</span><span class="name variable">dizi</span><span class="punctuation">[&#64;]</span><span class="literal string interpol">}</span>
@@ -252,9 +284,11 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 -&gt; limon armut
 <span class="name variable">dizi</span><span class="operator">+=(</span>kiraz<span class="operator">)</span>
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[-1]</span><span class="literal string interpol">}</span>
--&gt; kiraz</code></pre>
+-&gt; kiraz
+</pre>
 <p>Diziler eleman indisleri ile kullanmanın yanında şu şekilde de tanımlanabilir.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">declare</span> -A dizi
+<pre class="code shell literal-block">
+<span class="name builtin">declare</span> -A dizi
 <span class="name variable">dizi</span><span class="operator">=([</span>kirmizi<span class="operator">]=</span>elma <span class="operator">[</span>sari<span class="operator">]=</span>muz <span class="operator">[</span>yesil<span class="operator">]=</span>limon <span class="operator">[</span>turuncu<span class="operator">]=</span>portakal<span class="operator">)</span>
 <span class="keyword">for</span> isim <span class="keyword">in</span> <span class="literal string interpol">${</span><span class="punctuation">!dizi[&#64;]</span><span class="literal string interpol">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="name variable">$isim</span><span class="literal string double"> &quot;</span>
@@ -267,28 +301,34 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 <span class="name builtin">echo</span>
 -&gt; portakal limon muz elma
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">dizi</span><span class="punctuation">[kirmizi]</span><span class="literal string interpol">}</span>
--&gt; elma</code></pre>
-</section>
-<section id="klavyeden-deger-alma">
-<h2>Klavyeden değer alma</h2>
+-&gt; elma
+</pre>
+</div>
+<div class="section" id="klavyeden-deger-alma">
+<h1>Klavyeden değer alma</h1>
 <p>Klavyeden değer almak için <strong>read</strong> komutu kullanılır. Alınan değer değişken olarak tanımlanır.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">read</span> deger
+<pre class="code shell literal-block">
+<span class="name builtin">read</span> deger
 &lt;- merhaba
 <span class="name builtin">echo</span> <span class="name variable">$deger</span>
--&gt; merhaba</code></pre>
-</section>
-<section id="kosullar">
-<h2>Koşullar</h2>
+-&gt; merhaba
+</pre>
+</div>
+<div class="section" id="kosullar">
+<h1>Koşullar</h1>
 <p>Koşullar <strong>if</strong> ile <strong>fi</strong> ile biter.  Koşul ifadesi sonrası <strong>then</strong> kullanılır. ilk koşul sağlanmıyorsa <strong>elif</strong> ifadesi ile ikinci koşul sorgulanabilir. Eğer hiçbir koşul sağlanmıyorsa <strong>else</strong> ifadesi içerisindeki eylem gerçekleştirilir.</p>
-<pre class="code shell literal-block"><code><span class="keyword">if</span> ifade <span class="punctuation">;</span> <span class="keyword">then</span>
+<pre class="code shell literal-block">
+<span class="keyword">if</span> ifade <span class="punctuation">;</span> <span class="keyword">then</span>
     eylem
 <span class="keyword">elif</span> ifade <span class="punctuation">;</span> <span class="keyword">then</span>
     eylem
 <span class="keyword">else</span>
     eylem
-<span class="keyword">fi</span></code></pre>
+<span class="keyword">fi</span>
+</pre>
 <p>Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru döndürmüyorsa yalnış olarak değerlendirilir. <strong>[[</strong> veya <strong>[</strong> ile büyük-küçük-eşit kıyaslaması, dosya veya dizin varlığı vb. gibi sorgulamalar yapılabilir. Bu yazıda <strong>[[</strong> kullanılacaktır.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">read</span> veri
+<pre class="code shell literal-block">
+<span class="name builtin">read</span> veri
 <span class="keyword">if</span> <span class="operator">[[</span> <span class="literal string interpol">${</span><span class="name variable">veri</span><span class="literal string interpol">}</span> -lt <span class="literal number">10</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">then</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;Veri 10'dan küçük&quot;</span>
 <span class="keyword">else</span>
@@ -298,115 +338,119 @@ python3 -c <span class="literal string double">&quot;print(10/2)&quot;</span>
 &lt;- <span class="literal number">9</span>
 -&gt; Veri <span class="literal number">10</span><span class="literal string single">'dan küçük
 &lt;- 15
--&gt; Veri 10'</span>dan büyük veya 10a eşit</code></pre>
+-&gt; Veri 10'</span>dan büyük veya 10a eşit
+</pre>
 <p><strong>[[</strong> yerleşiği ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim. <strong>[</strong> bir komutken <strong>[[</strong> bir yerleşiktir. <strong>[</strong> ayrı bir süreç olarak çalıştırılır. Bu yüzden <strong>[[</strong> kullanmanızı tavsiye ederim.</p>
-<table class="colwidths-given">
+<table border="1" class="colwidths-given docutils">
 <caption><strong>[[ ifadeleri ve kullanımları</strong></caption>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 50%" />
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
 </colgroup>
-<thead>
-<tr><th class="head"><p>İfade</p></th>
-<th class="head"><p>Anlamı</p></th>
-<th class="head"><p>Kullanım şekli</p></th>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Anlamı</th>
+<th class="head">Kullanım şekli</th>
 </tr>
 </thead>
-<tbody>
-<tr><td><p>-lt</p></td>
-<td><p>küçüktür</p></td>
-<td><p>[[ ${a} -lt 5 ]]</p></td>
+<tbody valign="top">
+<tr><td>-lt</td>
+<td>küçüktür</td>
+<td>[[ ${a} -lt 5 ]]</td>
 </tr>
-<tr><td><p>-gt</p></td>
-<td><p>büyüktür</p></td>
-<td><p>[[ ${a} -gt 5 ]]</p></td>
+<tr><td>-gt</td>
+<td>büyüktür</td>
+<td>[[ ${a} -gt 5 ]]</td>
 </tr>
-<tr><td><p>-eq</p></td>
-<td><p>eşittir</p></td>
-<td><p>[[ ${a} -eq 5 ]]</p></td>
+<tr><td>-eq</td>
+<td>eşittir</td>
+<td>[[ ${a} -eq 5 ]]</td>
 </tr>
-<tr><td><p>-le</p></td>
-<td><p>küçük eşittir</p></td>
-<td><p>[[ ${a} -le 5 ]]</p></td>
+<tr><td>-le</td>
+<td>küçük eşittir</td>
+<td>[[ ${a} -le 5 ]]</td>
 </tr>
-<tr><td><p>-ge</p></td>
-<td><p>büyük eşittir</p></td>
-<td><p>[[ ${a} -ge 5 ]]</p></td>
+<tr><td>-ge</td>
+<td>büyük eşittir</td>
+<td>[[ ${a} -ge 5 ]]</td>
 </tr>
-<tr><td><p>-f</p></td>
-<td><p>dosyadır</p></td>
-<td><p>[[ -f /etc/os-release ]]</p></td>
+<tr><td>-f</td>
+<td>dosyadır</td>
+<td>[[ -f /etc/os-release ]]</td>
 </tr>
-<tr><td><p>-d</p></td>
-<td><p>dizindir</p></td>
-<td><p>[[ -d /etc ]]</p></td>
+<tr><td>-d</td>
+<td>dizindir</td>
+<td>[[ -d /etc ]]</td>
 </tr>
-<tr><td><p>-e</p></td>
-<td><p>vardır (dosya veya dizindir)</p></td>
-<td><p>[[ -e /bin/bash ]]</p></td>
+<tr><td>-e</td>
+<td>vardır (dosya veya dizindir)</td>
+<td>[[ -e /bin/bash ]]</td>
 </tr>
-<tr><td><p>-L</p></td>
-<td><p>sembolik bağdır</p></td>
-<td><p>[[ -L /lib ]]</p></td>
+<tr><td>-L</td>
+<td>sembolik bağdır</td>
+<td>[[ -L /lib ]]</td>
 </tr>
-<tr><td><p>-n</p></td>
-<td><p>uzunluğu 0 değildir</p></td>
-<td><p>[[ -n ${a} ]]</p></td>
+<tr><td>-n</td>
+<td>uzunluğu 0 değildir</td>
+<td>[[ -n ${a} ]]</td>
 </tr>
-<tr><td><p>-z</p></td>
-<td><p>uzunluğu 0dır</p></td>
-<td><p>[[ -z ${a} ]]</p></td>
+<tr><td>-z</td>
+<td>uzunluğu 0dır</td>
+<td>[[ -z ${a} ]]</td>
 </tr>
-<tr><td><p>!</p></td>
-<td><p>ifadenin tersini alır.</p></td>
-<td><p>[[ ! .... veya ! [[ ....</p></td>
+<tr><td>!</td>
+<td>ifadenin tersini alır.</td>
+<td>[[ ! .... veya ! [[ ....</td>
 </tr>
-<tr><td><p>&gt;</p></td>
-<td><p>alfabeti olarak büyüktür</p></td>
-<td><p>[[ &quot;portakal&quot; &gt; &quot;elma&quot; ]]</p></td>
+<tr><td>&gt;</td>
+<td>alfabeti olarak büyüktür</td>
+<td>[[ &quot;portakal&quot; &gt; &quot;elma&quot; ]]</td>
 </tr>
-<tr><td><p>&lt;</p></td>
-<td><p>alfabetik olarak küçüktür</p></td>
-<td><p>[[ &quot;elma&quot; &lt; &quot;limon&quot; ]]</p></td>
+<tr><td>&lt;</td>
+<td>alfabetik olarak küçüktür</td>
+<td>[[ &quot;elma&quot; &lt; &quot;limon&quot; ]]</td>
 </tr>
-<tr><td><p>==</p></td>
-<td><p>alfabetik eşittir</p></td>
-<td><p>[[ &quot;nane&quot; == &quot;nane&quot; ]]</p></td>
+<tr><td>==</td>
+<td>alfabetik eşittir</td>
+<td>[[ &quot;nane&quot; == &quot;nane&quot; ]]</td>
 </tr>
-<tr><td><p>!=</p></td>
-<td><p>alfabetik eşit değildir</p></td>
-<td><p>[[ &quot;name&quot; != &quot;limon&quot; ]]</p></td>
+<tr><td>!=</td>
+<td>alfabetik eşit değildir</td>
+<td>[[ &quot;name&quot; != &quot;limon&quot; ]]</td>
 </tr>
-<tr><td><p>=~</p></td>
-<td><p>regex kuralına göre eşittir</p></td>
-<td><p>[[ &quot;elma1&quot; =~ ^[a-z]l.*[1]$ ]]</p></td>
+<tr><td>=~</td>
+<td>regex kuralına göre eşittir</td>
+<td>[[ &quot;elma1&quot; =~ ^[a-z]l.*[1]$ ]]</td>
 </tr>
-<tr><td><p>||</p></td>
-<td><p>mantıksal veya bağlacı</p></td>
-<td><p>[[ .... || .... ]] veya [[ .... ]] || [[ .... ]]</p></td>
+<tr><td>||</td>
+<td>mantıksal veya bağlacı</td>
+<td>[[ .... || .... ]] veya [[ .... ]] || [[ .... ]]</td>
 </tr>
-<tr><td><p>&amp;&amp;</p></td>
-<td><p>mantıksal ve bağlacı</p></td>
-<td><p>[[ .... &amp;&amp; .... ]] veya [[ .... ]] &amp;&amp; [[ .... ]]</p></td>
+<tr><td>&amp;&amp;</td>
+<td>mantıksal ve bağlacı</td>
+<td>[[ .... &amp;&amp; .... ]] veya [[ .... ]] &amp;&amp; [[ .... ]]</td>
 </tr>
 </tbody>
 </table>
 <p><strong>true</strong> komutu her zaman doğru <strong>false</strong> komutu ile her zaman yanlış çıkış verir.</p>
 <p>Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım yapılabilir.</p>
-<pre class="code shell literal-block"><code><span class="operator">[[</span> <span class="literal number">12</span> -eq <span class="literal string interpol">${</span><span class="name variable">a</span><span class="literal string interpol">}</span> <span class="operator">]]</span> <span class="operator">&amp;&amp;</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;12ye eşit.&quot;</span> <span class="operator">||</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;12ye eşit değil&quot;</span>
+<pre class="code shell literal-block">
+<span class="operator">[[</span> <span class="literal number">12</span> -eq <span class="literal string interpol">${</span><span class="name variable">a</span><span class="literal string interpol">}</span> <span class="operator">]]</span> <span class="operator">&amp;&amp;</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;12ye eşit.&quot;</span> <span class="operator">||</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;12ye eşit değil&quot;</span>
 <span class="comment single">#bunun ile aynı anlama gelir:
 </span><span class="keyword">if</span> <span class="operator">[[</span> <span class="literal number">12</span> -eq <span class="literal string interpol">${</span><span class="name variable">a</span><span class="literal string interpol">}</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">then</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;12ye eşit&quot;</span>
 <span class="keyword">else</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;12ye eşit değil&quot;</span>
-<span class="keyword">fi</span></code></pre>
-</section>
-<section id="case-yapisi">
-<h2>case yapısı</h2>
+<span class="keyword">fi</span>
+</pre>
+</div>
+<div class="section" id="case-yapisi">
+<h1>case yapısı</h1>
 <p><strong>case</strong> yapısı case ile başlar değerden sonra gelen <strong>in</strong> ile devam eder ve koşullardan sonra gelen <strong>esac</strong> ile tamamlanır.
 case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısaltabiliriz.</p>
-<pre class="code shell literal-block"><code><span class="keyword">case</span> deger <span class="keyword">in</span>
+<pre class="code shell literal-block">
+<span class="keyword">case</span> deger <span class="keyword">in</span>
     elma <span class="punctuation">|</span> kiraz<span class="operator">)</span>
         <span class="name builtin">echo</span> <span class="literal string double">&quot;meyve&quot;</span>
         <span class="punctuation">;;</span>
@@ -428,72 +472,84 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
     <span class="name builtin">echo</span> <span class="literal string double">&quot;hayvan&quot;</span>
 <span class="keyword">else</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;hiçbiri&quot;</span>
-<span class="keyword">fi</span></code></pre>
-</section>
-<section id="donguler">
-<h2>Döngüler</h2>
+<span class="keyword">fi</span>
+</pre>
+</div>
+<div class="section" id="donguler">
+<h1>Döngüler</h1>
 <p>Döngülerde <strong>while</strong> ifadesi sonrası koşul gelir. <strong>do</strong> ile devam eder ve eylemden sonra <strong>done</strong> ifadesi ile biter. Döngülerde ifade doğru olduğu sürece eylem sürekli olarak tekrar eder.</p>
-<pre class="code shell literal-block"><code><span class="keyword">while</span> ifade <span class="punctuation">;</span> <span class="keyword">do</span>
+<pre class="code shell literal-block">
+<span class="keyword">while</span> ifade <span class="punctuation">;</span> <span class="keyword">do</span>
     eylem
-<span class="keyword">done</span></code></pre>
+<span class="keyword">done</span>
+</pre>
 <p>Örneğin 1den 10a kadar sayıları ekrana yan yana yazdıralım. Eğer echo komutumuzda <strong>-n</strong> parametresi verilirse alt satıra geçmeden yazmaya devam eder.</p>
-<pre class="code shell literal-block"><code><span class="name variable">i</span><span class="operator">=</span><span class="literal number">1</span>
+<pre class="code shell literal-block">
+<span class="name variable">i</span><span class="operator">=</span><span class="literal number">1</span>
 <span class="keyword">while</span> <span class="operator">[[</span> <span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span> -le <span class="literal number">10</span> <span class="operator">]]</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="name variable">$i</span><span class="literal string double"> &quot;</span> <span class="comment single"># sayıyı yazıya çevirip sonuna yanına boşluk koyduk
 </span>    <span class="name variable">i</span><span class="operator">=</span><span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span><span class="operator">+</span><span class="literal number">1</span><span class="keyword">))</span> <span class="comment single"># sayıya 1 ekledik
 </span><span class="keyword">done</span>
 <span class="name builtin">echo</span> <span class="comment single"># en son alt satıra geçmesi için
-</span>-&gt; <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span></code></pre>
+</span>-&gt; <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span>
+</pre>
 <p><strong>for</strong> ifadesinde değişken adından sonra <strong>in</strong> kullanılır daha sonra dizi yer alır. diziden sonra <strong>do</strong> ve bitişte de <strong>done</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="keyword">for</span> degisken <span class="keyword">in</span> dizi <span class="punctuation">;</span> <span class="keyword">do</span>
+<pre class="code shell literal-block">
+<span class="keyword">for</span> degisken <span class="keyword">in</span> dizi <span class="punctuation">;</span> <span class="keyword">do</span>
     eylem
-<span class="keyword">done</span></code></pre>
+<span class="keyword">done</span>
+</pre>
 <p>Ayrı örneğin for ile yapılmış hali</p>
-<pre class="code shell literal-block"><code><span class="keyword">for</span> i <span class="keyword">in</span> <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<pre class="code shell literal-block">
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span><span class="literal string double"> &quot;</span>
 <span class="keyword">done</span>
 <span class="name builtin">echo</span>
--&gt; <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span></code></pre>
+-&gt; <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span>
+</pre>
 <p>Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.</p>
-<pre class="code shell literal-block"><code><span class="keyword">for</span> i <span class="keyword">in</span> <span class="operator">{</span><span class="literal number">1</span>..10<span class="operator">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<pre class="code shell literal-block">
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="operator">{</span><span class="literal number">1</span>..10<span class="operator">}</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> -n <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span><span class="literal string double"> &quot;</span>
 <span class="keyword">done</span>
 <span class="name builtin">echo</span>
--&gt; <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span></code></pre>
+-&gt; <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="literal number">4</span> <span class="literal number">5</span> <span class="literal number">6</span> <span class="literal number">7</span> <span class="literal number">8</span> <span class="literal number">9</span> <span class="literal number">10</span>
+</pre>
 <p>Buradaki özel kullanımları aşağıda tablo halinde belirttim.</p>
-<table class="colwidths-given">
+<table border="1" class="colwidths-given docutils">
 <caption><strong>küme parantezli ifadeler ve anlamları</strong></caption>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 50%" />
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
 </colgroup>
-<thead>
-<tr><th class="head"><p>İfade</p></th>
-<th class="head"><p>Anlamı</p></th>
-<th class="head"><p>eşleniği</p></th>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Anlamı</th>
+<th class="head">eşleniği</th>
 </tr>
 </thead>
-<tbody>
-<tr><td><p>{1..5}</p></td>
-<td><p>aralık belirtir</p></td>
-<td><p>1 2 3 4 5</p></td>
+<tbody valign="top">
+<tr><td>{1..5}</td>
+<td>aralık belirtir</td>
+<td>1 2 3 4 5</td>
 </tr>
-<tr><td><p>{1..7..2}</p></td>
-<td><p>adımlı aralık belirtir</p></td>
-<td><p>1 3 5 7</p></td>
+<tr><td>{1..7..2}</td>
+<td>adımlı aralık belirtir</td>
+<td>1 3 5 7</td>
 </tr>
-<tr><td><p>{a,ve}li</p></td>
-<td><p>kurala uygun küme belirtir</p></td>
-<td><p>ali veli</p></td>
+<tr><td>{a,ve}li</td>
+<td>kurala uygun küme belirtir</td>
+<td>ali veli</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="fonksiyonlar">
-<h2>Fonksiyonlar</h2>
+</div>
+<div class="section" id="fonksiyonlar">
+<h1>Fonksiyonlar</h1>
 <p>Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksiyonu aşağıdaki gibi tanımlayabiliriz.</p>
-<pre class="code shell literal-block"><code>isim<span class="operator">(){</span>
+<pre class="code shell literal-block">
+isim<span class="operator">(){</span>
     eylem
     <span class="keyword">return</span> sonuç
 <span class="operator">}</span>
@@ -501,21 +557,25 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
 </span><span class="keyword">function</span> isim<span class="operator">(){</span>
     eylem
     <span class="keyword">return</span> sonuç
-<span class="operator">}</span></code></pre>
+<span class="operator">}</span>
+</pre>
 <p>Burada <strong>return</strong> ifadesi kullanılmadığı durumlarda 0 döndürülür. return ifadesinden sonra fonksiyon tamamlanır ve ana programdan devam edilir.</p>
 <p>Bu yazı boyunca ilkini tercih edeceğiz.</p>
 <p>Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sabit ve değişkenleri kullanabilirler.</p>
-<pre class="code shell literal-block"><code><span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">12</span>
+<pre class="code shell literal-block">
+<span class="name variable">sayi</span><span class="operator">=</span><span class="literal number">12</span>
 topla<span class="operator">(){</span>
     <span class="name builtin">echo</span> <span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span><span class="operator">+</span><span class="name variable">$1</span><span class="keyword">))</span>
     <span class="keyword">return</span> <span class="literal number">0</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;Bu satır çalışmaz&quot;</span>
 <span class="operator">}</span>
 topla <span class="literal number">1</span>
--&gt; <span class="literal number">13</span></code></pre>
+-&gt; <span class="literal number">13</span>
+</pre>
 <p><strong>local</strong> ifadesi sadece fonksionun içinde tanımlanan fonksion bitiminde silinen değişkenler için kullanılır.</p>
 <p>Fonksionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">read</span> sayi
+<pre class="code shell literal-block">
+<span class="name builtin">read</span> sayi
 teksayi<span class="operator">(){</span>
     <span class="name builtin">local</span> <span class="name variable">i</span><span class="operator">=</span><span class="keyword">$((</span><span class="name variable">$1</span><span class="operator">+</span><span class="literal number">1</span><span class="keyword">))</span> <span class="comment single"># sayıya 1 ekledik ve yerel hale getirdik.
 </span>    <span class="keyword">return</span> <span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">i</span><span class="literal string interpol">}</span><span class="operator">%</span><span class="literal number">2</span><span class="keyword">))</span>  <span class="comment single"># sayının 2 ile bölümünden kalanı döndürdük
@@ -529,23 +589,29 @@ teksayi<span class="operator">(){</span>
 &lt;- <span class="literal number">12</span>
 -&gt; çift sayıdır
 &lt;- <span class="literal number">5</span>
--&gt; tek sayıdır</code></pre>
+-&gt; tek sayıdır
+</pre>
 <p>Bir fonksionun çıktısını değişkene <strong>$(isim)</strong> ifadesi yadımı ile atayabiliriz. Aynı durum komutlar için de geçerlidir.</p>
-<pre class="code shell literal-block"><code>yaz<span class="operator">(){</span>
+<pre class="code shell literal-block">
+yaz<span class="operator">(){</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;Merhaba&quot;</span>
 <span class="operator">}</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="keyword">$(</span>yaz<span class="keyword">)</span><span class="literal string double"> dünya&quot;</span>
--&gt; Merhaba dünya</code></pre>
+-&gt; Merhaba dünya
+</pre>
 <p>Tanımlı bir fonksionu silmek için <strong>unset -f</strong> ifadesini kullanmamız gereklidir.</p>
-<pre class="code shell literal-block"><code>yaz<span class="operator">(){</span>
+<pre class="code shell literal-block">
+yaz<span class="operator">(){</span>
     <span class="name builtin">echo</span> <span class="literal string double">&quot;Merhaba&quot;</span>
 <span class="operator">}</span>
 <span class="name builtin">unset</span> -f yaz
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="keyword">$(</span>yaz<span class="keyword">)</span><span class="literal string double"> dünya&quot;</span>
 -&gt; bash: yaz: komut yok
--&gt; dünya</code></pre>
+-&gt; dünya
+</pre>
 <p>Burada dikkat ederseniz olmayan fonksionu çalıştırmaya çalıştığımız için hata mesajı verdi fakat çalışmaya devam etti. Eğer herhangi bir hata durumunda betiğin durmasını istiyorsak <strong>set -e</strong> bu durumun tam tersi için <strong>set +e</strong> ifadesini kullanmalıyız.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">echo</span> <span class="literal string double">&quot;satır 1&quot;</span>
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> <span class="literal string double">&quot;satır 1&quot;</span>
 acho <span class="literal string double">&quot;satır 2&quot;</span> <span class="comment single"># yanlış yazılan satır fakat devam edecek
 </span><span class="name builtin">echo</span> <span class="literal string double">&quot;satır 3&quot;</span>
 <span class="name builtin">set</span> -e
@@ -554,92 +620,100 @@ acho <span class="literal string double">&quot;satır 4&quot;</span> <span class
 </span>-&gt; satır <span class="literal number">1</span>
 -&gt; bash: acho: komut yok
 -&gt; satır <span class="literal number">3</span>
--&gt; bash: acho: komut yok</code></pre>
-</section>
-<section id="dosya-islemleri">
-<h2>Dosya işlemleri</h2>
+-&gt; bash: acho: komut yok
+</pre>
+</div>
+<div class="section" id="dosya-islemleri">
+<h1>Dosya işlemleri</h1>
 <p>Bash betiklerinde <strong>stdout</strong> <strong>stderr</strong> ve <strong>stdin</strong> olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stderr ve stdout beraber yazılır.</p>
-<table class="colwidths-given">
+<table border="1" class="colwidths-given docutils">
 <caption><strong>dosya ifadeleri ve anlamları</strong></caption>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 50%" />
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
 </colgroup>
-<thead>
-<tr><th class="head"><p>İfade</p></th>
-<th class="head"><p>Türü</p></th>
-<th class="head"><p>Anlamı</p></th>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Türü</th>
+<th class="head">Anlamı</th>
 </tr>
 </thead>
-<tbody>
-<tr><td><p>stdin</p></td>
-<td><p>Girdi</p></td>
-<td><p>Klavyeden girilen değerler.</p></td>
+<tbody valign="top">
+<tr><td>stdin</td>
+<td>Girdi</td>
+<td>Klavyeden girilen değerler.</td>
 </tr>
-<tr><td><p>stdout</p></td>
-<td><p>Çıktı</p></td>
-<td><p>Sıradan çıktılardır.</p></td>
+<tr><td>stdout</td>
+<td>Çıktı</td>
+<td>Sıradan çıktılardır.</td>
 </tr>
-<tr><td><p>stderr</p></td>
-<td><p>Çıktı</p></td>
-<td><p>Hata çıktılarıdır.</p></td>
+<tr><td>stderr</td>
+<td>Çıktı</td>
+<td>Hata çıktılarıdır.</td>
 </tr>
 </tbody>
 </table>
 <p><strong>cat</strong> komutu ile dosya içeriğini ekrana yazdırabiliriz. Dosya içeriğini <strong>$(cat dosya.txt)</strong> kullanarak değişkene atabiliriz.</p>
 <p>dosya.txt içeriğinin aşağıdaki gibi olduğunu varsayalım.</p>
-<pre class="code shell literal-block"><code>Merhaba dünya
+<pre class="code shell literal-block">
+Merhaba dünya
 Selam dünya
-sayı:123</code></pre>
+sayı:123
+</pre>
 <p>Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişkeni ekrana yazdırdık.</p>
-<pre class="code shell literal-block"><code><span class="name variable">icerik</span><span class="operator">=</span><span class="keyword">$(</span>cat ./dosya.txt<span class="keyword">)</span>
+<pre class="code shell literal-block">
+<span class="name variable">icerik</span><span class="operator">=</span><span class="keyword">$(</span>cat ./dosya.txt<span class="keyword">)</span>
 <span class="name builtin">echo</span> <span class="literal string double">&quot;</span><span class="literal string interpol">${</span><span class="name variable">icerik</span><span class="literal string interpol">}</span><span class="literal string double">&quot;</span>
 -&gt; Merhaba dünya
 -&gt; Selam dünya
--&gt; sayı:123</code></pre>
+-&gt; sayı:123
+</pre>
 <p><strong>grep &quot;sözcük&quot; dosya.txt</strong> ile dosya içerisinde sözcük gezen satırları filitreleyebiliriz. Eğer grep komutuna <strong>-v</strong> paraketresi eklersek sadece içermeyenleri filitreler.
 Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.</p>
-<pre class="code shell literal-block"><code>grep <span class="literal string double">&quot;dünya&quot;</span> dosya.txt
+<pre class="code shell literal-block">
+grep <span class="literal string double">&quot;dünya&quot;</span> dosya.txt
 -&gt; Merhaba dünya
 -&gt; Selam dünya
 grep -v <span class="literal string double">&quot;dünya&quot;</span> dosya.txt
--&gt; sayi:123</code></pre>
+-&gt; sayi:123
+</pre>
 <p>Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.</p>
-<table class="colwidths-given">
+<table border="1" class="colwidths-given docutils">
 <caption><strong>dosya ifadeleri ve anlamları</strong></caption>
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 25%" />
-<col style="width: 65%" />
+<col width="10%" />
+<col width="25%" />
+<col width="65%" />
 </colgroup>
-<thead>
-<tr><th class="head"><p>İfade</p></th>
-<th class="head"><p>Anlamı</p></th>
-<th class="head"><p>Kullanım şekli</p></th>
+<thead valign="bottom">
+<tr><th class="head">İfade</th>
+<th class="head">Anlamı</th>
+<th class="head">Kullanım şekli</th>
 </tr>
 </thead>
-<tbody>
-<tr><td><p>&gt;</p></td>
-<td><p>çıktıyı dosyaya yönlendir (stdout)</p></td>
-<td><p>echo &quot;Merhaba dünya&quot; &gt; dosya.txt</p></td>
+<tbody valign="top">
+<tr><td>&gt;</td>
+<td>çıktıyı dosyaya yönlendir (stdout)</td>
+<td>echo &quot;Merhaba dünya&quot; &gt; dosya.txt</td>
 </tr>
-<tr><td><p>2&gt;</p></td>
-<td><p>çıktıyı dosyaya yönlendir (stderr)</p></td>
-<td><p>ls /olmayan/dizin 2&gt; dosya.txt</p></td>
+<tr><td>2&gt;</td>
+<td>çıktıyı dosyaya yönlendir (stderr)</td>
+<td>ls /olmayan/dizin 2&gt; dosya.txt</td>
 </tr>
-<tr><td><p>&gt;&gt;</p></td>
-<td><p>çıktıyı dosyaya ekle</p></td>
-<td><p>echo -n &quot;Merhaba&quot; &gt; dosya.txt &amp;&amp; echo &quot;dünya&quot; &gt;&gt; dosya.txt</p></td>
+<tr><td>&gt;&gt;</td>
+<td>çıktıyı dosyaya ekle</td>
+<td>echo -n &quot;Merhaba&quot; &gt; dosya.txt &amp;&amp; echo &quot;dünya&quot; &gt;&gt; dosya.txt</td>
 </tr>
-<tr><td><p>&amp;&gt;</p></td>
-<td><p>çıktıyı yönlendir (stdout ve stderr)</p></td>
-<td><p>echo &quot;$(cat /olmayan/dosya) deneme&quot; &amp;&gt; dosya.txt</p></td>
+<tr><td>&amp;&gt;</td>
+<td>çıktıyı yönlendir (stdout ve stderr)</td>
+<td>echo &quot;$(cat /olmayan/dosya) deneme&quot; &amp;&gt; dosya.txt</td>
 </tr>
 </tbody>
 </table>
 <p>Ayrıca dosyadan veri girişleri için de aşağıda örnekler verilmiştir:</p>
-<pre class="code shell literal-block"><code><span class="comment single"># &lt;&lt;EOF:
+<pre class="code shell literal-block">
+<span class="comment single"># &lt;&lt;EOF:
 # EOF ifadesi gelene kadar olan kısmı girdi olarak kullanır:
 </span>cat &gt; dosya.txt <span class="literal string">&lt;&lt;EOF
 Merhaba
@@ -649,13 +723,15 @@ EOF</span>
 # Bir dosyayı girdi olarak kullanır:
 </span><span class="keyword">while</span> <span class="name builtin">read</span> line <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">line</span><span class="punctuation">:</span><span class="name variable">2</span><span class="punctuation">:</span><span class="name variable">5</span><span class="literal string interpol">}</span>
-<span class="keyword">done</span> &lt; dosya.txt</code></pre>
+<span class="keyword">done</span> &lt; dosya.txt
+</pre>
 <p><strong>/dev/null</strong> içine atılan çıktılar yok edilir. <strong>/dev/stderr</strong> içine atılan çıktılar ise hata çıktısı olur.</p>
-</section>
-<section id="boru-hatti">
-<h2>Boru hattı</h2>
+</div>
+<div class="section" id="boru-hatti">
+<h1>Boru hattı</h1>
 <p>Bash betiklerinde <strong>stdin</strong> yerine bir önceki komutun çıktısını kullanmak için boru hattı açabiliriz. Boru hattı açmak için iki komutun arasına <strong>|</strong> işareti koyulur. Boru hattında soldan sağa doğru çıktı akışı vardır. Boru hattından sadece <strong>stdout</strong> çıktısı geçmektedir. Eğer <strong>stderr</strong> çıktısını da boru hattından geçirmek istiyorsanız <strong>|&amp;</strong> kullanmalısınız.</p>
-<pre class="code shell literal-block"><code>topla<span class="operator">(){</span>
+<pre class="code shell literal-block">
+topla<span class="operator">(){</span>
     <span class="name builtin">read</span> sayi1
     <span class="name builtin">read</span> sayi2
     <span class="name builtin">echo</span> <span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi1</span><span class="literal string interpol">}</span><span class="operator">+</span><span class="literal string interpol">${</span><span class="name variable">sayi2</span><span class="literal string interpol">}</span><span class="keyword">))</span>
@@ -669,12 +745,14 @@ sayiyaz<span class="operator">(){</span>
     <span class="name builtin">echo</span> <span class="literal number">25</span>
 <span class="operator">}</span>
  sayiyaz <span class="punctuation">|</span> topla
--&gt; <span class="literal number">37</span></code></pre>
-</section>
-<section id="kod-blogu">
-<h2>Kod bloğu</h2>
+-&gt; <span class="literal number">37</span>
+</pre>
+</div>
+<div class="section" id="kod-blogu">
+<h1>Kod bloğu</h1>
 <p><strong>{</strong> ile <strong>}</strong> arasına yazılan kodlar birer kod bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.</p>
-<pre class="code shell literal-block"><code>cikart<span class="operator">(){</span>
+<pre class="code shell literal-block">
+cikart<span class="operator">(){</span>
     <span class="name builtin">read</span> sayi1
     <span class="name builtin">read</span> sayi2
     <span class="name builtin">echo</span> <span class="keyword">$((</span><span class="literal string interpol">${</span><span class="name variable">sayi1</span><span class="literal string interpol">}</span><span class="operator">-</span><span class="literal string interpol">${</span><span class="name variable">sayi2</span><span class="literal string interpol">}</span><span class="keyword">))</span>
@@ -690,12 +768,14 @@ cikart
 -&gt; <span class="literal number">13</span>
 <span class="comment single"># veya kısaca şu şekilde de yapılabilir.
 </span><span class="operator">{</span> <span class="name builtin">echo</span> <span class="literal number">25</span> <span class="punctuation">;</span> <span class="name builtin">echo</span> <span class="literal number">12</span> <span class="punctuation">;</span> <span class="operator">}</span> <span class="punctuation">|</span> cikart
--&gt; <span class="literal number">13</span></code></pre>
-</section>
-<section id="select-komutu">
-<h2>select komutu</h2>
+-&gt; <span class="literal number">13</span>
+</pre>
+</div>
+<div class="section" id="select-komutu">
+<h1>select komutu</h1>
 <p><strong>select</strong> kullanarak basit menü oluşturabiliriz.</p>
-<pre class="code shell literal-block"><code><span class="keyword">select</span> deger <span class="keyword">in</span> ali veli <span class="literal number">49</span> <span class="literal number">59</span> <span class="punctuation">;</span> <span class="keyword">do</span>
+<pre class="code shell literal-block">
+<span class="keyword">select</span> deger <span class="keyword">in</span> ali veli <span class="literal number">49</span> <span class="literal number">59</span> <span class="punctuation">;</span> <span class="keyword">do</span>
     <span class="name builtin">echo</span> <span class="name variable">$REPLY</span> <span class="comment single"># seçilen sayıyı verir
 </span>    <span class="name builtin">echo</span> <span class="name variable">$deger</span> <span class="comment single"># seçilen elemanı verir
 </span>    <span class="name builtin">break</span>
@@ -708,51 +788,83 @@ cikart
 -&gt; <span class="comment single">#?
 </span>&lt;- <span class="literal number">1</span>
 -&gt; <span class="literal number">1</span>
--&gt; ali</code></pre>
+-&gt; ali
+</pre>
 <p>Bu örnekde <strong>REPLY</strong> değişkeni seçtiğimiz sayıyı <strong>deger</strong> değişkeni ise seçtiğimiz elemanı ifade eder. <strong>select</strong> komutu sürekli olarak döngü halinde çalışır. Döngüden çıkmak için <strong>break</strong> kullandık.</p>
-</section>
-<section id="birden-cok-dosya-ile-calismak">
-<h2>Birden çok dosya ile çalışmak</h2>
+</div>
+<div class="section" id="birden-cok-dosya-ile-calismak">
+<h1>Birden çok dosya ile çalışmak</h1>
 <p>Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için <strong>source</strong> yada <strong>.</strong> ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.</p>
 <p>Örneğin deneme.sh dosyamızın içeriği aşağıdaki gibi olsun:</p>
-<pre class="code shell literal-block"><code><span class="name variable">mesaj</span><span class="operator">=</span><span class="literal string double">&quot;Selam&quot;</span>
+<pre class="code shell literal-block">
+<span class="name variable">mesaj</span><span class="operator">=</span><span class="literal string double">&quot;Selam&quot;</span>
 merhaba<span class="operator">(){</span>
     <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">mesaj</span><span class="literal string interpol">}</span>
 <span class="operator">}</span>
-<span class="name builtin">echo</span> <span class="literal string double">&quot;deneme yüklendi&quot;</span></code></pre>
+<span class="name builtin">echo</span> <span class="literal string double">&quot;deneme yüklendi&quot;</span>
+</pre>
 <p>Asıl betiğimizin içeriği de aşağıdaki gibi olsun.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">source</span> deneme.sh <span class="comment single"># deneme.sh dosyası çalıştırılır.
+<pre class="code shell literal-block">
+<span class="name builtin">source</span> deneme.sh <span class="comment single"># deneme.sh dosyası çalıştırılır.
 </span>merhaba
 -&gt; deneme yüklendi
--&gt; Selam</code></pre>
+-&gt; Selam
+</pre>
 <p>Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için <strong>&lt;(komut)</strong> ifadesi kullanılır. Aşağıda bununla ilgili bir örnek verilmiştir.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">source</span> &lt;<span class="operator">(</span>curl https://gitlab.com/sulincix/outher/-/raw/gh-pages/deneme.sh<span class="operator">)</span> <span class="comment single"># Örnekteki adrese takılmayın :D
+<pre class="code shell literal-block">
+<span class="name builtin">source</span> &lt;<span class="operator">(</span>curl https://gitlab.com/sulincix/outher/-/raw/gh-pages/deneme.sh<span class="operator">)</span> <span class="comment single"># Örnekteki adrese takılmayın :D
 </span>merhaba
 merhaba2
 <span class="name builtin">echo</span> <span class="literal string interpol">${</span><span class="name variable">sayi</span><span class="literal string interpol">}</span>
 -&gt; Merhaba dünya
 -&gt; <span class="literal number">50</span>
--&gt; <span class="literal number">100</span></code></pre>
-</section>
-<section id="exec-komutu">
-<h2>exec komutu</h2>
+-&gt; <span class="literal number">100</span>
+</pre>
+</div>
+<div class="section" id="exec-komutu">
+<h1>exec komutu</h1>
 <p><strong>exec</strong> komutu betiğin bundan sonraki bölümünü çalıştırmak yerine hedefteki komut ile değiştirilmesini sağlar. <strong>exec</strong> ile çalıştırılmış olan komut tamamlandığında betik tamamlanmış olur.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">echo</span> <span class="name variable">$$</span> <span class="comment single"># pid değeri yazdırır
+<pre class="code shell literal-block">
+<span class="name builtin">echo</span> <span class="name variable">$$</span> <span class="comment single"># pid değeri yazdırır
 </span>bash -c <span class="literal string single">'echo $$'</span> <span class="comment single"># yeni süreç oluşturduğu için pid değeri farklıdır.
 </span><span class="name builtin">exec</span> bash -c <span class="literal string single">'echo $$'</span> <span class="comment single"># mevcut komut ile değiştirildiği için pid değeri değişmez
 </span><span class="name builtin">echo</span> <span class="literal string double">&quot;hmm&quot;</span> <span class="comment single"># Bu kısım çalıştırılamaz.
 </span>-&gt; <span class="literal number">5755</span>
 -&gt; <span class="literal number">5756</span>
--&gt; <span class="literal number">5755</span></code></pre>
+-&gt; <span class="literal number">5755</span>
+</pre>
 <p><strong>exec</strong> komutunu doğrudan terminalde çalıştırırsanız ve komut tamamlanırsa terminaldeki süreç kapanacağı için terminal doğal olarak kapanacaktır.</p>
-</section>
-<section id="hata-ayiklama">
-<h2>Hata ayıklama</h2>
+<p><strong>exec</strong> komutunu kullanarak yönlendirmeler yapabilirsiniz.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">exec</span> &gt; log.txt <span class="comment single"># bütün çıktıları log.txt içine yazdırır.
+</span><span class="name builtin">echo</span> <span class="literal string double">&quot;merhaba&quot;</span> <span class="comment single"># ekrana değil dosyaya yazılır.
+</span><span class="name builtin">exec</span> &lt; komutlar.txt <span class="comment single"># komutlar.txt dosyasındakiler girdi olarak kullanılır.</span>
+</pre>
+</div>
+<div class="section" id="fd-kavrami">
+<h1>fd kavramı</h1>
+<p><strong>bash</strong> programında birden çok <strong>fd</strong> kullanılabilir. var olan fdlere ulaşmak için <strong>/proc/$$/fd/</strong> konumuna bakabiliriz. 0 stdin 1 stdout 2 stderr olarak çalışır.</p>
+<p><strong>Not:</strong> <strong>$$</strong> mevcut sürecin pid değerini verir.</p>
+<pre class="code shell literal-block">
+<span class="name builtin">exec</span> <span class="literal number">3</span>&gt; log.txt <span class="comment single"># yazmak için boş bir 3 numaralı fd açmak için.
+</span><span class="name builtin">echo</span> <span class="literal string double">&quot;deneme&quot;</span> &gt;<span class="punctuation">&amp;</span><span class="literal number">3</span>
+<span class="name builtin">exec</span> <span class="literal number">3</span>&gt;<span class="punctuation">&amp;</span> - <span class="comment single"># açık olan 3 nuramalı fd kapatmak için.
+</span><span class="name builtin">exec</span> <span class="literal number">2</span>&gt;<span class="punctuation">&amp;</span><span class="literal number">1</span> <span class="comment single"># stderr içine atılanı stdout içine aktarır.
+</span><span class="name builtin">exec</span> <span class="literal number">4</span>&lt; input.txt <span class="comment single"># okumak için 4 numaralı fd açmak için.
+</span><span class="name builtin">echo</span> <span class="literal string double">&quot;hmm&quot;</span> &gt; input.txt <span class="comment single"># girdi dosyamıza yazı yazalım.
+</span><span class="name builtin">read</span> line &lt;<span class="punctuation">&amp;</span><span class="literal number">4</span> <span class="comment single"># 3 nuramalı fd içinden değir okur.
+</span><span class="name builtin">exec</span> <span class="literal number">4</span>&lt;<span class="punctuation">&amp;</span>- <span class="comment single"># 4 numaralı fd kapatmak için.</span>
+</pre>
+</div>
+<div class="section" id="hata-ayiklama">
+<h1>Hata ayıklama</h1>
 <p><strong>bash</strong> komutuna farklı parametreler vererek kolayca script'inizi derleyebilirsiniz. Örneğin <strong>-n</strong> parametresi kodu çalıştırmayıp sadece hata kontrolü yapacaktır, <strong>-v</strong> komutları çalıştırmadan yazdıracak, <strong>-x</strong> ise işlem bittikten sonra kodları yazdıracaktır.</p>
-<pre class="code shell literal-block"><code>bash -n script_adi.sh
+<pre class="code shell literal-block">
+bash -n script_adi.sh
 bash -v script_adi.sh
-bash -x script_adi.sh</code></pre>
-</section>
-</main>
+bash -x script_adi.sh
+</pre>
+</div>
+</div>
 </body>
 </html>

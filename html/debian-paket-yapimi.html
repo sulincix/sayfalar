@@ -1,28 +1,30 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <title>Debian paket yapımı</title>
 <link rel="stylesheet" href="main.css" />
-<link rel="stylesheet" href="main.css" />
 </head>
 <body>
-<main id="debian-paket-yapimi">
+<div class="document" id="debian-paket-yapimi">
 <h1 class="title">Debian paket yapımı</h1>
 
 <p>Bu anlatımda debian tabanı için deb paketi yapmayı anlatacağım. Tüm adımlar root ile gerçekleştirilmiştir. Debian tabanlı bir dağıtım yada debootstrap ile kurulmuş bir chroot kullanmanız gerekmektedir.</p>
 <p>Bu yazının ikinci kısmında da elimizdeki bir paketi açıp üzerinde değişiklik yapıp tekrar paketlemeyi anlatacağım.</p>
-<section id="hazirlik">
-<h2>Hazırlık</h2>
+<div class="section" id="hazirlik">
+<h1>Hazırlık</h1>
 <p>Aşağıdaki paketleri kurarak paket derleme aşaması için gereken araçları yüklemeniz gerekmektedir.</p>
-<pre class="code shell literal-block"><code>$ apt-get install build-essential</code></pre>
-</section>
-<section id="paket-talimati-hazirlanmasi">
-<h2>Paket talimatı hazırlanması</h2>
+<pre class="code shell literal-block">
+$ apt-get install build-essential
+</pre>
+</div>
+<div class="section" id="paket-talimati-hazirlanmasi">
+<h1>Paket talimatı hazırlanması</h1>
 <p>Debian tabanında paketlerin derleme talimatı <strong>debian</strong> dizininde bulunur. Bu dizinde <strong>source/format</strong>, <strong>copyright</strong>, <strong>control</strong>, <strong>rules</strong>, <strong>compat</strong> dosyaları bulunur. <strong>copyright</strong> dosyasında lisans metnimiz yer alır. <em>http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/</em> adresindeki formata uygun şekilde yazarız. Aşağıda örnek bir <strong>copyright</strong> dosyası yer almaktadır.</p>
-<pre class="code yaml literal-block"><code><span class="name tag">Format</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/</span><span class="whitespace">
+<pre class="code yaml literal-block">
+<span class="name tag">Format</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/</span><span class="whitespace">
 </span><span class="name tag">Upstream-Name</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">test</span><span class="whitespace">
 </span><span class="name tag">Source</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">https://example.org</span><span class="whitespace">
 
@@ -31,11 +33,13 @@
 </span><span class="name tag">License</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">GPL-3.0+</span><span class="whitespace">
 
 </span><span class="name tag">License</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">GPL-3.0+</span><span class="whitespace">
- </span><span class="literal scalar plain">This program is free software</span><span class="punctuation indicator">:</span><span class="whitespace"> </span><span class="literal scalar plain">you can redistribute it ...</span></code></pre>
+ </span><span class="literal scalar plain">This program is free software</span><span class="punctuation indicator">:</span><span class="whitespace"> </span><span class="literal scalar plain">you can redistribute it ...</span>
+</pre>
 <p><strong>source/format</strong> dosyası paketin kaynak formatını belirtir. Bu dosya içerisine <strong>3.0 (native)</strong> yazabilirsiniz.</p>
 <p><strong>compat</strong> dosyası içerisinde paketin hangi sürüme uyumlu olacağı yazılmıştır. Bu yazıyı yazarken en son sürüm olarak <strong>11</strong> olduğu için dosyaya <strong>11</strong> yazabiliriz.</p>
 <p><strong>control</strong> dosyası içerisinde paketin adı bağımlılıkları gibi değerleri taşır. Aşağıda örnek control dosyası verilmiştir.</p>
-<pre class="code yaml literal-block"><code><span class="name tag">Source</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">example</span><span class="whitespace">
+<pre class="code yaml literal-block">
+<span class="name tag">Source</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">example</span><span class="whitespace">
 </span><span class="name tag">Section</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">utils</span><span class="whitespace">
 </span><span class="name tag">Priority</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">optional</span><span class="whitespace">
 </span><span class="name tag">Maintainer</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">user name &lt;user&#64;example.org&gt;</span><span class="whitespace">
@@ -49,23 +53,31 @@
          </span><span class="literal scalar plain">package4</span><span class="whitespace">
 
 </span><span class="name tag">Description</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">example package</span><span class="whitespace">
- </span><span class="literal scalar plain">Example package for sayfalar documentation</span></code></pre>
+ </span><span class="literal scalar plain">Example package for sayfalar documentation</span>
+</pre>
 <p>Eğer <strong>Architecture</strong> değerine any yazarsanız paket derlediğiniz mimariye bağımlı olur. Eğer all yazarsanız tümünde çalışabilir.</p>
 <p><strong>rules</strong> dosyası derleme yapılırken kullanılan dosyadır. Bu dosyanın türü genellikle <strong>Makefile</strong> olur fakat istediğiniz herhangi bir dille de yazabilirsiniz.</p>
 <p><strong>make &amp;&amp; make install</strong> şeklinde derlenip kurulan bir kaynak kodu rules dosyasında aşağıdaki gibi belirtebiliriz. Bunun için <strong>dh</strong> komutu kullanılır.</p>
-<pre class="code makefile literal-block"><code><span class="comment">#!/usr/bin/make -f
+<pre class="code makefile literal-block">
+<span class="comment">#!/usr/bin/make -f
 </span>
 <span class="name function">%</span><span class="operator">:</span>
-        dh <span class="name variable">$&#64;</span></code></pre>
+        dh <span class="name variable">$&#64;</span>
+</pre>
 <p>Eğer <strong>./configure</strong> işlemimiz de varsa aşağıdakini rules içine ekleyebiliriz.</p>
-<pre class="code makefile literal-block"><code><span class="name function">override_dh_auto_configure</span><span class="operator">:</span>
-        ./configre --prefix<span class="operator">=</span>/usr</code></pre>
+<pre class="code makefile literal-block">
+<span class="name function">override_dh_auto_configure</span><span class="operator">:</span>
+        ./configre --prefix<span class="operator">=</span>/usr
+</pre>
 <p>Burada sırasıyla rules dosyasına aşağıdaki gibi komut yollanır.</p>
-<pre class="code shell literal-block"><code>./debian/rules clean <span class="comment single"># dh clean
+<pre class="code shell literal-block">
+./debian/rules clean <span class="comment single"># dh clean
 </span>./debian/rules build <span class="comment single"># dh build
-</span>./debian/rules binary <span class="comment single"># dh binary</span></code></pre>
+</span>./debian/rules binary <span class="comment single"># dh binary</span>
+</pre>
 <p>Biraz önceki rules dosyamızı biraz değiştirerek tekrar yazalım.</p>
-<pre class="code makefile literal-block"><code><span class="comment">#!/usr/bin/make -f
+<pre class="code makefile literal-block">
+<span class="comment">#!/usr/bin/make -f
 </span>
 <span class="name function">clean</span><span class="operator">:</span>
         dh clean
@@ -75,32 +87,36 @@
 </span>        make
         make install <span class="name variable">DESTDIR</span><span class="operator">=</span>debian/example <span class="comment single"># DESTDIR konumu debian/paketadı şeklinde olmalıdır.
 </span><span class="name function">binary</span><span class="operator">:</span>
-        dh binary</code></pre>
+        dh binary
+</pre>
 <p>Burada <strong>dh clean</strong> komutu kaynağı temizlemek için kullanılır. <strong>dh binary</strong> ise paketleme işlemi için gereken komuttur.</p>
 <p><strong>changelog</strong> dosyası ise paketin sürüm numarası ve değişikliklerini belirtir. Aşağıda örnek <strong>changelog</strong> dosyası yer almaktadır.</p>
-<pre class="code shell literal-block"><code>example <span class="operator">(</span><span class="literal number">0</span>.3.1<span class="operator">)</span> stable<span class="punctuation">;</span> <span class="name variable">urgency</span><span class="operator">=</span>medium
+<pre class="code shell literal-block">
+example <span class="operator">(</span><span class="literal number">0</span>.3.1<span class="operator">)</span> stable<span class="punctuation">;</span> <span class="name variable">urgency</span><span class="operator">=</span>medium
   <span class="operator">[</span> user name <span class="operator">]</span>
   * Initial commit
 
- -- user name  &lt;user&#64;example.org&gt;  Mon, <span class="literal number">31</span> Dec <span class="literal number">2021</span> <span class="literal number">13</span>:31:31 +0000</code></pre>
-</section>
-<section id="paketin-derlenmesi">
-<h2>Paketin derlenmesi</h2>
+ -- user name  &lt;user&#64;example.org&gt;  Mon, <span class="literal number">31</span> Dec <span class="literal number">2021</span> <span class="literal number">13</span>:31:31 +0000
+</pre>
+</div>
+<div class="section" id="paketin-derlenmesi">
+<h1>Paketin derlenmesi</h1>
 <p><strong>dpkg-buildpackage -b</strong> komutunu derlenecek olan paketin kaynağının bulunduğu dizinde çalıştırın.</p>
 <p>Paket dosyaları kaynağın bulunduğu dizinin bir öncesinde oluşturulur. <strong>deb</strong> uzantılı dosyalarımızı eğer varsa depoya atabiliriz.</p>
-</section>
-<section id="paket-kayaginin-temizlenmesi">
-<h2>Paket kayağının temizlenmesi</h2>
+</div>
+<div class="section" id="paket-kayaginin-temizlenmesi">
+<h1>Paket kayağının temizlenmesi</h1>
 <p><strong>dh clean</strong> komutunu kullanabilirsiniz.</p>
-</section>
-<section id="post-install-betikleri">
-<h2>Post install betikleri</h2>
+</div>
+<div class="section" id="post-install-betikleri">
+<h1>Post install betikleri</h1>
 <p>debian dizini içine atacağımız <strong>postinst</strong>, <strong>preinst</strong>, <strong>prerm</strong>, <strong>postrm</strong> dosyaları paketin içerisine eklenir ve gerektiği yerde çalıştırılır. Genellikle bash betiğidir fakat istediğiniz dille yazabilirsiniz.</p>
-</section>
-<section id="paket-parcalama-islemi">
-<h2>Paket parçalama işlemi</h2>
+</div>
+<div class="section" id="paket-parcalama-islemi">
+<h1>Paket parçalama işlemi</h1>
 <p>Bir deb dosyasını parçalamak için öncelikle <strong>ar</strong> komutu kullanarak paketin dosyaları açılır. Bu işlemde karşımıza 3 tane dosya çıkar. data.tar.xz dosyası paketin dosyalarını barındırır. debian-binary dosyası paket formatını gösterir. Bu dosyayı silebiliriz. control.tar.xz dosyası paket bilgisi içerir.</p>
-<pre class="code shell literal-block"><code>$ ar x paket.deb
+<pre class="code shell literal-block">
+$ ar x paket.deb
 $ ls
 -&gt; control.tar.xz  data.tar.xz  debian-binary  paket.deb
 $ tar -xf data.tar.xz <span class="operator">&amp;&amp;</span> rm -f data.tar.xz debian-binary paket.deb
@@ -110,14 +126,17 @@ $ <span class="name builtin">cd</span> DEBIAN
 $ tar -xf control.tar.xz <span class="operator">&amp;&amp;</span> rm -f control.tar.xz
 $ <span class="name builtin">cd</span> ..
 $ ls
--&gt; DEBIAN/ usr/ etc/</code></pre>
-</section>
-<section id="parcalanan-paketin-tekrar-paketlenmesi">
-<h2>Parçalanan paketin tekrar paketlenmesi</h2>
+-&gt; DEBIAN/ usr/ etc/
+</pre>
+</div>
+<div class="section" id="parcalanan-paketin-tekrar-paketlenmesi">
+<h1>Parçalanan paketin tekrar paketlenmesi</h1>
 <p>Parçalanan paketin tekrar paketlenmesi için aşağıdaki komutu kullanabiliriz. Burada paket yolunu tam yol olarak vermeniz gerekmektedir. Paket dizininin dışında çalıştırılmalıdır. Paket adı dizinin adı şeklinde ayarlanmaktadır.</p>
-<pre class="code shell literal-block"><code>$ dpkg -b /home/sulincix/test/example
--&gt; dpkg-deb: building package <span class="literal string single">'example'</span> <span class="keyword">in</span> <span class="literal string single">'example.deb'</span>.</code></pre>
-</section>
-</main>
+<pre class="code shell literal-block">
+$ dpkg -b /home/sulincix/test/example
+-&gt; dpkg-deb: building package <span class="literal string single">'example'</span> <span class="keyword">in</span> <span class="literal string single">'example.deb'</span>.
+</pre>
+</div>
+</div>
 </body>
 </html>

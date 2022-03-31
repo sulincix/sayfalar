@@ -1405,6 +1405,42 @@ echo "hmm" # Bu kısım çalıştırılamaz.
 .UNINDENT
 .sp
 \fBexec\fP komutunu doğrudan terminalde çalıştırırsanız ve komut tamamlanırsa terminaldeki süreç kapanacağı için terminal doğal olarak kapanacaktır.
+.sp
+\fBexec\fP komutunu kullanarak yönlendirmeler yapabilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+exec > log.txt # bütün çıktıları log.txt içine yazdırır.
+echo "merhaba" # ekrana değil dosyaya yazılır.
+exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH FD KAVRAMI
+.sp
+\fBbash\fP programında birden çok \fBfd\fP kullanılabilir. var olan fdlere ulaşmak için \fB/proc/$$/fd/\fP konumuna bakabiliriz. 0 stdin 1 stdout 2 stderr olarak çalışır.
+.sp
+\fBNot:\fP \fB$$\fP mevcut sürecin pid değerini verir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+exec 3> log.txt # yazmak için boş bir 3 numaralı fd açmak için.
+echo "deneme" >&3
+exec 3>& \- # açık olan 3 nuramalı fd kapatmak için.
+exec 2>&1 # stderr içine atılanı stdout içine aktarır.
+exec 4< input.txt # okumak için 4 numaralı fd açmak için.
+echo "hmm" > input.txt # girdi dosyamıza yazı yazalım.
+read line <&4 # 3 nuramalı fd içinden değir okur.
+exec 4<&\- # 4 numaralı fd kapatmak için.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH HATA AYIKLAMA
 .sp
 \fBbash\fP komutuna farklı parametreler vererek kolayca script\(aqinizi derleyebilirsiniz. Örneğin \fB\-n\fP parametresi kodu çalıştırmayıp sadece hata kontrolü yapacaktır, \fB\-v\fP komutları çalıştırmadan yazdıracak, \fB\-x\fP ise işlem bittikten sonra kodları yazdıracaktır.
