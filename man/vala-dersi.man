@@ -1,0 +1,326 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "VALA DERSI"  "" "" ""
+.SH NAME
+Vala dersi \- 
+.sp
+Bu yazıda vala programlama dilini anlatacağım.
+.sp
+Vala programlama dili derlemeli bir dil olup yazmış olduğunuz kod valanın çeviricisi yardımı ile önce \fBC\fP koduna çevrilir ve ardından \fBgcc\fP veya \fBclang\fP gibi bir derleyici kullanılarak derlenir. Vala kaynak kodunu derlemek için \fBvalac\fP kullanılır. Örneğin aşağıda basit bir derleme örneği verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac main.vala
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Vala programlarını main fonksiyonu ile başlar. Bu fonksiyon aşağıdaki gibi yazılır:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int main(string[] args){
+   \&...
+   return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada \fBint\fP fonksiyonun çıktı türünü \fBmain\fP adını \fBstring[] args\fP ise parametresini ifade eder. \fBreturn 0\fP ise çıkış kodunu bildirir. Vala programlama dilinde her satırın sonunda \fB;\fP bulunmak zorundadır.
+.SH AÇIKLAMA SATIRI
+.sp
+Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında dikkate alınmaz.
+.INDENT 0.0
+.IP \(bu 2
+\fB\e\fP ifadesinden sonra satır sonuna kadar olan kısım açıklamadır.
+.IP \(bu 2
+\fB\e*\fP ile başlayıp \fB*\e\fP ile biten yazılar açıklamadır.
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+// bu bir açıklamadır
+/* bu bir açıklamadır */
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH EKRANA YAZI YAZDIRMA
+.sp
+Ekrana yazı yazmak için \fBprintf\fP kullanılır. normal çıktı için \fBstdout.printf\fP, hata çıktısı için ise \fBstderr.printf\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int main(string[] args){
+    stdout\&.printf("Merhaba Dünya");
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DEĞIŞKEN TÜRLERI
+.sp
+Değişkenler türleri ile beraber tanımlanırlar veya \fBvar\fP ifadesi kullanılarak tanımlanırlar.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int num = 0;
+val text = "Hello world";
+string abc = "fff";
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bununla birlikte değişkenlere başta değer atamayıp sonradan da değer atama işlemi yapılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int num;
+num = 31;
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Değişkenler arası tür dönüşümü işlemi için \fBparse\fP ve \fBto_string\fP kulanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int num = 15;
+string txt = num\&.to_string(); // int \-> string dönüşümü
+int ff = int\&.parse("23"); // string \-> int dönüşümü
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Başlıca veri türleri şunlardır:
+.INDENT 0.0
+.IP \(bu 2
+\fBint\fP tam sayıları tutar
+.IP \(bu 2
+\fBchar\fP tek bir karakter tutar.
+.IP \(bu 2
+\fBfloat\fP virgüllü sayıları tutar.x
+.IP \(bu 2
+\fBdouble\fP büyük bellek boyutu gerektiren sayıları tutar.
+.IP \(bu 2
+\fBbool\fP doğru veya yanlış olma durumu tutar.
+.IP \(bu 2
+\fBstring\fP yazı tutar.
+.UNINDENT
+.SH FONKSIYONLAR VE PARAMETRELER
+.sp
+Vala yazarken forksino tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int main(string[] args){
+    write("Hello world");
+    return 0;
+}
+void write(string message){
+    stdout\&.printf(message);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DIZILER
+.sp
+Diziler birden çok eleman tutan değişkenlerdir. tanımlanırken \fBxxx[] yy\fP şeklinde tanımlanırlar.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int[] nums = {12,22,45,31,48};
+stdout\&.printf(num[3].to_string()); // Ekrana 31 yazar.
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıda \fB{}\fP kullanılarak dizi elemanları ile beraber tanımlanmıştır. Bir altındaki satırda ise dizinin 4. elemanı çekilmiştir ve string türüne çevirilip ekrana yazılmıştır. Burada 3 olarak çekilme sebebi dizilerin eleman sayılarının 0dan başlamasıdır.
+.sp
+Diziye aşağıdaki gibi eleman ekleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+    int nums = {14,44,12};
+    nums += 98;
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dizinin boyutunu aşağıdaki gibi öğrenebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+    string[] msgs = {"Hello", "World"};
+    int ff = msgs\&.length;
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için \fBlibgee\fP kütüphanesinden faydalanılır. Öncelikle kodun en üstüne \fIUsing gee;\fP eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. \fBlibgee\fP kullanılırken derleme işlemine \fI\-\-pkg gee\-0.8\fP eklenir. Bu sayede derlenen programa libgee kütüpnaseni dahil edilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac main.vala \-\-pkg gee\-0.8
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+    Using gee;
+
+void test(){
+        var liste = new ArrayList<int>();
+        liste\&.add(12);
+        liste\&.add(18);
+        liste\&.add(3);
+        liste\&.remove(18);
+    }
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekde \fBArrayList\fP tanımlanmıştır. \fBadd\fP ile eleman eklemesi \fBremove\fP ile eleman çıkarılması yapılır.
+.sp
+Listenin belirtilen index sayılı elemanı aşağıdaki gibi getirilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int num = liste\&.get(3); // 4. eleman değeri getirilir.
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Listenin istenen bir elemanı aşağıdaki gibi değiştirilebilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+liste\&.set(3,144); // 4. eleman değiştirilir.
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Listenin eleman sayısı aşağıdaki gibi bulunur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int boyut = liste\&.size;
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KLAVYEDEN DEĞER ALMA
+.sp
+Klavyeden string türünden değer almak için \fBstdin.read_line()\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+var text = stdin\&.read_line();
+stdout\&.printf(text);
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KOŞULLAR
+.\" Generated by docutils manpage writer.
+.

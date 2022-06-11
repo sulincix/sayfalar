@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<title>Vala dersi</title>
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<div class="document" id="vala-dersi">
+<h1 class="title">Vala dersi</h1>
+
+<p>Bu yazıda vala programlama dilini anlatacağım.</p>
+<p>Vala programlama dili derlemeli bir dil olup yazmış olduğunuz kod valanın çeviricisi yardımı ile önce <strong>C</strong> koduna çevrilir ve ardından <strong>gcc</strong> veya <strong>clang</strong> gibi bir derleyici kullanılarak derlenir. Vala kaynak kodunu derlemek için <strong>valac</strong> kullanılır. Örneğin aşağıda basit bir derleme örneği verilmiştir.</p>
+<pre class="code shell literal-block">
+$ valac main.vala
+</pre>
+<p>Vala programlarını main fonksiyonu ile başlar. Bu fonksiyon aşağıdaki gibi yazılır:</p>
+<pre class="code vala literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+   </span><span class="punctuation">...</span><span class="whitespace">
+   </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Burada <strong>int</strong> fonksiyonun çıktı türünü <strong>main</strong> adını <strong>string[] args</strong> ise parametresini ifade eder. <strong>return 0</strong> ise çıkış kodunu bildirir. Vala programlama dilinde her satırın sonunda <strong>;</strong> bulunmak zorundadır.</p>
+<div class="section" id="aciklama-satiri">
+<h1>Açıklama satırı</h1>
+<p>Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında dikkate alınmaz.</p>
+<ul class="simple">
+<li><strong>\</strong> ifadesinden sonra satır sonuna kadar olan kısım açıklamadır.</li>
+<li><strong>\*</strong> ile başlayıp <strong>*\</strong> ile biten yazılar açıklamadır.</li>
+</ul>
+<pre class="code vala literal-block">
+<span class="comment single">// bu bir açıklamadır
+</span><span class="comment multiline">/* bu bir açıklamadır */</span>
+</pre>
+</div>
+<div class="section" id="ekrana-yazi-yazdirma">
+<h1>Ekrana yazı yazdırma</h1>
+<p>Ekrana yazı yazmak için <strong>printf</strong> kullanılır. normal çıktı için <strong>stdout.printf</strong>, hata çıktısı için ise <strong>stderr.printf</strong> kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Merhaba Dünya&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+</div>
+<div class="section" id="degisken-turleri">
+<h1>Değişken türleri</h1>
+<p>Değişkenler türleri ile beraber tanımlanırlar veya <strong>var</strong> ifadesi kullanılarak tanımlanırlar.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="name">val</span><span class="whitespace"> </span><span class="name">text</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;Hello world&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">abc</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;fff&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Bununla birlikte değişkenlere başta değer atamayıp sonradan da değer atama işlemi yapılabilir.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">31</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Değişkenler arası tür dönüşümü işlemi için <strong>parse</strong> ve <strong>to_string</strong> kulanılır.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">15</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">txt</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">num</span><span class="punctuation">.</span><span class="name">to_string</span><span class="punctuation">();</span><span class="whitespace"> </span><span class="comment single">// int -&gt; string dönüşümü
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">ff</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="punctuation">.</span><span class="name">parse</span><span class="punctuation">(</span><span class="literal string">&quot;23&quot;</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// string -&gt; int dönüşümü
+</span><span class="punctuation">...</span>
+</pre>
+<p>Başlıca veri türleri şunlardır:</p>
+<ul class="simple">
+<li><strong>int</strong> tam sayıları tutar</li>
+<li><strong>char</strong> tek bir karakter tutar.</li>
+<li><strong>float</strong> virgüllü sayıları tutar.x</li>
+<li><strong>double</strong> büyük bellek boyutu gerektiren sayıları tutar.</li>
+<li><strong>bool</strong> doğru veya yanlış olma durumu tutar.</li>
+<li><strong>string</strong> yazı tutar.</li>
+</ul>
+</div>
+<div class="section" id="fonksiyonlar-ve-parametreler">
+<h1>Fonksiyonlar ve parametreler</h1>
+<p>Vala yazarken forksino tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.</p>
+<pre class="code vala literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">write</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+</div>
+<div class="section" id="diziler">
+<h1>Diziler</h1>
+<p>Diziler birden çok eleman tutan değişkenlerdir. tanımlanırken <strong>xxx[] yy</strong> şeklinde tanımlanırlar.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">nums</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="literal number integer">45</span><span class="punctuation">,</span><span class="literal number integer">31</span><span class="punctuation">,</span><span class="literal number integer">48</span><span class="punctuation">};</span><span class="whitespace">
+</span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">num</span><span class="punctuation">[</span><span class="literal number integer">3</span><span class="punctuation">].</span><span class="name">to_string</span><span class="punctuation">());</span><span class="whitespace"> </span><span class="comment single">// Ekrana 31 yazar.
+</span><span class="punctuation">...</span>
+</pre>
+<p>Yukarıda <strong>{}</strong> kullanılarak dizi elemanları ile beraber tanımlanmıştır. Bir altındaki satırda ise dizinin 4. elemanı çekilmiştir ve string türüne çevirilip ekrana yazılmıştır. Burada 3 olarak çekilme sebebi dizilerin eleman sayılarının 0dan başlamasıdır.</p>
+<p>Diziye aşağıdaki gibi eleman ekleyebiliriz.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">nums</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">14</span><span class="punctuation">,</span><span class="literal number integer">44</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">};</span><span class="whitespace">
+    </span><span class="name">nums</span><span class="whitespace"> </span><span class="operator">+=</span><span class="whitespace"> </span><span class="literal number integer">98</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Dizinin boyutunu aşağıdaki gibi öğrenebiliriz.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+    </span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">msgs</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal string">&quot;Hello&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal string">&quot;World&quot;</span><span class="punctuation">};</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">ff</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">msgs</span><span class="punctuation">.</span><span class="name">length</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için <strong>libgee</strong> kütüphanesinden faydalanılır. Öncelikle kodun en üstüne <cite>Using gee;</cite> eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. <strong>libgee</strong> kullanılırken derleme işlemine <cite>--pkg gee-0.8</cite> eklenir. Bu sayede derlenen programa libgee kütüpnaseni dahil edilir.</p>
+<pre class="code shell literal-block">
+$ valac main.vala --pkg gee-0.8
+</pre>
+<p>Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:</p>
+<pre class="code vala literal-block">
+<span class="whitespace">    </span><span class="name">Using</span><span class="whitespace"> </span><span class="name">gee</span><span class="punctuation">;</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">liste</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">ArrayList</span><span class="operator">&lt;</span><span class="keyword type">int</span><span class="operator">&gt;</span><span class="punctuation">();</span><span class="whitespace">
+        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">12</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">18</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">remove</span><span class="punctuation">(</span><span class="literal number integer">18</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Yukarıdaki örnekde <strong>ArrayList</strong> tanımlanmıştır. <strong>add</strong> ile eleman eklemesi <strong>remove</strong> ile eleman çıkarılması yapılır.</p>
+<p>Listenin belirtilen index sayılı elemanı aşağıdaki gibi getirilir.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">liste</span><span class="punctuation">.</span><span class="keyword">get</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// 4. eleman değeri getirilir.
+</span><span class="punctuation">...</span>
+</pre>
+<p>Listenin istenen bir elemanı aşağıdaki gibi değiştirilebilir.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="name">liste</span><span class="punctuation">.</span><span class="keyword">set</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">,</span><span class="literal number integer">144</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// 4. eleman değiştirilir.
+</span><span class="punctuation">...</span>
+</pre>
+<p>Listenin eleman sayısı aşağıdaki gibi bulunur.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">boyut</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">size</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+</div>
+<div class="section" id="klavyeden-deger-alma">
+<h1>Klavyeden değer alma</h1>
+<p>Klavyeden string türünden değer almak için <strong>stdin.read_line()</strong> kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">text</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">stdin</span><span class="punctuation">.</span><span class="name">read_line</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">text</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+</div>
+<div class="section" id="kosullar">
+<h1>Koşullar</h1>
+</div>
+</div>
+</body>
+</html>
