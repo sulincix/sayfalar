@@ -128,7 +128,7 @@ Dizinin boyutunu aşağıdaki gibi öğrenebiliriz.
 	int ff = msgs.length;
     ...
 
-Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için **libgee** kütüphanesinden faydalanılır. Öncelikle kodun en üstüne `Using gee;` eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. **libgee** kullanılırken derleme işlemine `--pkg gee-0.8` eklenir. Bu sayede derlenen programa libgee kütüpnaseni dahil edilir.
+Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için **libgee** kütüphanesinden faydalanılır. Öncelikle kodun en üstüne `Using gee;` eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. **libgee** kullanılırken derleme işlemine `--pkg gee-0.8` eklenir. Bu sayede derlenen programa libgee kütüphanesi dahil edilir.
 
 .. code-block:: shell
 
@@ -140,14 +140,14 @@ Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:
 
 	Using gee;
 	
-    void test(){
+	void test(){
 	    var liste = new ArrayList<int>();
 	    liste.add(12);
 	    liste.add(18);
 	    liste.add(3);
 	    liste.remove(18);
 	}
-    ...
+	...
 
 Yukarıdaki örnekde **ArrayList** tanımlanmıştır. **add** ile eleman eklemesi **remove** ile eleman çıkarılması yapılır.
 

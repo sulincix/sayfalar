@@ -118,21 +118,21 @@ $ valac main.vala
     </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">ff</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">msgs</span><span class="punctuation">.</span><span class="name">length</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">...</span>
 </pre>
-<p>Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için <strong>libgee</strong> kütüphanesinden faydalanılır. Öncelikle kodun en üstüne <cite>Using gee;</cite> eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. <strong>libgee</strong> kullanılırken derleme işlemine <cite>--pkg gee-0.8</cite> eklenir. Bu sayede derlenen programa libgee kütüpnaseni dahil edilir.</p>
+<p>Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için <strong>libgee</strong> kütüphanesinden faydalanılır. Öncelikle kodun en üstüne <cite>Using gee;</cite> eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. <strong>libgee</strong> kullanılırken derleme işlemine <cite>--pkg gee-0.8</cite> eklenir. Bu sayede derlenen programa libgee kütüphanesi dahil edilir.</p>
 <pre class="code shell literal-block">
 $ valac main.vala --pkg gee-0.8
 </pre>
 <p>Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:</p>
 <pre class="code vala literal-block">
-<span class="whitespace">    </span><span class="name">Using</span><span class="whitespace"> </span><span class="name">gee</span><span class="punctuation">;</span><span class="whitespace">
+<span class="name">Using</span><span class="whitespace"> </span><span class="name">gee</span><span class="punctuation">;</span><span class="whitespace">
 
 </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">(){</span><span class="whitespace">
-        </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">liste</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">ArrayList</span><span class="operator">&lt;</span><span class="keyword type">int</span><span class="operator">&gt;</span><span class="punctuation">();</span><span class="whitespace">
-        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">12</span><span class="punctuation">);</span><span class="whitespace">
-        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">18</span><span class="punctuation">);</span><span class="whitespace">
-        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">);</span><span class="whitespace">
-        </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">remove</span><span class="punctuation">(</span><span class="literal number integer">18</span><span class="punctuation">);</span><span class="whitespace">
-    </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">liste</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">ArrayList</span><span class="operator">&lt;</span><span class="keyword type">int</span><span class="operator">&gt;</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">12</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">18</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">add</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">liste</span><span class="punctuation">.</span><span class="name">remove</span><span class="punctuation">(</span><span class="literal number integer">18</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
 </span><span class="punctuation">...</span>
 </pre>
 <p>Yukarıdaki örnekde <strong>ArrayList</strong> tanımlanmıştır. <strong>add</strong> ile eleman eklemesi <strong>remove</strong> ile eleman çıkarılması yapılır.</p>

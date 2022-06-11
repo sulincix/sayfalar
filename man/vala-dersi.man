@@ -229,7 +229,7 @@ Dizinin boyutunu aşağıdaki gibi öğrenebiliriz.
 .UNINDENT
 .UNINDENT
 .sp
-Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için \fBlibgee\fP kütüphanesinden faydalanılır. Öncelikle kodun en üstüne \fIUsing gee;\fP eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. \fBlibgee\fP kullanılırken derleme işlemine \fI\-\-pkg gee\-0.8\fP eklenir. Bu sayede derlenen programa libgee kütüpnaseni dahil edilir.
+Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için \fBlibgee\fP kütüphanesinden faydalanılır. Öncelikle kodun en üstüne \fIUsing gee;\fP eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. \fBlibgee\fP kullanılırken derleme işlemine \fI\-\-pkg gee\-0.8\fP eklenir. Bu sayede derlenen programa libgee kütüphanesi dahil edilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -247,15 +247,15 @@ Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:
 .sp
 .nf
 .ft C
-    Using gee;
+Using gee;
 
 void test(){
-        var liste = new ArrayList<int>();
-        liste\&.add(12);
-        liste\&.add(18);
-        liste\&.add(3);
-        liste\&.remove(18);
-    }
+    var liste = new ArrayList<int>();
+    liste\&.add(12);
+    liste\&.add(18);
+    liste\&.add(3);
+    liste\&.remove(18);
+}
 \&...
 .ft P
 .fi
