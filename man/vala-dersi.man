@@ -31,7 +31,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .SH NAME
 Vala dersi \- 
 .sp
-Bu yazıda vala programlama dilini anlatacağım.
+Bu yazıda vala programlama dilini anlatacağım. Örneklende \fB\&...\fP bulunan satırlar üstünde ve altında başka kodların bulunabileceğini belirtir. Çalıştırılan komutların başında \fB$\fP işareti kullanılmıştır.
 .sp
 Vala programlama dili derlemeli bir dil olup yazmış olduğunuz kod valanın çeviricisi yardımı ile önce \fBC\fP koduna çevrilir ve ardından \fBgcc\fP veya \fBclang\fP gibi bir derleyici kullanılarak derlenir. Vala kaynak kodunu derlemek için \fBvalac\fP kullanılır. Örneğin aşağıda basit bir derleme örneği verilmiştir.
 .INDENT 0.0
@@ -61,6 +61,64 @@ int main(string[] args){
 .UNINDENT
 .sp
 Burada \fBint\fP fonksiyonun çıktı türünü \fBmain\fP adını \fBstring[] args\fP ise parametresini ifade eder. \fBreturn 0\fP ise çıkış kodunu bildirir. Vala programlama dilinde her satırın sonunda \fB;\fP bulunmak zorundadır.
+.SH GIRINTILEME
+.sp
+Vala girintilemeye dikkat eden bir dil değildir fakat kodun okunaklı olması açısından girintilemeye dikkat etmenizi öneririm.
+Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar zorunluluk oluşturmadığı gibi kendinize göre farklılaştırabilirziniz.
+.INDENT 0.0
+.IP \(bu 2
+Koşullar döngüler ve fonksiyonlarda 4 boşluk veya tek tab ile girintileyin.
+.IP \(bu 2
+Virgülden sonra bir boşluk bırakın.
+.IP \(bu 2
+Koşullar döngüler ve fonksiyonlarda \fB{\fP işaretini satır sonuna koyun.
+.IP \(bu 2
+\fBelse\fP ve \fBelse if\fP ifadelerinde \fB}\fP ve \fB{\fP işaretini satırın başında ve sonunda kullanın.
+.IP \(bu 2
+İşleyicilerin başına ve sonuna birer boşluk ekleyin.
+.UNINDENT
+.sp
+Örneğin bu kurala uygun girintilenmiş bir kod:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int main(string[] args){
+    int i = int\&.parse(stdin\&.read_line());
+    int[] liste = {12, 22, 55, 27};
+    if(i == 12){
+        i = 33 / 3;
+    }else if(i >= 44){
+        i = 0;
+    }
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada da aynı kodun kötü girintilenmiş hali bulunmaktadır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int main(    string[] args ){
+int i=int\&.parse(  stdin\&.read_line() );
+int[] liste={12,22,55,27};
+if (i== 2)
+  {i=33/3;}
+    else if    (i>=44){i=0;
+        }return 0;
+            }
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Her ikisi de aslında tamamen aynı kod fakat ilk örnek daha okunaklı ve düzenli gözükmektedir.
 .SH AÇIKLAMA SATIRI
 .sp
 Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında dikkate alınmaz.
@@ -160,25 +218,6 @@ Başlıca veri türleri şunlardır:
 \fBbool\fP doğru veya yanlış olma durumu tutar.
 .IP \(bu 2
 \fBstring\fP yazı tutar.
-.UNINDENT
-.SH FONKSIYONLAR VE PARAMETRELER
-.sp
-Vala yazarken forksino tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-int main(string[] args){
-    write("Hello world");
-    return 0;
-}
-void write(string message){
-    stdout\&.printf(message);
-}
-.ft P
-.fi
-.UNINDENT
 .UNINDENT
 .SH DIZILER
 .sp
@@ -322,5 +361,282 @@ stdout\&.printf(text);
 .UNINDENT
 .UNINDENT
 .SH KOŞULLAR
+.sp
+Koşul tanımlamak için \fBif\fP kullanılır. Bu ifade parametre olarak \fBbool\fP türünden değişken alır.  Koşulun gerçekleşmediği durumda \fBelse if\fP kullanılarak diğer koşul karşılanıyor mu diye bakılır. Hiçbiri gerçekleşmiyorsa \fBelse\fP kullanılarak bu durumda yapılacaklar belirtilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+if(koşul){
+   \&...
+}else if(diğer\-koşul){
+   \&...
+}else{
+   \&...
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örneğin klavyeden değer alalım ve bu değerin eşit olma durumuna bakalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+string parola = stdin\&.read_line();
+if(parola == "abc123"){
+    stdout\&.printf("doğru parola");
+}else{
+    stderr\&.printf("hatalı parola");
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Koşullarda kullanılan işleyiciler ve anlamları aşağıda liste halinde verilmiştir.
+.SH KOŞUL IŞLEYICILERI
+.TS
+center;
+|l|l|l|.
+_
+T{
+ifade
+T}	T{
+anlamı
+T}	T{
+örnek
+T}
+_
+T{
+>
+T}	T{
+büyüktür
+T}	T{
+121 > 12
+T}
+_
+T{
+<
+T}	T{
+küçüktür
+T}	T{
+12 < 121
+T}
+_
+T{
+==
+T}	T{
+birbirine eşittir
+T}	T{
+121 == 121
+T}
+_
+T{
+!
+T}	T{
+karşıtlık bildirir.
+T}	T{
+!(12 > 121)
+T}
+_
+T{
+&&
+T}	T{
+logic and
+T}	T{
+"fg" == "aa" && 121 > 12
+T}
+_
+T{
+||
+T}	T{
+logic or
+T}	T{
+"fg" == "aa" || 121 > 12
+T}
+_
+T{
+!=
+T}	T{
+eşit değildir
+T}	T{
+"fg" != "aa"
+T}
+_
+T{
+>=
+T}	T{
+büyük eşittir
+T}	T{
+121 >= 121
+T}
+_
+T{
+<=
+T}	T{
+küçük eşittir
+T}	T{
+12 <= 12
+T}
+_
+T{
+in
+T}	T{
+eleman içerme kontrolü
+T}	T{
+12 in {12, 121, 48, 94}
+T}
+_
+.TE
+.sp
+Koşullar için alternatif olarak şu şekilde de kullanım mevcuttur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+koşul ? durum : diğer\-durum;
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada \fB?\fP işaretinden sonra ilk durum \fB:\fP işaretinden sonra da gerçekleşmediği durum belirtilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+string parola = stdin\&.read_line();
+parola == "abc123" ? stdout\&.printf("Doğru parola") : stderr\&.printf("yanlış parola");
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DÖNGÜLER
+.sp
+Döngüler aşağıdaki gibi tanımlanır. döngüde koşul sağlandığı sürece sürekli olarak içerisindeki kod çalıştırılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+while(koşul){
+    \&...
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örneğin ekrana 0dan 10a kadar olan sayıları yazdıralım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int sayi = 0;
+while (sayi <=10){
+    stdout\&.printf(sayi\&.to_string());
+    sayi += 1; // sayi = sayi + 1 ile aynı anlama gelir.
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekte \fBwhile\fP ifadesi sayı 10dan küçük ve eşitse çalışır. sayı 11 olduğunda bu sağlanmadığı için işlem sonlandırılır.
+.sp
+\fBfor\fP ifadesi kulanılarak benzer bir döngü yapılabilir. Örneğin:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+for(int i=0; i<=10; i++){ // i += 1 ile aynı anlama gelir
+    stdout\&.printf(sayi\&.to_string());
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu örnek while örneğindeki ile aynı işlemi gerçekleştirir.
+.sp
+Bir listenin tüm elemanları ile döngü oluşturmak için ise \fBforeach\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+int[] i = {31, 44, 78, 84, 27};
+foreach(int sayi in i){
+    stdout\&.printf(sayi\&.to_string());
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada \fBsayi\fP değişkeni her seferinde listenin bir sonraki elemanı olarak tanımlanır ve işleme koyulur.
+.sp
+Döngüden çıkmak için \fBbreak\fP döngünün alt satırlarının çalışmayıp sonraki koşul için başa dönülmesi için ise \fBcontinue\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+while(true){
+    int txt = stdin\&.read_line();
+    if(txt == "abc123"){
+        stdout\&.printf("Doğru parola");
+        break;
+    }else{
+        stderr\&.printf("Hatalı parola");
+        continue;
+    }
+    stdout\&.printf("test 123"); // bu satır çalıştırılmaz.
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH FONKSIYONLAR VE PARAMETRELER
+.sp
+Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int main(string[] args){
+    write("Hello world");
+    return 0;
+}
+void write(string message){
+    stdout\&.printf(message);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .\" Generated by docutils manpage writer.
 .

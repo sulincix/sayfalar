@@ -11,7 +11,7 @@
 <div class="document" id="vala-dersi">
 <h1 class="title">Vala dersi</h1>
 
-<p>Bu yazıda vala programlama dilini anlatacağım.</p>
+<p>Bu yazıda vala programlama dilini anlatacağım. Örneklende <strong>...</strong> bulunan satırlar üstünde ve altında başka kodların bulunabileceğini belirtir. Çalıştırılan komutların başında <strong>$</strong> işareti kullanılmıştır.</p>
 <p>Vala programlama dili derlemeli bir dil olup yazmış olduğunuz kod valanın çeviricisi yardımı ile önce <strong>C</strong> koduna çevrilir ve ardından <strong>gcc</strong> veya <strong>clang</strong> gibi bir derleyici kullanılarak derlenir. Vala kaynak kodunu derlemek için <strong>valac</strong> kullanılır. Örneğin aşağıda basit bir derleme örneği verilmiştir.</p>
 <pre class="code shell literal-block">
 $ valac main.vala
@@ -24,6 +24,43 @@ $ valac main.vala
 </span><span class="punctuation">}</span>
 </pre>
 <p>Burada <strong>int</strong> fonksiyonun çıktı türünü <strong>main</strong> adını <strong>string[] args</strong> ise parametresini ifade eder. <strong>return 0</strong> ise çıkış kodunu bildirir. Vala programlama dilinde her satırın sonunda <strong>;</strong> bulunmak zorundadır.</p>
+<div class="section" id="girintileme">
+<h1>Girintileme</h1>
+<p>Vala girintilemeye dikkat eden bir dil değildir fakat kodun okunaklı olması açısından girintilemeye dikkat etmenizi öneririm.
+Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar zorunluluk oluşturmadığı gibi kendinize göre farklılaştırabilirziniz.</p>
+<ul class="simple">
+<li>Koşullar döngüler ve fonksiyonlarda 4 boşluk veya tek tab ile girintileyin.</li>
+<li>Virgülden sonra bir boşluk bırakın.</li>
+<li>Koşullar döngüler ve fonksiyonlarda <strong>{</strong> işaretini satır sonuna koyun.</li>
+<li><strong>else</strong> ve <strong>else if</strong> ifadelerinde <strong>}</strong> ve <strong>{</strong> işaretini satırın başında ve sonunda kullanın.</li>
+<li>İşleyicilerin başına ve sonuna birer boşluk ekleyin.</li>
+</ul>
+<p>Örneğin bu kurala uygun girintilenmiş bir kod:</p>
+<pre class="code vala literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="punctuation">.</span><span class="name">parse</span><span class="punctuation">(</span><span class="name">stdin</span><span class="punctuation">.</span><span class="name">read_line</span><span class="punctuation">());</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">liste</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">55</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">27</span><span class="punctuation">};</span><span class="whitespace">
+    </span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">i</span><span class="whitespace"> </span><span class="operator">==</span><span class="whitespace"> </span><span class="literal number integer">12</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">33</span><span class="whitespace"> </span><span class="operator">/</span><span class="whitespace"> </span><span class="literal number integer">3</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="keyword">else</span><span class="whitespace"> </span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">i</span><span class="whitespace"> </span><span class="operator">&gt;=</span><span class="whitespace"> </span><span class="literal number integer">44</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Burada da aynı kodun kötü girintilenmiş hali bulunmaktadır.</p>
+<pre class="code vala literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="whitespace">    </span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="whitespace"> </span><span class="punctuation">){</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="keyword type">int</span><span class="punctuation">.</span><span class="name">parse</span><span class="punctuation">(</span><span class="whitespace">  </span><span class="name">stdin</span><span class="punctuation">.</span><span class="name">read_line</span><span class="punctuation">()</span><span class="whitespace"> </span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">liste</span><span class="operator">=</span><span class="punctuation">{</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="literal number integer">55</span><span class="punctuation">,</span><span class="literal number integer">27</span><span class="punctuation">};</span><span class="whitespace">
+</span><span class="keyword">if</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">i</span><span class="operator">==</span><span class="whitespace"> </span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="whitespace">
+  </span><span class="punctuation">{</span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">33</span><span class="operator">/</span><span class="literal number integer">3</span><span class="punctuation">;}</span><span class="whitespace">
+    </span><span class="keyword">else</span><span class="whitespace"> </span><span class="keyword">if</span><span class="whitespace">    </span><span class="punctuation">(</span><span class="name">i</span><span class="operator">&gt;=</span><span class="literal number integer">44</span><span class="punctuation">){</span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+        </span><span class="punctuation">}</span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+            </span><span class="punctuation">}</span>
+</pre>
+<p>Her ikisi de aslında tamamen aynı kod fakat ilk örnek daha okunaklı ve düzenli gözükmektedir.</p>
+</div>
 <div class="section" id="aciklama-satiri">
 <h1>Açıklama satırı</h1>
 <p>Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında dikkate alınmaz.</p>
@@ -80,19 +117,6 @@ $ valac main.vala
 <li><strong>bool</strong> doğru veya yanlış olma durumu tutar.</li>
 <li><strong>string</strong> yazı tutar.</li>
 </ul>
-</div>
-<div class="section" id="fonksiyonlar-ve-parametreler">
-<h1>Fonksiyonlar ve parametreler</h1>
-<p>Vala yazarken forksino tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.</p>
-<pre class="code vala literal-block">
-<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
-    </span><span class="name">write</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world&quot;</span><span class="punctuation">);</span><span class="whitespace">
-    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
-</span><span class="punctuation">}</span><span class="whitespace">
-</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
-    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
-</span><span class="punctuation">}</span>
-</pre>
 </div>
 <div class="section" id="diziler">
 <h1>Diziler</h1>
@@ -167,6 +191,165 @@ $ valac main.vala --pkg gee-0.8
 </div>
 <div class="section" id="kosullar">
 <h1>Koşullar</h1>
+<p>Koşul tanımlamak için <strong>if</strong> kullanılır. Bu ifade parametre olarak <strong>bool</strong> türünden değişken alır.  Koşulun gerçekleşmediği durumda <strong>else if</strong> kullanılarak diğer koşul karşılanıyor mu diye bakılır. Hiçbiri gerçekleşmiyorsa <strong>else</strong> kullanılarak bu durumda yapılacaklar belirtilir.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">koşul</span><span class="punctuation">){</span><span class="whitespace">
+   </span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="keyword">else</span><span class="whitespace"> </span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">diğer</span><span class="operator">-</span><span class="name">koşul</span><span class="punctuation">){</span><span class="whitespace">
+   </span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="keyword">else</span><span class="punctuation">{</span><span class="whitespace">
+   </span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Örneğin klavyeden değer alalım ve bu değerin eşit olma durumuna bakalım.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">parola</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">stdin</span><span class="punctuation">.</span><span class="name">read_line</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">parola</span><span class="whitespace"> </span><span class="operator">==</span><span class="whitespace"> </span><span class="literal string">&quot;abc123&quot;</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;doğru parola&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="keyword">else</span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="name">stderr</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;hatalı parola&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Koşullarda kullanılan işleyiciler ve anlamları aşağıda liste halinde verilmiştir.</p>
+<table border="1" class="colwidths-given docutils">
+<caption><strong>Koşul işleyicileri</strong></caption>
+<colgroup>
+<col width="20%" />
+<col width="40%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">ifade</th>
+<th class="head">anlamı</th>
+<th class="head">örnek</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&gt;</td>
+<td>büyüktür</td>
+<td>121 &gt; 12</td>
+</tr>
+<tr><td>&lt;</td>
+<td>küçüktür</td>
+<td>12 &lt; 121</td>
+</tr>
+<tr><td>==</td>
+<td>birbirine eşittir</td>
+<td>121 == 121</td>
+</tr>
+<tr><td>!</td>
+<td>karşıtlık bildirir.</td>
+<td>!(12 &gt; 121)</td>
+</tr>
+<tr><td>&amp;&amp;</td>
+<td>logic and</td>
+<td>&quot;fg&quot; == &quot;aa&quot; &amp;&amp; 121 &gt; 12</td>
+</tr>
+<tr><td>||</td>
+<td>logic or</td>
+<td>&quot;fg&quot; == &quot;aa&quot; || 121 &gt; 12</td>
+</tr>
+<tr><td>!=</td>
+<td>eşit değildir</td>
+<td>&quot;fg&quot; != &quot;aa&quot;</td>
+</tr>
+<tr><td>&gt;=</td>
+<td>büyük eşittir</td>
+<td>121 &gt;= 121</td>
+</tr>
+<tr><td>&lt;=</td>
+<td>küçük eşittir</td>
+<td>12 &lt;= 12</td>
+</tr>
+<tr><td>in</td>
+<td>eleman içerme kontrolü</td>
+<td>12 in {12, 121, 48, 94}</td>
+</tr>
+</tbody>
+</table>
+<p>Koşullar için alternatif olarak şu şekilde de kullanım mevcuttur.</p>
+<pre class="code vala literal-block">
+<span class="name">koşul</span><span class="whitespace"> </span><span class="operator">?</span><span class="whitespace"> </span><span class="name">durum</span><span class="whitespace"> </span><span class="operator">:</span><span class="whitespace"> </span><span class="name">diğer</span><span class="operator">-</span><span class="name">durum</span><span class="punctuation">;</span>
+</pre>
+<p>Burada <strong>?</strong> işaretinden sonra ilk durum <strong>:</strong> işaretinden sonra da gerçekleşmediği durum belirtilir.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">parola</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">stdin</span><span class="punctuation">.</span><span class="name">read_line</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="name">parola</span><span class="whitespace"> </span><span class="operator">==</span><span class="whitespace"> </span><span class="literal string">&quot;abc123&quot;</span><span class="whitespace"> </span><span class="operator">?</span><span class="whitespace"> </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Doğru parola&quot;</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="operator">:</span><span class="whitespace"> </span><span class="name">stderr</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;yanlış parola&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+</div>
+<div class="section" id="donguler">
+<h1>Döngüler</h1>
+<p>Döngüler aşağıdaki gibi tanımlanır. döngüde koşul sağlandığı sürece sürekli olarak içerisindeki kod çalıştırılır.</p>
+<pre class="code vala literal-block">
+<span class="keyword">while</span><span class="punctuation">(</span><span class="name">koşul</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Örneğin ekrana 0dan 10a kadar olan sayıları yazdıralım.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword">while</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">&lt;=</span><span class="literal number integer">10</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">.</span><span class="name">to_string</span><span class="punctuation">());</span><span class="whitespace">
+    </span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">+=</span><span class="whitespace"> </span><span class="literal number integer">1</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// sayi = sayi + 1 ile aynı anlama gelir.
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Yukarıdaki örnekte <strong>while</strong> ifadesi sayı 10dan küçük ve eşitse çalışır. sayı 11 olduğunda bu sağlanmadığı için işlem sonlandırılır.</p>
+<p><strong>for</strong> ifadesi kulanılarak benzer bir döngü yapılabilir. Örneğin:</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword">for</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">&lt;=</span><span class="literal number integer">10</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">++</span><span class="punctuation">){</span><span class="whitespace"> </span><span class="comment single">// i += 1 ile aynı anlama gelir
+</span><span class="whitespace">    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">.</span><span class="name">to_string</span><span class="punctuation">());</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Bu örnek while örneğindeki ile aynı işlemi gerçekleştirir.</p>
+<p>Bir listenin tüm elemanları ile döngü oluşturmak için ise <strong>foreach</strong> kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">31</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">44</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">78</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">84</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">27</span><span class="punctuation">};</span><span class="whitespace">
+</span><span class="keyword">foreach</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="whitespace"> </span><span class="keyword">in</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">.</span><span class="name">to_string</span><span class="punctuation">());</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Burada <strong>sayi</strong> değişkeni her seferinde listenin bir sonraki elemanı olarak tanımlanır ve işleme koyulur.</p>
+<p>Döngüden çıkmak için <strong>break</strong> döngünün alt satırlarının çalışmayıp sonraki koşul için başa dönülmesi için ise <strong>continue</strong> kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword">while</span><span class="punctuation">(</span><span class="name builtin">true</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">txt</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">stdin</span><span class="punctuation">.</span><span class="name">read_line</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">txt</span><span class="whitespace"> </span><span class="operator">==</span><span class="whitespace"> </span><span class="literal string">&quot;abc123&quot;</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Doğru parola&quot;</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="keyword">break</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="keyword">else</span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">stderr</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Hatalı parola&quot;</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="keyword">continue</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;test 123&quot;</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// bu satır çalıştırılmaz.
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+</div>
+<div class="section" id="fonksiyonlar-ve-parametreler">
+<h1>Fonksiyonlar ve parametreler</h1>
+<p>Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.</p>
+<pre class="code vala literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">write</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
 </div>
 </div>
 </body>
