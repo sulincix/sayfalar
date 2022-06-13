@@ -638,5 +638,360 @@ void write(string message){
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluşturup daha sonra tanımlamak mümkündür.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+void fff(); // boş olarak tanımlanabilir.
+void fff(){
+    stdout\&.printf("hmmm");
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ayrıca fonksiyonu boş olarak tanımlayıp \fBC\fP programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için \fBextern\fP ifadesi kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+// main.vala dosyası
+extern void main(string msg);
+int main(string[] args){
+    fff("Hello World");
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+// util.c dosyası
+#include <stdio.h>
+void fff(char* msg){
+    fputs(msg,stdout);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekteki 2 dosyayı derlemek için aşağıdaki gibi bir komut kullanılmalıdır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac main.vala util.c
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+C kaynak kodunun gerektirdiği parametreleri \fB\-X\fP kullanarak ekleyebiliriz. Bu sayede doğrudan gccye parametre eklenebilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac main.vala util.c \-X "\-lreadline" # C ile readline kütüphanesini kullanmak için \-lreadline gerekir.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez. Bu gibi durumlar için \fBdelegate\fP ifadesinden yararlanılır. Önce delegate ifadesi ile fonksiyonun nasıl tanımlanacağı belirtilir daha sonra bu yeni oluşturulmuş tür parametre olarak kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+delegate void fff(string message);
+
+// delegate ile kullanıma uygun fonksiyon tanımladık.
+void f1(string message){
+    stdout\&.printf(message);
+}
+
+// delegate çağırmaya yarayan fonksiyon yazdık
+void f2(fff function, string message){
+    function(message);
+}
+
+// main fonksiyonu
+void main(string[] args){
+    f2(f1,"Hello World");
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH SINIF KAVRAMI
+.sp
+Vala nesne yönelimli bir programlama dilidir. Bu sebeple sınıflar oluşturabiliriz. Sınıflar \fBGtk\fP gibi arayüz programlamada kullanışlı olmaktadırlar. Sınıf oluşturmak için \fBclass\fP ifadesi kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+public class test {
+    public void write(){
+        stdout\&.printf("test123");
+    }
+}
+int main(string[] args){
+    test t = new test();
+    t\&.write();
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekte sınıf tanımlanmıştır. Daha sonra bu sınıftan bir nesne türetilmiştir ve ardıntan nesneye ait fonksiyon çalıştırılmıştır.
+.sp
+Sınıf içerisinde bulunan bazı fonksiyonların dışarıdan erişilmesini istemiyorsanız \fBprivate\fP, erişilmesini istiyorsanız \fBpublic\fP ifadesi ile tanımlamanız gerekmektedir.
+.sp
+Sınıf içerisinde tanımlanmış değişkenlere ulaşmak için \fBthis\fP ifadesi kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+public class test {
+    private int i;
+    private int j;
+
+    public void set(int i, int j){
+        this\&.i = i;
+        this\&.j = j;
+    }
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH SUPER SINIF
+.sp
+Bir sınıfı başka bir sınıftan türetebiliriz. Bunun için sınıf tanımlanırken \fIclass xxx : yyy\fP yapısı kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+public class hello {
+    public void write_hello(){
+        stdout\&.printf("Hello");
+    }
+}
+public class world : hello {
+    public void write_world(){
+        stdout\&.printf("World");
+    }
+    public void write(){
+        write_hello();
+        write_world();
+    }
+}
+int main(){
+    world w = new world();
+    w\&.write();
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer var olan bir fonksiyonun üzerine yazmak istiyorsak \fBoverride\fP ifadesini kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+public class hello {
+    public void write(){
+        stdout\&.printf("hello");
+    }
+}
+public class world : hello {
+    public override void write(){
+        stdout\&.printf("world");
+    }
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir sınıfı birden fazla sınıfın birleşiminden türetebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+public class hello {
+    public void write_hello(){
+        stdout\&.printf("Hello");
+    }
+}
+public class world {
+    public void write_world(){
+        stdout\&.printf("World");
+    }
+}
+public class helloworld : hello, world {
+    public void write(){
+        write_hello();
+        write_world();
+    }
+
+}
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH SIGNAL KAVRAMI
+.sp
+Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için boş olarak tanımlanan fonksiyonun başına \fBsignal\fP ifadesi yerleştirilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+public class test {
+    public signal void sig1(int i);
+
+    public void run(int i){
+        this\&.sig1(i);
+    }
+}
+int main(string[] args){
+    test t1 = new test();
+    t1\&.sig1\&.connect((i)=>{
+        stdout\&.printf(i\&.to_string());
+    });
+    t1\&.run(31);
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH KÜTÜPHANE OLUŞTURMA
+.sp
+Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+// library.vala dosyası
+public int test(){
+    stdout\&.printf("Hello World");
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile derleyebiliriz. Vala programlama dili \fBglib\-2.0\fP kullanarak çalıştığı için bu kütüphaneyi derleme esnasında eklememiz gerekmektedir. Ayrıca glib\-2.0 derlenirken \fB\-fPIC\fP parametresine ihtiyaç duyar.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac \-C \-H libtest.h \-\-vapi libtest.vapi library.vala // Önce C koduna çevirelim
+$ gcc library.c \-o libtest.so \-shared \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC // gcc ile derleyelim.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak koduna çevirmeye gerek kalmadan kütüphanemiz derlenmiş olur.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac \-H libtest.h \-\-vapi libtest.vapi \-o libtest.so \-X \-shared \-X \-fPIC library.vala
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi aşağıdaki gibi bir C kodu yazalım ve kütüphanemizi orada kullanalım. Oluşturulmuş olan \fBlibrary.h\fP dosyamızdan yararlanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+// main.c dosyası
+#include <libtest.h>
+int main(){
+    gint i = test(); // vala değişken türleri glib kütüphanesinden gelir.
+    return (int) i;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ve şimdi de C kodunu derleyemlim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gcc \-L. \-I. \-ltest main.c \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bununla birlikte \fBlibtest.vapi\fP dosyamızı kullanarak kütüphanemizi vala ile kullanmamız da mümkündür.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+// main.vala dosyası
+int main(string[] args){
+    int i = test();
+    return i;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi vala kodunu derleyelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ valac \-\-vapidir ./ main.vala \-\-pkg libtest
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .\" Generated by docutils manpage writer.
 .

@@ -350,6 +350,216 @@ $ valac main.vala --pkg gee-0.8
     </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="punctuation">}</span>
 </pre>
+<p>Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluşturup daha sonra tanımlamak mümkündür.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">();</span><span class="whitespace"> </span><span class="comment single">// boş olarak tanımlanabilir.
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;hmmm&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Ayrıca fonksiyonu boş olarak tanımlayıp <strong>C</strong> programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için <strong>extern</strong> ifadesi kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="comment single">// main.vala dosyası
+</span><span class="keyword declaration">extern</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">msg</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">fff</span><span class="punctuation">(</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<pre class="code C literal-block">
+<span class="comment single">// util.c dosyası
+</span><span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">fff</span><span class="punctuation">(</span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">msg</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">fputs</span><span class="punctuation">(</span><span class="name">msg</span><span class="punctuation">,</span><span class="name">stdout</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Yukarıdaki örnekteki 2 dosyayı derlemek için aşağıdaki gibi bir komut kullanılmalıdır.</p>
+<pre class="code shell literal-block">
+$ valac main.vala util.c
+</pre>
+<p>C kaynak kodunun gerektirdiği parametreleri <strong>-X</strong> kullanarak ekleyebiliriz. Bu sayede doğrudan gccye parametre eklenebilir.</p>
+<pre class="code shell literal-block">
+$ valac main.vala util.c -X <span class="literal string double">&quot;-lreadline&quot;</span> <span class="comment single"># C ile readline kütüphanesini kullanmak için -lreadline gerekir.</span>
+</pre>
+<p>Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez. Bu gibi durumlar için <strong>delegate</strong> ifadesinden yararlanılır. Önce delegate ifadesi ile fonksiyonun nasıl tanımlanacağı belirtilir daha sonra bu yeni oluşturulmuş tür parametre olarak kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="keyword declaration">delegate</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+
+</span><span class="comment single">// delegate ile kullanıma uygun fonksiyon tanımladık.
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">f1</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="comment single">// delegate çağırmaya yarayan fonksiyon yazdık
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">f2</span><span class="punctuation">(</span><span class="name">fff</span><span class="whitespace"> </span><span class="name">function</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">function</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="comment single">// main fonksiyonu
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">f2</span><span class="punctuation">(</span><span class="name">f1</span><span class="punctuation">,</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+</div>
+<div class="section" id="sinif-kavrami">
+<h1>Sınıf kavramı</h1>
+<p>Vala nesne yönelimli bir programlama dilidir. Bu sebeple sınıflar oluşturabiliriz. Sınıflar <strong>Gtk</strong> gibi arayüz programlamada kullanışlı olmaktadırlar. Sınıf oluşturmak için <strong>class</strong> ifadesi kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;test123&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="name">t</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="name">t</span><span class="punctuation">.</span><span class="name">write</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Yukarıdaki örnekte sınıf tanımlanmıştır. Daha sonra bu sınıftan bir nesne türetilmiştir ve ardıntan nesneye ait fonksiyon çalıştırılmıştır.</p>
+<p>Sınıf içerisinde bulunan bazı fonksiyonların dışarıdan erişilmesini istemiyorsanız <strong>private</strong>, erişilmesini istiyorsanız <strong>public</strong> ifadesi ile tanımlamanız gerekmektedir.</p>
+<p>Sınıf içerisinde tanımlanmış değişkenlere ulaşmak için <strong>this</strong> ifadesi kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">private</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="keyword declaration">private</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="keyword">set</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="keyword">this</span><span class="punctuation">.</span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
+        </span><span class="keyword">this</span><span class="punctuation">.</span><span class="name">j</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+</div>
+<div class="section" id="super-sinif">
+<h1>Super sınıf</h1>
+<p>Bir sınıfı başka bir sınıftan türetebiliriz. Bunun için sınıf tanımlanırken <cite>class xxx : yyy</cite> yapısı kullanılır.</p>
+<pre class="code vala literal-block">
+<span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">hello</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write_hello</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Hello&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">world</span><span class="whitespace"> </span><span class="operator">:</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write_world</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">write_hello</span><span class="punctuation">();</span><span class="whitespace">
+        </span><span class="name">write_world</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">world</span><span class="whitespace"> </span><span class="name">w</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">world</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="name">w</span><span class="punctuation">.</span><span class="name">write</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Eğer var olan bir fonksiyonun üzerine yazmak istiyorsak <strong>override</strong> ifadesini kullanabiliriz.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">hello</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;hello&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">world</span><span class="whitespace"> </span><span class="operator">:</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">override</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;world&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Bir sınıfı birden fazla sınıfın birleşiminden türetebiliriz.</p>
+<pre class="code vala literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">hello</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write_hello</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Hello&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">world</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write_world</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">helloworld</span><span class="whitespace"> </span><span class="operator">:</span><span class="whitespace"> </span><span class="name">hello</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">world</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">write_hello</span><span class="punctuation">();</span><span class="whitespace">
+        </span><span class="name">write_world</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+</div>
+<div class="section" id="signal-kavrami">
+<h1>Signal kavramı</h1>
+<p>Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için boş olarak tanımlanan fonksiyonun başına <strong>signal</strong> ifadesi yerleştirilir.</p>
+<pre class="code vala literal-block">
+<span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">signal</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">sig1</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">);</span><span class="whitespace">
+
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">run</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="keyword">this</span><span class="punctuation">.</span><span class="name">sig1</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="name">t1</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">sig1</span><span class="punctuation">.</span><span class="name">connect</span><span class="punctuation">((</span><span class="name">i</span><span class="punctuation">)</span><span class="operator">=&gt;</span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">.</span><span class="name">to_string</span><span class="punctuation">());</span><span class="whitespace">
+    </span><span class="punctuation">});</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">run</span><span class="punctuation">(</span><span class="literal number integer">31</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+</div>
+<div class="section" id="kutuphane-olusturma">
+<h1>Kütüphane oluşturma</h1>
+<p>Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.</p>
+<pre class="code vala literal-block">
+<span class="comment single">// library.vala dosyası
+</span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile derleyebiliriz. Vala programlama dili <strong>glib-2.0</strong> kullanarak çalıştığı için bu kütüphaneyi derleme esnasında eklememiz gerekmektedir. Ayrıca glib-2.0 derlenirken <strong>-fPIC</strong> parametresine ihtiyaç duyar.</p>
+<pre class="code shell literal-block">
+$ valac -C -H libtest.h --vapi libtest.vapi library.vala // Önce C koduna çevirelim
+$ gcc library.c -o libtest.so -shared <span class="literal string backtick">`</span>pkg-config --cflags --libs glib-2.0<span class="literal string backtick">`</span> -fPIC // gcc ile derleyelim.
+</pre>
+<p>Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak koduna çevirmeye gerek kalmadan kütüphanemiz derlenmiş olur.</p>
+<pre class="code shell literal-block">
+$ valac -H libtest.h --vapi libtest.vapi -o libtest.so -X -shared -X -fPIC library.vala
+</pre>
+<p>Şimdi aşağıdaki gibi bir C kodu yazalım ve kütüphanemizi orada kullanalım. Oluşturulmuş olan <strong>library.h</strong> dosyamızdan yararlanabiliriz.</p>
+<pre class="code C literal-block">
+<span class="comment single">// main.c dosyası
+</span><span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;libtest.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">gint</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">();</span><span class="whitespace"> </span><span class="comment single">// vala değişken türleri glib kütüphanesinden gelir.
+</span><span class="whitespace">    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="keyword type">int</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Ve şimdi de C kodunu derleyemlim.</p>
+<pre class="code shell literal-block">
+$ gcc -L. -I. -ltest main.c <span class="literal string backtick">`</span>pkg-config --cflags --libs glib-2.0<span class="literal string backtick">`</span> -fPIC
+</pre>
+<p>Bununla birlikte <strong>libtest.vapi</strong> dosyamızı kullanarak kütüphanemizi vala ile kullanmamız da mümkündür.</p>
+<pre class="code vala literal-block">
+<span class="comment single">// main.vala dosyası
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Şimdi vala kodunu derleyelim.</p>
+<pre class="code shell literal-block">
+$ valac --vapidir ./ main.vala --pkg libtest
+</pre>
 </div>
 </div>
 </body>

@@ -388,3 +388,249 @@ Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağ
 	    stdout.printf(message);
 	}
 
+Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluşturup daha sonra tanımlamak mümkündür.
+
+.. code-block:: vala
+
+	...
+	void fff(); // boş olarak tanımlanabilir.
+	void fff(){
+	    stdout.printf("hmmm");
+	}
+	...
+
+Ayrıca fonksiyonu boş olarak tanımlayıp **C** programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için **extern** ifadesi kullanılır.
+
+.. code-block:: vala
+
+	// main.vala dosyası
+	extern void main(string msg);
+	int main(string[] args){
+	    fff("Hello World");
+	}
+
+.. code-block:: C
+
+	// util.c dosyası
+	#include <stdio.h>
+	void fff(char* msg){
+	    fputs(msg,stdout);
+	}
+
+Yukarıdaki örnekteki 2 dosyayı derlemek için aşağıdaki gibi bir komut kullanılmalıdır.
+
+.. code-block:: shell
+
+	$ valac main.vala util.c
+
+C kaynak kodunun gerektirdiği parametreleri **-X** kullanarak ekleyebiliriz. Bu sayede doğrudan gccye parametre eklenebilir.
+
+.. code-block:: shell
+
+	$ valac main.vala util.c -X "-lreadline" # C ile readline kütüphanesini kullanmak için -lreadline gerekir.
+
+Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez. Bu gibi durumlar için **delegate** ifadesinden yararlanılır. Önce delegate ifadesi ile fonksiyonun nasıl tanımlanacağı belirtilir daha sonra bu yeni oluşturulmuş tür parametre olarak kullanılır.
+
+.. code-block:: vala
+
+	delegate void fff(string message);
+	
+	// delegate ile kullanıma uygun fonksiyon tanımladık.
+	void f1(string message){
+	    stdout.printf(message);
+	}
+	
+	// delegate çağırmaya yarayan fonksiyon yazdık
+	void f2(fff function, string message){
+	    function(message);
+	}
+	
+	// main fonksiyonu
+	void main(string[] args){
+	    f2(f1,"Hello World");
+	}
+
+Sınıf kavramı
+=============
+Vala nesne yönelimli bir programlama dilidir. Bu sebeple sınıflar oluşturabiliriz. Sınıflar **Gtk** gibi arayüz programlamada kullanışlı olmaktadırlar. Sınıf oluşturmak için **class** ifadesi kullanılır.
+
+.. code-block:: vala
+
+	public class test {
+	    public void write(){
+	        stdout.printf("test123");
+	    }
+	}
+	int main(string[] args){
+	    test t = new test();
+	    t.write();
+	}
+
+Yukarıdaki örnekte sınıf tanımlanmıştır. Daha sonra bu sınıftan bir nesne türetilmiştir ve ardıntan nesneye ait fonksiyon çalıştırılmıştır.
+
+Sınıf içerisinde bulunan bazı fonksiyonların dışarıdan erişilmesini istemiyorsanız **private**, erişilmesini istiyorsanız **public** ifadesi ile tanımlamanız gerekmektedir.
+
+Sınıf içerisinde tanımlanmış değişkenlere ulaşmak için **this** ifadesi kullanılır.
+
+.. code-block:: vala
+
+	...
+	public class test {
+	    private int i;
+	    private int j;
+	    
+	    public void set(int i, int j){
+	        this.i = i;
+	        this.j = j;
+	    }
+	}
+	...
+
+Super sınıf
+===========
+Bir sınıfı başka bir sınıftan türetebiliriz. Bunun için sınıf tanımlanırken `class xxx : yyy` yapısı kullanılır.
+
+.. code-block:: vala
+
+	public class hello {
+	    public void write_hello(){
+	        stdout.printf("Hello");
+	    }
+	}
+	public class world : hello {
+	    public void write_world(){
+	        stdout.printf("World");
+	    }
+	    public void write(){
+	        write_hello();
+	        write_world();
+	    }
+	}
+	int main(){
+	    world w = new world();
+	    w.write();
+	    return 0;
+	}
+
+Eğer var olan bir fonksiyonun üzerine yazmak istiyorsak **override** ifadesini kullanabiliriz.
+
+.. code-block:: vala
+
+	...
+	public class hello {
+	    public void write(){
+	        stdout.printf("hello");
+	    }
+	}
+	public class world : hello {
+	    public override void write(){
+	        stdout.printf("world");
+	    }
+	}
+	...
+
+Bir sınıfı birden fazla sınıfın birleşiminden türetebiliriz. 
+
+.. code-block:: vala
+
+	...
+	public class hello {
+	    public void write_hello(){
+	        stdout.printf("Hello");
+	    }
+	}
+	public class world {
+	    public void write_world(){
+	        stdout.printf("World");
+	    }
+	}
+	public class helloworld : hello, world {
+	    public void write(){
+	        write_hello();
+	        write_world();
+	    }
+
+	}
+	...
+
+Signal kavramı
+==============
+Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için boş olarak tanımlanan fonksiyonun başına **signal** ifadesi yerleştirilir.
+
+.. code-block:: vala
+
+	public class test {
+	    public signal void sig1(int i);
+	    
+	    public void run(int i){
+	        this.sig1(i);
+	    }
+	}
+	int main(string[] args){
+	    test t1 = new test();
+	    t1.sig1.connect((i)=>{
+	        stdout.printf(i.to_string());
+	    });
+	    t1.run(31);
+	    return 0;
+	}
+
+Kütüphane oluşturma
+===================
+Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.
+
+.. code-block:: vala
+
+	// library.vala dosyası
+	public int test(){
+	    stdout.printf("Hello World");
+	    return 0;
+	}
+
+Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile derleyebiliriz. Vala programlama dili **glib-2.0** kullanarak çalıştığı için bu kütüphaneyi derleme esnasında eklememiz gerekmektedir. Ayrıca glib-2.0 derlenirken **-fPIC** parametresine ihtiyaç duyar.
+
+.. code-block:: shell
+
+	$ valac -C -H libtest.h --vapi libtest.vapi library.vala // Önce C koduna çevirelim
+	$ gcc library.c -o libtest.so -shared `pkg-config --cflags --libs glib-2.0` -fPIC // gcc ile derleyelim.
+
+Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak koduna çevirmeye gerek kalmadan kütüphanemiz derlenmiş olur.
+
+.. code-block:: shell
+
+	$ valac -H libtest.h --vapi libtest.vapi -o libtest.so -X -shared -X -fPIC library.vala
+
+Şimdi aşağıdaki gibi bir C kodu yazalım ve kütüphanemizi orada kullanalım. Oluşturulmuş olan **library.h** dosyamızdan yararlanabiliriz.
+
+.. code-block:: C
+
+	// main.c dosyası
+	#include <libtest.h>
+	int main(){
+	    gint i = test(); // vala değişken türleri glib kütüphanesinden gelir.
+	    return (int) i;
+	}
+
+Ve şimdi de C kodunu derleyemlim.
+
+.. code-block:: shell
+
+	$ gcc -L. -I. -ltest main.c `pkg-config --cflags --libs glib-2.0` -fPIC
+
+Bununla birlikte **libtest.vapi** dosyamızı kullanarak kütüphanemizi vala ile kullanmamız da mümkündür.
+
+.. code-block:: vala
+
+	// main.vala dosyası
+	int main(string[] args){
+	    int i = test();
+	    return i;
+	}
+
+Şimdi vala kodunu derleyelim.
+
+.. code-block:: shell
+
+	$ valac --vapidir ./ main.vala --pkg libtest
+
+
