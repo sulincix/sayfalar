@@ -148,7 +148,7 @@ Ekrana yazı yazmak için \fBprintf\fP kullanılır. normal çıktı için \fBst
 .nf
 .ft C
 int main(string[] args){
-    stdout\&.printf("Merhaba Dünya");
+    stdout\&.printf(\(dqMerhaba Dünya\(dq);
     return 0;
 }
 .ft P
@@ -165,8 +165,8 @@ Değişkenler türleri ile beraber tanımlanırlar veya \fBvar\fP ifadesi kullan
 .ft C
 \&...
 int num = 0;
-val text = "Hello world";
-string abc = "fff";
+val text = \(dqHello world\(dq;
+string abc = \(dqfff\(dq;
 \&...
 .ft P
 .fi
@@ -197,7 +197,7 @@ Değişkenler arası tür dönüşümü işlemi için \fBparse\fP ve \fBto_strin
 \&...
 int num = 15;
 string txt = num\&.to_string(); // int \-> string dönüşümü
-int ff = int\&.parse("23"); // string \-> int dönüşümü
+int ff = int\&.parse(\(dq23\(dq); // string \-> int dönüşümü
 \&...
 .ft P
 .fi
@@ -260,7 +260,7 @@ Dizinin boyutunu aşağıdaki gibi öğrenebiliriz.
 .nf
 .ft C
 \&...
-    string[] msgs = {"Hello", "World"};
+    string[] msgs = {\(dqHello\(dq, \(dqWorld\(dq};
     int ff = msgs\&.length;
 \&...
 .ft P
@@ -390,10 +390,10 @@ if(koşul){
 .ft C
 \&...
 string parola = stdin\&.read_line();
-if(parola == "abc123"){
-    stdout\&.printf("doğru parola");
+if(parola == \(dqabc123\(dq){
+    stdout\&.printf(\(dqdoğru parola\(dq);
 }else{
-    stderr\&.printf("hatalı parola");
+    stderr\&.printf(\(dqhatalı parola\(dq);
 }
 \&...
 .ft P
@@ -452,7 +452,7 @@ T{
 T}	T{
 logic and
 T}	T{
-"fg" == "aa" && 121 > 12
+\(dqfg\(dq == \(dqaa\(dq && 121 > 12
 T}
 _
 T{
@@ -460,7 +460,7 @@ T{
 T}	T{
 logic or
 T}	T{
-"fg" == "aa" || 121 > 12
+\(dqfg\(dq == \(dqaa\(dq || 121 > 12
 T}
 _
 T{
@@ -468,7 +468,7 @@ T{
 T}	T{
 eşit değildir
 T}	T{
-"fg" != "aa"
+\(dqfg\(dq != \(dqaa\(dq
 T}
 _
 T{
@@ -517,7 +517,7 @@ Burada \fB?\fP işaretinden sonra ilk durum \fB:\fP işaretinden sonra da gerçe
 .ft C
 \&...
 string parola = stdin\&.read_line();
-parola == "abc123" ? stdout\&.printf("Doğru parola") : stderr\&.printf("yanlış parola");
+parola == \(dqabc123\(dq ? stdout\&.printf(\(dqDoğru parola\(dq) : stderr\&.printf(\(dqyanlış parola\(dq);
 \&...
 .ft P
 .fi
@@ -605,14 +605,14 @@ Döngüden çıkmak için \fBbreak\fP döngünün alt satırlarının çalışma
 \&...
 while(true){
     int txt = stdin\&.read_line();
-    if(txt == "abc123"){
-        stdout\&.printf("Doğru parola");
+    if(txt == \(dqabc123\(dq){
+        stdout\&.printf(\(dqDoğru parola\(dq);
         break;
     }else{
-        stderr\&.printf("Hatalı parola");
+        stderr\&.printf(\(dqHatalı parola\(dq);
         continue;
     }
-    stdout\&.printf("test 123"); // bu satır çalıştırılmaz.
+    stdout\&.printf(\(dqtest 123\(dq); // bu satır çalıştırılmaz.
 }
 \&...
 .ft P
@@ -628,7 +628,7 @@ Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağ
 .nf
 .ft C
 int main(string[] args){
-    write("Hello world");
+    write(\(dqHello world\(dq);
     return 0;
 }
 void write(string message){
@@ -648,7 +648,7 @@ Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluş
 \&...
 void fff(); // boş olarak tanımlanabilir.
 void fff(){
-    stdout\&.printf("hmmm");
+    stdout\&.printf(\(dqhmmm\(dq);
 }
 \&...
 .ft P
@@ -665,7 +665,7 @@ Ayrıca fonksiyonu boş olarak tanımlayıp \fBC\fP programlama dili ile yazılm
 // main.vala dosyası
 extern void main(string msg);
 int main(string[] args){
-    fff("Hello World");
+    fff(\(dqHello World\(dq);
 }
 .ft P
 .fi
@@ -704,7 +704,7 @@ C kaynak kodunun gerektirdiği parametreleri \fB\-X\fP kullanarak ekleyebiliriz.
 .sp
 .nf
 .ft C
-$ valac main.vala util.c \-X "\-lreadline" # C ile readline kütüphanesini kullanmak için \-lreadline gerekir.
+$ valac main.vala util.c \-X \(dq\-lreadline\(dq # C ile readline kütüphanesini kullanmak için \-lreadline gerekir.
 .ft P
 .fi
 .UNINDENT
@@ -730,7 +730,7 @@ void f2(fff function, string message){
 
 // main fonksiyonu
 void main(string[] args){
-    f2(f1,"Hello World");
+    f2(f1,\(dqHello World\(dq);
 }
 .ft P
 .fi
@@ -746,7 +746,7 @@ Vala nesne yönelimli bir programlama dilidir. Bu sebeple sınıflar oluşturabi
 .ft C
 public class test {
     public void write(){
-        stdout\&.printf("test123");
+        stdout\&.printf(\(dqtest123\(dq);
     }
 }
 int main(string[] args){
@@ -793,12 +793,12 @@ Bir sınıfı başka bir sınıftan türetebiliriz. Bunun için sınıf tanımla
 .ft C
 public class hello {
     public void write_hello(){
-        stdout\&.printf("Hello");
+        stdout\&.printf(\(dqHello\(dq);
     }
 }
 public class world : hello {
     public void write_world(){
-        stdout\&.printf("World");
+        stdout\&.printf(\(dqWorld\(dq);
     }
     public void write(){
         write_hello();
@@ -824,12 +824,12 @@ Eğer var olan bir fonksiyonun üzerine yazmak istiyorsak \fBoverride\fP ifadesi
 \&...
 public class hello {
     public void write(){
-        stdout\&.printf("hello");
+        stdout\&.printf(\(dqhello\(dq);
     }
 }
 public class world : hello {
     public override void write(){
-        stdout\&.printf("world");
+        stdout\&.printf(\(dqworld\(dq);
     }
 }
 \&...
@@ -847,12 +847,12 @@ Bir sınıfı birden fazla sınıfın birleşiminden türetebiliriz.
 \&...
 public class hello {
     public void write_hello(){
-        stdout\&.printf("Hello");
+        stdout\&.printf(\(dqHello\(dq);
     }
 }
 public class world {
     public void write_world(){
-        stdout\&.printf("World");
+        stdout\&.printf(\(dqWorld\(dq);
     }
 }
 public class helloworld : hello, world {
@@ -904,7 +904,7 @@ Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşa�
 .ft C
 // library.vala dosyası
 public int test(){
-    stdout\&.printf("Hello World");
+    stdout\&.printf(\(dqHello World\(dq);
     return 0;
 }
 .ft P

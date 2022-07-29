@@ -46,15 +46,15 @@ Python programlama dilinde açıklamalar \fB#\fP işaretinden sonrası için ge�
 .UNINDENT
 .UNINDENT
 .sp
-Bununla birlikte çoklu açıklama satırı yapmak için \fB"""\fP işareti arasına alabiliriz.
+Bununla birlikte çoklu açıklama satırı yapmak için \fB\(dq\(dq\(dq\fP işareti arasına alabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-""" Bu bir açıklama satırı
+\(dq\(dq\(dq Bu bir açıklama satırı
 Bu diğer açıklama satırı
-Bu son açıklama satırı """
+Bu son açıklama satırı \(dq\(dq\(dq
 .ft P
 .fi
 .UNINDENT
@@ -101,7 +101,7 @@ Pythonda girintileme olayı için de \fB{\fP ve \fB}\fP kullanılmak yerine boş
 .ft C
 f = 12 # f sayısını 12ye eşitledik
 if f == 12: # f sayısı 12ye eşit mi diye sorguladık
-    print("eşit") # ekrana yazı yazdırık
+    print(\(dqeşit\(dq) # ekrana yazı yazdırık
 .ft P
 .fi
 .UNINDENT
@@ -116,7 +116,7 @@ Pythonda ekrana yazı yazmak için \fBprint\fP işlevini kullanıyoruz.
 .sp
 .nf
 .ft C
-print("Merhaba Dünya")
+print(\(dqMerhaba Dünya\(dq)
 \-> Merhaba Dünya
 .ft P
 .fi
@@ -132,7 +132,7 @@ Birden çok ifadeyi yazdırmak için \fBprint\fP işlevine birden çok girdi ver
 # Yazılar tırnak içine alınır.
 # Sayılar tırnak içine alınmaz.
 # True ve False doğruluk belirtir.
-print("Merhaba",12,"Dünya",True)
+print(\(dqMerhaba\(dq,12,\(dqDünya\(dq,True)
 \-> Merhaba 12 Dünya True
 .ft P
 .fi
@@ -148,7 +148,7 @@ Değişkenler tanımlanırken \fBdegisken = deger\fP şeklinde bir ifade kulanı
 .nf
 .ft C
 i = 12
-yazi = "merhaba dünya"
+yazi = \(dqmerhaba dünya\(dq
 k = 1.2
 hmm = True
 .ft P
@@ -180,7 +180,7 @@ Bir değişkenin türünü öğrenmek için \fBtype\fP işlevini kullanabiliriz.
 .sp
 .nf
 .ft C
-veri = "abc123"
+veri = \(dqabc123\(dq
 turu = type(veri)
 print(turu)
 \-> <class \(aqstr\(aq>
@@ -205,15 +205,15 @@ print(tur)
 .UNINDENT
 .SS String
 .sp
-String türünden değişkenler yazı içerir. \fB"\fP veya \fB\(aq\fP veya \fB"""\fP arasına yazılırarak tanımlanır.
+String türünden değişkenler yazı içerir. \fB\(dq\fP veya \fB\(aq\fP veya \fB\(dq\(dq\(dq\fP arasına yazılırarak tanımlanır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-yazi1 = "merhaba"
+yazi1 = \(dqmerhaba\(dq
 yazi2 = \(aqyazım\(aq
-yazi3 = """dünya"""
+yazi3 = \(dq\(dq\(dqdünya\(dq\(dq\(dq
 .ft P
 .fi
 .UNINDENT
@@ -225,7 +225,7 @@ String türünden değişkenler \fB+\fP işareti ile uc uca eklenebilir.
 .sp
 .nf
 .ft C
-yazi = "merhaba" + \(aq \(aq + """dünya"""
+yazi = \(dqmerhaba\(dq + \(aq \(aq + \(dq\(dq\(dqdünya\(dq\(dq\(dq
 print(yazi)
 \-> merhaba dünya
 .ft P
@@ -239,7 +239,7 @@ Değişkeni birden çok kez toplamak için \fB*\fP işareti kullanılabilir.
 .sp
 .nf
 .ft C
-yazi = "ali"*5
+yazi = \(dqali\(dq*5
 print(yazi)
 \-> alialialialiali
 .ft P
@@ -253,8 +253,8 @@ String türünden bir değişkenin içerisindeki bir bölümü başka bir şey i
 .sp
 .nf
 .ft C
-veri = "Merhaba"
-veri2 = veri\&.replace("rha","123")
+veri = \(dqMerhaba\(dq
+veri2 = veri\&.replace(\(dqrha\(dq,\(dq123\(dq)
 print(veri2)
 \-> Me123ba
 .ft P
@@ -270,12 +270,12 @@ Integer türünden değişkenler tam sayı belirtir. Dört işlem işaretleri il
 .nf
 .ft C
 sayi = (((24/2)+4)*2)\-1
-"""
+\(dq\(dq\(dq
 24/2 = 12
 12+4 = 16
 16*2 = 32
 32\-1 = 31
-"""
+\(dq\(dq\(dq
 print(sayi)
 \-> 31
 .ft P
@@ -303,7 +303,7 @@ String türünden bir değişkeni integer haline getirmek için \fBint\fP işlev
 .sp
 .nf
 .ft C
-print(int("12")/2)
+print(int(\(dq12\(dq)/2)
 \-> 6
 .ft P
 .fi
@@ -350,7 +350,7 @@ String türünden bir değişkeni float haline getirmek için \fBfloat\fP işlev
 .sp
 .nf
 .ft C
-print(float("2.2")/2)
+print(float(\(dq2.2\(dq)/2)
 \-> 1.1
 .ft P
 .fi
@@ -365,14 +365,14 @@ Boolean değişkenler sadece \fBTrue\fP veya \fBFalse\fP değerlerini alabilir. 
 .nf
 .ft C
 bool = 12 == 13
-"""
+\(dq\(dq\(dq
 == eşit
 != eşit değil
 <  küçük
 >  büyük
 <= küçük eşit
 >= büyük eşit
-"""
+\(dq\(dq\(dq
 print(bool)
 \-> False
 .ft P
@@ -400,8 +400,8 @@ Bir string türünden değişkenin içinde başka bir string türünden değişk
 .sp
 .nf
 .ft C
-veri = "ef" in "Dünya"
-veri2 = "ny" in "Dünya"
+veri = \(dqef\(dq in \(dqDünya\(dq
+veri2 = \(dqny\(dq in \(dqDünya\(dq
 print(veri,veri2)
 \-> False True
 .ft P
@@ -430,7 +430,7 @@ Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerin
 .sp
 .nf
 .ft C
-a = input("Bir değer girin >")
+a = input(\(dqBir değer girin >\(dq)
 print(a,type(a))
 <\- 12
 \-> 12 <class \(aqstr\(aq>
@@ -445,7 +445,7 @@ String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak
 .sp
 .nf
 .ft C
-a = eval("12/2 == 16\-10") # string ifade çalıştırılır ve sonucu aktarılır.
+a = eval(\(dq12/2 == 16\-10\(dq) # string ifade çalıştırılır ve sonucu aktarılır.
 print(a)
 \-> True
 .ft P
@@ -480,9 +480,9 @@ else:
 .nf
 .ft C
 if 13 % 2 == 0 : # % işareti bölümden kalanı bulmaya yarar.
-    print("Çift sayı")
+    print(\(dqÇift sayı\(dq)
 else:
-    print("Tek sayı")
+    print(\(dqTek sayı\(dq)
 .ft P
 .fi
 .UNINDENT
@@ -496,9 +496,9 @@ Değeri olmayan (None) değişkenler koşul ifadelerinde \fBFalse\fP olarak kabu
 .ft C
 veri = None
 if veri:
-    print("Tanımlı")
+    print(\(dqTanımlı\(dq)
 else:
-    print("Tanımsız")
+    print(\(dqTanımsız\(dq)
 \-> Tanımsız
 .ft P
 .fi
@@ -512,15 +512,15 @@ Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:
 .nf
 .ft C
 koşul and eylem
-""" Şununla aynıdır:
+\(dq\(dq\(dq Şununla aynıdır:
 if koşul:
     eylem
-"""
+\(dq\(dq\(dq
 koşul or eylem
-""" Şununla aynıdır:
+\(dq\(dq\(dq Şununla aynıdır:
 if not koşul:
     eylem
-"""
+\(dq\(dq\(dq
 .ft P
 .fi
 .UNINDENT
@@ -532,8 +532,8 @@ Bu konunun daha iyi anlaşılması için:
 .sp
 .nf
 .ft C
-12 == 12 and print("eşittir")
-12 == 14 or print("eşit değildir")
+12 == 12 and print(\(dqeşittir\(dq)
+12 == 14 or print(\(dqeşit değildir\(dq)
 \-> eşittir
 \-> eşit değildir
 .ft P
@@ -578,7 +578,7 @@ Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki 
 .sp
 .nf
 .ft C
-a = [1, 3, "merhaba", True, 1.2, None]
+a = [1, 3, \(dqmerhaba\(dq, True, 1.2, None]
 .ft P
 .fi
 .UNINDENT
@@ -594,7 +594,7 @@ Dizilerde eleman eklemek için \fBappend\fP veya \fBinsert\fP işlevini eleman s
 .ft C
 a = [22]
 print(a)
-a\&.append("Merhaba") # Sona ekleme yapar.
+a\&.append(\(dqMerhaba\(dq) # Sona ekleme yapar.
 a\&.insert(0,12) # 0 elemanın ekleneceği yeri ifade eder.
 print(a)
 a\&.remove(22) # 22 elemanını siler
@@ -636,7 +636,7 @@ Dizideki bir elemanın uzunluğunu bulmak için \fBlen\fP işlevi, elemanın diz
 .sp
 .nf
 .ft C
-a = [12, "hmm", 3.2]
+a = [12, \(dqhmm\(dq, 3.2]
 sayi = len(a)
 sayi2 = a\&.index(3.2)
 print(sayi,sayi2)
@@ -684,10 +684,10 @@ String türünden bir değişkeni belli bir harf veya harf öbeğine göre bölm
 .sp
 .nf
 .ft C
-veri="   Bu bir yazıdır   "
+veri=\(dq   Bu bir yazıdır   \(dq
 veri2 = veri\&.strip()
 print(len(veri),len(veri2))
-liste = veri2\&.split(" ")
+liste = veri2\&.split(\(dq \(dq)
 print(liste)
 \-> 20 14
 \-> [\(aqBu\(aq, \(aqbir\(aq, \(aqyazıdır\(aq]
@@ -739,10 +739,10 @@ Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringi
 .sp
 .nf
 .ft C
-veri = "Merhaba Dünya"
+veri = \(dqMerhaba Dünya\(dq
 toplam = 0
 for i in veri:
-    if i == "a" or i == "e":
+    if i == \(dqa\(dq or i == \(dqe\(dq:
         toplam += 1
 print(toplam)
 \-> 4
@@ -796,7 +796,7 @@ işlevlerde çıktı sonucu olarak bir değişken döndürmek için \fBreturn\fP
 .ft C
 def topla(sayi1,sayi2):
     return sayi1 + sayi2
-    print("Merhaba") # bu satır çalıştırılmaz
+    print(\(dqMerhaba\(dq) # bu satır çalıştırılmaz
 toplam = topla(3,5)
 print(toplam)
 \-> 8
@@ -812,13 +812,13 @@ Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken iş
 .nf
 .ft C
 def yazdir():
-    yazi = "Merhaba"
+    yazi = \(dqMerhaba\(dq
     print(yazi)
 yazdir()
 print(yazi)
 \-> Merhaba
 \-> Traceback (most recent call last):
-\->   File "ders.py", line 5, in <module>
+\->   File \(dqders.py\(dq, line 5, in <module>
 \->     print(yazi)
 \-> NameError: name \(aqyazi\(aq is not defined
 .ft P
@@ -826,14 +826,14 @@ print(yazi)
 .UNINDENT
 .UNINDENT
 .sp
-Bir işlevin ne işe yaradığını öğrenmek için \fBhelp\fP işlevi kullanılır. işlevin ne işe yaradığını tanımlamak için ise ilk satıra \fB"""\fP içerisine yazabiliriz. Bunu tanımlamak programınızı inceleyen diğer insanlar için yararlı olacaktır.
+Bir işlevin ne işe yaradığını öğrenmek için \fBhelp\fP işlevi kullanılır. işlevin ne işe yaradığını tanımlamak için ise ilk satıra \fB\(dq\(dq\(dq\fP içerisine yazabiliriz. Bunu tanımlamak programınızı inceleyen diğer insanlar için yararlı olacaktır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
 def abc(sayi):
-    """Girilen sayıyı 10dan çıkartır"""
+    \(dq\(dq\(dqGirilen sayıyı 10dan çıkartır\(dq\(dq\(dq
     return 10\-sayi
 help(abc)
 \->  Help on function abc in module __main__:
@@ -852,7 +852,7 @@ Bir işlevin birden çok çıktısı olabilir. Bunun için \fBreturn\fP ifadesin
 .nf
 .ft C
 def yer_degistir(a,b):
-    """Girilen değişkenlerin yerini değiştirir"""
+    \(dq\(dq\(dqGirilen değişkenlerin yerini değiştirir\(dq\(dq\(dq
     return b,a
 c = 12
 d = 31
@@ -932,7 +932,7 @@ Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.
 .sp
 .nf
 .ft C
-dosya = open("dosya.txt","r") # okumak için r kullanılır.
+dosya = open(\(dqdosya.txt\(dq,\(dqr\(dq) # okumak için r kullanılır.
 ilksatir = dosya\&.readline()
 tumu = dosya\&.read()
 satirlar = dosya\&.readlines()
@@ -949,10 +949,10 @@ Dosyaya yazmak için ise \fBwrite\fP işlevi kullanılır. Okuma ve yazma işlem
 .sp
 .nf
 .ft C
-dosya = open("dosya.txt","w") # yazmak için w eklemek için a kullanılır.
-dosya\&.write("Merhaba dünya\en")
-dosya\&.write("Selam dünya\en")
-dosya\&.write("sayı:123\en")
+dosya = open(\(dqdosya.txt\(dq,\(dqw\(dq) # yazmak için w eklemek için a kullanılır.
+dosya\&.write(\(dqMerhaba dünya\en\(dq)
+dosya\&.write(\(dqSelam dünya\en\(dq)
+dosya\&.write(\(dqsayı:123\en\(dq)
 dosya\&.close()
 .ft P
 .fi
@@ -966,13 +966,13 @@ Python programlarında kodların markaşıklaşmasını önlemek ve daha kullan�
 .sp
 .nf
 .ft C
-yazi = "Merhaba"
+yazi = \(dqMerhaba\(dq
 sayi = 12
 def yazdir():
     print(yazi)
 class sinif:
     def islev(self):
-        print("selam")
+        print(\(dqselam\(dq)
 .ft P
 .fi
 .UNINDENT
@@ -1039,16 +1039,16 @@ sayı=44
 dosya = None # boş dosya nesnesi
 class inidosya:
     def __init__(self,yol):
-        ini = open(yol,"r") # ini dosyasını açtık
+        ini = open(yol,\(dqr\(dq) # ini dosyasını açtık
         self\&.icerik = ini\&.read() # dosya içeriğini okuduk
     def deger_al(bolum,veri):
         etkin = False # istenilen yere gelene kadar etkisiz kal
-        for satir in dosya\&.icerik\&.split("\en"):
-            if "[" + bolum + "]" in satir: # okunan satırda istenilen bölümün başı mı
+        for satir in dosya\&.icerik\&.split(\(dq\en\(dq):
+            if \(dq[\(dq + bolum + \(dq]\(dq in satir: # okunan satırda istenilen bölümün başı mı
                 etkin = True # etkinleştir
-            if etkin and "=" in satir: # etkinse ve satırda = bulunuyorsa
-                if satir\&.split("=")[0] == veri: # = işaretine göre 0. eleman aranan mı
-                    return satir\&.split("=")[0] # = işaretine göre böl . elemanı al
+            if etkin and \(dq=\(dq in satir: # etkinse ve satırda = bulunuyorsa
+                if satir\&.split(\(dq=\(dq)[0] == veri: # = işaretine göre 0. eleman aranan mı
+                    return satir\&.split(\(dq=\(dq)[0] # = işaretine göre böl . elemanı al
 .ft P
 .fi
 .UNINDENT
@@ -1060,8 +1060,8 @@ class inidosya:
 .ft C
 # main.py dosyası içeriği
 import iniparser # modülü yükle
-iniparser\&.dosya = iniparser\&.inidosya("dosya") # ini dosyasını yükle
-deger=iniparser\&.deger_al("hmm","veri") # değeri al
+iniparser\&.dosya = iniparser\&.inidosya(\(dqdosya\(dq) # ini dosyasını yükle
+deger=iniparser\&.deger_al(\(dqhmm\(dq,\(dqveri\(dq) # değeri al
 print(deger\&.strip()) # değerin başında sonunda boşluk varsa sil ve yaz
 \-> abc123x
 .ft P
@@ -1098,7 +1098,7 @@ class genis(deneme):
 # main.py dosyası
 from ornek import genis as g # ornek.py dosyasındaki genis sınıfını g olarak içeri aldık.
 print(g\&.sayi, g\&.sayi2)
-g\&.hmm("abc123")
+g\&.hmm(\(dqabc123\(dq)
 \-> 13 44
 \-> abc123
 .ft P

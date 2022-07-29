@@ -739,4 +739,3 @@ Bir modülü diğer bir modülün genişletilmişi olarak tanımlayabiliriz. Gel
 	-> 13 44
 	-> abc123
 	    
-

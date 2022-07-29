@@ -1,42 +1,37 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 <title>Debian için depo oluşturma</title>
+<link rel="stylesheet" href="main.css" />
 <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-<div class="document" id="debian-icin-depo-olusturma">
+<main id="debian-icin-depo-olusturma">
 <h1 class="title">Debian için depo oluşturma</h1>
 
 <p>Bu dokümanda <strong>debian</strong> için depo oluşturma ve depoyu güncelleme konusu anlatılmıştır.</p>
-<div class="section" id="gerekli-paketlerin-kurulmasi">
-<h1>Gerekli paketlerin kurulması</h1>
+<section id="gerekli-paketlerin-kurulmasi">
+<h2>Gerekli paketlerin kurulması</h2>
 <p>Aşağıdaki komut ile index almamız için gereken paketi kurabilirsiniz:</p>
-<pre class="code shell literal-block">
-$ apt-get instal apt-ftparchive
-</pre>
+<pre class="code shell literal-block"><code>$ apt-get instal apt-ftparchive</code></pre>
 <p>Depoyu ağda paylaşmak için web server gerekmektedir.</p>
 <blockquote>
-<strong>Nginx</strong> veya <strong>Apache</strong> kurmalısınız.</blockquote>
+<p><strong>Nginx</strong> veya <strong>Apache</strong> kurmalısınız.</p>
+</blockquote>
 <p>Nginx kurmak için:</p>
-<pre class="code shell literal-block">
-$ apt install nginx
-</pre>
+<pre class="code shell literal-block"><code>$ apt install nginx</code></pre>
 <p>Apache kurmak için:</p>
-<pre class="code shell literal-block">
-$ apt install apache2
-</pre>
-</div>
-<div class="section" id="depo-ile-ilgili-temel-kavramlar">
-<h1>Depo ile ilgili temel kavramlar</h1>
+<pre class="code shell literal-block"><code>$ apt install apache2</code></pre>
+</section>
+<section id="depo-ile-ilgili-temel-kavramlar">
+<h2>Depo ile ilgili temel kavramlar</h2>
 <p>Deponun 2 temel dizini bulunmaktadır: <strong>pool</strong> ve <strong>dists</strong></p>
 <p>Deponun bilgilerini <strong>Release</strong> dosyası içinde bulunur.</p>
 <p>Deponun temel dizin yapısı şu şekilde özetlenebilir:</p>
-<pre class="code shell literal-block">
-repository/
+<pre class="code shell literal-block"><code>repository/
 <span class="punctuation">|</span>-- dists
 <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- stable
 <span class="punctuation">|</span>       <span class="punctuation">|</span>-- Release
@@ -46,16 +41,14 @@ repository/
 <span class="literal string backtick">`</span>-- pool
     <span class="punctuation">|</span>-- contrib
     <span class="punctuation">|</span>-- main
-    <span class="literal string backtick">`</span>-- non-free
-</pre>
+    <span class="literal string backtick">`</span>-- non-free</code></pre>
 <p>Depoya <strong>pool</strong> ve <strong>dists</strong> dizinleri içinde olmamak şartı ile istediğiniz dosyaları yerleştirebilirsiniz. (örneğin: index.html)</p>
-<div class="section" id="dists">
-<h2>Dists</h2>
+<section id="dists">
+<h3>Dists</h3>
 <p><em>dists</em> içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.</p>
 <p><strong>dists</strong> dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve <strong>Release</strong> dosyası bulunur.</p>
 <p>Örnek depo <strong>dists</strong> dizin yapısı (imzalanmamış depo):</p>
-<pre class="code shell literal-block">
-dists/
+<pre class="code shell literal-block"><code>dists/
 <span class="literal string backtick">`</span>-- stable
     <span class="punctuation">|</span>-- Release
     <span class="punctuation">|</span>-- contrib
@@ -80,35 +73,33 @@ dists/
             <span class="punctuation">|</span>-- Packages
             <span class="literal string backtick">`</span>-- Packages.gz
 
-<span class="literal number">10</span> directories, <span class="literal number">13</span> files
-</pre>
-</div>
-<div class="section" id="pool">
-<h2>Pool</h2>
+<span class="literal number">10</span> directories, <span class="literal number">13</span> files</code></pre>
+</section>
+<section id="pool">
+<h3>Pool</h3>
 <p><em>pool</em> içerisinde de pakekler uygun hiyerarşiye göre dizilmiştir.</p>
 <p><strong>pool</strong> dizininde bulunan paketler genel bir kural olmaması ile birlikte şu kurallara uygun şekilde dizilmeleri tavsiye edilmektedir:</p>
 <p>Alfabetik kural:</p>
 <ol class="arabic">
-<li><p class="first">Paket isminin ilk harfi ile başlayar dizin içerisinde paket adını taşıyan bir dizin olmalı ve paket bu dizinde yer almalı.</p>
+<li><p>Paket isminin ilk harfi ile başlayar dizin içerisinde paket adını taşıyan bir dizin olmalı ve paket bu dizinde yer almalı.</p>
 <p>test adındaki bir paket için <strong>pool/t/test/test_1.0_amd64.deb</strong></p>
 </li>
-<li><p class="first">Paket adının başında lib varsa ve kütüphane dosyası ise ilk harf yerine lib kısmından sonraki ilk harf ile beraber alınmalı.</p>
+<li><p>Paket adının başında lib varsa ve kütüphane dosyası ise ilk harf yerine lib kısmından sonraki ilk harf ile beraber alınmalı.</p>
 <p>libncurses paketi için <strong>pool/libn/libncurses/libncurses_6.2-1_amd64.deb</strong></p>
 </li>
 </ol>
 <p>Bölümsel kural:</p>
 <ol class="arabic">
-<li><p class="first">Bölümler belirlenmeli.</p>
+<li><p>Bölümler belirlenmeli.</p>
 <p><em>system</em>, <em>util</em>, <em>network</em>, <em>optional</em>, <em>appications</em> gibi.</p>
 </li>
-<li><p class="first">Alt bölümler oluşturulabilir.</p>
+<li><p>Alt bölümler oluşturulabilir.</p>
 <p>bash paketi için <strong>pool/system/shell/bash/bash_5.0_amd64.deb</strong></p>
 </li>
 </ol>
 <p>Küçük depolar için tüm paketleri tek bir dizine yığabilirsiniz.</p>
 <p>Alfabetik kurala göre dizilmiş örnek <strong>pool</strong> dizini:</p>
-<pre class="code shell literal-block">
-pool/
+<pre class="code shell literal-block"><code>pool/
 <span class="punctuation">|</span>-- contrib
 <span class="punctuation">|</span>-- main
 <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- f
@@ -116,16 +107,14 @@ pool/
 <span class="punctuation">|</span>           <span class="literal string backtick">`</span>-- foo_1.0_all.deb
 <span class="literal string backtick">`</span>-- non-free
 
-<span class="literal number">5</span> directories, <span class="literal number">1</span> file
-</pre>
+<span class="literal number">5</span> directories, <span class="literal number">1</span> file</code></pre>
 <p>Paketler <strong>paket_version_mimari.deb</strong> şeklinde isimlendirilmelidir.</p>
 <p>amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için <strong>test_1.0_amd64.deb</strong></p>
-</div>
-<div class="section" id="release">
-<h2>Release</h2>
+</section>
+<section id="release">
+<h3>Release</h3>
 <p><strong>Release</strong> dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin hash değerleri yer alır. Örneğin:</p>
-<pre class="code shell literal-block">
-Origin: Debian
+<pre class="code shell literal-block"><code>Origin: Debian
 Label: Debian
 Suite: stable
 Version: <span class="literal number">10</span>.5
@@ -179,27 +168,23 @@ SHA512:
   69bc3bee91d222eeff12e479a44aeb7d22fc8aa71c597aeb3c4f9a42b6c737fcfb4422084dd6e1387540bc0b56e9cacfeb7818e1d09063624dba54170ffa5fab      <span class="literal number">1286</span>    main/binary-amd64/Packages.gz
   d54bcb50ab9409e3480dc002c520d240a02804ba648b9a581d524e1ae161f33a8d31e2bd4e0528db07c34ef2b0e4c53b7286ebc38fb319ff47be18be9db67db0      <span class="literal number">1156</span>    main/binary-i386/Packages
   ff4ee4f90b1ecd861d1adedaa6f0d77684c188add447e81f5131ce8e77ede3f4c99762c6e22c7804f11694b57d160ab46f44075a3ff8305fe285bc43f68700d0      <span class="literal number">820</span>     main/binary-i386/Packages.xz
-  07524f649a0ffc66192af4925b750d22ce3fc446eb0d890b473713615fde4b2174214e94bdcdac97b5281e2386c5efaf7a8aa139a03f69c10b6d181e99d81c8a      <span class="literal number">747</span>     main/binary-i386/Packages.gz
-</pre>
-</div>
-</div>
-<div class="section" id="index-alinmasi">
-<h1>İndex alınması</h1>
+  07524f649a0ffc66192af4925b750d22ce3fc446eb0d890b473713615fde4b2174214e94bdcdac97b5281e2386c5efaf7a8aa139a03f69c10b6d181e99d81c8a      <span class="literal number">747</span>     main/binary-i386/Packages.gz</code></pre>
+</section>
+</section>
+<section id="index-alinmasi">
+<h2>İndex alınması</h2>
 <p><strong>pool</strong> dizini içerisine yukarıda anlatılan hiyerarşilere uygun şekilde paketlerimizi yerleştirmeliyiz. pool içerisinde <strong>main</strong>, <strong>contrib</strong>, <strong>non-free</strong> adında dizinler olmalıdır. Bu isimler ile <strong>dists</strong> dizini içerisindeki isimler aynı olmalıdır.</p>
 <p>pool içerisindeki paket yerleştirme işlemi bittikten sonra şu komutu kullanarak index almalıyız:</p>
-<pre class="code shell literal-block">
-$ apt-ftparchive -a amd64 packages pool/main &gt; dists/stable/main/binary-amd64/Packages
+<pre class="code shell literal-block"><code>$ apt-ftparchive -a amd64 packages pool/main &gt; dists/stable/main/binary-amd64/Packages
 $ gzip -k dists/stable/main/binary-amd64/Packages
-$ xz -k dists/stable/main/binary-amd64/Packages
-</pre>
+$ xz -k dists/stable/main/binary-amd64/Packages</code></pre>
 <p>İlk komut ile pool/main içerisindeki paketlerin indexlerini dists içerisindeki main bölümüne yerleştiriyoruz. Bu işlem contrib ve non-free için benzer şekilde yapılmalıdır. ayrıca eğer i386 veya arm64 veya armhf için de paketler varsa onlar için de tekrarlamanız gerekmektedir.</p>
 <p>İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.</p>
-<div class="section" id="release-dosyasinin-yazilmasi">
-<h2>Release dosyasının yazılması</h2>
+<section id="release-dosyasinin-yazilmasi">
+<h3>Release dosyasının yazılması</h3>
 <p>Release dosyasını elle yazmak hem uğraştırıcıdır. Başlık kısmındaki değerler değişmeyeceği için onları ayrı bir dosyaya yazıp md5sum değerlerini de komut kullanarak üstüne ekleyebilirsiniz. <em>sed</em> komutu ile de biçimlendirseniz güzel olur :D</p>
 <p>Başlık dosyamızdaki tarihi sonradan güncelleyebilmek için tarih yerine XdateX yazdık. Başlık dosyası içeriği şu şekilde olamalı:</p>
-<pre class="code YAML literal-block">
-<span class="literal scalar plain">$ cat baslik</span><span class="whitespace">
+<pre class="code YAML literal-block"><code><span class="literal scalar plain">$ cat baslik</span><span class="whitespace">
 </span><span class="literal scalar plain">Origin</span><span class="punctuation indicator">:</span><span class="whitespace"> </span><span class="literal scalar plain">Debian</span><span class="whitespace">
 </span><span class="name tag">Label</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Debian</span><span class="whitespace">
 </span><span class="name tag">Suite</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">stable</span><span class="whitespace">
@@ -210,21 +195,17 @@ $ xz -k dists/stable/main/binary-amd64/Packages
 </span><span class="name tag">Acquire-By-Hash</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">yes</span><span class="whitespace">
 </span><span class="name tag">Architectures</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">amd64 i386</span><span class="whitespace">
 </span><span class="name tag">Components</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">main contrib non-free</span><span class="whitespace">
-</span><span class="name tag">Description</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Test repository</span>
-</pre>
+</span><span class="name tag">Description</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Test repository</span></code></pre>
 <p>Release dosyamızı oluşturmadan önce yardımcı fonksionumuzu tanımlamamız gerekmektedir. Bashrc içerisine aşağıdaki fonksionu tanımlayalım. (veya betik yazıyorsanız betik içine) Bu fonksion Release dosyasındaki hash değerlerinin formatına uygun çıktı üzetebilmemizi sağlar.</p>
-<pre class="code shell literal-block">
- prepareLine<span class="operator">(){</span>
+<pre class="code shell literal-block"><code> prepareLine<span class="operator">(){</span>
     <span class="keyword">while</span> <span class="name builtin">read</span> line <span class="punctuation">;</span> <span class="keyword">do</span>
         <span class="name variable">fname</span><span class="operator">=</span><span class="keyword">$(</span><span class="name builtin">echo</span> <span class="name variable">$line</span> <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/.* //g&quot;</span><span class="keyword">)</span>
         <span class="name variable">fhash</span><span class="operator">=</span><span class="keyword">$(</span><span class="name builtin">echo</span> <span class="name variable">$line</span> <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/ .*//g&quot;</span><span class="keyword">)</span>
         <span class="name builtin">echo</span> -e <span class="literal string double">&quot;  </span><span class="name variable">$fhash</span><span class="literal string double">\t</span><span class="keyword">$(</span>du -bs <span class="name variable">$fname</span><span class="punctuation">|</span> sed <span class="literal string single">'s|\./||g'</span><span class="keyword">)</span><span class="literal string double">&quot;</span>
     <span class="keyword">done</span>
-<span class="operator">}</span>
-</pre>
+<span class="operator">}</span></code></pre>
 <p>Başlık ile md5sum birleştirmek için aşağıdakine benzer bir komut dizisi kullanabilirsiniz:</p>
-<pre class="code shell literal-block">
-$ cat baslik <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/XdateX/</span><span class="keyword">$(</span>date -R<span class="keyword">)</span><span class="literal string double">/g&quot;</span> &gt; dists/stable/Release
+<pre class="code shell literal-block"><code>$ cat baslik <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/XdateX/</span><span class="keyword">$(</span>date -R<span class="keyword">)</span><span class="literal string double">/g&quot;</span> &gt; dists/stable/Release
 $ <span class="name builtin">cd</span> dists/stable/
 $ <span class="name builtin">echo</span> <span class="literal string double">&quot;MD5Sum:&quot;</span> &gt;&gt;  Release
 $ find . -type f <span class="punctuation">|</span> xargs md5sum <span class="punctuation">|</span> prepareLine &gt;&gt; Release
@@ -233,59 +214,44 @@ $ find . -type f <span class="punctuation">|</span> xargs sha1sum <span class="p
 $ <span class="name builtin">echo</span> <span class="literal string double">&quot;SHA256:&quot;</span> &gt;&gt;  Release
 $ find . -type f <span class="punctuation">|</span> xargs sha256sum <span class="punctuation">|</span> prepareLine &gt;&gt; Release
 $ <span class="name builtin">echo</span> <span class="literal string double">&quot;SHA512:&quot;</span> &gt;&gt;  Release
-$ find . -type f <span class="punctuation">|</span> xargs sha512sum <span class="punctuation">|</span> prepareLine  &gt;&gt; Release
-</pre>
-</div>
-<div class="section" id="deponun-imzalanmasi">
-<h2>Deponun imzalanması</h2>
+$ find . -type f <span class="punctuation">|</span> xargs sha512sum <span class="punctuation">|</span> prepareLine  &gt;&gt; Release</code></pre>
+</section>
+<section id="deponun-imzalanmasi">
+<h3>Deponun imzalanması</h3>
 <p>Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:</p>
-<pre class="code shell literal-block">
-$ gpg --clearsign -o InRelease Release
-$ gpg -abs -o Release.gpg Release
-</pre>
+<pre class="code shell literal-block"><code>$ gpg --clearsign -o InRelease Release
+$ gpg -abs -o Release.gpg Release</code></pre>
 <p>Eğer gpg anahtarınız yoksa oluşturmak için:</p>
-<pre class="code shell literal-block">
-$ gpg --gen-key
-</pre>
+<pre class="code shell literal-block"><code>$ gpg --gen-key</code></pre>
 <p>Oluşturduğumuz gpg anahtarını listelemek için:</p>
-<pre class="code shell literal-block">
-$ gpg --list-keys
-</pre>
+<pre class="code shell literal-block"><code>$ gpg --list-keys</code></pre>
 <p>Bu listede gpg anahtarını id değerleri bulunur. Bu değeri kullanarak gpg anahtarımızı dışarı aktarabiliriz. Aktarılan bu anahtar depoyu kullanmak isteyen kullanıcılar tarafından anahtar deposuna eklenmelidir.</p>
 <p>Elimizdeki gpg anahtarını dışarı aktarmak için:</p>
-<pre class="code shell literal-block">
-$ gpg --output Release.key --armor --export gpg_id_değeri
-</pre>
-</div>
-</div>
-<div class="section" id="deponun-agda-paylasilmasi">
-<h1>Deponun ağda paylaşılması</h1>
+<pre class="code shell literal-block"><code>$ gpg --output Release.key --armor --export gpg_id_değeri</code></pre>
+</section>
+</section>
+<section id="deponun-agda-paylasilmasi">
+<h2>Deponun ağda paylaşılması</h2>
 <p><strong>Apache</strong> veya <strong>nginx</strong> tavsiye etmekle birlikte <strong>busybox httpd</strong> ve <strong>python3 http.server</strong> kullanılabilir.</p>
 <p>Eğer sunucunuz yoksa bir hostingde yada github.io gibi static site üzerinde de barındırabilirsiniz. (Eğer kullanım şartlarına ihlal durum oluşturmuyorsa.)</p>
 <p>Eğer http(s) yerine ftp kullanmak istiyorsanız <strong>vsftpd</strong> veya <strong>busybox ftpd</strong> kullanabilirsiniz.</p>
-<div class="section" id="deponun-kullanicilar-tarafindan-sisteme-eklenmesi">
-<h2>Deponun kullanıcılar tarafından sisteme eklenmesi</h2>
+<section id="deponun-kullanicilar-tarafindan-sisteme-eklenmesi">
+<h3>Deponun kullanıcılar tarafından sisteme eklenmesi</h3>
 <p>Depomuz tamamlandı ve internet ağının bir parçası haline geldikten sonra kullanıcılar bu depoyu kullanmak istediklerinde şu adımları uygulamalılar.</p>
 <ol class="arabic simple">
-<li>Depoyu imzalayan gpg anahtarını içeri aktarmalılar.</li>
+<li><p>Depoyu imzalayan gpg anahtarını içeri aktarmalılar.</p></li>
 </ol>
-<pre class="code shell literal-block">
-$ wget -O - http://depo_sunucusu/depo_konumu/dists/stable/Release.key <span class="punctuation">|</span> apt-key add -
-</pre>
+<pre class="code shell literal-block"><code>$ wget -O - http://depo_sunucusu/depo_konumu/dists/stable/Release.key <span class="punctuation">|</span> apt-key add -</code></pre>
 <ol class="arabic simple" start="2">
-<li>/etc/sources.list.d/ dizinine dosya içerisine eklemeliler. (veya sources.list dosyasına)</li>
+<li><p>/etc/sources.list.d/ dizinine dosya içerisine eklemeliler. (veya sources.list dosyasına)</p></li>
 </ol>
-<pre class="code shell literal-block">
-$ <span class="name builtin">echo</span> <span class="literal string double">&quot;deb http://depo_sunucusu/depo_konumu stable main contrib non-free&quot;</span> &gt; /etc/apt/sources.list.d/testrepo.list
-</pre>
+<pre class="code shell literal-block"><code>$ <span class="name builtin">echo</span> <span class="literal string double">&quot;deb http://depo_sunucusu/depo_konumu stable main contrib non-free&quot;</span> &gt; /etc/apt/sources.list.d/testrepo.list</code></pre>
 <ol class="arabic simple" start="3">
-<li>Depoyu güncellemeliler.</li>
+<li><p>Depoyu güncellemeliler.</p></li>
 </ol>
-<pre class="code shell literal-block">
-$ apt-get update
-</pre>
-</div>
-</div>
-</div>
+<pre class="code shell literal-block"><code>$ apt-get update</code></pre>
+</section>
+</section>
+</main>
 </body>
 </html>

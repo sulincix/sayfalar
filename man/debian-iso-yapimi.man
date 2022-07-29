@@ -149,7 +149,7 @@ Bir üst dizinde kurulum aracına ait \fBdeb\fP paketi oluşacakdır.
 .sp
 Eğer debian yerine devuan kullanmak istiyorsanız depo adresi olarak \fIhttps://pkgmaster.devuan.org/merged\fP koymalısınız.
 .sp
-Eğer "Unpacking the base system..." sırasında sorun yaşıyorsanız \fBchroot\fP dizininin sahibini \fBroot\fP olarak değiştirip tekrar denemenizi öneriririz.
+Eğer \(dqUnpacking the base system...\(dq sırasında sorun yaşıyorsanız \fBchroot\fP dizininin sahibini \fBroot\fP olarak değiştirip tekrar denemenizi öneriririz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -169,7 +169,7 @@ Eğer apt ile ilgili \fBsandbox\fP hatası alırsanız aşağıdaki komutu kulla
 .sp
 .nf
 .ft C
-☭ echo "APT::Sandbox::User root;" > sid\-chroot/etc/apt/apt.conf.d/99sandboxroot
+☭ echo \(dqAPT::Sandbox::User root;\(dq > sid\-chroot/etc/apt/apt.conf.d/99sandboxroot
 .ft P
 .fi
 .UNINDENT
@@ -318,8 +318,8 @@ Debian tabanlı sistemlerde önerilen paketler varsayılan olarak paket kurulumu
 .nf
 .ft C
 # /etc/apt/apt.conf.d/01norecommend adında bir dosya açın ve içine şunu yazın
-APT::Install\-Recommends "0";
-APT::Install\-Suggests "0";
+APT::Install\-Recommends \(dq0\(dq;
+APT::Install\-Suggests \(dq0\(dq;
 .ft P
 .fi
 .UNINDENT
@@ -334,11 +334,11 @@ Eğer dil dosyaları, man dosyaları gibi şeylere ihtiyacınız yoksa ve bunlar
 .nf
 .ft C
 # /etc/apt/apt.conf.d/02antibloat adında dosya açın ve içine şunu yazın
-DPkg::Post\-Invoke {"rm \-rf /usr/share/locale || true";};
-DPkg::Post\-Invoke {"rm \-rf /usr/share/man || true";};
-DPkg::Post\-Invoke {"rm \-rf /usr/share/help || true";};
-DPkg::Post\-Invoke {"rm \-rf /usr/share/doc || true";};
-DPkg::Post\-Invoke {"rm \-rf /usr/share/info || true";};
+DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/locale || true\(dq;};
+DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/man || true\(dq;};
+DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/help || true\(dq;};
+DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/doc || true\(dq;};
+DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/info || true\(dq;};
 .ft P
 .fi
 .UNINDENT
@@ -357,16 +357,16 @@ Dağıtım adını değiştirmek için \fB/etc/os\-release\fP ve \fB/etc/lsb\-re
 .sp
 .nf
 .ft C
-PRETTY_NAME="Custom debian (sid)"
-NAME="CUSTOM"
-VERSION_ID="1"
-VERSION="1 (sid)"
+PRETTY_NAME=\(dqCustom debian (sid)\(dq
+NAME=\(dqCUSTOM\(dq
+VERSION_ID=\(dq1\(dq
+VERSION=\(dq1 (sid)\(dq
 ID=customdebian
 ID_LIKE=debian
-HOME_URL="https://www.example.com/"
-SUPPORT_URL="https://forums.example.com/"
-BUG_REPORT_URL="https://example.com/issues/"
-PRIVACY_POLICY_URL="https://www.example.com/privacy/"
+HOME_URL=\(dqhttps://www.example.com/\(dq
+SUPPORT_URL=\(dqhttps://forums.example.com/\(dq
+BUG_REPORT_URL=\(dqhttps://example.com/issues/\(dq
+PRIVACY_POLICY_URL=\(dqhttps://www.example.com/privacy/\(dq
 VERSION_CODENAME=custom
 DEBIAN_CODENAME=sid
 .ft P
@@ -385,7 +385,7 @@ DEBIAN_CODENAME=sid
 DISTRIB_ID=CustomDebian
 DISTRIB_RELEASE=1
 DISTRIB_CODENAME=sid
-DISTRIB_DESCRIPTION="Custom Debian sid"
+DISTRIB_DESCRIPTION=\(dqCustom Debian sid\(dq
 .ft P
 .fi
 .UNINDENT
@@ -609,7 +609,7 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .ft C
 ☭ mkdir \-p isowork/boot/grub/
 ☭ echo \(aqinsmod all_video\(aq > isowork/boot/grub/grub.cfg
-☭ echo \(aqmenuentry "Start Debian 64\-bit" \-\-class debian {\(aq >> isowork/boot/grub/grub.cfg
+☭ echo \(aqmenuentry \(dqStart Debian 64\-bit\(dq \-\-class debian {\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    linux /live/vmlinuz boot=live live\-config live\-media\-path=/live \-\-\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    initrd /live/initrd.img\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq}\(aq >> isowork/boot/grub/grub.cfg

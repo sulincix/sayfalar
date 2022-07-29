@@ -44,7 +44,7 @@ Bu yazıda sizlere makefile dosyası nasıl yazılır anlatacağım.
 .ft C
 #include <stdio.h>
 int main(){
-    puts("Hello world!\en");
+    puts(\(dqHello world!\en\(dq);
     return 0;
 }
 .ft P
@@ -153,7 +153,7 @@ Eğer \fB$\fP işareti kullanmanız gereken bir durum oluşursa \fB$$\fP ifadesi
 .nf
 .ft C
 hello:
-        bash \-c "echo $$HOME"
+        bash \-c \(dqecho $$HOME\(dq
 .ft P
 .fi
 .UNINDENT
@@ -167,7 +167,7 @@ Makefile yazarken bölümler tanımlanır ve eğer bölümün adı belirtilmemi�
 .nf
 .ft C
 yazi: sayi test
-        echo "Hello world"
+        echo \(dqHello world\(dq
 sayi:
         echo 12
 test:
@@ -267,7 +267,7 @@ main: main\&.o
 main.o: main\&.c test\&.c
 
 main.c:
-        echo "int main(){}" > main.c
+        echo \(dqint main(){}\(dq > main.c
 %.c:
         touch $@
 .ft P
@@ -299,7 +299,7 @@ Shell ifadesi ise komut çalıştırarak sonucunu döndürür.
 .sp
 .nf
 .ft C
-files := $(shell find \-type f \-iname "*.c")
+files := $(shell find \-type f \-iname \(dq*.c\(dq)
 main:
         gcc \-o main $(files)
 .ft P
@@ -333,7 +333,7 @@ build: main
         gcc main.c \-o main
 # build.mk dosyası
 main:
-        echo "int main(){return 0;}" > main.c
+        echo \(dqint main(){return 0;}\(dq > main.c
 .ft P
 .fi
 .UNINDENT
@@ -348,9 +348,9 @@ main:
 .ft C
 build:
 ifeq ($(CC),clang)
-        echo "clang"
+        echo \(dqclang\(dq
 else
-        echo "gcc"
+        echo \(dqgcc\(dq
 endif
 .ft P
 .fi
@@ -365,7 +365,7 @@ Eğer komutun başına \fB@\fP işareti koyarsanız komut ekrana yazılmadan ça
 .nf
 .ft C
 build:
-        @echo "Merhaba dünya"
+        @echo \(dqMerhaba dünya\(dq
         \-gcc main.c \-o main
 .ft P
 .fi
@@ -382,7 +382,7 @@ Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşa
 build:
         @for sayi in 1 2 3 $(dizi) ; do \e
             echo $$sayi ; \e
-            echo "diger satir" ; \e
+            echo \(dqdiger satir\(dq ; \e
         done
 .ft P
 .fi
@@ -399,7 +399,7 @@ build:
 SHELL=/usr/bin/python3
 build:
         import os ;\e
-        liste = os.listdir("/") ;\e
+        liste = os.listdir(\(dq/\(dq) ;\e
         print(liste[0])
 .ft P
 .fi

@@ -71,11 +71,11 @@ chmod +x ders1.sh
 .sp
 .nf
 .ft C
-: "
+: \(dq
 Bu bir açıklama satıdırıdır.
 Bu da diğer açıklama satırıdır.
 Bu da sonunca açıklama satırıdır.
-"
+\(dq
 .ft P
 .fi
 .UNINDENT
@@ -101,7 +101,7 @@ Ekrana özel karakterleri yazmak için \fB\-e\fP parametresi kullanmamız gerekm
 .sp
 .nf
 .ft C
-echo \-e "Merhaba\endünya"
+echo \-e \(dqMerhaba\endünya\(dq
 \-> Merhaba
 \-> dünya
 .ft P
@@ -116,7 +116,7 @@ Ekrana renkli yazı da yazdırabiliriz. Bunun için \fB\e033[x;..;ym\fP ifadesin
 .nf
 .ft C
 # Mavi renkli kalın merhaba ile normal dünya yazdırır.
-echo \-e "\e033[34;1mMerhaba\e033[0m Dünya"
+echo \-e \(dq\e033[34;1mMerhaba\e033[0m Dünya\(dq
 .ft P
 .fi
 .UNINDENT
@@ -270,14 +270,14 @@ T}
 _
 .TE
 .sp
-Çift tırnak (\fB"\fP) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (\fB\(aq\fP) içindekiler işlenmez. Örneğin:
+Çift tırnak (\fB\(dq\fP) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (\fB\(aq\fP) içindekiler işlenmez. Örneğin:
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
 var=12
-echo "$var"
+echo \(dq$var\(dq
 echo \(aq$var\(aq
 \-> 12
 \-> $var
@@ -295,7 +295,7 @@ Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden
 .sp
 .nf
 .ft C
-echo "$1 \- $# \- $@"
+echo \(dq$1 \- $# \- $@\(dq
 
 \&./ders1.sh merhaba dünya
 \-> merhaba \- 2 \- merhaba dünya
@@ -316,7 +316,7 @@ Normal Değişkenler aşağıdaki gibi tanımlanır.
 .nf
 .ft C
 sayı=23
-yazi="merhaba"
+yazi=\(dqmerhaba\(dq
 .ft P
 .fi
 .UNINDENT
@@ -331,7 +331,7 @@ yazi="merhaba"
 typeset \-i a # Değişkeni sayı olarak belirttik.
 a=1 ; b=1
 a+=1 ; b+=1
-echo "$a $b"
+echo \(dq$a $b\(dq
 \-> 2 11
 .ft P
 .fi
@@ -345,7 +345,7 @@ echo "$a $b"
 .nf
 .ft C
 export sayi=23
-export yazi="merhaba"
+export yazi=\(dqmerhaba\(dq
 .ft P
 .fi
 .UNINDENT
@@ -357,7 +357,7 @@ Sabitler daha sonradan değeri değiştirilemeyen verilerdir. Sabit tanımlamak 
 .sp
 .nf
 .ft C
-declare \-r yazi="merhaba"
+declare \-r yazi=\(dqmerhaba\(dq
 declade \-r sayi=23
 .ft P
 .fi
@@ -370,7 +370,7 @@ Değişkenler ve sabitler kullanılırken \fB${}\fP işareti içine alınırlar 
 .sp
 .nf
 .ft C
-deneme="abc123"
+deneme=\(dqabc123\(dq
 echo ${deneme}
 \-> abc123
 .ft P
@@ -378,15 +378,15 @@ echo ${deneme}
 .UNINDENT
 .UNINDENT
 .sp
-Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için \fB"\fP işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
+Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek için \fB\(dq\fP işaretleri arasına alabiliriz. Birden fazla yazıyı toplamak için yan yana yazmamız yeterlidir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
 sayi=11
-yazi="karpuz"
-echo "${sayi}${karpuz} limon"
+yazi=\(dqkarpuz\(dq
+echo \(dq${sayi}${karpuz} limon\(dq
 \-> 11karpuz limon
 .ft P
 .fi
@@ -418,7 +418,7 @@ expr 3 + 5 # her piri arasında boşluk gerekli
 \-> 8
 echo 6\-1 | bc \-l # Burada \-l virgüllü sayılar için kullanılır.
 \-> 5
-python3 \-c "print(10/2)"
+python3 \-c \(dqprint(10/2)\(dq
 \-> 5\&.0
 .ft P
 .fi
@@ -544,12 +544,12 @@ Diziler eleman indisleri ile kullanmanın yanında şu şekilde de tanımlanabil
 declare \-A dizi
 dizi=([kirmizi]=elma [sari]=muz [yesil]=limon [turuncu]=portakal)
 for isim in ${!dizi[@]} ; do
-    echo \-n "$isim "
+    echo \-n \(dq$isim \(dq
 done
 echo
 \-> turuncu yesil sari kirmizi
 for isim in ${dizi[@]} ; do
-    echo \-n "$isim "
+    echo \-n \(dq$isim \(dq
 done
 echo
 \-> portakal limon muz elma
@@ -603,9 +603,9 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 .ft C
 read veri
 if [[ ${veri} \-lt 10 ]] ; then
-    echo "Veri 10\(aqdan küçük"
+    echo \(dqVeri 10\(aqdan küçük\(dq
 else
-    echo "Veri 10\(aqdan büyük veya 10a eşit"
+    echo \(dqVeri 10\(aqdan büyük veya 10a eşit\(dq
 fi
 
 <\- 9
@@ -732,7 +732,7 @@ T{
 T}	T{
 alfabeti olarak büyüktür
 T}	T{
-[[ "portakal" > "elma" ]]
+[[ \(dqportakal\(dq > \(dqelma\(dq ]]
 T}
 _
 T{
@@ -740,7 +740,7 @@ T{
 T}	T{
 alfabetik olarak küçüktür
 T}	T{
-[[ "elma" < "limon" ]]
+[[ \(dqelma\(dq < \(dqlimon\(dq ]]
 T}
 _
 T{
@@ -748,7 +748,7 @@ T{
 T}	T{
 alfabetik eşittir
 T}	T{
-[[ "nane" == "nane" ]]
+[[ \(dqnane\(dq == \(dqnane\(dq ]]
 T}
 _
 T{
@@ -756,7 +756,7 @@ T{
 T}	T{
 alfabetik eşit değildir
 T}	T{
-[[ "name" != "limon" ]]
+[[ \(dqname\(dq != \(dqlimon\(dq ]]
 T}
 _
 T{
@@ -764,7 +764,7 @@ T{
 T}	T{
 regex kuralına göre eşittir
 T}	T{
-[[ "elma1" =~ ^[a\-z]l.*[1]$ ]]
+[[ \(dqelma1\(dq =~ ^[a\-z]l.*[1]$ ]]
 T}
 _
 T{
@@ -793,12 +793,12 @@ Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım
 .sp
 .nf
 .ft C
-[[ 12 \-eq ${a} ]] && echo "12ye eşit." || echo "12ye eşit değil"
+[[ 12 \-eq ${a} ]] && echo \(dq12ye eşit.\(dq || echo \(dq12ye eşit değil\(dq
 #bunun ile aynı anlama gelir:
 if [[ 12 \-eq ${a} ]] ; then
-    echo "12ye eşit"
+    echo \(dq12ye eşit\(dq
 else
-    echo "12ye eşit değil"
+    echo \(dq12ye eşit değil\(dq
 fi
 .ft P
 .fi
@@ -815,26 +815,26 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
 .ft C
 case deger in
     elma | kiraz)
-        echo "meyve"
+        echo \(dqmeyve\(dq
         ;;
     patates | soğan)
-        echo "sebze"
+        echo \(dqsebze\(dq
         ;;
     balık)
-        echo "hayvan"
+        echo \(dqhayvan\(dq
     *)
-        echo "hiçbiri"
+        echo \(dqhiçbiri\(dq
         ;;
 esac
 # Şununla aynıdır:
-if [[ "${deger}" == "elma" || "${deger}" == "kiraz" ]] ; then
-    echo "meyve"
-elif [[ "${deger}" == "patates" || "${deger}" == "soğan" ]] ; then
-    echo "sebze"
-elif [[ "${değer}" == "balık" ]] ; then
-    echo "hayvan"
+if [[ \(dq${deger}\(dq == \(dqelma\(dq || \(dq${deger}\(dq == \(dqkiraz\(dq ]] ; then
+    echo \(dqmeyve\(dq
+elif [[ \(dq${deger}\(dq == \(dqpatates\(dq || \(dq${deger}\(dq == \(dqsoğan\(dq ]] ; then
+    echo \(dqsebze\(dq
+elif [[ \(dq${değer}\(dq == \(dqbalık\(dq ]] ; then
+    echo \(dqhayvan\(dq
 else
-    echo "hiçbiri"
+    echo \(dqhiçbiri\(dq
 fi
 .ft P
 .fi
@@ -864,7 +864,7 @@ done
 .ft C
 i=1
 while [[ ${i} \-le 10 ]] ; do
-    echo \-n "$i " # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
+    echo \-n \(dq$i \(dq # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
     i=$((${i}+1)) # sayıya 1 ekledik
 done
 echo # en son alt satıra geçmesi için
@@ -895,7 +895,7 @@ Ayrı örneğin for ile yapılmış hali
 .nf
 .ft C
 for i in 1 2 3 4 5 6 7 8 9 10 ; do
-    echo \-n "${i} "
+    echo \-n \(dq${i} \(dq
 done
 echo
 \-> 1 2 3 4 5 6 7 8 9 10
@@ -911,7 +911,7 @@ Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.
 .nf
 .ft C
 for i in {1\&..10} ; do
-    echo \-n "${i} "
+    echo \-n \(dq${i} \(dq
 done
 echo
 \-> 1 2 3 4 5 6 7 8 9 10
@@ -995,7 +995,7 @@ sayi=12
 topla(){
     echo $((${sayi}+$1))
     return 0
-    echo "Bu satır çalışmaz"
+    echo \(dqBu satır çalışmaz\(dq
 }
 topla 1
 \-> 13
@@ -1018,9 +1018,9 @@ teksayi(){
     return $((${i}%2))  # sayının 2 ile bölümünden kalanı döndürdük
 }
 if teksayi ${sayi} ; then
-    echo "tek sayıdır"
+    echo \(dqtek sayıdır\(dq
 else
-    echo "çift sayıdır"
+    echo \(dqçift sayıdır\(dq
 fi
 
 <\- 12
@@ -1039,9 +1039,9 @@ Bir fonksionun çıktısını değişkene \fB$(isim)\fP ifadesi yadımı ile ata
 .nf
 .ft C
 yaz(){
-    echo "Merhaba"
+    echo \(dqMerhaba\(dq
 }
-echo "$(yaz) dünya"
+echo \(dq$(yaz) dünya\(dq
 \-> Merhaba dünya
 .ft P
 .fi
@@ -1055,10 +1055,10 @@ Tanımlı bir fonksionu silmek için \fBunset \-f\fP ifadesini kullanmamız gere
 .nf
 .ft C
 yaz(){
-    echo "Merhaba"
+    echo \(dqMerhaba\(dq
 }
 unset \-f yaz
-echo "$(yaz) dünya"
+echo \(dq$(yaz) dünya\(dq
 \-> bash: yaz: komut yok
 \-> dünya
 .ft P
@@ -1072,12 +1072,12 @@ Burada dikkat ederseniz olmayan fonksionu çalıştırmaya çalıştığımız i
 .sp
 .nf
 .ft C
-echo "satır 1"
-acho "satır 2" # yanlış yazılan satır fakat devam edecek
-echo "satır 3"
+echo \(dqsatır 1\(dq
+acho \(dqsatır 2\(dq # yanlış yazılan satır fakat devam edecek
+echo \(dqsatır 3\(dq
 set \-e
-acho "satır 4" # yanlış yazılan satır çalışmayı durduracak
-echo "satır 5" # bu satır çalışmayacak
+acho \(dqsatır 4\(dq # yanlış yazılan satır çalışmayı durduracak
+echo \(dqsatır 5\(dq # bu satır çalışmayacak
 \-> satır 1
 \-> bash: acho: komut yok
 \-> satır 3
@@ -1151,7 +1151,7 @@ Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişke
 .nf
 .ft C
 icerik=$(cat ./dosya.txt)
-echo "${icerik}"
+echo \(dq${icerik}\(dq
 \-> Merhaba dünya
 \-> Selam dünya
 \-> sayı:123
@@ -1160,17 +1160,17 @@ echo "${icerik}"
 .UNINDENT
 .UNINDENT
 .sp
-\fBgrep "sözcük" dosya.txt\fP ile dosya içerisinde sözcük gezen satırları filitreleyebiliriz. Eğer grep komutuna \fB\-v\fP paraketresi eklersek sadece içermeyenleri filitreler.
+\fBgrep \(dqsözcük\(dq dosya.txt\fP ile dosya içerisinde sözcük gezen satırları filitreleyebiliriz. Eğer grep komutuna \fB\-v\fP paraketresi eklersek sadece içermeyenleri filitreler.
 Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-grep "dünya" dosya.txt
+grep \(dqdünya\(dq dosya.txt
 \-> Merhaba dünya
 \-> Selam dünya
-grep \-v "dünya" dosya.txt
+grep \-v \(dqdünya\(dq dosya.txt
 \-> sayi:123
 .ft P
 .fi
@@ -1196,7 +1196,7 @@ T{
 T}	T{
 çıktıyı dosyaya yönlendir (stdout)
 T}	T{
-echo "Merhaba dünya" > dosya.txt
+echo \(dqMerhaba dünya\(dq > dosya.txt
 T}
 _
 T{
@@ -1212,7 +1212,7 @@ T{
 T}	T{
 çıktıyı dosyaya ekle
 T}	T{
-echo \-n "Merhaba" > dosya.txt && echo "dünya" >> dosya.txt
+echo \-n \(dqMerhaba\(dq > dosya.txt && echo \(dqdünya\(dq >> dosya.txt
 T}
 _
 T{
@@ -1220,7 +1220,7 @@ T{
 T}	T{
 çıktıyı yönlendir (stdout ve stderr)
 T}	T{
-echo "$(cat /olmayan/dosya) deneme" &> dosya.txt
+echo \(dq$(cat /olmayan/dosya) deneme\(dq &> dosya.txt
 T}
 _
 .TE
@@ -1342,11 +1342,11 @@ Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBso
 .sp
 .nf
 .ft C
-mesaj="Selam"
+mesaj=\(dqSelam\(dq
 merhaba(){
     echo ${mesaj}
 }
-echo "deneme yüklendi"
+echo \(dqdeneme yüklendi\(dq
 .ft P
 .fi
 .UNINDENT
@@ -1395,7 +1395,7 @@ echo ${sayi}
 echo $$ # pid değeri yazdırır
 bash \-c \(aqecho $$\(aq # yeni süreç oluşturduğu için pid değeri farklıdır.
 exec bash \-c \(aqecho $$\(aq # mevcut komut ile değiştirildiği için pid değeri değişmez
-echo "hmm" # Bu kısım çalıştırılamaz.
+echo \(dqhmm\(dq # Bu kısım çalıştırılamaz.
 \-> 5755
 \-> 5756
 \-> 5755
@@ -1413,7 +1413,7 @@ echo "hmm" # Bu kısım çalıştırılamaz.
 .nf
 .ft C
 exec > log.txt # bütün çıktıları log.txt içine yazdırır.
-echo "merhaba" # ekrana değil dosyaya yazılır.
+echo \(dqmerhaba\(dq # ekrana değil dosyaya yazılır.
 exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
 .ft P
 .fi
@@ -1430,11 +1430,11 @@ exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
 .nf
 .ft C
 exec 3> log.txt # yazmak için boş bir 3 numaralı fd açmak için.
-echo "deneme" >&3
+echo \(dqdeneme\(dq >&3
 exec 3>& \- # açık olan 3 nuramalı fd kapatmak için.
 exec 2>&1 # stderr içine atılanı stdout içine aktarır.
 exec 4< input.txt # okumak için 4 numaralı fd açmak için.
-echo "hmm" > input.txt # girdi dosyamıza yazı yazalım.
+echo \(dqhmm\(dq > input.txt # girdi dosyamıza yazı yazalım.
 read line <&4 # 3 nuramalı fd içinden değir okur.
 exec 4<&\- # 4 numaralı fd kapatmak için.
 .ft P

@@ -91,7 +91,7 @@ Nasıl kullanıldığını öğrenmek için \fIinary\-template \-\-help\fP çal�
 .sp
 .nf
 .ft C
-inary\-template \-n bash \-a "https://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz" \-v "5.1.8"
+inary\-template \-n bash \-a \(dqhttps://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz\(dq \-v \(dq5.1.8\(dq
 .ft P
 .fi
 .UNINDENT
@@ -195,11 +195,11 @@ from inary.actionsapi import autotools
 from inary.actionsapi import get
 
 def setup():
-    opts = "\-\-prefix=/usr" # parametreler
-    if get\&.buildTYPE() == "emul32": # build type türünü çeker
-        shelltools\&.export("CC","{} \-m32"\&.format(get\&.CC())) # derleyiciyi 32bit moduna alır
-        shelltools\&.export("CXX","{} \-m32"\&.format(get\&.CXX())) # derleyiciyi 32bit moduna alır
-        opts += " \-\-libdir=/usr/lib32"
+    opts = \(dq\-\-prefix=/usr\(dq # parametreler
+    if get\&.buildTYPE() == \(dqemul32\(dq: # build type türünü çeker
+        shelltools\&.export(\(dqCC\(dq,\(dq{} \-m32\(dq\&.format(get\&.CC())) # derleyiciyi 32bit moduna alır
+        shelltools\&.export(\(dqCXX\(dq,\(dq{} \-m32\(dq\&.format(get\&.CXX())) # derleyiciyi 32bit moduna alır
+        opts += \(dq \-\-libdir=/usr/lib32\(dq
     autotools\&.rawConfigure(opts)
 
 def build():
@@ -207,8 +207,8 @@ def build():
 
 def build():
     autotools\&.install()
-    if get\&.buildTYPE() == "emul32":
-        inarytools\&.removeDir("/usr/bin") # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.
+    if get\&.buildTYPE() == \(dqemul32\(dq:
+        inarytools\&.removeDir(\(dq/usr/bin\(dq) # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.
 .ft P
 .fi
 .UNINDENT
@@ -340,13 +340,13 @@ Mesontools fonksionları aşağıdaki gibidir:
 .ft C
 inary/actionsapi/mesontools.py:
   \- fixpc(): 32bit pkgconfig dosyalarının konumunu düzeltir
-  \- configure(parameters="", type="meson"): cmake yada meson kullanarak configure işlemi (varsayılan meson)
-  \- meson_configure(parameters=""): meson build
-  \- cmake_configure(parameters=""): mkdir build && cd build && cmake \-G ninja ..
-  \- ninja_build(parameters=""): ninja \-C build
-  \- make(parameters=""): ninja_build ile aynı
-  \- ninja_install(parameters=""): ninja \-C install
-  \- install(parameters=""):  ninja_install ile aynı
+  \- configure(parameters=\(dq\(dq, type=\(dqmeson\(dq): cmake yada meson kullanarak configure işlemi (varsayılan meson)
+  \- meson_configure(parameters=\(dq\(dq): meson build
+  \- cmake_configure(parameters=\(dq\(dq): mkdir build && cd build && cmake \-G ninja ..
+  \- ninja_build(parameters=\(dq\(dq): ninja \-C build
+  \- make(parameters=\(dq\(dq): ninja_build ile aynı
+  \- ninja_install(parameters=\(dq\(dq): ninja \-C install
+  \- install(parameters=\(dq\(dq):  ninja_install ile aynı
   \- ninja_check(): ninja \-C build check
   \- check(): ninja_check ile aynı
 .ft P
@@ -445,8 +445,8 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 .sp
 .nf
 .ft C
-<?xml version="1.0" ?>
-<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary\-spec.dtd">
+<?xml version=\(dq1.0\(dq ?>
+<!DOCTYPE INARY SYSTEM \(dqhttps://raw.githubusercontent.com/Zaryob/inary/master/inary\-spec.dtd\(dq>
 <INARY>
     <Source>
         ... <!\-\-Burası source bölümüdür.\-\->
@@ -474,7 +474,7 @@ Bu bölümde kaynağın özellikleri belirtilir. \fBName\fP, \fBHomepage\fP, \fB
 .sp
 \fBArchive\fP kısmı birden fazla olabilir.
 .sp
-Archive türü ikili dosyaysa veya açılmayacaksa \fBtype="binary"\fP eklemeniz gerekmektedir. (\fI<Archive sha1sum="..." type="archive">https://.../file.bin</Archive>\fP)
+Archive türü ikili dosyaysa veya açılmayacaksa \fBtype=\(dqbinary\(dq\fP eklemeniz gerekmektedir. (\fI<Archive sha1sum=\(dq...\(dq type=\(dqarchive\(dq>https://.../file.bin</Archive>\fP)
 .sp
 \fBBuildDependency\fP kısmında yazılan paketler derleme öncesi kurulur. Oluşturulan paketlere bağımlılık olarak eklenmez.
 .INDENT 0.0
@@ -495,7 +495,7 @@ Archive türü ikili dosyaysa veya açılmayacaksa \fBtype="binary"\fP eklemeniz
        <PartOf>system.base</PartOf>
        <Summary>Bourne\-Again shell</Summary>
        <Description>GNU bash shell</Description>
-       <Archive sha1sum="d116b469b9e6ea5264a74661d3a4c797da7f997b">https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz</Archive>
+       <Archive sha1sum=\(dqd116b469b9e6ea5264a74661d3a4c797da7f997b\(dq>https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz</Archive>
        <BuildDependencies>
            <Dependency>ncurses\-devel</Dependency>
            <Dependency>readline\-devel</Dependency>
@@ -525,13 +525,13 @@ Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. \fBN
            <Dependency>ncurses</Dependency>
        </RuntimeDependencies>
        <Files>
-           <Path fileType="config">/etc</Path>
-           <Path fileType="executable">/bin</Path>
-           <Path fileType="executable">/usr/bin</Path>
-           <Path fileType="info">/usr/share/info</Path>
-           <Path fileType="header">/usr/include</Path>
-           <Path fileType="library">/usr/lib/</Path>
-           <Path fileType="localedata">/usr/share/locale</Path>
+           <Path fileType=\(dqconfig\(dq>/etc</Path>
+           <Path fileType=\(dqexecutable\(dq>/bin</Path>
+           <Path fileType=\(dqexecutable\(dq>/usr/bin</Path>
+           <Path fileType=\(dqinfo\(dq>/usr/share/info</Path>
+           <Path fileType=\(dqheader\(dq>/usr/include</Path>
+           <Path fileType=\(dqlibrary\(dq>/usr/lib/</Path>
+           <Path fileType=\(dqlocaledata\(dq>/usr/share/locale</Path>
        </Files>
    </Package>
 .ft P
@@ -553,7 +553,7 @@ Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanı
 .nf
 .ft C
 <History>
-    <Update release="1">
+    <Update release=\(dq1\(dq>
            <Date>2019\-01\-17</Date>
            <Version>5.0</Version>
            <Comment>First release</Comment>
@@ -594,18 +594,18 @@ Bu bölümde kaynağın özellikleri belirtilir. \fBpackages\fP dizisindeki elem
 .nf
 .ft C
 class source:
-    name = "bash"
-    homepage = "http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html"
+    name = \(dqbash\(dq
+    homepage = \(dqhttp://cnswww.cns.cwru.edu/~chet/bash/bashtop.html\(dq
     class packager:
-        name = "Süleyman POYRAZ"
-        email = "zaryob.dev@gmail.com"
+        name = \(dqSüleyman POYRAZ\(dq
+        email = \(dqzaryob.dev@gmail.com\(dq
     license = [\(aqGPLv2\(aq]
     isa = [\(aqapp:console\(aq]
-    partof = "system.base"
-    summary = "Bourne\-Again shell"
-    description = "GNU bash shell"
+    partof = \(dqsystem.base\(dq
+    summary = \(dqBourne\-Again shell\(dq
+    description = \(dqGNU bash shell\(dq
     archive = [
-        ("6399bd1f9ef4dd0d901c7b76737bc409de73c77a","https://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz"),
+        (\(dq6399bd1f9ef4dd0d901c7b76737bc409de73c77a\(dq,\(dqhttps://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz\(dq),
     ]
     builddependencies = [\(aqncurses\-devel\(aq, \(aqreadline\-devel\(aq]
     packages = [\(aqpkg_bash\(aq, \(aqpkg_bash_devel\(aq, \(aqpkg_bash_docs\(aq, \(aqpkg_bash_pages\(aq]
@@ -622,14 +622,14 @@ Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını \fBSour
 .nf
 .ft C
 class pkg_bash
-    name = "bash"
-    runtimedependencies = ["ncurses"]
+    name = \(dqbash\(dq
+    runtimedependencies = [\(dqncurses\(dq]
     files = [
-        ("config","/etc"),
-        ("executable","/bin"),
-        ("info","/usr/share/info"),
-        ("library","/lib"),
-        ("localedata","/usr/share/locale"),
+        (\(dqconfig\(dq,\(dq/etc\(dq),
+        (\(dqexecutable\(dq,\(dq/bin\(dq),
+        (\(dqinfo\(dq,\(dq/usr/share/info\(dq),
+        (\(dqlibrary\(dq,\(dq/lib\(dq),
+        (\(dqlocaledata\(dq,\(dq/usr/share/locale\(dq),
     ]
 .ft P
 .fi
@@ -645,7 +645,7 @@ Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine re
 .ft C
 class history:
     update = [
-        ["2021\-08\-29","5.1.8","First release","Süleyman POYRAZ","zaryob.dev@gmail.com"],
+        [\(dq2021\-08\-29\(dq,\(dq5.1.8\(dq,\(dqFirst release\(dq,\(dqSüleyman POYRAZ\(dq,\(dqzaryob.dev@gmail.com\(dq],
     ]
 .ft P
 .fi

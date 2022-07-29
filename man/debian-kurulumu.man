@@ -435,7 +435,7 @@ Eğer \fB0\fP ayarlarsanız grub ekranı gözükmez. \fB\-1\fP yaparsanız siz t
 .sp
 .nf
 .ft C
-$ sed \-i "s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/g" /etc/default/grub
+$ sed \-i \(dqs/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/g\(dq /etc/default/grub
 .ft P
 .fi
 .UNINDENT

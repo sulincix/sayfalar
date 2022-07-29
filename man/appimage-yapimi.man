@@ -95,7 +95,7 @@ AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve \fB$PATH\fP değer
 .ft C
 $ cat > AppRun << EOF
 > #!/bin/bash
-> echo "Hello Word"
+> echo \(dqHello Word\(dq
 > EOF
 .ft P
 .fi
@@ -121,8 +121,8 @@ AppRun dosyasında en sona aşağıdaki ifadeyi eklerseniz desktop dosyasındaki
 .nf
 .ft C
 $ cat >> AppRun << EOF
-> EXEC=$(grep \-e "^Exec=.*" "${HERE}"/*.desktop | head \-n 1 | cut \-d "=" \-f 2 | cut \-d " " \-f 1)\(aq
-> exec "${EXEC}" "$@"
+> EXEC=$(grep \-e \(dq^Exec=.*\(dq \(dq${HERE}\(dq/*.desktop | head \-n 1 | cut \-d \(dq=\(dq \-f 2 | cut \-d \(dq \(dq \-f 1)\(aq
+> exec \(dq${EXEC}\(dq \(dq$@\(dq
 > EOF
 .ft P
 .fi
@@ -244,7 +244,7 @@ Aşağıdaki ifadeyi \fBAppRun\fP içerisine yazın:
 .nf
 .ft C
 $ cat >> AppRun << EOF
-> export GSETTINGS_SCHEMA_DIR="${HERE}/usr/share/glib\-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}"
+> export GSETTINGS_SCHEMA_DIR=\(dq${HERE}/usr/share/glib\-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}\(dq
 > EOF
 .ft P
 .fi
@@ -271,14 +271,14 @@ Uygulamaların düzgün çalışabilmesi için \fBLD_LIBRARY_PATH\fP \fBPATH\fP 
 .nf
 .ft C
 $ cat >> AppRun << EOF
-> export SELF=$(readlink \-f "$0")
+> export SELF=$(readlink \-f \(dq$0\(dq)
 > export HERE=${SELF%/*}
-> export LD_LIBRARY_PATH="${HERE}/usr/lib/:${HERE}/usr/lib/i386\-linux\-gnu/:${HERE}/usr/lib/x86_64\-linux\-gnu/"
-> export LD_LIBRARY_PATH+="${HERE}/usr/lib32/:${HERE}/usr/lib64/:${HERE}/lib/:${HERE}/lib/i386\-linux\-gnu/"
-> export LD_LIBRARY_PATH+=":${HERE}/lib/x86_64\-linux\-gnu/:${HERE}/lib32/:${HERE}/lib64/${HERE}/usr/bin/"
-> export PATH=":${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}"
-> export PYTHONPATH="${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}"
-> export PERLLIB="${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}"
+> export LD_LIBRARY_PATH=\(dq${HERE}/usr/lib/:${HERE}/usr/lib/i386\-linux\-gnu/:${HERE}/usr/lib/x86_64\-linux\-gnu/\(dq
+> export LD_LIBRARY_PATH+=\(dq${HERE}/usr/lib32/:${HERE}/usr/lib64/:${HERE}/lib/:${HERE}/lib/i386\-linux\-gnu/\(dq
+> export LD_LIBRARY_PATH+=\(dq:${HERE}/lib/x86_64\-linux\-gnu/:${HERE}/lib32/:${HERE}/lib64/${HERE}/usr/bin/\(dq
+> export PATH=\(dq:${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}\(dq
+> export PYTHONPATH=\(dq${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}\(dq
+> export PERLLIB=\(dq${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}\(dq
 > EOF
 .ft P
 .fi
@@ -295,7 +295,7 @@ Aşağıdaki ifadeyi \fBAppRun\fP içine yazın:
 .nf
 .ft C
 $ cat >> AppRun << EOF
-> export XDG_DATA_DIRS="${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}"
+> export XDG_DATA_DIRS=\(dq${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}\(dq
 > EOF
 .ft P
 .fi
@@ -312,11 +312,11 @@ Aşağıdaki ifadeyi \fBAppRun\fP içine yazın:
 .nf
 .ft C
 $ cat >> AppRun << EOF
-> export QT_PLUGIN_PATH="${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386\-linux\-gnu/qt4/plugins/"
-> export QT_PLUGIN_PATH+=":${HERE}/usr/lib/x86_64\-linux\-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/"
-> export QT_PLUGIN_PATH+=":${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/"
-> export QT_PLUGIN_PATH+=":${HERE}/usr/lib/i386\-linux\-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64\-linux\-gnu/qt5/plugins/"
-> export QT_PLUGIN_PATH+=":${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
+> export QT_PLUGIN_PATH=\(dq${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386\-linux\-gnu/qt4/plugins/\(dq
+> export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib/x86_64\-linux\-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/\(dq
+> export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/\(dq
+> export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib/i386\-linux\-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64\-linux\-gnu/qt5/plugins/\(dq
+> export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}\(dq
 > EOF
 .ft P
 .fi
