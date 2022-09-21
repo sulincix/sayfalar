@@ -97,6 +97,20 @@ Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlarda
 	# -p port yönlendirmesi yapar. 
 	# --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.
 
+Eğer container çalıştıktan sonra silinmesini istiyorsanız **--rm** parametresi ekleyebiliriz. Bu sayede işlem bitimi otomatik olarak silinir.
+
+.. code-block:: shell
+
+	$ docker run --rm alpine echo hello world
+
+İşlem başlatmayıp sadece container oluşturmak istiyorsanız **docker create** kullanabilirsiniz.
+
+.. code-block:: shell
+
+	$ docker create --name deneme2 debian
+	
+Container oluştururkenki seçenekler için **docker run --help** veya **docker create --help** yapabilirsiniz.
+
 Çalışan containerları listelemek için **docker ps** kullanılır. **-a** parametresi eklenirse tüm containerlar listelenir. **-q** parametresi ile sadece id değerleri yazdırılır.
 
 .. code-block:: shell
@@ -130,6 +144,15 @@ Container ile işimiz bittiğinde silmek için **docker rm** kullanılır. Silme
 	$ docker rm -f b91e04ab5dcc
 	# Aşağıdaki komutla tüm containerları silebiliriz.
 	$ docker rm -f $(docker ps -a -q)
+
+Çalışmayan tüm containerların silinmesi için **docker container prune** kullanılabilir.
+
+.. code-block:: shell
+
+	$ docker container prune
+	WARNING! This will remove all stopped containers.
+	Are you sure you want to continue? [y/N] y
+	Total reclaimed space: 0B
 
 Çalışan containerlar ile ilgili kullanım istatistiklerine ulaşmak için **docker stats** kullanılır. **docker top** ise container içinde çalışan süreçler ile ilgili bilgi almaya yarar.
 

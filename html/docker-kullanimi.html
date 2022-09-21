@@ -72,6 +72,11 @@ alpine       latest    9c6f07244728   <span class="literal number">6</span> week
 # -t pseudo-tty olarak çalıştırır. -it olarak kullanıp shell çalıştırabiliriz.
 # -p port yönlendirmesi yapar.
 # --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.</span></code></pre>
+<p>Eğer container çalıştıktan sonra silinmesini istiyorsanız <strong>--rm</strong> parametresi ekleyebiliriz. Bu sayede işlem bitimi otomatik olarak silinir.</p>
+<pre class="code shell literal-block"><code>$ docker run --rm alpine <span class="name builtin">echo</span> hello world</code></pre>
+<p>İşlem başlatmayıp sadece container oluşturmak istiyorsanız <strong>docker create</strong> kullanabilirsiniz.</p>
+<pre class="code shell literal-block"><code>$ docker create --name deneme2 debian</code></pre>
+<p>Container oluştururkenki seçenekler için <strong>docker run --help</strong> veya <strong>docker create --help</strong> yapabilirsiniz.</p>
 <p>Çalışan containerları listelemek için <strong>docker ps</strong> kullanılır. <strong>-a</strong> parametresi eklenirse tüm containerlar listelenir. <strong>-q</strong> parametresi ile sadece id değerleri yazdırılır.</p>
 <pre class="code shell literal-block"><code>$ docker ps -a
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                     PORTS     NAMES
@@ -90,6 +95,11 @@ Error response from daemon: You cannot remove a running container ...
 $ docker rm -f b91e04ab5dcc
 <span class="comment single"># Aşağıdaki komutla tüm containerları silebiliriz.
 </span>$ docker rm -f <span class="keyword">$(</span>docker ps -a -q<span class="keyword">)</span></code></pre>
+<p>Çalışmayan tüm containerların silinmesi için <strong>docker container prune</strong> kullanılabilir.</p>
+<pre class="code shell literal-block"><code>$ docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to <span class="keyword">continue</span>? <span class="operator">[</span>y/N<span class="operator">]</span> y
+Total reclaimed space: 0B</code></pre>
 <p>Çalışan containerlar ile ilgili kullanım istatistiklerine ulaşmak için <strong>docker stats</strong> kullanılır. <strong>docker top</strong> ise container içinde çalışan süreçler ile ilgili bilgi almaya yarar.</p>
 <p>Container ile ilgili bilgi almak için <strong>docker inspect</strong> kullanılır.</p>
 <pre class="code shell literal-block"><code>$ docker stats

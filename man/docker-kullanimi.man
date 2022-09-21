@@ -177,6 +177,32 @@ $ docker run \-it \-d \-p 8000:80 \-\-name deneme 43d28810c1b4 /bin/bash
 .UNINDENT
 .UNINDENT
 .sp
+Eğer container çalıştıktan sonra silinmesini istiyorsanız \fB\-\-rm\fP parametresi ekleyebiliriz. Bu sayede işlem bitimi otomatik olarak silinir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker run \-\-rm alpine echo hello world
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+İşlem başlatmayıp sadece container oluşturmak istiyorsanız \fBdocker create\fP kullanabilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker create \-\-name deneme2 debian
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Container oluştururkenki seçenekler için \fBdocker run \-\-help\fP veya \fBdocker create \-\-help\fP yapabilirsiniz.
+.sp
 Çalışan containerları listelemek için \fBdocker ps\fP kullanılır. \fB\-a\fP parametresi eklenirse tüm containerlar listelenir. \fB\-q\fP parametresi ile sadece id değerleri yazdırılır.
 .INDENT 0.0
 .INDENT 3.5
@@ -230,6 +256,21 @@ Error response from daemon: You cannot remove a running container ...
 $ docker rm \-f b91e04ab5dcc
 # Aşağıdaki komutla tüm containerları silebiliriz.
 $ docker rm \-f $(docker ps \-a \-q)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çalışmayan tüm containerların silinmesi için \fBdocker container prune\fP kullanılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B
 .ft P
 .fi
 .UNINDENT
