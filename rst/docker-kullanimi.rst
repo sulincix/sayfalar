@@ -307,7 +307,7 @@ Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlan
 
 .. code-block:: shell
 
-	$ docker build -f builder/Dockerfile https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz
+	$ docker build -f builder/Dockerfile https://example.org/source.tar.gz
 
 **stdin** okunarak çalıştırılabilir.
 

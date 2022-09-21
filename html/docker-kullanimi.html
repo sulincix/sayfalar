@@ -172,7 +172,7 @@ RUN <span class="name builtin">echo</span> hello world</code></pre>
 <p>Ayrıca doğrudan git üzerinden de çalıştırılabilir.</p>
 <pre class="code shell literal-block"><code>$ docker build git://gitserver.com/username/repository.git</code></pre>
 <p>Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlanabilir.</p>
-<pre class="code shell literal-block"><code>$ docker build -f builder/Dockerfile https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz</code></pre>
+<pre class="code shell literal-block"><code>$ docker build -f builder/Dockerfile https://example.org/source.tar.gz</code></pre>
 <p><strong>stdin</strong> okunarak çalıştırılabilir.</p>
 <pre class="code shell literal-block"><code>$ cat Dockerfile <span class="punctuation">|</span> docker build -</code></pre>
 </section>
