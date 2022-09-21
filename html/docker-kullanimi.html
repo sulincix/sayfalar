@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<title>Docker kullanımı</title>
+<link rel="stylesheet" href="main.css" />
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<main id="docker-kullanimi">
+<h1 class="title">Docker kullanımı</h1>
+
+<p>Bu yazıda sizlere docker kullanımı anlatılacaktır.</p>
+<section id="docker-kurulumu">
+<h2>Docker kurulumu</h2>
+<p>Docker kurmak için debian tabanlı dağıtımlarda <strong>docker.io</strong> paketini kurmalısınız.</p>
+<pre class="code shell literal-block"><code>$ apt install docker.io --no-install-recommends</code></pre>
+<p>Eğer debian dışında bir dağıtım kullanıyorsanız kendi sitesi üzerinden indirmeyi veya kaynak koddan derlemeyi deneyebilirsiniz.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># docker binarylerini indirmek için https://download.docker.com/linux/static/stable/
+# indirdikten sonra arşivden çıkatrıp containerd ve dockerd çalıştıralım. (root kullanarak)
+</span>$ tar -xf docker-xxx.tgz
+$ <span class="name builtin">cd</span> docker
+$ <span class="name builtin">export</span> <span class="name variable">PATH</span><span class="operator">=</span><span class="name variable">$PATH</span>:<span class="keyword">$(</span><span class="name builtin">pwd</span><span class="keyword">)</span> <span class="comment single"># path içine mevcut dizini de ekledik
+# containerd ve dockerd çalıştıralım. Bunlar daemon olduğu için sürekli arkada çalışması gerekmektedir.
+</span>$ containerd
+$ dockerd</code></pre>
+<p>Docker çalışıyor mu diye kontrol etmek için <strong>docker info</strong> komutunu kullanabiliriz.</p>
+<pre class="code shell literal-block"><code>$ docker info</code></pre>
+<p>Docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># Bu aşama docker gurubu mevcut olmayanlar için geçerlidir.
+</span>$ groupadd docker
+$ chgrp docker /run/docker.sock <span class="comment single"># bu işlem her yeniden başlatmada gerekebilir.
+# Bu aşama tüm dağıtımlarda gereklidir.
+</span>$ usermod -aG docker username <span class="comment single"># oturumu kapatıp açmak gerekebilir.</span></code></pre>
+</section>
+<section id="docker-calisma-mantigi">
+<h2>Docker çalışma mantığı</h2>
+<p>Docker linux çekirdeği üzerinde oluşturulmuş <strong>container</strong> yapısı üzerinde çalışır. Her container kendisine özel ayrılmış alanda kısıtlı kaynaklar ile çalışır. Bu sayede herhangi bir performans kaybı olmadan ana sistemden bağımsız şekilde istenilen uygulamalar çalıştırılabilir.</p>
+<p>Docker containerlarını üretmek için öncelikle imaj gerekmektedir. İmajlara <strong>dockerhub</strong> üzerinden ulaşabiliriz. Öncelikle imaj kurulur. daha sonra bu imajdan container türetilir. İş bittikten sonra container kolaylıkla yok edilebilir. Veya containerların imajı alınarak yeni imaja dönüştürülebilir.</p>
+<pre class="code text literal-block"><code>kernel (linux)
+  |
+system (gentoo)
+  |
+docker ----------------
+  |       |    |     |
+alpine debian arch ubuntu</code></pre>
+</section>
+<section id="imajlar">
+<h2>İmajlar</h2>
+<p>Docker imajı indirmek için <strong>docker pull</strong> komutu kullanılır. <strong>name:tag</strong> şeklinde belirtilir. eğer tag belirtilmemişse latest olarak değerlendirilir.</p>
+<pre class="code shell literal-block"><code>$ docker pull alpine:latest</code></pre>
+<p>Mevcut imajları listelemek için <strong>docker images</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+debian       latest    43d28810c1b4   <span class="literal number">8</span> days ago    124MB
+alpine       latest    9c6f07244728   <span class="literal number">6</span> weeks ago   <span class="literal number">5</span>.54MB</code></pre>
+<p>Burada dikkat edilmesi gereken konu her imajın bir <strong>ID</strong> değeri bulunmasıdır. İmajlar ile ilgili işlemler yapılırken imajın adı veya bu id değeri kullanılır.</p>
+<p>İmaj silmek için <strong>docker rmi</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ docker rmi alpine
+<span class="comment single"># veya şu da kullanılabilir.
+</span>$ docker rmi 9c6f07244728</code></pre>
+</section>
+<section id="containerlar">
+<h2>Containerlar</h2>
+<p>Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için <strong>docker run</strong> komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.</p>
+<pre class="code shell literal-block"><code><span class="comment single">#  docker run &lt;seçenekler&gt; &lt;imajın idsi veya ismi&gt; &lt;çalıştırılacak komut&gt;
+</span>$ docker run -it -d -p <span class="literal number">8000</span>:80 -v /home/user/docker-share:/shared --name deneme 43d28810c1b4 /bin/bash
+<span class="comment single"># -i stdin okumasına izin verir
+# -d komutu arkada çalıştır
+# -t pseudo-tty olarak çalıştırır. -it olarak kullanıp shell çalıştırabiliriz.
+# -p port yönlendirmesi yapar.
+# -v paylaşılan dizin belirlemeye yarar.
+# --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.</span></code></pre>
+<p>Çalışan containerları listelemek için <strong>docker ps</strong> kullanılır. <strong>-a</strong> parametresi eklenirse tüm containerlar listelenir. <strong>-q</strong> parametresi ile sadece id değerleri yazdırılır.</p>
+<pre class="code shell literal-block"><code>$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                     PORTS     NAMES
+e1e2983bfa34   debian    <span class="literal string double">&quot;bash&quot;</span>    <span class="literal number">8</span> seconds ago    Exited <span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span> <span class="literal number">5</span> seconds ago             <span class="name builtin">test</span>
+b91e04ab5dcc   debian    <span class="literal string double">&quot;bash&quot;</span>    <span class="literal number">23</span> seconds ago   Up <span class="literal number">22</span> seconds                        deneme</code></pre>
+<p>Çalışan bir containera bağlanmak için <strong>docker attach</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># ctrl-k kısayolu ile bağlantı kesilmesi için ek parametre ekleyelim.
+</span>$ docker attach b91e04ab5dcc --detach-keys<span class="operator">=</span><span class="literal string double">&quot;ctrl-k&quot;</span></code></pre>
+<p>Çalışan bir container <strong>docker kill</strong> kullanılarak kapatılabilir. kapatılmış bir container docker start kullanılarak tekrar başlatılabilir.</p>
+<pre class="code shell literal-block"><code>$ docker <span class="name builtin">kill</span> b91e04ab5dcc
+$ docker ps -q <span class="punctuation">|</span> grep b91e04ab5dcc <span class="comment single"># çıktı boşsa container çalışmıyor demektir
+</span>$ docker start b91e04ab5dcc</code></pre>
+<p>Container ile işimiz bittiğinde silmek için <strong>docker rm</strong> kullanılır. Silme işleminden önce kapatmamız gerekir. Eğer zorla kapatılmasını isterseniz <strong>-f</strong> parametresi ekleyebiliriz.</p>
+<pre class="code shell literal-block"><code>$ docker rm b91e04ab5dcc
+Error response from daemon: You cannot remove a running container ...
+$ docker rm -f b91e04ab5dcc
+<span class="comment single"># Aşağıdaki komutla tüm containerları silebiliriz.
+</span>$ docker rm -f <span class="keyword">$(</span>docker ps -a -q<span class="keyword">)</span></code></pre>
+<p>Çalışan containerlar ile ilgili kullanım istatistiklerine ulaşmak için <strong>docker stats</strong> kullanılır. <strong>docker top</strong> ise container içinde çalışan süreçler ile ilgili bilgi almaya yarar.</p>
+<p>Container ile ilgili bilgi almak için <strong>docker inspect</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ docker stats
+CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
+40f84cb8e4e0   deneme2          <span class="literal number">0</span>.00%     808KiB / <span class="literal number">31</span>.15GiB   <span class="literal number">0</span>.00%     <span class="literal number">1</span>.87kB / 0B   0B / 0B     <span class="literal number">1</span>
+$ docker top 40f84cb8e4e0
+UID            PID              PPID      C                   STIME    TTY            TIME        CMD
+root           <span class="literal number">7432</span>             <span class="literal number">7396</span>      <span class="literal number">0</span>                   <span class="literal number">10</span>:42    pts/0          <span class="literal number">00</span>:00:00    bash
+$ docker inspect 40f84cb8e4e0
+...
+  <span class="literal string double">&quot;Id&quot;</span>: <span class="literal string double">&quot;40f84cb8e4e0...&quot;</span>,
+  <span class="literal string double">&quot;Created&quot;</span>: <span class="literal string double">&quot;2022-09-21T07:42:18.337126911Z&quot;</span>,
+...</code></pre>
+<p>Çalışan bir container içerisinde bir komut çalıştırmak için <strong>docker exec</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ docker <span class="name builtin">exec</span> -it 40f84cb8e4e0 /bin/bash</code></pre>
+<p>Containerları duraklatıp devam ettirmek için <strong>docker pause</strong> ve <strong>docker unpause</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ docker pause 40f84cb8e4e0
+$ docker unpause 40f84cb8e4e0</code></pre>
+</section>
+<section id="uzak-sunucuda-calismak">
+<h2>Uzak sunucuda çalışmak</h2>
+<p><strong>DOCKER_HOST</strong> çevresel değişkenini ayarlayarak ssh üzerinden uzaktaki bir makinadaki container ve imajları yönetebilirsiniz.</p>
+<pre class="code shell literal-block"><code>$ <span class="name builtin">export</span> <span class="name variable">DOCKER_HOST</span><span class="operator">=</span>ssh://user&#64;server
+$ docker info</code></pre>
+<p>Bağlantı için ssh anahtarınızı sunucuya atmış olmanız gerekmektedir. Bunun için <strong>ssh-copy-id</strong> kullanabilirsiniz veya anahtarınızı <strong>~/.ssh/authorized_keys</strong> içerisine yazmalısınız.</p>
+<pre class="code shell literal-block"><code>$ ssh-copy-id user&#64;server
+user&#64;server<span class="error">'</span>s password:</code></pre>
+</section>
+</main>
+</body>
+</html>

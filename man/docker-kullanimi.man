@@ -1,0 +1,315 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "DOCKER KULLANIMI"  "" "" ""
+.SH NAME
+Docker kullanımı \- 
+.sp
+Bu yazıda sizlere docker kullanımı anlatılacaktır.
+.SH DOCKER KURULUMU
+.sp
+Docker kurmak için debian tabanlı dağıtımlarda \fBdocker.io\fP paketini kurmalısınız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt install docker.io \-\-no\-install\-recommends
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer debian dışında bir dağıtım kullanıyorsanız kendi sitesi üzerinden indirmeyi veya kaynak koddan derlemeyi deneyebilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# docker binarylerini indirmek için https://download.docker.com/linux/static/stable/
+# indirdikten sonra arşivden çıkatrıp containerd ve dockerd çalıştıralım. (root kullanarak)
+$ tar \-xf docker\-xxx.tgz
+$ cd docker
+$ export PATH=$PATH:$(pwd) # path içine mevcut dizini de ekledik
+# containerd ve dockerd çalıştıralım. Bunlar daemon olduğu için sürekli arkada çalışması gerekmektedir.
+$ containerd
+$ dockerd
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Docker çalışıyor mu diye kontrol etmek için \fBdocker info\fP komutunu kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker info
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# Bu aşama docker gurubu mevcut olmayanlar için geçerlidir.
+$ groupadd docker
+$ chgrp docker /run/docker.sock # bu işlem her yeniden başlatmada gerekebilir.
+# Bu aşama tüm dağıtımlarda gereklidir.
+$ usermod \-aG docker username # oturumu kapatıp açmak gerekebilir.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DOCKER ÇALIŞMA MANTIĞI
+.sp
+Docker linux çekirdeği üzerinde oluşturulmuş \fBcontainer\fP yapısı üzerinde çalışır. Her container kendisine özel ayrılmış alanda kısıtlı kaynaklar ile çalışır. Bu sayede herhangi bir performans kaybı olmadan ana sistemden bağımsız şekilde istenilen uygulamalar çalıştırılabilir.
+.sp
+Docker containerlarını üretmek için öncelikle imaj gerekmektedir. İmajlara \fBdockerhub\fP üzerinden ulaşabiliriz. Öncelikle imaj kurulur. daha sonra bu imajdan container türetilir. İş bittikten sonra container kolaylıkla yok edilebilir. Veya containerların imajı alınarak yeni imaja dönüştürülebilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+kernel (linux)
+  |
+system (gentoo)
+  |
+docker \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+  |       |    |     |
+alpine debian arch ubuntu
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH İMAJLAR
+.sp
+Docker imajı indirmek için \fBdocker pull\fP komutu kullanılır. \fBname:tag\fP şeklinde belirtilir. eğer tag belirtilmemişse latest olarak değerlendirilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker pull alpine:latest
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Mevcut imajları listelemek için \fBdocker images\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+debian       latest    43d28810c1b4   8 days ago    124MB
+alpine       latest    9c6f07244728   6 weeks ago   5\&.54MB
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada dikkat edilmesi gereken konu her imajın bir \fBID\fP değeri bulunmasıdır. İmajlar ile ilgili işlemler yapılırken imajın adı veya bu id değeri kullanılır.
+.sp
+İmaj silmek için \fBdocker rmi\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker rmi alpine
+# veya şu da kullanılabilir.
+$ docker rmi 9c6f07244728
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH CONTAINERLAR
+.sp
+Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için \fBdocker run\fP komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#  docker run <seçenekler> <imajın idsi veya ismi> <çalıştırılacak komut>
+$ docker run \-it \-d \-p 8000:80 \-v /home/user/docker\-share:/shared \-\-name deneme 43d28810c1b4 /bin/bash
+# \-i stdin okumasına izin verir
+# \-d komutu arkada çalıştır
+# \-t pseudo\-tty olarak çalıştırır. \-it olarak kullanıp shell çalıştırabiliriz.
+# \-p port yönlendirmesi yapar.
+# \-v paylaşılan dizin belirlemeye yarar.
+# \-\-name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çalışan containerları listelemek için \fBdocker ps\fP kullanılır. \fB\-a\fP parametresi eklenirse tüm containerlar listelenir. \fB\-q\fP parametresi ile sadece id değerleri yazdırılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker ps \-a
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                     PORTS     NAMES
+e1e2983bfa34   debian    \(dqbash\(dq    8 seconds ago    Exited (0) 5 seconds ago             test
+b91e04ab5dcc   debian    \(dqbash\(dq    23 seconds ago   Up 22 seconds                        deneme
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çalışan bir containera bağlanmak için \fBdocker attach\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# ctrl\-k kısayolu ile bağlantı kesilmesi için ek parametre ekleyelim.
+$ docker attach b91e04ab5dcc \-\-detach\-keys=\(dqctrl\-k\(dq
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çalışan bir container \fBdocker kill\fP kullanılarak kapatılabilir. kapatılmış bir container docker start kullanılarak tekrar başlatılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker kill b91e04ab5dcc
+$ docker ps \-q | grep b91e04ab5dcc # çıktı boşsa container çalışmıyor demektir
+$ docker start b91e04ab5dcc
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Container ile işimiz bittiğinde silmek için \fBdocker rm\fP kullanılır. Silme işleminden önce kapatmamız gerekir. Eğer zorla kapatılmasını isterseniz \fB\-f\fP parametresi ekleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker rm b91e04ab5dcc
+Error response from daemon: You cannot remove a running container ...
+$ docker rm \-f b91e04ab5dcc
+# Aşağıdaki komutla tüm containerları silebiliriz.
+$ docker rm \-f $(docker ps \-a \-q)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çalışan containerlar ile ilgili kullanım istatistiklerine ulaşmak için \fBdocker stats\fP kullanılır. \fBdocker top\fP ise container içinde çalışan süreçler ile ilgili bilgi almaya yarar.
+.sp
+Container ile ilgili bilgi almak için \fBdocker inspect\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker stats
+CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
+40f84cb8e4e0   deneme2          0\&.00%     808KiB / 31\&.15GiB   0\&.00%     1\&.87kB / 0B   0B / 0B     1
+$ docker top 40f84cb8e4e0
+UID            PID              PPID      C                   STIME    TTY            TIME        CMD
+root           7432             7396      0                   10:42    pts/0          00:00:00    bash
+$ docker inspect 40f84cb8e4e0
+\&...
+  \(dqId\(dq: \(dq40f84cb8e4e0...\(dq,
+  \(dqCreated\(dq: \(dq2022\-09\-21T07:42:18.337126911Z\(dq,
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çalışan bir container içerisinde bir komut çalıştırmak için \fBdocker exec\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker exec \-it 40f84cb8e4e0 /bin/bash
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Containerları duraklatıp devam ettirmek için \fBdocker pause\fP ve \fBdocker unpause\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker pause 40f84cb8e4e0
+$ docker unpause 40f84cb8e4e0
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH UZAK SUNUCUDA ÇALIŞMAK
+.sp
+\fBDOCKER_HOST\fP çevresel değişkenini ayarlayarak ssh üzerinden uzaktaki bir makinadaki container ve imajları yönetebilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ export DOCKER_HOST=ssh://user@server
+$ docker info
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bağlantı için ssh anahtarınızı sunucuya atmış olmanız gerekmektedir. Bunun için \fBssh\-copy\-id\fP kullanabilirsiniz veya anahtarınızı \fB~/.ssh/authorized_keys\fP içerisine yazmalısınız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ ssh\-copy\-id user@server
+user@server\(aqs password:
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.
