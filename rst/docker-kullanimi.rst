@@ -90,12 +90,11 @@ Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlarda
 .. code-block:: shell
 
 	#  docker run <seçenekler> <imajın idsi veya ismi> <çalıştırılacak komut>
-	$ docker run -it -d -p 8000:80 -v /home/user/docker-share:/shared --name deneme 43d28810c1b4 /bin/bash
+	$ docker run -it -d -p 8000:80 --name deneme 43d28810c1b4 /bin/bash
 	# -i stdin okumasına izin verir
 	# -d komutu arkada çalıştır
 	# -t pseudo-tty olarak çalıştırır. -it olarak kullanıp shell çalıştırabiliriz.
 	# -p port yönlendirmesi yapar. 
-	# -v paylaşılan dizin belirlemeye yarar.
 	# --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.
 
 Çalışan containerları listelemek için **docker ps** kullanılır. **-a** parametresi eklenirse tüm containerlar listelenir. **-q** parametresi ile sadece id değerleri yazdırılır.
@@ -178,4 +177,66 @@ Bağlantı için ssh anahtarınızı sunucuya atmış olmanız gerekmektedir. Bu
 
 	$ ssh-copy-id user@server
 	user@server's password:
+
+Volume kavramı
+^^^^^^^^^^^^^^
+Docker üzerinde birden çok container ile çalıştığımızı farz edelim. Bu containerlar birbirleri ile dosya alışverişi yapmak isteyebilirler. Örneğin bir tanesi web server olarak çalışırken diğeri web serverda bulunan dosyaları farklı bir amaç için kullanabilir.
+
+Bu gibi durumlar için **volume** bulunur. Volume container tarafından kullanılabilen depolama alanlarıdır. Volume oluşturmak için **docker volume create** kullanılır.
+
+**Volume** diskte **/var/lib/docker/volumes/** içerisinde depolanır.
+
+.. code-block:: shell
+
+	$ docker volume create data
+
+Var olan **volume** listesi için **docker volume ls** kullanılır.
+
+.. code-block:: shell
+
+	$ docker volume ls
+	DRIVER    VOLUME NAME
+	local     data
+
+
+Bir **volume** silmek için **docker volume rm** kullanılır. Silmeden önce bu alanı kullanan containerları kapatmalısınız.
+
+.. code-block:: shell
+
+	$ docker volume rm data
+
+Bir container başlatılırken ona volume eklemek için **--mount** parametresi eklenir.
+
+.. code-block:: shell
+
+	$ docker run -d --name webserver --mount source=data,target=/var/www/http/ nginx:latest
+
+Bağlanacak dizine yazılmasını istemiyorsak **readonly** eklemeliyiz.
+
+.. code-block:: shell
+
+	docker run --mount source=data,target=/app,readonly test321 alpine
+
+Container içine bir dizine tmpfs bağlamak için **type** belirtilir.
+
+.. code-block:: shell
+
+	$ docker run --mount type=tmpfs,target=/app/temp/ --name apptest debian
+	# Şu şekilde de kullanılabilir.
+	$ docker run --tmpfs /app/temp/ --name apptest debian
+
+Ayrıca volume yerine ana sistemdeki bir dizini de bağlayabiliriz.
+
+.. code-block:: shell
+
+	docker run --mount type=bind,source=/home/shared,target=/shared --name test123 alpine
+
+Dizinleri aşağıdaki gibi de bağlayabiliriz.
+
+.. code-block:: shell
+
+	# yazılmasını istemiyorsanız ro istiyorsanız rw
+	# Hiçbir şey eklemezseniz rw kabul edilir.
+	docker run -v /mnt:/mnt:ro -v /shared:/shared:rw test456 alpine
+
 

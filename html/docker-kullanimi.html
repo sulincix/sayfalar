@@ -66,12 +66,11 @@ alpine       latest    9c6f07244728   <span class="literal number">6</span> week
 <h2>Containerlar</h2>
 <p>Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için <strong>docker run</strong> komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.</p>
 <pre class="code shell literal-block"><code><span class="comment single">#  docker run &lt;seçenekler&gt; &lt;imajın idsi veya ismi&gt; &lt;çalıştırılacak komut&gt;
-</span>$ docker run -it -d -p <span class="literal number">8000</span>:80 -v /home/user/docker-share:/shared --name deneme 43d28810c1b4 /bin/bash
+</span>$ docker run -it -d -p <span class="literal number">8000</span>:80 --name deneme 43d28810c1b4 /bin/bash
 <span class="comment single"># -i stdin okumasına izin verir
 # -d komutu arkada çalıştır
 # -t pseudo-tty olarak çalıştırır. -it olarak kullanıp shell çalıştırabiliriz.
 # -p port yönlendirmesi yapar.
-# -v paylaşılan dizin belirlemeye yarar.
 # --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.</span></code></pre>
 <p>Çalışan containerları listelemek için <strong>docker ps</strong> kullanılır. <strong>-a</strong> parametresi eklenirse tüm containerlar listelenir. <strong>-q</strong> parametresi ile sadece id değerleri yazdırılır.</p>
 <pre class="code shell literal-block"><code>$ docker ps -a
@@ -118,6 +117,33 @@ $ docker info</code></pre>
 <p>Bağlantı için ssh anahtarınızı sunucuya atmış olmanız gerekmektedir. Bunun için <strong>ssh-copy-id</strong> kullanabilirsiniz veya anahtarınızı <strong>~/.ssh/authorized_keys</strong> içerisine yazmalısınız.</p>
 <pre class="code shell literal-block"><code>$ ssh-copy-id user&#64;server
 user&#64;server<span class="error">'</span>s password:</code></pre>
+</section>
+<section id="volume-kavrami">
+<h2>Volume kavramı</h2>
+<p>Docker üzerinde birden çok container ile çalıştığımızı farz edelim. Bu containerlar birbirleri ile dosya alışverişi yapmak isteyebilirler. Örneğin bir tanesi web server olarak çalışırken diğeri web serverda bulunan dosyaları farklı bir amaç için kullanabilir.</p>
+<p>Bu gibi durumlar için <strong>volume</strong> bulunur. Volume container tarafından kullanılabilen depolama alanlarıdır. Volume oluşturmak için <strong>docker volume create</strong> kullanılır.</p>
+<p><strong>Volume</strong> diskte <strong>/var/lib/docker/volumes/</strong> içerisinde depolanır.</p>
+<pre class="code shell literal-block"><code>$ docker volume create data</code></pre>
+<p>Var olan <strong>volume</strong> listesi için <strong>docker volume ls</strong> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ docker volume ls
+DRIVER    VOLUME NAME
+<span class="name builtin">local</span>     data</code></pre>
+<p>Bir <strong>volume</strong> silmek için <strong>docker volume rm</strong> kullanılır. Silmeden önce bu alanı kullanan containerları kapatmalısınız.</p>
+<pre class="code shell literal-block"><code>$ docker volume rm data</code></pre>
+<p>Bir container başlatılırken ona volume eklemek için <strong>--mount</strong> parametresi eklenir.</p>
+<pre class="code shell literal-block"><code>$ docker run -d --name webserver --mount <span class="name variable">source</span><span class="operator">=</span>data,target<span class="operator">=</span>/var/www/http/ nginx:latest</code></pre>
+<p>Bağlanacak dizine yazılmasını istemiyorsak <strong>readonly</strong> eklemeliyiz.</p>
+<pre class="code shell literal-block"><code>docker run --mount <span class="name variable">source</span><span class="operator">=</span>data,target<span class="operator">=</span>/app,readonly test321 alpine</code></pre>
+<p>Container içine bir dizine tmpfs bağlamak için <strong>type</strong> belirtilir.</p>
+<pre class="code shell literal-block"><code>$ docker run --mount <span class="name variable">type</span><span class="operator">=</span>tmpfs,target<span class="operator">=</span>/app/temp/ --name apptest debian
+<span class="comment single"># Şu şekilde de kullanılabilir.
+</span>$ docker run --tmpfs /app/temp/ --name apptest debian</code></pre>
+<p>Ayrıca volume yerine ana sistemdeki bir dizini de bağlayabiliriz.</p>
+<pre class="code shell literal-block"><code>docker run --mount <span class="name variable">type</span><span class="operator">=</span>bind,source<span class="operator">=</span>/home/shared,target<span class="operator">=</span>/shared --name test123 alpine</code></pre>
+<p>Dizinleri aşağıdaki gibi de bağlayabiliriz.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># yazılmasını istemiyorsanız ro istiyorsanız rw
+# Hiçbir şey eklemezseniz rw kabul edilir.
+</span>docker run -v /mnt:/mnt:ro -v /shared:/shared:rw test456 alpine</code></pre>
 </section>
 </main>
 </body>
