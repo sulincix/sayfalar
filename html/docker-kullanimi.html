@@ -61,6 +61,10 @@ alpine       latest    9c6f07244728   <span class="literal number">6</span> week
 <pre class="code shell literal-block"><code>$ docker rmi alpine
 <span class="comment single"># veya şu da kullanılabilir.
 </span>$ docker rmi 9c6f07244728</code></pre>
+<p>İmajımızı bir dosyaya kaydetmek için <strong>docker save</strong> kullanırız.</p>
+<pre class="code shell literal-block"><code>$ docker save debian:latest -o /home/backup/debian.tar</code></pre>
+<p>kaydedilmiş bir dosyadan imaj yüklemek için ise <strong>docker load</strong> kullanılız.</p>
+<pre class="code shell literal-block"><code>$ docker load -i /home/backup/debian.tar</code></pre>
 </section>
 <section id="containerlar">
 <h2>Containerlar</h2>
@@ -118,6 +122,8 @@ $ docker inspect 40f84cb8e4e0
 <p>Containerları duraklatıp devam ettirmek için <strong>docker pause</strong> ve <strong>docker unpause</strong> kullanılır.</p>
 <pre class="code shell literal-block"><code>$ docker pause 40f84cb8e4e0
 $ docker unpause 40f84cb8e4e0</code></pre>
+<p>Mevcut containerdan imaj elde etmek için <strong>docker commit</strong> kullanabiliriz.</p>
+<pre class="code shell literal-block"><code>$ docker commit 40f84cb8e4e0 builder:1.0</code></pre>
 </section>
 <section id="uzak-sunucuda-calismak">
 <h2>Uzak sunucuda çalışmak</h2>
@@ -154,6 +160,47 @@ DRIVER    VOLUME NAME
 <pre class="code shell literal-block"><code><span class="comment single"># yazılmasını istemiyorsanız ro istiyorsanız rw
 # Hiçbir şey eklemezseniz rw kabul edilir.
 </span>docker run -v /mnt:/mnt:ro -v /shared:/shared:rw test456 alpine</code></pre>
+</section>
+<section id="dockerfile">
+<h2>Dockerfile</h2>
+<p><strong>Dockerfile</strong> docker kullanarak belli işleri gerçekleştirmeye yarayan bir talimat dosyasıdır. Bu talimatların sonucunda yeni bir imaj dosyası oluşturulur. Örneğin aşağıda bir Dockerfile dosyası verilmiştir.</p>
+<pre class="code shell literal-block"><code>FROM alpine
+RUN <span class="name builtin">echo</span> hello world</code></pre>
+<p>Bir Dockerfile dosyası aşağıdaki gibi çalıştırılır.</p>
+<pre class="code shell literal-block"><code>$ docker build -f ./builder/Dockerfile ./</code></pre>
+<p>Burada <strong>-f</strong> parametresi dosyadan oku anlamına gelir. <strong>./</strong> ise çalışma dizinini belirtir. Eğer <strong>-f</strong> verilmemişse çalışma dizininde dockerfile dosyası aranır.</p>
+<p>Ayrıca doğrudan git üzerinden de çalıştırılabilir.</p>
+<pre class="code shell literal-block"><code>$ docker build git://gitserver.com/username/repository.git</code></pre>
+<p>Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlanabilir.</p>
+<pre class="code shell literal-block"><code>$ docker build -f builder/Dockerfile https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz</code></pre>
+<p><strong>stdin</strong> okunarak çalıştırılabilir.</p>
+<pre class="code shell literal-block"><code>$ cat Dockerfile <span class="punctuation">|</span> docker build -</code></pre>
+</section>
+<section id="dockerfile-yapisi">
+<h2>Dockerfile yapısı</h2>
+<p>Dockerfile dosyaları komutlar yardımı ile çalışır. Aşağıda komut ve kullanım şekli belirtilmiştir.</p>
+<pre class="code yaml literal-block"><code><span class="name tag">FROM &lt;imaj| scratch&gt;    </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">hedef imajı kullan veya boş imajla başla</span><span class="whitespace">
+</span><span class="name tag">COPY &lt;src&gt; &lt;trgt&gt;       </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Çalışma dizinindeki dosyayı kopyalar.</span><span class="whitespace">
+</span><span class="name tag">ADD &lt;src&gt; &lt;trgt&gt;        </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">COPY ile benzerdir fakat arşivleri açarak kopyalar.</span><span class="whitespace">
+</span><span class="name tag">RUN &lt;command&gt;           </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Komut çalıştırır.</span><span class="whitespace">
+</span><span class="name tag">USER &lt;name&gt;             </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">varsayılan kullanıcı adı belirler</span><span class="whitespace">
+</span><span class="name tag">WORKDIR &lt;dir&gt;           </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Container içindeki çalışma dizinini belirler.</span><span class="whitespace">
+</span><span class="name tag">CMD &lt;command&gt;           </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Varsayılan çalıştırılacak olan komutu belirler.</span><span class="whitespace">
+</span><span class="name tag">ENV &lt;name&gt; &lt;value&gt;      </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Çevresel değişken belirler.</span><span class="whitespace">
+</span><span class="name tag">LABEL &lt;key=value&gt;       </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Metadata tanımlamak için kullanılır.</span><span class="whitespace">
+</span><span class="name tag">EXPOSE &lt;port/protocol&gt;  </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Port açmak için kullanılır. protocol kısmı tcp veya udp olabilir.</span><span class="whitespace">
+</span><span class="name tag">ARG &lt;name=value&gt;        </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">ENV ile benzerdir fakat sadece imaj oluşturulurken kullanılabilir.</span></code></pre>
+<p>Örneğin aşağıda bir dockerfile dosyası ile kaynak kod derleyelim.</p>
+<pre class="code yaml literal-block"><code><span class="literal scalar plain">FROM alpine</span><span class="whitespace">
+</span><span class="literal scalar plain">RUN apk add --no-cache build-base</span><span class="whitespace">
+</span><span class="literal scalar plain">ADD bash-5.0.tar.gz /build</span><span class="whitespace">
+</span><span class="literal scalar plain">WORKDIR /build/bash-5.0</span><span class="whitespace">
+</span><span class="literal scalar plain">RUN ./configure --prefix=/usr</span><span class="whitespace">
+</span><span class="literal scalar plain">RUN make</span><span class="whitespace">
+</span><span class="literal scalar plain">RUN make install</span></code></pre>
+<p>Şimdi bu dosyayı derleme yapmak için kullanalım. Burada <strong>-t</strong> yeni oluşacak imaja isim tag eklemek için kullanılır.</p>
+<pre class="code shell literal-block"><code>$ wget https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz
+$ docker build -t build-bash:5.0 .</code></pre>
 </section>
 </main>
 </body>

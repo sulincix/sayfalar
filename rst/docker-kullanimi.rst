@@ -83,6 +83,18 @@ Burada dikkat edilmesi gereken konu her imajın bir **ID** değeri bulunmasıdı
 	# veya şu da kullanılabilir.
 	$ docker rmi 9c6f07244728
 
+İmajımızı bir dosyaya kaydetmek için **docker save** kullanırız.
+
+.. code-block:: shell
+
+	$ docker save debian:latest -o /home/backup/debian.tar
+
+kaydedilmiş bir dosyadan imaj yüklemek için ise **docker load** kullanılız.
+
+.. code-block:: shell
+
+	$ docker load -i /home/backup/debian.tar
+
 Containerlar
 ^^^^^^^^^^^^
 Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için **docker run** komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.
@@ -185,6 +197,12 @@ Containerları duraklatıp devam ettirmek için **docker pause** ve **docker unp
 	$ docker pause 40f84cb8e4e0
 	$ docker unpause 40f84cb8e4e0
 
+Mevcut containerdan imaj elde etmek için **docker commit** kullanabiliriz.
+
+.. code-block:: shell
+
+	$ docker commit 40f84cb8e4e0 builder:1.0
+
 Uzak sunucuda çalışmak
 ^^^^^^^^^^^^^^^^^^^^^^
 **DOCKER_HOST** çevresel değişkenini ayarlayarak ssh üzerinden uzaktaki bir makinadaki container ve imajları yönetebilirsiniz.
@@ -262,4 +280,75 @@ Dizinleri aşağıdaki gibi de bağlayabiliriz.
 	# Hiçbir şey eklemezseniz rw kabul edilir.
 	docker run -v /mnt:/mnt:ro -v /shared:/shared:rw test456 alpine
 
+Dockerfile
+^^^^^^^^^^
+**Dockerfile** docker kullanarak belli işleri gerçekleştirmeye yarayan bir talimat dosyasıdır. Bu talimatların sonucunda yeni bir imaj dosyası oluşturulur. Örneğin aşağıda bir Dockerfile dosyası verilmiştir.
+
+.. code-block:: shell
+
+	FROM alpine
+	RUN echo hello world
+
+Bir Dockerfile dosyası aşağıdaki gibi çalıştırılır.
+
+.. code-block:: shell
+
+	$ docker build -f ./builder/Dockerfile ./
+
+Burada **-f** parametresi dosyadan oku anlamına gelir. **./** ise çalışma dizinini belirtir. Eğer **-f** verilmemişse çalışma dizininde dockerfile dosyası aranır.
+
+Ayrıca doğrudan git üzerinden de çalıştırılabilir.
+
+.. code-block:: shell
+
+	$ docker build git://gitserver.com/username/repository.git
+
+Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlanabilir.
+
+.. code-block:: shell
+
+	$ docker build -f builder/Dockerfile https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz
+
+**stdin** okunarak çalıştırılabilir.
+
+.. code-block:: shell
+
+	$ cat Dockerfile | docker build -
+
+Dockerfile yapısı
+^^^^^^^^^^^^^^^^^
+Dockerfile dosyaları komutlar yardımı ile çalışır. Aşağıda komut ve kullanım şekli belirtilmiştir.
+
+.. code-block:: yaml
+
+	FROM <imaj| scratch>    : hedef imajı kullan veya boş imajla başla
+	COPY <src> <trgt>       : Çalışma dizinindeki dosyayı kopyalar.
+	ADD <src> <trgt>        : COPY ile benzerdir fakat arşivleri açarak kopyalar.
+	RUN <command>           : Komut çalıştırır.
+	USER <name>             : varsayılan kullanıcı adı belirler
+	WORKDIR <dir>           : Container içindeki çalışma dizinini belirler.
+	CMD <command>           : Varsayılan çalıştırılacak olan komutu belirler.
+	ENV <name> <value>      : Çevresel değişken belirler.
+	LABEL <key=value>       : Metadata tanımlamak için kullanılır.
+	EXPOSE <port/protocol>  : Port açmak için kullanılır. protocol kısmı tcp veya udp olabilir.
+	ARG <name=value>        : ENV ile benzerdir fakat sadece imaj oluşturulurken kullanılabilir.
+
+Örneğin aşağıda bir dockerfile dosyası ile kaynak kod derleyelim.
+
+.. code-block:: yaml
+
+	FROM alpine
+	RUN apk add --no-cache build-base
+	ADD bash-5.0.tar.gz /build
+	WORKDIR /build/bash-5.0
+	RUN ./configure --prefix=/usr
+	RUN make
+	RUN make install
+
+Şimdi bu dosyayı derleme yapmak için kullanalım. Burada **-t** yeni oluşacak imaja isim tag eklemek için kullanılır.
+
+.. code-block:: shell
+
+	$ wget https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz
+	$ docker build -t build-bash:5.0 .
 

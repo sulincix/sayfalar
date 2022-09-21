@@ -157,6 +157,30 @@ $ docker rmi 9c6f07244728
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+İmajımızı bir dosyaya kaydetmek için \fBdocker save\fP kullanırız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker save debian:latest \-o /home/backup/debian.tar
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+kaydedilmiş bir dosyadan imaj yüklemek için ise \fBdocker load\fP kullanılız.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker load \-i /home/backup/debian.tar
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH CONTAINERLAR
 .sp
 Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için \fBdocker run\fP komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.
@@ -324,6 +348,18 @@ $ docker unpause 40f84cb8e4e0
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Mevcut containerdan imaj elde etmek için \fBdocker commit\fP kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker commit 40f84cb8e4e0 builder:1.0
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH UZAK SUNUCUDA ÇALIŞMAK
 .sp
 \fBDOCKER_HOST\fP çevresel değişkenini ayarlayarak ssh üzerinden uzaktaki bir makinadaki container ve imajları yönetebilirsiniz.
@@ -454,6 +490,124 @@ Dizinleri aşağıdaki gibi de bağlayabiliriz.
 # yazılmasını istemiyorsanız ro istiyorsanız rw
 # Hiçbir şey eklemezseniz rw kabul edilir.
 docker run \-v /mnt:/mnt:ro \-v /shared:/shared:rw test456 alpine
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DOCKERFILE
+.sp
+\fBDockerfile\fP docker kullanarak belli işleri gerçekleştirmeye yarayan bir talimat dosyasıdır. Bu talimatların sonucunda yeni bir imaj dosyası oluşturulur. Örneğin aşağıda bir Dockerfile dosyası verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+FROM alpine
+RUN echo hello world
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir Dockerfile dosyası aşağıdaki gibi çalıştırılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker build \-f ./builder/Dockerfile ./
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada \fB\-f\fP parametresi dosyadan oku anlamına gelir. \fB\&./\fP ise çalışma dizinini belirtir. Eğer \fB\-f\fP verilmemişse çalışma dizininde dockerfile dosyası aranır.
+.sp
+Ayrıca doğrudan git üzerinden de çalıştırılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker build git://gitserver.com/username/repository.git
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlanabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker build \-f builder/Dockerfile https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBstdin\fP okunarak çalıştırılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ cat Dockerfile | docker build \-
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH DOCKERFILE YAPISI
+.sp
+Dockerfile dosyaları komutlar yardımı ile çalışır. Aşağıda komut ve kullanım şekli belirtilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+FROM <imaj| scratch>    : hedef imajı kullan veya boş imajla başla
+COPY <src> <trgt>       : Çalışma dizinindeki dosyayı kopyalar.
+ADD <src> <trgt>        : COPY ile benzerdir fakat arşivleri açarak kopyalar.
+RUN <command>           : Komut çalıştırır.
+USER <name>             : varsayılan kullanıcı adı belirler
+WORKDIR <dir>           : Container içindeki çalışma dizinini belirler.
+CMD <command>           : Varsayılan çalıştırılacak olan komutu belirler.
+ENV <name> <value>      : Çevresel değişken belirler.
+LABEL <key=value>       : Metadata tanımlamak için kullanılır.
+EXPOSE <port/protocol>  : Port açmak için kullanılır. protocol kısmı tcp veya udp olabilir.
+ARG <name=value>        : ENV ile benzerdir fakat sadece imaj oluşturulurken kullanılabilir.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Örneğin aşağıda bir dockerfile dosyası ile kaynak kod derleyelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+FROM alpine
+RUN apk add \-\-no\-cache build\-base
+ADD bash\-5.0.tar.gz /build
+WORKDIR /build/bash\-5.0
+RUN ./configure \-\-prefix=/usr
+RUN make
+RUN make install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi bu dosyayı derleme yapmak için kullanalım. Burada \fB\-t\fP yeni oluşacak imaja isim tag eklemek için kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ wget https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz
+$ docker build \-t build\-bash:5.0 .
 .ft P
 .fi
 .UNINDENT
