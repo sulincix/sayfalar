@@ -95,6 +95,22 @@ kaydedilmiş bir dosyadan imaj yüklemek için ise **docker load** kullanılız.
 
 	$ docker load -i /home/backup/debian.tar
 
+tarball dosyasından docker imajı oluşturmak için **docker import** kullanabiliriz.
+
+.. code-block:: shell
+
+	$ docker import rootfs.tar custom:new
+	# veya bir dizinden üretebiliriz
+	$ tar -c -C rootfs . | docker import - custom:new2
+
+Docker imajını tarball olarak çıkartmak için ise **docker export** kullanabiliriz.
+
+.. code-block:: shell
+
+	$ docker export debian:stable > /home/user/debian-stable.tar
+	# veya şu şekilde de kullanılabilir
+	$ docker export -o /home/user/debian-stable.tar debian:stable
+
 Containerlar
 ^^^^^^^^^^^^
 Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için **docker run** komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.

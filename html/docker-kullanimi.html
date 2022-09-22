@@ -65,6 +65,14 @@ alpine       latest    9c6f07244728   <span class="literal number">6</span> week
 <pre class="code shell literal-block"><code>$ docker save debian:latest -o /home/backup/debian.tar</code></pre>
 <p>kaydedilmiş bir dosyadan imaj yüklemek için ise <strong>docker load</strong> kullanılız.</p>
 <pre class="code shell literal-block"><code>$ docker load -i /home/backup/debian.tar</code></pre>
+<p>tarball dosyasından docker imajı oluşturmak için <strong>docker import</strong> kullanabiliriz.</p>
+<pre class="code shell literal-block"><code>$ docker import rootfs.tar custom:new
+<span class="comment single"># veya bir dizinden üretebiliriz
+</span>$ tar -c -C rootfs . <span class="punctuation">|</span> docker import - custom:new2</code></pre>
+<p>Docker imajını tarball olarak çıkartmak için ise <strong>docker export</strong> kullanabiliriz.</p>
+<pre class="code shell literal-block"><code>$ docker <span class="name builtin">export</span> debian:stable &gt; /home/user/debian-stable.tar
+<span class="comment single"># veya şu şekilde de kullanılabilir
+</span>$ docker <span class="name builtin">export</span> -o /home/user/debian-stable.tar debian:stable</code></pre>
 </section>
 <section id="containerlar">
 <h2>Containerlar</h2>

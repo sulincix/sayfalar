@@ -181,6 +181,34 @@ $ docker load \-i /home/backup/debian.tar
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+tarball dosyasından docker imajı oluşturmak için \fBdocker import\fP kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker import rootfs.tar custom:new
+# veya bir dizinden üretebiliriz
+$ tar \-c \-C rootfs . | docker import \- custom:new2
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Docker imajını tarball olarak çıkartmak için ise \fBdocker export\fP kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ docker export debian:stable > /home/user/debian\-stable.tar
+# veya şu şekilde de kullanılabilir
+$ docker export \-o /home/user/debian\-stable.tar debian:stable
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH CONTAINERLAR
 .sp
 Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için \fBdocker run\fP komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.
