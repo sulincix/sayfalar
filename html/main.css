@@ -19,7 +19,8 @@ body {
 }
 pre{
     font-family: monospace;
-    margin-left: 30px;
+    margin-left: 3px;
+    margin-right: 3px;
     background: #1c1e1f;
     padding: 10px;
     border-radius: 8px;
@@ -27,13 +28,14 @@ pre{
 
 h1 {
   font-weight: bold;
-  font-size: 22px;
+  font-size: 28px;
 }
 
 h2 {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 26px;
 }
+
 
 .title{
     text-align: center;
@@ -53,6 +55,7 @@ h2 {
     color: #57aef9;
 }
 .keyword, .operator, .interpol{
+    font-weight: bold;
     color: #d73c4b;
 }
 .variable{
