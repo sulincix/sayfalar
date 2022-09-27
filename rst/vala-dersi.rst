@@ -388,23 +388,23 @@ Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağ
 	    stdout.printf(message);
 	}
 
-Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluşturup daha sonra tanımlamak mümkündür.
+Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu isim olarak oluşturup daha sonra tanımlamak mümkündür.
 
 .. code-block:: vala
 
 	...
-	void fff(); // boş olarak tanımlanabilir.
+	void fff(); // isim olarak tanımlanabilir.
 	void fff(){
 	    stdout.printf("hmmm");
 	}
 	...
 
-Ayrıca fonksiyonu boş olarak tanımlayıp **C** programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için **extern** ifadesi kullanılır.
+Ayrıca fonksiyonu isim olarak tanımlayıp **C** programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için **extern** ifadesi kullanılır.
 
 .. code-block:: vala
 
 	// main.vala dosyası
-	extern void main(string msg);
+	extern void fff(string msg);
 	int main(string[] args){
 	    fff("Hello World");
 	}
@@ -428,6 +428,23 @@ C kaynak kodunun gerektirdiği parametreleri **-X** kullanarak ekleyebiliriz. Bu
 .. code-block:: shell
 
 	$ valac main.vala util.c -X "-lreadline" # C ile readline kütüphanesini kullanmak için -lreadline gerekir.
+
+Vala içinde C kullanabildiğimiz gibi tam tersi de mümkündür. Bunun için C tarafında fonksiyon için isim tanımlamamız yeterlidir.
+
+.. code-block:: C
+
+	void fff(char* message);
+	int main(int argc, char *argv[]){
+	    fff("Hello world");
+	}
+
+.. code-block:: vala
+
+	public void fff(string message){
+	    print(message);
+	}
+
+Yukarıdaki örnekte C kodu içerisinde vala ile yazılmış bir fonksiyon kullanılmıştır.
 
 Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez. Bu gibi durumlar için **delegate** ifadesinden yararlanılır. Önce delegate ifadesi ile fonksiyonun nasıl tanımlanacağı belirtilir daha sonra bu yeni oluşturulmuş tür parametre olarak kullanılır.
 
@@ -555,7 +572,7 @@ Bir sınıfı birden fazla sınıfın birleşiminden türetebiliriz.
 
 Signal kavramı
 ==============
-Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için boş olarak tanımlanan fonksiyonun başına **signal** ifadesi yerleştirilir.
+Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için isim olarak tanımlanan fonksiyonun başına **signal** ifadesi yerleştirilir.
 
 .. code-block:: vala
 

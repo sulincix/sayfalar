@@ -295,16 +295,16 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
 </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">write</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
     </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
-<p>Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluşturup daha sonra tanımlamak mümkündür.</p>
+<p>Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu isim olarak oluşturup daha sonra tanımlamak mümkündür.</p>
 <pre class="code vala literal-block"><code><span class="punctuation">...</span><span class="whitespace">
-</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">();</span><span class="whitespace"> </span><span class="comment single">// boş olarak tanımlanabilir.
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">();</span><span class="whitespace"> </span><span class="comment single">// isim olarak tanımlanabilir.
 </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">(){</span><span class="whitespace">
     </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;hmmm&quot;</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="punctuation">}</span><span class="whitespace">
 </span><span class="punctuation">...</span></code></pre>
-<p>Ayrıca fonksiyonu boş olarak tanımlayıp <strong>C</strong> programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için <strong>extern</strong> ifadesi kullanılır.</p>
+<p>Ayrıca fonksiyonu isim olarak tanımlayıp <strong>C</strong> programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için <strong>extern</strong> ifadesi kullanılır.</p>
 <pre class="code vala literal-block"><code><span class="comment single">// main.vala dosyası
-</span><span class="keyword declaration">extern</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">msg</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="keyword declaration">extern</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">msg</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
     </span><span class="name">fff</span><span class="punctuation">(</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
@@ -317,6 +317,15 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
 <pre class="code shell literal-block"><code>$ valac main.vala util.c</code></pre>
 <p>C kaynak kodunun gerektirdiği parametreleri <strong>-X</strong> kullanarak ekleyebiliriz. Bu sayede doğrudan gccye parametre eklenebilir.</p>
 <pre class="code shell literal-block"><code>$ valac main.vala util.c -X <span class="literal string double">&quot;-lreadline&quot;</span> <span class="comment single"># C ile readline kütüphanesini kullanmak için -lreadline gerekir.</span></code></pre>
+<p>Vala içinde C kullanabildiğimiz gibi tam tersi de mümkündür. Bunun için C tarafında fonksiyon için isim tanımlamamız yeterlidir.</p>
+<pre class="code C literal-block"><code><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">fff</span><span class="punctuation">(</span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">argc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">argv</span><span class="punctuation">[]){</span><span class="whitespace">
+    </span><span class="name">fff</span><span class="punctuation">(</span><span class="literal string">&quot;Hello world&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span></code></pre>
+<pre class="code vala literal-block"><code><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">print</span><span class="punctuation">(</span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span></code></pre>
+<p>Yukarıdaki örnekte C kodu içerisinde vala ile yazılmış bir fonksiyon kullanılmıştır.</p>
 <p>Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez. Bu gibi durumlar için <strong>delegate</strong> ifadesinden yararlanılır. Önce delegate ifadesi ile fonksiyonun nasıl tanımlanacağı belirtilir daha sonra bu yeni oluşturulmuş tür parametre olarak kullanılır.</p>
 <pre class="code vala literal-block"><code><span class="keyword declaration">delegate</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">fff</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
 
@@ -420,7 +429,7 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
 </section>
 <section id="signal-kavrami">
 <h2>Signal kavramı</h2>
-<p>Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için boş olarak tanımlanan fonksiyonun başına <strong>signal</strong> ifadesi yerleştirilir.</p>
+<p>Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için isim olarak tanımlanan fonksiyonun başına <strong>signal</strong> ifadesi yerleştirilir.</p>
 <pre class="code vala literal-block"><code><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
     </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">signal</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">sig1</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">);</span><span class="whitespace">
 

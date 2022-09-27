@@ -639,14 +639,14 @@ void write(string message){
 .UNINDENT
 .UNINDENT
 .sp
-Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu boş olarak oluşturup daha sonra tanımlamak mümkündür.
+Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu isim olarak oluşturup daha sonra tanımlamak mümkündür.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
 \&...
-void fff(); // boş olarak tanımlanabilir.
+void fff(); // isim olarak tanımlanabilir.
 void fff(){
     stdout\&.printf(\(dqhmmm\(dq);
 }
@@ -656,14 +656,14 @@ void fff(){
 .UNINDENT
 .UNINDENT
 .sp
-Ayrıca fonksiyonu boş olarak tanımlayıp \fBC\fP programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için \fBextern\fP ifadesi kullanılır.
+Ayrıca fonksiyonu isim olarak tanımlayıp \fBC\fP programlama dili ile yazılmış bir fonksiyon kullanabiliriz. Bu sayede kaynak kod C ve Vala karışımından oluşmuş olur. Bunun için \fBextern\fP ifadesi kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
 // main.vala dosyası
-extern void main(string msg);
+extern void fff(string msg);
 int main(string[] args){
     fff(\(dqHello World\(dq);
 }
@@ -709,6 +709,35 @@ $ valac main.vala util.c \-X \(dq\-lreadline\(dq # C ile readline kütüphanesin
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Vala içinde C kullanabildiğimiz gibi tam tersi de mümkündür. Bunun için C tarafında fonksiyon için isim tanımlamamız yeterlidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+void fff(char* message);
+int main(int argc, char *argv[]){
+    fff(\(dqHello world\(dq);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+public void fff(string message){
+    print(message);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekte C kodu içerisinde vala ile yazılmış bir fonksiyon kullanılmıştır.
 .sp
 Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez. Bu gibi durumlar için \fBdelegate\fP ifadesinden yararlanılır. Önce delegate ifadesi ile fonksiyonun nasıl tanımlanacağı belirtilir daha sonra bu yeni oluşturulmuş tür parametre olarak kullanılır.
 .INDENT 0.0
@@ -869,7 +898,7 @@ public class helloworld : hello, world {
 .UNINDENT
 .SH SIGNAL KAVRAMI
 .sp
-Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için boş olarak tanımlanan fonksiyonun başına \fBsignal\fP ifadesi yerleştirilir.
+Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için isim olarak tanımlanan fonksiyonun başına \fBsignal\fP ifadesi yerleştirilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
