@@ -23,13 +23,20 @@ Eğer debian dışında bir dağıtım kullanıyorsanız kendi sitesi üzerinden
 	$ containerd
 	$ dockerd
 
+Rootless docker kurmak için
+
+.. code-block:: shell
+
+	$ curl -fsSL https://get.docker.com/rootless | bash
+
+
 Docker çalışıyor mu diye kontrol etmek için **docker info** komutunu kullanabiliriz.
 
 .. code-block:: shell
 
 	$ docker info
 
-Docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz.
+Rootless olmayan docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz. Bu işlem güvenlik sorunlarına sebep olabilir. Detaylı bilgi için: https://docs.docker.com/engine/security/#docker-daemon-attack-surface
 
 .. code-block:: shell
 

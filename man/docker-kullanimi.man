@@ -65,6 +65,18 @@ $ dockerd
 .UNINDENT
 .UNINDENT
 .sp
+Rootless docker kurmak için
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ curl \-fsSL https://get.docker.com/rootless | bash
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
 Docker çalışıyor mu diye kontrol etmek için \fBdocker info\fP komutunu kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
@@ -77,7 +89,7 @@ $ docker info
 .UNINDENT
 .UNINDENT
 .sp
-Docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz.
+Rootless olmayan docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz. Bu işlem güvenlik sorunlarına sebep olabilir. Detaylı bilgi için: \fI\%https://docs.docker.com/engine/security/#docker\-daemon\-attack\-surface\fP
 .INDENT 0.0
 .INDENT 3.5
 .sp

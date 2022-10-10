@@ -26,9 +26,11 @@ $ <span class="name builtin">export</span> <span class="name variable">PATH</spa
 # containerd ve dockerd çalıştıralım. Bunlar daemon olduğu için sürekli arkada çalışması gerekmektedir.
 </span>$ containerd
 $ dockerd</code></pre>
+<p>Rootless docker kurmak için</p>
+<pre class="code shell literal-block"><code>$ curl -fsSL https://get.docker.com/rootless <span class="punctuation">|</span> bash</code></pre>
 <p>Docker çalışıyor mu diye kontrol etmek için <strong>docker info</strong> komutunu kullanabiliriz.</p>
 <pre class="code shell literal-block"><code>$ docker info</code></pre>
-<p>Docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz.</p>
+<p>Rootless olmayan docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz. Bu işlem güvenlik sorunlarına sebep olabilir. Detaylı bilgi için: <a class="reference external" href="https://docs.docker.com/engine/security/#docker-daemon-attack-surface">https://docs.docker.com/engine/security/#docker-daemon-attack-surface</a></p>
 <pre class="code shell literal-block"><code><span class="comment single"># Bu aşama docker gurubu mevcut olmayanlar için geçerlidir.
 </span>$ groupadd docker
 $ chgrp docker /run/docker.sock <span class="comment single"># bu işlem her yeniden başlatmada gerekebilir.
