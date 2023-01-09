@@ -421,6 +421,36 @@ $ git push origin development
 .fi
 .UNINDENT
 .UNINDENT
+.sp
+Branch silmek için \fIgit branch \-d <dal\-adı>\fP komutunu kullanabilirsiniz. Bulunduğunuz dalı silemezsiniz. ( Bindiğiniz dalı kesemediğiniz gibi:D )
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# önce diğer brancha geçelim
+$ git switch master
+# development branchını silelim
+$ git branch \-d development
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir branchı yeniden adlandırmak için \fIgit branch \-\-move <eski\-ad> <yeni\-ad>\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# bir branch oluşturalım.
+$ git branch dev
+# yeniden adlandıralım.
+$ git branch \-\-move dev development
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH REMOTE KAVRAMI
 .sp
 Git üzerinde birden çok sunucu tanımlanabilir ve bunlardan istenilene veri alınıp verilebilir. Bu sunucular \fBremote\fP sözcüğü ile ifade edilir.
@@ -488,6 +518,22 @@ Remote üzerinden değişiklikleri alıp vermek için \fIgit pull <remote\-adı>
 $ git pull github
 # diğer remote üzerine gönderelim.
 $ git push origin
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir remoteyi silmek için \fIgit remote remove <remote\-adı>\fP komutu kullanılır.
+Yeniden adlandırmak için ise \fIgit remote rename <eski\-ad> <yeni\-ad>\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# yeniden adlandıralım.
+$ git remote rename github git
+# remote silelim
+$ git remote remove git
 .ft P
 .fi
 .UNINDENT

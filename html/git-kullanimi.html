@@ -208,6 +208,16 @@ $ git branch
 </span>$ git switch master
 <span class="comment single"># development branchını sunucuya yollayalım.
 </span>$ git push origin development</code></pre>
+<p>Branch silmek için <cite>git branch -d &lt;dal-adı&gt;</cite> komutunu kullanabilirsiniz. Bulunduğunuz dalı silemezsiniz. ( Bindiğiniz dalı kesemediğiniz gibi:D )</p>
+<pre class="code shell literal-block"><code><span class="comment single"># önce diğer brancha geçelim
+</span>$ git switch master
+<span class="comment single"># development branchını silelim
+</span>$ git branch -d development</code></pre>
+<p>Bir branchı yeniden adlandırmak için <cite>git branch --move &lt;eski-ad&gt; &lt;yeni-ad&gt;</cite> komutu kullanılır.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># bir branch oluşturalım.
+</span>$ git branch dev
+<span class="comment single"># yeniden adlandıralım.
+</span>$ git branch --move dev development</code></pre>
 </section>
 <section id="remote-kavrami">
 <h2>Remote kavramı</h2>
@@ -230,6 +240,12 @@ $ git remote
 </span>$ git pull github
 <span class="comment single"># diğer remote üzerine gönderelim.
 </span>$ git push origin</code></pre>
+<p>Bir remoteyi silmek için <cite>git remote remove &lt;remote-adı&gt;</cite> komutu kullanılır.
+Yeniden adlandırmak için ise <cite>git remote rename &lt;eski-ad&gt; &lt;yeni-ad&gt;</cite> komutu kullanılır.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># yeniden adlandıralım.
+</span>$ git remote rename github git
+<span class="comment single"># remote silelim
+</span>$ git remote remove git</code></pre>
 </section>
 </main>
 </body>
