@@ -78,7 +78,7 @@ Bu dosyada python3 ile yazılır. Sırasıyla **setup build check install** fonk
 	def build():
 	    autotools.make()
 	    
-	def build():
+	def install():
 	    autotools.install()
 
 Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte kullanımı zorunlu değildir. Bu actions dosyamız aşağıdakine benzer şekilde bir komut çalıştırarak derleme yapar.
@@ -125,7 +125,7 @@ Burada **WORK_DIR** çevresel değişkeni inary tarafından otomatik olarak beli
 	def build():
 	    autotools.make()
 	    
-	def build():
+	def install():
 	    autotools.install()
 	    if get.buildTYPE() == "emul32":
 	        inarytools.removeDir("/usr/bin") # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.

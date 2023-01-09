@@ -18,6 +18,7 @@ sed -i 's|href=.*.css|href=\"main.css|g' html/*.html
 
 cat main.css > html/main.css
 echo "<head><title>Sayfalar</title>" > index.html
+echo "<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0;\">" >> index.html
 echo '<link rel="stylesheet" href="main.css" />' >> index.html
 echo "</head><body>" >> index.html
 for i in $(ls html | grep ".html$" | sed "s/.html//g" | sort)

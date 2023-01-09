@@ -141,7 +141,7 @@ def setup():
 def build():
     autotools\&.make()
 
-def build():
+def install():
     autotools\&.install()
 .ft P
 .fi
@@ -205,7 +205,7 @@ def setup():
 def build():
     autotools\&.make()
 
-def build():
+def install():
     autotools\&.install()
     if get\&.buildTYPE() == \(dqemul32\(dq:
         inarytools\&.removeDir(\(dq/usr/bin\(dq) # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.

@@ -61,7 +61,7 @@ Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çal�
 <span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
     <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span>
 
-<span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
+<span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span>
     <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span></code></pre>
 <p>Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte kullanımı zorunlu değildir. Bu actions dosyamız aşağıdakine benzer şekilde bir komut çalıştırarak derleme yapar.</p>
 <pre class="code shell literal-block"><code>./configure --prefix<span class="operator">=</span>/usr <span class="comment single"># autotools.configure()
@@ -94,7 +94,7 @@ Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çal�
 <span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
     <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span>
 
-<span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
+<span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span>
     <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span>
     <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span>
         <span class="name">inarytools</span><span class="operator">.</span><span class="name">removeDir</span><span class="punctuation">(</span><span class="literal string double">&quot;/usr/bin&quot;</span><span class="punctuation">)</span> <span class="comment single"># 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.</span></code></pre>
