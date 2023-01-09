@@ -247,6 +247,22 @@ Yeniden adlandırmak için ise <cite>git remote rename &lt;eski-ad&gt; &lt;yeni-
 <span class="comment single"># remote silelim
 </span>$ git remote remove git</code></pre>
 </section>
+<section id="squash-commit-kavrami">
+<h2>Squash commit kavramı</h2>
+<p>Bazen git üzerinde farklı bir branch üzerinde geliştirme yaparken çok fazla miktarda commit ürettiğinizde bunları ana branch üzerine birleştirirken birsürü committen oluşması yerine tek bir commit haline getirmek isteyebilirsiniz.
+Bu gibi durumlarda commitleri birleştirerek <strong>squash commit</strong> elde edebilirsiniz. Bunun için rebase module geçmemiz gerekmektedir.</p>
+<p>İlk olarak <cite>git rebase -i &lt;commit-id&gt;</cite> komutu ile rebase moduna geçelim. burada <strong>-i</strong> parametresi commitleri birleştirmemiz için metin düzenleyicimizde bir ekran açacaktır.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># rebase moduna geçelim.
+</span>$ git rebase -i HEAD~5
+<span class="comment single"># metin düzenleyicimizde aşağıdaki gibi metin bulunur.
+</span>pick aa34d35 commit <span class="literal number">5</span>
+pick 879917e commit <span class="literal number">4</span>
+pick 864dc97 commit <span class="literal number">3</span>
+...</code></pre>
+<p>Yukarıdaki örnekte <strong>pick</strong> ile belirtilen commitleri <strong>squash</strong> olarak değiştirirseniz commit bir önceki commit ile birleştirilmiş olur.
+Diğer komutlar düzenleyicide altta açıklama satırı olarak yer almaktadır.</p>
+<p>Düzenleyicide kaydedip çıktıktan sonra bu sefer commit mesajı ekranı ile karşılaşırız. Burada birleştirilmiş commit mesajını yazıp kaydettikten sonra commitler birleştirilmiş olur.</p>
+</section>
 </main>
 </body>
 </html>

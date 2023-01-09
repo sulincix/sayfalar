@@ -238,6 +238,7 @@ Bu işlem sunucudaki değişiklikleri silip yerine yereldeki değişikliklerin a
 Mümkünse hiç force push yapmayın.
 
 
+
 Branch kavramı
 ^^^^^^^^^^^^^^
 Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar **branch** sözcüğü ile ifade edilir.
@@ -358,3 +359,25 @@ Yeniden adlandırmak için ise `git remote rename <eski-ad> <yeni-ad>` komutu ku
 	# remote silelim
 	$ git remote remove git
 
+
+Squash commit kavramı
+^^^^^^^^^^^^^^^^^^^^^
+Bazen git üzerinde farklı bir branch üzerinde geliştirme yaparken çok fazla miktarda commit ürettiğinizde bunları ana branch üzerine birleştirirken birsürü committen oluşması yerine tek bir commit haline getirmek isteyebilirsiniz.
+Bu gibi durumlarda commitleri birleştirerek **squash commit** elde edebilirsiniz. Bunun için rebase module geçmemiz gerekmektedir.
+
+İlk olarak `git rebase -i <commit-id>` komutu ile rebase moduna geçelim. burada **-i** parametresi commitleri birleştirmemiz için metin düzenleyicimizde bir ekran açacaktır.
+
+.. code-block:: shell
+
+	# rebase moduna geçelim.
+	$ git rebase -i HEAD~5
+	# metin düzenleyicimizde aşağıdaki gibi metin bulunur.
+	pick aa34d35 commit 5
+	pick 879917e commit 4
+	pick 864dc97 commit 3
+	...
+
+Yukarıdaki örnekte **pick** ile belirtilen commitleri **squash** olarak değiştirirseniz commit bir önceki commit ile birleştirilmiş olur.
+Diğer komutlar düzenleyicide altta açıklama satırı olarak yer almaktadır.
+
+Düzenleyicide kaydedip çıktıktan sonra bu sefer commit mesajı ekranı ile karşılaşırız. Burada birleştirilmiş commit mesajını yazıp kaydettikten sonra commitler birleştirilmiş olur.
