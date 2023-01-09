@@ -15,6 +15,7 @@ do
 	rst2html --link-stylesheet rst/$i.rst > html/$i.html
 done
 sed -i 's|href=.*.css|href=\"main.css|g' html/*.html
+sed -i '9d;8a<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0;\">' html/*.html
 
 cat main.css > html/main.css
 echo "<head><title>Sayfalar</title>" > index.html
