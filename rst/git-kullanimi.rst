@@ -287,6 +287,25 @@ Sunucuya değişikliklerimizi istenilen dalda göndermek için `git push <remote
 	# development branchını sunucuya yollayalım.
 	$ git push origin development
 
+Branch silmek için `git branch -d <dal-adı>` komutunu kullanabilirsiniz. Bulunduğunuz dalı silemezsiniz. ( Bindiğiniz dalı kesemediğiniz gibi:D )
+
+.. code-block:: shell
+
+	# önce diğer brancha geçelim
+	$ git switch master
+	# development branchını silelim
+	$ git branch -d development
+
+
+Bir branchı yeniden adlandırmak için `git branch --move <eski-ad> <yeni-ad>` komutu kullanılır.
+
+.. code-block:: shell
+
+	# bir branch oluşturalım.
+	$ git branch dev
+	# yeniden adlandıralım.
+	$ git branch --move dev development
+
 Remote kavramı
 ^^^^^^^^^^^^^^
 Git üzerinde birden çok sunucu tanımlanabilir ve bunlardan istenilene veri alınıp verilebilir. Bu sunucular **remote** sözcüğü ile ifade edilir.
@@ -328,3 +347,14 @@ Remote üzerinden değişiklikleri alıp vermek için `git pull <remote-adı>` v
 	$ git pull github
 	# diğer remote üzerine gönderelim.
 	$ git push origin
+
+Bir remoteyi silmek için `git remote remove <remote-adı>` komutu kullanılır.
+Yeniden adlandırmak için ise `git remote rename <eski-ad> <yeni-ad>` komutu kullanılır.
+
+.. code-block:: shell
+
+	# yeniden adlandıralım.
+	$ git remote rename github git
+	# remote silelim
+	$ git remote remove git
+
