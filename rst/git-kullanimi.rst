@@ -184,7 +184,7 @@ Yukarıdaki örnekde `git push` komutunu sunucudaki değişiklikleri almadan ça
 Conflict durumunda **rebase** moduna geçilir. Bu modda çakışan dosyalarda hangisinin seçileceğine karar verilir. 
 Çakışan dosyalar aşağıdaki gibi hal alır. Burada çakışma giderildikten sonra yeni bir commit oluşturmanız gerekmektedir.
 
-.. code-block: python
+.. code-block:: shell
 
 	...
 	<<<<<<< HEAD
@@ -197,9 +197,9 @@ Conflict durumunda **rebase** moduna geçilir. Bu modda çakışan dosyalarda ha
 Burada iki değişiklikten hangisinin kalması isteniyorsa o tutulur diğerleri silinir.
 Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağıdaki gibi olmalıdır.
 
-.. code-block: python 
+.. code-block:: shell 
 
-  ...
+	...
 	print("hello world")
 	...
 
@@ -212,14 +212,14 @@ Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağı
 
 Çakışma giderildikten sonra rebase durumundan çıkmak için `git rebase --continue` komutu kullanılır.
 
-.. code-block: shell
+.. code-block:: shell
 
 	$ git rebase --continue
 	-> Successfully rebased and updated refs/heads/master.
 
 Ardından git push komutu ile sunucuya gönderilir.
 
-.. code-block: shell
+.. code-block:: shell
 
 	$ git push
 	-> To https://gitlab.com/sulincix/git-dersi.git

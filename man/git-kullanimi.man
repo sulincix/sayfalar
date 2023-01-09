@@ -284,25 +284,37 @@ $ git pull \-\-rebase
 .sp
 Conflict durumunda \fBrebase\fP moduna geçilir. Bu modda çakışan dosyalarda hangisinin seçileceğine karar verilir.
 Çakışan dosyalar aşağıdaki gibi hal alır. Burada çakışma giderildikten sonra yeni bir commit oluşturmanız gerekmektedir.
-.\" code-block: python
-.\" 
-.\" ...
-.\" <<<<<<< HEAD
-.\" print("hello world")
-.\" =======
-.\" print("hi world")
-.\" >>>>>>> abaf641 (aaa)
-.\" ...
-.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+<<<<<<< HEAD
+print(\(dqhello world\(dq)
+=======
+print(\(dqhi world\(dq)
+>>>>>>> abaf641 (aaa)
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .sp
 Burada iki değişiklikten hangisinin kalması isteniyorsa o tutulur diğerleri silinir.
 Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağıdaki gibi olmalıdır.
-.\" code-block: python
-.\" 
-.\" ...
-.\"       print("hello world")
-.\"       ...
-.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&...
+print(\(dqhello world\(dq)
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .sp
 Çakışma giderildikten sonra yeni commit oluşturup gönderebiliriz.
 .INDENT 0.0
@@ -318,19 +330,31 @@ $ git commit \-m \(dqÇakışma giderildi\(dq
 .UNINDENT
 .sp
 Çakışma giderildikten sonra rebase durumundan çıkmak için \fIgit rebase \-\-continue\fP komutu kullanılır.
-.\" code-block: shell
-.\" 
-.\" $ git rebase --continue
-.\" -> Successfully rebased and updated refs/heads/master.
-.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git rebase \-\-continue
+\-> Successfully rebased and updated refs/heads/master.
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .sp
 Ardından git push komutu ile sunucuya gönderilir.
-.\" code-block: shell
-.\" 
-.\" $ git push
-.\" -> To https://gitlab.com/sulincix/git-dersi.git
-.\" ->    e2fe24f..19361f6  master -> master
-.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git push
+\-> To https://gitlab.com/sulincix/git\-dersi.git
+\->    e2fe24f..19361f6  master \-> master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .sp
 Eğer rebase yapmaktan vazgeçmek istiyorsanız \fIgit rebase \-\-abort\fP kullanmanız gerekir. Bu sayede rebase işleminden çıkılır.
 .\" code/block:: shell

@@ -141,36 +141,28 @@ Bu duruma <strong>conflict</strong> adı verilir. Conflict çözmek için öncel
 ...</code></pre>
 <p>Conflict durumunda <strong>rebase</strong> moduna geçilir. Bu modda çakışan dosyalarda hangisinin seçileceğine karar verilir.
 Çakışan dosyalar aşağıdaki gibi hal alır. Burada çakışma giderildikten sonra yeni bir commit oluşturmanız gerekmektedir.</p>
-<!-- code-block: python
-
-...
-<<<<<<< HEAD
-print("hello world")
-=======
-print("hi world")
->>>>>>> abaf641 (aaa)
-... -->
+<pre class="code shell literal-block"><code>...
+<span class="operator">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; HEAD
+print<span class="operator">(</span><span class="literal string double">&quot;hello world&quot;</span><span class="operator">)</span>
+<span class="operator">=======</span>
+print<span class="operator">(</span><span class="literal string double">&quot;hi world&quot;</span><span class="operator">)</span>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; abaf641 <span class="operator">(</span>aaa<span class="operator">)</span>
+...</code></pre>
 <p>Burada iki değişiklikten hangisinin kalması isteniyorsa o tutulur diğerleri silinir.
 Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağıdaki gibi olmalıdır.</p>
-<!-- code-block: python
-
-...
-      print("hello world")
-      ... -->
+<pre class="code shell literal-block"><code>...
+print<span class="operator">(</span><span class="literal string double">&quot;hello world&quot;</span><span class="operator">)</span>
+...</code></pre>
 <p>Çakışma giderildikten sonra yeni commit oluşturup gönderebiliriz.</p>
 <pre class="code shell literal-block"><code>$ git add main.py
 $ git commit -m <span class="literal string double">&quot;Çakışma giderildi&quot;</span></code></pre>
 <p>Çakışma giderildikten sonra rebase durumundan çıkmak için <cite>git rebase --continue</cite> komutu kullanılır.</p>
-<!-- code-block: shell
-
-$ git rebase - -continue
--> Successfully rebased and updated refs/heads/master. -->
+<pre class="code shell literal-block"><code>$ git rebase --continue
+-&gt; Successfully rebased and updated refs/heads/master.</code></pre>
 <p>Ardından git push komutu ile sunucuya gönderilir.</p>
-<!-- code-block: shell
-
-$ git push
--> To https://gitlab.com/sulincix/git-dersi.git
-->    e2fe24f..19361f6  master -> master -->
+<pre class="code shell literal-block"><code>$ git push
+-&gt; To https://gitlab.com/sulincix/git-dersi.git
+-&gt;    e2fe24f..19361f6  master -&gt; master</code></pre>
 <p>Eğer rebase yapmaktan vazgeçmek istiyorsanız <cite>git rebase --abort</cite> kullanmanız gerekir. Bu sayede rebase işleminden çıkılır.</p>
 <!-- code/block:: shell
 
