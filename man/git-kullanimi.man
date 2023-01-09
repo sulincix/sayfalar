@@ -1,0 +1,404 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "GIT KULLANIMI"  "" "" ""
+.SH NAME
+Git kullanımı \- 
+.sp
+Bu dokümanda sürüm kontrol sistemi olan git komutu nasıl kullanılır anlatılacakdır.
+.SH GIT KURULUMU
+.sp
+git kurulumu debian tabanlı dağıtımlar için aşağıdaki komut kullanılarak kurulabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ apt install git\-core
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Kaynak koddan derlemek için öncelikle git kaynak kodunu indirip bizine açalım.
+Ardından aşağıdaki adımları uygulayarak derleyelim ve kuralım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\&./configure \-\-prefix=/usr
+make
+make install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH GIT NE IŞE YARAR
+.sp
+Git yazdığımız kodların sürüm takibini yapmamızı sağlayan bir araçtır.
+Bu sayede kod yazarken önceki değişiklikleri kaybetmeden düzenli bir şekilde kodda yaptığımız değişiklikleri görebilir ve ihtiyaç duyulduğunda eski sürümlere dönülebilir.
+Ayrıca git sayesinde yazdığımız kodu git sunucuları (github, gitlab vb) kullanarak paylaşmak mümkündür.
+.SH GIT KULLANARAK KAYNAK KODUN INDIRILMESI
+.sp
+Git kullanarak kaynak kodu bilgisayarımıza indirmek için \fIgit clone\fP komutundan faydalanılır.
+Bu komut git sunucusundan yapılan tüm değişiklikler ile beraber indirir.
+Eğer belli miktarda değişiklikle indirmek isterseniz \fB\-\-depth=\fP parametresi eklenmelidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# sadece son değişikliği almak için \-\-depth=1 eklendi.
+$ git clone https://gitlab.com/sulincix/sayfalar.git \-\-depth=1
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+İndrilen kodun istediğiniz bir dizine indirilmesini istiyorsanız komutun sonuna istenilen konumu yazmanız gereklidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git clone https://gitlab.com/sulincix/sayfalar.git ~/Belgeler/sayfalar
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH ESKI DEĞIŞIKLIKLERI GÖRMEK VE ESKI SÜRÜME DÖNMEK
+.sp
+\fIgit log\fP komutunu kullanarak eski değişiklikleri görebilirsiniz. Bu yapılan değişiklikler \fBcommit\fP olarak adlandırılır.
+Yazının bundan sonraki kısmında \fBcommit\fP sözcüğü kullanılacaktır.
+.sp
+Her commitin bir id değeri bulunur. Bu değer kullanılarak eski sürüme dönülebilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git log
+\-> commit a983f37db618a06a53adb593dd97aa0282775ef5 (HEAD \-> master, origin/master, origin/HEAD)
+\-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+\-> Date:   Mon Oct 10 08:31:30 2022 +0000
+\->
+\->     commit 2
+\->
+\-> commit 180a8bcaf81485958fded6a69c97d15161fd1b75
+\-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+\-> Date:   Tue Sep 27 10:11:12 2022 +0000
+\->
+\->     commit 1
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada eski sürüme dönmek için \fIgit reset <commit\-id>\fP komutu kullanılır.
+Bu komut kodda yapılan değişiklikleri silmeyip git içerisinde eski sürüme dönmeyi sağlar.
+Eğer git üzerinde yaptığınız değişiklikleri de geri almak isterseniz \fI\-\-hard\fP parametresini kullanabilirsiniz.
+Bu parametre tehlikelidir çünkü yazdığınız kodu geri dönülemez şekilde siler.
+.sp
+Ayrıca commit id yerine \fIHEAD~n\fP kullanarak \fBn\fP sayıda önceki commite geri dönebilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# belirtilen commit\-id değerine göre eski sürüme dönmek için (hard reset)
+$ git reset 180a8bcaf81485958fded6a69c97d15161fd1b75 \-\-hard
+# belirtilen sayıda eski sürüme dönmek için (reset)
+$ git reset HEAD~2
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH SUNUCUDAKI GÜNCEL DEĞIŞIKLIKLERI ALMAK
+.sp
+Sunucudaki değişiklikleri \fIgit pull\fP komutu ile alabiliriz.
+Bu komut sunucu tarafında yapılan değişiklikleri yereldeki git deposuna ekleyecektir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git pull
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH YENI COMMIT OLUŞTURMA
+.sp
+Kaynak kodda yaptığımız değişiklikleri yeni bir commit olarak oluşturmak için \fIgit commit\fP komutu kullanılır.
+Bunun için öncelikle hangi dosyaları değiştirdiysek \fIgit add\fP komutu ile belirtemiz gerekir.
+Daha sonra \fIgit checkout\fP komutu ile yapılan değişikliklerin düzgün bir şekilde algılandığından emin olunur.
+Son olarak \fIgit commit\fP komutu ile yeni commit oluşturulur.
+.sp
+git commit komutu doğrudan çalıştırıldığında metin düzenleyici ile commit mesajı düzenleme ekranı çalıştırılır.
+Eğer bu ekranı kullanmak yerine parametre ile belirtmek istereniz \fB\-m\fP parametresi eklemelisiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git add rst/git\-kullanimi.rst
+$ git checkout
+\-> M    rst/git\-kullanimi.rst
+$ git commit \-m \(dqcommit mesajı\(dq
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+commit mesajı düzenleyici \fBEDITOR\fP çevreler değişkeni ile belirlenir. Genellikle varsayılan olarak vim kullanılır.
+Bunu değiştirmek için \fB~/.bashrc\fP içerisinde aşağıdaki gibi tanımlama yapabilirsiniz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+export EDITOR=nano
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Commit mesajını değiştirmek için \fIgit commit \-\-amend\fP komutunu kullanabilirsiniz.
+.sp
+Yeni commit oluşturduktan sonra \fBHEAD\fP ve \fBorigin\fP artık aynı committe olmayacaktır.
+Burada HEAD sizin yerel olarak bulundurduğunuz halini origin ise git sunucusundaki halini gösterir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git log
+\-> commit 03d5176f5e5b46e43dd688fd7b884a58e60afcd4 (HEAD \-> master)
+\-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+\-> Date:   Mon Jan 9 11:09:02 2023 +0300
+\->
+\->     commit 2
+\->
+\-> commit 913d993457d7b07e81746088fbc7cf6aaf9bc01a (origin/master, origin/HEAD)
+\-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+\-> Date:   Tue Dec 27 16:44:49 2022 +0300
+\->
+\->     commit 1
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH GIT SUNUCUSUNA GÖNDERME
+.sp
+Yaptığımız değişiklikleri git sunucusuna göndermek için \fIgit push\fP komutu kullanılır.
+Sunucu sizden kullanıcı adı ve parola ile doğrulama isteyebilir.
+Sunucuya ssh anahtarı eklediyseniz ve ssh üzerinden kullanıyorsanız genellikle doğrulama yapılırken parolaya gerek duyulmaz.
+.sp
+\fBNot:\fP github 13 Ağustos 2021 tarihinde https üzerinden commit göndermeyi engellemeye başladı.
+Parolanız yerine githubdan sağlayacağınız token değerini girmeniz gerekmektedir.
+Github kullanıyorsanız ssh anahtarı ile kullanmanızı öneririm.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git push
+\-> Username for \(aqhttps://gitlab.com\(aq: sulincix
+\-> Password for \(aqhttps://sulincix@gitlab.com\(aq:
+\-> Enumerating objects: 3, done\&.
+\-> Counting objects: 100% (3/3), done\&.
+\-> Writing objects: 100% (3/3), 205 bytes | 205\&.00 KiB/s, done\&.
+\-> Total 3 (delta 0), reused 0 (delta 0), pack\-reused 0
+\-> remote: . Processing 1 references
+\-> remote: Processed 1 references in total
+\-> To https://gitlab.com/sulincix/git\-dersi.git
+\->    1ac2e12..2742a1f  master \-> master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Eğer sunucusunda daha önceden yaptığınız değişiklikler varsa ve sizin yaptığınız değişiklikler ile çakışıyorsa \fIgit push\fP komutu hata verecektir.
+Bu duruma \fBconflict\fP adı verilir. Conflict çözmek için öncelikle \fBgit pull \-\-rebase\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+git push
+\-> Username for ...
+\-> Password for ...
+\-> To https://gitlab.com/sulincix/git\-dersi.git
+\->  ! [rejected]        master \-> master (fetch first)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekde \fIgit push\fP komutunu sunucudaki değişiklikleri almadan çalıştırdığımız için bize önce \fIgit pull\fP komutu kullanarak değişiklikleri almamız söyleniyor.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git pull \-\-rebase
+\&...
+\-> From https://gitlab.com/sulincix/git\-dersi.git
+\->    61e3643..e2fe24f  master     \-> origin/master
+\-> Auto\-merging commit 3
+\-> CONFLICT (add/add): Merge conflict in commit 3
+\-> error: could not apply abaf641... commit 3
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Conflict durumunda \fBrebase\fP moduna geçilir. Bu modda çakışan dosyalarda hangisinin seçileceğine karar verilir.
+Çakışan dosyalar aşağıdaki gibi hal alır. Burada çakışma giderildikten sonra yeni bir commit oluşturmanız gerekmektedir.
+.\" code-block: python
+.\" 
+.\" ...
+.\" <<<<<<< HEAD
+.\" print("hello world")
+.\" =======
+.\" print("hi world")
+.\" >>>>>>> abaf641 (aaa)
+.\" ...
+.
+.sp
+Burada iki değişiklikten hangisinin kalması isteniyorsa o tutulur diğerleri silinir.
+Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağıdaki gibi olmalıdır.
+.\" code-block: python
+.\" 
+.\" ...
+.\"       print("hello world")
+.\"       ...
+.
+.sp
+Çakışma giderildikten sonra yeni commit oluşturup gönderebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git add main.py
+$ git commit \-m \(dqÇakışma giderildi\(dq
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Çakışma giderildikten sonra rebase durumundan çıkmak için \fIgit rebase \-\-continue\fP komutu kullanılır.
+.\" code-block: python
+.\" 
+.\" $ git rebase --continue
+.\" -> Successfully rebased and updated refs/heads/master.
+.
+.sp
+Ardından git push komutu ile sunucuya gönderilir.
+.\" code-block: python
+.\" 
+.\" $ git push
+.\" -> To https://gitlab.com/sulincix/git-dersi.git
+.\" ->    e2fe24f..19361f6  master -> master
+.
+.sp
+Eğer sunucuya değişiklikleri zorla göndermek için \fB\-\-force\fP parametresi kullanılır.
+Bu işlem sunucudaki değişiklikleri silip yerine yereldeki değişikliklerin atılmasını sağlar.
+.sp
+\fBNot:\fP Bu işlem sonucunda sunucuda bulunan değişiklikler silindiği için tehlikelidir. \fBDaha önemlisi arkadaşlarınız size küfür edebilir :D\fP
+Mümkünse hiç force push yapmayın.
+.SH BRANCH KAVRAMI
+.sp
+Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar \fBbranch\fP sözcüğü ile ifade edilir.
+Bu sadece koda yeri bir özelliği geliştirirken farklı bir dal kullanıp kodun stabil çalışan halini kullancak kişiler için korumanız mümkündür.
+.sp
+Mecut branchları görüntülemek için \fIgit branch\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git branch
+\-> * master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yeni bir branch oluşturmak için \fIgit branch <dal\-adı>\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# yeni branch oluşturalım
+$ git branch development
+# branch listeleyelim
+$ git branch
+\->   development
+\-> * master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekte mevcut bulunduğumuz branch başında * işareti bulunmaktadır.
+Bulunduğumuz branchı değiştirmek için \fIgit switch <dal\-adı>\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git switch development
+\-> Switched to branch \(aqdevelopment\(aq
+$ git branch
+\-> * development
+\->   master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dallarda yapılan değişiklikleri birleştirmek için \fIgit merge <dal1> <dal2>\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git merge development master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.\" Generated by docutils manpage writer.
+.

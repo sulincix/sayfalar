@@ -1,0 +1,274 @@
+Git kullanımı
+=============
+Bu dokümanda sürüm kontrol sistemi olan git komutu nasıl kullanılır anlatılacakdır.
+
+Git kurulumu
+^^^^^^^^^^^^
+git kurulumu debian tabanlı dağıtımlar için aşağıdaki komut kullanılarak kurulabilir.
+
+.. code-block:: shell
+
+	$ apt install git-core
+
+Kaynak koddan derlemek için öncelikle git kaynak kodunu indirip bizine açalım.
+Ardından aşağıdaki adımları uygulayarak derleyelim ve kuralım.
+
+.. code-block:: shell
+
+	./configure --prefix=/usr
+	make
+	make install
+
+Git ne işe yarar
+^^^^^^^^^^^^^^^^
+Git yazdığımız kodların sürüm takibini yapmamızı sağlayan bir araçtır.
+Bu sayede kod yazarken önceki değişiklikleri kaybetmeden düzenli bir şekilde kodda yaptığımız değişiklikleri görebilir ve ihtiyaç duyulduğunda eski sürümlere dönülebilir.
+Ayrıca git sayesinde yazdığımız kodu git sunucuları (github, gitlab vb) kullanarak paylaşmak mümkündür.
+
+Git kullanarak kaynak kodun indirilmesi
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Git kullanarak kaynak kodu bilgisayarımıza indirmek için `git clone` komutundan faydalanılır.
+Bu komut git sunucusundan yapılan tüm değişiklikler ile beraber indirir.
+Eğer belli miktarda değişiklikle indirmek isterseniz **--depth=** parametresi eklenmelidir.
+
+.. code-block:: shell
+
+	# sadece son değişikliği almak için --depth=1 eklendi.
+	$ git clone https://gitlab.com/sulincix/sayfalar.git --depth=1
+
+İndrilen kodun istediğiniz bir dizine indirilmesini istiyorsanız komutun sonuna istenilen konumu yazmanız gereklidir.
+
+.. code-block:: shell
+
+	$ git clone https://gitlab.com/sulincix/sayfalar.git ~/Belgeler/sayfalar
+
+Eski değişiklikleri görmek ve eski sürüme dönmek
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`git log` komutunu kullanarak eski değişiklikleri görebilirsiniz. Bu yapılan değişiklikler **commit** olarak adlandırılır.
+Yazının bundan sonraki kısmında **commit** sözcüğü kullanılacaktır.
+
+Her commitin bir id değeri bulunur. Bu değer kullanılarak eski sürüme dönülebilir.
+
+.. code-block:: shell
+
+	$ git log
+	-> commit a983f37db618a06a53adb593dd97aa0282775ef5 (HEAD -> master, origin/master, origin/HEAD)
+	-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+	-> Date:   Mon Oct 10 08:31:30 2022 +0000
+	-> 
+	->     commit 2
+	-> 
+	-> commit 180a8bcaf81485958fded6a69c97d15161fd1b75
+	-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+	-> Date:   Tue Sep 27 10:11:12 2022 +0000
+	-> 
+	->     commit 1
+	...
+
+Burada eski sürüme dönmek için `git reset <commit-id>` komutu kullanılır.
+Bu komut kodda yapılan değişiklikleri silmeyip git içerisinde eski sürüme dönmeyi sağlar.
+Eğer git üzerinde yaptığınız değişiklikleri de geri almak isterseniz `--hard` parametresini kullanabilirsiniz.
+Bu parametre tehlikelidir çünkü yazdığınız kodu geri dönülemez şekilde siler.
+
+Ayrıca commit id yerine `HEAD~n` kullanarak **n** sayıda önceki commite geri dönebilirsiniz.
+
+.. code-block:: shell
+
+	# belirtilen commit-id değerine göre eski sürüme dönmek için (hard reset)
+	$ git reset 180a8bcaf81485958fded6a69c97d15161fd1b75 --hard
+	# belirtilen sayıda eski sürüme dönmek için (reset)
+	$ git reset HEAD~2
+
+
+Sunucudaki güncel değişiklikleri almak
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Sunucudaki değişiklikleri `git pull` komutu ile alabiliriz.
+Bu komut sunucu tarafında yapılan değişiklikleri yereldeki git deposuna ekleyecektir.
+
+.. code-block:: shell
+
+	$ git pull
+
+Yeni commit oluşturma
+^^^^^^^^^^^^^^^^^^^^^
+Kaynak kodda yaptığımız değişiklikleri yeni bir commit olarak oluşturmak için `git commit` komutu kullanılır.
+Bunun için öncelikle hangi dosyaları değiştirdiysek `git add` komutu ile belirtemiz gerekir.
+Daha sonra `git checkout` komutu ile yapılan değişikliklerin düzgün bir şekilde algılandığından emin olunur.
+Son olarak `git commit` komutu ile yeni commit oluşturulur.
+
+git commit komutu doğrudan çalıştırıldığında metin düzenleyici ile commit mesajı düzenleme ekranı çalıştırılır.
+Eğer bu ekranı kullanmak yerine parametre ile belirtmek istereniz **-m** parametresi eklemelisiniz.
+
+.. code-block:: shell
+
+	$ git add rst/git-kullanimi.rst
+	$ git checkout
+	-> M	rst/git-kullanimi.rst
+	$ git commit -m "commit mesajı"
+
+commit mesajı düzenleyici **EDITOR** çevreler değişkeni ile belirlenir. Genellikle varsayılan olarak vim kullanılır.
+Bunu değiştirmek için **~/.bashrc** içerisinde aşağıdaki gibi tanımlama yapabilirsiniz.
+
+.. code-block:: shell
+
+	export EDITOR=nano
+
+Commit mesajını değiştirmek için `git commit --amend` komutunu kullanabilirsiniz. 
+
+Yeni commit oluşturduktan sonra **HEAD** ve **origin** artık aynı committe olmayacaktır. 
+Burada HEAD sizin yerel olarak bulundurduğunuz halini origin ise git sunucusundaki halini gösterir.
+
+.. code-block:: shell
+
+	$ git log
+	-> commit 03d5176f5e5b46e43dd688fd7b884a58e60afcd4 (HEAD -> master)
+	-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+	-> Date:   Mon Jan 9 11:09:02 2023 +0300
+	-> 
+	->     commit 2
+	-> 
+	-> commit 913d993457d7b07e81746088fbc7cf6aaf9bc01a (origin/master, origin/HEAD)
+	-> Author: aliriza <aliriza.keskin@pardus.org.tr>
+	-> Date:   Tue Dec 27 16:44:49 2022 +0300
+	-> 
+	->     commit 1
+
+Git sunucusuna gönderme
+^^^^^^^^^^^^^^^^^^^^^^^
+Yaptığımız değişiklikleri git sunucusuna göndermek için `git push` komutu kullanılır.
+Sunucu sizden kullanıcı adı ve parola ile doğrulama isteyebilir.
+Sunucuya ssh anahtarı eklediyseniz ve ssh üzerinden kullanıyorsanız genellikle doğrulama yapılırken parolaya gerek duyulmaz.
+
+**Not:** github 13 Ağustos 2021 tarihinde https üzerinden commit göndermeyi engellemeye başladı.
+Parolanız yerine githubdan sağlayacağınız token değerini girmeniz gerekmektedir.
+Github kullanıyorsanız ssh anahtarı ile kullanmanızı öneririm.
+
+.. code-block:: shell
+
+	$ git push
+	-> Username for 'https://gitlab.com': sulincix
+	-> Password for 'https://sulincix@gitlab.com': 
+	-> Enumerating objects: 3, done.
+	-> Counting objects: 100% (3/3), done.
+	-> Writing objects: 100% (3/3), 205 bytes | 205.00 KiB/s, done.
+	-> Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+	-> remote: . Processing 1 references
+	-> remote: Processed 1 references in total
+	-> To https://gitlab.com/sulincix/git-dersi.git
+	->    1ac2e12..2742a1f  master -> master
+
+Eğer sunucusunda daha önceden yaptığınız değişiklikler varsa ve sizin yaptığınız değişiklikler ile çakışıyorsa `git push` komutu hata verecektir.
+Bu duruma **conflict** adı verilir. Conflict çözmek için öncelikle **git pull --rebase** komutu kullanılır.
+
+.. code-block:: shell
+
+	git push
+	-> Username for ...
+	-> Password for ...
+	-> To https://gitlab.com/sulincix/git-dersi.git
+	->  ! [rejected]        master -> master (fetch first)
+
+Yukarıdaki örnekde `git push` komutunu sunucudaki değişiklikleri almadan çalıştırdığımız için bize önce `git pull` komutu kullanarak değişiklikleri almamız söyleniyor.
+
+.. code-block:: shell
+
+	$ git pull --rebase
+	...
+	-> From https://gitlab.com/sulincix/git-dersi.git
+	->    61e3643..e2fe24f  master     -> origin/master
+	-> Auto-merging commit 3
+	-> CONFLICT (add/add): Merge conflict in commit 3
+	-> error: could not apply abaf641... commit 3
+	...
+
+Conflict durumunda **rebase** moduna geçilir. Bu modda çakışan dosyalarda hangisinin seçileceğine karar verilir. 
+Çakışan dosyalar aşağıdaki gibi hal alır. Burada çakışma giderildikten sonra yeni bir commit oluşturmanız gerekmektedir.
+
+.. code-block: python
+
+	...
+	<<<<<<< HEAD
+	print("hello world")
+	=======
+	print("hi world")
+	>>>>>>> abaf641 (aaa)
+	...
+
+Burada iki değişiklikten hangisinin kalması isteniyorsa o tutulur diğerleri silinir.
+Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağıdaki gibi olmalıdır.
+
+.. code-block: python 
+
+  ...
+	print("hello world")
+	...
+
+Çakışma giderildikten sonra yeni commit oluşturup gönderebiliriz.
+
+.. code-block:: shell
+
+	$ git add main.py
+	$ git commit -m "Çakışma giderildi"
+
+Çakışma giderildikten sonra rebase durumundan çıkmak için `git rebase --continue` komutu kullanılır.
+
+.. code-block: python 
+
+	$ git rebase --continue
+	-> Successfully rebased and updated refs/heads/master.
+
+Ardından git push komutu ile sunucuya gönderilir.
+
+.. code-block: python 
+
+	$ git push
+	-> To https://gitlab.com/sulincix/git-dersi.git
+	->    e2fe24f..19361f6  master -> master
+
+Eğer sunucuya değişiklikleri zorla göndermek için **--force** parametresi kullanılır.
+Bu işlem sunucudaki değişiklikleri silip yerine yereldeki değişikliklerin atılmasını sağlar.
+
+**Not:** Bu işlem sonucunda sunucuda bulunan değişiklikler silindiği için tehlikelidir. **Daha önemlisi arkadaşlarınız size küfür edebilir :D**
+Mümkünse hiç force push yapmayın.
+
+
+Branch kavramı
+^^^^^^^^^^^^^^
+Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar **branch** sözcüğü ile ifade edilir.
+Bu sadece koda yeri bir özelliği geliştirirken farklı bir dal kullanıp kodun stabil çalışan halini kullancak kişiler için korumanız mümkündür.
+
+Mecut branchları görüntülemek için `git branch` komutu kullanılır.
+
+.. code-block:: shell
+
+	$ git branch
+	-> * master
+
+Yeni bir branch oluşturmak için `git branch <dal-adı>` komutu kullanılır.
+
+.. code-block:: shell
+
+	# yeni branch oluşturalım
+	$ git branch development
+	# branch listeleyelim
+	$ git branch
+	->   development
+	-> * master
+
+Yukarıdaki örnekte mevcut bulunduğumuz branch başında * işareti bulunmaktadır.
+Bulunduğumuz branchı değiştirmek için `git switch <dal-adı>` komutu kullanılır.
+
+.. code-block:: shell
+
+	$ git switch development
+	-> Switched to branch 'development'
+	$ git branch
+	-> * development
+	->   master
+
+Dallarda yapılan değişiklikleri birleştirmek için `git merge <dal1> <dal2>` komutu kullanılır.
+
+.. code-block:: shell
+
+	$ git merge development master
+
