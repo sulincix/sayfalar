@@ -212,18 +212,24 @@ Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağı
 
 Çakışma giderildikten sonra rebase durumundan çıkmak için `git rebase --continue` komutu kullanılır.
 
-.. code-block: python 
+.. code-block: shell
 
 	$ git rebase --continue
 	-> Successfully rebased and updated refs/heads/master.
 
 Ardından git push komutu ile sunucuya gönderilir.
 
-.. code-block: python 
+.. code-block: shell
 
 	$ git push
 	-> To https://gitlab.com/sulincix/git-dersi.git
 	->    e2fe24f..19361f6  master -> master
+
+Eğer rebase yapmaktan vazgeçmek istiyorsanız `git rebase --abort` kullanmanız gerekir. Bu sayede rebase işleminden çıkılır.
+
+.. code/block:: shell
+
+	$ git rebase --abort
 
 Eğer sunucuya değişiklikleri zorla göndermek için **--force** parametresi kullanılır.
 Bu işlem sunucudaki değişiklikleri silip yerine yereldeki değişikliklerin atılmasını sağlar.
@@ -237,7 +243,7 @@ Branch kavramı
 Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar **branch** sözcüğü ile ifade edilir.
 Bu sadece koda yeri bir özelliği geliştirirken farklı bir dal kullanıp kodun stabil çalışan halini kullancak kişiler için korumanız mümkündür.
 
-Mecut branchları görüntülemek için `git branch` komutu kullanılır.
+Mecut branchları görüntülemek için `git branch` komutu kullanılır. Varsayılan branch adımız genellikle **master** olarak tanımlıdır.
 
 .. code-block:: shell
 
@@ -272,3 +278,53 @@ Dallarda yapılan değişiklikleri birleştirmek için `git merge <dal1> <dal2>`
 
 	$ git merge development master
 
+Sunucuya değişikliklerimizi istenilen dalda göndermek için `git push <remote-adı> <dal-adı>` kullanılır.
+
+.. code-block:: shell
+
+	# master branchına geçelim
+	$ git switch master
+	# development branchını sunucuya yollayalım.
+	$ git push origin development
+
+Remote kavramı
+^^^^^^^^^^^^^^
+Git üzerinde birden çok sunucu tanımlanabilir ve bunlardan istenilene veri alınıp verilebilir. Bu sunucular **remote** sözcüğü ile ifade edilir.
+
+Mevcut remote listesi için `git remote` komutu kullanılır. varsayılan remote adı genellikle **origin** olarak tanımlanır.
+
+.. code-block:: shell
+
+	$ git remote
+	-> origin
+
+Bir remotenin hangi adreste olduğunu öğrenmek için `git remote get-url <remote-adı>` komutu kullanılır.
+
+.. code-block:: shell
+
+	$ git remote get-url origin
+	-> https://gitlab.com/sulincix/sayfalar.git
+
+Remotenin adresini değiştirmek için ise `git remote set-url <remote-adı> <yeni-adres>` kullanılır.
+
+.. code-block:: shell
+
+	$ git remote set-url origin https://gitlab.com/sulincix/git-dersi.git
+
+Yeni bir remote eklemek için ise `git remote add <remote-adı> <adres>` kullanılır.
+
+.. code-block:: shell
+
+	$ git remote add github https://github.com/sulincix/sayfalar.git
+	$ git remote
+	-> origin
+	-> github
+
+Remote üzerinden değişiklikleri alıp vermek için `git pull <remote-adı>` ve `git push <remote-adı>` kullanılır.
+
+.. code-block:: shell
+
+	# Değişiklikleri alalım
+	$ git pull github
+	# diğer remote üzerine gönderelim.
+	$ git push origin

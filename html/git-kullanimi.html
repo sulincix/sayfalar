@@ -161,16 +161,20 @@ Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağı
 <pre class="code shell literal-block"><code>$ git add main.py
 $ git commit -m <span class="literal string double">&quot;Çakışma giderildi&quot;</span></code></pre>
 <p>Çakışma giderildikten sonra rebase durumundan çıkmak için <cite>git rebase --continue</cite> komutu kullanılır.</p>
-<!-- code-block: python
+<!-- code-block: shell
 
 $ git rebase - -continue
 -> Successfully rebased and updated refs/heads/master. -->
 <p>Ardından git push komutu ile sunucuya gönderilir.</p>
-<!-- code-block: python
+<!-- code-block: shell
 
 $ git push
 -> To https://gitlab.com/sulincix/git-dersi.git
 ->    e2fe24f..19361f6  master -> master -->
+<p>Eğer rebase yapmaktan vazgeçmek istiyorsanız <cite>git rebase --abort</cite> kullanmanız gerekir. Bu sayede rebase işleminden çıkılır.</p>
+<!-- code/block:: shell
+
+$ git rebase - -abort -->
 <p>Eğer sunucuya değişiklikleri zorla göndermek için <strong>--force</strong> parametresi kullanılır.
 Bu işlem sunucudaki değişiklikleri silip yerine yereldeki değişikliklerin atılmasını sağlar.</p>
 <p><strong>Not:</strong> Bu işlem sonucunda sunucuda bulunan değişiklikler silindiği için tehlikelidir. <strong>Daha önemlisi arkadaşlarınız size küfür edebilir :D</strong>
@@ -180,7 +184,7 @@ Mümkünse hiç force push yapmayın.</p>
 <h2>Branch kavramı</h2>
 <p>Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar <strong>branch</strong> sözcüğü ile ifade edilir.
 Bu sadece koda yeri bir özelliği geliştirirken farklı bir dal kullanıp kodun stabil çalışan halini kullancak kişiler için korumanız mümkündür.</p>
-<p>Mecut branchları görüntülemek için <cite>git branch</cite> komutu kullanılır.</p>
+<p>Mecut branchları görüntülemek için <cite>git branch</cite> komutu kullanılır. Varsayılan branch adımız genellikle <strong>master</strong> olarak tanımlıdır.</p>
 <pre class="code shell literal-block"><code>$ git branch
 -&gt; * master</code></pre>
 <p>Yeni bir branch oluşturmak için <cite>git branch &lt;dal-adı&gt;</cite> komutu kullanılır.</p>
@@ -199,6 +203,33 @@ $ git branch
 -&gt;   master</code></pre>
 <p>Dallarda yapılan değişiklikleri birleştirmek için <cite>git merge &lt;dal1&gt; &lt;dal2&gt;</cite> komutu kullanılır.</p>
 <pre class="code shell literal-block"><code>$ git merge development master</code></pre>
+<p>Sunucuya değişikliklerimizi istenilen dalda göndermek için <cite>git push &lt;remote-adı&gt; &lt;dal-adı&gt;</cite> kullanılır.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># master branchına geçelim
+</span>$ git switch master
+<span class="comment single"># development branchını sunucuya yollayalım.
+</span>$ git push origin development</code></pre>
+</section>
+<section id="remote-kavrami">
+<h2>Remote kavramı</h2>
+<p>Git üzerinde birden çok sunucu tanımlanabilir ve bunlardan istenilene veri alınıp verilebilir. Bu sunucular <strong>remote</strong> sözcüğü ile ifade edilir.</p>
+<p>Mevcut remote listesi için <cite>git remote</cite> komutu kullanılır. varsayılan remote adı genellikle <strong>origin</strong> olarak tanımlanır.</p>
+<pre class="code shell literal-block"><code>$ git remote
+-&gt; origin</code></pre>
+<p>Bir remotenin hangi adreste olduğunu öğrenmek için <cite>git remote get-url &lt;remote-adı&gt;</cite> komutu kullanılır.</p>
+<pre class="code shell literal-block"><code>$ git remote get-url origin
+-&gt; https://gitlab.com/sulincix/sayfalar.git</code></pre>
+<p>Remotenin adresini değiştirmek için ise <cite>git remote set-url &lt;remote-adı&gt; &lt;yeni-adres&gt;</cite> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ git remote set-url origin https://gitlab.com/sulincix/git-dersi.git</code></pre>
+<p>Yeni bir remote eklemek için ise <cite>git remote add &lt;remote-adı&gt; &lt;adres&gt;</cite> kullanılır.</p>
+<pre class="code shell literal-block"><code>$ git remote add github https://github.com/sulincix/sayfalar.git
+$ git remote
+-&gt; origin
+-&gt; github</code></pre>
+<p>Remote üzerinden değişiklikleri alıp vermek için <cite>git pull &lt;remote-adı&gt;</cite> ve <cite>git push &lt;remote-adı&gt;</cite> kullanılır.</p>
+<pre class="code shell literal-block"><code><span class="comment single"># Değişiklikleri alalım
+</span>$ git pull github
+<span class="comment single"># diğer remote üzerine gönderelim.
+</span>$ git push origin</code></pre>
 </section>
 </main>
 </body>

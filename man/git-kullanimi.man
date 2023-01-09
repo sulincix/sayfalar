@@ -318,18 +318,24 @@ $ git commit \-m \(dqÇakışma giderildi\(dq
 .UNINDENT
 .sp
 Çakışma giderildikten sonra rebase durumundan çıkmak için \fIgit rebase \-\-continue\fP komutu kullanılır.
-.\" code-block: python
+.\" code-block: shell
 .\" 
 .\" $ git rebase --continue
 .\" -> Successfully rebased and updated refs/heads/master.
 .
 .sp
 Ardından git push komutu ile sunucuya gönderilir.
-.\" code-block: python
+.\" code-block: shell
 .\" 
 .\" $ git push
 .\" -> To https://gitlab.com/sulincix/git-dersi.git
 .\" ->    e2fe24f..19361f6  master -> master
+.
+.sp
+Eğer rebase yapmaktan vazgeçmek istiyorsanız \fIgit rebase \-\-abort\fP kullanmanız gerekir. Bu sayede rebase işleminden çıkılır.
+.\" code/block:: shell
+.\" 
+.\" $ git rebase --abort
 .
 .sp
 Eğer sunucuya değişiklikleri zorla göndermek için \fB\-\-force\fP parametresi kullanılır.
@@ -342,7 +348,7 @@ Mümkünse hiç force push yapmayın.
 Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar \fBbranch\fP sözcüğü ile ifade edilir.
 Bu sadece koda yeri bir özelliği geliştirirken farklı bir dal kullanıp kodun stabil çalışan halini kullancak kişiler için korumanız mümkündür.
 .sp
-Mecut branchları görüntülemek için \fIgit branch\fP komutu kullanılır.
+Mecut branchları görüntülemek için \fIgit branch\fP komutu kullanılır. Varsayılan branch adımız genellikle \fBmaster\fP olarak tanımlıdır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -396,6 +402,92 @@ Dallarda yapılan değişiklikleri birleştirmek için \fIgit merge <dal1> <dal2
 .nf
 .ft C
 $ git merge development master
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Sunucuya değişikliklerimizi istenilen dalda göndermek için \fIgit push <remote\-adı> <dal\-adı>\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# master branchına geçelim
+$ git switch master
+# development branchını sunucuya yollayalım.
+$ git push origin development
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH REMOTE KAVRAMI
+.sp
+Git üzerinde birden çok sunucu tanımlanabilir ve bunlardan istenilene veri alınıp verilebilir. Bu sunucular \fBremote\fP sözcüğü ile ifade edilir.
+.sp
+Mevcut remote listesi için \fIgit remote\fP komutu kullanılır. varsayılan remote adı genellikle \fBorigin\fP olarak tanımlanır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git remote
+\-> origin
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir remotenin hangi adreste olduğunu öğrenmek için \fIgit remote get\-url <remote\-adı>\fP komutu kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git remote get\-url origin
+\-> https://gitlab.com/sulincix/sayfalar.git
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Remotenin adresini değiştirmek için ise \fIgit remote set\-url <remote\-adı> <yeni\-adres>\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git remote set\-url origin https://gitlab.com/sulincix/git\-dersi.git
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yeni bir remote eklemek için ise \fIgit remote add <remote\-adı> <adres>\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ git remote add github https://github.com/sulincix/sayfalar.git
+$ git remote
+\-> origin
+\-> github
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Remote üzerinden değişiklikleri alıp vermek için \fIgit pull <remote\-adı>\fP ve \fIgit push <remote\-adı>\fP kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# Değişiklikleri alalım
+$ git pull github
+# diğer remote üzerine gönderelim.
+$ git push origin
 .ft P
 .fi
 .UNINDENT
