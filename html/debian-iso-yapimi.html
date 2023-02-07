@@ -52,17 +52,17 @@
 <ol class="arabic simple">
 <li><p>Gerekli paketleri kuralım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi-ia32-bin grub-efi</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>debootstrap<span class="whitespace"> </span>xorriso<span class="whitespace"> </span>squashfs-tools<span class="whitespace"> </span>mtools<span class="whitespace"> </span>grub-pc-bin<span class="whitespace"> </span>grub-efi-ia32-bin<span class="whitespace"> </span>grub-efi</code></pre>
 <ol class="arabic simple" start="2">
 <li><p>Kurulum aracını derleyelim. (İsteğe bağlı)</p></li>
 </ol>
 <p>Öncelikle kurulum aracını deb paketi yapmak için gerekli olan paketleri kuralım:</p>
-<pre class="code shell literal-block"><code>☭ apt-get install devscripts</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>devscripts</code></pre>
 <p>Daha sonra kaynak kodu bir dizine çekip <strong>deb</strong> paketi haline getirelim.</p>
-<pre class="code shell literal-block"><code>☭ git clone https://gitlab.com/ggggggggggggggggg/17g
-☭ <span class="name builtin">cd</span> 17g
-☭ mk-build-deps --install
-☭ debuild -us -uc -b</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>git<span class="whitespace"> </span>clone<span class="whitespace"> </span>https://gitlab.com/ggggggggggggggggg/17g<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>17g<span class="whitespace">
+</span>☭<span class="whitespace"> </span>mk-build-deps<span class="whitespace"> </span>--install<span class="whitespace">
+</span>☭<span class="whitespace"> </span>debuild<span class="whitespace"> </span>-us<span class="whitespace"> </span>-uc<span class="whitespace"> </span>-b</code></pre>
 <p>Bir üst dizinde kurulum aracına ait <strong>deb</strong> paketi oluşacakdır.</p>
 </section>
 <section id="chroot-olusturulmasi">
@@ -70,36 +70,36 @@
 <ol class="arabic simple">
 <li><p><strong>Debootstrap</strong> ile debian chroot ortamı oluşturalım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ mkdir sid-chroot
-☭ debootstrap --arch<span class="operator">=</span>amd64 --no-merged-usr sid sid-chroot https://deb.debian.org/debian</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>sid-chroot<span class="whitespace">
+</span>☭<span class="whitespace"> </span>debootstrap<span class="whitespace"> </span>--arch<span class="operator">=</span>amd64<span class="whitespace"> </span>--no-merged-usr<span class="whitespace"> </span>sid<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>https://deb.debian.org/debian</code></pre>
 <p>Eğer debian yerine devuan kullanmak istiyorsanız depo adresi olarak <em>https://pkgmaster.devuan.org/merged</em> koymalısınız.</p>
 <p>Eğer &quot;Unpacking the base system...&quot; sırasında sorun yaşıyorsanız <strong>chroot</strong> dizininin sahibini <strong>root</strong> olarak değiştirip tekrar denemenizi öneriririz.</p>
-<pre class="code shell literal-block"><code>☭ chown root sid-chroot</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>chown<span class="whitespace"> </span>root<span class="whitespace"> </span>sid-chroot</code></pre>
 <ol class="arabic simple" start="2">
 <li><p>Eğer apt ile ilgili <strong>sandbox</strong> hatası alırsanız aşağıdaki komutu kullanın.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ <span class="name builtin">echo</span> <span class="literal string double">&quot;APT::Sandbox::User root;&quot;</span> &gt; sid-chroot/etc/apt/apt.conf.d/99sandboxroot</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;APT::Sandbox::User root;&quot;</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>sid-chroot/etc/apt/apt.conf.d/99sandboxroot</code></pre>
 <p>Eğer sıfırdan debootstrap kullanarak chroot oluşturmak yerine mevcut bir debian tabanlı isoyu açmak istiyorsak aşağıdaki adımları uygulayın.</p>
 <ol class="arabic simple">
 <li><p>Iso dosyamızı bir dizine bağlayalım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ mount -o loop debian-live-orijinal.iso /mnt</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>mount<span class="whitespace"> </span>-o<span class="whitespace"> </span>loop<span class="whitespace"> </span>debian-live-orijinal.iso<span class="whitespace"> </span>/mnt</code></pre>
 <ol class="arabic simple" start="2">
 <li><p>Iso içerisindeki <strong>live/filesystem.squashfs</strong> dosyasını açalım. ve adını <strong>sid-chroot</strong> olarak değiştirelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ unsquashfs /mnt/live/filesystem.squashfs
-☭ mv squashfs-root sid-chroot</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>unsquashfs<span class="whitespace"> </span>/mnt/live/filesystem.squashfs<span class="whitespace">
+</span>☭<span class="whitespace"> </span>mv<span class="whitespace"> </span>squashfs-root<span class="whitespace"> </span>sid-chroot</code></pre>
 <ol class="arabic simple" start="3">
 <li><p>Iso dosyamızın bağını sökelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ umount -f /mnt</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>umount<span class="whitespace"> </span>-f<span class="whitespace"> </span>/mnt</code></pre>
 </section>
 <section id="chroot-icine-girmek-icin-on-hazirlik">
 <h2>Chroot içine girmek için ön hazırlık</h2>
 <ol class="arabic simple">
 <li><p><strong>dev sys proc run</strong> bind bağlayalım. Bu işlem her chroot ile <strong>sid-chroot</strong> içerisine girileceğinde yapılmalıdır. <strong>sid-chroot</strong> içerisinden çıkıldığında ise  bind bağının sökülmesi gerekmektedir.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ <span class="keyword">for</span> i <span class="keyword">in</span> dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span>i<span class="whitespace"> </span><span class="keyword">in</span><span class="whitespace"> </span>dev<span class="whitespace"> </span>dev/pts<span class="whitespace"> </span>proc<span class="whitespace"> </span>sys<span class="punctuation">;</span><span class="whitespace"> </span><span class="keyword">do</span><span class="whitespace"> </span>mount<span class="whitespace"> </span>-o<span class="whitespace"> </span><span class="name builtin">bind</span><span class="whitespace"> </span>/<span class="name variable">$i</span><span class="whitespace"> </span>sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="keyword">done</span></code></pre>
 </section>
 <section id="gerekli-paketlerin-kurulmasi">
 <h2>Gerekli paketlerin kurulması</h2>
@@ -107,39 +107,39 @@
 <ol class="arabic simple">
 <li><p>Chroot komutu ile oluşan <strong>chroot</strong> içerisine girelim. ve ardından <strong>sources.list</strong> dosyasını düzenleyelim. Bu noktadan sonra chroot içerisinden devam edeceğiz.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ chroot sid-chroot /bin/bash
-☭ <span class="name builtin">echo</span> <span class="literal string single">'deb https://deb.debian.org/debian sid main contrib non-free'</span> &gt; /etc/apt/sources.list
-☭ apt-get update</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>chroot<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>/bin/bash<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string single">'deb https://deb.debian.org/debian sid main contrib non-free'</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>/etc/apt/sources.list<span class="whitespace">
+</span>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>update</code></pre>
 <ol class="arabic simple" start="2">
 <li><p>Kernel kuralım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install linux-headers-amd64 linux-image-amd64</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>linux-headers-amd64<span class="whitespace"> </span>linux-image-amd64</code></pre>
 <p>Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (isteğe bağlı)</p>
-<pre class="code shell literal-block"><code>☭ bash &lt;<span class="operator">(</span>https://liquorix.net/add-liquorix-repo.sh<span class="operator">)</span>
-☭ apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>bash<span class="whitespace"> </span>&lt;<span class="operator">(</span>https://liquorix.net/add-liquorix-repo.sh<span class="operator">)</span><span class="whitespace">
+</span>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>linux-image-liquorix-amd64<span class="whitespace"> </span>linux-headers-liquorix-amd64</code></pre>
 <ol class="arabic simple" start="3">
 <li><p>Grub kuralım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install grub-pc-bin grub-efi-ia32-bin grub-efi</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>grub-pc-bin<span class="whitespace"> </span>grub-efi-ia32-bin<span class="whitespace"> </span>grub-efi</code></pre>
 <ol class="arabic simple" start="4">
 <li><p>Live açılış için gereken paketleri kuralım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install live-config live-boot</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>live-config<span class="whitespace"> </span>live-boot</code></pre>
 <ol class="arabic simple" start="5">
 <li><p>Debian tabanlı sistemlerde önerilen paketler varsayılan olarak paket kurulumu esnasında kurulur. Bu durum gereksiz paketlerin de gelmesine sebep olabilmektedir. Önerilen paketleri kapatmak için aşağıdaki yolu uygulayabilirsiniz. (İsteğe bağlı)</p></li>
 </ol>
 <pre class="code shell literal-block"><code><span class="comment single"># /etc/apt/apt.conf.d/01norecommend adında bir dosya açın ve içine şunu yazın
-</span>APT::Install-Recommends <span class="literal string double">&quot;0&quot;</span><span class="punctuation">;</span>
-APT::Install-Suggests <span class="literal string double">&quot;0&quot;</span><span class="punctuation">;</span></code></pre>
+</span>APT::Install-Recommends<span class="whitespace"> </span><span class="literal string double">&quot;0&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span>APT::Install-Suggests<span class="whitespace"> </span><span class="literal string double">&quot;0&quot;</span><span class="punctuation">;</span></code></pre>
 <ol class="arabic simple" start="6">
 <li><p>Eğer dil dosyaları, man dosyaları gibi şeylere ihtiyacınız yoksa ve bunların gereksiz olduğunu düşünüyorsanız Bunları paket kurduktan sonra otomatik silen ayarı aşağıdaki gibi yapabilirsiniz. (Tavsiye edilmez. / İsteğe bağlı.)</p></li>
 </ol>
 <pre class="code shell literal-block"><code><span class="comment single"># /etc/apt/apt.conf.d/02antibloat adında dosya açın ve içine şunu yazın
-</span>DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/locale || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
-DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/man || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
-DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/help || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
-DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/doc || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span>
-DPkg::Post-Invoke <span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/info || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span></code></pre>
+</span>DPkg::Post-Invoke<span class="whitespace"> </span><span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/locale || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span><span class="whitespace">
+</span>DPkg::Post-Invoke<span class="whitespace"> </span><span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/man || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span><span class="whitespace">
+</span>DPkg::Post-Invoke<span class="whitespace"> </span><span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/help || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span><span class="whitespace">
+</span>DPkg::Post-Invoke<span class="whitespace"> </span><span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/doc || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span><span class="whitespace">
+</span>DPkg::Post-Invoke<span class="whitespace"> </span><span class="operator">{</span><span class="literal string double">&quot;rm -rf /usr/share/info || true&quot;</span><span class="punctuation">;</span><span class="operator">}</span><span class="punctuation">;</span></code></pre>
 </section>
 <section id="ozellestirme">
 <h2>Özelleştirme</h2>
@@ -149,30 +149,30 @@ DPkg::Post-Invoke <span class="operator">{</span><span class="literal string dou
 <ul class="simple">
 <li><p>/etc/os-release</p></li>
 </ul>
-<pre class="code shell literal-block"><code><span class="name variable">PRETTY_NAME</span><span class="operator">=</span><span class="literal string double">&quot;Custom debian (sid)&quot;</span>
-<span class="name variable">NAME</span><span class="operator">=</span><span class="literal string double">&quot;CUSTOM&quot;</span>
-<span class="name variable">VERSION_ID</span><span class="operator">=</span><span class="literal string double">&quot;1&quot;</span>
-<span class="name variable">VERSION</span><span class="operator">=</span><span class="literal string double">&quot;1 (sid)&quot;</span>
-<span class="name variable">ID</span><span class="operator">=</span>customdebian
-<span class="name variable">ID_LIKE</span><span class="operator">=</span>debian
-<span class="name variable">HOME_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://www.example.com/&quot;</span>
-<span class="name variable">SUPPORT_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://forums.example.com/&quot;</span>
-<span class="name variable">BUG_REPORT_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://example.com/issues/&quot;</span>
-<span class="name variable">PRIVACY_POLICY_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://www.example.com/privacy/&quot;</span>
-<span class="name variable">VERSION_CODENAME</span><span class="operator">=</span>custom
-<span class="name variable">DEBIAN_CODENAME</span><span class="operator">=</span>sid</code></pre>
+<pre class="code shell literal-block"><code><span class="name variable">PRETTY_NAME</span><span class="operator">=</span><span class="literal string double">&quot;Custom debian (sid)&quot;</span><span class="whitespace">
+</span><span class="name variable">NAME</span><span class="operator">=</span><span class="literal string double">&quot;CUSTOM&quot;</span><span class="whitespace">
+</span><span class="name variable">VERSION_ID</span><span class="operator">=</span><span class="literal string double">&quot;1&quot;</span><span class="whitespace">
+</span><span class="name variable">VERSION</span><span class="operator">=</span><span class="literal string double">&quot;1 (sid)&quot;</span><span class="whitespace">
+</span><span class="name variable">ID</span><span class="operator">=</span>customdebian<span class="whitespace">
+</span><span class="name variable">ID_LIKE</span><span class="operator">=</span>debian<span class="whitespace">
+</span><span class="name variable">HOME_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://www.example.com/&quot;</span><span class="whitespace">
+</span><span class="name variable">SUPPORT_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://forums.example.com/&quot;</span><span class="whitespace">
+</span><span class="name variable">BUG_REPORT_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://example.com/issues/&quot;</span><span class="whitespace">
+</span><span class="name variable">PRIVACY_POLICY_URL</span><span class="operator">=</span><span class="literal string double">&quot;https://www.example.com/privacy/&quot;</span><span class="whitespace">
+</span><span class="name variable">VERSION_CODENAME</span><span class="operator">=</span>custom<span class="whitespace">
+</span><span class="name variable">DEBIAN_CODENAME</span><span class="operator">=</span>sid</code></pre>
 <ul class="simple">
 <li><p>/etc/lsb-release</p></li>
 </ul>
-<pre class="code shell literal-block"><code><span class="name variable">DISTRIB_ID</span><span class="operator">=</span>CustomDebian
-<span class="name variable">DISTRIB_RELEASE</span><span class="operator">=</span><span class="literal number">1</span>
-<span class="name variable">DISTRIB_CODENAME</span><span class="operator">=</span>sid
-<span class="name variable">DISTRIB_DESCRIPTION</span><span class="operator">=</span><span class="literal string double">&quot;Custom Debian sid&quot;</span></code></pre>
+<pre class="code shell literal-block"><code><span class="name variable">DISTRIB_ID</span><span class="operator">=</span>CustomDebian<span class="whitespace">
+</span><span class="name variable">DISTRIB_RELEASE</span><span class="operator">=</span><span class="literal number">1</span><span class="whitespace">
+</span><span class="name variable">DISTRIB_CODENAME</span><span class="operator">=</span>sid<span class="whitespace">
+</span><span class="name variable">DISTRIB_DESCRIPTION</span><span class="operator">=</span><span class="literal string double">&quot;Custom Debian sid&quot;</span></code></pre>
 <ol class="arabic simple" start="2">
 <li><p>Masaüstü ortamı kurabiliriz.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install xorg xinit
-☭ apt-get install lightdm <span class="comment single"># giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>xorg<span class="whitespace"> </span>xinit<span class="whitespace">
+</span>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>lightdm<span class="whitespace"> </span><span class="comment single"># giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.</span></code></pre>
 <table>
 <caption><strong>Masaüstü kurulumu</strong></caption>
 <colgroup>
@@ -213,14 +213,14 @@ DPkg::Post-Invoke <span class="operator">{</span><span class="literal string dou
 <ol class="arabic simple" start="3">
 <li><p>Sürücüleri ekleyebiliz.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install bluez-firmware firmware-amd-graphics firmware-atheros <span class="literal string escape">\
-</span>      firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 <span class="literal string escape">\
-</span>      firmware-bnx2x firmware-brcm80211 firmware-cavium firmware-intel-sound <span class="literal string escape">\
-</span>      firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi <span class="literal string escape">\
-</span>      firmware-libertas firmware-linux firmware-linux-free firmware-linux-nonfree <span class="literal string escape">\
-</span>      firmware-misc-nonfree firmware-myricom firmware-netxen firmware-qlogic <span class="literal string escape">\
-</span>      firmware-ralink firmware-realtek firmware-samsung firmware-siano <span class="literal string escape">\
-</span>      firmware-ti-connectivity firmware-zd1211 zd1211-firmware</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>bluez-firmware<span class="whitespace"> </span>firmware-amd-graphics<span class="whitespace"> </span>firmware-atheros<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-b43-installer<span class="whitespace"> </span>firmware-b43legacy-installer<span class="whitespace"> </span>firmware-bnx2<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-bnx2x<span class="whitespace"> </span>firmware-brcm80211<span class="whitespace"> </span>firmware-cavium<span class="whitespace"> </span>firmware-intel-sound<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-intelwimax<span class="whitespace"> </span>firmware-ipw2x00<span class="whitespace"> </span>firmware-ivtv<span class="whitespace"> </span>firmware-iwlwifi<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-libertas<span class="whitespace"> </span>firmware-linux<span class="whitespace"> </span>firmware-linux-free<span class="whitespace"> </span>firmware-linux-nonfree<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-misc-nonfree<span class="whitespace"> </span>firmware-myricom<span class="whitespace"> </span>firmware-netxen<span class="whitespace"> </span>firmware-qlogic<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-ralink<span class="whitespace"> </span>firmware-realtek<span class="whitespace"> </span>firmware-samsung<span class="whitespace"> </span>firmware-siano<span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">      </span>firmware-ti-connectivity<span class="whitespace"> </span>firmware-zd1211<span class="whitespace"> </span>zd1211-firmware</code></pre>
 <ol class="arabic simple" start="4">
 <li><p>Varsayılan kullanıcı ayarları yapmak için kullanıcı ev dizinine gelmesini istediğiniz dosyaları <strong>/etc/skel</strong> içerisine uygun hiyerarşiye göre dizmelisiniz.</p></li>
 </ol>
@@ -229,12 +229,12 @@ DPkg::Post-Invoke <span class="operator">{</span><span class="literal string dou
 <ol class="arabic simple" start="5">
 <li><p>Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğumuz <strong>deb</strong> dosyasını chroot içindeki <strong>/tmp</strong> dizinine kopyalayalım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ dpkg -i /tmp/17g-installer.deb <span class="comment single"># dosya adını uygun şekilde yazınız.
-</span>☭ apt-get install -f <span class="comment single"># eksik bağımlılıkları tamamlaması için.</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>dpkg<span class="whitespace"> </span>-i<span class="whitespace"> </span>/tmp/17g-installer.deb<span class="whitespace"> </span><span class="comment single"># dosya adını uygun şekilde yazınız.
+</span>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>-f<span class="whitespace"> </span><span class="comment single"># eksik bağımlılıkları tamamlaması için.</span></code></pre>
 <ol class="arabic simple" start="6">
 <li><p>Network manager gvfs-backends gibi bazı paketlere ihtiyacımız olabilir. Bunları kuralbilirsiniz.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ apt-get install network-manager-gnome gvfs-backends pavucontrol chromium vlc</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>install<span class="whitespace"> </span>network-manager-gnome<span class="whitespace"> </span>gvfs-backends<span class="whitespace"> </span>pavucontrol<span class="whitespace"> </span>chromium<span class="whitespace"> </span>vlc</code></pre>
 </section>
 <section id="paketleme-oncesi">
 <h2>Paketleme öncesi</h2>
@@ -242,16 +242,16 @@ DPkg::Post-Invoke <span class="operator">{</span><span class="literal string dou
 <li><p>Öncelikle chroot içerisinden çıkalım. İşlemin bundan sonraki aşaması chrootun dışarısında gerçekleşecektir.</p></li>
 <li><p>Chroot içerisindeki <strong>bind</strong> bağlarını kaldıralım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ umount -lf -R sid-chroot/* <span class="literal number">2</span>&gt;/dev/null</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>umount<span class="whitespace"> </span>-lf<span class="whitespace"> </span>-R<span class="whitespace"> </span>sid-chroot/*<span class="whitespace"> </span><span class="literal number">2</span>&gt;/dev/null</code></pre>
 </section>
 <section id="temizlik">
 <h2>Temizlik</h2>
 <p>Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu değildir fakat yaptığınız zaman squashfs ve iso boyutunu küçültmektedir.</p>
-<pre class="code shell literal-block"><code>☭ chroot sid-chroot apt-get autoremove <span class="comment single"># boşta kalan paketleri temizler
-</span>☭ chroot sid-chroot apt-get clean <span class="comment single"># apt önbelleğini temizler
-</span>☭ rm -f sid-chroot/root/.bash_history <span class="comment single"># iso yaparken oluşturduğunuz historyleri temizler
-</span>☭ rm -rf sid-chroot/var/lib/apt/lists/* <span class="comment single"># index dosyalarını temizler
-</span>☭ find sid-chroot/var/log/ -type f <span class="punctuation">|</span> xargs rm -f <span class="comment single"># logları siler</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>chroot<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>autoremove<span class="whitespace"> </span><span class="comment single"># boşta kalan paketleri temizler
+</span>☭<span class="whitespace"> </span>chroot<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>clean<span class="whitespace"> </span><span class="comment single"># apt önbelleğini temizler
+</span>☭<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span>sid-chroot/root/.bash_history<span class="whitespace"> </span><span class="comment single"># iso yaparken oluşturduğunuz historyleri temizler
+</span>☭<span class="whitespace"> </span>rm<span class="whitespace"> </span>-rf<span class="whitespace"> </span>sid-chroot/var/lib/apt/lists/*<span class="whitespace"> </span><span class="comment single"># index dosyalarını temizler
+</span>☭<span class="whitespace"> </span>find<span class="whitespace"> </span>sid-chroot/var/log/<span class="whitespace"> </span>-type<span class="whitespace"> </span>f<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>xargs<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span><span class="comment single"># logları siler</span></code></pre>
 </section>
 <section id="paketleme-asamasi">
 <h2>Paketleme aşaması</h2>
@@ -263,26 +263,26 @@ DPkg::Post-Invoke <span class="operator">{</span><span class="literal string dou
 Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben sizlere <em>gzip</em> kullanmanızı öneririm.</p>
 </blockquote>
 <p><strong>Not:</strong> Ubuntu tabanında <strong>live</strong> dizini yerine <strong>casper</strong> dizini blunmaktadır.</p>
-<pre class="code shell literal-block"><code>☭ mkdir isowork
-☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
-☭ mkdir -p isowork/live
-☭ mv filesystem.squashfs isowork/live/filesystem.squashfs</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>isowork<span class="whitespace">
+</span>☭<span class="whitespace"> </span>mksquashfs<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>filesystem.squashfs<span class="whitespace"> </span>-comp<span class="whitespace"> </span>gzip<span class="whitespace"> </span>-wildcards<span class="whitespace">
+</span>☭<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>-p<span class="whitespace"> </span>isowork/live<span class="whitespace">
+</span>☭<span class="whitespace"> </span>mv<span class="whitespace"> </span>filesystem.squashfs<span class="whitespace"> </span>isowork/live/filesystem.squashfs</code></pre>
 <ol class="arabic simple" start="2">
 <li><p>Ardından <strong>vmlinuz</strong> ve <strong>initrd</strong> dosyalarını isowork/live içerisine atalım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ ls sid-chroot/boot/ <span class="comment single"># dosyalarımızın adını öğrenmek için
-</span>    config-5.7.0-1-amd64  grub  initrd.img-5.7.0-1-amd64  System.map-5.7.0-1-amd64  vmlinuz-5.7.0-1-amd64
-☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
-☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>ls<span class="whitespace"> </span>sid-chroot/boot/<span class="whitespace"> </span><span class="comment single"># dosyalarımızın adını öğrenmek için
+</span><span class="whitespace">    </span>config-5.7.0-1-amd64<span class="whitespace">  </span>grub<span class="whitespace">  </span>initrd.img-5.7.0-1-amd64<span class="whitespace">  </span>System.map-5.7.0-1-amd64<span class="whitespace">  </span>vmlinuz-5.7.0-1-amd64<span class="whitespace">
+</span>☭<span class="whitespace"> </span>cp<span class="whitespace"> </span>-pf<span class="whitespace"> </span>sid-chroot/boot/initrd.img-5.7.0-1-amd64<span class="whitespace"> </span>isowork/live/initrd.img<span class="whitespace">
+</span>☭<span class="whitespace"> </span>cp<span class="whitespace"> </span>-pf<span class="whitespace"> </span>sid-chroot/boot/vmlinuz-5.7.0-1-amd64<span class="whitespace"> </span>isowork/live/vmlinuz</code></pre>
 <ol class="arabic simple" start="3">
 <li><p><strong>grub.cfg</strong> dosyası oluşturalım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ mkdir -p isowork/boot/grub/
-☭ <span class="name builtin">echo</span> <span class="literal string single">'insmod all_video'</span> &gt; isowork/boot/grub/grub.cfg
-☭ <span class="name builtin">echo</span> <span class="literal string single">'menuentry &quot;Start Debian 64-bit&quot; --class debian {'</span> &gt;&gt; isowork/boot/grub/grub.cfg
-☭ <span class="name builtin">echo</span> <span class="literal string single">'    linux /live/vmlinuz boot=live live-config live-media-path=/live --'</span> &gt;&gt; isowork/boot/grub/grub.cfg
-☭ <span class="name builtin">echo</span> <span class="literal string single">'    initrd /live/initrd.img'</span> &gt;&gt; isowork/boot/grub/grub.cfg
-☭ <span class="name builtin">echo</span> <span class="literal string single">'}'</span> &gt;&gt; isowork/boot/grub/grub.cfg</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>-p<span class="whitespace"> </span>isowork/boot/grub/<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string single">'insmod all_video'</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>isowork/boot/grub/grub.cfg<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string single">'menuentry &quot;Start Debian 64-bit&quot; --class debian {'</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>isowork/boot/grub/grub.cfg<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string single">'    linux /live/vmlinuz boot=live live-config live-media-path=/live --'</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>isowork/boot/grub/grub.cfg<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string single">'    initrd /live/initrd.img'</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>isowork/boot/grub/grub.cfg<span class="whitespace">
+</span>☭<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string single">'}'</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>isowork/boot/grub/grub.cfg</code></pre>
 <p>Burada <strong>linux</strong> ile başlayan satırın sonuna ekleyeceğimiz ek ayarlar ile sistemin dilini ve klavye düzeni gibi şeyleri ayarlayabilirsiniz. Aşağıda Bu parametreler ve anlamları verilmiştir.</p>
 <table>
 <caption><strong>Parametre ve anlamları</strong></caption>
@@ -330,19 +330,19 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 <ol class="arabic simple" start="4">
 <li><p>Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca iso <strong>isowork</strong> dizini içerisine istediğiniz dosyaları ekleyebilirsiniz.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ tree isowork
-    isowork/
-    ├── boot
-    │   └── grub
-    │       └── grub.cfg
-    └── live
-        ├── filesystem.squashfs
-        ├── initrd.img
-        └── vmlinuz</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>tree<span class="whitespace"> </span>isowork<span class="whitespace">
+    </span>isowork/<span class="whitespace">
+    </span>├──<span class="whitespace"> </span>boot<span class="whitespace">
+    </span>│<span class="whitespace">   </span>└──<span class="whitespace"> </span>grub<span class="whitespace">
+    </span>│<span class="whitespace">       </span>└──<span class="whitespace"> </span>grub.cfg<span class="whitespace">
+    </span>└──<span class="whitespace"> </span>live<span class="whitespace">
+        </span>├──<span class="whitespace"> </span>filesystem.squashfs<span class="whitespace">
+        </span>├──<span class="whitespace"> </span>initrd.img<span class="whitespace">
+        </span>└──<span class="whitespace"> </span>vmlinuz</code></pre>
 <ol class="arabic simple" start="5">
 <li><p>Iso dosyası üretelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ grub-mkrescue isowork -o debian-live.iso</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>grub-mkrescue<span class="whitespace"> </span>isowork<span class="whitespace"> </span>-o<span class="whitespace"> </span>debian-live.iso</code></pre>
 </section>
 <section id="iso-uzerinde-duzenleme-yapma">
 <h2>Iso üzerinde düzenleme yapma</h2>
@@ -350,33 +350,33 @@ Debianda varsayılan sıkıştırma formatı <em>xz</em> olmasına ramen ben siz
 <ol class="arabic simple">
 <li><p><strong>sid-chroot</strong> dizinine tekrar bind bağı atalım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ <span class="keyword">for</span> i <span class="keyword">in</span> dev dev/pts proc sys<span class="punctuation">;</span> <span class="keyword">do</span> mount -o <span class="name builtin">bind</span> /<span class="name variable">$i</span> sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span> <span class="keyword">done</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span>i<span class="whitespace"> </span><span class="keyword">in</span><span class="whitespace"> </span>dev<span class="whitespace"> </span>dev/pts<span class="whitespace"> </span>proc<span class="whitespace"> </span>sys<span class="punctuation">;</span><span class="whitespace"> </span><span class="keyword">do</span><span class="whitespace"> </span>mount<span class="whitespace"> </span>-o<span class="whitespace"> </span><span class="name builtin">bind</span><span class="whitespace"> </span>/<span class="name variable">$i</span><span class="whitespace"> </span>sid-chroot/<span class="name variable">$i</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="keyword">done</span></code></pre>
 <ol class="arabic simple" start="2">
 <li><p><strong>sid-chroot</strong> içine tekrar girelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ chroot sid-chroot /bin/bash</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>chroot<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>/bin/bash</code></pre>
 <ol class="arabic simple" start="3">
 <li><p>Düzenlemek istediğimiz yapalım. Ve ardından chroot içinden çıkalım.</p></li>
 <li><p>Chroot içerisindeki <strong>bind</strong> bağlarını kaldıralım.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ umount -lf -R sid-chroot/* <span class="literal number">2</span>&gt;/dev/null</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>umount<span class="whitespace"> </span>-lf<span class="whitespace"> </span>-R<span class="whitespace"> </span>sid-chroot/*<span class="whitespace"> </span><span class="literal number">2</span>&gt;/dev/null</code></pre>
 <ol class="arabic simple" start="5">
 <li><p>Tekrar <strong>squashfs</strong> dosyası üretelim ve güncelleyelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ mksquashfs sid-chroot filesystem.squashfs -comp gzip -wildcards
-☭ rm -f isowork/live/filesystem.squashfs
-☭ mv filesystem.squashfs isowork/live/filesystem.squashfs</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>mksquashfs<span class="whitespace"> </span>sid-chroot<span class="whitespace"> </span>filesystem.squashfs<span class="whitespace"> </span>-comp<span class="whitespace"> </span>gzip<span class="whitespace"> </span>-wildcards<span class="whitespace">
+</span>☭<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span>isowork/live/filesystem.squashfs<span class="whitespace">
+</span>☭<span class="whitespace"> </span>mv<span class="whitespace"> </span>filesystem.squashfs<span class="whitespace"> </span>isowork/live/filesystem.squashfs</code></pre>
 <ol class="arabic simple" start="6">
 <li><p>Eğer kernelle ilgili bir değişiklik yaptıysak <strong>isowork</strong> içerisindeki live dizininde bulunan dosyaları güncelleyelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ rm -f isowork/live/initrd.img isowork/live/vmlinuz
-☭ cp -pf sid-chroot/boot/initrd.img-5.7.0-1-amd64 isowork/live/initrd.img
-☭ cp -pf sid-chroot/boot/vmlinuz-5.7.0-1-amd64 isowork/live/vmlinuz</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span>isowork/live/initrd.img<span class="whitespace"> </span>isowork/live/vmlinuz<span class="whitespace">
+</span>☭<span class="whitespace"> </span>cp<span class="whitespace"> </span>-pf<span class="whitespace"> </span>sid-chroot/boot/initrd.img-5.7.0-1-amd64<span class="whitespace"> </span>isowork/live/initrd.img<span class="whitespace">
+</span>☭<span class="whitespace"> </span>cp<span class="whitespace"> </span>-pf<span class="whitespace"> </span>sid-chroot/boot/vmlinuz-5.7.0-1-amd64<span class="whitespace"> </span>isowork/live/vmlinuz</code></pre>
 <ol class="arabic simple" start="7">
 <li><p>Yeni iso dosyasını üretelim.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>☭ mv debian-live.iso debian-live-eski.iso
-☭ grub-mkrescue isowork -o debian-live.iso</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>mv<span class="whitespace"> </span>debian-live.iso<span class="whitespace"> </span>debian-live-eski.iso<span class="whitespace">
+</span>☭<span class="whitespace"> </span>grub-mkrescue<span class="whitespace"> </span>isowork<span class="whitespace"> </span>-o<span class="whitespace"> </span>debian-live.iso</code></pre>
 </section>
 </main>
 </body>

@@ -923,6 +923,98 @@ int main(string[] args){
 .fi
 .UNINDENT
 .UNINDENT
+.SH NAMESPACE KAVRAMI
+.sp
+Valada kodları alan adlarına bölerek yazmamız mümkündür. Bu sayede alan adı içine tanımladığımız fonksiyonları alan adı ile beraber çağırarak kullanabiliriz. Bunun için \fBnamespace {}\fP ifadesi kullanılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+namespace test {
+    void print(){
+        stdout\&.printf(\(dqTest\(dq);
+    }
+}
+\&...
+int main(string[] args){
+    test\&.print();
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Namespace iç içe tanımlanabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+namespace test1 {
+    namespace test2 {
+        void print(){
+            stdout\&.printf(\(dqTest\(dq);
+        }
+    }
+}
+\&...
+int main(string[] args){
+    test1\&.test2\&.print();
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bir namespace alanını kaynak kodda içeri aktararak kullanmak için \fBusing\fP ifadesi kullanılır.
+Bu ifade sayesinde belirtilen alan adındaki tüm fonksiyonlar kaynak kodda doğrudan kullanılabilir hale gelir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+using Gtk;
+
+int main(string[] args){
+    # İstersen yine de namespace adı ile kullanabiliriz\&.
+    Gtk\&.init (ref args);
+    # Gtk\&.Window yerine Window kullanabiliriz\&.
+    var win = new Window();
+    # Şununla aynı anlama gelir
+    # var win = new Gtk\&.Window();
+    \&...
+    # Aynı isimde var olan bir fonksiyonu namespace adı olmadan kullanmak mümkün değildir\&.
+    Gtk\&.main ();
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Sınıfları tanımlarken namespace belirterek tanımlamak mümkündür.
+Bunun için sınıfın adının başına namespace adını belirtmek yeterlidir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+public class test\&.cls {
+    public void print(){
+        stdout\&.printf(\(dqTest\(dq);
+    }
+}
+\&...
+int main(string[] args){
+    var tcls = new test\&.cls();
+    tcls\&.print();
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH KÜTÜPHANE OLUŞTURMA
 .sp
 Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.
@@ -1017,7 +1109,7 @@ int main(string[] args){
 .sp
 .nf
 .ft C
-$ valac \-\-vapidir ./ main.vala \-\-pkg libtest
+$ valac \-\-vapidir \&./ main.vala \-\-pkg libtest
 .ft P
 .fi
 .UNINDENT

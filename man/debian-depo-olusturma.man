@@ -344,13 +344,13 @@ Başlık ile md5sum birleştirmek için aşağıdakine benzer bir komut dizisi k
 $ cat baslik | sed \(dqs/XdateX/$(date \-R)/g\(dq > dists/stable/Release
 $ cd dists/stable/
 $ echo \(dqMD5Sum:\(dq >>  Release
-$ find . \-type f | xargs md5sum | prepareLine >> Release
+$ find \&. \-type f | xargs md5sum | prepareLine >> Release
 $ echo \(dqSHA1:\(dq >>  Release
-$ find . \-type f | xargs sha1sum | prepareLine >> Release
+$ find \&. \-type f | xargs sha1sum | prepareLine >> Release
 $ echo \(dqSHA256:\(dq >>  Release
-$ find . \-type f | xargs sha256sum | prepareLine >> Release
+$ find \&. \-type f | xargs sha256sum | prepareLine >> Release
 $ echo \(dqSHA512:\(dq >>  Release
-$ find . \-type f | xargs sha512sum | prepareLine  >> Release
+$ find \&. \-type f | xargs sha512sum | prepareLine  >> Release
 .ft P
 .fi
 .UNINDENT

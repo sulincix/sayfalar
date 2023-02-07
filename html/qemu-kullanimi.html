@@ -25,35 +25,35 @@
 <section id="disk-imaji-olusturma">
 <h2>Disk imajı oluşturma</h2>
 <p><strong>qemu-img</strong> komutu ile kolay yoldan imaj açabiliriz. boyutunu <strong>G</strong> <strong>M</strong> gibi harfler ile ifade ediyoruz. Örneğin:</p>
-<pre class="code shell literal-block"><code>☭ qemu-img create deneme.img 30G
-Formatting <span class="literal string single">'deneme.img'</span>, <span class="name variable">fmt</span><span class="operator">=</span>raw <span class="name variable">size</span><span class="operator">=</span><span class="literal number">32212254720</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-img<span class="whitespace"> </span>create<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span>30G<span class="whitespace">
+</span>Formatting<span class="whitespace"> </span><span class="literal string single">'deneme.img'</span>,<span class="whitespace"> </span><span class="name variable">fmt</span><span class="operator">=</span>raw<span class="whitespace"> </span><span class="name variable">size</span><span class="operator">=</span><span class="literal number">32212254720</span></code></pre>
 <p>Bu disk imajı <strong>raw</strong> formattadır. yani disk imajını usb belleğe <em>dd</em> komutu ile yazıp daha sonra bunu kullanabilirsiniz.</p>
 <p><strong>Raw</strong> yerine <strong>qcow2</strong> formatta oluşturmak isterseniz <strong>-f qcow2</strong> parametresini ekleyebilirsiniz. Örneğin:</p>
-<pre class="code shell literal-block"><code>☭ qemu-img create -f qcow2 deneme.qcow2 30G</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-img<span class="whitespace"> </span>create<span class="whitespace"> </span>-f<span class="whitespace"> </span>qcow2<span class="whitespace"> </span>deneme.qcow2<span class="whitespace"> </span>30G</code></pre>
 <p><strong>Raw</strong> imajlar çok fantastik şeyler yaparsanız diske zarar verebilir. <strong>Qcow2</strong> imajlar ise daha az zararsızdır ama <em>dd</em> komutu ile doğrudan basıp kullanılamaz.</p>
 </section>
 <section id="sanal-makinanin-baslatilmasi">
 <h2>Sanal makinanın başlatılması</h2>
 <p><strong>qemu-system-x86_64</strong> komutu ile başlatılır. <strong>--enable-kvm</strong> parametresi eklenerek <strong>kvm</strong> etkinleştirilmelidir. yoksa çok kasar. Debianda <strong>kvm</strong> komutu bu komutun kısa halidir. eğer <strong>kvm</strong> komutu yoksa <strong>bashrc</strong> içine <strong>alias</strong> ekleyebilirsiniz. Örnek kullanım:</p>
-<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-system-x86_64<span class="whitespace"> </span>--enable-kvm</code></pre>
 <p>Ardından oluşturduğumuz disk imajını qemuya hard disk olarak bağlamamız gerekli. onun için de <strong>-hda</strong> parametresi kullanılır. Ayrıca <strong>-m</strong> parametresi ile bellek miktarını <strong>G</strong> <strong>M</strong> gibi semboller ile göstererek belirtmemiz gerekli. Örneğin:</p>
-<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G
-WARNING: Image format was not specified <span class="keyword">for</span> <span class="literal string single">'deneme.img'</span> and probing guessed raw.
-       Automatically detecting the format is dangerous <span class="keyword">for</span> raw images, write operations on block <span class="literal number">0</span> will be restricted.
-       Specify the <span class="literal string single">'raw'</span> format explicitly to remove the restrictions.</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-system-x86_64<span class="whitespace"> </span>--enable-kvm<span class="whitespace"> </span>-hda<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span>-m<span class="whitespace"> </span>2G<span class="whitespace">
+</span>WARNING:<span class="whitespace"> </span>Image<span class="whitespace"> </span>format<span class="whitespace"> </span>was<span class="whitespace"> </span>not<span class="whitespace"> </span>specified<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span><span class="literal string single">'deneme.img'</span><span class="whitespace"> </span>and<span class="whitespace"> </span>probing<span class="whitespace"> </span>guessed<span class="whitespace"> </span>raw.<span class="whitespace">
+       </span>Automatically<span class="whitespace"> </span>detecting<span class="whitespace"> </span>the<span class="whitespace"> </span>format<span class="whitespace"> </span>is<span class="whitespace"> </span>dangerous<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span>raw<span class="whitespace"> </span>images,<span class="whitespace"> </span>write<span class="whitespace"> </span>operations<span class="whitespace"> </span>on<span class="whitespace"> </span>block<span class="whitespace"> </span><span class="literal number">0</span><span class="whitespace"> </span>will<span class="whitespace"> </span>be<span class="whitespace"> </span>restricted.<span class="whitespace">
+       </span>Specify<span class="whitespace"> </span>the<span class="whitespace"> </span><span class="literal string single">'raw'</span><span class="whitespace"> </span>format<span class="whitespace"> </span>explicitly<span class="whitespace"> </span>to<span class="whitespace"> </span>remove<span class="whitespace"> </span>the<span class="whitespace"> </span>restrictions.</code></pre>
 <p>Örnekteki gibi uyarı vermesinin sebebi raw disk imajı kullanmamızdan dolayı. Çok fantastik şeyler yapmayacaksak çokta önemli değil :D Ayrıca raw imaj yerine usb bellek hard disk gibi şeyleri de kullanabilirsiniz. imaj konumu olarak /dev/sdx vermeniz yeterlidir.</p>
 <p>Şimdi sıra geldi sanal makinaya format atmaya. Bunun için iso imajını bağlamak gerekli. bunun için <strong>-cdrom</strong> parametresi kullanılmalıdır. Örneğin</p>
-<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-system-x86_64<span class="whitespace"> </span>--enable-kvm<span class="whitespace"> </span>-hda<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span>-m<span class="whitespace"> </span>2G<span class="whitespace"> </span>-cdrom<span class="whitespace"> </span>debian-live-10.4.0-amd64-gnome.iso</code></pre>
 <p><strong>Uefi</strong> bios için <strong>ovmf</strong> eklememiz gerekir. onun için <strong>-bios /usr/share/ovmf/OVMF.fd</strong> parametresi eklenebilir. (bu dosyanın konumu dağıtımdan dağıtıma değişebilir.)</p>
-<pre class="code shell literal-block"><code>☭ qemu-system-x86_64 --enable-kvm -hda deneme.img -m 2G -cdrom debian-live-10.4.0-amd64-gnome.iso -bios /usr/share/ovmf/OVMF.fd</code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-system-x86_64<span class="whitespace"> </span>--enable-kvm<span class="whitespace"> </span>-hda<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span>-m<span class="whitespace"> </span>2G<span class="whitespace"> </span>-cdrom<span class="whitespace"> </span>debian-live-10.4.0-amd64-gnome.iso<span class="whitespace"> </span>-bios<span class="whitespace"> </span>/usr/share/ovmf/OVMF.fd</code></pre>
 </section>
 <section id="snapshot-ozelligi">
 <h2>Snapshot özelliği</h2>
 <p>Sanal makinanın imajını almak için <strong>qemu-img snapshot</strong> kullanabiliriz. Örnek kullanım:</p>
-<pre class="code shell literal-block"><code>☭ qemu-img snapshot -c temiz-kurulum deneme.img <span class="comment single"># snapshot üretmek için
-</span>☭ qemu-img snapshot -l deneme.img <span class="comment single"># snapshot listelemek için
-</span>☭ qemu-img snapshot -a temiz-kurulum deneme.img <span class="comment single"># snapshot geri dönmek için
-</span>☭ qemu-img snapshot -d temiz-kurulum deneme.img <span class="comment single"># snapshot silmek için</span></code></pre>
+<pre class="code shell literal-block"><code>☭<span class="whitespace"> </span>qemu-img<span class="whitespace"> </span>snapshot<span class="whitespace"> </span>-c<span class="whitespace"> </span>temiz-kurulum<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span><span class="comment single"># snapshot üretmek için
+</span>☭<span class="whitespace"> </span>qemu-img<span class="whitespace"> </span>snapshot<span class="whitespace"> </span>-l<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span><span class="comment single"># snapshot listelemek için
+</span>☭<span class="whitespace"> </span>qemu-img<span class="whitespace"> </span>snapshot<span class="whitespace"> </span>-a<span class="whitespace"> </span>temiz-kurulum<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span><span class="comment single"># snapshot geri dönmek için
+</span>☭<span class="whitespace"> </span>qemu-img<span class="whitespace"> </span>snapshot<span class="whitespace"> </span>-d<span class="whitespace"> </span>temiz-kurulum<span class="whitespace"> </span>deneme.img<span class="whitespace"> </span><span class="comment single"># snapshot silmek için</span></code></pre>
 </section>
 <section id="bazi-parametreler">
 <h2>Bazı Parametreler</h2>

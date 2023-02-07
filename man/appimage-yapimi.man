@@ -140,12 +140,12 @@ Kullanımı \fIARCH=x86_64 appimagetool [proje dizini]\fP
 .sp
 .nf
 .ft C
-$ ARCH=x86_64 ./appimagetool\-x86_64.AppImage MyApp.AppDir/
+$ ARCH=x86_64 \&./appimagetool\-x86_64.AppImage MyApp.AppDir/
 appimagetool, continuous build (commit effcebc), build 2084 built on 2019\-05\-01 21:02:41 UTC
 Using architecture x86_64
 /home/a/test/MyApp.AppDir should be packaged as MyApp\-x86_64.AppImage
-Deleting pre\-existing .DirIcon
-Creating .DirIcon symlink based on information from desktop file
+Deleting pre\-existing \&.DirIcon
+Creating \&.DirIcon symlink based on information from desktop file
 WARNING: AppStream upstream metadata is missing, please consider creating it
          in usr/share/metainfo/myapp.appdata.xml
          Please see https://www.freedesktop.org/software/appstream/docs/chap\-Quickstart.html#sect\-Quickstart\-DesktopApps
@@ -197,7 +197,7 @@ Oluşan \fBAppImage\fP dosyamızı çalıştıralım.
 .sp
 .nf
 .ft C
-$ ./MyApp\-x86_64.AppImage
+$ \&./MyApp\-x86_64.AppImage
 Hello Word
 .ft P
 .fi

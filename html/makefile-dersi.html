@@ -27,12 +27,12 @@
 </span><span class="name">$</span><span class="whitespace"> </span><span class="name">install</span><span class="whitespace"> </span><span class="name">hello</span><span class="whitespace"> </span><span class="operator">/</span><span class="name">usr</span><span class="operator">/</span><span class="name">bin</span><span class="operator">/</span><span class="name">hello</span></code></pre>
 <p>Makefile dosyalarının bölüm tanımlamalarında girintileme amaçlı <strong>Tab</strong> kullanılır.</p>
 <p>Şimdi aşağıdaki makefile dosyasını inceleyelim.</p>
-<pre class="code makefile literal-block"><code><span class="name variable">PREFIX</span><span class="operator">=</span>/usr
-<span class="name function">build</span><span class="operator">:</span>
-        <span class="keyword">$(</span>CC<span class="keyword">)</span> -o hello hello.c
+<pre class="code makefile literal-block"><code><span class="name variable">PREFIX</span><span class="operator">=</span>/usr<span class="whitespace">
+</span><span class="name function">build</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="keyword">$(</span>CC<span class="keyword">)</span><span class="whitespace"> </span>-o<span class="whitespace"> </span>hello<span class="whitespace"> </span>hello.c<span class="whitespace">
 
-<span class="name function">install</span><span class="operator">:</span>
-        install hello <span class="keyword">$(</span>DESTDIR<span class="keyword">)</span>/<span class="keyword">$(</span>PREFIX<span class="keyword">)</span>/bin/hello</code></pre>
+</span><span class="name function">install</span><span class="operator">:</span><span class="whitespace">
+        </span>install<span class="whitespace"> </span>hello<span class="whitespace"> </span><span class="keyword">$(</span>DESTDIR<span class="keyword">)</span>/<span class="keyword">$(</span>PREFIX<span class="keyword">)</span>/bin/hello</code></pre>
 <p>Burada <strong>PREFIX</strong>, <strong>CC</strong>, <strong>DESTDIR</strong> gibi parametreler değişkendir. Bu değişkenler derleme esnasında değiştirilebilir.</p>
 <p>Bu makefile dosyasını kullanarak derlemeyi ve yüklemeyi aşağıdaki gibi yaparız.</p>
 <pre class="code C literal-block"><code><span class="name">$</span><span class="whitespace"> </span><span class="name">make</span><span class="whitespace">
@@ -49,128 +49,128 @@
 <section id="degisken-islemleri">
 <h2>Değişken işlemleri</h2>
 <p>Değişken tanımlamak için <strong>variable=value</strong> şeklinde tanımlanabilir. değişkeni kullanırken de <strong>$()</strong> işareti arasına alınır. Örneğin:</p>
-<pre class="code makefile literal-block"><code><span class="name variable">yazi</span><span class="operator">=</span>hello world
-<span class="name function">hello</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name variable">yazi</span><span class="operator">=</span>hello<span class="whitespace"> </span>world<span class="whitespace">
+</span><span class="name function">hello</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="keyword">$(</span>yazi<span class="keyword">)</span></code></pre>
 <p>Bu değişkeni <strong>make yazi=deneme123</strong> şeklinde komut vererek değiştirebiliriz.</p>
 <p>Var olan bir değişkene ekleme yapmak için <strong>+=</strong> ifadesi kullanılır.  <strong>:=</strong> ifadesi eğer tanımlama varsa ekleme yapar. <strong>?=</strong> sadece daha önceden tanımlanmışsa ekleme yapar.</p>
-<pre class="code makefile literal-block"><code><span class="name variable">yazi</span><span class="operator">=</span>hello
-<span class="name variable">yazi</span><span class="operator">+=</span>world
-<span class="name variable">sayi</span><span class="operator">:=</span><span class="keyword">$(</span>shell ls<span class="keyword">)</span>
-<span class="name function">hello</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> <span class="keyword">$(</span>yazi<span class="keyword">)</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name variable">yazi</span><span class="operator">=</span>hello<span class="whitespace">
+</span><span class="name variable">yazi</span><span class="operator">+=</span>world<span class="whitespace">
+</span><span class="name variable">sayi</span><span class="operator">:=</span><span class="keyword">$(</span>shell<span class="whitespace"> </span>ls<span class="keyword">)</span><span class="whitespace">
+</span><span class="name function">hello</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="keyword">$(</span>yazi<span class="keyword">)</span></code></pre>
 <p>Eğer <strong>$</strong> işareti kullanmanız gereken bir durum oluşursa <strong>$$</strong> ifadesi kullanabilirsiniz. Örneğin:</p>
-<pre class="code makefile literal-block"><code><span class="name function">hello</span><span class="operator">:</span>
-        bash -c <span class="literal string double">&quot;echo </span><span class="name variable">$$</span><span class="literal string double">HOME&quot;</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">hello</span><span class="operator">:</span><span class="whitespace">
+        </span>bash<span class="whitespace"> </span>-c<span class="whitespace"> </span><span class="literal string double">&quot;echo </span><span class="name variable">$$</span><span class="literal string double">HOME&quot;</span></code></pre>
 </section>
 <section id="bolumler">
 <h2>Bölümler</h2>
 <p>Makefile yazarken bölümler tanımlanır ve eğer bölümün adı belirtilmemişse ilk bölüm çalıştırılır. Bölümler arası bağımlılık vermek için aşağıdaki gibi bir kullanım yapılmalıdır.</p>
-<pre class="code makefile literal-block"><code><span class="name function">yazi</span><span class="operator">:</span> <span class="name">sayi</span> <span class="name">test</span>
-        <span class="name builtin">echo</span> <span class="literal string double">&quot;Hello world&quot;</span>
-<span class="name function">sayi</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> <span class="literal number">12</span>
-<span class="name function">test</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> test123</code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">yazi</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">sayi</span> <span class="name">test</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;Hello world&quot;</span><span class="whitespace">
+</span><span class="name function">sayi</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal number">12</span><span class="whitespace">
+</span><span class="name function">test</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>test123</code></pre>
 <p>Yukarıdaki dosyayı çalıştırdığımızda sırasıyla <strong>sayi</strong> -&gt; <strong>test</strong> -&gt; <strong>yazi</strong> bölümleri çalıştırılır.</p>
 <p>Aynı işi yapan birden çok bölüm şu şekilde tanımlanabilir.</p>
-<pre class="code makefile literal-block"><code><span class="name function">bol1 bol2</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> Merhaba
-<span class="comment"># Şuna eşittir.
-</span><span class="name function">bol1</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> Merhaba
-<span class="name function">bol2</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> Merhaba</code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">bol1 bol2</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>Merhaba<span class="whitespace">
+</span><span class="comment"># Şuna eşittir.
+</span><span class="name function">bol1</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>Merhaba<span class="whitespace">
+</span><span class="name function">bol2</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>Merhaba</code></pre>
 <p>Bölümün adını <strong>$&#64;</strong> kullanarak öğrenebiliriz.</p>
-<pre class="code makefile literal-block"><code><span class="name function">bolum</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> <span class="name variable">$&#64;</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">bolum</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="name variable">$&#64;</span></code></pre>
 <p>Bölümün tüm bağımlılıklarını almak için için <strong>$^</strong> kullanabiliriz.</p>
-<pre class="code makefile literal-block"><code><span class="name function">bolum</span><span class="operator">:</span> <span class="name">bol</span>1 <span class="name">bol</span>2
-        <span class="name builtin">echo</span> $^
-<span class="name function">bol1 bol2</span><span class="operator">:</span>
-        <span class="name builtin">true</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">bolum</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">bol</span>1 <span class="name">bol</span>2<span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>$^<span class="whitespace">
+</span><span class="name function">bol1 bol2</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">true</span></code></pre>
 <p><strong>$?</strong> ifadesi <strong>$^</strong> ile benzerdir fakat sadece geçerli bölümden sonra tanımlanan bölümleri döndürür.</p>
-<pre class="code makefile literal-block"><code><span class="name function">bol1</span><span class="operator">:</span>
-        <span class="name builtin">true</span>
-<span class="name function">bolum</span><span class="operator">:</span> <span class="name">bol</span>1 <span class="name">bol</span>2
-        <span class="name builtin">echo</span> <span class="name variable">$?</span>
-<span class="name function">bol2</span><span class="operator">:</span>
-        <span class="name builtin">true</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">bol1</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">true</span><span class="whitespace">
+</span><span class="name function">bolum</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">bol</span>1 <span class="name">bol</span>2<span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="name variable">$?</span><span class="whitespace">
+</span><span class="name function">bol2</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">true</span></code></pre>
 <p><strong>$&lt;</strong> ifadesi sadece ilk bağımlılığı almak için kullanılır.</p>
-<pre class="code makefile literal-block"><code><span class="name function">bol1 bol2</span><span class="operator">:</span>
-        <span class="name builtin">true</span>
-<span class="name function">bolum</span><span class="operator">:</span> <span class="name">bol</span>1 <span class="name">bol</span>2
-        <span class="name builtin">echo</span> $&lt;</code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">bol1 bol2</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">true</span><span class="whitespace">
+</span><span class="name function">bolum</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">bol</span>1 <span class="name">bol</span>2<span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>$&lt;</code></pre>
 <p>Eğer <strong>xxxx.o</strong> şeklinde bir kural tanımlarsanız bu kural çalıştırıldıktan sonra gcc ile kural adındaki dosya derlenir.</p>
-<pre class="code makefile literal-block"><code><span class="name function">main</span><span class="operator">:</span> <span class="name">main</span>.<span class="name">o</span>
-<span class="name function">main.o</span><span class="operator">:</span> <span class="name">main</span>.<span class="name">c</span> <span class="name">test</span>.<span class="name">c</span>
+<pre class="code makefile literal-block"><code><span class="name function">main</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">main</span>.<span class="name">o</span><span class="whitespace">
+</span><span class="name function">main.o</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">main</span>.<span class="name">c</span> <span class="name">test</span>.<span class="name">c</span><span class="whitespace">
 
-<span class="name function">main.c</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> <span class="literal string double">&quot;int main(){}&quot;</span> &gt; main.c
-<span class="name function">%.c</span><span class="operator">:</span>
-        touch <span class="name variable">$&#64;</span></code></pre>
+</span><span class="name function">main.c</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;int main(){}&quot;</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>main.c<span class="whitespace">
+</span><span class="name function">%.c</span><span class="operator">:</span><span class="whitespace">
+        </span>touch<span class="whitespace"> </span><span class="name variable">$&#64;</span></code></pre>
 <p>Burada main.c dosyası var olmayan bir dosyadır ve derleme esnasında oluşturulur. test.c dosyası ise daha önceden var olan bir dosyadır ve o dosyaya bir şey yapılmaz. main.c kuralı sadece main.c için çalıştırılırken <strong>%.c</strong> şeklinde belirtilen kular hem main.c hem test.c için çalıştırılır.
 <strong>main</strong> ile belirttiğimiz kuralda main.o bağımlılığı olduğu için bi derlemenin sonucu olarak main adında bir derlenmiş dosya üretilmektedir.</p>
 </section>
 <section id="wildcard-ve-shell">
 <h2>wildcard ve shell</h2>
 <p>Wildcard ifadesi eşleşen dosyaları döndürür.</p>
-<pre class="code makefile literal-block"><code><span class="name variable">files</span> <span class="operator">:=</span> <span class="keyword">$(</span>wildcard *.c<span class="keyword">)</span>
-<span class="name function">main</span><span class="operator">:</span>
-        gcc -o main <span class="keyword">$(</span>files<span class="keyword">)</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name variable">files</span><span class="whitespace"> </span><span class="operator">:=</span><span class="whitespace"> </span><span class="keyword">$(</span>wildcard<span class="whitespace"> </span>*.c<span class="keyword">)</span><span class="whitespace">
+</span><span class="name function">main</span><span class="operator">:</span><span class="whitespace">
+        </span>gcc<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace"> </span><span class="keyword">$(</span>files<span class="keyword">)</span></code></pre>
 <p>Shell ifadesi ise komut çalıştırarak sonucunu döndürür.</p>
-<pre class="code makefile literal-block"><code><span class="name variable">files</span> <span class="operator">:=</span> <span class="keyword">$(</span>shell find -type f -iname <span class="literal string double">&quot;*.c&quot;</span><span class="keyword">)</span>
-<span class="name function">main</span><span class="operator">:</span>
-        gcc -o main <span class="keyword">$(</span>files<span class="keyword">)</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name variable">files</span><span class="whitespace"> </span><span class="operator">:=</span><span class="whitespace"> </span><span class="keyword">$(</span>shell<span class="whitespace"> </span>find<span class="whitespace"> </span>-type<span class="whitespace"> </span>f<span class="whitespace"> </span>-iname<span class="whitespace"> </span><span class="literal string double">&quot;*.c&quot;</span><span class="keyword">)</span><span class="whitespace">
+</span><span class="name function">main</span><span class="operator">:</span><span class="whitespace">
+        </span>gcc<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace"> </span><span class="keyword">$(</span>files<span class="keyword">)</span></code></pre>
 </section>
 <section id="birden-cok-dosya-ile-calisma">
 <h2>Birden çok dosya ile çalışma</h2>
 <p><strong>make -C xxx</strong> şeklinde alt dizindeki bir makefile dosyasını çalıştırabilirsiniz.</p>
-<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span>
-        make -C src</code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span><span class="whitespace">
+        </span>make<span class="whitespace"> </span>-C<span class="whitespace"> </span>src</code></pre>
 <p>Ayrıca <strong>include</strong> kullanarak başka bir dosyada bulunan kuralları kullanabilirsiniz.</p>
 <pre class="code makefile literal-block"><code><span class="comment"># Makefile dosyası
 </span><span class="comment preproc">include build.mk
-</span><span class="name function">build</span><span class="operator">:</span> <span class="name">main</span>
-        gcc main.c -o main
-<span class="comment"># build.mk dosyası
-</span><span class="name function">main</span><span class="operator">:</span>
-        <span class="name builtin">echo</span> <span class="literal string double">&quot;int main(){return 0;}&quot;</span> &gt; main.c</code></pre>
+</span><span class="name function">build</span><span class="operator">:</span><span class="whitespace"> </span><span class="name">main</span><span class="whitespace">
+        </span>gcc<span class="whitespace"> </span>main.c<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace">
+</span><span class="comment"># build.mk dosyası
+</span><span class="name function">main</span><span class="operator">:</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;int main(){return 0;}&quot;</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>main.c</code></pre>
 </section>
 <section id="kosullar">
 <h2>Koşullar</h2>
 <p><strong>ifeq</strong> ifadesi ile koşul tanımlanabilir.  aşağıdaki ifadeşi <strong>make CC=clang</strong> şeklinde çalıştırırkanız clang yazdırır, parametresiz bir şekilde çalıştırırsanız gcc yazdırır. Burada dikkat edilmesi gereken konu <strong>ifeq</strong>, <strong>else</strong>, <strong>endif</strong> girintilenmeden yazılır.</p>
-<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span>
-<span class="comment preproc">ifeq ($(CC),clang)
-</span>        <span class="name builtin">echo</span> <span class="literal string double">&quot;clang&quot;</span>
-<span class="comment preproc">else
-</span>        <span class="name builtin">echo</span> <span class="literal string double">&quot;gcc&quot;</span>
-<span class="comment preproc">endif</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span><span class="whitespace">
+</span><span class="comment preproc">ifeq ($(CC),clang)
+</span><span class="whitespace">        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;clang&quot;</span><span class="whitespace">
+</span><span class="comment preproc">else
+</span><span class="whitespace">        </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;gcc&quot;</span><span class="whitespace">
+</span><span class="comment preproc">endif</span></code></pre>
 </section>
 <section id="komut-ozellik-ifadeleri">
 <h2>Komut özellik ifadeleri</h2>
 <p>Eğer komutun başına <strong>&#64;</strong> işareti koyarsanız komut ekrana yazılmadan çalıştırılır. <strong>-</strong> yazarsanız komut hata alsa bile geri kalan kısımlar çalışmaya devam eder.</p>
-<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span>
-        &#64;echo <span class="literal string double">&quot;Merhaba dünya&quot;</span>
-        -gcc main.c -o main</code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span><span class="whitespace">
+        </span>&#64;echo<span class="whitespace"> </span><span class="literal string double">&quot;Merhaba dünya&quot;</span><span class="whitespace">
+        </span>-gcc<span class="whitespace"> </span>main.c<span class="whitespace"> </span>-o<span class="whitespace"> </span>main</code></pre>
 </section>
 <section id="while-ve-for-kullanimi">
 <h2>while ve for kullanımı</h2>
 <p>Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşağıdaki gibi kullanılabilir. done dışındaki satırların sonuna <strong>\</strong> işareti eklenir, do dışındaki satırların sonuna da <strong>;</strong> işareti koyulur.</p>
-<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span>
-        &#64;for sayi <span class="keyword">in</span> <span class="literal number">1</span> <span class="literal number">2</span> <span class="literal number">3</span> <span class="keyword">$(</span>dizi<span class="keyword">)</span> <span class="punctuation">;</span> <span class="keyword">do</span> <span class="literal string escape">\
-</span>            <span class="name builtin">echo</span> <span class="name variable">$$</span>sayi <span class="punctuation">;</span> <span class="literal string escape">\
-</span>            <span class="name builtin">echo</span> <span class="literal string double">&quot;diger satir&quot;</span> <span class="punctuation">;</span> <span class="literal string escape">\
-</span>        <span class="keyword">done</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name function">build</span><span class="operator">:</span><span class="whitespace">
+        </span>&#64;for<span class="whitespace"> </span>sayi<span class="whitespace"> </span><span class="keyword">in</span><span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace"> </span><span class="literal number">2</span><span class="whitespace"> </span><span class="literal number">3</span><span class="whitespace"> </span><span class="keyword">$(</span>dizi<span class="keyword">)</span><span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace"> </span><span class="keyword">do</span><span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">            </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="name variable">$$</span>sayi<span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">            </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;diger satir&quot;</span><span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace"> </span><span class="literal string escape">\
+</span><span class="whitespace">        </span><span class="keyword">done</span></code></pre>
 </section>
 <section id="shell-degiskeni">
 <h2>SHELL değişkeni</h2>
 <p><strong>SHELL</strong> değişkeni makefile altındaki komutların hangi shell kullanılarak çalıştırılacağını belirtir. Varsayılan değeri <strong>/bin/sh</strong> olarak belirlenmiştir. Örneğin debian tabanlı dağıtımlarda /bin/sh konumu /bin/dash bağlıyken archlinuxta /bin/bash bağlıdır. <strong>dash</strong> <strong>[[</strong> kullanımını desteklemezken <strong>bash</strong> destekler. Bu sebeple uyumluluğu arttırmak için <strong>SHELL</strong> değişkenini zorla /bin/bash olarak değiştirebiliriz. Aşağıdaki örnekle konuyu daha iyi anlamak için SHELL değişkenini python3 ayarladık ve python kodu yazdık.</p>
-<pre class="code makefile literal-block"><code><span class="name variable">SHELL</span><span class="operator">=</span>/usr/bin/python3
-<span class="name function">build</span><span class="operator">:</span>
-        import os <span class="punctuation">;</span><span class="literal string escape">\
-</span>        <span class="name variable">liste</span> <span class="operator">=</span> os.listdir<span class="operator">(</span><span class="literal string double">&quot;/&quot;</span><span class="operator">)</span> <span class="punctuation">;</span><span class="literal string escape">\
-</span>        print<span class="operator">(</span>liste<span class="operator">[</span><span class="literal number">0</span><span class="operator">])</span></code></pre>
+<pre class="code makefile literal-block"><code><span class="name variable">SHELL</span><span class="operator">=</span>/usr/bin/python3<span class="whitespace">
+</span><span class="name function">build</span><span class="operator">:</span><span class="whitespace">
+        </span>import<span class="whitespace"> </span>os<span class="whitespace"> </span><span class="punctuation">;</span><span class="literal string escape">\
+</span><span class="whitespace">        </span><span class="name variable">liste</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span>os.listdir<span class="operator">(</span><span class="literal string double">&quot;/&quot;</span><span class="operator">)</span><span class="whitespace"> </span><span class="punctuation">;</span><span class="literal string escape">\
+</span><span class="whitespace">        </span>print<span class="operator">(</span>liste<span class="operator">[</span><span class="literal number">0</span><span class="operator">])</span></code></pre>
 </section>
 </main>
 </body>

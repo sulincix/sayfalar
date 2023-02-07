@@ -17,14 +17,14 @@
 <section id="asama-proje-dizini">
 <h2>1. Aşama: proje dizini</h2>
 <p>Eklentimizin paketlenmesi için öncelikle bir proje dizini gerekmektedir.</p>
-<pre class="code shell literal-block"><code>$ mkdir eklenti
-$ <span class="name builtin">cd</span> eklenti</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>eklenti<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>eklenti</code></pre>
 <p>Proje dizinimizde eklentinin özelliklerini belirten <strong>manifest.json</strong> dosyası ve eklentinin kodunu içeren javascript kodu yer almaktadır.</p>
-<pre class="code shell literal-block"><code>$ tree eklenti
-eklenti/
-    ├── main.js
-    ├── icon.png
-    └── manifest.json</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>tree<span class="whitespace"> </span>eklenti<span class="whitespace">
+</span>eklenti/<span class="whitespace">
+    </span>├──<span class="whitespace"> </span>main.js<span class="whitespace">
+    </span>├──<span class="whitespace"> </span>icon.png<span class="whitespace">
+    </span>└──<span class="whitespace"> </span>manifest.json</code></pre>
 </section>
 <section id="asama-manifest-hazirlanmasi">
 <h2>2. Aşama: manifest hazırlanması</h2>
@@ -69,8 +69,8 @@ eklenti/
 <section id="asama-paketleme">
 <h2>4. Aşama: paketleme</h2>
 <p>Firefox eklentileri <strong>xpi</strong> uzantılıdır. Bu eklentiler basit zip dosyalarıdır. proje dizinimizi ziplememiz yeterli olacaktır.</p>
-<pre class="code shell literal-block"><code>$ <span class="name builtin">cd</span> eklenti
-$ zip eklenti.xpi manifest.json main.js icon.png</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>eklenti<span class="whitespace">
+</span>$<span class="whitespace"> </span>zip<span class="whitespace"> </span>eklenti.xpi<span class="whitespace"> </span>manifest.json<span class="whitespace"> </span>main.js<span class="whitespace"> </span>icon.png</code></pre>
 </section>
 <section id="asama-eklentiyi-yukleme">
 <h2>5. Aşama: Eklentiyi yükleme</h2>

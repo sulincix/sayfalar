@@ -23,21 +23,21 @@
 <section id="derleme-ortaminin-hazirlanmasi">
 <h2>Derleme ortamının hazırlanması</h2>
 <p>İlk olarak inary-devel kaynaktan derlenecektir. Kaynak kodu git üzerinden çekip kuralım.</p>
-<pre class="code shell literal-block"><code>git clone https://gitlab.com/sulinos/inary -b develop
-<span class="name builtin">cd</span> inary
-make <span class="operator">&amp;&amp;</span> make install</code></pre>
+<pre class="code shell literal-block"><code>git<span class="whitespace"> </span>clone<span class="whitespace"> </span>https://gitlab.com/sulinos/inary<span class="whitespace"> </span>-b<span class="whitespace"> </span>develop<span class="whitespace">
+</span><span class="name builtin">cd</span><span class="whitespace"> </span>inary<span class="whitespace">
+</span>make<span class="whitespace"> </span><span class="operator">&amp;&amp;</span><span class="whitespace"> </span>make<span class="whitespace"> </span>install</code></pre>
 <p>Ardından <strong>system.devel</strong> componentini kuralım. Burada temel derleyiciler bulunur.</p>
-<pre class="code shell literal-block"><code>inary it -c system.devel</code></pre>
+<pre class="code shell literal-block"><code>inary<span class="whitespace"> </span>it<span class="whitespace"> </span>-c<span class="whitespace"> </span>system.devel</code></pre>
 <p>Derleme işlemleri /var/inary dizini içerisinde gerçekleşecektir. Buraya isterseniz farklı bir disk bağlayabilirsiniz.
 Derlemenin hızlı olması ve diske yüklenmemesi için buraya ramdisk bağlamanızı öneririm. Ram miktarının yeteri kadar fazla olduğundan emin olur.</p>
-<pre class="code shell literal-block"><code>mkdir /var/inary
-mount -t tmpfs tmpfs /var/inary</code></pre>
+<pre class="code shell literal-block"><code>mkdir<span class="whitespace"> </span>/var/inary<span class="whitespace">
+</span>mount<span class="whitespace"> </span>-t<span class="whitespace"> </span>tmpfs<span class="whitespace"> </span>tmpfs<span class="whitespace"> </span>/var/inary</code></pre>
 </section>
 <section id="taslak-hazirlama">
 <h2>Taslak hazırlama</h2>
 <p><strong>inary-template</strong> komutunu kullanarak şablon oluşturalım. İsim ve adres zorunlu parametredir.
 Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çalıştırın.</p>
-<pre class="code shell literal-block"><code>inary-template -n bash -a <span class="literal string double">&quot;https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz&quot;</span> -v <span class="literal string double">&quot;5.1.8&quot;</span></code></pre>
+<pre class="code shell literal-block"><code>inary-template<span class="whitespace"> </span>-n<span class="whitespace"> </span>bash<span class="whitespace"> </span>-a<span class="whitespace"> </span><span class="literal string double">&quot;https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz&quot;</span><span class="whitespace"> </span>-v<span class="whitespace"> </span><span class="literal string double">&quot;5.1.8&quot;</span></code></pre>
 <p>Bize otomatik olarak 3 tane dosya üretti.</p>
 <ul class="simple">
 <li><p><strong>actions.py</strong> dosyası nasıl derleneceğini anlatan dosyadır.</p></li>
@@ -47,57 +47,57 @@ Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çal�
 <p>pspec.py formatı inary tarafından kullanılmaz. Bu yüzden bu dosyayı düzenledikten sonra pspec.xml dosyasını güncellemelisiniz. Bu dosyayı kullanmayıp elle pspec.xml dosyasını düzenleyebilirsiniz. SulinOS kaynak depolarında pspec.py formatındaki dosyalar mevcut değildir.</p>
 <p>pspec.xml dosyasını kullanarak pspec.py üretmek için ise <strong>revpspec</strong> komutunu kullanmalısınız. Bu komut kısmen kararlı değildir.</p>
 <p>Derlemeye hazır hale gelmiş talimatları <strong>inary bi</strong> kullanarak dertiriz.</p>
-<pre class="code shell literal-block"><code>inary bi</code></pre>
+<pre class="code shell literal-block"><code>inary<span class="whitespace"> </span>bi</code></pre>
 <p><strong>inary-template</strong> ile üretilen pspec.xml veya pspec.py dosyalarını düzenlemek kolay olduğu için içeriği ile ilgili detaylı bilgilere yazının devamında değineceğim. <strong>actions.py</strong> dosyasının yapısını ve <strong>actionsapi</strong> kütüphanesini anlatarak devam edelim.</p>
 <section id="actions-py-dosyasi">
 <h3>Actions.py dosyası</h3>
 <p>Bu dosyada python3 ile yazılır. Sırasıyla <strong>setup build check install</strong> fonksionları mevcutsa çalıştırılır. Bu dosyada derleme işlemi yapılırken <strong>actionsapi</strong> adı verilen inary kaynak kodu ile beraber gelen bir kütüphane kullanılır. Bash derlemek için aşağıdakine benzer bir actions dosyası yazılabilir.</p>
-<pre class="code python literal-block"><code><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span>
-<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span>
+<pre class="code python literal-block"><code><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span><span class="whitespace">
+</span><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span><span class="whitespace">
 
-<span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span>
-    <span class="name">autotools</span><span class="operator">.</span><span class="name">configure</span><span class="punctuation">()</span>
+</span><span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span><span class="whitespace">
+</span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">configure</span><span class="punctuation">()</span><span class="whitespace">
 
-<span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
-    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span>
+</span><span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span><span class="whitespace">
+</span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span><span class="whitespace">
 
-<span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span>
-    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span></code></pre>
+</span><span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span><span class="whitespace">
+</span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span></code></pre>
 <p>Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte kullanımı zorunlu değildir. Bu actions dosyamız aşağıdakine benzer şekilde bir komut çalıştırarak derleme yapar.</p>
-<pre class="code shell literal-block"><code>./configure --prefix<span class="operator">=</span>/usr <span class="comment single"># autotools.configure()
-</span>make -j<span class="keyword">$(</span>nproc<span class="keyword">)</span> <span class="comment single"># autotools.make()
-</span>make install <span class="name variable">DESTDIR</span><span class="operator">=</span>/paketleme/dizini <span class="comment single"># autotools.install()</span></code></pre>
+<pre class="code shell literal-block"><code>./configure<span class="whitespace"> </span>--prefix<span class="operator">=</span>/usr<span class="whitespace"> </span><span class="comment single"># autotools.configure()
+</span>make<span class="whitespace"> </span>-j<span class="keyword">$(</span>nproc<span class="keyword">)</span><span class="whitespace"> </span><span class="comment single"># autotools.make()
+</span>make<span class="whitespace"> </span>install<span class="whitespace"> </span><span class="name variable">DESTDIR</span><span class="operator">=</span>/paketleme/dizini<span class="whitespace"> </span><span class="comment single"># autotools.install()</span></code></pre>
 <p>Actionsapi içerisindeki her aracın birer <strong>configure</strong>, <strong>make</strong> ve <strong>install</strong> fonksionu bulunur. kullanım şekilleri de aynıdır. Bu sayede kopyala yapıştır mantığı ile ilerleyerek hızlıca onlarca paket yapabilirsiniz. (Araçtan kasıt: autotools cmaketools mesontools ...)</p>
 <p>Actions ile inary paket sistemi arasında çevresel değişkenler yardımı ile bağlantı kurulur. Bazı önemli çevresel değişkenler ve örnek değerleri aşağıda verilmiştir.</p>
-<pre class="code shell literal-block"><code><span class="name variable">SRCDIR</span><span class="operator">=</span>/tmp/inary/test-1.0.0-1/work
-<span class="name variable">SRC_RELEASE</span><span class="operator">=</span><span class="literal number">1</span>
-<span class="name variable">OPERATION</span><span class="operator">=</span>setup
-<span class="name variable">INSTALL_DIR</span><span class="operator">=</span>/var/inary/test-1.0.0-1/install
-<span class="name variable">PKG_DIR</span><span class="operator">=</span>/var/inary/test-1.0.0-1
-<span class="name variable">WORK_DIR</span><span class="operator">=</span>/var/inary/test-1.0.0-1/work
-<span class="name variable">SRC_VERSION</span><span class="operator">=</span><span class="literal number">1</span>.0.0
-<span class="name variable">INARY_BUILD_TYPE</span><span class="operator">=</span>
-<span class="name variable">SRC_NAME</span><span class="operator">=</span><span class="name builtin">test</span></code></pre>
+<pre class="code shell literal-block"><code><span class="name variable">SRCDIR</span><span class="operator">=</span>/tmp/inary/test-1.0.0-1/work<span class="whitespace">
+</span><span class="name variable">SRC_RELEASE</span><span class="operator">=</span><span class="literal number">1</span><span class="whitespace">
+</span><span class="name variable">OPERATION</span><span class="operator">=</span>setup<span class="whitespace">
+</span><span class="name variable">INSTALL_DIR</span><span class="operator">=</span>/var/inary/test-1.0.0-1/install<span class="whitespace">
+</span><span class="name variable">PKG_DIR</span><span class="operator">=</span>/var/inary/test-1.0.0-1<span class="whitespace">
+</span><span class="name variable">WORK_DIR</span><span class="operator">=</span>/var/inary/test-1.0.0-1/work<span class="whitespace">
+</span><span class="name variable">SRC_VERSION</span><span class="operator">=</span><span class="literal number">1</span>.0.0<span class="whitespace">
+</span><span class="name variable">INARY_BUILD_TYPE</span><span class="operator">=</span><span class="whitespace">
+</span><span class="name variable">SRC_NAME</span><span class="operator">=</span><span class="name builtin">test</span></code></pre>
 <p>Burada <strong>WORK_DIR</strong> çevresel değişkeni inary tarafından otomatik olarak belirlenir. Bunu değiştirmek için actions betiğinin başına <strong>WorkDir=dizinyolu</strong> şeklinde belirtmelisiniz. <strong>INARY_BUILD_TYPE</strong> çevresel değişkeni kullanarak bir paket ile birden çok türde veya yapılandırmada paket üretmek mümkündür. Örneğin Sulin depolarında 32bit kütüphaneleri üretmek için emul32 adında özel bir değer tanımlanır. Inary her tanımlanan build type için tüm fonksionları tekrar çalıştırır. Bu değeri kontrol ederek kodu istediğiniz yönte ayarlayabilirsiniz. Örneğin aşağıda bir paketin 32bit kütüphanesini de derlemek için:</p>
-<pre class="code python literal-block"><code><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span>
-<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span>
-<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">get</span>
+<pre class="code python literal-block"><code><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span><span class="whitespace">
+</span><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span><span class="whitespace">
+</span><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">get</span><span class="whitespace">
 
-<span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span>
-    <span class="name">opts</span> <span class="operator">=</span> <span class="literal string double">&quot;--prefix=/usr&quot;</span> <span class="comment single"># parametreler</span>
-    <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span> <span class="comment single"># build type türünü çeker</span>
-        <span class="name">shelltools</span><span class="operator">.</span><span class="name">export</span><span class="punctuation">(</span><span class="literal string double">&quot;CC&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;</span><span class="literal string interpol">{}</span><span class="literal string double"> -m32&quot;</span><span class="operator">.</span><span class="name">format</span><span class="punctuation">(</span><span class="name">get</span><span class="operator">.</span><span class="name">CC</span><span class="punctuation">()))</span> <span class="comment single"># derleyiciyi 32bit moduna alır</span>
-        <span class="name">shelltools</span><span class="operator">.</span><span class="name">export</span><span class="punctuation">(</span><span class="literal string double">&quot;CXX&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;</span><span class="literal string interpol">{}</span><span class="literal string double"> -m32&quot;</span><span class="operator">.</span><span class="name">format</span><span class="punctuation">(</span><span class="name">get</span><span class="operator">.</span><span class="name">CXX</span><span class="punctuation">()))</span> <span class="comment single"># derleyiciyi 32bit moduna alır</span>
-        <span class="name">opts</span> <span class="operator">+=</span> <span class="literal string double">&quot; --libdir=/usr/lib32&quot;</span>
-    <span class="name">autotools</span><span class="operator">.</span><span class="name">rawConfigure</span><span class="punctuation">(</span><span class="name">opts</span><span class="punctuation">)</span>
+</span><span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span><span class="whitespace">
+</span>    <span class="name">opts</span> <span class="operator">=</span> <span class="literal string double">&quot;--prefix=/usr&quot;</span> <span class="comment single"># parametreler</span><span class="whitespace">
+</span>    <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span> <span class="comment single"># build type türünü çeker</span><span class="whitespace">
+</span>        <span class="name">shelltools</span><span class="operator">.</span><span class="name">export</span><span class="punctuation">(</span><span class="literal string double">&quot;CC&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;</span><span class="literal string interpol">{}</span><span class="literal string double"> -m32&quot;</span><span class="operator">.</span><span class="name">format</span><span class="punctuation">(</span><span class="name">get</span><span class="operator">.</span><span class="name">CC</span><span class="punctuation">()))</span> <span class="comment single"># derleyiciyi 32bit moduna alır</span><span class="whitespace">
+</span>        <span class="name">shelltools</span><span class="operator">.</span><span class="name">export</span><span class="punctuation">(</span><span class="literal string double">&quot;CXX&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;</span><span class="literal string interpol">{}</span><span class="literal string double"> -m32&quot;</span><span class="operator">.</span><span class="name">format</span><span class="punctuation">(</span><span class="name">get</span><span class="operator">.</span><span class="name">CXX</span><span class="punctuation">()))</span> <span class="comment single"># derleyiciyi 32bit moduna alır</span><span class="whitespace">
+</span>        <span class="name">opts</span> <span class="operator">+=</span> <span class="literal string double">&quot; --libdir=/usr/lib32&quot;</span><span class="whitespace">
+</span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">rawConfigure</span><span class="punctuation">(</span><span class="name">opts</span><span class="punctuation">)</span><span class="whitespace">
 
-<span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span>
-    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span>
+</span><span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span><span class="whitespace">
+</span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span><span class="whitespace">
 
-<span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span>
-    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span>
-    <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span>
-        <span class="name">inarytools</span><span class="operator">.</span><span class="name">removeDir</span><span class="punctuation">(</span><span class="literal string double">&quot;/usr/bin&quot;</span><span class="punctuation">)</span> <span class="comment single"># 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.</span></code></pre>
+</span><span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span><span class="whitespace">
+</span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span><span class="whitespace">
+</span>    <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span><span class="whitespace">
+</span>        <span class="name">inarytools</span><span class="operator">.</span><span class="name">removeDir</span><span class="punctuation">(</span><span class="literal string double">&quot;/usr/bin&quot;</span><span class="punctuation">)</span> <span class="comment single"># 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.</span></code></pre>
 <p>Burada önce <strong>emul32</strong> için çalıştırılır. Sonra tanımlanmamış olan varsayılan tür için çalıştırılır. Yukarıdakö örnekte derleyiciyi 32bit olarak ayarlayıp derleme yaptırdık. daha sonra 32bit olarak derlenen kısımdaki /usr/bin/ dizinini sildik.</p>
 <p>Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan <cite>get_actionsapi_functions</cite> betiğini çalıştırınız.</p>
 </section>
@@ -106,148 +106,148 @@ Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çal�
 <h2>0. Shelltools</h2>
 <p>Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.</p>
 <p>Dizin değiştirmek için <strong>cd</strong> dizin içeriği listesi almak için <strong>ls</strong> Komut çalıştırmak için ise <strong>system</strong> fonksionları kullanılır. Çevresel değişken ayarı için ise export kullanılır.</p>
-<pre class="code shell literal-block"><code>- cd<span class="operator">(</span><span class="name variable">directoryName</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:
-- ls<span class="operator">(</span><span class="name builtin">source</span><span class="operator">)</span>:
-- system<span class="operator">(</span><span class="name builtin">command</span><span class="operator">)</span>:
-- export<span class="operator">(</span>key, value<span class="operator">)</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>cd<span class="operator">(</span><span class="name variable">directoryName</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>ls<span class="operator">(</span><span class="name builtin">source</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>system<span class="operator">(</span><span class="name builtin">command</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>export<span class="operator">(</span>key,<span class="whitespace"> </span>value<span class="operator">)</span>:</code></pre>
 <p>Dizin veya dosya isimleri ile ilgili işlemler için aşağıdaki fonksionlar kullanılabilir.</p>
-<pre class="code shell literal-block"><code>- realPath<span class="operator">(</span>filePath<span class="operator">)</span>:
-- baseName<span class="operator">(</span>filePath<span class="operator">)</span>:
-- dirName<span class="operator">(</span>filePath<span class="operator">)</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>realPath<span class="operator">(</span>filePath<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>baseName<span class="operator">(</span>filePath<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dirName<span class="operator">(</span>filePath<span class="operator">)</span>:</code></pre>
 <p>Erişim ve varlık kontrolleri aşağıdaki fonksionlar ile yapılır. Bunlar boolean değer döndürür.</p>
-<pre class="code shell literal-block"><code>- can_access_file<span class="operator">(</span>filePath<span class="operator">)</span>:
-- can_access_directory<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:
-- isLink<span class="operator">(</span>filePath<span class="operator">)</span>:
-- isFile<span class="operator">(</span>filePath<span class="operator">)</span>:
-- isDirectory<span class="operator">(</span>filePath<span class="operator">)</span>:
-- isEmpty<span class="operator">(</span>filePath<span class="operator">)</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>can_access_file<span class="operator">(</span>filePath<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>can_access_directory<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>isLink<span class="operator">(</span>filePath<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>isFile<span class="operator">(</span>filePath<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>isDirectory<span class="operator">(</span>filePath<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>isEmpty<span class="operator">(</span>filePath<span class="operator">)</span>:</code></pre>
 <p>Dizin oluşturmak için <strong>makedirs</strong> kullanılır. Bu fonksion eğer alt dizinler yoksa onlarla beraber oluşturur. (bir nevi mkdir -p gibi)</p>
-<pre class="code shell literal-block"><code>- makedirs<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>makedirs<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:</code></pre>
 <p>Dosya işlemleri için aşağıdaki fonksionlar kullanılır.</p>
-<pre class="code shell literal-block"><code>- echo<span class="operator">(</span>destionationFile, content<span class="operator">)</span>:
-- chmod<span class="operator">(</span>filePath, <span class="name variable">mode</span><span class="operator">=</span>0o755<span class="operator">)</span>:
-- chown<span class="operator">(</span>filePath, <span class="name variable">uid</span><span class="operator">=</span><span class="literal string single">'root'</span>, <span class="name variable">gid</span><span class="operator">=</span><span class="literal string single">'root'</span><span class="operator">)</span>:
-- sym<span class="operator">(</span>source, destination<span class="operator">)</span>:
-- unlink<span class="operator">(</span>pattern<span class="operator">)</span>:
-- unlinkDir<span class="operator">(</span>sourceDirectory<span class="operator">)</span>:
-- move<span class="operator">(</span>source, destination<span class="operator">)</span>:
-- copy<span class="operator">(</span>source, destination, <span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:
-- copytree<span class="operator">(</span>source, destination, <span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:
-- touch<span class="operator">(</span>filePath<span class="operator">)</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>echo<span class="operator">(</span>destionationFile,<span class="whitespace"> </span>content<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>chmod<span class="operator">(</span>filePath,<span class="whitespace"> </span><span class="name variable">mode</span><span class="operator">=</span>0o755<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>chown<span class="operator">(</span>filePath,<span class="whitespace"> </span><span class="name variable">uid</span><span class="operator">=</span><span class="literal string single">'root'</span>,<span class="whitespace"> </span><span class="name variable">gid</span><span class="operator">=</span><span class="literal string single">'root'</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>sym<span class="operator">(</span>source,<span class="whitespace"> </span>destination<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>unlink<span class="operator">(</span>pattern<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>unlinkDir<span class="operator">(</span>sourceDirectory<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>move<span class="operator">(</span>source,<span class="whitespace"> </span>destination<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>copy<span class="operator">(</span>source,<span class="whitespace"> </span>destination,<span class="whitespace"> </span><span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>copytree<span class="operator">(</span>source,<span class="whitespace"> </span>destination,<span class="whitespace"> </span><span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>touch<span class="operator">(</span>filePath<span class="operator">)</span>:</code></pre>
 </section>
 <section id="autotools">
 <h2>1. Autotools</h2>
 <p>Autotools kütüphanesi <cite>./configure</cite>, <cite>make</cite>, <cite>make install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
 <p>Autotools fonksionları aşağıdaki gibidir:</p>
-<pre class="code shell literal-block"><code>inary/actionsapi/autotools.py:
-  - configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: ./configure --prefix<span class="operator">=</span>/usr ...
-  - rawConfigure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: prefix olmadan configure
-  - compile<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: gcc kullanarak derleme yapar <span class="operator">(</span>gcc ...<span class="operator">)</span>
-  - make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: make komutunu çalıştırır
-  - fixInfoDir<span class="operator">()</span>: paketleme dizinindeki /usr/share/info/dir dizinini siler
-  - fixpc<span class="operator">()</span>: 32bit pkgconfig dosyalarının konumunu düzeltir
-  - install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: make install çalıştırır
-  - rawInstall<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: destdir olmadan install
-  - aclocal<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: aclocal.m4 dosyalı üretir
-  - autogen<span class="operator">(</span><span class="name variable">noconfigure</span><span class="operator">=</span>True<span class="operator">)</span>: bash autogen.sh
-  - autoconf<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: autoconf çalıştırır
-  - autoreconf<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: autoreconf çalıştırır
-  - automake<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: automake çalıştırır
-  - autoheader<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: autoheader çalıştırır</code></pre>
+<pre class="code shell literal-block"><code>inary/actionsapi/autotools.py:<span class="whitespace">
+  </span>-<span class="whitespace"> </span>configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>./configure<span class="whitespace"> </span>--prefix<span class="operator">=</span>/usr<span class="whitespace"> </span>...<span class="whitespace">
+  </span>-<span class="whitespace"> </span>rawConfigure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>prefix<span class="whitespace"> </span>olmadan<span class="whitespace"> </span>configure<span class="whitespace">
+  </span>-<span class="whitespace"> </span>compile<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>gcc<span class="whitespace"> </span>kullanarak<span class="whitespace"> </span>derleme<span class="whitespace"> </span>yapar<span class="whitespace"> </span><span class="operator">(</span>gcc<span class="whitespace"> </span>...<span class="operator">)</span><span class="whitespace">
+  </span>-<span class="whitespace"> </span>make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>make<span class="whitespace"> </span>komutunu<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>fixInfoDir<span class="operator">()</span>:<span class="whitespace"> </span>paketleme<span class="whitespace"> </span>dizinindeki<span class="whitespace"> </span>/usr/share/info/dir<span class="whitespace"> </span>dizinini<span class="whitespace"> </span>siler<span class="whitespace">
+  </span>-<span class="whitespace"> </span>fixpc<span class="operator">()</span>:<span class="whitespace"> </span>32bit<span class="whitespace"> </span>pkgconfig<span class="whitespace"> </span>dosyalarının<span class="whitespace"> </span>konumunu<span class="whitespace"> </span>düzeltir<span class="whitespace">
+  </span>-<span class="whitespace"> </span>install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>:<span class="whitespace"> </span>make<span class="whitespace"> </span>install<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>rawInstall<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>:<span class="whitespace"> </span>destdir<span class="whitespace"> </span>olmadan<span class="whitespace"> </span>install<span class="whitespace">
+  </span>-<span class="whitespace"> </span>aclocal<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>aclocal.m4<span class="whitespace"> </span>dosyalı<span class="whitespace"> </span>üretir<span class="whitespace">
+  </span>-<span class="whitespace"> </span>autogen<span class="operator">(</span><span class="name variable">noconfigure</span><span class="operator">=</span>True<span class="operator">)</span>:<span class="whitespace"> </span>bash<span class="whitespace"> </span>autogen.sh<span class="whitespace">
+  </span>-<span class="whitespace"> </span>autoconf<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>autoconf<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>autoreconf<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>autoreconf<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>automake<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>automake<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>autoheader<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>autoheader<span class="whitespace"> </span>çalıştırır</code></pre>
 </section>
 <section id="mesontools">
 <h2>2. Mesontools</h2>
 <p>Mesontools kütüphanesi <cite>meson build</cite>, <cite>ninja -C build</cite>, <cite>ninja -C build install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
 <p>Mesontools fonksionları aşağıdaki gibidir:</p>
-<pre class="code shell literal-block"><code>inary/actionsapi/mesontools.py:
-  - fixpc<span class="operator">()</span>: 32bit pkgconfig dosyalarının konumunu düzeltir
-  - configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span>, <span class="name variable">type</span><span class="operator">=</span><span class="literal string double">&quot;meson&quot;</span><span class="operator">)</span>: cmake yada meson kullanarak configure işlemi <span class="operator">(</span>varsayılan meson<span class="operator">)</span>
-  - meson_configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: meson build
-  - cmake_configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: mkdir build <span class="operator">&amp;&amp;</span> <span class="name builtin">cd</span> build <span class="operator">&amp;&amp;</span> cmake -G ninja ..
-  - ninja_build<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: ninja -C build
-  - make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: ninja_build ile aynı
-  - ninja_install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>: ninja -C install
-  - install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:  ninja_install ile aynı
-  - ninja_check<span class="operator">()</span>: ninja -C build check
-  - check<span class="operator">()</span>: ninja_check ile aynı</code></pre>
+<pre class="code shell literal-block"><code>inary/actionsapi/mesontools.py:<span class="whitespace">
+  </span>-<span class="whitespace"> </span>fixpc<span class="operator">()</span>:<span class="whitespace"> </span>32bit<span class="whitespace"> </span>pkgconfig<span class="whitespace"> </span>dosyalarının<span class="whitespace"> </span>konumunu<span class="whitespace"> </span>düzeltir<span class="whitespace">
+  </span>-<span class="whitespace"> </span>configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span>,<span class="whitespace"> </span><span class="name variable">type</span><span class="operator">=</span><span class="literal string double">&quot;meson&quot;</span><span class="operator">)</span>:<span class="whitespace"> </span>cmake<span class="whitespace"> </span>yada<span class="whitespace"> </span>meson<span class="whitespace"> </span>kullanarak<span class="whitespace"> </span>configure<span class="whitespace"> </span>işlemi<span class="whitespace"> </span><span class="operator">(</span>varsayılan<span class="whitespace"> </span>meson<span class="operator">)</span><span class="whitespace">
+  </span>-<span class="whitespace"> </span>meson_configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:<span class="whitespace"> </span>meson<span class="whitespace"> </span>build<span class="whitespace">
+  </span>-<span class="whitespace"> </span>cmake_configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>build<span class="whitespace"> </span><span class="operator">&amp;&amp;</span><span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>build<span class="whitespace"> </span><span class="operator">&amp;&amp;</span><span class="whitespace"> </span>cmake<span class="whitespace"> </span>-G<span class="whitespace"> </span>ninja<span class="whitespace"> </span>..<span class="whitespace">
+  </span>-<span class="whitespace"> </span>ninja_build<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:<span class="whitespace"> </span>ninja<span class="whitespace"> </span>-C<span class="whitespace"> </span>build<span class="whitespace">
+  </span>-<span class="whitespace"> </span>make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:<span class="whitespace"> </span>ninja_build<span class="whitespace"> </span>ile<span class="whitespace"> </span>aynı<span class="whitespace">
+  </span>-<span class="whitespace"> </span>ninja_install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:<span class="whitespace"> </span>ninja<span class="whitespace"> </span>-C<span class="whitespace"> </span>install<span class="whitespace">
+  </span>-<span class="whitespace"> </span>install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string double">&quot;&quot;</span><span class="operator">)</span>:<span class="whitespace">  </span>ninja_install<span class="whitespace"> </span>ile<span class="whitespace"> </span>aynı<span class="whitespace">
+  </span>-<span class="whitespace"> </span>ninja_check<span class="operator">()</span>:<span class="whitespace"> </span>ninja<span class="whitespace"> </span>-C<span class="whitespace"> </span>build<span class="whitespace"> </span>check<span class="whitespace">
+  </span>-<span class="whitespace"> </span>check<span class="operator">()</span>:<span class="whitespace"> </span>ninja_check<span class="whitespace"> </span>ile<span class="whitespace"> </span>aynı</code></pre>
 </section>
 <section id="cmaketools">
 <h2>3. Cmaketools</h2>
 <p>Cmaketools kütüphanesi <cite>cmake ..</cite>, <cite>make</cite>, <cite>make install</cite> şeklinde derlenen kaynaklar için kullanılır.</p>
 <p>Cmake fonksionları aşağıdaki gibidir.</p>
-<pre class="code shell literal-block"><code>inary/actionsapi/cmaketools.py:
-  - configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,installPrefix<span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">sourceDir</span><span class="operator">=</span><span class="literal string single">'.'</span><span class="operator">)</span>: cmake kullanarak configure işlemi
-  - make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>: make çalıştırır
-  - fixInfoDir<span class="operator">()</span>: paketleme dizinindeki /usr/share/info/dir dizinini siler
-  - install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: make install çalıştırır
-  - rawInstall<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>: destdir olmadan make install</code></pre>
+<pre class="code shell literal-block"><code>inary/actionsapi/cmaketools.py:<span class="whitespace">
+  </span>-<span class="whitespace"> </span>configure<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,installPrefix<span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">sourceDir</span><span class="operator">=</span><span class="literal string single">'.'</span><span class="operator">)</span>:<span class="whitespace"> </span>cmake<span class="whitespace"> </span>kullanarak<span class="whitespace"> </span>configure<span class="whitespace"> </span>işlemi<span class="whitespace">
+  </span>-<span class="whitespace"> </span>make<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace"> </span>make<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>fixInfoDir<span class="operator">()</span>:<span class="whitespace"> </span>paketleme<span class="whitespace"> </span>dizinindeki<span class="whitespace"> </span>/usr/share/info/dir<span class="whitespace"> </span>dizinini<span class="whitespace"> </span>siler<span class="whitespace">
+  </span>-<span class="whitespace"> </span>install<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>:<span class="whitespace"> </span>make<span class="whitespace"> </span>install<span class="whitespace"> </span>çalıştırır<span class="whitespace">
+  </span>-<span class="whitespace"> </span>rawInstall<span class="operator">(</span><span class="name variable">parameters</span><span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">argument</span><span class="operator">=</span><span class="literal string single">'install'</span><span class="operator">)</span>:<span class="whitespace"> </span>destdir<span class="whitespace"> </span>olmadan<span class="whitespace"> </span>make<span class="whitespace"> </span>install</code></pre>
 </section>
 <section id="inarytools">
 <h2>4. Inarytools</h2>
 <p>Inarytools kütüphanesi derleme işlemine yardımcı olan bir araçtır. Dosya işlemleri ve bazı uzun kodları kısatlma amaçlı yapılmıştır.</p>
 <p>Destination konumlarını tanımlarken paket içeriğindeki yollarını yazmamız yeterlidir.</p>
 <p>Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örneklerini kaynak koddan bulabilirsiniz.</p>
-<pre class="code shell literal-block"><code>- executable_insinto<span class="operator">(</span>destinationDirectory, *sourceFiles<span class="operator">)</span>:
-- readable_insinto<span class="operator">(</span>destinationDirectory, *sourceFiles<span class="operator">)</span>:
-- lib_insinto<span class="operator">(</span>sourceFile, destinationDirectory, <span class="name variable">permission</span><span class="operator">=</span><span class="literal number">644</span><span class="operator">)</span>:
-- dobin<span class="operator">(</span>sourceFile, <span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/bin'</span><span class="operator">)</span>:
-- dopixmaps<span class="operator">(</span>sourceFile, <span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/share/pixmaps'</span><span class="operator">)</span>:
-- dodir<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:
-- dodoc<span class="operator">(</span>*sourceFiles, **kw<span class="operator">)</span>:
-- dohtml<span class="operator">(</span>*sourceFiles, **kw<span class="operator">)</span>:
-- doinfo<span class="operator">(</span>*sourceFiles<span class="operator">)</span>:
-- dolib<span class="operator">(</span>sourceFile, <span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/lib'</span>, <span class="name variable">mode</span><span class="operator">=</span><span class="literal number">755</span><span class="operator">)</span>:
-- doman<span class="operator">(</span>*sourceFiles, <span class="name variable">pageDirectory</span><span class="operator">=</span>None<span class="operator">)</span>:
-- domo<span class="operator">(</span>sourceFile, locale, destinationFile,
-- domove<span class="operator">(</span>sourceFile, destination, <span class="name variable">destinationFile</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:
-- rename<span class="operator">(</span>sourceFile, destinationFile<span class="operator">)</span>:
-- dosed<span class="operator">(</span>sources, findPattern, <span class="name variable">replacePattern</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">deleteLine</span><span class="operator">=</span>False, <span class="name variable">level</span><span class="operator">=</span>-1<span class="operator">)</span>:
-- dosbin<span class="operator">(</span>sourceFile, <span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/sbin'</span><span class="operator">)</span>:
-- dosym<span class="operator">(</span>sourceFile, destinationFile<span class="operator">)</span>:
-- insinto<span class="operator">(</span>destinationDirectory, sourceFile, <span class="name variable">destinationFile</span><span class="operator">=</span><span class="literal string single">''</span>, <span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:
-- newdoc<span class="operator">(</span>sourceFile, destinationFile<span class="operator">)</span>:
-- newman<span class="operator">(</span>sourceFile, destinationFile<span class="operator">)</span>:
-- remove<span class="operator">(</span>sourceFile<span class="operator">)</span>:
-- removeDir<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>executable_insinto<span class="operator">(</span>destinationDirectory,<span class="whitespace"> </span>*sourceFiles<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>readable_insinto<span class="operator">(</span>destinationDirectory,<span class="whitespace"> </span>*sourceFiles<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>lib_insinto<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>destinationDirectory,<span class="whitespace"> </span><span class="name variable">permission</span><span class="operator">=</span><span class="literal number">644</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dobin<span class="operator">(</span>sourceFile,<span class="whitespace"> </span><span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/bin'</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dopixmaps<span class="operator">(</span>sourceFile,<span class="whitespace"> </span><span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/share/pixmaps'</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dodir<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dodoc<span class="operator">(</span>*sourceFiles,<span class="whitespace"> </span>**kw<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dohtml<span class="operator">(</span>*sourceFiles,<span class="whitespace"> </span>**kw<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>doinfo<span class="operator">(</span>*sourceFiles<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dolib<span class="operator">(</span>sourceFile,<span class="whitespace"> </span><span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/lib'</span>,<span class="whitespace"> </span><span class="name variable">mode</span><span class="operator">=</span><span class="literal number">755</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>doman<span class="operator">(</span>*sourceFiles,<span class="whitespace"> </span><span class="name variable">pageDirectory</span><span class="operator">=</span>None<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>domo<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>locale,<span class="whitespace"> </span>destinationFile,<span class="whitespace">
+</span>-<span class="whitespace"> </span>domove<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>destination,<span class="whitespace"> </span><span class="name variable">destinationFile</span><span class="operator">=</span><span class="literal string single">''</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>rename<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>destinationFile<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dosed<span class="operator">(</span>sources,<span class="whitespace"> </span>findPattern,<span class="whitespace"> </span><span class="name variable">replacePattern</span><span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">deleteLine</span><span class="operator">=</span>False,<span class="whitespace"> </span><span class="name variable">level</span><span class="operator">=</span>-1<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dosbin<span class="operator">(</span>sourceFile,<span class="whitespace"> </span><span class="name variable">destinationDirectory</span><span class="operator">=</span><span class="literal string single">'/usr/sbin'</span><span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>dosym<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>destinationFile<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>insinto<span class="operator">(</span>destinationDirectory,<span class="whitespace"> </span>sourceFile,<span class="whitespace"> </span><span class="name variable">destinationFile</span><span class="operator">=</span><span class="literal string single">''</span>,<span class="whitespace"> </span><span class="name variable">sym</span><span class="operator">=</span>True<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>newdoc<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>destinationFile<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>newman<span class="operator">(</span>sourceFile,<span class="whitespace"> </span>destinationFile<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>remove<span class="operator">(</span>sourceFile<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>removeDir<span class="operator">(</span>destinationDirectory<span class="operator">)</span>:</code></pre>
 </section>
 <section id="get">
 <h2>5. Get</h2>
 <p>Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. get fonksionları parametre almaz ve string türünden değer döndürür.</p>
-<pre class="code shell literal-block"><code>- curDIR<span class="operator">()</span>:         - docDIR<span class="operator">()</span>:            - srcVERSION<span class="operator">()</span>:     - qtDIR<span class="operator">()</span>:
-- curKERNEL<span class="operator">()</span>:      - sbinDIR<span class="operator">()</span>:           - srcRELEASE<span class="operator">()</span>:     - existBinary<span class="operator">(</span>bin<span class="operator">)</span>:
-- curPYTHON<span class="operator">()</span>:      - infoDIR<span class="operator">()</span>:           - srcTAG<span class="operator">()</span>:         - getBinutilsInfo<span class="operator">(</span>util<span class="operator">)</span>:
-- curPERL<span class="operator">()</span>:        - manDIR<span class="operator">()</span>:            - srcDIR<span class="operator">()</span>:         - AR<span class="operator">()</span>:
-- ENV<span class="operator">(</span>environ<span class="operator">)</span>:     - dataDIR<span class="operator">()</span>:           - ARCH<span class="operator">()</span>:           - AS<span class="operator">()</span>:
-- pkgDIR<span class="operator">()</span>:         - confDIR<span class="operator">()</span>:           - HOST<span class="operator">()</span>:           - CC<span class="operator">()</span>:
-- workDIR<span class="operator">()</span>:        - localstateDIR<span class="operator">()</span>:     - CHOST<span class="operator">()</span>:          - CXX<span class="operator">()</span>:
-- operation<span class="operator">()</span>:      - libexecDIR<span class="operator">()</span>:        - CFLAGS<span class="operator">()</span>:         - LD<span class="operator">()</span>:
-- installDIR<span class="operator">()</span>:     - libDIR<span class="operator">()</span>:            - CXXFLAGS<span class="operator">()</span>:       - NM<span class="operator">()</span>:
-- lsbINFO<span class="operator">()</span>:        - defaultprefixDIR<span class="operator">()</span>:  - LDFLAGS<span class="operator">()</span>:        - RANLIB<span class="operator">()</span>:
-- kernelVERSION<span class="operator">()</span>:  - emul32prefixDIR<span class="operator">()</span>:   - makeJOBS<span class="operator">()</span>:       - F77<span class="operator">()</span>:
-- srcNAME<span class="operator">()</span>:        - kdeDIR<span class="operator">()</span>:            - buildTYPE<span class="operator">()</span>:      - GCJ<span class="operator">()</span>:</code></pre>
+<pre class="code shell literal-block"><code>-<span class="whitespace"> </span>curDIR<span class="operator">()</span>:<span class="whitespace">         </span>-<span class="whitespace"> </span>docDIR<span class="operator">()</span>:<span class="whitespace">            </span>-<span class="whitespace"> </span>srcVERSION<span class="operator">()</span>:<span class="whitespace">     </span>-<span class="whitespace"> </span>qtDIR<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>curKERNEL<span class="operator">()</span>:<span class="whitespace">      </span>-<span class="whitespace"> </span>sbinDIR<span class="operator">()</span>:<span class="whitespace">           </span>-<span class="whitespace"> </span>srcRELEASE<span class="operator">()</span>:<span class="whitespace">     </span>-<span class="whitespace"> </span>existBinary<span class="operator">(</span>bin<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>curPYTHON<span class="operator">()</span>:<span class="whitespace">      </span>-<span class="whitespace"> </span>infoDIR<span class="operator">()</span>:<span class="whitespace">           </span>-<span class="whitespace"> </span>srcTAG<span class="operator">()</span>:<span class="whitespace">         </span>-<span class="whitespace"> </span>getBinutilsInfo<span class="operator">(</span>util<span class="operator">)</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>curPERL<span class="operator">()</span>:<span class="whitespace">        </span>-<span class="whitespace"> </span>manDIR<span class="operator">()</span>:<span class="whitespace">            </span>-<span class="whitespace"> </span>srcDIR<span class="operator">()</span>:<span class="whitespace">         </span>-<span class="whitespace"> </span>AR<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>ENV<span class="operator">(</span>environ<span class="operator">)</span>:<span class="whitespace">     </span>-<span class="whitespace"> </span>dataDIR<span class="operator">()</span>:<span class="whitespace">           </span>-<span class="whitespace"> </span>ARCH<span class="operator">()</span>:<span class="whitespace">           </span>-<span class="whitespace"> </span>AS<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>pkgDIR<span class="operator">()</span>:<span class="whitespace">         </span>-<span class="whitespace"> </span>confDIR<span class="operator">()</span>:<span class="whitespace">           </span>-<span class="whitespace"> </span>HOST<span class="operator">()</span>:<span class="whitespace">           </span>-<span class="whitespace"> </span>CC<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>workDIR<span class="operator">()</span>:<span class="whitespace">        </span>-<span class="whitespace"> </span>localstateDIR<span class="operator">()</span>:<span class="whitespace">     </span>-<span class="whitespace"> </span>CHOST<span class="operator">()</span>:<span class="whitespace">          </span>-<span class="whitespace"> </span>CXX<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>operation<span class="operator">()</span>:<span class="whitespace">      </span>-<span class="whitespace"> </span>libexecDIR<span class="operator">()</span>:<span class="whitespace">        </span>-<span class="whitespace"> </span>CFLAGS<span class="operator">()</span>:<span class="whitespace">         </span>-<span class="whitespace"> </span>LD<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>installDIR<span class="operator">()</span>:<span class="whitespace">     </span>-<span class="whitespace"> </span>libDIR<span class="operator">()</span>:<span class="whitespace">            </span>-<span class="whitespace"> </span>CXXFLAGS<span class="operator">()</span>:<span class="whitespace">       </span>-<span class="whitespace"> </span>NM<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>lsbINFO<span class="operator">()</span>:<span class="whitespace">        </span>-<span class="whitespace"> </span>defaultprefixDIR<span class="operator">()</span>:<span class="whitespace">  </span>-<span class="whitespace"> </span>LDFLAGS<span class="operator">()</span>:<span class="whitespace">        </span>-<span class="whitespace"> </span>RANLIB<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>kernelVERSION<span class="operator">()</span>:<span class="whitespace">  </span>-<span class="whitespace"> </span>emul32prefixDIR<span class="operator">()</span>:<span class="whitespace">   </span>-<span class="whitespace"> </span>makeJOBS<span class="operator">()</span>:<span class="whitespace">       </span>-<span class="whitespace"> </span>F77<span class="operator">()</span>:<span class="whitespace">
+</span>-<span class="whitespace"> </span>srcNAME<span class="operator">()</span>:<span class="whitespace">        </span>-<span class="whitespace"> </span>kdeDIR<span class="operator">()</span>:<span class="whitespace">            </span>-<span class="whitespace"> </span>buildTYPE<span class="operator">()</span>:<span class="whitespace">      </span>-<span class="whitespace"> </span>GCJ<span class="operator">()</span>:</code></pre>
 <section id="pspec-xml-dosyasi">
 <h3>Pspec.xml dosyası</h3>
 <p>Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunarak gereken değerler alınarak derleme işlemi yapılır. <strong>Source</strong>, <strong>Package</strong> ve <strong>History</strong> olmak üzere 3 bölümden oluşur.</p>
 <p>Örneğin aşağıda örnek pspec dosyası verilmiştir.</p>
-<pre class="code xml literal-block"><code><span class="comment preproc">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
-<span class="comment preproc">&lt;!DOCTYPE INARY SYSTEM &quot;https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd&quot;&gt;</span>
-<span class="name tag">&lt;INARY&gt;</span>
-    <span class="name tag">&lt;Source&gt;</span>
-        ... <span class="comment multiline">&lt;!--Burası source bölümüdür.--&gt;</span>
-    <span class="name tag">&lt;/Source&gt;</span>
+<pre class="code xml literal-block"><code><span class="comment preproc">&lt;?xml version=&quot;1.0&quot; ?&gt;</span><span class="whitespace">
+</span><span class="comment preproc">&lt;!DOCTYPE INARY SYSTEM &quot;https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd&quot;&gt;</span><span class="whitespace">
+</span><span class="name tag">&lt;INARY&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;Source&gt;</span><span class="whitespace">
+        </span>...<span class="whitespace"> </span><span class="comment multiline">&lt;!--Burası source bölümüdür.--&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;/Source&gt;</span><span class="whitespace">
 
-    <span class="name tag">&lt;Package&gt;</span>
-        ... <span class="comment multiline">&lt;!--Burası package bölümüdür.--&gt;</span>
-    <span class="name tag">&lt;/Package&gt;</span>
+    </span><span class="name tag">&lt;Package&gt;</span><span class="whitespace">
+        </span>...<span class="whitespace"> </span><span class="comment multiline">&lt;!--Burası package bölümüdür.--&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;/Package&gt;</span><span class="whitespace">
 
-    <span class="name tag">&lt;Package&gt;</span>
-        ... <span class="comment multiline">&lt;!--Burası diğer package bölümüdür.--&gt;</span>
-    <span class="name tag">&lt;/Package&gt;</span>
+    </span><span class="name tag">&lt;Package&gt;</span><span class="whitespace">
+        </span>...<span class="whitespace"> </span><span class="comment multiline">&lt;!--Burası diğer package bölümüdür.--&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;/Package&gt;</span><span class="whitespace">
 
-    <span class="name tag">&lt;History&gt;</span>
-        ... <span class="comment multiline">&lt;!--Burası history bölümüdür.--&gt;</span>
-    <span class="name tag">&lt;/History&gt;</span>
-<span class="name tag">&lt;/INARY&gt;</span></code></pre>
+    </span><span class="name tag">&lt;History&gt;</span><span class="whitespace">
+        </span>...<span class="whitespace"> </span><span class="comment multiline">&lt;!--Burası history bölümüdür.--&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;/History&gt;</span><span class="whitespace">
+</span><span class="name tag">&lt;/INARY&gt;</span></code></pre>
 </section>
 </section>
 <section id="source-bolumu">
@@ -256,48 +256,48 @@ Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çal�
 <p><strong>Archive</strong> kısmı birden fazla olabilir.</p>
 <p>Archive türü ikili dosyaysa veya açılmayacaksa <strong>type=&quot;binary&quot;</strong> eklemeniz gerekmektedir. (<cite>&lt;Archive sha1sum=&quot;...&quot; type=&quot;archive&quot;&gt;https://.../file.bin&lt;/Archive&gt;</cite>)</p>
 <p><strong>BuildDependency</strong> kısmında yazılan paketler derleme öncesi kurulur. Oluşturulan paketlere bağımlılık olarak eklenmez.</p>
-<pre class="code xml literal-block"><code><span class="name tag">&lt;Source&gt;</span>
-       <span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span>
-       <span class="name tag">&lt;Homepage&gt;</span>https://www.gnu.org/software/bash<span class="name tag">&lt;/Homepage&gt;</span>
-       <span class="name tag">&lt;Packager&gt;</span>
-            <span class="name tag">&lt;Name&gt;</span>Ali Rıza KESKİN<span class="name tag">&lt;/Name&gt;</span>
-            <span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span>
-       <span class="name tag">&lt;/Packager&gt;</span>
-       <span class="name tag">&lt;License&gt;</span>GPLv2<span class="name tag">&lt;/License&gt;</span>
-       <span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span>
-       <span class="comment multiline">&lt;!--&lt;Rfp&gt;Bu paket deneyseldir&lt;/Rfp&gt;--&gt;</span>
-       <span class="name tag">&lt;PartOf&gt;</span>system.base<span class="name tag">&lt;/PartOf&gt;</span>
-       <span class="name tag">&lt;Summary&gt;</span>Bourne-Again shell<span class="name tag">&lt;/Summary&gt;</span>
-       <span class="name tag">&lt;Description&gt;</span>GNU bash shell<span class="name tag">&lt;/Description&gt;</span>
-       <span class="name tag">&lt;Archive</span> <span class="name attribute">sha1sum=</span><span class="literal string">&quot;d116b469b9e6ea5264a74661d3a4c797da7f997b&quot;</span><span class="name tag">&gt;</span>https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz<span class="name tag">&lt;/Archive&gt;</span>
-       <span class="name tag">&lt;BuildDependencies&gt;</span>
-           <span class="name tag">&lt;Dependency&gt;</span>ncurses-devel<span class="name tag">&lt;/Dependency&gt;</span>
-           <span class="name tag">&lt;Dependency&gt;</span>readline-devel<span class="name tag">&lt;/Dependency&gt;</span>
-       <span class="name tag">&lt;/BuildDependencies&gt;</span>
-   <span class="name tag">&lt;/Source&gt;</span></code></pre>
+<pre class="code xml literal-block"><code><span class="name tag">&lt;Source&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Homepage&gt;</span>https://www.gnu.org/software/bash<span class="name tag">&lt;/Homepage&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Packager&gt;</span><span class="whitespace">
+            </span><span class="name tag">&lt;Name&gt;</span>Ali<span class="whitespace"> </span>Rıza<span class="whitespace"> </span>KESKİN<span class="name tag">&lt;/Name&gt;</span><span class="whitespace">
+            </span><span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;/Packager&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;License&gt;</span>GPLv2<span class="name tag">&lt;/License&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span><span class="whitespace">
+       </span><span class="comment multiline">&lt;!--&lt;Rfp&gt;Bu paket deneyseldir&lt;/Rfp&gt;--&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;PartOf&gt;</span>system.base<span class="name tag">&lt;/PartOf&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Summary&gt;</span>Bourne-Again<span class="whitespace"> </span>shell<span class="name tag">&lt;/Summary&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Description&gt;</span>GNU<span class="whitespace"> </span>bash<span class="whitespace"> </span>shell<span class="name tag">&lt;/Description&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Archive</span><span class="whitespace"> </span><span class="name attribute">sha1sum=</span><span class="literal string">&quot;d116b469b9e6ea5264a74661d3a4c797da7f997b&quot;</span><span class="name tag">&gt;</span>https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz<span class="name tag">&lt;/Archive&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;BuildDependencies&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Dependency&gt;</span>ncurses-devel<span class="name tag">&lt;/Dependency&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Dependency&gt;</span>readline-devel<span class="name tag">&lt;/Dependency&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;/BuildDependencies&gt;</span><span class="whitespace">
+   </span><span class="name tag">&lt;/Source&gt;</span></code></pre>
 <p>Eğer <strong>Rfp</strong> tagı kullanırsanız paket <strong>Rfp</strong> olarak oluşturulur. Bu paketler kararlı olmayan veya deneysel paketlerdir. Derlenirken ve kurulurken onay ister. Onay mesajını bu tagın arasına yazmalısınız. <strong>Rfp</strong> paketler Sulin deposunda bulunmaz.</p>
 </section>
 <section id="package-bolumu">
 <h2>Package bölümü</h2>
 <p>Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. <strong>Name</strong>, <strong>Files</strong> kısımları zorunludur.</p>
 <p><strong>File</strong> kısmında en az 1 tane <strong>Path</strong> bulunmalıdır ve <strong>fileType</strong> değeri belirtilmek zorundadır. Bu değer <strong>config</strong>, <strong>executable</strong>, <strong>library</strong>, <strong>header</strong>, <strong>localedata</strong>, <strong>data</strong>, <strong>info</strong> alabilir.</p>
-<pre class="code xml literal-block"><code><span class="name tag">&lt;Package&gt;</span>
-       <span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span>
-       <span class="name tag">&lt;IsA&gt;</span>postOps<span class="name tag">&lt;/IsA&gt;</span>
-       <span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span>
-       <span class="name tag">&lt;RuntimeDependencies&gt;</span>
-           <span class="name tag">&lt;Dependency&gt;</span>ncurses<span class="name tag">&lt;/Dependency&gt;</span>
-       <span class="name tag">&lt;/RuntimeDependencies&gt;</span>
-       <span class="name tag">&lt;Files&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;config&quot;</span><span class="name tag">&gt;</span>/etc<span class="name tag">&lt;/Path&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/bin<span class="name tag">&lt;/Path&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/usr/bin<span class="name tag">&lt;/Path&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;info&quot;</span><span class="name tag">&gt;</span>/usr/share/info<span class="name tag">&lt;/Path&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;header&quot;</span><span class="name tag">&gt;</span>/usr/include<span class="name tag">&lt;/Path&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;library&quot;</span><span class="name tag">&gt;</span>/usr/lib/<span class="name tag">&lt;/Path&gt;</span>
-           <span class="name tag">&lt;Path</span> <span class="name attribute">fileType=</span><span class="literal string">&quot;localedata&quot;</span><span class="name tag">&gt;</span>/usr/share/locale<span class="name tag">&lt;/Path&gt;</span>
-       <span class="name tag">&lt;/Files&gt;</span>
-   <span class="name tag">&lt;/Package&gt;</span></code></pre>
+<pre class="code xml literal-block"><code><span class="name tag">&lt;Package&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Name&gt;</span>bash<span class="name tag">&lt;/Name&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;IsA&gt;</span>postOps<span class="name tag">&lt;/IsA&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;IsA&gt;</span>app:console<span class="name tag">&lt;/IsA&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;RuntimeDependencies&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Dependency&gt;</span>ncurses<span class="name tag">&lt;/Dependency&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;/RuntimeDependencies&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;Files&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;config&quot;</span><span class="name tag">&gt;</span>/etc<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/bin<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;executable&quot;</span><span class="name tag">&gt;</span>/usr/bin<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;info&quot;</span><span class="name tag">&gt;</span>/usr/share/info<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;header&quot;</span><span class="name tag">&gt;</span>/usr/include<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;library&quot;</span><span class="name tag">&gt;</span>/usr/lib/<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Path</span><span class="whitespace"> </span><span class="name attribute">fileType=</span><span class="literal string">&quot;localedata&quot;</span><span class="name tag">&gt;</span>/usr/share/locale<span class="name tag">&lt;/Path&gt;</span><span class="whitespace">
+       </span><span class="name tag">&lt;/Files&gt;</span><span class="whitespace">
+   </span><span class="name tag">&lt;/Package&gt;</span></code></pre>
 <p><strong>RuntimeDependencies</strong> kısmında yazılan paketler paketlere bağımlılık olarak eklenir. Derleme öncesi kurulacak listesine eklenmez.</p>
 <p><strong>fileType</strong> türüne <strong>config</strong> verirseniz o dizindeki dosyaları ayar dosyası olarak ekler. Paket güncelleme esnasında configleri kullanıcılar isterse güncellemeyebilir.</p>
 <p><strong>IsA</strong> değerini <strong>postOps</strong> ayarlarsanız paketin içine <strong>postoperations.py</strong> dosyası eklenir. Bu dosya kurulum aşamasında çalıştırılacak betik dosyasıdır.</p>
@@ -305,76 +305,76 @@ Nasıl kullanıldığını öğrenmek için <em>inary-template --help</em> çal�
 <section id="history-bolumu">
 <h2>History bölümü</h2>
 <p>Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanın sürümü olarak alınır. <strong>Update</strong> kısmı birden çok kez bulunabilir ve en az 1 tane bulunmalıdır.</p>
-<pre class="code xml literal-block"><code><span class="name tag">&lt;History&gt;</span>
-    <span class="name tag">&lt;Update</span> <span class="name attribute">release=</span><span class="literal string">&quot;1&quot;</span><span class="name tag">&gt;</span>
-           <span class="name tag">&lt;Date&gt;</span>2019-01-17<span class="name tag">&lt;/Date&gt;</span>
-           <span class="name tag">&lt;Version&gt;</span>5.0<span class="name tag">&lt;/Version&gt;</span>
-           <span class="name tag">&lt;Comment&gt;</span>First release<span class="name tag">&lt;/Comment&gt;</span>
-           <span class="name tag">&lt;Name&gt;</span>Ali Rıza KESKİN<span class="name tag">&lt;/Name&gt;</span>
-           <span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span>
-    <span class="name tag">&lt;/Update&gt;</span>
-<span class="name tag">&lt;/History&gt;</span></code></pre>
+<pre class="code xml literal-block"><code><span class="name tag">&lt;History&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;Update</span><span class="whitespace"> </span><span class="name attribute">release=</span><span class="literal string">&quot;1&quot;</span><span class="name tag">&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Date&gt;</span>2019-01-17<span class="name tag">&lt;/Date&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Version&gt;</span>5.0<span class="name tag">&lt;/Version&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Comment&gt;</span>First<span class="whitespace"> </span>release<span class="name tag">&lt;/Comment&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Name&gt;</span>Ali<span class="whitespace"> </span>Rıza<span class="whitespace"> </span>KESKİN<span class="name tag">&lt;/Name&gt;</span><span class="whitespace">
+           </span><span class="name tag">&lt;Email&gt;</span>paledega&#64;yandex.ru<span class="name tag">&lt;/Email&gt;</span><span class="whitespace">
+    </span><span class="name tag">&lt;/Update&gt;</span><span class="whitespace">
+</span><span class="name tag">&lt;/History&gt;</span></code></pre>
 <section id="pspec-py-dosyasi">
 <h3>Pspec.py dosyası</h3>
 <p>Bu dosya doğrudan kullanılmaz. Bu dosyayı <strong>pspec.xml</strong> üretmek için kullanırız. Bu dosyanın bulunduğu dizinde <strong>genpspec</strong> komutunu çalıştırarak <strong>pspec.xml</strong> dosyasını üretebilirsiniz.
 Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
-<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">inary</span><span class="punctuation">:</span>
-    <span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span>
-        <span class="comment single"># Source bölümü</span>
-    <span class="keyword">class</span> <span class="name class">pkg_bash</span><span class="punctuation">:</span>
-        <span class="comment single"># Package bölümü</span>
-    <span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span>
-        <span class="comment single"># History bölümü</span></code></pre>
+<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">inary</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span><span class="whitespace">
+</span>        <span class="comment single"># Source bölümü</span><span class="whitespace">
+</span>    <span class="keyword">class</span> <span class="name class">pkg_bash</span><span class="punctuation">:</span><span class="whitespace">
+</span>        <span class="comment single"># Package bölümü</span><span class="whitespace">
+</span>    <span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span><span class="whitespace">
+</span>        <span class="comment single"># History bölümü</span></code></pre>
 </section>
 </section>
 <section id="source-bolumu-1">
 <h2>Source bölümü</h2>
 <p>Bu bölümde kaynağın özellikleri belirtilir. <strong>packages</strong> dizisindeki elemanların adına sahip olan sınıflar <strong>pspec.xml</strong> oluşturulurken kullanılır.</p>
-<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span>
-    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span>
-    <span class="name">homepage</span> <span class="operator">=</span> <span class="literal string double">&quot;http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html&quot;</span>
-    <span class="keyword">class</span> <span class="name class">packager</span><span class="punctuation">:</span>
-        <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;Süleyman POYRAZ&quot;</span>
-        <span class="name">email</span> <span class="operator">=</span> <span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span>
-    <span class="name">license</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'GPLv2'</span><span class="punctuation">]</span>
-    <span class="name">isa</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'app:console'</span><span class="punctuation">]</span>
-    <span class="name">partof</span> <span class="operator">=</span> <span class="literal string double">&quot;system.base&quot;</span>
-    <span class="name">summary</span> <span class="operator">=</span> <span class="literal string double">&quot;Bourne-Again shell&quot;</span>
-    <span class="name">description</span> <span class="operator">=</span> <span class="literal string double">&quot;GNU bash shell&quot;</span>
-    <span class="name">archive</span> <span class="operator">=</span> <span class="punctuation">[</span>
-        <span class="punctuation">(</span><span class="literal string double">&quot;6399bd1f9ef4dd0d901c7b76737bc409de73c77a&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz&quot;</span><span class="punctuation">),</span>
-    <span class="punctuation">]</span>
-    <span class="name">builddependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'ncurses-devel'</span><span class="punctuation">,</span> <span class="literal string single">'readline-devel'</span><span class="punctuation">]</span>
-    <span class="name">packages</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'pkg_bash'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_devel'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_docs'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_pages'</span><span class="punctuation">]</span></code></pre>
+<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span><span class="whitespace">
+</span>    <span class="name">homepage</span> <span class="operator">=</span> <span class="literal string double">&quot;http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html&quot;</span><span class="whitespace">
+</span>    <span class="keyword">class</span> <span class="name class">packager</span><span class="punctuation">:</span><span class="whitespace">
+</span>        <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;Süleyman POYRAZ&quot;</span><span class="whitespace">
+</span>        <span class="name">email</span> <span class="operator">=</span> <span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span><span class="whitespace">
+</span>    <span class="name">license</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'GPLv2'</span><span class="punctuation">]</span><span class="whitespace">
+</span>    <span class="name">isa</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'app:console'</span><span class="punctuation">]</span><span class="whitespace">
+</span>    <span class="name">partof</span> <span class="operator">=</span> <span class="literal string double">&quot;system.base&quot;</span><span class="whitespace">
+</span>    <span class="name">summary</span> <span class="operator">=</span> <span class="literal string double">&quot;Bourne-Again shell&quot;</span><span class="whitespace">
+</span>    <span class="name">description</span> <span class="operator">=</span> <span class="literal string double">&quot;GNU bash shell&quot;</span><span class="whitespace">
+</span>    <span class="name">archive</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="whitespace">
+</span>        <span class="punctuation">(</span><span class="literal string double">&quot;6399bd1f9ef4dd0d901c7b76737bc409de73c77a&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz&quot;</span><span class="punctuation">),</span><span class="whitespace">
+</span>    <span class="punctuation">]</span><span class="whitespace">
+</span>    <span class="name">builddependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'ncurses-devel'</span><span class="punctuation">,</span> <span class="literal string single">'readline-devel'</span><span class="punctuation">]</span><span class="whitespace">
+</span>    <span class="name">packages</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'pkg_bash'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_devel'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_docs'</span><span class="punctuation">,</span> <span class="literal string single">'pkg_bash_pages'</span><span class="punctuation">]</span></code></pre>
 </section>
 <section id="package-bolumu-1">
 <h2>Package bölümü</h2>
 <p>Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını <strong>Source</strong> bölümündeki <strong>packages</strong> dizisi içine eklediğinizde buradaki değerler kullanılır.</p>
-<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">pkg_bash</span>
-    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span>
-    <span class="name">runtimedependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string double">&quot;ncurses&quot;</span><span class="punctuation">]</span>
-    <span class="name">files</span> <span class="operator">=</span> <span class="punctuation">[</span>
-        <span class="punctuation">(</span><span class="literal string double">&quot;config&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/etc&quot;</span><span class="punctuation">),</span>
-        <span class="punctuation">(</span><span class="literal string double">&quot;executable&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/bin&quot;</span><span class="punctuation">),</span>
-        <span class="punctuation">(</span><span class="literal string double">&quot;info&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/usr/share/info&quot;</span><span class="punctuation">),</span>
-        <span class="punctuation">(</span><span class="literal string double">&quot;library&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/lib&quot;</span><span class="punctuation">),</span>
-        <span class="punctuation">(</span><span class="literal string double">&quot;localedata&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/usr/share/locale&quot;</span><span class="punctuation">),</span>
-    <span class="punctuation">]</span></code></pre>
+<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">pkg_bash</span><span class="whitespace">
+</span>    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span><span class="whitespace">
+</span>    <span class="name">runtimedependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string double">&quot;ncurses&quot;</span><span class="punctuation">]</span><span class="whitespace">
+</span>    <span class="name">files</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="whitespace">
+</span>        <span class="punctuation">(</span><span class="literal string double">&quot;config&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/etc&quot;</span><span class="punctuation">),</span><span class="whitespace">
+</span>        <span class="punctuation">(</span><span class="literal string double">&quot;executable&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/bin&quot;</span><span class="punctuation">),</span><span class="whitespace">
+</span>        <span class="punctuation">(</span><span class="literal string double">&quot;info&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/usr/share/info&quot;</span><span class="punctuation">),</span><span class="whitespace">
+</span>        <span class="punctuation">(</span><span class="literal string double">&quot;library&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/lib&quot;</span><span class="punctuation">),</span><span class="whitespace">
+</span>        <span class="punctuation">(</span><span class="literal string double">&quot;localedata&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;/usr/share/locale&quot;</span><span class="punctuation">),</span><span class="whitespace">
+</span>    <span class="punctuation">]</span></code></pre>
 </section>
 <section id="history-bolumu-1">
 <h2>History bölümü</h2>
 <p>Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine release bilgisi otomatik olarak hesaplanır. <strong>update</strong> dizisine dizi halinde eklenir.</p>
-<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span>
-    <span class="name">update</span> <span class="operator">=</span> <span class="punctuation">[</span>
-        <span class="punctuation">[</span><span class="literal string double">&quot;2021-08-29&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;5.1.8&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;First release&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;Süleyman POYRAZ&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span><span class="punctuation">],</span>
-    <span class="punctuation">]</span></code></pre>
+<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="name">update</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="whitespace">
+</span>        <span class="punctuation">[</span><span class="literal string double">&quot;2021-08-29&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;5.1.8&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;First release&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;Süleyman POYRAZ&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span><span class="punctuation">],</span><span class="whitespace">
+</span>    <span class="punctuation">]</span></code></pre>
 <section id="postoperations-py-dosyasi">
 <h3>Postoperations.py dosyası</h3>
 <p>Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar <strong>postInstall</strong>, <strong>preInstall</strong>, <strong>postRemove</strong>, <strong>preRemove</strong> şeklindedir. Bu fonksionlar argument almazlar.</p>
-<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">postInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulduktan sonra çalıştırılır.</span>
-<span class="keyword">def</span> <span class="name function">postRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silindikten sonra çalıştırılır.</span>
-<span class="keyword">def</span> <span class="name function">preInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulmadan önce çalıştırılır.</span>
-<span class="keyword">def</span> <span class="name function">preRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silinmeden önce çalıştırılır.</span></code></pre>
+<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">postInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulduktan sonra çalıştırılır.</span><span class="whitespace">
+</span><span class="keyword">def</span> <span class="name function">postRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silindikten sonra çalıştırılır.</span><span class="whitespace">
+</span><span class="keyword">def</span> <span class="name function">preInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulmadan önce çalıştırılır.</span><span class="whitespace">
+</span><span class="keyword">def</span> <span class="name function">preRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silinmeden önce çalıştırılır.</span></code></pre>
 <p>Bu dosyada bununan <strong>postInstall</strong> fonksionu aynı zamanda paketler yeniden yapılandırılmaya çalışılırken de çalıştırılır. Bu betiklerde actionsapi kullanımı ile ilgili herhangi bir kısıtlama bulunmamasına karşın kullanımı tavsiye edilmemektedir.</p>
 <p>Inary komutu her çalıştırıldığında işlem bitiminde sysconf modülü tetiklenir. Bu modül dosya sistemindeki değişiklikleri baz alarak çalışır ve önbellek dosyalarını güncelleme gibi bazı işleri otomatik olarak yerine getirir. Bu sebeple postoperations betiklerine nadiren ihtiyaç duyulur.</p>
 </section>

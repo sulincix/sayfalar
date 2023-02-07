@@ -14,7 +14,7 @@
 
 <p>Bu yazıda vala programlama dilini anlatacağım. Örneklende <strong>...</strong> bulunan satırlar üstünde ve altında başka kodların bulunabileceğini belirtir. Çalıştırılan komutların başında <strong>$</strong> işareti kullanılmıştır.</p>
 <p>Vala programlama dili derlemeli bir dil olup yazmış olduğunuz kod valanın çeviricisi yardımı ile önce <strong>C</strong> koduna çevrilir ve ardından <strong>gcc</strong> veya <strong>clang</strong> gibi bir derleyici kullanılarak derlenir. Vala kaynak kodunu derlemek için <strong>valac</strong> kullanılır. Örneğin aşağıda basit bir derleme örneği verilmiştir.</p>
-<pre class="code shell literal-block"><code>$ valac main.vala</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>main.vala</code></pre>
 <p>Vala programlarını main fonksiyonu ile başlar. Bu fonksiyon aşağıdaki gibi yazılır:</p>
 <pre class="code vala literal-block"><code><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
    </span><span class="punctuation">...</span><span class="whitespace">
@@ -120,7 +120,7 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
     </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">ff</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">msgs</span><span class="punctuation">.</span><span class="name">length</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">...</span></code></pre>
 <p>Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle yetersiz kaldığı için <strong>libgee</strong> kütüphanesinden faydalanılır. Öncelikle kodun en üstüne <cite>Using gee;</cite> eklenir. bu sayede kütüphane içerisindeki işlevler kullanılabilir olur. Bu ifade detaylı olarak ilerleyen bölümlerde anlatılacaktır. <strong>libgee</strong> kullanılırken derleme işlemine <cite>--pkg gee-0.8</cite> eklenir. Bu sayede derlenen programa libgee kütüphanesi dahil edilir.</p>
-<pre class="code shell literal-block"><code>$ valac main.vala --pkg gee-0.8</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>main.vala<span class="whitespace"> </span>--pkg<span class="whitespace"> </span>gee-0.8</code></pre>
 <p>Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:</p>
 <pre class="code vala literal-block"><code><span class="name">Using</span><span class="whitespace"> </span><span class="name">gee</span><span class="punctuation">;</span><span class="whitespace">
 
@@ -314,9 +314,9 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
     </span><span class="name">fputs</span><span class="punctuation">(</span><span class="name">msg</span><span class="punctuation">,</span><span class="name">stdout</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
 <p>Yukarıdaki örnekteki 2 dosyayı derlemek için aşağıdaki gibi bir komut kullanılmalıdır.</p>
-<pre class="code shell literal-block"><code>$ valac main.vala util.c</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>main.vala<span class="whitespace"> </span>util.c</code></pre>
 <p>C kaynak kodunun gerektirdiği parametreleri <strong>-X</strong> kullanarak ekleyebiliriz. Bu sayede doğrudan gccye parametre eklenebilir.</p>
-<pre class="code shell literal-block"><code>$ valac main.vala util.c -X <span class="literal string double">&quot;-lreadline&quot;</span> <span class="comment single"># C ile readline kütüphanesini kullanmak için -lreadline gerekir.</span></code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>main.vala<span class="whitespace"> </span>util.c<span class="whitespace"> </span>-X<span class="whitespace"> </span><span class="literal string double">&quot;-lreadline&quot;</span><span class="whitespace"> </span><span class="comment single"># C ile readline kütüphanesini kullanmak için -lreadline gerekir.</span></code></pre>
 <p>Vala içinde C kullanabildiğimiz gibi tam tersi de mümkündür. Bunun için C tarafında fonksiyon için isim tanımlamamız yeterlidir.</p>
 <pre class="code C literal-block"><code><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">fff</span><span class="punctuation">(</span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">message</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">argc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">argv</span><span class="punctuation">[]){</span><span class="whitespace">
@@ -446,6 +446,60 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
     </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
 </section>
+<section id="namespace-kavrami">
+<h2>Namespace kavramı</h2>
+<p>Valada kodları alan adlarına bölerek yazmamız mümkündür. Bu sayede alan adı içine tanımladığımız fonksiyonları alan adı ile beraber çağırarak kullanabiliriz. Bunun için <strong>namespace {}</strong> ifadesi kullanılır.</p>
+<pre class="code vala literal-block"><code><span class="keyword namespace">namespace</span><span class="whitespace"> </span><span class="name namespace">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">print</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Test&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="punctuation">.</span><span class="name">print</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="punctuation">}</span></code></pre>
+<p>Namespace iç içe tanımlanabilir.</p>
+<pre class="code vala literal-block"><code><span class="keyword namespace">namespace</span><span class="whitespace"> </span><span class="name namespace">test1</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword namespace">namespace</span><span class="whitespace"> </span><span class="name namespace">test2</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">print</span><span class="punctuation">(){</span><span class="whitespace">
+            </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Test&quot;</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">test1</span><span class="punctuation">.</span><span class="name">test2</span><span class="punctuation">.</span><span class="name">print</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="punctuation">}</span></code></pre>
+<p>Bir namespace alanını kaynak kodda içeri aktararak kullanmak için <strong>using</strong> ifadesi kullanılır.
+Bu ifade sayesinde belirtilen alan adındaki tüm fonksiyonlar kaynak kodda doğrudan kullanılabilir hale gelir.</p>
+<pre class="code vala literal-block"><code><span class="keyword namespace">using</span><span class="whitespace"> </span><span class="name namespace">Gtk</span><span class="punctuation">;</span><span class="whitespace">
+
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="error">#</span><span class="whitespace"> </span><span class="error">İ</span><span class="name">stersen</span><span class="whitespace"> </span><span class="name">yine</span><span class="whitespace"> </span><span class="name">de</span><span class="whitespace"> </span><span class="keyword namespace">namespace</span><span class="whitespace"> </span><span class="name namespace">adı</span><span class="whitespace"> </span><span class="name">ile</span><span class="whitespace"> </span><span class="name">kullanabiliriz</span><span class="punctuation">.</span><span class="whitespace">
+    </span><span class="name">Gtk</span><span class="punctuation">.</span><span class="name">init</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="keyword declaration">ref</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="error">#</span><span class="whitespace"> </span><span class="name">Gtk</span><span class="punctuation">.</span><span class="name">Window</span><span class="whitespace"> </span><span class="name">yerine</span><span class="whitespace"> </span><span class="name">Window</span><span class="whitespace"> </span><span class="name">kullanabiliriz</span><span class="punctuation">.</span><span class="whitespace">
+    </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">win</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">Window</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="error">#</span><span class="whitespace"> </span><span class="error">Ş</span><span class="name">ununla</span><span class="whitespace"> </span><span class="name">aynı</span><span class="whitespace"> </span><span class="name">anlama</span><span class="whitespace"> </span><span class="name">gelir</span><span class="whitespace">
+    </span><span class="error">#</span><span class="whitespace"> </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">win</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">Gtk</span><span class="punctuation">.</span><span class="name">Window</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="punctuation">...</span><span class="whitespace">
+    </span><span class="error">#</span><span class="whitespace"> </span><span class="name">Aynı</span><span class="whitespace"> </span><span class="name">isimde</span><span class="whitespace"> </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">olan</span><span class="whitespace"> </span><span class="name">bir</span><span class="whitespace"> </span><span class="name">fonksiyonu</span><span class="whitespace"> </span><span class="keyword namespace">namespace</span><span class="whitespace"> </span><span class="name namespace">adı</span><span class="whitespace"> </span><span class="name">olmadan</span><span class="whitespace"> </span><span class="name">kullanmak</span><span class="whitespace"> </span><span class="name">mümkün</span><span class="whitespace"> </span><span class="name">değildir</span><span class="punctuation">.</span><span class="whitespace">
+    </span><span class="name">Gtk</span><span class="punctuation">.</span><span class="name">main</span><span class="whitespace"> </span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span></code></pre>
+<p>Sınıfları tanımlarken namespace belirterek tanımlamak mümkündür.
+Bunun için sınıfın adının başına namespace adını belirtmek yeterlidir.</p>
+<pre class="code vala literal-block"><code><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword declaration">class</span><span class="whitespace"> </span><span class="name class">test</span><span class="punctuation">.</span><span class="name">cls</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword declaration">public</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name">print</span><span class="punctuation">(){</span><span class="whitespace">
+        </span><span class="name">stdout</span><span class="punctuation">.</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Test&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword declaration">var</span><span class="whitespace"> </span><span class="name">tcls</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">new</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">.</span><span class="name">cls</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="name">tcls</span><span class="punctuation">.</span><span class="name">print</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span></code></pre>
+</section>
 <section id="kutuphane-olusturma">
 <h2>Kütüphane oluşturma</h2>
 <p>Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.</p>
@@ -455,10 +509,10 @@ Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar 
     </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
 <p>Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile derleyebiliriz. Vala programlama dili <strong>glib-2.0</strong> kullanarak çalıştığı için bu kütüphaneyi derleme esnasında eklememiz gerekmektedir. Ayrıca glib-2.0 derlenirken <strong>-fPIC</strong> parametresine ihtiyaç duyar.</p>
-<pre class="code shell literal-block"><code>$ valac -C -H libtest.h --vapi libtest.vapi library.vala // Önce C koduna çevirelim
-$ gcc library.c -o libtest.so -shared <span class="literal string backtick">`</span>pkg-config --cflags --libs glib-2.0<span class="literal string backtick">`</span> -fPIC // gcc ile derleyelim.</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>-C<span class="whitespace"> </span>-H<span class="whitespace"> </span>libtest.h<span class="whitespace"> </span>--vapi<span class="whitespace"> </span>libtest.vapi<span class="whitespace"> </span>library.vala<span class="whitespace"> </span>//<span class="whitespace"> </span>Önce<span class="whitespace"> </span>C<span class="whitespace"> </span>koduna<span class="whitespace"> </span>çevirelim<span class="whitespace">
+</span>$<span class="whitespace"> </span>gcc<span class="whitespace"> </span>library.c<span class="whitespace"> </span>-o<span class="whitespace"> </span>libtest.so<span class="whitespace"> </span>-shared<span class="whitespace"> </span><span class="literal string backtick">`</span>pkg-config<span class="whitespace"> </span>--cflags<span class="whitespace"> </span>--libs<span class="whitespace"> </span>glib-2.0<span class="literal string backtick">`</span><span class="whitespace"> </span>-fPIC<span class="whitespace"> </span>//<span class="whitespace"> </span>gcc<span class="whitespace"> </span>ile<span class="whitespace"> </span>derleyelim.</code></pre>
 <p>Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak koduna çevirmeye gerek kalmadan kütüphanemiz derlenmiş olur.</p>
-<pre class="code shell literal-block"><code>$ valac -H libtest.h --vapi libtest.vapi -o libtest.so -X -shared -X -fPIC library.vala</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>-H<span class="whitespace"> </span>libtest.h<span class="whitespace"> </span>--vapi<span class="whitespace"> </span>libtest.vapi<span class="whitespace"> </span>-o<span class="whitespace"> </span>libtest.so<span class="whitespace"> </span>-X<span class="whitespace"> </span>-shared<span class="whitespace"> </span>-X<span class="whitespace"> </span>-fPIC<span class="whitespace"> </span>library.vala</code></pre>
 <p>Şimdi aşağıdaki gibi bir C kodu yazalım ve kütüphanemizi orada kullanalım. Oluşturulmuş olan <strong>library.h</strong> dosyamızdan yararlanabiliriz.</p>
 <pre class="code C literal-block"><code><span class="comment single">// main.c dosyası
 </span><span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;libtest.h&gt;</span><span class="comment preproc">
@@ -467,7 +521,7 @@ $ gcc library.c -o libtest.so -shared <span class="literal string backtick">`</s
 </span><span class="whitespace">    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="keyword type">int</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
 <p>Ve şimdi de C kodunu derleyemlim.</p>
-<pre class="code shell literal-block"><code>$ gcc -L. -I. -ltest main.c <span class="literal string backtick">`</span>pkg-config --cflags --libs glib-2.0<span class="literal string backtick">`</span> -fPIC</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>gcc<span class="whitespace"> </span>-L.<span class="whitespace"> </span>-I.<span class="whitespace"> </span>-ltest<span class="whitespace"> </span>main.c<span class="whitespace"> </span><span class="literal string backtick">`</span>pkg-config<span class="whitespace"> </span>--cflags<span class="whitespace"> </span>--libs<span class="whitespace"> </span>glib-2.0<span class="literal string backtick">`</span><span class="whitespace"> </span>-fPIC</code></pre>
 <p>Bununla birlikte <strong>libtest.vapi</strong> dosyamızı kullanarak kütüphanemizi vala ile kullanmamız da mümkündür.</p>
 <pre class="code vala literal-block"><code><span class="comment single">// main.vala dosyası
 </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">main</span><span class="punctuation">(</span><span class="keyword type">string</span><span class="punctuation">[]</span><span class="whitespace"> </span><span class="name">args</span><span class="punctuation">){</span><span class="whitespace">
@@ -475,7 +529,7 @@ $ gcc library.c -o libtest.so -shared <span class="literal string backtick">`</s
     </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">}</span></code></pre>
 <p>Şimdi vala kodunu derleyelim.</p>
-<pre class="code shell literal-block"><code>$ valac --vapidir ./ main.vala --pkg libtest</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>valac<span class="whitespace"> </span>--vapidir<span class="whitespace"> </span>./<span class="whitespace"> </span>main.vala<span class="whitespace"> </span>--pkg<span class="whitespace"> </span>libtest</code></pre>
 </section>
 </main>
 </body>

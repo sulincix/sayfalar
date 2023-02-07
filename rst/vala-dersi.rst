@@ -592,6 +592,75 @@ Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması ge
 	    return 0;
 	}
 
+Namespace kavramı
+=================
+Valada kodları alan adlarına bölerek yazmamız mümkündür. Bu sayede alan adı içine tanımladığımız fonksiyonları alan adı ile beraber çağırarak kullanabiliriz. Bunun için **namespace {}** ifadesi kullanılır.
+
+.. code-block:: vala
+
+	namespace test {
+	    void print(){
+	        stdout.printf("Test");
+	    }
+	}
+	...
+	int main(string[] args){
+	    test.print();
+	}
+
+Namespace iç içe tanımlanabilir.
+
+.. code-block:: vala
+
+	namespace test1 {
+	    namespace test2 {
+	        void print(){
+	            stdout.printf("Test");
+	        }
+	    }
+	}
+	...
+	int main(string[] args){
+	    test1.test2.print();
+	}
+
+Bir namespace alanını kaynak kodda içeri aktararak kullanmak için **using** ifadesi kullanılır.
+Bu ifade sayesinde belirtilen alan adındaki tüm fonksiyonlar kaynak kodda doğrudan kullanılabilir hale gelir.
+
+.. code-block:: vala
+
+	using Gtk;
+	
+	int main(string[] args){
+	    # İstersen yine de namespace adı ile kullanabiliriz.
+	    Gtk.init (ref args);
+	    # Gtk.Window yerine Window kullanabiliriz.
+	    var win = new Window();
+	    # Şununla aynı anlama gelir
+	    # var win = new Gtk.Window();
+	    ...
+	    # Aynı isimde var olan bir fonksiyonu namespace adı olmadan kullanmak mümkün değildir.
+	    Gtk.main ();
+	    return 0;
+	}
+
+Sınıfları tanımlarken namespace belirterek tanımlamak mümkündür.
+Bunun için sınıfın adının başına namespace adını belirtmek yeterlidir.
+
+.. code-block:: vala
+
+	public class test.cls {
+	    public void print(){
+	        stdout.printf("Test");
+	    }
+	}
+	...
+	int main(string[] args){
+	    var tcls = new test.cls();
+	    tcls.print();
+	    return 0;
+	}
+
 Kütüphane oluşturma
 ===================
 Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.

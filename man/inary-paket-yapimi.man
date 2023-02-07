@@ -310,9 +310,9 @@ Autotools fonksionları aşağıdaki gibidir:
 .nf
 .ft C
 inary/actionsapi/autotools.py:
-  \- configure(parameters=\(aq\(aq): ./configure \-\-prefix=/usr ...
+  \- configure(parameters=\(aq\(aq): \&./configure \-\-prefix=/usr \&...
   \- rawConfigure(parameters=\(aq\(aq): prefix olmadan configure
-  \- compile(parameters=\(aq\(aq): gcc kullanarak derleme yapar (gcc ...)
+  \- compile(parameters=\(aq\(aq): gcc kullanarak derleme yapar (gcc \&...)
   \- make(parameters=\(aq\(aq): make komutunu çalıştırır
   \- fixInfoDir(): paketleme dizinindeki /usr/share/info/dir dizinini siler
   \- fixpc(): 32bit pkgconfig dosyalarının konumunu düzeltir
@@ -342,7 +342,7 @@ inary/actionsapi/mesontools.py:
   \- fixpc(): 32bit pkgconfig dosyalarının konumunu düzeltir
   \- configure(parameters=\(dq\(dq, type=\(dqmeson\(dq): cmake yada meson kullanarak configure işlemi (varsayılan meson)
   \- meson_configure(parameters=\(dq\(dq): meson build
-  \- cmake_configure(parameters=\(dq\(dq): mkdir build && cd build && cmake \-G ninja ..
+  \- cmake_configure(parameters=\(dq\(dq): mkdir build && cd build && cmake \-G ninja \&..
   \- ninja_build(parameters=\(dq\(dq): ninja \-C build
   \- make(parameters=\(dq\(dq): ninja_build ile aynı
   \- ninja_install(parameters=\(dq\(dq): ninja \-C install
@@ -449,19 +449,19 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 <!DOCTYPE INARY SYSTEM \(dqhttps://raw.githubusercontent.com/Zaryob/inary/master/inary\-spec.dtd\(dq>
 <INARY>
     <Source>
-        ... <!\-\-Burası source bölümüdür.\-\->
+        \&... <!\-\-Burası source bölümüdür.\-\->
     </Source>
 
     <Package>
-        ... <!\-\-Burası package bölümüdür.\-\->
+        \&... <!\-\-Burası package bölümüdür.\-\->
     </Package>
 
     <Package>
-        ... <!\-\-Burası diğer package bölümüdür.\-\->
+        \&... <!\-\-Burası diğer package bölümüdür.\-\->
     </Package>
 
     <History>
-        ... <!\-\-Burası history bölümüdür.\-\->
+        \&... <!\-\-Burası history bölümüdür.\-\->
     </History>
 </INARY>
 .ft P

@@ -237,7 +237,7 @@ $ git push
 \-> Counting objects: 100% (3/3), done\&.
 \-> Writing objects: 100% (3/3), 205 bytes | 205\&.00 KiB/s, done\&.
 \-> Total 3 (delta 0), reused 0 (delta 0), pack\-reused 0
-\-> remote: . Processing 1 references
+\-> remote: \&. Processing 1 references
 \-> remote: Processed 1 references in total
 \-> To https://gitlab.com/sulincix/git\-dersi.git
 \->    1ac2e12..2742a1f  master \-> master
@@ -254,8 +254,8 @@ Bu duruma \fBconflict\fP adı verilir. Conflict çözmek için öncelikle \fBgit
 .nf
 .ft C
 git push
-\-> Username for ...
-\-> Password for ...
+\-> Username for \&...
+\-> Password for \&...
 \-> To https://gitlab.com/sulincix/git\-dersi.git
 \->  ! [rejected]        master \-> master (fetch first)
 .ft P

@@ -126,7 +126,7 @@ Eğer \fB\&./configure\fP işlemimiz de varsa aşağıdakini rules içine ekleye
 .nf
 .ft C
 override_dh_auto_configure:
-        ./configre \-\-prefix=/usr
+        \&./configre \-\-prefix=/usr
 .ft P
 .fi
 .UNINDENT
@@ -157,7 +157,7 @@ Biraz önceki rules dosyamızı biraz değiştirerek tekrar yazalım.
 clean:
         dh clean
 build:
-        ./configure \-\-prefix=/usr
+        \&./configure \-\-prefix=/usr
         : dh build yerine aşağıdaki komutları yazabiliriz.
         make
         make install DESTDIR=debian/example # DESTDIR konumu debian/paketadı şeklinde olmalıdır.
@@ -212,7 +212,7 @@ $ mkdir DEBIAN
 $ mv control.tar.xz DEBIAN
 $ cd DEBIAN
 $ tar \-xf control.tar.xz && rm \-f control.tar.xz
-$ cd ..
+$ cd \&..
 $ ls
 \-> DEBIAN/ usr/ etc/
 .ft P

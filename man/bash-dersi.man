@@ -1150,7 +1150,7 @@ Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişke
 .sp
 .nf
 .ft C
-icerik=$(cat ./dosya.txt)
+icerik=$(cat \&./dosya.txt)
 echo \(dq${icerik}\(dq
 \-> Merhaba dünya
 \-> Selam dünya

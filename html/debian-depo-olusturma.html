@@ -16,64 +16,64 @@
 <section id="gerekli-paketlerin-kurulmasi">
 <h2>Gerekli paketlerin kurulması</h2>
 <p>Aşağıdaki komut ile index almamız için gereken paketi kurabilirsiniz:</p>
-<pre class="code shell literal-block"><code>$ apt-get instal apt-ftparchive</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>instal<span class="whitespace"> </span>apt-ftparchive</code></pre>
 <p>Depoyu ağda paylaşmak için web server gerekmektedir.</p>
 <blockquote>
 <p><strong>Nginx</strong> veya <strong>Apache</strong> kurmalısınız.</p>
 </blockquote>
 <p>Nginx kurmak için:</p>
-<pre class="code shell literal-block"><code>$ apt install nginx</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>nginx</code></pre>
 <p>Apache kurmak için:</p>
-<pre class="code shell literal-block"><code>$ apt install apache2</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>apache2</code></pre>
 </section>
 <section id="depo-ile-ilgili-temel-kavramlar">
 <h2>Depo ile ilgili temel kavramlar</h2>
 <p>Deponun 2 temel dizini bulunmaktadır: <strong>pool</strong> ve <strong>dists</strong></p>
 <p>Deponun bilgilerini <strong>Release</strong> dosyası içinde bulunur.</p>
 <p>Deponun temel dizin yapısı şu şekilde özetlenebilir:</p>
-<pre class="code shell literal-block"><code>repository/
-<span class="punctuation">|</span>-- dists
-<span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- stable
-<span class="punctuation">|</span>       <span class="punctuation">|</span>-- Release
-<span class="punctuation">|</span>       <span class="punctuation">|</span>-- contrib
-<span class="punctuation">|</span>       <span class="punctuation">|</span>-- main
-<span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- non-free
-<span class="literal string backtick">`</span>-- pool
-    <span class="punctuation">|</span>-- contrib
-    <span class="punctuation">|</span>-- main
-    <span class="literal string backtick">`</span>-- non-free</code></pre>
+<pre class="code shell literal-block"><code>repository/<span class="whitespace">
+</span><span class="punctuation">|</span>--<span class="whitespace"> </span>dists<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>stable<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">       </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Release<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">       </span><span class="punctuation">|</span>--<span class="whitespace"> </span>contrib<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">       </span><span class="punctuation">|</span>--<span class="whitespace"> </span>main<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">       </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>non-free<span class="whitespace">
+</span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>pool<span class="whitespace">
+    </span><span class="punctuation">|</span>--<span class="whitespace"> </span>contrib<span class="whitespace">
+    </span><span class="punctuation">|</span>--<span class="whitespace"> </span>main<span class="whitespace">
+    </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>non-free</code></pre>
 <p>Depoya <strong>pool</strong> ve <strong>dists</strong> dizinleri içinde olmamak şartı ile istediğiniz dosyaları yerleştirebilirsiniz. (örneğin: index.html)</p>
 <section id="dists">
 <h3>Dists</h3>
 <p><em>dists</em> içerisinde depo indexi depo imzası ve hangi ortama uyumlu çalıştığına dair bilgiler bulnur.</p>
 <p><strong>dists</strong> dizini içerisinde dağıtım adına göre dizinler bulunur. ve bu dizinler içerisinde de kısımlara dair dizinler ve <strong>Release</strong> dosyası bulunur.</p>
 <p>Örnek depo <strong>dists</strong> dizin yapısı (imzalanmamış depo):</p>
-<pre class="code shell literal-block"><code>dists/
-<span class="literal string backtick">`</span>-- stable
-    <span class="punctuation">|</span>-- Release
-    <span class="punctuation">|</span>-- contrib
-    <span class="punctuation">|</span>   <span class="punctuation">|</span>-- binary-amd64
-    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="punctuation">|</span>-- Packages
-    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- Packages.gz
-    <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- binary-i386
-    <span class="punctuation">|</span>       <span class="punctuation">|</span>-- Packages
-    <span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- Packages.gz
-    <span class="punctuation">|</span>-- main
-    <span class="punctuation">|</span>   <span class="punctuation">|</span>-- binary-amd64
-    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="punctuation">|</span>-- Packages
-    <span class="punctuation">|</span>   <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- Packages.gz
-    <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- binary-i386
-    <span class="punctuation">|</span>       <span class="punctuation">|</span>-- Packages
-    <span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- Packages.gz
-    <span class="literal string backtick">`</span>-- non-free
-        <span class="punctuation">|</span>-- binary-amd64
-        <span class="punctuation">|</span>   <span class="punctuation">|</span>-- Packages
-        <span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- Packages.gz
-        <span class="literal string backtick">`</span>-- binary-i386
-            <span class="punctuation">|</span>-- Packages
-            <span class="literal string backtick">`</span>-- Packages.gz
+<pre class="code shell literal-block"><code>dists/<span class="whitespace">
+</span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>stable<span class="whitespace">
+    </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Release<span class="whitespace">
+    </span><span class="punctuation">|</span>--<span class="whitespace"> </span>contrib<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span>--<span class="whitespace"> </span>binary-amd64<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Packages<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>Packages.gz<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>binary-i386<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">       </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Packages<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">       </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>Packages.gz<span class="whitespace">
+    </span><span class="punctuation">|</span>--<span class="whitespace"> </span>main<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span>--<span class="whitespace"> </span>binary-amd64<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Packages<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>Packages.gz<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>binary-i386<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">       </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Packages<span class="whitespace">
+    </span><span class="punctuation">|</span><span class="whitespace">       </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>Packages.gz<span class="whitespace">
+    </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>non-free<span class="whitespace">
+        </span><span class="punctuation">|</span>--<span class="whitespace"> </span>binary-amd64<span class="whitespace">
+        </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Packages<span class="whitespace">
+        </span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>Packages.gz<span class="whitespace">
+        </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>binary-i386<span class="whitespace">
+            </span><span class="punctuation">|</span>--<span class="whitespace"> </span>Packages<span class="whitespace">
+            </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>Packages.gz<span class="whitespace">
 
-<span class="literal number">10</span> directories, <span class="literal number">13</span> files</code></pre>
+</span><span class="literal number">10</span><span class="whitespace"> </span>directories,<span class="whitespace"> </span><span class="literal number">13</span><span class="whitespace"> </span>files</code></pre>
 </section>
 <section id="pool">
 <h3>Pool</h3>
@@ -99,85 +99,85 @@
 </ol>
 <p>Küçük depolar için tüm paketleri tek bir dizine yığabilirsiniz.</p>
 <p>Alfabetik kurala göre dizilmiş örnek <strong>pool</strong> dizini:</p>
-<pre class="code shell literal-block"><code>pool/
-<span class="punctuation">|</span>-- contrib
-<span class="punctuation">|</span>-- main
-<span class="punctuation">|</span>   <span class="literal string backtick">`</span>-- f
-<span class="punctuation">|</span>       <span class="literal string backtick">`</span>-- foo
-<span class="punctuation">|</span>           <span class="literal string backtick">`</span>-- foo_1.0_all.deb
-<span class="literal string backtick">`</span>-- non-free
+<pre class="code shell literal-block"><code>pool/<span class="whitespace">
+</span><span class="punctuation">|</span>--<span class="whitespace"> </span>contrib<span class="whitespace">
+</span><span class="punctuation">|</span>--<span class="whitespace"> </span>main<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">   </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>f<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">       </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>foo<span class="whitespace">
+</span><span class="punctuation">|</span><span class="whitespace">           </span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>foo_1.0_all.deb<span class="whitespace">
+</span><span class="literal string backtick">`</span>--<span class="whitespace"> </span>non-free<span class="whitespace">
 
-<span class="literal number">5</span> directories, <span class="literal number">1</span> file</code></pre>
+</span><span class="literal number">5</span><span class="whitespace"> </span>directories,<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace"> </span>file</code></pre>
 <p>Paketler <strong>paket_version_mimari.deb</strong> şeklinde isimlendirilmelidir.</p>
 <p>amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için <strong>test_1.0_amd64.deb</strong></p>
 </section>
 <section id="release">
 <h3>Release</h3>
 <p><strong>Release</strong> dosyasında depoya dair bilgiler yer almaktadır. Bu bilgilerden sonra da dists içerisindeki indexlerin hash değerleri yer alır. Örneğin:</p>
-<pre class="code shell literal-block"><code>Origin: Debian
-Label: Debian
-Suite: stable
-Version: <span class="literal number">10</span>.5
-Codename: stable
-Changelogs: https://sulincix.github.io
-Date: Sat, <span class="literal number">01</span> Aug <span class="literal number">2020</span> <span class="literal number">11</span>:04:59 UTC
-Acquire-By-Hash: yes
-Architectures: amd64 i386
-Components: main contrib non-free
-Description: Test repository
-MD5Sum:
-  09055bc807e6edb1d39b9478c3e979e6      <span class="literal number">2472</span>    Release.key
-  a4acada35cf263239778004cc3a3052c      <span class="literal number">659</span>     Release.gpg
-  6b41b0a0be8cc937b40b431f74f2321f      <span class="literal number">4427</span>    InRelease
-  b15aade8df5dac635bb851713d5b30c0      <span class="literal number">396</span>     Release
-  8fcbf476f836a406733f7468d9be00fa      <span class="literal number">2280</span>    main/binary-amd64/Packages
-  17393ff93c41644879ba128ffb0b22d3      <span class="literal number">1348</span>    main/binary-amd64/Packages.xz
-  bb3d363cfd9263fce932c1cc12c18e68      <span class="literal number">1286</span>    main/binary-amd64/Packages.gz
-  089b664e3c4e3222cefff76098e9b8a7      <span class="literal number">1156</span>    main/binary-i386/Packages
-  aad80a1b6699ca9f538107937506ef70      <span class="literal number">820</span>     main/binary-i386/Packages.xz
-  af2c952ea91ad4d89f6259f2a3ac397d      <span class="literal number">747</span>     main/binary-i386/Packages.gz
-SHA1:
-  bf969834bcf3fe37435317fec8ae6375f5cbfcab      <span class="literal number">2472</span>    Release.key
-  be23df080f41ca983de08838452a6e2c77a31836      <span class="literal number">659</span>     Release.gpg
-  e5a3ee28bae50959ee62a73270b9162f59884437      <span class="literal number">4427</span>    InRelease
-  e7247091579e00f62a96a6b6d6957b1a2715732b      <span class="literal number">1035</span>    Release
-  0276cc6bd45abaed900a2dfdafe7b01dde21b89b      <span class="literal number">2280</span>    main/binary-amd64/Packages
-  f9ff41da670bf4836367cd170dfc5086bb80cb69      <span class="literal number">1348</span>    main/binary-amd64/Packages.xz
-  4ce6b6deaa2722bb9256e89dc8bbb28bb653847b      <span class="literal number">1286</span>    main/binary-amd64/Packages.gz
-  dab4a82db5aaa3e50fb2e9d4584fadd0d79c9ac8      <span class="literal number">1156</span>    main/binary-i386/Packages
-  751dd84b265115e52ab482c9249b5d7205fa3e1b      <span class="literal number">820</span>     main/binary-i386/Packages.xz
-  9620d2eda8c4fc29f4130b0bbf603a0a35df8563      <span class="literal number">747</span>     main/binary-i386/Packages.gz
-SHA256:
-  8ec32aa00483111e9552c03262a1704d6e44e42f4451265b66b2a0fe920a69f8      <span class="literal number">2472</span>    Release.key
-  60af76151b979d0c0eb0ae859e33cc1f6f1be0c09cb201a81e303d536df796cf      <span class="literal number">659</span>     Release.gpg
-  f7f32eba3c9fa2fe69832bbb12c0fb446c723f6fbe64ae992260702310981d68      <span class="literal number">4427</span>    InRelease
-  254fefc722399f2316a3bf5d245939e99506e0589220f0d1549b7aa97c40089b      <span class="literal number">1805</span>    Release
-  52f805226b147e0e68c5b659f0efd42a4ab27033b6a13e6aac9b6a04ba808891      <span class="literal number">2280</span>    main/binary-amd64/Packages
-  55f622e5bb9e2fe7f9eae38488a3b7034b48e61774915ac88ed1b871c4f752a3      <span class="literal number">1348</span>    main/binary-amd64/Packages.xz
-  1576654604e7a85dc84862e234a23d89af7d020d048491b31baed92f6a066f58      <span class="literal number">1286</span>    main/binary-amd64/Packages.gz
-  afb0bf00963b462ce942381563c14e02e124c7767df08f62117d3f42be02f083      <span class="literal number">1156</span>    main/binary-i386/Packages
-  b4a0d98a479cd9812ff79f15d9ee41edc13967c87f6800ed257f9fdc2f0eacb0      <span class="literal number">820</span>     main/binary-i386/Packages.xz
-  b2bca5e3c273f4b5a9df7bc8206a411c23dbdf5db329e4e969bcb38274b16feb      <span class="literal number">747</span>     main/binary-i386/Packages.gz
-SHA512:
-  b3c7b2ca8c88639558b8f9d880e559d4ae6cca7f66f61d6db6f29c48b2e3bfbb0cc39f3ef9feccb4dfad616410c38a60f774e52df2ee0ee8f4ecf1420e662ef3      <span class="literal number">2472</span>    Release.key
-  a679b02b193493c00a679d18e830447f60169a5689e3ae9678ee65ac925fdc4de44a3e1099da34889dca5ef01fa29befb3f493881a88e08bb1d21432d125c93f      <span class="literal number">659</span>     Release.gpg
-  290ef238a374930f2cf08572e1a2cc024ef7184a00bd8c85f63ceb876952b008edfb5fea0dcafc2247b31cef72914609e1d51a943378571599c801ed24db56a2      <span class="literal number">4427</span>    InRelease
-  16686a082d2b4f183ff5ddaa87328c7b0ba6788fa9e0f85cc66d70c8f9862e22acf235957acd36bb7ea3f77579ced07d54ae553c33d179c3b9f3913276575ee8      <span class="literal number">2935</span>    Release
-  591da357d487637d1b6b40286aaef08c599ee8f4f9894bdc1763e1102c68c37a3f57516cdb2d1267c71103adc0ec13e2ecf39c3014a10e9f905caa4c3f29af55      <span class="literal number">2280</span>    main/binary-amd64/Packages
-  f6bff31b379fd4aa99b960b15275f5db113c049587761d1f10dc8de33be831f360b1f4dd00223f206b57cbbec008e1aebf2b2c4fdb8a3b5aefbfa4f1c3810d33      <span class="literal number">1348</span>    main/binary-amd64/Packages.xz
-  69bc3bee91d222eeff12e479a44aeb7d22fc8aa71c597aeb3c4f9a42b6c737fcfb4422084dd6e1387540bc0b56e9cacfeb7818e1d09063624dba54170ffa5fab      <span class="literal number">1286</span>    main/binary-amd64/Packages.gz
-  d54bcb50ab9409e3480dc002c520d240a02804ba648b9a581d524e1ae161f33a8d31e2bd4e0528db07c34ef2b0e4c53b7286ebc38fb319ff47be18be9db67db0      <span class="literal number">1156</span>    main/binary-i386/Packages
-  ff4ee4f90b1ecd861d1adedaa6f0d77684c188add447e81f5131ce8e77ede3f4c99762c6e22c7804f11694b57d160ab46f44075a3ff8305fe285bc43f68700d0      <span class="literal number">820</span>     main/binary-i386/Packages.xz
-  07524f649a0ffc66192af4925b750d22ce3fc446eb0d890b473713615fde4b2174214e94bdcdac97b5281e2386c5efaf7a8aa139a03f69c10b6d181e99d81c8a      <span class="literal number">747</span>     main/binary-i386/Packages.gz</code></pre>
+<pre class="code shell literal-block"><code>Origin:<span class="whitespace"> </span>Debian<span class="whitespace">
+</span>Label:<span class="whitespace"> </span>Debian<span class="whitespace">
+</span>Suite:<span class="whitespace"> </span>stable<span class="whitespace">
+</span>Version:<span class="whitespace"> </span><span class="literal number">10</span>.5<span class="whitespace">
+</span>Codename:<span class="whitespace"> </span>stable<span class="whitespace">
+</span>Changelogs:<span class="whitespace"> </span>https://sulincix.github.io<span class="whitespace">
+</span>Date:<span class="whitespace"> </span>Sat,<span class="whitespace"> </span><span class="literal number">01</span><span class="whitespace"> </span>Aug<span class="whitespace"> </span><span class="literal number">2020</span><span class="whitespace"> </span><span class="literal number">11</span>:04:59<span class="whitespace"> </span>UTC<span class="whitespace">
+</span>Acquire-By-Hash:<span class="whitespace"> </span>yes<span class="whitespace">
+</span>Architectures:<span class="whitespace"> </span>amd64<span class="whitespace"> </span>i386<span class="whitespace">
+</span>Components:<span class="whitespace"> </span>main<span class="whitespace"> </span>contrib<span class="whitespace"> </span>non-free<span class="whitespace">
+</span>Description:<span class="whitespace"> </span>Test<span class="whitespace"> </span>repository<span class="whitespace">
+</span>MD5Sum:<span class="whitespace">
+  </span>09055bc807e6edb1d39b9478c3e979e6<span class="whitespace">      </span><span class="literal number">2472</span><span class="whitespace">    </span>Release.key<span class="whitespace">
+  </span>a4acada35cf263239778004cc3a3052c<span class="whitespace">      </span><span class="literal number">659</span><span class="whitespace">     </span>Release.gpg<span class="whitespace">
+  </span>6b41b0a0be8cc937b40b431f74f2321f<span class="whitespace">      </span><span class="literal number">4427</span><span class="whitespace">    </span>InRelease<span class="whitespace">
+  </span>b15aade8df5dac635bb851713d5b30c0<span class="whitespace">      </span><span class="literal number">396</span><span class="whitespace">     </span>Release<span class="whitespace">
+  </span>8fcbf476f836a406733f7468d9be00fa<span class="whitespace">      </span><span class="literal number">2280</span><span class="whitespace">    </span>main/binary-amd64/Packages<span class="whitespace">
+  </span>17393ff93c41644879ba128ffb0b22d3<span class="whitespace">      </span><span class="literal number">1348</span><span class="whitespace">    </span>main/binary-amd64/Packages.xz<span class="whitespace">
+  </span>bb3d363cfd9263fce932c1cc12c18e68<span class="whitespace">      </span><span class="literal number">1286</span><span class="whitespace">    </span>main/binary-amd64/Packages.gz<span class="whitespace">
+  </span>089b664e3c4e3222cefff76098e9b8a7<span class="whitespace">      </span><span class="literal number">1156</span><span class="whitespace">    </span>main/binary-i386/Packages<span class="whitespace">
+  </span>aad80a1b6699ca9f538107937506ef70<span class="whitespace">      </span><span class="literal number">820</span><span class="whitespace">     </span>main/binary-i386/Packages.xz<span class="whitespace">
+  </span>af2c952ea91ad4d89f6259f2a3ac397d<span class="whitespace">      </span><span class="literal number">747</span><span class="whitespace">     </span>main/binary-i386/Packages.gz<span class="whitespace">
+</span>SHA1:<span class="whitespace">
+  </span>bf969834bcf3fe37435317fec8ae6375f5cbfcab<span class="whitespace">      </span><span class="literal number">2472</span><span class="whitespace">    </span>Release.key<span class="whitespace">
+  </span>be23df080f41ca983de08838452a6e2c77a31836<span class="whitespace">      </span><span class="literal number">659</span><span class="whitespace">     </span>Release.gpg<span class="whitespace">
+  </span>e5a3ee28bae50959ee62a73270b9162f59884437<span class="whitespace">      </span><span class="literal number">4427</span><span class="whitespace">    </span>InRelease<span class="whitespace">
+  </span>e7247091579e00f62a96a6b6d6957b1a2715732b<span class="whitespace">      </span><span class="literal number">1035</span><span class="whitespace">    </span>Release<span class="whitespace">
+  </span>0276cc6bd45abaed900a2dfdafe7b01dde21b89b<span class="whitespace">      </span><span class="literal number">2280</span><span class="whitespace">    </span>main/binary-amd64/Packages<span class="whitespace">
+  </span>f9ff41da670bf4836367cd170dfc5086bb80cb69<span class="whitespace">      </span><span class="literal number">1348</span><span class="whitespace">    </span>main/binary-amd64/Packages.xz<span class="whitespace">
+  </span>4ce6b6deaa2722bb9256e89dc8bbb28bb653847b<span class="whitespace">      </span><span class="literal number">1286</span><span class="whitespace">    </span>main/binary-amd64/Packages.gz<span class="whitespace">
+  </span>dab4a82db5aaa3e50fb2e9d4584fadd0d79c9ac8<span class="whitespace">      </span><span class="literal number">1156</span><span class="whitespace">    </span>main/binary-i386/Packages<span class="whitespace">
+  </span>751dd84b265115e52ab482c9249b5d7205fa3e1b<span class="whitespace">      </span><span class="literal number">820</span><span class="whitespace">     </span>main/binary-i386/Packages.xz<span class="whitespace">
+  </span>9620d2eda8c4fc29f4130b0bbf603a0a35df8563<span class="whitespace">      </span><span class="literal number">747</span><span class="whitespace">     </span>main/binary-i386/Packages.gz<span class="whitespace">
+</span>SHA256:<span class="whitespace">
+  </span>8ec32aa00483111e9552c03262a1704d6e44e42f4451265b66b2a0fe920a69f8<span class="whitespace">      </span><span class="literal number">2472</span><span class="whitespace">    </span>Release.key<span class="whitespace">
+  </span>60af76151b979d0c0eb0ae859e33cc1f6f1be0c09cb201a81e303d536df796cf<span class="whitespace">      </span><span class="literal number">659</span><span class="whitespace">     </span>Release.gpg<span class="whitespace">
+  </span>f7f32eba3c9fa2fe69832bbb12c0fb446c723f6fbe64ae992260702310981d68<span class="whitespace">      </span><span class="literal number">4427</span><span class="whitespace">    </span>InRelease<span class="whitespace">
+  </span>254fefc722399f2316a3bf5d245939e99506e0589220f0d1549b7aa97c40089b<span class="whitespace">      </span><span class="literal number">1805</span><span class="whitespace">    </span>Release<span class="whitespace">
+  </span>52f805226b147e0e68c5b659f0efd42a4ab27033b6a13e6aac9b6a04ba808891<span class="whitespace">      </span><span class="literal number">2280</span><span class="whitespace">    </span>main/binary-amd64/Packages<span class="whitespace">
+  </span>55f622e5bb9e2fe7f9eae38488a3b7034b48e61774915ac88ed1b871c4f752a3<span class="whitespace">      </span><span class="literal number">1348</span><span class="whitespace">    </span>main/binary-amd64/Packages.xz<span class="whitespace">
+  </span>1576654604e7a85dc84862e234a23d89af7d020d048491b31baed92f6a066f58<span class="whitespace">      </span><span class="literal number">1286</span><span class="whitespace">    </span>main/binary-amd64/Packages.gz<span class="whitespace">
+  </span>afb0bf00963b462ce942381563c14e02e124c7767df08f62117d3f42be02f083<span class="whitespace">      </span><span class="literal number">1156</span><span class="whitespace">    </span>main/binary-i386/Packages<span class="whitespace">
+  </span>b4a0d98a479cd9812ff79f15d9ee41edc13967c87f6800ed257f9fdc2f0eacb0<span class="whitespace">      </span><span class="literal number">820</span><span class="whitespace">     </span>main/binary-i386/Packages.xz<span class="whitespace">
+  </span>b2bca5e3c273f4b5a9df7bc8206a411c23dbdf5db329e4e969bcb38274b16feb<span class="whitespace">      </span><span class="literal number">747</span><span class="whitespace">     </span>main/binary-i386/Packages.gz<span class="whitespace">
+</span>SHA512:<span class="whitespace">
+  </span>b3c7b2ca8c88639558b8f9d880e559d4ae6cca7f66f61d6db6f29c48b2e3bfbb0cc39f3ef9feccb4dfad616410c38a60f774e52df2ee0ee8f4ecf1420e662ef3<span class="whitespace">      </span><span class="literal number">2472</span><span class="whitespace">    </span>Release.key<span class="whitespace">
+  </span>a679b02b193493c00a679d18e830447f60169a5689e3ae9678ee65ac925fdc4de44a3e1099da34889dca5ef01fa29befb3f493881a88e08bb1d21432d125c93f<span class="whitespace">      </span><span class="literal number">659</span><span class="whitespace">     </span>Release.gpg<span class="whitespace">
+  </span>290ef238a374930f2cf08572e1a2cc024ef7184a00bd8c85f63ceb876952b008edfb5fea0dcafc2247b31cef72914609e1d51a943378571599c801ed24db56a2<span class="whitespace">      </span><span class="literal number">4427</span><span class="whitespace">    </span>InRelease<span class="whitespace">
+  </span>16686a082d2b4f183ff5ddaa87328c7b0ba6788fa9e0f85cc66d70c8f9862e22acf235957acd36bb7ea3f77579ced07d54ae553c33d179c3b9f3913276575ee8<span class="whitespace">      </span><span class="literal number">2935</span><span class="whitespace">    </span>Release<span class="whitespace">
+  </span>591da357d487637d1b6b40286aaef08c599ee8f4f9894bdc1763e1102c68c37a3f57516cdb2d1267c71103adc0ec13e2ecf39c3014a10e9f905caa4c3f29af55<span class="whitespace">      </span><span class="literal number">2280</span><span class="whitespace">    </span>main/binary-amd64/Packages<span class="whitespace">
+  </span>f6bff31b379fd4aa99b960b15275f5db113c049587761d1f10dc8de33be831f360b1f4dd00223f206b57cbbec008e1aebf2b2c4fdb8a3b5aefbfa4f1c3810d33<span class="whitespace">      </span><span class="literal number">1348</span><span class="whitespace">    </span>main/binary-amd64/Packages.xz<span class="whitespace">
+  </span>69bc3bee91d222eeff12e479a44aeb7d22fc8aa71c597aeb3c4f9a42b6c737fcfb4422084dd6e1387540bc0b56e9cacfeb7818e1d09063624dba54170ffa5fab<span class="whitespace">      </span><span class="literal number">1286</span><span class="whitespace">    </span>main/binary-amd64/Packages.gz<span class="whitespace">
+  </span>d54bcb50ab9409e3480dc002c520d240a02804ba648b9a581d524e1ae161f33a8d31e2bd4e0528db07c34ef2b0e4c53b7286ebc38fb319ff47be18be9db67db0<span class="whitespace">      </span><span class="literal number">1156</span><span class="whitespace">    </span>main/binary-i386/Packages<span class="whitespace">
+  </span>ff4ee4f90b1ecd861d1adedaa6f0d77684c188add447e81f5131ce8e77ede3f4c99762c6e22c7804f11694b57d160ab46f44075a3ff8305fe285bc43f68700d0<span class="whitespace">      </span><span class="literal number">820</span><span class="whitespace">     </span>main/binary-i386/Packages.xz<span class="whitespace">
+  </span>07524f649a0ffc66192af4925b750d22ce3fc446eb0d890b473713615fde4b2174214e94bdcdac97b5281e2386c5efaf7a8aa139a03f69c10b6d181e99d81c8a<span class="whitespace">      </span><span class="literal number">747</span><span class="whitespace">     </span>main/binary-i386/Packages.gz</code></pre>
 </section>
 </section>
 <section id="index-alinmasi">
 <h2>İndex alınması</h2>
 <p><strong>pool</strong> dizini içerisine yukarıda anlatılan hiyerarşilere uygun şekilde paketlerimizi yerleştirmeliyiz. pool içerisinde <strong>main</strong>, <strong>contrib</strong>, <strong>non-free</strong> adında dizinler olmalıdır. Bu isimler ile <strong>dists</strong> dizini içerisindeki isimler aynı olmalıdır.</p>
 <p>pool içerisindeki paket yerleştirme işlemi bittikten sonra şu komutu kullanarak index almalıyız:</p>
-<pre class="code shell literal-block"><code>$ apt-ftparchive -a amd64 packages pool/main &gt; dists/stable/main/binary-amd64/Packages
-$ gzip -k dists/stable/main/binary-amd64/Packages
-$ xz -k dists/stable/main/binary-amd64/Packages</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt-ftparchive<span class="whitespace"> </span>-a<span class="whitespace"> </span>amd64<span class="whitespace"> </span>packages<span class="whitespace"> </span>pool/main<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>dists/stable/main/binary-amd64/Packages<span class="whitespace">
+</span>$<span class="whitespace"> </span>gzip<span class="whitespace"> </span>-k<span class="whitespace"> </span>dists/stable/main/binary-amd64/Packages<span class="whitespace">
+</span>$<span class="whitespace"> </span>xz<span class="whitespace"> </span>-k<span class="whitespace"> </span>dists/stable/main/binary-amd64/Packages</code></pre>
 <p>İlk komut ile pool/main içerisindeki paketlerin indexlerini dists içerisindeki main bölümüne yerleştiriyoruz. Bu işlem contrib ve non-free için benzer şekilde yapılmalıdır. ayrıca eğer i386 veya arm64 veya armhf için de paketler varsa onlar için de tekrarlamanız gerekmektedir.</p>
 <p>İkinci ve üçüncü komut ise aldığımız indexi gzip formatta sıkıştırmaktadır. Depolarda daha az ağ trafiği yaparak index indirmek için gzip, bz2 veya xz formatında sıkıtşıtma yapılabilir.</p>
 <section id="release-dosyasinin-yazilmasi">
@@ -197,37 +197,37 @@ $ xz -k dists/stable/main/binary-amd64/Packages</code></pre>
 </span><span class="name tag">Components</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">main contrib non-free</span><span class="whitespace">
 </span><span class="name tag">Description</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Test repository</span></code></pre>
 <p>Release dosyamızı oluşturmadan önce yardımcı fonksionumuzu tanımlamamız gerekmektedir. Bashrc içerisine aşağıdaki fonksionu tanımlayalım. (veya betik yazıyorsanız betik içine) Bu fonksion Release dosyasındaki hash değerlerinin formatına uygun çıktı üzetebilmemizi sağlar.</p>
-<pre class="code shell literal-block"><code> prepareLine<span class="operator">(){</span>
-    <span class="keyword">while</span> <span class="name builtin">read</span> line <span class="punctuation">;</span> <span class="keyword">do</span>
-        <span class="name variable">fname</span><span class="operator">=</span><span class="keyword">$(</span><span class="name builtin">echo</span> <span class="name variable">$line</span> <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/.* //g&quot;</span><span class="keyword">)</span>
-        <span class="name variable">fhash</span><span class="operator">=</span><span class="keyword">$(</span><span class="name builtin">echo</span> <span class="name variable">$line</span> <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/ .*//g&quot;</span><span class="keyword">)</span>
-        <span class="name builtin">echo</span> -e <span class="literal string double">&quot;  </span><span class="name variable">$fhash</span><span class="literal string double">\t</span><span class="keyword">$(</span>du -bs <span class="name variable">$fname</span><span class="punctuation">|</span> sed <span class="literal string single">'s|\./||g'</span><span class="keyword">)</span><span class="literal string double">&quot;</span>
-    <span class="keyword">done</span>
-<span class="operator">}</span></code></pre>
+<pre class="code shell literal-block"><code><span class="whitespace"> </span>prepareLine<span class="operator">(){</span><span class="whitespace">
+    </span><span class="keyword">while</span><span class="whitespace"> </span><span class="name builtin">read</span><span class="whitespace"> </span>line<span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace"> </span><span class="keyword">do</span><span class="whitespace">
+        </span><span class="name variable">fname</span><span class="operator">=</span><span class="keyword">$(</span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="name variable">$line</span><span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>sed<span class="whitespace"> </span><span class="literal string double">&quot;s/.* //g&quot;</span><span class="keyword">)</span><span class="whitespace">
+        </span><span class="name variable">fhash</span><span class="operator">=</span><span class="keyword">$(</span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="name variable">$line</span><span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>sed<span class="whitespace"> </span><span class="literal string double">&quot;s/ .*//g&quot;</span><span class="keyword">)</span><span class="whitespace">
+        </span><span class="name builtin">echo</span><span class="whitespace"> </span>-e<span class="whitespace"> </span><span class="literal string double">&quot;  </span><span class="name variable">$fhash</span><span class="literal string double">\t</span><span class="keyword">$(</span>du<span class="whitespace"> </span>-bs<span class="whitespace"> </span><span class="name variable">$fname</span><span class="punctuation">|</span><span class="whitespace"> </span>sed<span class="whitespace"> </span><span class="literal string single">'s|\./||g'</span><span class="keyword">)</span><span class="literal string double">&quot;</span><span class="whitespace">
+    </span><span class="keyword">done</span><span class="whitespace">
+</span><span class="operator">}</span></code></pre>
 <p>Başlık ile md5sum birleştirmek için aşağıdakine benzer bir komut dizisi kullanabilirsiniz:</p>
-<pre class="code shell literal-block"><code>$ cat baslik <span class="punctuation">|</span> sed <span class="literal string double">&quot;s/XdateX/</span><span class="keyword">$(</span>date -R<span class="keyword">)</span><span class="literal string double">/g&quot;</span> &gt; dists/stable/Release
-$ <span class="name builtin">cd</span> dists/stable/
-$ <span class="name builtin">echo</span> <span class="literal string double">&quot;MD5Sum:&quot;</span> &gt;&gt;  Release
-$ find . -type f <span class="punctuation">|</span> xargs md5sum <span class="punctuation">|</span> prepareLine &gt;&gt; Release
-$ <span class="name builtin">echo</span> <span class="literal string double">&quot;SHA1:&quot;</span> &gt;&gt;  Release
-$ find . -type f <span class="punctuation">|</span> xargs sha1sum <span class="punctuation">|</span> prepareLine &gt;&gt; Release
-$ <span class="name builtin">echo</span> <span class="literal string double">&quot;SHA256:&quot;</span> &gt;&gt;  Release
-$ find . -type f <span class="punctuation">|</span> xargs sha256sum <span class="punctuation">|</span> prepareLine &gt;&gt; Release
-$ <span class="name builtin">echo</span> <span class="literal string double">&quot;SHA512:&quot;</span> &gt;&gt;  Release
-$ find . -type f <span class="punctuation">|</span> xargs sha512sum <span class="punctuation">|</span> prepareLine  &gt;&gt; Release</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>baslik<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>sed<span class="whitespace"> </span><span class="literal string double">&quot;s/XdateX/</span><span class="keyword">$(</span>date<span class="whitespace"> </span>-R<span class="keyword">)</span><span class="literal string double">/g&quot;</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>dists/stable/Release<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>dists/stable/<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;MD5Sum:&quot;</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace">  </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span>find<span class="whitespace"> </span>.<span class="whitespace"> </span>-type<span class="whitespace"> </span>f<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>xargs<span class="whitespace"> </span>md5sum<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>prepareLine<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;SHA1:&quot;</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace">  </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span>find<span class="whitespace"> </span>.<span class="whitespace"> </span>-type<span class="whitespace"> </span>f<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>xargs<span class="whitespace"> </span>sha1sum<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>prepareLine<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;SHA256:&quot;</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace">  </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span>find<span class="whitespace"> </span>.<span class="whitespace"> </span>-type<span class="whitespace"> </span>f<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>xargs<span class="whitespace"> </span>sha256sum<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>prepareLine<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;SHA512:&quot;</span><span class="whitespace"> </span>&gt;&gt;<span class="whitespace">  </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span>find<span class="whitespace"> </span>.<span class="whitespace"> </span>-type<span class="whitespace"> </span>f<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>xargs<span class="whitespace"> </span>sha512sum<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>prepareLine<span class="whitespace">  </span>&gt;&gt;<span class="whitespace"> </span>Release</code></pre>
 </section>
 <section id="deponun-imzalanmasi">
 <h3>Deponun imzalanması</h3>
 <p>Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı verirler. Eğer gpg anahtarınız mevcutsa şu komutu kullanabilirsiniz:</p>
-<pre class="code shell literal-block"><code>$ gpg --clearsign -o InRelease Release
-$ gpg -abs -o Release.gpg Release</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>gpg<span class="whitespace"> </span>--clearsign<span class="whitespace"> </span>-o<span class="whitespace"> </span>InRelease<span class="whitespace"> </span>Release<span class="whitespace">
+</span>$<span class="whitespace"> </span>gpg<span class="whitespace"> </span>-abs<span class="whitespace"> </span>-o<span class="whitespace"> </span>Release.gpg<span class="whitespace"> </span>Release</code></pre>
 <p>Eğer gpg anahtarınız yoksa oluşturmak için:</p>
-<pre class="code shell literal-block"><code>$ gpg --gen-key</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>gpg<span class="whitespace"> </span>--gen-key</code></pre>
 <p>Oluşturduğumuz gpg anahtarını listelemek için:</p>
-<pre class="code shell literal-block"><code>$ gpg --list-keys</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>gpg<span class="whitespace"> </span>--list-keys</code></pre>
 <p>Bu listede gpg anahtarını id değerleri bulunur. Bu değeri kullanarak gpg anahtarımızı dışarı aktarabiliriz. Aktarılan bu anahtar depoyu kullanmak isteyen kullanıcılar tarafından anahtar deposuna eklenmelidir.</p>
 <p>Elimizdeki gpg anahtarını dışarı aktarmak için:</p>
-<pre class="code shell literal-block"><code>$ gpg --output Release.key --armor --export gpg_id_değeri</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>gpg<span class="whitespace"> </span>--output<span class="whitespace"> </span>Release.key<span class="whitespace"> </span>--armor<span class="whitespace"> </span>--export<span class="whitespace"> </span>gpg_id_değeri</code></pre>
 </section>
 </section>
 <section id="deponun-agda-paylasilmasi">
@@ -241,15 +241,15 @@ $ gpg -abs -o Release.gpg Release</code></pre>
 <ol class="arabic simple">
 <li><p>Depoyu imzalayan gpg anahtarını içeri aktarmalılar.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>$ wget -O - http://depo_sunucusu/depo_konumu/dists/stable/Release.key <span class="punctuation">|</span> apt-key add -</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>wget<span class="whitespace"> </span>-O<span class="whitespace"> </span>-<span class="whitespace"> </span>http://depo_sunucusu/depo_konumu/dists/stable/Release.key<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>apt-key<span class="whitespace"> </span>add<span class="whitespace"> </span>-</code></pre>
 <ol class="arabic simple" start="2">
 <li><p>/etc/sources.list.d/ dizinine dosya içerisine eklemeliler. (veya sources.list dosyasına)</p></li>
 </ol>
-<pre class="code shell literal-block"><code>$ <span class="name builtin">echo</span> <span class="literal string double">&quot;deb http://depo_sunucusu/depo_konumu stable main contrib non-free&quot;</span> &gt; /etc/apt/sources.list.d/testrepo.list</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span><span class="literal string double">&quot;deb http://depo_sunucusu/depo_konumu stable main contrib non-free&quot;</span><span class="whitespace"> </span>&gt;<span class="whitespace"> </span>/etc/apt/sources.list.d/testrepo.list</code></pre>
 <ol class="arabic simple" start="3">
 <li><p>Depoyu güncellemeliler.</p></li>
 </ol>
-<pre class="code shell literal-block"><code>$ apt-get update</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt-get<span class="whitespace"> </span>update</code></pre>
 </section>
 </section>
 </main>

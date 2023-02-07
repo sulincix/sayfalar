@@ -16,17 +16,17 @@
 <section id="appdir-olusturma">
 <h2>AppDir oluşturma</h2>
 <p>Proje dizinimize aşağıdakine benzer proje dizini açarak işe başlayalım.</p>
-<pre class="code shell literal-block"><code>MyApp.AppDir/
-MyApp.AppDir/AppRun
-MyApp.AppDir/myapp.desktop
-MyApp.AppDir/myapp.png
-MyApp.AppDir/usr/bin/myapp
-MyApp.AppDir/usr/lib/libfoo.so.0</code></pre>
+<pre class="code shell literal-block"><code>MyApp.AppDir/<span class="whitespace">
+</span>MyApp.AppDir/AppRun<span class="whitespace">
+</span>MyApp.AppDir/myapp.desktop<span class="whitespace">
+</span>MyApp.AppDir/myapp.png<span class="whitespace">
+</span>MyApp.AppDir/usr/bin/myapp<span class="whitespace">
+</span>MyApp.AppDir/usr/lib/libfoo.so.0</code></pre>
 <p>Bu doküman boyunca <strong>MyApp.AppDir</strong> dizinini proje dizini olarak kuıllanacağım.</p>
 <section id="desktop-dosyasi">
 <h3>Desktop Dosyası</h3>
 <p>Bu dosya uygulama ile ilgili bilgileri içerir. (Uygulama simgesi adı vb.) Deneme amaçlı bu dosyadan bir dane oluşturalım.</p>
-<pre class="code shell literal-block"><code>$ cat &gt; myapp.desktop <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>myapp.desktop<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; [Desktop Entry]
 &gt; Name=MyApp
 &gt; Exec=myapp
@@ -38,19 +38,19 @@ MyApp.AppDir/usr/lib/libfoo.so.0</code></pre>
 <section id="uygulama-simgesi">
 <h3>Uygulama simgesi</h3>
 <p>Bu dosyanın adı desktop dosyası ile aynı olmalıdır. Uygulama simgesini belirlemeye yarar. Deneme amaçlı boş dosya açsak işimizi görür :)</p>
-<pre class="code shell literal-block"><code>$ touch myapp.png</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>touch<span class="whitespace"> </span>myapp.png</code></pre>
 </section>
 <section id="apprun-dosyasi">
 <h3>AppRun Dosyası</h3>
 <p>AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve <strong>$PATH</strong> değerini ayarlamak zorunda. AppImage dosyası çalıştırıldığında <strong>$APPDIR</strong> değişkeni ile ifade edilen dizinine bağlanır ve <strong>AppRun</strong> dosyası çalıştırılır. Deneme amaçlı AppRun dosyası oluşturalım. Ekrana çalıştırınca <em>Hello World</em> yazdırsın.</p>
-<pre class="code shell literal-block"><code>$ cat &gt; AppRun <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; #!/bin/bash
 &gt; echo &quot;Hello Word&quot;
 &gt; EOF</span></code></pre>
 <p>Eğer script dili ile çalışan <strong>AppRun</strong> yazıyorsanız başına interpreter belirtecini <strong>(#!/bin/bash)</strong> eklemeyi unutmayın. Genellikle bash scriptleri tercih edilir.</p>
-<pre class="code shell literal-block"><code>$ chmod +x AppRun</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>chmod<span class="whitespace"> </span>+x<span class="whitespace"> </span>AppRun</code></pre>
 <p>AppRun dosyasında en sona aşağıdaki ifadeyi eklerseniz desktop dosyasındaki <strong>Exec</strong> değerini kullanarak asıl uygulamayı başlatır.</p>
-<pre class="code shell literal-block"><code>$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; EXEC=$(grep -e &quot;^Exec=.*&quot; &quot;${HERE}&quot;/*.desktop | head -n 1 | cut -d &quot;=&quot; -f 2 | cut -d &quot; &quot; -f 1)'
 &gt; exec &quot;${EXEC}&quot; &quot;$&#64;&quot;
 &gt; EOF</span></code></pre>
@@ -61,55 +61,55 @@ MyApp.AppDir/usr/lib/libfoo.so.0</code></pre>
 <p><a class="reference external" href="https://github.com/AppImage/AppImageKit/releases">appimagetool</a> indirin ve çalıştırılabilir yapın.</p>
 <p>Ardından <strong>appimagetool</strong> ile projenizi örnekteki gibi paketleyin.</p>
 <p>Kullanımı <em>ARCH=x86_64 appimagetool [proje dizini]</em></p>
-<pre class="code shell literal-block"><code>$ <span class="name variable">ARCH</span><span class="operator">=</span>x86_64 ./appimagetool-x86_64.AppImage MyApp.AppDir/
-appimagetool, continuous build <span class="operator">(</span>commit effcebc<span class="operator">)</span>, build <span class="literal number">2084</span> built on <span class="literal number">2019</span>-05-01 <span class="literal number">21</span>:02:41 UTC
-Using architecture x86_64
-/home/a/test/MyApp.AppDir should be packaged as MyApp-x86_64.AppImage
-Deleting pre-existing .DirIcon
-Creating .DirIcon symlink based on information from desktop file
-WARNING: AppStream upstream metadata is missing, please consider creating it
-         <span class="keyword">in</span> usr/share/metainfo/myapp.appdata.xml
-         Please see https://www.freedesktop.org/software/appstream/docs/chap-Quickstart.html#sect-Quickstart-DesktopApps
-         <span class="keyword">for</span> more information or use the generator at http://output.jsbin.com/qoqukof.
-Generating squashfs...
-Parallel mksquashfs: Using <span class="literal number">4</span> processors
-Creating <span class="literal number">4</span>.0 filesystem on MyApp-x86_64.AppImage, block size <span class="literal number">131072</span>.
-<span class="operator">[===================================================================</span><span class="punctuation">|</span><span class="operator">]</span> <span class="literal number">2</span>/2 <span class="literal number">100</span>%
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span><span class="name variable">ARCH</span><span class="operator">=</span>x86_64<span class="whitespace"> </span>./appimagetool-x86_64.AppImage<span class="whitespace"> </span>MyApp.AppDir/<span class="whitespace">
+</span>appimagetool,<span class="whitespace"> </span>continuous<span class="whitespace"> </span>build<span class="whitespace"> </span><span class="operator">(</span>commit<span class="whitespace"> </span>effcebc<span class="operator">)</span>,<span class="whitespace"> </span>build<span class="whitespace"> </span><span class="literal number">2084</span><span class="whitespace"> </span>built<span class="whitespace"> </span>on<span class="whitespace"> </span><span class="literal number">2019</span>-05-01<span class="whitespace"> </span><span class="literal number">21</span>:02:41<span class="whitespace"> </span>UTC<span class="whitespace">
+</span>Using<span class="whitespace"> </span>architecture<span class="whitespace"> </span>x86_64<span class="whitespace">
+</span>/home/a/test/MyApp.AppDir<span class="whitespace"> </span>should<span class="whitespace"> </span>be<span class="whitespace"> </span>packaged<span class="whitespace"> </span>as<span class="whitespace"> </span>MyApp-x86_64.AppImage<span class="whitespace">
+</span>Deleting<span class="whitespace"> </span>pre-existing<span class="whitespace"> </span>.DirIcon<span class="whitespace">
+</span>Creating<span class="whitespace"> </span>.DirIcon<span class="whitespace"> </span>symlink<span class="whitespace"> </span>based<span class="whitespace"> </span>on<span class="whitespace"> </span>information<span class="whitespace"> </span>from<span class="whitespace"> </span>desktop<span class="whitespace"> </span>file<span class="whitespace">
+</span>WARNING:<span class="whitespace"> </span>AppStream<span class="whitespace"> </span>upstream<span class="whitespace"> </span>metadata<span class="whitespace"> </span>is<span class="whitespace"> </span>missing,<span class="whitespace"> </span>please<span class="whitespace"> </span>consider<span class="whitespace"> </span>creating<span class="whitespace"> </span>it<span class="whitespace">
+         </span><span class="keyword">in</span><span class="whitespace"> </span>usr/share/metainfo/myapp.appdata.xml<span class="whitespace">
+         </span>Please<span class="whitespace"> </span>see<span class="whitespace"> </span>https://www.freedesktop.org/software/appstream/docs/chap-Quickstart.html#sect-Quickstart-DesktopApps<span class="whitespace">
+         </span><span class="keyword">for</span><span class="whitespace"> </span>more<span class="whitespace"> </span>information<span class="whitespace"> </span>or<span class="whitespace"> </span>use<span class="whitespace"> </span>the<span class="whitespace"> </span>generator<span class="whitespace"> </span>at<span class="whitespace"> </span>http://output.jsbin.com/qoqukof.<span class="whitespace">
+</span>Generating<span class="whitespace"> </span>squashfs...<span class="whitespace">
+</span>Parallel<span class="whitespace"> </span>mksquashfs:<span class="whitespace"> </span>Using<span class="whitespace"> </span><span class="literal number">4</span><span class="whitespace"> </span>processors<span class="whitespace">
+</span>Creating<span class="whitespace"> </span><span class="literal number">4</span>.0<span class="whitespace"> </span>filesystem<span class="whitespace"> </span>on<span class="whitespace"> </span>MyApp-x86_64.AppImage,<span class="whitespace"> </span>block<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="literal number">131072</span>.<span class="whitespace">
+</span><span class="operator">[===================================================================</span><span class="punctuation">|</span><span class="operator">]</span><span class="whitespace"> </span><span class="literal number">2</span>/2<span class="whitespace"> </span><span class="literal number">100</span>%<span class="whitespace">
 
-Exportable Squashfs <span class="literal number">4</span>.0 filesystem, gzip compressed, data block size <span class="literal number">131072</span>
-    compressed data, compressed metadata, compressed fragments, compressed xattrs
-    duplicates are removed
-Filesystem size <span class="literal number">0</span>.46 Kbytes <span class="operator">(</span><span class="literal number">0</span>.00 Mbytes<span class="operator">)</span>
-    <span class="literal number">78</span>.26% of uncompressed filesystem size <span class="operator">(</span><span class="literal number">0</span>.58 Kbytes<span class="operator">)</span>
-Inode table size <span class="literal number">97</span> bytes <span class="operator">(</span><span class="literal number">0</span>.09 Kbytes<span class="operator">)</span>
-    <span class="literal number">49</span>.74% of uncompressed inode table size <span class="operator">(</span><span class="literal number">195</span> bytes<span class="operator">)</span>
-Directory table size <span class="literal number">97</span> bytes <span class="operator">(</span><span class="literal number">0</span>.09 Kbytes<span class="operator">)</span>
-    <span class="literal number">87</span>.39% of uncompressed directory table size <span class="operator">(</span><span class="literal number">111</span> bytes<span class="operator">)</span>
-Number of duplicate files found <span class="literal number">2</span>
-Number of inodes <span class="literal number">6</span>
-Number of files <span class="literal number">4</span>
-Number of fragments <span class="literal number">1</span>
-Number of symbolic links  <span class="literal number">1</span>
-Number of device nodes <span class="literal number">0</span>
-Number of fifo nodes <span class="literal number">0</span>
-Number of socket nodes <span class="literal number">0</span>
-Number of directories <span class="literal number">1</span>
-Number of ids <span class="operator">(</span>unique uids + gids<span class="operator">)</span> <span class="literal number">1</span>
-Number of uids <span class="literal number">1</span>
-    root <span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span>
-Number of gids <span class="literal number">1</span>
-    root <span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span>
-Embedding ELF...
-Marking the AppImage as executable...
-Embedding MD5 digest
-Success
+</span>Exportable<span class="whitespace"> </span>Squashfs<span class="whitespace"> </span><span class="literal number">4</span>.0<span class="whitespace"> </span>filesystem,<span class="whitespace"> </span>gzip<span class="whitespace"> </span>compressed,<span class="whitespace"> </span>data<span class="whitespace"> </span>block<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="literal number">131072</span><span class="whitespace">
+    </span>compressed<span class="whitespace"> </span>data,<span class="whitespace"> </span>compressed<span class="whitespace"> </span>metadata,<span class="whitespace"> </span>compressed<span class="whitespace"> </span>fragments,<span class="whitespace"> </span>compressed<span class="whitespace"> </span>xattrs<span class="whitespace">
+    </span>duplicates<span class="whitespace"> </span>are<span class="whitespace"> </span>removed<span class="whitespace">
+</span>Filesystem<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="literal number">0</span>.46<span class="whitespace"> </span>Kbytes<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span>.00<span class="whitespace"> </span>Mbytes<span class="operator">)</span><span class="whitespace">
+    </span><span class="literal number">78</span>.26%<span class="whitespace"> </span>of<span class="whitespace"> </span>uncompressed<span class="whitespace"> </span>filesystem<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span>.58<span class="whitespace"> </span>Kbytes<span class="operator">)</span><span class="whitespace">
+</span>Inode<span class="whitespace"> </span>table<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="literal number">97</span><span class="whitespace"> </span>bytes<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span>.09<span class="whitespace"> </span>Kbytes<span class="operator">)</span><span class="whitespace">
+    </span><span class="literal number">49</span>.74%<span class="whitespace"> </span>of<span class="whitespace"> </span>uncompressed<span class="whitespace"> </span>inode<span class="whitespace"> </span>table<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">195</span><span class="whitespace"> </span>bytes<span class="operator">)</span><span class="whitespace">
+</span>Directory<span class="whitespace"> </span>table<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="literal number">97</span><span class="whitespace"> </span>bytes<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span>.09<span class="whitespace"> </span>Kbytes<span class="operator">)</span><span class="whitespace">
+    </span><span class="literal number">87</span>.39%<span class="whitespace"> </span>of<span class="whitespace"> </span>uncompressed<span class="whitespace"> </span>directory<span class="whitespace"> </span>table<span class="whitespace"> </span>size<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">111</span><span class="whitespace"> </span>bytes<span class="operator">)</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>duplicate<span class="whitespace"> </span>files<span class="whitespace"> </span>found<span class="whitespace"> </span><span class="literal number">2</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>inodes<span class="whitespace"> </span><span class="literal number">6</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>files<span class="whitespace"> </span><span class="literal number">4</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>fragments<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>symbolic<span class="whitespace"> </span>links<span class="whitespace">  </span><span class="literal number">1</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>device<span class="whitespace"> </span>nodes<span class="whitespace"> </span><span class="literal number">0</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>fifo<span class="whitespace"> </span>nodes<span class="whitespace"> </span><span class="literal number">0</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>socket<span class="whitespace"> </span>nodes<span class="whitespace"> </span><span class="literal number">0</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>directories<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>ids<span class="whitespace"> </span><span class="operator">(</span>unique<span class="whitespace"> </span>uids<span class="whitespace"> </span>+<span class="whitespace"> </span>gids<span class="operator">)</span><span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>uids<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace">
+    </span>root<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span><span class="whitespace">
+</span>Number<span class="whitespace"> </span>of<span class="whitespace"> </span>gids<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace">
+    </span>root<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span><span class="whitespace">
+</span>Embedding<span class="whitespace"> </span>ELF...<span class="whitespace">
+</span>Marking<span class="whitespace"> </span>the<span class="whitespace"> </span>AppImage<span class="whitespace"> </span>as<span class="whitespace"> </span>executable...<span class="whitespace">
+</span>Embedding<span class="whitespace"> </span>MD5<span class="whitespace"> </span>digest<span class="whitespace">
+</span>Success<span class="whitespace">
 
-Please consider submitting your AppImage to AppImageHub, the crowd-sourced
-central directory of available AppImages, by opening a pull request
-at https://github.com/AppImage/appimage.github.io</code></pre>
+</span>Please<span class="whitespace"> </span>consider<span class="whitespace"> </span>submitting<span class="whitespace"> </span>your<span class="whitespace"> </span>AppImage<span class="whitespace"> </span>to<span class="whitespace"> </span>AppImageHub,<span class="whitespace"> </span>the<span class="whitespace"> </span>crowd-sourced<span class="whitespace">
+</span>central<span class="whitespace"> </span>directory<span class="whitespace"> </span>of<span class="whitespace"> </span>available<span class="whitespace"> </span>AppImages,<span class="whitespace"> </span>by<span class="whitespace"> </span>opening<span class="whitespace"> </span>a<span class="whitespace"> </span>pull<span class="whitespace"> </span>request<span class="whitespace">
+</span>at<span class="whitespace"> </span>https://github.com/AppImage/appimage.github.io</code></pre>
 <p>Oluşan <strong>AppImage</strong> dosyamızı çalıştıralım.</p>
-<pre class="code shell literal-block"><code>$ ./MyApp-x86_64.AppImage
-Hello Word</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>./MyApp-x86_64.AppImage<span class="whitespace">
+</span>Hello<span class="whitespace"> </span>Word</code></pre>
 </section>
 <section id="appimage-paketi-icin-onemli-notlar">
 <h2>AppImage paketi için önemli notlar</h2>
@@ -117,25 +117,25 @@ Hello Word</code></pre>
 <h3>Hardcoded konumlar</h3>
 <p>İkili dosyalarda hardcoded konum bulunmamalı. Eğer bulunuyorsa yama atılmalı.</p>
 <p>Aşağıdaki komutla hardcoded konum var mı öğrenebiliriz:</p>
-<pre class="code shell literal-block"><code>$ strings MyApp.AppDir/usr/bin/myapp <span class="punctuation">|</span> grep /usr</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>strings<span class="whitespace"> </span>MyApp.AppDir/usr/bin/myapp<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>grep<span class="whitespace"> </span>/usr</code></pre>
 <p>Aşağıdaki komutla yama atabiliriz:</p>
-<pre class="code shell literal-block"><code>$ sed -i -e <span class="literal string single">'s#/usr#././#g'</span> MyApp.AppDir/usr/bin/myapp</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>sed<span class="whitespace"> </span>-i<span class="whitespace"> </span>-e<span class="whitespace"> </span><span class="literal string single">'s#/usr#././#g'</span><span class="whitespace"> </span>MyApp.AppDir/usr/bin/myapp</code></pre>
 <p>Burada ././ 4 karakterlidir (/usr ile aynı uzunlukta) ve burası anlamına gelmektedir. Farklı bir konumu tarif ettirmeyiniz.</p>
 </section>
 <section id="glib-semalari">
 <h3>GLib şemaları</h3>
 <p>Uygulamanız eğer <strong>glib şeması</strong> içeriyorsa <strong>AppRun</strong> dosyanızda şema konumunu tanımlamalısınız. Ayrıca paketlemeden önce şemayı derlemeniz gerekmektedir.</p>
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içerisine yazın:</p>
-<pre class="code shell literal-block"><code>$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export GSETTINGS_SCHEMA_DIR=&quot;${HERE}/usr/share/glib-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}&quot;
 &gt; EOF</span></code></pre>
 <p><strong>glib şemasını</strong> derlemek için aşağıdaki komutu kullanın:</p>
-<pre class="code shell literal-block"><code>$ glib-compile-schemas MyApp.AppDir/usr/share/glib-2.0/schemas/</code></pre>
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>glib-compile-schemas<span class="whitespace"> </span>MyApp.AppDir/usr/share/glib-2.0/schemas/</code></pre>
 </section>
 <section id="bazi-gerekli-cevresel-degiskenler">
 <h3>Bazı gerekli çevresel değişkenler</h3>
 <p>Uygulamaların düzgün çalışabilmesi için <strong>LD_LIBRARY_PATH</strong> <strong>PATH</strong> <strong>PYTHON_PATH</strong> değişkenlerinin ayarlanması gerekir. Aşağıdaki ifadeyi <strong>AppRun</strong> içerisine yazın:</p>
-<pre class="code shell literal-block"><code>$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export SELF=$(readlink -f &quot;$0&quot;)
 &gt; export HERE=${SELF%/*}
 &gt; export LD_LIBRARY_PATH=&quot;${HERE}/usr/lib/:${HERE}/usr/lib/i386-linux-gnu/:${HERE}/usr/lib/x86_64-linux-gnu/&quot;
@@ -150,7 +150,7 @@ Hello Word</code></pre>
 <h3>Xdg dizinleri</h3>
 <p>Uygulamanızın <strong>xdg dizinleri</strong> varsa onları da tanımlamanız gereklidir. (örneğin <em>/usr/share</em>)</p>
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
-<pre class="code shell literal-block"><code>$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export XDG_DATA_DIRS=&quot;${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}&quot;
 &gt; EOF</span></code></pre>
 </section>
@@ -158,7 +158,7 @@ Hello Word</code></pre>
 <h3>Qt plugin dizinleri</h3>
 <p>Uygulamanız <strong>qt</strong> tabanlı ise <strong>qt plugin</strong> dizinlerini tanımlamalısınız.</p>
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
-<pre class="code shell literal-block"><code>$ cat &gt;&gt; AppRun <span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export QT_PLUGIN_PATH=&quot;${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt4/plugins/&quot;
 &gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib/x86_64-linux-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/&quot;
 &gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/&quot;

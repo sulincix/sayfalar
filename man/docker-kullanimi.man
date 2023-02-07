@@ -202,7 +202,7 @@ tarball dosyasından docker imajı oluşturmak için \fBdocker import\fP kullana
 .ft C
 $ docker import rootfs.tar custom:new
 # veya bir dizinden üretebiliriz
-$ tar \-c \-C rootfs . | docker import \- custom:new2
+$ tar \-c \-C rootfs \&. | docker import \- custom:new2
 .ft P
 .fi
 .UNINDENT
@@ -316,7 +316,7 @@ Container ile işimiz bittiğinde silmek için \fBdocker rm\fP kullanılır. Sil
 .nf
 .ft C
 $ docker rm b91e04ab5dcc
-Error response from daemon: You cannot remove a running container ...
+Error response from daemon: You cannot remove a running container \&...
 $ docker rm \-f b91e04ab5dcc
 # Aşağıdaki komutla tüm containerları silebiliriz.
 $ docker rm \-f $(docker ps \-a \-q)
@@ -555,7 +555,7 @@ Bir Dockerfile dosyası aşağıdaki gibi çalıştırılır.
 .sp
 .nf
 .ft C
-$ docker build \-f ./builder/Dockerfile ./
+$ docker build \-f \&./builder/Dockerfile \&./
 .ft P
 .fi
 .UNINDENT
@@ -647,7 +647,7 @@ RUN make install
 .nf
 .ft C
 $ wget https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz
-$ docker build \-t build\-bash:5.0 .
+$ docker build \-t build\-bash:5.0 \&.
 .ft P
 .fi
 .UNINDENT
