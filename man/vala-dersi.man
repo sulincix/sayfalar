@@ -977,14 +977,14 @@ Bu ifade sayesinde belirtilen alan adındaki tüm fonksiyonlar kaynak kodda doğ
 using Gtk;
 
 int main(string[] args){
-    # İstersen yine de namespace adı ile kullanabiliriz\&.
+    // İsterseniz yine de namespace adı ile kullanabiliriz.
     Gtk\&.init (ref args);
-    # Gtk\&.Window yerine Window kullanabiliriz\&.
+    // Gtk.Window yerine Window kullanabiliriz.
     var win = new Window();
-    # Şununla aynı anlama gelir
-    # var win = new Gtk\&.Window();
+    // Şununla aynı anlama gelir
+    // var win = new Gtk.Window();
     \&...
-    # Aynı isimde var olan bir fonksiyonu namespace adı olmadan kullanmak mümkün değildir\&.
+    // Aynı isimde var olan bir fonksiyonu namespace adı olmadan kullanmak mümkün değildir.
     Gtk\&.main ();
     return 0;
 }
