@@ -1,122 +1,164 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <title>Docker kullanımı</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-</head>
 <body>
-<main id="docker-kullanimi">
+<div class="document" id="docker-kullanimi">
 <h1 class="title">Docker kullanımı</h1>
 
 <p>Bu yazıda sizlere docker kullanımı anlatılacaktır.</p>
-<section id="docker-kurulumu">
-<h2>Docker kurulumu</h2>
+<div class="section" id="docker-kurulumu">
+<h1>Docker kurulumu</h1>
 <p>Docker kurmak için debian tabanlı dağıtımlarda <strong>docker.io</strong> paketini kurmalısınız.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>docker.io<span class="whitespace"> </span>--no-install-recommends</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>docker.io<span class="whitespace"> </span>--no-install-recommends
+</pre>
 <p>Eğer debian dışında bir dağıtım kullanıyorsanız kendi sitesi üzerinden indirmeyi veya kaynak koddan derlemeyi deneyebilirsiniz.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># docker binarylerini indirmek için https://download.docker.com/linux/static/stable/
+<pre class="code shell literal-block">
+<span class="comment single"># docker binarylerini indirmek için https://download.docker.com/linux/static/stable/
 # indirdikten sonra arşivden çıkatrıp containerd ve dockerd çalıştıralım. (root kullanarak)
 </span>$<span class="whitespace"> </span>tar<span class="whitespace"> </span>-xf<span class="whitespace"> </span>docker-xxx.tgz<span class="whitespace">
 </span>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>docker<span class="whitespace">
 </span>$<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">PATH</span><span class="operator">=</span><span class="name variable">$PATH</span>:<span class="keyword">$(</span><span class="name builtin">pwd</span><span class="keyword">)</span><span class="whitespace"> </span><span class="comment single"># path içine mevcut dizini de ekledik
 # containerd ve dockerd çalıştıralım. Bunlar daemon olduğu için sürekli arkada çalışması gerekmektedir.
 </span>$<span class="whitespace"> </span>containerd<span class="whitespace">
-</span>$<span class="whitespace"> </span>dockerd</code></pre>
+</span>$<span class="whitespace"> </span>dockerd
+</pre>
 <p>Rootless docker kurmak için</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>curl<span class="whitespace"> </span>-fsSL<span class="whitespace"> </span>https://get.docker.com/rootless<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>bash</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>curl<span class="whitespace"> </span>-fsSL<span class="whitespace"> </span>https://get.docker.com/rootless<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>bash
+</pre>
 <p>Docker çalışıyor mu diye kontrol etmek için <strong>docker info</strong> komutunu kullanabiliriz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>info</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>info
+</pre>
 <p>Rootless olmayan docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz. Bu işlem güvenlik sorunlarına sebep olabilir. Detaylı bilgi için: <a class="reference external" href="https://docs.docker.com/engine/security/#docker-daemon-attack-surface">https://docs.docker.com/engine/security/#docker-daemon-attack-surface</a></p>
-<pre class="code shell literal-block"><code><span class="comment single"># Bu aşama docker gurubu mevcut olmayanlar için geçerlidir.
+<pre class="code shell literal-block">
+<span class="comment single"># Bu aşama docker gurubu mevcut olmayanlar için geçerlidir.
 </span>$<span class="whitespace"> </span>groupadd<span class="whitespace"> </span>docker<span class="whitespace">
 </span>$<span class="whitespace"> </span>chgrp<span class="whitespace"> </span>docker<span class="whitespace"> </span>/run/docker.sock<span class="whitespace"> </span><span class="comment single"># bu işlem her yeniden başlatmada gerekebilir.
 # Bu aşama tüm dağıtımlarda gereklidir.
-</span>$<span class="whitespace"> </span>usermod<span class="whitespace"> </span>-aG<span class="whitespace"> </span>docker<span class="whitespace"> </span>username<span class="whitespace"> </span><span class="comment single"># oturumu kapatıp açmak gerekebilir.</span></code></pre>
-</section>
-<section id="docker-calisma-mantigi">
-<h2>Docker çalışma mantığı</h2>
+</span>$<span class="whitespace"> </span>usermod<span class="whitespace"> </span>-aG<span class="whitespace"> </span>docker<span class="whitespace"> </span>username<span class="whitespace"> </span><span class="comment single"># oturumu kapatıp açmak gerekebilir.</span>
+</pre>
+</div>
+<div class="section" id="docker-calisma-mantigi">
+<h1>Docker çalışma mantığı</h1>
 <p>Docker linux çekirdeği üzerinde oluşturulmuş <strong>container</strong> yapısı üzerinde çalışır. Her container kendisine özel ayrılmış alanda kısıtlı kaynaklar ile çalışır. Bu sayede herhangi bir performans kaybı olmadan ana sistemden bağımsız şekilde istenilen uygulamalar çalıştırılabilir.</p>
 <p>Docker containerlarını üretmek için öncelikle imaj gerekmektedir. İmajlara <strong>dockerhub</strong> üzerinden ulaşabiliriz. Öncelikle imaj kurulur. daha sonra bu imajdan container türetilir. İş bittikten sonra container kolaylıkla yok edilebilir. Veya containerların imajı alınarak yeni imaja dönüştürülebilir.</p>
-<pre class="code text literal-block"><code>kernel (linux)
+<pre class="code text literal-block">
+kernel (linux)
   |
 system (gentoo)
   |
 docker ----------------
   |       |    |     |
-alpine debian arch ubuntu</code></pre>
-</section>
-<section id="imajlar">
-<h2>İmajlar</h2>
+alpine debian arch ubuntu
+</pre>
+</div>
+<div class="section" id="imajlar">
+<h1>İmajlar</h1>
 <p>Docker imajı indirmek için <strong>docker pull</strong> komutu kullanılır. <strong>name:tag</strong> şeklinde belirtilir. eğer tag belirtilmemişse latest olarak değerlendirilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>pull<span class="whitespace"> </span>alpine:latest</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>pull<span class="whitespace"> </span>alpine:latest
+</pre>
 <p>Mevcut imajları listelemek için <strong>docker images</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>images<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>images<span class="whitespace">
 </span>REPOSITORY<span class="whitespace">   </span>TAG<span class="whitespace">       </span>IMAGE<span class="whitespace"> </span>ID<span class="whitespace">       </span>CREATED<span class="whitespace">       </span>SIZE<span class="whitespace">
 </span>debian<span class="whitespace">       </span>latest<span class="whitespace">    </span>43d28810c1b4<span class="whitespace">   </span><span class="literal number">8</span><span class="whitespace"> </span>days<span class="whitespace"> </span>ago<span class="whitespace">    </span>124MB<span class="whitespace">
-</span>alpine<span class="whitespace">       </span>latest<span class="whitespace">    </span>9c6f07244728<span class="whitespace">   </span><span class="literal number">6</span><span class="whitespace"> </span>weeks<span class="whitespace"> </span>ago<span class="whitespace">   </span><span class="literal number">5</span>.54MB</code></pre>
+</span>alpine<span class="whitespace">       </span>latest<span class="whitespace">    </span>9c6f07244728<span class="whitespace">   </span><span class="literal number">6</span><span class="whitespace"> </span>weeks<span class="whitespace"> </span>ago<span class="whitespace">   </span><span class="literal number">5</span>.54MB
+</pre>
 <p>Burada dikkat edilmesi gereken konu her imajın bir <strong>ID</strong> değeri bulunmasıdır. İmajlar ile ilgili işlemler yapılırken imajın adı veya bu id değeri kullanılır.</p>
 <p>İmaj silmek için <strong>docker rmi</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rmi<span class="whitespace"> </span>alpine<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rmi<span class="whitespace"> </span>alpine<span class="whitespace">
 </span><span class="comment single"># veya şu da kullanılabilir.
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rmi<span class="whitespace"> </span>9c6f07244728</code></pre>
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rmi<span class="whitespace"> </span>9c6f07244728
+</pre>
 <p>İmajımızı bir dosyaya kaydetmek için <strong>docker save</strong> kullanırız.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>save<span class="whitespace"> </span>debian:latest<span class="whitespace"> </span>-o<span class="whitespace"> </span>/home/backup/debian.tar</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>save<span class="whitespace"> </span>debian:latest<span class="whitespace"> </span>-o<span class="whitespace"> </span>/home/backup/debian.tar
+</pre>
 <p>kaydedilmiş bir dosyadan imaj yüklemek için ise <strong>docker load</strong> kullanılız.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>load<span class="whitespace"> </span>-i<span class="whitespace"> </span>/home/backup/debian.tar</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>load<span class="whitespace"> </span>-i<span class="whitespace"> </span>/home/backup/debian.tar
+</pre>
 <p>tarball dosyasından docker imajı oluşturmak için <strong>docker import</strong> kullanabiliriz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>import<span class="whitespace"> </span>rootfs.tar<span class="whitespace"> </span>custom:new<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>import<span class="whitespace"> </span>rootfs.tar<span class="whitespace"> </span>custom:new<span class="whitespace">
 </span><span class="comment single"># veya bir dizinden üretebiliriz
-</span>$<span class="whitespace"> </span>tar<span class="whitespace"> </span>-c<span class="whitespace"> </span>-C<span class="whitespace"> </span>rootfs<span class="whitespace"> </span>.<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>docker<span class="whitespace"> </span>import<span class="whitespace"> </span>-<span class="whitespace"> </span>custom:new2</code></pre>
+</span>$<span class="whitespace"> </span>tar<span class="whitespace"> </span>-c<span class="whitespace"> </span>-C<span class="whitespace"> </span>rootfs<span class="whitespace"> </span>.<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>docker<span class="whitespace"> </span>import<span class="whitespace"> </span>-<span class="whitespace"> </span>custom:new2
+</pre>
 <p>Docker imajını tarball olarak çıkartmak için ise <strong>docker export</strong> kullanabiliriz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span>debian:stable<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>/home/user/debian-stable.tar<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span>debian:stable<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>/home/user/debian-stable.tar<span class="whitespace">
 </span><span class="comment single"># veya şu şekilde de kullanılabilir
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span>-o<span class="whitespace"> </span>/home/user/debian-stable.tar<span class="whitespace"> </span>debian:stable</code></pre>
-</section>
-<section id="containerlar">
-<h2>Containerlar</h2>
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span>-o<span class="whitespace"> </span>/home/user/debian-stable.tar<span class="whitespace"> </span>debian:stable
+</pre>
+</div>
+<div class="section" id="containerlar">
+<h1>Containerlar</h1>
 <p>Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlardan türetilirler. bir container üretmek için <strong>docker run</strong> komutu kullanılır. Bu komut aldığı parametreler ile containerın özelliklerini ayarlar.</p>
-<pre class="code shell literal-block"><code><span class="comment single">#  docker run &lt;seçenekler&gt; &lt;imajın idsi veya ismi&gt; &lt;çalıştırılacak komut&gt;
+<pre class="code shell literal-block">
+<span class="comment single">#  docker run &lt;seçenekler&gt; &lt;imajın idsi veya ismi&gt; &lt;çalıştırılacak komut&gt;
 </span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>-it<span class="whitespace"> </span>-d<span class="whitespace"> </span>-p<span class="whitespace"> </span><span class="literal number">8000</span>:80<span class="whitespace"> </span>--name<span class="whitespace"> </span>deneme<span class="whitespace"> </span>43d28810c1b4<span class="whitespace"> </span>/bin/bash<span class="whitespace">
 </span><span class="comment single"># -i stdin okumasına izin verir
 # -d komutu arkada çalıştır
 # -t pseudo-tty olarak çalıştırır. -it olarak kullanıp shell çalıştırabiliriz.
 # -p port yönlendirmesi yapar.
-# --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.</span></code></pre>
+# --name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.</span>
+</pre>
 <p>Eğer container çalıştıktan sonra silinmesini istiyorsanız <strong>--rm</strong> parametresi ekleyebiliriz. Bu sayede işlem bitimi otomatik olarak silinir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--rm<span class="whitespace"> </span>alpine<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span>hello<span class="whitespace"> </span>world</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--rm<span class="whitespace"> </span>alpine<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span>hello<span class="whitespace"> </span>world
+</pre>
 <p>İşlem başlatmayıp sadece container oluşturmak istiyorsanız <strong>docker create</strong> kullanabilirsiniz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>create<span class="whitespace"> </span>--name<span class="whitespace"> </span>deneme2<span class="whitespace"> </span>debian</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>create<span class="whitespace"> </span>--name<span class="whitespace"> </span>deneme2<span class="whitespace"> </span>debian
+</pre>
 <p>Container oluştururkenki seçenekler için <strong>docker run --help</strong> veya <strong>docker create --help</strong> yapabilirsiniz.</p>
 <p>Çalışan containerları listelemek için <strong>docker ps</strong> kullanılır. <strong>-a</strong> parametresi eklenirse tüm containerlar listelenir. <strong>-q</strong> parametresi ile sadece id değerleri yazdırılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>ps<span class="whitespace"> </span>-a<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>ps<span class="whitespace"> </span>-a<span class="whitespace">
 </span>CONTAINER<span class="whitespace"> </span>ID<span class="whitespace">   </span>IMAGE<span class="whitespace">     </span>COMMAND<span class="whitespace">   </span>CREATED<span class="whitespace">          </span>STATUS<span class="whitespace">                     </span>PORTS<span class="whitespace">     </span>NAMES<span class="whitespace">
 </span>e1e2983bfa34<span class="whitespace">   </span>debian<span class="whitespace">    </span><span class="literal string double">&quot;bash&quot;</span><span class="whitespace">    </span><span class="literal number">8</span><span class="whitespace"> </span>seconds<span class="whitespace"> </span>ago<span class="whitespace">    </span>Exited<span class="whitespace"> </span><span class="operator">(</span><span class="literal number">0</span><span class="operator">)</span><span class="whitespace"> </span><span class="literal number">5</span><span class="whitespace"> </span>seconds<span class="whitespace"> </span>ago<span class="whitespace">             </span><span class="name builtin">test</span><span class="whitespace">
-</span>b91e04ab5dcc<span class="whitespace">   </span>debian<span class="whitespace">    </span><span class="literal string double">&quot;bash&quot;</span><span class="whitespace">    </span><span class="literal number">23</span><span class="whitespace"> </span>seconds<span class="whitespace"> </span>ago<span class="whitespace">   </span>Up<span class="whitespace"> </span><span class="literal number">22</span><span class="whitespace"> </span>seconds<span class="whitespace">                        </span>deneme</code></pre>
+</span>b91e04ab5dcc<span class="whitespace">   </span>debian<span class="whitespace">    </span><span class="literal string double">&quot;bash&quot;</span><span class="whitespace">    </span><span class="literal number">23</span><span class="whitespace"> </span>seconds<span class="whitespace"> </span>ago<span class="whitespace">   </span>Up<span class="whitespace"> </span><span class="literal number">22</span><span class="whitespace"> </span>seconds<span class="whitespace">                        </span>deneme
+</pre>
 <p>Çalışan bir containera bağlanmak için <strong>docker attach</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># ctrl-k kısayolu ile bağlantı kesilmesi için ek parametre ekleyelim.
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>attach<span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace"> </span>--detach-keys<span class="operator">=</span><span class="literal string double">&quot;ctrl-k&quot;</span></code></pre>
+<pre class="code shell literal-block">
+<span class="comment single"># ctrl-k kısayolu ile bağlantı kesilmesi için ek parametre ekleyelim.
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>attach<span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace"> </span>--detach-keys<span class="operator">=</span><span class="literal string double">&quot;ctrl-k&quot;</span>
+</pre>
 <p>Çalışan bir container <strong>docker kill</strong> kullanılarak kapatılabilir. kapatılmış bir container docker start kullanılarak tekrar başlatılabilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">kill</span><span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">kill</span><span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace">
 </span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>ps<span class="whitespace"> </span>-q<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>grep<span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace"> </span><span class="comment single"># çıktı boşsa container çalışmıyor demektir
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>start<span class="whitespace"> </span>b91e04ab5dcc</code></pre>
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>start<span class="whitespace"> </span>b91e04ab5dcc
+</pre>
 <p>Container ile işimiz bittiğinde silmek için <strong>docker rm</strong> kullanılır. Silme işleminden önce kapatmamız gerekir. Eğer zorla kapatılmasını isterseniz <strong>-f</strong> parametresi ekleyebiliriz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rm<span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rm<span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace">
 </span>Error<span class="whitespace"> </span>response<span class="whitespace"> </span>from<span class="whitespace"> </span>daemon:<span class="whitespace"> </span>You<span class="whitespace"> </span>cannot<span class="whitespace"> </span>remove<span class="whitespace"> </span>a<span class="whitespace"> </span>running<span class="whitespace"> </span>container<span class="whitespace"> </span>...<span class="whitespace">
 </span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span>b91e04ab5dcc<span class="whitespace">
 </span><span class="comment single"># Aşağıdaki komutla tüm containerları silebiliriz.
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span><span class="keyword">$(</span>docker<span class="whitespace"> </span>ps<span class="whitespace"> </span>-a<span class="whitespace"> </span>-q<span class="keyword">)</span></code></pre>
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>rm<span class="whitespace"> </span>-f<span class="whitespace"> </span><span class="keyword">$(</span>docker<span class="whitespace"> </span>ps<span class="whitespace"> </span>-a<span class="whitespace"> </span>-q<span class="keyword">)</span>
+</pre>
 <p>Çalışmayan tüm containerların silinmesi için <strong>docker container prune</strong> kullanılabilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>container<span class="whitespace"> </span>prune<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>container<span class="whitespace"> </span>prune<span class="whitespace">
 </span>WARNING!<span class="whitespace"> </span>This<span class="whitespace"> </span>will<span class="whitespace"> </span>remove<span class="whitespace"> </span>all<span class="whitespace"> </span>stopped<span class="whitespace"> </span>containers.<span class="whitespace">
 </span>Are<span class="whitespace"> </span>you<span class="whitespace"> </span>sure<span class="whitespace"> </span>you<span class="whitespace"> </span>want<span class="whitespace"> </span>to<span class="whitespace"> </span><span class="keyword">continue</span>?<span class="whitespace"> </span><span class="operator">[</span>y/N<span class="operator">]</span><span class="whitespace"> </span>y<span class="whitespace">
-</span>Total<span class="whitespace"> </span>reclaimed<span class="whitespace"> </span>space:<span class="whitespace"> </span>0B</code></pre>
+</span>Total<span class="whitespace"> </span>reclaimed<span class="whitespace"> </span>space:<span class="whitespace"> </span>0B
+</pre>
 <p>Çalışan containerlar ile ilgili kullanım istatistiklerine ulaşmak için <strong>docker stats</strong> kullanılır. <strong>docker top</strong> ise container içinde çalışan süreçler ile ilgili bilgi almaya yarar.</p>
 <p>Container ile ilgili bilgi almak için <strong>docker inspect</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>stats<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>stats<span class="whitespace">
 </span>CONTAINER<span class="whitespace"> </span>ID<span class="whitespace">   </span>NAME<span class="whitespace">             </span>CPU<span class="whitespace"> </span>%<span class="whitespace">     </span>MEM<span class="whitespace"> </span>USAGE<span class="whitespace"> </span>/<span class="whitespace"> </span>LIMIT<span class="whitespace">   </span>MEM<span class="whitespace"> </span>%<span class="whitespace">     </span>NET<span class="whitespace"> </span>I/O<span class="whitespace">       </span>BLOCK<span class="whitespace"> </span>I/O<span class="whitespace">   </span>PIDS<span class="whitespace">
 </span>40f84cb8e4e0<span class="whitespace">   </span>deneme2<span class="whitespace">          </span><span class="literal number">0</span>.00%<span class="whitespace">     </span>808KiB<span class="whitespace"> </span>/<span class="whitespace"> </span><span class="literal number">31</span>.15GiB<span class="whitespace">   </span><span class="literal number">0</span>.00%<span class="whitespace">     </span><span class="literal number">1</span>.87kB<span class="whitespace"> </span>/<span class="whitespace"> </span>0B<span class="whitespace">   </span>0B<span class="whitespace"> </span>/<span class="whitespace"> </span>0B<span class="whitespace">     </span><span class="literal number">1</span><span class="whitespace">
 </span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>top<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace">
@@ -126,70 +168,108 @@ alpine debian arch ubuntu</code></pre>
 </span>...<span class="whitespace">
   </span><span class="literal string double">&quot;Id&quot;</span>:<span class="whitespace"> </span><span class="literal string double">&quot;40f84cb8e4e0...&quot;</span>,<span class="whitespace">
   </span><span class="literal string double">&quot;Created&quot;</span>:<span class="whitespace"> </span><span class="literal string double">&quot;2022-09-21T07:42:18.337126911Z&quot;</span>,<span class="whitespace">
-</span>...</code></pre>
+</span>...
+</pre>
 <p>Çalışan bir container içerisinde bir komut çalıştırmak için <strong>docker exec</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">exec</span><span class="whitespace"> </span>-it<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace"> </span>/bin/bash</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span><span class="name builtin">exec</span><span class="whitespace"> </span>-it<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace"> </span>/bin/bash
+</pre>
 <p>Containerları duraklatıp devam ettirmek için <strong>docker pause</strong> ve <strong>docker unpause</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>pause<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace">
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>unpause<span class="whitespace"> </span>40f84cb8e4e0</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>pause<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace">
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>unpause<span class="whitespace"> </span>40f84cb8e4e0
+</pre>
 <p>Mevcut containerdan imaj elde etmek için <strong>docker commit</strong> kullanabiliriz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>commit<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace"> </span>builder:1.0</code></pre>
-</section>
-<section id="uzak-sunucuda-calismak">
-<h2>Uzak sunucuda çalışmak</h2>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>commit<span class="whitespace"> </span>40f84cb8e4e0<span class="whitespace"> </span>builder:1.0
+</pre>
+</div>
+<div class="section" id="uzak-sunucuda-calismak">
+<h1>Uzak sunucuda çalışmak</h1>
 <p><strong>DOCKER_HOST</strong> çevresel değişkenini ayarlayarak ssh üzerinden uzaktaki bir makinadaki container ve imajları yönetebilirsiniz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">DOCKER_HOST</span><span class="operator">=</span>ssh://user&#64;server<span class="whitespace">
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>info</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">DOCKER_HOST</span><span class="operator">=</span>ssh://user&#64;server<span class="whitespace">
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>info
+</pre>
 <p>Bağlantı için ssh anahtarınızı sunucuya atmış olmanız gerekmektedir. Bunun için <strong>ssh-copy-id</strong> kullanabilirsiniz veya anahtarınızı <strong>~/.ssh/authorized_keys</strong> içerisine yazmalısınız.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>ssh-copy-id<span class="whitespace"> </span>user&#64;server<span class="whitespace">
-</span>user&#64;server<span class="error">'</span>s<span class="whitespace"> </span>password:</code></pre>
-</section>
-<section id="volume-kavrami">
-<h2>Volume kavramı</h2>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>ssh-copy-id<span class="whitespace"> </span>user&#64;server<span class="whitespace">
+</span>user&#64;server<span class="error">'</span>s<span class="whitespace"> </span>password:
+</pre>
+</div>
+<div class="section" id="volume-kavrami">
+<h1>Volume kavramı</h1>
 <p>Docker üzerinde birden çok container ile çalıştığımızı farz edelim. Bu containerlar birbirleri ile dosya alışverişi yapmak isteyebilirler. Örneğin bir tanesi web server olarak çalışırken diğeri web serverda bulunan dosyaları farklı bir amaç için kullanabilir.</p>
 <p>Bu gibi durumlar için <strong>volume</strong> bulunur. Volume container tarafından kullanılabilen depolama alanlarıdır. Volume oluşturmak için <strong>docker volume create</strong> kullanılır.</p>
 <p><strong>Volume</strong> diskte <strong>/var/lib/docker/volumes/</strong> içerisinde depolanır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>volume<span class="whitespace"> </span>create<span class="whitespace"> </span>data</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>volume<span class="whitespace"> </span>create<span class="whitespace"> </span>data
+</pre>
 <p>Var olan <strong>volume</strong> listesi için <strong>docker volume ls</strong> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>volume<span class="whitespace"> </span>ls<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>volume<span class="whitespace"> </span>ls<span class="whitespace">
 </span>DRIVER<span class="whitespace">    </span>VOLUME<span class="whitespace"> </span>NAME<span class="whitespace">
-</span><span class="name builtin">local</span><span class="whitespace">     </span>data</code></pre>
+</span><span class="name builtin">local</span><span class="whitespace">     </span>data
+</pre>
 <p>Bir <strong>volume</strong> silmek için <strong>docker volume rm</strong> kullanılır. Silmeden önce bu alanı kullanan containerları kapatmalısınız.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>volume<span class="whitespace"> </span>rm<span class="whitespace"> </span>data</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>volume<span class="whitespace"> </span>rm<span class="whitespace"> </span>data
+</pre>
 <p>Bir container başlatılırken ona volume eklemek için <strong>--mount</strong> parametresi eklenir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>-d<span class="whitespace"> </span>--name<span class="whitespace"> </span>webserver<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">source</span><span class="operator">=</span>data,target<span class="operator">=</span>/var/www/http/<span class="whitespace"> </span>nginx:latest</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>-d<span class="whitespace"> </span>--name<span class="whitespace"> </span>webserver<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">source</span><span class="operator">=</span>data,target<span class="operator">=</span>/var/www/http/<span class="whitespace"> </span>nginx:latest
+</pre>
 <p>Bağlanacak dizine yazılmasını istemiyorsak <strong>readonly</strong> eklemeliyiz.</p>
-<pre class="code shell literal-block"><code>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">source</span><span class="operator">=</span>data,target<span class="operator">=</span>/app,readonly<span class="whitespace"> </span>test321<span class="whitespace"> </span>alpine</code></pre>
+<pre class="code shell literal-block">
+docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">source</span><span class="operator">=</span>data,target<span class="operator">=</span>/app,readonly<span class="whitespace"> </span>test321<span class="whitespace"> </span>alpine
+</pre>
 <p>Container içine bir dizine tmpfs bağlamak için <strong>type</strong> belirtilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">type</span><span class="operator">=</span>tmpfs,target<span class="operator">=</span>/app/temp/<span class="whitespace"> </span>--name<span class="whitespace"> </span>apptest<span class="whitespace"> </span>debian<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">type</span><span class="operator">=</span>tmpfs,target<span class="operator">=</span>/app/temp/<span class="whitespace"> </span>--name<span class="whitespace"> </span>apptest<span class="whitespace"> </span>debian<span class="whitespace">
 </span><span class="comment single"># Şu şekilde de kullanılabilir.
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--tmpfs<span class="whitespace"> </span>/app/temp/<span class="whitespace"> </span>--name<span class="whitespace"> </span>apptest<span class="whitespace"> </span>debian</code></pre>
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--tmpfs<span class="whitespace"> </span>/app/temp/<span class="whitespace"> </span>--name<span class="whitespace"> </span>apptest<span class="whitespace"> </span>debian
+</pre>
 <p>Ayrıca volume yerine ana sistemdeki bir dizini de bağlayabiliriz.</p>
-<pre class="code shell literal-block"><code>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">type</span><span class="operator">=</span>bind,source<span class="operator">=</span>/home/shared,target<span class="operator">=</span>/shared<span class="whitespace"> </span>--name<span class="whitespace"> </span>test123<span class="whitespace"> </span>alpine</code></pre>
+<pre class="code shell literal-block">
+docker<span class="whitespace"> </span>run<span class="whitespace"> </span>--mount<span class="whitespace"> </span><span class="name variable">type</span><span class="operator">=</span>bind,source<span class="operator">=</span>/home/shared,target<span class="operator">=</span>/shared<span class="whitespace"> </span>--name<span class="whitespace"> </span>test123<span class="whitespace"> </span>alpine
+</pre>
 <p>Dizinleri aşağıdaki gibi de bağlayabiliriz.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># yazılmasını istemiyorsanız ro istiyorsanız rw
+<pre class="code shell literal-block">
+<span class="comment single"># yazılmasını istemiyorsanız ro istiyorsanız rw
 # Hiçbir şey eklemezseniz rw kabul edilir.
-</span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>-v<span class="whitespace"> </span>/mnt:/mnt:ro<span class="whitespace"> </span>-v<span class="whitespace"> </span>/shared:/shared:rw<span class="whitespace"> </span>test456<span class="whitespace"> </span>alpine</code></pre>
-</section>
-<section id="dockerfile">
-<h2>Dockerfile</h2>
+</span>docker<span class="whitespace"> </span>run<span class="whitespace"> </span>-v<span class="whitespace"> </span>/mnt:/mnt:ro<span class="whitespace"> </span>-v<span class="whitespace"> </span>/shared:/shared:rw<span class="whitespace"> </span>test456<span class="whitespace"> </span>alpine
+</pre>
+</div>
+<div class="section" id="dockerfile">
+<h1>Dockerfile</h1>
 <p><strong>Dockerfile</strong> docker kullanarak belli işleri gerçekleştirmeye yarayan bir talimat dosyasıdır. Bu talimatların sonucunda yeni bir imaj dosyası oluşturulur. Örneğin aşağıda bir Dockerfile dosyası verilmiştir.</p>
-<pre class="code shell literal-block"><code>FROM<span class="whitespace"> </span>alpine<span class="whitespace">
-</span>RUN<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span>hello<span class="whitespace"> </span>world</code></pre>
+<pre class="code shell literal-block">
+FROM<span class="whitespace"> </span>alpine<span class="whitespace">
+</span>RUN<span class="whitespace"> </span><span class="name builtin">echo</span><span class="whitespace"> </span>hello<span class="whitespace"> </span>world
+</pre>
 <p>Bir Dockerfile dosyası aşağıdaki gibi çalıştırılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-f<span class="whitespace"> </span>./builder/Dockerfile<span class="whitespace"> </span>./</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-f<span class="whitespace"> </span>./builder/Dockerfile<span class="whitespace"> </span>./
+</pre>
 <p>Burada <strong>-f</strong> parametresi dosyadan oku anlamına gelir. <strong>./</strong> ise çalışma dizinini belirtir. Eğer <strong>-f</strong> verilmemişse çalışma dizininde dockerfile dosyası aranır.</p>
 <p>Ayrıca doğrudan git üzerinden de çalıştırılabilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>git://gitserver.com/username/repository.git</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>git://gitserver.com/username/repository.git
+</pre>
 <p>Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlanabilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-f<span class="whitespace"> </span>builder/Dockerfile<span class="whitespace"> </span>https://example.org/source.tar.gz</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-f<span class="whitespace"> </span>builder/Dockerfile<span class="whitespace"> </span>https://example.org/source.tar.gz
+</pre>
 <p><strong>stdin</strong> okunarak çalıştırılabilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>Dockerfile<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-</code></pre>
-</section>
-<section id="dockerfile-yapisi">
-<h2>Dockerfile yapısı</h2>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>Dockerfile<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-
+</pre>
+</div>
+<div class="section" id="dockerfile-yapisi">
+<h1>Dockerfile yapısı</h1>
 <p>Dockerfile dosyaları komutlar yardımı ile çalışır. Aşağıda komut ve kullanım şekli belirtilmiştir.</p>
-<pre class="code yaml literal-block"><code><span class="name tag">FROM &lt;imaj| scratch&gt;    </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">hedef imajı kullan veya boş imajla başla</span><span class="whitespace">
+<pre class="code yaml literal-block">
+<span class="name tag">FROM &lt;imaj| scratch&gt;    </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">hedef imajı kullan veya boş imajla başla</span><span class="whitespace">
 </span><span class="name tag">COPY &lt;src&gt; &lt;trgt&gt;       </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Çalışma dizinindeki dosyayı kopyalar.</span><span class="whitespace">
 </span><span class="name tag">ADD &lt;src&gt; &lt;trgt&gt;        </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">COPY ile benzerdir fakat arşivleri açarak kopyalar.</span><span class="whitespace">
 </span><span class="name tag">RUN &lt;command&gt;           </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Komut çalıştırır.</span><span class="whitespace">
@@ -199,19 +279,24 @@ alpine debian arch ubuntu</code></pre>
 </span><span class="name tag">ENV &lt;name&gt; &lt;value&gt;      </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Çevresel değişken belirler.</span><span class="whitespace">
 </span><span class="name tag">LABEL &lt;key=value&gt;       </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Metadata tanımlamak için kullanılır.</span><span class="whitespace">
 </span><span class="name tag">EXPOSE &lt;port/protocol&gt;  </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">Port açmak için kullanılır. protocol kısmı tcp veya udp olabilir.</span><span class="whitespace">
-</span><span class="name tag">ARG &lt;name=value&gt;        </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">ENV ile benzerdir fakat sadece imaj oluşturulurken kullanılabilir.</span></code></pre>
+</span><span class="name tag">ARG &lt;name=value&gt;        </span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal scalar plain">ENV ile benzerdir fakat sadece imaj oluşturulurken kullanılabilir.</span>
+</pre>
 <p>Örneğin aşağıda bir dockerfile dosyası ile kaynak kod derleyelim.</p>
-<pre class="code yaml literal-block"><code><span class="literal scalar plain">FROM alpine</span><span class="whitespace">
+<pre class="code yaml literal-block">
+<span class="literal scalar plain">FROM alpine</span><span class="whitespace">
 </span><span class="literal scalar plain">RUN apk add --no-cache build-base</span><span class="whitespace">
 </span><span class="literal scalar plain">ADD bash-5.0.tar.gz /build</span><span class="whitespace">
 </span><span class="literal scalar plain">WORKDIR /build/bash-5.0</span><span class="whitespace">
 </span><span class="literal scalar plain">RUN ./configure --prefix=/usr</span><span class="whitespace">
 </span><span class="literal scalar plain">RUN make</span><span class="whitespace">
-</span><span class="literal scalar plain">RUN make install</span></code></pre>
+</span><span class="literal scalar plain">RUN make install</span>
+</pre>
 <p>Şimdi bu dosyayı derleme yapmak için kullanalım. Burada <strong>-t</strong> yeni oluşacak imaja isim tag eklemek için kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>wget<span class="whitespace"> </span>https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz<span class="whitespace">
-</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-t<span class="whitespace"> </span>build-bash:5.0<span class="whitespace"> </span>.</code></pre>
-</section>
-</main>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>wget<span class="whitespace"> </span>https://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz<span class="whitespace">
+</span>$<span class="whitespace"> </span>docker<span class="whitespace"> </span>build<span class="whitespace"> </span>-t<span class="whitespace"> </span>build-bash:5.0<span class="whitespace"> </span>.
+</pre>
+</div>
+</div>
 </body>
 </html>

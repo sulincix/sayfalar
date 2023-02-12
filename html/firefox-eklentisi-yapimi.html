@@ -1,35 +1,39 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <title>Firefox eklentisi yapımı</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-</head>
 <body>
-<main id="firefox-eklentisi-yapimi">
+<div class="document" id="firefox-eklentisi-yapimi">
 <h1 class="title">Firefox eklentisi yapımı</h1>
 
 <p><strong>Not:</strong> Bu yazı <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension</a> adresinden yararlanılarak oluşturulmuştur.</p>
 <p>Bu yazıda sizlere basit firefox eklentisi yapmayı ve paketlemeyi anlatacağım.</p>
-<section id="asama-proje-dizini">
-<h2>1. Aşama: proje dizini</h2>
+<div class="section" id="asama-proje-dizini">
+<h1>1. Aşama: proje dizini</h1>
 <p>Eklentimizin paketlenmesi için öncelikle bir proje dizini gerekmektedir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>eklenti<span class="whitespace">
-</span>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>eklenti</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>eklenti<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>eklenti
+</pre>
 <p>Proje dizinimizde eklentinin özelliklerini belirten <strong>manifest.json</strong> dosyası ve eklentinin kodunu içeren javascript kodu yer almaktadır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>tree<span class="whitespace"> </span>eklenti<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>tree<span class="whitespace"> </span>eklenti<span class="whitespace">
 </span>eklenti/<span class="whitespace">
     </span>├──<span class="whitespace"> </span>main.js<span class="whitespace">
     </span>├──<span class="whitespace"> </span>icon.png<span class="whitespace">
-    </span>└──<span class="whitespace"> </span>manifest.json</code></pre>
-</section>
-<section id="asama-manifest-hazirlanmasi">
-<h2>2. Aşama: manifest hazırlanması</h2>
+    </span>└──<span class="whitespace"> </span>manifest.json
+</pre>
+</div>
+<div class="section" id="asama-manifest-hazirlanmasi">
+<h1>2. Aşama: manifest hazırlanması</h1>
 <p>Manifest dosyası eklentinin adı açıklaması sürümü ve bunun gibi bilgiler içerir. Aşağıdakine benzer formattadır.</p>
-<pre class="code json literal-block"><code><span class="punctuation">{</span><span class="whitespace">
+<pre class="code json literal-block">
+<span class="punctuation">{</span><span class="whitespace">
 
   </span><span class="name tag">&quot;manifest_version&quot;</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="whitespace">
   </span><span class="name tag">&quot;name&quot;</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="literal string double">&quot;Eklenti deneme&quot;</span><span class="punctuation">,</span><span class="whitespace">
@@ -54,32 +58,37 @@
     </span><span class="punctuation">}</span><span class="whitespace">
   </span><span class="punctuation">}</span><span class="whitespace">
 
-</span><span class="punctuation">}</span></code></pre>
+</span><span class="punctuation">}</span>
+</pre>
 <p>Burada <strong>manifest_version</strong> eklentinin sürüm numarasını, <strong>name</strong> eklentinin adını, <strong>version</strong> gözüken sürüm numarasını, <strong>description</strong> eklentinin açıklamasını belirtir. <strong>icons</strong> kısmında eklentinin simgesi belirtilir. <strong>content_scrippt</strong> bölümünde ise eşleşen alan adlarında kullanılacak javascript kodları belirtilir.</p>
 <p><strong>browser_specific_settings</strong> bölümünde ise eklentinin tarayıcıya özel bölümü yer alır. Burada <strong>id</strong> eklentiye özel bir belirteçtir. <strong>strict_min_version</strong> ise gerekli olan en düşük sürümü belirtir.</p>
 <p>Manifest ile ilgili tüm detaylara mozillanın dokümanlarından ulaşabilirsiniz.</p>
-</section>
-<section id="asama-javascript-kodlama">
-<h2>3. Aşama: javascript kodlama</h2>
+</div>
+<div class="section" id="asama-javascript-kodlama">
+<h1>3. Aşama: javascript kodlama</h1>
 <p>Her ne kadar javascript yazmaktan nefret etsem de firefox eklentileri javascript ile yazıldığı için burada kullanmamız gereklidir.</p>
 <p>Örnek manifestte belirttiğimiz <strong>main.js</strong> dosyasının içeriğini aşağıdaki gibi yazabiliriz.</p>
-<pre class="code javascript literal-block"><code><span class="name builtin">document</span><span class="punctuation">.</span><span class="name other">body</span><span class="punctuation">.</span><span class="name other">textContent</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string double">&quot;Hello World&quot;</span><span class="punctuation">;</span></code></pre>
+<pre class="code javascript literal-block">
+<span class="name builtin">document</span><span class="punctuation">.</span><span class="name other">body</span><span class="punctuation">.</span><span class="name other">textContent</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string double">&quot;Hello World&quot;</span><span class="punctuation">;</span>
+</pre>
 <p>Yukarıdaki örnekte sayfanın body kısmını <em>Hello World</em> ile değiştirdik. Burada yazacağımız kodları firefoxta <strong>f12</strong> tuşuna basınca açılan konsolda yazabilirsiniz. Bu kodlar sayfa yüklendikten sonra çalıştırılır ve sayfada değişiklik yapmamıza imkan tanır.</p>
-</section>
-<section id="asama-paketleme">
-<h2>4. Aşama: paketleme</h2>
+</div>
+<div class="section" id="asama-paketleme">
+<h1>4. Aşama: paketleme</h1>
 <p>Firefox eklentileri <strong>xpi</strong> uzantılıdır. Bu eklentiler basit zip dosyalarıdır. proje dizinimizi ziplememiz yeterli olacaktır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>eklenti<span class="whitespace">
-</span>$<span class="whitespace"> </span>zip<span class="whitespace"> </span>eklenti.xpi<span class="whitespace"> </span>manifest.json<span class="whitespace"> </span>main.js<span class="whitespace"> </span>icon.png</code></pre>
-</section>
-<section id="asama-eklentiyi-yukleme">
-<h2>5. Aşama: Eklentiyi yükleme</h2>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>eklenti<span class="whitespace">
+</span>$<span class="whitespace"> </span>zip<span class="whitespace"> </span>eklenti.xpi<span class="whitespace"> </span>manifest.json<span class="whitespace"> </span>main.js<span class="whitespace"> </span>icon.png
+</pre>
+</div>
+<div class="section" id="asama-eklentiyi-yukleme">
+<h1>5. Aşama: Eklentiyi yükleme</h1>
 <p>Eklentiler güvenlik sebebi gereği normal yoldan tarayıcıya sürükle bırak yapılarak yüklenemez. Bu sebeple adres çubuğuna <strong>about:debugging</strong> yazarak hata ayıklama bölümünden oluşturduğumuz xpi dosyasını seçerek kurulum yapabilirsiniz.</p>
-</section>
-<section id="asama-eklenti-magazasinda-paylasma">
-<h2>6. Aşama: Eklenti mağazasında paylaşma</h2>
+</div>
+<div class="section" id="asama-eklenti-magazasinda-paylasma">
+<h1>6. Aşama: Eklenti mağazasında paylaşma</h1>
 <p>Eklentiniz tamamlandıktan sonra <a class="reference external" href="https://addons.mozilla.org/developers/addons">https://addons.mozilla.org/developers/addons</a> adresinden firefox hesabı ile giriş yapıp eklentinizi yayınlayabilirsiniz. Eklentiler mozilla tarafından onaylandıktan sonra indirilebilir olacaktır.</p>
-</section>
-</main>
+</div>
+</div>
 </body>
 </html>

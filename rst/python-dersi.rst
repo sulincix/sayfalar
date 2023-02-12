@@ -343,26 +343,6 @@ Bu konunun daha iyi anlaşılması için:
 	-> eşittir
 	-> eşit değildir
 	
-While döngüsü
-=============
-
-Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca **while** döngüsü ile **if** arasındaki fark **while** içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.
-
-.. code-block:: python
-
-	while koşul:
-	    eylem
-
-Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda *i* sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır. 
-
-.. code-block:: python
-
-	i = 1
-	while i < 10:
-	    print(i)
-	    i+=1 # i = i + 1 ile aynı anlama gelir.
-	-> 1 2 3 4 5 6 7 8 9 (Bunu alt alta yazdığını hayal edin :D )
-
 Diziler
 =======
 
@@ -448,6 +428,37 @@ String türünden bir değişkeni belli bir harf veya harf öbeğine göre bölm
 	-> 20 14
 	-> ['Bu', 'bir', 'yazıdır']
 
+While döngüsü
+=============
+
+Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca **while** döngüsü ile **if** arasındaki fark **while** içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.
+
+.. code-block:: python
+
+	while koşul:
+	    eylem
+
+Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda *i* sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır. 
+
+.. code-block:: python
+
+	i = 1
+	while i < 10:
+	    print(i)
+	    i+=1 # i = i + 1 ile aynı anlama gelir.
+	-> 1 2 3 4 5 6 7 8 9 (Bunu alt alta yazdığını hayal edin :D )
+
+Bir döngüden çıkmak için **break** ifadesi kullanılır. Döngünün o andi adımını tamamlayıp diğer adıma geçmek için ise **continue** ifadesi kullanılır.
+
+Örneğin aşyağıda siz çift sayı girene kadar sürekli olarak çalışan bir program yazalım.
+
+.. code-block:: python
+
+	while True:
+	    sayi = int(input("Sayı girin"))
+	    if sayi % 2 == 0:
+	        break
+
 For döngüsü
 ===========
 
@@ -492,18 +503,19 @@ Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringi
 .. code-block:: python
 
 	asallar = [2] # ilk asal sayıyı elle yazdık.
-	i = 2 # Şu anki sayı
+	i = 3 # Şu anki sayı
 	while i < 60: # 60a kadar say
 	    hmm = True # asal sayı mı diye bakılan değişken
 	    for e in asallar: # asal sayılar listesi elemanları
 	        if i % e == 0: # tam bölünüyor mu
 	            hmm = False # asal sayı değildir
+	            break # for döngüsünden çıkmak için
 	    if hmm: # Asal sayıysa diziye ekleyelim
 	        asallar.append(i)
 	    i += 1 # mevcut sayımızı 1 arttıralım.
 	print(asallar) # 60a kadar olan asal sayılar dizisini yazalım.
 	-> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
-	
+
 İşlevler
 ========
 
@@ -566,6 +578,21 @@ Bir işlevin birden çok çıktısı olabilir. Bunun için **return** ifadesini 
 	# Bunun yerine doğrudan c,d = d,c kullanılabilirdi.
 	print(c,d)
 	-> 31 12
+
+Konunun daha iyi anlaşılabilir olması için girilen dizinin sayılarının ortalamasını alan bir fonksiyon yazalım.
+
+.. code-block:: python
+
+	def ortalama(dizi):
+	    toplam = 0 # toplam değişkeni tanımladık.
+	    for eleman in dizi: # for döngüsü oluşturduk.
+	        toplam += int(eleman) # elemanları topladık.
+	    return toplam / len(dizi) # toplamı eleman sayısına böldük.
+
+	ort = input("Dizi giriniz. aralarına , koyunuz")
+	print(ortalama(ort.split(",")))
+	<- 1,34,22,-32
+	-> 6.25
 
 Sınıflar
 ========

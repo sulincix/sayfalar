@@ -1,50 +1,58 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <title>Git kullanımı</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-</head>
 <body>
-<main id="git-kullanimi">
+<div class="document" id="git-kullanimi">
 <h1 class="title">Git kullanımı</h1>
 
 <p>Bu dokümanda sürüm kontrol sistemi olan git komutu nasıl kullanılır anlatılacakdır.</p>
-<section id="git-kurulumu">
-<h2>Git kurulumu</h2>
+<div class="section" id="git-kurulumu">
+<h1>Git kurulumu</h1>
 <p>git kurulumu debian tabanlı dağıtımlar için aşağıdaki komut kullanılarak kurulabilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>git-core</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>git-core
+</pre>
 <p>Kaynak koddan derlemek için öncelikle git kaynak kodunu indirip bizine açalım.
 Ardından aşağıdaki adımları uygulayarak derleyelim ve kuralım.</p>
-<pre class="code shell literal-block"><code>./configure<span class="whitespace"> </span>--prefix<span class="operator">=</span>/usr<span class="whitespace">
+<pre class="code shell literal-block">
+./configure<span class="whitespace"> </span>--prefix<span class="operator">=</span>/usr<span class="whitespace">
 </span>make<span class="whitespace">
-</span>make<span class="whitespace"> </span>install</code></pre>
-</section>
-<section id="git-ne-ise-yarar">
-<h2>Git ne işe yarar</h2>
+</span>make<span class="whitespace"> </span>install
+</pre>
+</div>
+<div class="section" id="git-ne-ise-yarar">
+<h1>Git ne işe yarar</h1>
 <p>Git yazdığımız kodların sürüm takibini yapmamızı sağlayan bir araçtır.
 Bu sayede kod yazarken önceki değişiklikleri kaybetmeden düzenli bir şekilde kodda yaptığımız değişiklikleri görebilir ve ihtiyaç duyulduğunda eski sürümlere dönülebilir.
 Ayrıca git sayesinde yazdığımız kodu git sunucuları (github, gitlab vb) kullanarak paylaşmak mümkündür.</p>
-</section>
-<section id="git-kullanarak-kaynak-kodun-indirilmesi">
-<h2>Git kullanarak kaynak kodun indirilmesi</h2>
+</div>
+<div class="section" id="git-kullanarak-kaynak-kodun-indirilmesi">
+<h1>Git kullanarak kaynak kodun indirilmesi</h1>
 <p>Git kullanarak kaynak kodu bilgisayarımıza indirmek için <cite>git clone</cite> komutundan faydalanılır.
 Bu komut git sunucusundan yapılan tüm değişiklikler ile beraber indirir.
 Eğer belli miktarda değişiklikle indirmek isterseniz <strong>--depth=</strong> parametresi eklenmelidir.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># sadece son değişikliği almak için --depth=1 eklendi.
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>clone<span class="whitespace"> </span>https://gitlab.com/sulincix/sayfalar.git<span class="whitespace"> </span>--depth<span class="operator">=</span><span class="literal number">1</span></code></pre>
+<pre class="code shell literal-block">
+<span class="comment single"># sadece son değişikliği almak için --depth=1 eklendi.
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>clone<span class="whitespace"> </span>https://gitlab.com/sulincix/sayfalar.git<span class="whitespace"> </span>--depth<span class="operator">=</span><span class="literal number">1</span>
+</pre>
 <p>İndrilen kodun istediğiniz bir dizine indirilmesini istiyorsanız komutun sonuna istenilen konumu yazmanız gereklidir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>clone<span class="whitespace"> </span>https://gitlab.com/sulincix/sayfalar.git<span class="whitespace"> </span>~/Belgeler/sayfalar</code></pre>
-</section>
-<section id="eski-degisiklikleri-gormek-ve-eski-surume-donmek">
-<h2>Eski değişiklikleri görmek ve eski sürüme dönmek</h2>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>clone<span class="whitespace"> </span>https://gitlab.com/sulincix/sayfalar.git<span class="whitespace"> </span>~/Belgeler/sayfalar
+</pre>
+</div>
+<div class="section" id="eski-degisiklikleri-gormek-ve-eski-surume-donmek">
+<h1>Eski değişiklikleri görmek ve eski sürüme dönmek</h1>
 <p><cite>git log</cite> komutunu kullanarak eski değişiklikleri görebilirsiniz. Bu yapılan değişiklikler <strong>commit</strong> olarak adlandırılır.
 Yazının bundan sonraki kısmında <strong>commit</strong> sözcüğü kullanılacaktır.</p>
 <p>Her commitin bir id değeri bulunur. Bu değer kullanılarak eski sürüme dönülebilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>log<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>log<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>commit<span class="whitespace"> </span>a983f37db618a06a53adb593dd97aa0282775ef5<span class="whitespace"> </span><span class="operator">(</span>HEAD<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master,<span class="whitespace"> </span>origin/master,<span class="whitespace"> </span>origin/HEAD<span class="operator">)</span><span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Author:<span class="whitespace"> </span>aliriza<span class="whitespace"> </span>&lt;aliriza.keskin&#64;pardus.org.tr&gt;<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Date:<span class="whitespace">   </span>Mon<span class="whitespace"> </span>Oct<span class="whitespace"> </span><span class="literal number">10</span><span class="whitespace"> </span><span class="literal number">08</span>:31:30<span class="whitespace"> </span><span class="literal number">2022</span><span class="whitespace"> </span>+0000<span class="whitespace">
@@ -56,42 +64,52 @@ Yazının bundan sonraki kısmında <strong>commit</strong> sözcüğü kullanı
 </span>-&gt;<span class="whitespace"> </span>Date:<span class="whitespace">   </span>Tue<span class="whitespace"> </span>Sep<span class="whitespace"> </span><span class="literal number">27</span><span class="whitespace"> </span><span class="literal number">10</span>:11:12<span class="whitespace"> </span><span class="literal number">2022</span><span class="whitespace"> </span>+0000<span class="whitespace">
 </span>-&gt;<span class="whitespace">
 </span>-&gt;<span class="whitespace">     </span>commit<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace">
-</span>...</code></pre>
+</span>...
+</pre>
 <p>Burada eski sürüme dönmek için <cite>git reset &lt;commit-id&gt;</cite> komutu kullanılır.
 Bu komut kodda yapılan değişiklikleri silmeyip git içerisinde eski sürüme dönmeyi sağlar.
 Eğer git üzerinde yaptığınız değişiklikleri de geri almak isterseniz <cite>--hard</cite> parametresini kullanabilirsiniz.
 Bu parametre tehlikelidir çünkü yazdığınız kodu geri dönülemez şekilde siler.</p>
 <p>Ayrıca commit id yerine <cite>HEAD~n</cite> kullanarak <strong>n</strong> sayıda önceki commite geri dönebilirsiniz.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># belirtilen commit-id değerine göre eski sürüme dönmek için (hard reset)
+<pre class="code shell literal-block">
+<span class="comment single"># belirtilen commit-id değerine göre eski sürüme dönmek için (hard reset)
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>reset<span class="whitespace"> </span>180a8bcaf81485958fded6a69c97d15161fd1b75<span class="whitespace"> </span>--hard<span class="whitespace">
 </span><span class="comment single"># belirtilen sayıda eski sürüme dönmek için (reset)
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>reset<span class="whitespace"> </span>HEAD~2</code></pre>
-</section>
-<section id="sunucudaki-guncel-degisiklikleri-almak">
-<h2>Sunucudaki güncel değişiklikleri almak</h2>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>reset<span class="whitespace"> </span>HEAD~2
+</pre>
+</div>
+<div class="section" id="sunucudaki-guncel-degisiklikleri-almak">
+<h1>Sunucudaki güncel değişiklikleri almak</h1>
 <p>Sunucudaki değişiklikleri <cite>git pull</cite> komutu ile alabiliriz.
 Bu komut sunucu tarafında yapılan değişiklikleri yereldeki git deposuna ekleyecektir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>pull</code></pre>
-</section>
-<section id="yeni-commit-olusturma">
-<h2>Yeni commit oluşturma</h2>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>pull
+</pre>
+</div>
+<div class="section" id="yeni-commit-olusturma">
+<h1>Yeni commit oluşturma</h1>
 <p>Kaynak kodda yaptığımız değişiklikleri yeni bir commit olarak oluşturmak için <cite>git commit</cite> komutu kullanılır.
 Bunun için öncelikle hangi dosyaları değiştirdiysek <cite>git add</cite> komutu ile belirtemiz gerekir.
 Daha sonra <cite>git checkout</cite> komutu ile yapılan değişikliklerin düzgün bir şekilde algılandığından emin olunur.
 Son olarak <cite>git commit</cite> komutu ile yeni commit oluşturulur.</p>
 <p>git commit komutu doğrudan çalıştırıldığında metin düzenleyici ile commit mesajı düzenleme ekranı çalıştırılır.
 Eğer bu ekranı kullanmak yerine parametre ile belirtmek istereniz <strong>-m</strong> parametresi eklemelisiniz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>add<span class="whitespace"> </span>rst/git-kullanimi.rst<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>add<span class="whitespace"> </span>rst/git-kullanimi.rst<span class="whitespace">
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>checkout<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>M<span class="whitespace">    </span>rst/git-kullanimi.rst<span class="whitespace">
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>commit<span class="whitespace"> </span>-m<span class="whitespace"> </span><span class="literal string double">&quot;commit mesajı&quot;</span></code></pre>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>commit<span class="whitespace"> </span>-m<span class="whitespace"> </span><span class="literal string double">&quot;commit mesajı&quot;</span>
+</pre>
 <p>commit mesajı düzenleyici <strong>EDITOR</strong> çevreler değişkeni ile belirlenir. Genellikle varsayılan olarak vim kullanılır.
 Bunu değiştirmek için <strong>~/.bashrc</strong> içerisinde aşağıdaki gibi tanımlama yapabilirsiniz.</p>
-<pre class="code shell literal-block"><code><span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">EDITOR</span><span class="operator">=</span>nano</code></pre>
+<pre class="code shell literal-block">
+<span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">EDITOR</span><span class="operator">=</span>nano
+</pre>
 <p>Commit mesajını değiştirmek için <cite>git commit --amend</cite> komutunu kullanabilirsiniz.</p>
 <p>Yeni commit oluşturduktan sonra <strong>HEAD</strong> ve <strong>origin</strong> artık aynı committe olmayacaktır.
 Burada HEAD sizin yerel olarak bulundurduğunuz halini origin ise git sunucusundaki halini gösterir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>log<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>log<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>commit<span class="whitespace"> </span>03d5176f5e5b46e43dd688fd7b884a58e60afcd4<span class="whitespace"> </span><span class="operator">(</span>HEAD<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master<span class="operator">)</span><span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Author:<span class="whitespace"> </span>aliriza<span class="whitespace"> </span>&lt;aliriza.keskin&#64;pardus.org.tr&gt;<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Date:<span class="whitespace">   </span>Mon<span class="whitespace"> </span>Jan<span class="whitespace"> </span><span class="literal number">9</span><span class="whitespace"> </span><span class="literal number">11</span>:09:02<span class="whitespace"> </span><span class="literal number">2023</span><span class="whitespace"> </span>+0300<span class="whitespace">
@@ -102,17 +120,19 @@ Burada HEAD sizin yerel olarak bulundurduğunuz halini origin ise git sunucusund
 </span>-&gt;<span class="whitespace"> </span>Author:<span class="whitespace"> </span>aliriza<span class="whitespace"> </span>&lt;aliriza.keskin&#64;pardus.org.tr&gt;<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Date:<span class="whitespace">   </span>Tue<span class="whitespace"> </span>Dec<span class="whitespace"> </span><span class="literal number">27</span><span class="whitespace"> </span><span class="literal number">16</span>:44:49<span class="whitespace"> </span><span class="literal number">2022</span><span class="whitespace"> </span>+0300<span class="whitespace">
 </span>-&gt;<span class="whitespace">
-</span>-&gt;<span class="whitespace">     </span>commit<span class="whitespace"> </span><span class="literal number">1</span></code></pre>
-</section>
-<section id="git-sunucusuna-gonderme">
-<h2>Git sunucusuna gönderme</h2>
+</span>-&gt;<span class="whitespace">     </span>commit<span class="whitespace"> </span><span class="literal number">1</span>
+</pre>
+</div>
+<div class="section" id="git-sunucusuna-gonderme">
+<h1>Git sunucusuna gönderme</h1>
 <p>Yaptığımız değişiklikleri git sunucusuna göndermek için <cite>git push</cite> komutu kullanılır.
 Sunucu sizden kullanıcı adı ve parola ile doğrulama isteyebilir.
 Sunucuya ssh anahtarı eklediyseniz ve ssh üzerinden kullanıyorsanız genellikle doğrulama yapılırken parolaya gerek duyulmaz.</p>
 <p><strong>Not:</strong> github 13 Ağustos 2021 tarihinde https üzerinden commit göndermeyi engellemeye başladı.
 Parolanız yerine githubdan sağlayacağınız token değerini girmeniz gerekmektedir.
 Github kullanıyorsanız ssh anahtarı ile kullanmanızı öneririm.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Username<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span><span class="literal string single">'https://gitlab.com'</span>:<span class="whitespace"> </span>sulincix<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Password<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span><span class="literal string single">'https://sulincix&#64;gitlab.com'</span>:<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Enumerating<span class="whitespace"> </span>objects:<span class="whitespace"> </span><span class="literal number">3</span>,<span class="whitespace"> </span><span class="keyword">done</span>.<span class="whitespace">
@@ -122,47 +142,62 @@ Github kullanıyorsanız ssh anahtarı ile kullanmanızı öneririm.</p>
 </span>-&gt;<span class="whitespace"> </span>remote:<span class="whitespace"> </span>.<span class="whitespace"> </span>Processing<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace"> </span>references<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>remote:<span class="whitespace"> </span>Processed<span class="whitespace"> </span><span class="literal number">1</span><span class="whitespace"> </span>references<span class="whitespace"> </span><span class="keyword">in</span><span class="whitespace"> </span>total<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>To<span class="whitespace"> </span>https://gitlab.com/sulincix/git-dersi.git<span class="whitespace">
-</span>-&gt;<span class="whitespace">    </span>1ac2e12..2742a1f<span class="whitespace">  </span>master<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master</code></pre>
+</span>-&gt;<span class="whitespace">    </span>1ac2e12..2742a1f<span class="whitespace">  </span>master<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master
+</pre>
 <p>Eğer sunucusunda daha önceden yaptığınız değişiklikler varsa ve sizin yaptığınız değişiklikler ile çakışıyorsa <cite>git push</cite> komutu hata verecektir.
 Bu duruma <strong>conflict</strong> adı verilir. Conflict çözmek için öncelikle <strong>git pull --rebase</strong> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code>git<span class="whitespace"> </span>push<span class="whitespace">
+<pre class="code shell literal-block">
+git<span class="whitespace"> </span>push<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Username<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span>...<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Password<span class="whitespace"> </span><span class="keyword">for</span><span class="whitespace"> </span>...<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>To<span class="whitespace"> </span>https://gitlab.com/sulincix/git-dersi.git<span class="whitespace">
-</span>-&gt;<span class="whitespace">  </span>!<span class="whitespace"> </span><span class="operator">[</span>rejected<span class="operator">]</span><span class="whitespace">        </span>master<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master<span class="whitespace"> </span><span class="operator">(</span>fetch<span class="whitespace"> </span>first<span class="operator">)</span></code></pre>
+</span>-&gt;<span class="whitespace">  </span>!<span class="whitespace"> </span><span class="operator">[</span>rejected<span class="operator">]</span><span class="whitespace">        </span>master<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master<span class="whitespace"> </span><span class="operator">(</span>fetch<span class="whitespace"> </span>first<span class="operator">)</span>
+</pre>
 <p>Yukarıdaki örnekde <cite>git push</cite> komutunu sunucudaki değişiklikleri almadan çalıştırdığımız için bize önce <cite>git pull</cite> komutu kullanarak değişiklikleri almamız söyleniyor.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>pull<span class="whitespace"> </span>--rebase<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>pull<span class="whitespace"> </span>--rebase<span class="whitespace">
 </span>...<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>From<span class="whitespace"> </span>https://gitlab.com/sulincix/git-dersi.git<span class="whitespace">
 </span>-&gt;<span class="whitespace">    </span>61e3643..e2fe24f<span class="whitespace">  </span>master<span class="whitespace">     </span>-&gt;<span class="whitespace"> </span>origin/master<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Auto-merging<span class="whitespace"> </span>commit<span class="whitespace"> </span><span class="literal number">3</span><span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>CONFLICT<span class="whitespace"> </span><span class="operator">(</span>add/add<span class="operator">)</span>:<span class="whitespace"> </span>Merge<span class="whitespace"> </span>conflict<span class="whitespace"> </span><span class="keyword">in</span><span class="whitespace"> </span>commit<span class="whitespace"> </span><span class="literal number">3</span><span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>error:<span class="whitespace"> </span>could<span class="whitespace"> </span>not<span class="whitespace"> </span>apply<span class="whitespace"> </span>abaf641...<span class="whitespace"> </span>commit<span class="whitespace"> </span><span class="literal number">3</span><span class="whitespace">
-</span>...</code></pre>
+</span>...
+</pre>
 <p>Conflict durumunda <strong>rebase</strong> moduna geçilir. Bu modda çakışan dosyalarda hangisinin seçileceğine karar verilir.
 Çakışan dosyalar aşağıdaki gibi hal alır. Burada çakışma giderildikten sonra yeni bir commit oluşturmanız gerekmektedir.</p>
-<pre class="code shell literal-block"><code>...<span class="whitespace">
+<pre class="code shell literal-block">
+...<span class="whitespace">
 </span><span class="operator">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;<span class="whitespace"> </span>HEAD<span class="whitespace">
 </span>print<span class="operator">(</span><span class="literal string double">&quot;hello world&quot;</span><span class="operator">)</span><span class="whitespace">
 </span><span class="operator">=======</span><span class="whitespace">
 </span>print<span class="operator">(</span><span class="literal string double">&quot;hi world&quot;</span><span class="operator">)</span><span class="whitespace">
 </span>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="whitespace"> </span>abaf641<span class="whitespace"> </span><span class="operator">(</span>aaa<span class="operator">)</span><span class="whitespace">
-</span>...</code></pre>
+</span>...
+</pre>
 <p>Burada iki değişiklikten hangisinin kalması isteniyorsa o tutulur diğerleri silinir.
 Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağıdaki gibi olmalıdır.</p>
-<pre class="code shell literal-block"><code>...<span class="whitespace">
+<pre class="code shell literal-block">
+...<span class="whitespace">
 </span>print<span class="operator">(</span><span class="literal string double">&quot;hello world&quot;</span><span class="operator">)</span><span class="whitespace">
-</span>...</code></pre>
+</span>...
+</pre>
 <p>Çakışma giderildikten sonra yeni commit oluşturup gönderebiliriz.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>add<span class="whitespace"> </span>main.py<span class="whitespace">
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>commit<span class="whitespace"> </span>-m<span class="whitespace"> </span><span class="literal string double">&quot;Çakışma giderildi&quot;</span></code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>add<span class="whitespace"> </span>main.py<span class="whitespace">
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>commit<span class="whitespace"> </span>-m<span class="whitespace"> </span><span class="literal string double">&quot;Çakışma giderildi&quot;</span>
+</pre>
 <p>Çakışma giderildikten sonra rebase durumundan çıkmak için <cite>git rebase --continue</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>rebase<span class="whitespace"> </span>--continue<span class="whitespace">
-</span>-&gt;<span class="whitespace"> </span>Successfully<span class="whitespace"> </span>rebased<span class="whitespace"> </span>and<span class="whitespace"> </span>updated<span class="whitespace"> </span>refs/heads/master.</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>rebase<span class="whitespace"> </span>--continue<span class="whitespace">
+</span>-&gt;<span class="whitespace"> </span>Successfully<span class="whitespace"> </span>rebased<span class="whitespace"> </span>and<span class="whitespace"> </span>updated<span class="whitespace"> </span>refs/heads/master.
+</pre>
 <p>Ardından git push komutu ile sunucuya gönderilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>To<span class="whitespace"> </span>https://gitlab.com/sulincix/git-dersi.git<span class="whitespace">
-</span>-&gt;<span class="whitespace">    </span>e2fe24f..19361f6<span class="whitespace">  </span>master<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master</code></pre>
+</span>-&gt;<span class="whitespace">    </span>e2fe24f..19361f6<span class="whitespace">  </span>master<span class="whitespace"> </span>-&gt;<span class="whitespace"> </span>master
+</pre>
 <p>Eğer rebase yapmaktan vazgeçmek istiyorsanız <cite>git rebase --abort</cite> kullanmanız gerekir. Bu sayede rebase işleminden çıkılır.</p>
 <!-- code/block:: shell
 
@@ -171,90 +206,118 @@ $ git rebase - -abort -->
 Bu işlem sunucudaki değişiklikleri silip yerine yereldeki değişikliklerin atılmasını sağlar.</p>
 <p><strong>Not:</strong> Bu işlem sonucunda sunucuda bulunan değişiklikler silindiği için tehlikelidir. <strong>Daha önemlisi arkadaşlarınız size küfür edebilir :D</strong>
 Mümkünse hiç force push yapmayın.</p>
-</section>
-<section id="branch-kavrami">
-<h2>Branch kavramı</h2>
+</div>
+<div class="section" id="branch-kavrami">
+<h1>Branch kavramı</h1>
 <p>Git üzerinde birden çok dal ile çalışmak mümkündür. Bu dallar <strong>branch</strong> sözcüğü ile ifade edilir.
 Bu sadece koda yeri bir özelliği geliştirirken farklı bir dal kullanıp kodun stabil çalışan halini kullancak kişiler için korumanız mümkündür.</p>
 <p>Mecut branchları görüntülemek için <cite>git branch</cite> komutu kullanılır. Varsayılan branch adımız genellikle <strong>master</strong> olarak tanımlıdır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace">
-</span>-&gt;<span class="whitespace"> </span>*<span class="whitespace"> </span>master</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace">
+</span>-&gt;<span class="whitespace"> </span>*<span class="whitespace"> </span>master
+</pre>
 <p>Yeni bir branch oluşturmak için <cite>git branch &lt;dal-adı&gt;</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># yeni branch oluşturalım
+<pre class="code shell literal-block">
+<span class="comment single"># yeni branch oluşturalım
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace"> </span>development<span class="whitespace">
 </span><span class="comment single"># branch listeleyelim
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace">
 </span>-&gt;<span class="whitespace">   </span>development<span class="whitespace">
-</span>-&gt;<span class="whitespace"> </span>*<span class="whitespace"> </span>master</code></pre>
+</span>-&gt;<span class="whitespace"> </span>*<span class="whitespace"> </span>master
+</pre>
 <p>Yukarıdaki örnekte mevcut bulunduğumuz branch başında * işareti bulunmaktadır.
 Bulunduğumuz branchı değiştirmek için <cite>git switch &lt;dal-adı&gt;</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>switch<span class="whitespace"> </span>development<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>switch<span class="whitespace"> </span>development<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>Switched<span class="whitespace"> </span>to<span class="whitespace"> </span>branch<span class="whitespace"> </span><span class="literal string single">'development'</span><span class="whitespace">
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>*<span class="whitespace"> </span>development<span class="whitespace">
-</span>-&gt;<span class="whitespace">   </span>master</code></pre>
+</span>-&gt;<span class="whitespace">   </span>master
+</pre>
 <p>Dallarda yapılan değişiklikleri birleştirmek için <cite>git merge &lt;dal1&gt; &lt;dal2&gt;</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>merge<span class="whitespace"> </span>development<span class="whitespace"> </span>master</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>merge<span class="whitespace"> </span>development<span class="whitespace"> </span>master
+</pre>
 <p>Sunucuya değişikliklerimizi istenilen dalda göndermek için <cite>git push &lt;remote-adı&gt; &lt;dal-adı&gt;</cite> kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># master branchına geçelim
+<pre class="code shell literal-block">
+<span class="comment single"># master branchına geçelim
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>switch<span class="whitespace"> </span>master<span class="whitespace">
 </span><span class="comment single"># development branchını sunucuya yollayalım.
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace"> </span>origin<span class="whitespace"> </span>development</code></pre>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace"> </span>origin<span class="whitespace"> </span>development
+</pre>
 <p>Branch silmek için <cite>git branch -d &lt;dal-adı&gt;</cite> komutunu kullanabilirsiniz. Bulunduğunuz dalı silemezsiniz. ( Bindiğiniz dalı kesemediğiniz gibi:D )</p>
-<pre class="code shell literal-block"><code><span class="comment single"># önce diğer brancha geçelim
+<pre class="code shell literal-block">
+<span class="comment single"># önce diğer brancha geçelim
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>switch<span class="whitespace"> </span>master<span class="whitespace">
 </span><span class="comment single"># development branchını silelim
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace"> </span>-d<span class="whitespace"> </span>development</code></pre>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace"> </span>-d<span class="whitespace"> </span>development
+</pre>
 <p>Bir branchı yeniden adlandırmak için <cite>git branch --move &lt;eski-ad&gt; &lt;yeni-ad&gt;</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># bir branch oluşturalım.
+<pre class="code shell literal-block">
+<span class="comment single"># bir branch oluşturalım.
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace"> </span>dev<span class="whitespace">
 </span><span class="comment single"># yeniden adlandıralım.
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace"> </span>--move<span class="whitespace"> </span>dev<span class="whitespace"> </span>development</code></pre>
-</section>
-<section id="remote-kavrami">
-<h2>Remote kavramı</h2>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>branch<span class="whitespace"> </span>--move<span class="whitespace"> </span>dev<span class="whitespace"> </span>development
+</pre>
+</div>
+<div class="section" id="remote-kavrami">
+<h1>Remote kavramı</h1>
 <p>Git üzerinde birden çok sunucu tanımlanabilir ve bunlardan istenilene veri alınıp verilebilir. Bu sunucular <strong>remote</strong> sözcüğü ile ifade edilir.</p>
 <p>Mevcut remote listesi için <cite>git remote</cite> komutu kullanılır. varsayılan remote adı genellikle <strong>origin</strong> olarak tanımlanır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace">
-</span>-&gt;<span class="whitespace"> </span>origin</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace">
+</span>-&gt;<span class="whitespace"> </span>origin
+</pre>
 <p>Bir remotenin hangi adreste olduğunu öğrenmek için <cite>git remote get-url &lt;remote-adı&gt;</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>get-url<span class="whitespace"> </span>origin<span class="whitespace">
-</span>-&gt;<span class="whitespace"> </span>https://gitlab.com/sulincix/sayfalar.git</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>get-url<span class="whitespace"> </span>origin<span class="whitespace">
+</span>-&gt;<span class="whitespace"> </span>https://gitlab.com/sulincix/sayfalar.git
+</pre>
 <p>Remotenin adresini değiştirmek için ise <cite>git remote set-url &lt;remote-adı&gt; &lt;yeni-adres&gt;</cite> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>set-url<span class="whitespace"> </span>origin<span class="whitespace"> </span>https://gitlab.com/sulincix/git-dersi.git</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>set-url<span class="whitespace"> </span>origin<span class="whitespace"> </span>https://gitlab.com/sulincix/git-dersi.git
+</pre>
 <p>Yeni bir remote eklemek için ise <cite>git remote add &lt;remote-adı&gt; &lt;adres&gt;</cite> kullanılır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>add<span class="whitespace"> </span>github<span class="whitespace"> </span>https://github.com/sulincix/sayfalar.git<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>add<span class="whitespace"> </span>github<span class="whitespace"> </span>https://github.com/sulincix/sayfalar.git<span class="whitespace">
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace">
 </span>-&gt;<span class="whitespace"> </span>origin<span class="whitespace">
-</span>-&gt;<span class="whitespace"> </span>github</code></pre>
+</span>-&gt;<span class="whitespace"> </span>github
+</pre>
 <p>Remote üzerinden değişiklikleri alıp vermek için <cite>git pull &lt;remote-adı&gt;</cite> ve <cite>git push &lt;remote-adı&gt;</cite> kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># Değişiklikleri alalım
+<pre class="code shell literal-block">
+<span class="comment single"># Değişiklikleri alalım
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>pull<span class="whitespace"> </span>github<span class="whitespace">
 </span><span class="comment single"># diğer remote üzerine gönderelim.
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace"> </span>origin</code></pre>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>push<span class="whitespace"> </span>origin
+</pre>
 <p>Bir remoteyi silmek için <cite>git remote remove &lt;remote-adı&gt;</cite> komutu kullanılır.
 Yeniden adlandırmak için ise <cite>git remote rename &lt;eski-ad&gt; &lt;yeni-ad&gt;</cite> komutu kullanılır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># yeniden adlandıralım.
+<pre class="code shell literal-block">
+<span class="comment single"># yeniden adlandıralım.
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>rename<span class="whitespace"> </span>github<span class="whitespace"> </span>git<span class="whitespace">
 </span><span class="comment single"># remote silelim
-</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>remove<span class="whitespace"> </span>git</code></pre>
-</section>
-<section id="squash-commit-kavrami">
-<h2>Squash commit kavramı</h2>
+</span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>remote<span class="whitespace"> </span>remove<span class="whitespace"> </span>git
+</pre>
+</div>
+<div class="section" id="squash-commit-kavrami">
+<h1>Squash commit kavramı</h1>
 <p>Bazen git üzerinde farklı bir branch üzerinde geliştirme yaparken çok fazla miktarda commit ürettiğinizde bunları ana branch üzerine birleştirirken birsürü committen oluşması yerine tek bir commit haline getirmek isteyebilirsiniz.
 Bu gibi durumlarda commitleri birleştirerek <strong>squash commit</strong> elde edebilirsiniz. Bunun için rebase module geçmemiz gerekmektedir.</p>
 <p>İlk olarak <cite>git rebase -i &lt;commit-id&gt;</cite> komutu ile rebase moduna geçelim. burada <strong>-i</strong> parametresi commitleri birleştirmemiz için metin düzenleyicimizde bir ekran açacaktır.</p>
-<pre class="code shell literal-block"><code><span class="comment single"># rebase moduna geçelim.
+<pre class="code shell literal-block">
+<span class="comment single"># rebase moduna geçelim.
 </span>$<span class="whitespace"> </span>git<span class="whitespace"> </span>rebase<span class="whitespace"> </span>-i<span class="whitespace"> </span>HEAD~5<span class="whitespace">
 </span><span class="comment single"># metin düzenleyicimizde aşağıdaki gibi metin bulunur.
 </span>pick<span class="whitespace"> </span>aa34d35<span class="whitespace"> </span>commit<span class="whitespace"> </span><span class="literal number">5</span><span class="whitespace">
 </span>pick<span class="whitespace"> </span>879917e<span class="whitespace"> </span>commit<span class="whitespace"> </span><span class="literal number">4</span><span class="whitespace">
 </span>pick<span class="whitespace"> </span>864dc97<span class="whitespace"> </span>commit<span class="whitespace"> </span><span class="literal number">3</span><span class="whitespace">
-</span>...</code></pre>
+</span>...
+</pre>
 <p>Yukarıdaki örnekte <strong>pick</strong> ile belirtilen commitleri <strong>squash</strong> olarak değiştirirseniz commit bir önceki commit ile birleştirilmiş olur.
 Diğer komutlar düzenleyicide altta açıklama satırı olarak yer almaktadır.</p>
 <p>Düzenleyicide kaydedip çıktıktan sonra bu sefer commit mesajı ekranı ile karşılaşırız. Burada birleştirilmiş commit mesajını yazıp kaydettikten sonra commitler birleştirilmiş olur.</p>
-</section>
-</main>
+</div>
+</div>
 </body>
 </html>

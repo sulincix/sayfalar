@@ -1,67 +1,79 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <title>AppImage paketleme</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-</head>
 <body>
-<main id="appimage-paketleme">
+<div class="document" id="appimage-paketleme">
 <h1 class="title">AppImage paketleme</h1>
 
 <p>Bu belgede bir <strong>AppDir</strong> oluşturup ardından <strong>AppImage</strong> dosyası üretmeyi anlatacağız.</p>
-<section id="appdir-olusturma">
-<h2>AppDir oluşturma</h2>
+<div class="section" id="appdir-olusturma">
+<h1>AppDir oluşturma</h1>
 <p>Proje dizinimize aşağıdakine benzer proje dizini açarak işe başlayalım.</p>
-<pre class="code shell literal-block"><code>MyApp.AppDir/<span class="whitespace">
+<pre class="code shell literal-block">
+MyApp.AppDir/<span class="whitespace">
 </span>MyApp.AppDir/AppRun<span class="whitespace">
 </span>MyApp.AppDir/myapp.desktop<span class="whitespace">
 </span>MyApp.AppDir/myapp.png<span class="whitespace">
 </span>MyApp.AppDir/usr/bin/myapp<span class="whitespace">
-</span>MyApp.AppDir/usr/lib/libfoo.so.0</code></pre>
+</span>MyApp.AppDir/usr/lib/libfoo.so.0
+</pre>
 <p>Bu doküman boyunca <strong>MyApp.AppDir</strong> dizinini proje dizini olarak kuıllanacağım.</p>
-<section id="desktop-dosyasi">
-<h3>Desktop Dosyası</h3>
+<div class="section" id="desktop-dosyasi">
+<h2>Desktop Dosyası</h2>
 <p>Bu dosya uygulama ile ilgili bilgileri içerir. (Uygulama simgesi adı vb.) Deneme amaçlı bu dosyadan bir dane oluşturalım.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>myapp.desktop<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>myapp.desktop<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; [Desktop Entry]
 &gt; Name=MyApp
 &gt; Exec=myapp
 &gt; Icon=myapp
 &gt; Type=Application
 &gt; Categories=Utility;
-&gt; EOF</span></code></pre>
-</section>
-<section id="uygulama-simgesi">
-<h3>Uygulama simgesi</h3>
+&gt; EOF</span>
+</pre>
+</div>
+<div class="section" id="uygulama-simgesi">
+<h2>Uygulama simgesi</h2>
 <p>Bu dosyanın adı desktop dosyası ile aynı olmalıdır. Uygulama simgesini belirlemeye yarar. Deneme amaçlı boş dosya açsak işimizi görür :)</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>touch<span class="whitespace"> </span>myapp.png</code></pre>
-</section>
-<section id="apprun-dosyasi">
-<h3>AppRun Dosyası</h3>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>touch<span class="whitespace"> </span>myapp.png
+</pre>
+</div>
+<div class="section" id="apprun-dosyasi">
+<h2>AppRun Dosyası</h2>
 <p>AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve <strong>$PATH</strong> değerini ayarlamak zorunda. AppImage dosyası çalıştırıldığında <strong>$APPDIR</strong> değişkeni ile ifade edilen dizinine bağlanır ve <strong>AppRun</strong> dosyası çalıştırılır. Deneme amaçlı AppRun dosyası oluşturalım. Ekrana çalıştırınca <em>Hello World</em> yazdırsın.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; #!/bin/bash
 &gt; echo &quot;Hello Word&quot;
-&gt; EOF</span></code></pre>
+&gt; EOF</span>
+</pre>
 <p>Eğer script dili ile çalışan <strong>AppRun</strong> yazıyorsanız başına interpreter belirtecini <strong>(#!/bin/bash)</strong> eklemeyi unutmayın. Genellikle bash scriptleri tercih edilir.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>chmod<span class="whitespace"> </span>+x<span class="whitespace"> </span>AppRun</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>chmod<span class="whitespace"> </span>+x<span class="whitespace"> </span>AppRun
+</pre>
 <p>AppRun dosyasında en sona aşağıdaki ifadeyi eklerseniz desktop dosyasındaki <strong>Exec</strong> değerini kullanarak asıl uygulamayı başlatır.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; EXEC=$(grep -e &quot;^Exec=.*&quot; &quot;${HERE}&quot;/*.desktop | head -n 1 | cut -d &quot;=&quot; -f 2 | cut -d &quot; &quot; -f 1)'
 &gt; exec &quot;${EXEC}&quot; &quot;$&#64;&quot;
-&gt; EOF</span></code></pre>
-</section>
-</section>
-<section id="paketleme-asamasi">
-<h2>Paketleme aşaması</h2>
+&gt; EOF</span>
+</pre>
+</div>
+</div>
+<div class="section" id="paketleme-asamasi">
+<h1>Paketleme aşaması</h1>
 <p><a class="reference external" href="https://github.com/AppImage/AppImageKit/releases">appimagetool</a> indirin ve çalıştırılabilir yapın.</p>
 <p>Ardından <strong>appimagetool</strong> ile projenizi örnekteki gibi paketleyin.</p>
 <p>Kullanımı <em>ARCH=x86_64 appimagetool [proje dizini]</em></p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span><span class="name variable">ARCH</span><span class="operator">=</span>x86_64<span class="whitespace"> </span>./appimagetool-x86_64.AppImage<span class="whitespace"> </span>MyApp.AppDir/<span class="whitespace">
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span><span class="name variable">ARCH</span><span class="operator">=</span>x86_64<span class="whitespace"> </span>./appimagetool-x86_64.AppImage<span class="whitespace"> </span>MyApp.AppDir/<span class="whitespace">
 </span>appimagetool,<span class="whitespace"> </span>continuous<span class="whitespace"> </span>build<span class="whitespace"> </span><span class="operator">(</span>commit<span class="whitespace"> </span>effcebc<span class="operator">)</span>,<span class="whitespace"> </span>build<span class="whitespace"> </span><span class="literal number">2084</span><span class="whitespace"> </span>built<span class="whitespace"> </span>on<span class="whitespace"> </span><span class="literal number">2019</span>-05-01<span class="whitespace"> </span><span class="literal number">21</span>:02:41<span class="whitespace"> </span>UTC<span class="whitespace">
 </span>Using<span class="whitespace"> </span>architecture<span class="whitespace"> </span>x86_64<span class="whitespace">
 </span>/home/a/test/MyApp.AppDir<span class="whitespace"> </span>should<span class="whitespace"> </span>be<span class="whitespace"> </span>packaged<span class="whitespace"> </span>as<span class="whitespace"> </span>MyApp-x86_64.AppImage<span class="whitespace">
@@ -106,36 +118,48 @@
 
 </span>Please<span class="whitespace"> </span>consider<span class="whitespace"> </span>submitting<span class="whitespace"> </span>your<span class="whitespace"> </span>AppImage<span class="whitespace"> </span>to<span class="whitespace"> </span>AppImageHub,<span class="whitespace"> </span>the<span class="whitespace"> </span>crowd-sourced<span class="whitespace">
 </span>central<span class="whitespace"> </span>directory<span class="whitespace"> </span>of<span class="whitespace"> </span>available<span class="whitespace"> </span>AppImages,<span class="whitespace"> </span>by<span class="whitespace"> </span>opening<span class="whitespace"> </span>a<span class="whitespace"> </span>pull<span class="whitespace"> </span>request<span class="whitespace">
-</span>at<span class="whitespace"> </span>https://github.com/AppImage/appimage.github.io</code></pre>
+</span>at<span class="whitespace"> </span>https://github.com/AppImage/appimage.github.io
+</pre>
 <p>Oluşan <strong>AppImage</strong> dosyamızı çalıştıralım.</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>./MyApp-x86_64.AppImage<span class="whitespace">
-</span>Hello<span class="whitespace"> </span>Word</code></pre>
-</section>
-<section id="appimage-paketi-icin-onemli-notlar">
-<h2>AppImage paketi için önemli notlar</h2>
-<section id="hardcoded-konumlar">
-<h3>Hardcoded konumlar</h3>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>./MyApp-x86_64.AppImage<span class="whitespace">
+</span>Hello<span class="whitespace"> </span>Word
+</pre>
+</div>
+<div class="section" id="appimage-paketi-icin-onemli-notlar">
+<h1>AppImage paketi için önemli notlar</h1>
+<div class="section" id="hardcoded-konumlar">
+<h2>Hardcoded konumlar</h2>
 <p>İkili dosyalarda hardcoded konum bulunmamalı. Eğer bulunuyorsa yama atılmalı.</p>
 <p>Aşağıdaki komutla hardcoded konum var mı öğrenebiliriz:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>strings<span class="whitespace"> </span>MyApp.AppDir/usr/bin/myapp<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>grep<span class="whitespace"> </span>/usr</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>strings<span class="whitespace"> </span>MyApp.AppDir/usr/bin/myapp<span class="whitespace"> </span><span class="punctuation">|</span><span class="whitespace"> </span>grep<span class="whitespace"> </span>/usr
+</pre>
 <p>Aşağıdaki komutla yama atabiliriz:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>sed<span class="whitespace"> </span>-i<span class="whitespace"> </span>-e<span class="whitespace"> </span><span class="literal string single">'s#/usr#././#g'</span><span class="whitespace"> </span>MyApp.AppDir/usr/bin/myapp</code></pre>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>sed<span class="whitespace"> </span>-i<span class="whitespace"> </span>-e<span class="whitespace"> </span><span class="literal string single">'s#/usr#././#g'</span><span class="whitespace"> </span>MyApp.AppDir/usr/bin/myapp
+</pre>
 <p>Burada ././ 4 karakterlidir (/usr ile aynı uzunlukta) ve burası anlamına gelmektedir. Farklı bir konumu tarif ettirmeyiniz.</p>
-</section>
-<section id="glib-semalari">
-<h3>GLib şemaları</h3>
+</div>
+<div class="section" id="glib-semalari">
+<h2>GLib şemaları</h2>
 <p>Uygulamanız eğer <strong>glib şeması</strong> içeriyorsa <strong>AppRun</strong> dosyanızda şema konumunu tanımlamalısınız. Ayrıca paketlemeden önce şemayı derlemeniz gerekmektedir.</p>
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içerisine yazın:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export GSETTINGS_SCHEMA_DIR=&quot;${HERE}/usr/share/glib-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}&quot;
-&gt; EOF</span></code></pre>
+&gt; EOF</span>
+</pre>
 <p><strong>glib şemasını</strong> derlemek için aşağıdaki komutu kullanın:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>glib-compile-schemas<span class="whitespace"> </span>MyApp.AppDir/usr/share/glib-2.0/schemas/</code></pre>
-</section>
-<section id="bazi-gerekli-cevresel-degiskenler">
-<h3>Bazı gerekli çevresel değişkenler</h3>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>glib-compile-schemas<span class="whitespace"> </span>MyApp.AppDir/usr/share/glib-2.0/schemas/
+</pre>
+</div>
+<div class="section" id="bazi-gerekli-cevresel-degiskenler">
+<h2>Bazı gerekli çevresel değişkenler</h2>
 <p>Uygulamaların düzgün çalışabilmesi için <strong>LD_LIBRARY_PATH</strong> <strong>PATH</strong> <strong>PYTHON_PATH</strong> değişkenlerinin ayarlanması gerekir. Aşağıdaki ifadeyi <strong>AppRun</strong> içerisine yazın:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export SELF=$(readlink -f &quot;$0&quot;)
 &gt; export HERE=${SELF%/*}
 &gt; export LD_LIBRARY_PATH=&quot;${HERE}/usr/lib/:${HERE}/usr/lib/i386-linux-gnu/:${HERE}/usr/lib/x86_64-linux-gnu/&quot;
@@ -144,29 +168,34 @@
 &gt; export PATH=&quot;:${HERE}/usr/sbin/:${HERE}/usr/games/:${HERE}/bin/:${HERE}/sbin/${PATH:+:$PATH}&quot;
 &gt; export PYTHONPATH=&quot;${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}&quot;
 &gt; export PERLLIB=&quot;${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}&quot;
-&gt; EOF</span></code></pre>
-</section>
-<section id="xdg-dizinleri">
-<h3>Xdg dizinleri</h3>
+&gt; EOF</span>
+</pre>
+</div>
+<div class="section" id="xdg-dizinleri">
+<h2>Xdg dizinleri</h2>
 <p>Uygulamanızın <strong>xdg dizinleri</strong> varsa onları da tanımlamanız gereklidir. (örneğin <em>/usr/share</em>)</p>
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export XDG_DATA_DIRS=&quot;${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}&quot;
-&gt; EOF</span></code></pre>
-</section>
-<section id="qt-plugin-dizinleri">
-<h3>Qt plugin dizinleri</h3>
+&gt; EOF</span>
+</pre>
+</div>
+<div class="section" id="qt-plugin-dizinleri">
+<h2>Qt plugin dizinleri</h2>
 <p>Uygulamanız <strong>qt</strong> tabanlı ise <strong>qt plugin</strong> dizinlerini tanımlamalısınız.</p>
 <p>Aşağıdaki ifadeyi <strong>AppRun</strong> içine yazın:</p>
-<pre class="code shell literal-block"><code>$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cat<span class="whitespace"> </span>&gt;&gt;<span class="whitespace"> </span>AppRun<span class="whitespace"> </span><span class="literal string">&lt;&lt; EOF
 &gt; export QT_PLUGIN_PATH=&quot;${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386-linux-gnu/qt4/plugins/&quot;
 &gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib/x86_64-linux-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/&quot;
 &gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib64/qt4/plugins/:${HERE}/usr/lib/qt5/plugins/&quot;
 &gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib/i386-linux-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64-linux-gnu/qt5/plugins/&quot;
 &gt; export QT_PLUGIN_PATH+=&quot;:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}&quot;
-&gt; EOF</span></code></pre>
-</section>
-</section>
-</main>
+&gt; EOF</span>
+</pre>
+</div>
+</div>
+</div>
 </body>
 </html>

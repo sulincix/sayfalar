@@ -1,106 +1,136 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <title>Python dersi</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-</head>
 <body>
-<main id="python-dersi">
+<div class="document" id="python-dersi">
 <h1 class="title">Python dersi</h1>
 
 <p>Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar <em>&lt;-</em> ile çıktıların olduğu satırlar <em>-&gt;</em> ile işaretlenmiştir.</p>
-<section id="aciklama-satirlari">
-<h2>Açıklama satırları</h2>
+<div class="section" id="aciklama-satirlari">
+<h1>Açıklama satırları</h1>
 <p>Python programlama dilinde açıklamalar <strong>#</strong> işaretinden sonrası için geçerlidir. Örneğin:</p>
-<pre class="code python literal-block"><code><span class="comment single">#bu bir açıklama satırıdır.</span></code></pre>
+<pre class="code python literal-block">
+<span class="comment single">#bu bir açıklama satırıdır.</span>
+</pre>
 <p>Bununla birlikte çoklu açıklama satırı yapmak için <strong>&quot;&quot;&quot;</strong> işareti arasına alabiliriz.</p>
-<pre class="code python literal-block"><code><span class="literal string doc">&quot;&quot;&quot; Bu bir açıklama satırı
+<pre class="code python literal-block">
+<span class="literal string doc">&quot;&quot;&quot; Bu bir açıklama satırı
 Bu diğer açıklama satırı
-Bu son açıklama satırı &quot;&quot;&quot;</span></code></pre>
-</section>
-<section id="temel-bilgiler">
-<h2>Temel bilgiler</h2>
+Bu son açıklama satırı &quot;&quot;&quot;</span>
+</pre>
+</div>
+<div class="section" id="temel-bilgiler">
+<h1>Temel bilgiler</h1>
 <p>Python programlarının ilk satırında <strong>#!/usr/bin/python3</strong> satırı bulunmalıdır.
 Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.</p>
-<pre class="code shell literal-block"><code><span class="comment hashbang">#!/usr/bin/python3
+<pre class="code shell literal-block">
+<span class="comment hashbang">#!/usr/bin/python3
 </span><span class="comment single"># Çalıştırma izni vererek çalıştırabiliriz.
 </span>chmod<span class="whitespace"> </span>+x<span class="whitespace"> </span>dosya.py<span class="whitespace">
 </span>./dosya.py<span class="whitespace">
 </span><span class="comment single"># Veya doğrudan çalıştırabiliriz.
-</span>python3<span class="whitespace"> </span>dosya.py</code></pre>
+</span>python3<span class="whitespace"> </span>dosya.py
+</pre>
 <p>Python programlama dilinde satır sonuna <strong>;</strong> koyulmaz.</p>
 <p>Python programlarında işler işlevler üzerinden yürür. işlevlerin girdileri ve çıktıları bulunur.</p>
-<pre class="code shell literal-block"><code><span class="name variable">cikti</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span>islev<span class="operator">(</span>girdi1,<span class="whitespace"> </span>girdi2<span class="operator">)</span></code></pre>
+<pre class="code shell literal-block">
+<span class="name variable">cikti</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span>islev<span class="operator">(</span>girdi1,<span class="whitespace"> </span>girdi2<span class="operator">)</span>
+</pre>
 <p>Pythonda girintileme olayı için de <strong>{</strong> ve <strong>}</strong> kullanılmak yerine boşluklandırma kullanılır. Herhangi bir girintilemeye başlanan satırın sonunda <strong>:</strong> işareti bulunur. Örneğin:</p>
-<pre class="code python literal-block"><code><span class="name">f</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="comment single"># f sayısını 12ye eşitledik</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">f</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="comment single"># f sayısını 12ye eşitledik</span><span class="whitespace">
 </span><span class="keyword">if</span> <span class="name">f</span> <span class="operator">==</span> <span class="literal number integer">12</span><span class="punctuation">:</span> <span class="comment single"># f sayısı 12ye eşit mi diye sorguladık</span><span class="whitespace">
-</span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit&quot;</span><span class="punctuation">)</span> <span class="comment single"># ekrana yazı yazdırık</span></code></pre>
+</span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit&quot;</span><span class="punctuation">)</span> <span class="comment single"># ekrana yazı yazdırık</span>
+</pre>
 <p>Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.</p>
-</section>
-<section id="yazi-yazdirma">
-<h2>Yazı yazdırma</h2>
+</div>
+<div class="section" id="yazi-yazdirma">
+<h1>Yazı yazdırma</h1>
 <p>Pythonda ekrana yazı yazmak için <strong>print</strong> işlevini kullanıyoruz.</p>
-<pre class="code python literal-block"><code><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba Dünya&quot;</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="name">Dünya</span></code></pre>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba Dünya&quot;</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="name">Dünya</span>
+</pre>
 <p>Birden çok ifadeyi yazdırmak için <strong>print</strong> işlevine birden çok girdi verebilirsiniz. Bu şekilde aralarına birer boşluk koyarak yazdırır.</p>
-<pre class="code python literal-block"><code><span class="comment single"># Yazılar tırnak içine alınır.</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="comment single"># Yazılar tırnak içine alınır.</span><span class="whitespace">
 </span><span class="comment single"># Sayılar tırnak içine alınmaz.</span><span class="whitespace">
 </span><span class="comment single"># True ve False doğruluk belirtir.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="literal string double">&quot;Dünya&quot;</span><span class="punctuation">,</span><span class="keyword constant">True</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="literal number integer">12</span> <span class="name">Dünya</span> <span class="keyword constant">True</span></code></pre>
-</section>
-<section id="degiskenler">
-<h2>Değişkenler</h2>
+</span><span class="operator">-&gt;</span> <span class="name">Merhaba</span> <span class="literal number integer">12</span> <span class="name">Dünya</span> <span class="keyword constant">True</span>
+</pre>
+</div>
+<div class="section" id="degiskenler">
+<h1>Değişkenler</h1>
 <p>Değişkenler içerisinde veri bulunduran ve ihtiyaç durumunda bu veriyi düzenleme imkanı tanıyan kavramlardır.
 Değişkenler tanımlanırken <strong>degisken = deger</strong> şeklinde bir ifade kulanılır.</p>
-<pre class="code python literal-block"><code><span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="whitespace">
 </span><span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;merhaba dünya&quot;</span><span class="whitespace">
 </span><span class="name">k</span> <span class="operator">=</span> <span class="literal number float">1.2</span><span class="whitespace">
-</span><span class="name">hmm</span> <span class="operator">=</span> <span class="keyword constant">True</span></code></pre>
+</span><span class="name">hmm</span> <span class="operator">=</span> <span class="keyword constant">True</span>
+</pre>
 <p>Değişken adları sayı ile başlayamaz, Türkçe karakter içeremez ve sadece harfler, sayılar ve <strong>-</strong> <strong>_</strong> karakterlerinden oluşur.</p>
 <p>Değişkenler kullanılırken başına herhangi bir işaret almasına gerek yoktur. Örneğin:</p>
-<pre class="code python literal-block"><code><span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">12</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">12</span>
+</pre>
 <p>Değişkenler tanımlanırken her ne kadar türlerini belirtmesek bile birer türe sahip olarak tanımlanır. Bunlar başlıca <strong>integer</strong>, <strong>float</strong>, <strong>string</strong>, <strong>boolean</strong> türleridir.</p>
 <p>Bir değişkenin türünü öğrenmek için <strong>type</strong> işlevini kullanabiliriz.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;abc123&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;abc123&quot;</span><span class="whitespace">
 </span><span class="name">turu</span> <span class="operator">=</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">turu</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span>
+</pre>
 <p>Boş bir değişken tanımlamak için onun değerine <strong>None</strong> atayabiliriz. Bu sayede değişken tanımlanmış fakar değeri atanmamış olur.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="keyword constant">None</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="keyword constant">None</span><span class="whitespace">
 </span><span class="name">tur</span> <span class="operator">=</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">tur</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">NoneType</span><span class="literal string single">'&gt;</span></code></pre>
-<section id="string">
-<h3>String</h3>
+</span><span class="operator">-&gt;</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">NoneType</span><span class="literal string single">'&gt;</span>
+</pre>
+<div class="section" id="string">
+<h2>String</h2>
 <p>String türünden değişkenler yazı içerir. <strong>&quot;</strong> veya <strong>'</strong> veya <strong>&quot;&quot;&quot;</strong> arasına yazılırarak tanımlanır.</p>
-<pre class="code python literal-block"><code><span class="name">yazi1</span> <span class="operator">=</span> <span class="literal string double">&quot;merhaba&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">yazi1</span> <span class="operator">=</span> <span class="literal string double">&quot;merhaba&quot;</span><span class="whitespace">
 </span><span class="name">yazi2</span> <span class="operator">=</span> <span class="literal string single">'yazım'</span><span class="whitespace">
-</span><span class="name">yazi3</span> <span class="operator">=</span> <span class="literal string double">&quot;&quot;&quot;dünya&quot;&quot;&quot;</span></code></pre>
+</span><span class="name">yazi3</span> <span class="operator">=</span> <span class="literal string double">&quot;&quot;&quot;dünya&quot;&quot;&quot;</span>
+</pre>
 <p>String türünden değişkenler <strong>+</strong> işareti ile uc uca eklenebilir.</p>
-<pre class="code python literal-block"><code><span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;merhaba&quot;</span> <span class="operator">+</span> <span class="literal string single">' '</span> <span class="operator">+</span> <span class="literal string double">&quot;&quot;&quot;dünya&quot;&quot;&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;merhaba&quot;</span> <span class="operator">+</span> <span class="literal string single">' '</span> <span class="operator">+</span> <span class="literal string double">&quot;&quot;&quot;dünya&quot;&quot;&quot;</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">merhaba</span> <span class="name">dünya</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="name">merhaba</span> <span class="name">dünya</span>
+</pre>
 <p>Değişkeni birden çok kez toplamak için <strong>*</strong> işareti kullanılabilir.</p>
-<pre class="code python literal-block"><code><span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;ali&quot;</span><span class="operator">*</span><span class="literal number integer">5</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;ali&quot;</span><span class="operator">*</span><span class="literal number integer">5</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">alialialialiali</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="name">alialialialiali</span>
+</pre>
 <p>String türünden bir değişkenin içerisindeki bir bölümü başka bir şey ile değiştirmek için <strong>replace</strong> işlevi kullanılınabilir.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span><span class="whitespace">
 </span><span class="name">veri2</span> <span class="operator">=</span> <span class="name">veri</span><span class="operator">.</span><span class="name">replace</span><span class="punctuation">(</span><span class="literal string double">&quot;rha&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;123&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri2</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">Me123ba</span></code></pre>
-</section>
-<section id="integer">
-<h3>Integer</h3>
+</span><span class="operator">-&gt;</span> <span class="name">Me123ba</span>
+</pre>
+</div>
+<div class="section" id="integer">
+<h2>Integer</h2>
 <p>Integer türünden değişkenler tam sayı belirtir. Dört işlem işaretleri ile işleme sokulabilirler.</p>
-<pre class="code python literal-block"><code><span class="name">sayi</span> <span class="operator">=</span> <span class="punctuation">(((</span><span class="literal number integer">24</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal number integer">4</span><span class="punctuation">)</span><span class="operator">*</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="operator">-</span><span class="literal number integer">1</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">sayi</span> <span class="operator">=</span> <span class="punctuation">(((</span><span class="literal number integer">24</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal number integer">4</span><span class="punctuation">)</span><span class="operator">*</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="operator">-</span><span class="literal number integer">1</span><span class="whitespace">
 </span><span class="literal string doc">&quot;&quot;&quot;
 24/2 = 12
 12+4 = 16
@@ -108,37 +138,49 @@ Değişkenler tanımlanırken <strong>degisken = deger</strong> şeklinde bir if
 32-1 = 31
 &quot;&quot;&quot;</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">31</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">31</span>
+</pre>
 <p>Integer değişkenlerin kuvvetlerini almak için <strong>**</strong> kullanılır.</p>
-<pre class="code python literal-block"><code><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">2</span><span class="operator">**</span><span class="literal number integer">3</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">2</span><span class="operator">**</span><span class="literal number integer">3</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">8</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">8</span>
+</pre>
 <p>String türünden bir değişkeni integer haline getirmek için <strong>int</strong> işlevi kullanılır.</p>
-<pre class="code python literal-block"><code><span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">int</span><span class="punctuation">(</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">6</span></code></pre>
-</section>
-<section id="float">
-<h3>Float</h3>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">int</span><span class="punctuation">(</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="operator">-&gt;</span> <span class="literal number integer">6</span>
+</pre>
+</div>
+<div class="section" id="float">
+<h2>Float</h2>
 <p>Float türünden değişkenler virgüllü sayılardır. Aynı integer sayılar gibi dört işleme sokulabilirler. İki integer değişkenin birbirine bölümü ile float oluşabilir.</p>
-<pre class="code python literal-block"><code><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">1</span><span class="operator">/</span><span class="literal number integer">2</span> <span class="comment single"># sayi = 0.5 şeklinde de tanımlanabilir.</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">1</span><span class="operator">/</span><span class="literal number integer">2</span> <span class="comment single"># sayi = 0.5 şeklinde de tanımlanabilir.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number float">0.5</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number float">0.5</span>
+</pre>
 <p>Bir float değişkenini integer haline getirmek için <strong>int</strong> işlevi kullanılır. Bu dönüşümde virgülden sonraki kısım atılır.</p>
-<pre class="code python literal-block"><code><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number float">3.2</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">sayi</span> <span class="operator">=</span> <span class="literal number float">3.2</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">sayi2</span> <span class="operator">=</span> <span class="name builtin">int</span><span class="punctuation">(</span><span class="literal number float">3.2</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi2</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="literal number float">3.2</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">3</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">3</span>
+</pre>
 <p><strong>Not:</strong> float ile string çarpılamaz.</p>
 <p>String türünden bir değişkeni float haline getirmek için <strong>float</strong> işlevi kullanılır.</p>
-<pre class="code python literal-block"><code><span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">float</span><span class="punctuation">(</span><span class="literal string double">&quot;2.2&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number float">1.1</span></code></pre>
-</section>
-<section id="boolean">
-<h3>Boolean</h3>
+<pre class="code python literal-block">
+<span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">float</span><span class="punctuation">(</span><span class="literal string double">&quot;2.2&quot;</span><span class="punctuation">)</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="operator">-&gt;</span> <span class="literal number float">1.1</span>
+</pre>
+</div>
+<div class="section" id="boolean">
+<h2>Boolean</h2>
 <p>Boolean değişkenler sadece <strong>True</strong> veya <strong>False</strong> değerlerini alabilir. Bu değişken daha çok koşullarda ve döngülerde kullanılır. iki değişkenin eşitliği sorgulanarak boolean üretilebilir.</p>
-<pre class="code python literal-block"><code><span class="name builtin">bool</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">13</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name builtin">bool</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">13</span><span class="whitespace">
 </span><span class="literal string doc">&quot;&quot;&quot;
 == eşit
 != eşit değil
@@ -148,58 +190,76 @@ Değişkenler tanımlanırken <strong>degisken = deger</strong> şeklinde bir if
 &gt;= büyük eşit
 &quot;&quot;&quot;</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">bool</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="keyword constant">False</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="keyword constant">False</span>
+</pre>
 <p>boolean değişkeninin tersini almak için <strong>not</strong> ifadesi kullanılabilir.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="operator word">not</span> <span class="keyword constant">True</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="operator word">not</span> <span class="keyword constant">True</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="keyword constant">False</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="keyword constant">False</span>
+</pre>
 <p>Bir string türünden değişkenin içinde başka bir string türünden değişken var mı diye kontrol etmek için <strong>in</strong> ifadesi kullanılır. Bu ifadenin sonucu boolean üretir.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;ef&quot;</span> <span class="operator word">in</span> <span class="literal string double">&quot;Dünya&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;ef&quot;</span> <span class="operator word">in</span> <span class="literal string double">&quot;Dünya&quot;</span><span class="whitespace">
 </span><span class="name">veri2</span> <span class="operator">=</span> <span class="literal string double">&quot;ny&quot;</span> <span class="operator word">in</span> <span class="literal string double">&quot;Dünya&quot;</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">,</span><span class="name">veri2</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="keyword constant">False</span> <span class="keyword constant">True</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="keyword constant">False</span> <span class="keyword constant">True</span>
+</pre>
 <p>Boolean değişkenlerde mantıksal işlemler <strong>and</strong> ve <strong>or</strong> ifadeleri ile yapılır.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span> <span class="literal number integer">6</span> <span class="operator word">or</span> <span class="literal number integer">4</span> <span class="operator">&gt;</span> <span class="literal number integer">2</span> <span class="comment single"># False or True = True</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span> <span class="literal number integer">6</span> <span class="operator word">or</span> <span class="literal number integer">4</span> <span class="operator">&gt;</span> <span class="literal number integer">2</span> <span class="comment single"># False or True = True</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="keyword constant">True</span></code></pre>
-</section>
-</section>
-<section id="klavyeden-deger-alma">
-<h2>Klavyeden değer alma</h2>
+</span><span class="operator">-&gt;</span> <span class="keyword constant">True</span>
+</pre>
+</div>
+</div>
+<div class="section" id="klavyeden-deger-alma">
+<h1>Klavyeden değer alma</h1>
 <p>Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için <strong>input</strong> işlevi kullanılır. Bu işlevin çıkışı string türündendir.</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Bir değer girin &gt;&quot;</span><span class="punctuation">)</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Bir değer girin &gt;&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name builtin">type</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">))</span><span class="whitespace">
 </span><span class="operator">&lt;-</span> <span class="literal number integer">12</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">12</span> <span class="operator">&lt;</span><span class="keyword">class</span> <span class="error">'</span><span class="name class">str</span><span class="literal string single">'&gt;</span>
+</pre>
 <p>String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak <strong>eval</strong> işlevini kullanabiliriz.</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="name builtin">eval</span><span class="punctuation">(</span><span class="literal string double">&quot;12/2 == 16-10&quot;</span><span class="punctuation">)</span> <span class="comment single"># string ifade çalıştırılır ve sonucu aktarılır.</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="name builtin">eval</span><span class="punctuation">(</span><span class="literal string double">&quot;12/2 == 16-10&quot;</span><span class="punctuation">)</span> <span class="comment single"># string ifade çalıştırılır ve sonucu aktarılır.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="keyword constant">True</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="keyword constant">True</span>
+</pre>
 <p><strong>Not:</strong> Bu işlev tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D</p>
-</section>
-<section id="kosullar">
-<h2>Koşullar</h2>
+</div>
+<div class="section" id="kosullar">
+<h1>Koşullar</h1>
 <p>Koşul tanımı yapmak için <strong>if</strong> ifadesi kullanılır. Koşul sağlanmıyorsa <strong>elif</strong> ifadesi ile yeni bir koşul tanımlanabilir veya <strong>else</strong> ifadesi ile koşulun sağlanmadığı durum tanımlanabilir.</p>
-<pre class="code python literal-block"><code><span class="keyword">if</span> <span class="name">koşul</span><span class="punctuation">:</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">if</span> <span class="name">koşul</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name">eylem</span><span class="whitespace">
 </span><span class="keyword">elif</span> <span class="name">koşul</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name">eylem</span><span class="whitespace">
 </span><span class="keyword">else</span><span class="punctuation">:</span><span class="whitespace">
-</span>    <span class="name">eylem</span></code></pre>
+</span>    <span class="name">eylem</span>
+</pre>
 <p>Örneğin bir integer değişkenin çift olup olmadığını bulalım.</p>
-<pre class="code python literal-block"><code><span class="keyword">if</span> <span class="literal number integer">13</span> <span class="operator">%</span> <span class="literal number integer">2</span> <span class="operator">==</span> <span class="literal number integer">0</span> <span class="punctuation">:</span> <span class="comment single"># % işareti bölümden kalanı bulmaya yarar.</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">if</span> <span class="literal number integer">13</span> <span class="operator">%</span> <span class="literal number integer">2</span> <span class="operator">==</span> <span class="literal number integer">0</span> <span class="punctuation">:</span> <span class="comment single"># % işareti bölümden kalanı bulmaya yarar.</span><span class="whitespace">
 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Çift sayı&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="keyword">else</span><span class="punctuation">:</span><span class="whitespace">
-</span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tek sayı&quot;</span><span class="punctuation">)</span></code></pre>
+</span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tek sayı&quot;</span><span class="punctuation">)</span>
+</pre>
 <p>Değeri olmayan (None) değişkenler koşul ifadelerinde <strong>False</strong> olarak kabul edilir.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="keyword constant">None</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="keyword constant">None</span><span class="whitespace">
 </span><span class="keyword">if</span> <span class="name">veri</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tanımlı&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="keyword">else</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Tanımsız&quot;</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">Tanımsız</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="name">Tanımsız</span>
+</pre>
 <p>Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:</p>
-<pre class="code python literal-block"><code><span class="name">koşul</span> <span class="operator word">and</span> <span class="name">eylem</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">koşul</span> <span class="operator word">and</span> <span class="name">eylem</span><span class="whitespace">
 </span><span class="literal string doc">&quot;&quot;&quot; Şununla aynıdır:
 if koşul:
     eylem
@@ -208,32 +268,26 @@ if koşul:
 </span><span class="literal string doc">&quot;&quot;&quot; Şununla aynıdır:
 if not koşul:
     eylem
-&quot;&quot;&quot;</span></code></pre>
+&quot;&quot;&quot;</span>
+</pre>
 <p>Bu konunun daha iyi anlaşılması için:</p>
-<pre class="code python literal-block"><code><span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">12</span> <span class="operator word">and</span> <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşittir&quot;</span><span class="punctuation">)</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">12</span> <span class="operator word">and</span> <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşittir&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="literal number integer">12</span> <span class="operator">==</span> <span class="literal number integer">14</span> <span class="operator word">or</span> <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;eşit değildir&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="name">eşittir</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">eşit</span> <span class="name">değildir</span></code></pre>
-</section>
-<section id="while-dongusu">
-<h2>While döngüsü</h2>
-<p>Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca <strong>while</strong> döngüsü ile <strong>if</strong> arasındaki fark <strong>while</strong> içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.</p>
-<pre class="code python literal-block"><code><span class="keyword">while</span> <span class="name">koşul</span><span class="punctuation">:</span><span class="whitespace">
-</span>    <span class="name">eylem</span></code></pre>
-<p>Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda <em>i</em> sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır.</p>
-<pre class="code python literal-block"><code><span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">1</span><span class="whitespace">
-</span><span class="keyword">while</span> <span class="name">i</span> <span class="operator">&lt;</span> <span class="literal number integer">10</span><span class="punctuation">:</span><span class="whitespace">
-</span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">)</span><span class="whitespace">
-</span>    <span class="name">i</span><span class="operator">+=</span><span class="literal number integer">1</span> <span class="comment single"># i = i + 1 ile aynı anlama gelir.</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">1</span> <span class="literal number integer">2</span> <span class="literal number integer">3</span> <span class="literal number integer">4</span> <span class="literal number integer">5</span> <span class="literal number integer">6</span> <span class="literal number integer">7</span> <span class="literal number integer">8</span> <span class="literal number integer">9</span> <span class="punctuation">(</span><span class="name">Bunu</span> <span class="name">alt</span> <span class="name">alta</span> <span class="name">yazdığını</span> <span class="name">hayal</span> <span class="name">edin</span> <span class="punctuation">:</span><span class="name">D</span> <span class="punctuation">)</span></code></pre>
-</section>
-<section id="diziler">
-<h2>Diziler</h2>
+</span><span class="operator">-&gt;</span> <span class="name">eşit</span> <span class="name">değildir</span>
+</pre>
+</div>
+<div class="section" id="diziler">
+<h1>Diziler</h1>
 <p>Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki gibi tanımlanır:</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal string double">&quot;merhaba&quot;</span><span class="punctuation">,</span> <span class="keyword constant">True</span><span class="punctuation">,</span> <span class="literal number float">1.2</span><span class="punctuation">,</span> <span class="keyword constant">None</span><span class="punctuation">]</span></code></pre>
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal string double">&quot;merhaba&quot;</span><span class="punctuation">,</span> <span class="keyword constant">True</span><span class="punctuation">,</span> <span class="literal number float">1.2</span><span class="punctuation">,</span> <span class="keyword constant">None</span><span class="punctuation">]</span>
+</pre>
 <p>Dizilerin elemanlarının türü aynı olmak zorunda değildir. Hatta None bile olabilir.</p>
 <p>Dizilerde eleman eklemek için <strong>append</strong> veya <strong>insert</strong> işlevini eleman silmek için ise <strong>remove</strong>  veya <strong>pop</strong> işlevi kullanılır. Örneğin:</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">22</span><span class="punctuation">]</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">22</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">a</span><span class="operator">.</span><span class="name">append</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">)</span> <span class="comment single"># Sona ekleme yapar.</span><span class="whitespace">
 </span><span class="name">a</span><span class="operator">.</span><span class="name">insert</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">)</span> <span class="comment single"># 0 elemanın ekleneceği yeri ifade eder.</span><span class="whitespace">
@@ -245,9 +299,11 @@ if not koşul:
 </span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">22</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal number integer">22</span><span class="punctuation">,</span> <span class="literal string single">'Merhaba'</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal string single">'Merhaba'</span><span class="punctuation">]</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal string single">'Merhaba'</span><span class="punctuation">]</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal string single">'Merhaba'</span><span class="punctuation">]</span>
+</pre>
 <p>Dizileri sıralamak için <strong>sort</strong> boşaltmak için ise <strong>clear</strong> işlevi kullanılır.  Bir dizinin istenilen elemanını öğrenmek için <strong>liste[index]</strong> şeklinde bir ifade kullanılır. Index numaraları 0dan başyan integer olmalıdır. negatif değerlerde sondan saymaya başlar.</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">]</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">],</span><span class="name">a</span><span class="punctuation">[</span><span class="operator">-</span><span class="literal number integer">3</span><span class="punctuation">])</span><span class="whitespace">
 </span><span class="name">a</span><span class="operator">.</span><span class="name">sort</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
@@ -255,88 +311,135 @@ if not koşul:
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="literal number integer">3</span> <span class="literal number integer">7</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">]</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="punctuation">[]</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="punctuation">[]</span>
+</pre>
 <p>Dizideki bir elemanın uzunluğunu bulmak için <strong>len</strong> işlevi, elemanın dizinin kaçıncısı olduğunu bulmak için ise <strong>index</strong> işlevi kullanılır.</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal string double">&quot;hmm&quot;</span><span class="punctuation">,</span> <span class="literal number float">3.2</span><span class="punctuation">]</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal string double">&quot;hmm&quot;</span><span class="punctuation">,</span> <span class="literal number float">3.2</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name">sayi</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">sayi2</span> <span class="operator">=</span> <span class="name">a</span><span class="operator">.</span><span class="name">index</span><span class="punctuation">(</span><span class="literal number float">3.2</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="literal number integer">3</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">2</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">2</span>
+</pre>
 <p>Dizilerin elemanlarını <strong>+</strong> kullanarak birleştirebiliriz.</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">]</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name">b</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">a</span> <span class="operator">+</span> <span class="name">b</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">]</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">]</span>
+</pre>
 <p>Dizilerin bir bölümünü aşağıdakine benzer yolla kesebiliriz:</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">,</span> <span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal number integer">44</span><span class="punctuation">,</span> <span class="literal number integer">31</span><span class="punctuation">,</span> <span class="literal number integer">16</span><span class="punctuation">]</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">9</span><span class="punctuation">,</span> <span class="literal number integer">12</span><span class="punctuation">,</span> <span class="literal number integer">44</span><span class="punctuation">,</span> <span class="literal number integer">31</span><span class="punctuation">,</span> <span class="literal number integer">16</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name">b</span> <span class="operator">=</span> <span class="name">a</span><span class="punctuation">[:</span><span class="literal number integer">2</span><span class="punctuation">]</span> <span class="comment single"># baştan 3. elemana kadar.</span><span class="whitespace">
 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">4</span><span class="punctuation">:]</span> <span class="comment single"># 4. elemandan sonrası</span><span class="whitespace">
-</span><span class="name">d</span> <span class="operator">=</span> <span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">3</span><span class="punctuation">:</span><span class="literal number integer">6</span><span class="punctuation">]</span> <span class="comment single"># 4. elemandan 6. elemana kadar (dahil)</span></code></pre>
+</span><span class="name">d</span> <span class="operator">=</span> <span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">3</span><span class="punctuation">:</span><span class="literal number integer">6</span><span class="punctuation">]</span> <span class="comment single"># 4. elemandan 6. elemana kadar (dahil)</span>
+</pre>
 <p>String türünden bir değişkeni belli bir harf veya harf öbeğine göre bölmek için <strong>split</strong> işlevini kullanırız. Ayrıca string türünden bir değişkenin başındaki ve sonundaki boşlukları temizlemek için <strong>strip</strong> işlevini kullanırız.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span><span class="operator">=</span><span class="literal string double">&quot;   Bu bir yazıdır   &quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span><span class="operator">=</span><span class="literal string double">&quot;   Bu bir yazıdır   &quot;</span><span class="whitespace">
 </span><span class="name">veri2</span> <span class="operator">=</span> <span class="name">veri</span><span class="operator">.</span><span class="name">strip</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">veri</span><span class="punctuation">),</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">veri2</span><span class="punctuation">))</span><span class="whitespace">
 </span><span class="name">liste</span> <span class="operator">=</span> <span class="name">veri2</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot; &quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">liste</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="literal number integer">20</span> <span class="literal number integer">14</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal string single">'Bu'</span><span class="punctuation">,</span> <span class="literal string single">'bir'</span><span class="punctuation">,</span> <span class="literal string single">'yazıdır'</span><span class="punctuation">]</span></code></pre>
-</section>
-<section id="for-dongusu">
-<h2>For döngüsü</h2>
+</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal string single">'Bu'</span><span class="punctuation">,</span> <span class="literal string single">'bir'</span><span class="punctuation">,</span> <span class="literal string single">'yazıdır'</span><span class="punctuation">]</span>
+</pre>
+</div>
+<div class="section" id="while-dongusu">
+<h1>While döngüsü</h1>
+<p>Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca <strong>while</strong> döngüsü ile <strong>if</strong> arasındaki fark <strong>while</strong> içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.</p>
+<pre class="code python literal-block">
+<span class="keyword">while</span> <span class="name">koşul</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="name">eylem</span>
+</pre>
+<p>Örneğin 1den 10a kadar olan sayıları yazalım. Bu durumda <em>i</em> sayısı 10 olana kadar sürekli olarak ekrana yazılıp değeri 1 arttırılacakdır.</p>
+<pre class="code python literal-block">
+<span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">1</span><span class="whitespace">
+</span><span class="keyword">while</span> <span class="name">i</span> <span class="operator">&lt;</span> <span class="literal number integer">10</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">)</span><span class="whitespace">
+</span>    <span class="name">i</span><span class="operator">+=</span><span class="literal number integer">1</span> <span class="comment single"># i = i + 1 ile aynı anlama gelir.</span><span class="whitespace">
+</span><span class="operator">-&gt;</span> <span class="literal number integer">1</span> <span class="literal number integer">2</span> <span class="literal number integer">3</span> <span class="literal number integer">4</span> <span class="literal number integer">5</span> <span class="literal number integer">6</span> <span class="literal number integer">7</span> <span class="literal number integer">8</span> <span class="literal number integer">9</span> <span class="punctuation">(</span><span class="name">Bunu</span> <span class="name">alt</span> <span class="name">alta</span> <span class="name">yazdığını</span> <span class="name">hayal</span> <span class="name">edin</span> <span class="punctuation">:</span><span class="name">D</span> <span class="punctuation">)</span>
+</pre>
+<p>Bir döngüden çıkmak için <strong>break</strong> ifadesi kullanılır. Döngünün o andi adımını tamamlayıp diğer adıma geçmek için ise <strong>continue</strong> ifadesi kullanılır.</p>
+<p>Örneğin aşyağıda siz çift sayı girene kadar sürekli olarak çalışan bir program yazalım.</p>
+<pre class="code python literal-block">
+<span class="keyword">while</span> <span class="keyword constant">True</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="name">sayi</span> <span class="operator">=</span> <span class="name builtin">int</span><span class="punctuation">(</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Sayı girin&quot;</span><span class="punctuation">))</span><span class="whitespace">
+</span>    <span class="keyword">if</span> <span class="name">sayi</span> <span class="operator">%</span> <span class="literal number integer">2</span> <span class="operator">==</span> <span class="literal number integer">0</span><span class="punctuation">:</span><span class="whitespace">
+</span>        <span class="keyword">break</span>
+</pre>
+</div>
+<div class="section" id="for-dongusu">
+<h1>For döngüsü</h1>
 <p>For döngüsü while ile benzerdir fakat koşul aranmak yerine iteration yapar. Bu işlemde bir dizinin bütün elemanları tek tek işleme koyulur. Aşağıdaki gibi bir kullanımı vardır:</p>
-<pre class="code python literal-block"><code><span class="keyword">for</span> <span class="name">eleman</span> <span class="operator word">in</span> <span class="name">dizi</span><span class="punctuation">:</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">for</span> <span class="name">eleman</span> <span class="operator word">in</span> <span class="name">dizi</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name">eylem</span><span class="whitespace">
 </span><span class="comment single"># Şununla aynıdır</span><span class="whitespace">
 </span><span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">0</span><span class="whitespace">
 </span><span class="name">toplam</span> <span class="operator">=</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">dizi</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="keyword">while</span> <span class="name">i</span> <span class="operator">&lt;</span> <span class="name">toplam</span><span class="punctuation">:</span> <span class="comment single"># eleman yerine dizi[i] kullanabilirsiniz.</span><span class="whitespace">
 </span>    <span class="name">eylem</span><span class="whitespace">
-</span>    <span class="name">i</span> <span class="operator">+=</span> <span class="literal number integer">1</span></code></pre>
+</span>    <span class="name">i</span> <span class="operator">+=</span> <span class="literal number integer">1</span>
+</pre>
 <p>Örneğin bir integer değişkenlerden oluşan dizi oluşturalım ve elemanlarını 2ye bölerek ayrı bir diziye ekleyelim.</p>
-<pre class="code python literal-block"><code><span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">8</span><span class="punctuation">,</span> <span class="literal number integer">10</span><span class="punctuation">]</span> <span class="comment single"># dizi tanımladık</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">a</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">6</span><span class="punctuation">,</span> <span class="literal number integer">8</span><span class="punctuation">,</span> <span class="literal number integer">10</span><span class="punctuation">]</span> <span class="comment single"># dizi tanımladık</span><span class="whitespace">
 </span><span class="name">b</span> <span class="operator">=</span> <span class="punctuation">[]</span> <span class="comment single"># diğer diziyi tanımladık</span><span class="whitespace">
 </span><span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name">a</span><span class="punctuation">:</span> <span class="comment single"># a elemanları i içine atılacak</span><span class="whitespace">
 </span>    <span class="name">b</span><span class="operator">.</span><span class="name">append</span><span class="punctuation">(</span><span class="name">i</span><span class="operator">/</span><span class="literal number integer">2</span><span class="punctuation">)</span> <span class="comment single"># b içine elemanın yarısını ekledik.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">b</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">]</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">]</span>
+</pre>
 <p>Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringin harfleri olacaktır. Aşağıdaki örnekte string içerisinde kaç tane a veya e harfi bulunduğunu hesaplayalım.</p>
-<pre class="code python literal-block"><code><span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba Dünya&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">veri</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba Dünya&quot;</span><span class="whitespace">
 </span><span class="name">toplam</span> <span class="operator">=</span> <span class="literal number integer">0</span><span class="whitespace">
 </span><span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name">veri</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="keyword">if</span> <span class="name">i</span> <span class="operator">==</span> <span class="literal string double">&quot;a&quot;</span> <span class="operator word">or</span> <span class="name">i</span> <span class="operator">==</span> <span class="literal string double">&quot;e&quot;</span><span class="punctuation">:</span><span class="whitespace">
 </span>        <span class="name">toplam</span> <span class="operator">+=</span> <span class="literal number integer">1</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">toplam</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">4</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">4</span>
+</pre>
 <p>Şimdiye kadarki anlatılanların daha iyi anlaşılması için asal sayı hesaplayan bir python kodu yazalım:</p>
-<pre class="code python literal-block"><code><span class="name">asallar</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">]</span> <span class="comment single"># ilk asal sayıyı elle yazdık.</span><span class="whitespace">
-</span><span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">2</span> <span class="comment single"># Şu anki sayı</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">asallar</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">]</span> <span class="comment single"># ilk asal sayıyı elle yazdık.</span><span class="whitespace">
+</span><span class="name">i</span> <span class="operator">=</span> <span class="literal number integer">3</span> <span class="comment single"># Şu anki sayı</span><span class="whitespace">
 </span><span class="keyword">while</span> <span class="name">i</span> <span class="operator">&lt;</span> <span class="literal number integer">60</span><span class="punctuation">:</span> <span class="comment single"># 60a kadar say</span><span class="whitespace">
 </span>    <span class="name">hmm</span> <span class="operator">=</span> <span class="keyword constant">True</span> <span class="comment single"># asal sayı mı diye bakılan değişken</span><span class="whitespace">
 </span>    <span class="keyword">for</span> <span class="name">e</span> <span class="operator word">in</span> <span class="name">asallar</span><span class="punctuation">:</span> <span class="comment single"># asal sayılar listesi elemanları</span><span class="whitespace">
 </span>        <span class="keyword">if</span> <span class="name">i</span> <span class="operator">%</span> <span class="name">e</span> <span class="operator">==</span> <span class="literal number integer">0</span><span class="punctuation">:</span> <span class="comment single"># tam bölünüyor mu</span><span class="whitespace">
 </span>            <span class="name">hmm</span> <span class="operator">=</span> <span class="keyword constant">False</span> <span class="comment single"># asal sayı değildir</span><span class="whitespace">
+</span>            <span class="keyword">break</span> <span class="comment single"># for döngüsünden çıkmak için</span><span class="whitespace">
 </span>    <span class="keyword">if</span> <span class="name">hmm</span><span class="punctuation">:</span> <span class="comment single"># Asal sayıysa diziye ekleyelim</span><span class="whitespace">
 </span>        <span class="name">asallar</span><span class="operator">.</span><span class="name">append</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">)</span><span class="whitespace">
 </span>    <span class="name">i</span> <span class="operator">+=</span> <span class="literal number integer">1</span> <span class="comment single"># mevcut sayımızı 1 arttıralım.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">asallar</span><span class="punctuation">)</span> <span class="comment single"># 60a kadar olan asal sayılar dizisini yazalım.</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">11</span><span class="punctuation">,</span> <span class="literal number integer">13</span><span class="punctuation">,</span> <span class="literal number integer">17</span><span class="punctuation">,</span> <span class="literal number integer">19</span><span class="punctuation">,</span> <span class="literal number integer">23</span><span class="punctuation">,</span> <span class="literal number integer">29</span><span class="punctuation">,</span> <span class="literal number integer">31</span><span class="punctuation">,</span> <span class="literal number integer">37</span><span class="punctuation">,</span> <span class="literal number integer">41</span><span class="punctuation">,</span> <span class="literal number integer">43</span><span class="punctuation">,</span> <span class="literal number integer">47</span><span class="punctuation">,</span> <span class="literal number integer">53</span><span class="punctuation">,</span> <span class="literal number integer">59</span><span class="punctuation">]</span></code></pre>
-</section>
-<section id="islevler">
-<h2>İşlevler</h2>
+</span><span class="operator">-&gt;</span> <span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="literal number integer">7</span><span class="punctuation">,</span> <span class="literal number integer">11</span><span class="punctuation">,</span> <span class="literal number integer">13</span><span class="punctuation">,</span> <span class="literal number integer">17</span><span class="punctuation">,</span> <span class="literal number integer">19</span><span class="punctuation">,</span> <span class="literal number integer">23</span><span class="punctuation">,</span> <span class="literal number integer">29</span><span class="punctuation">,</span> <span class="literal number integer">31</span><span class="punctuation">,</span> <span class="literal number integer">37</span><span class="punctuation">,</span> <span class="literal number integer">41</span><span class="punctuation">,</span> <span class="literal number integer">43</span><span class="punctuation">,</span> <span class="literal number integer">47</span><span class="punctuation">,</span> <span class="literal number integer">53</span><span class="punctuation">,</span> <span class="literal number integer">59</span><span class="punctuation">]</span>
+</pre>
+</div>
+<div class="section" id="islevler">
+<h1>İşlevler</h1>
 <p>Python programlarken işlev tanımlayıp daha sonra bu işlevi kullanabiliriz. İşlevler aşağıdaki gibi tanımlanırlar:</p>
-<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name">girdi1</span><span class="punctuation">,</span><span class="name">girdi2</span><span class="punctuation">):</span><span class="whitespace">
-</span>    <span class="name">eylem</span></code></pre>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name">girdi1</span><span class="punctuation">,</span><span class="name">girdi2</span><span class="punctuation">):</span><span class="whitespace">
+</span>    <span class="name">eylem</span>
+</pre>
 <p>işlevlerde çıktı sonucu olarak bir değişken döndürmek için <strong>return</strong> ifadesi kullanılır. Örneğin girdideki sayıları toplayan işlev yazalım.</p>
-<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">topla</span><span class="punctuation">(</span><span class="name">sayi1</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">):</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">topla</span><span class="punctuation">(</span><span class="name">sayi1</span><span class="punctuation">,</span><span class="name">sayi2</span><span class="punctuation">):</span><span class="whitespace">
 </span>    <span class="keyword">return</span> <span class="name">sayi1</span> <span class="operator">+</span> <span class="name">sayi2</span><span class="whitespace">
 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba&quot;</span><span class="punctuation">)</span> <span class="comment single"># bu satır çalıştırılmaz</span><span class="whitespace">
 </span><span class="name">toplam</span> <span class="operator">=</span> <span class="name">topla</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">,</span><span class="literal number integer">5</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">toplam</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">8</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">8</span>
+</pre>
 <p>Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken işlevin dışında tanımsız olur.</p>
-<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">yazdir</span><span class="punctuation">():</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">yazdir</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span><span class="whitespace">
 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">yazdir</span><span class="punctuation">()</span><span class="whitespace">
@@ -345,18 +448,22 @@ if not koşul:
 </span><span class="operator">-&gt;</span> <span class="name">Traceback</span> <span class="punctuation">(</span><span class="name">most</span> <span class="name">recent</span> <span class="name">call</span> <span class="name">last</span><span class="punctuation">):</span><span class="whitespace">
 </span><span class="operator">-&gt;</span>   <span class="name">File</span> <span class="literal string double">&quot;ders.py&quot;</span><span class="punctuation">,</span> <span class="name">line</span> <span class="literal number integer">5</span><span class="punctuation">,</span> <span class="operator word">in</span> <span class="operator">&lt;</span><span class="name">module</span><span class="operator">&gt;</span><span class="whitespace">
 </span><span class="operator">-&gt;</span>     <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name exception">NameError</span><span class="punctuation">:</span> <span class="name">name</span> <span class="literal string single">'yazi'</span> <span class="operator word">is</span> <span class="operator word">not</span> <span class="name">defined</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="name exception">NameError</span><span class="punctuation">:</span> <span class="name">name</span> <span class="literal string single">'yazi'</span> <span class="operator word">is</span> <span class="operator word">not</span> <span class="name">defined</span>
+</pre>
 <p>Bir işlevin ne işe yaradığını öğrenmek için <strong>help</strong> işlevi kullanılır. işlevin ne işe yaradığını tanımlamak için ise ilk satıra <strong>&quot;&quot;&quot;</strong> içerisine yazabiliriz. Bunu tanımlamak programınızı inceleyen diğer insanlar için yararlı olacaktır.</p>
-<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">abc</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">):</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">abc</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">):</span><span class="whitespace">
     </span><span class="literal string doc">&quot;&quot;&quot;Girilen sayıyı 10dan çıkartır&quot;&quot;&quot;</span><span class="whitespace">
 </span>    <span class="keyword">return</span> <span class="literal number integer">10</span><span class="operator">-</span><span class="name">sayi</span><span class="whitespace">
 </span><span class="name">help</span><span class="punctuation">(</span><span class="name">abc</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span>  <span class="name">Help</span> <span class="name">on</span> <span class="name">function</span> <span class="name">abc</span> <span class="operator word">in</span> <span class="name">module</span> <span class="name">__main__</span><span class="punctuation">:</span><span class="whitespace">
 </span><span class="operator">-&gt;</span><span class="whitespace">
 </span><span class="operator">-&gt;</span>  <span class="name">abc</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span>      <span class="name">Girilen</span> <span class="name">sayıyı</span> <span class="literal number integer">10</span><span class="name">dan</span> <span class="name">çıkartır</span></code></pre>
+</span><span class="operator">-&gt;</span>      <span class="name">Girilen</span> <span class="name">sayıyı</span> <span class="literal number integer">10</span><span class="name">dan</span> <span class="name">çıkartır</span>
+</pre>
 <p>Bir işlevin birden çok çıktısı olabilir. Bunun için <strong>return</strong> ifadesini virgülle ayrılmış olarak birden çok değişken ile kullanmalıyız.</p>
-<pre class="code python literal-block"><code><span class="keyword">def</span> <span class="name function">yer_degistir</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">):</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">yer_degistir</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">):</span><span class="whitespace">
     </span><span class="literal string doc">&quot;&quot;&quot;Girilen değişkenlerin yerini değiştirir&quot;&quot;&quot;</span><span class="whitespace">
 </span>    <span class="keyword">return</span> <span class="name">b</span><span class="punctuation">,</span><span class="name">a</span><span class="whitespace">
 </span><span class="name">c</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="whitespace">
@@ -364,18 +471,35 @@ if not koşul:
 </span><span class="name">c</span><span class="punctuation">,</span><span class="name">d</span> <span class="operator">=</span> <span class="name">yer_degistir</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">,</span><span class="name">d</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="comment single"># Bunun yerine doğrudan c,d = d,c kullanılabilirdi.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">,</span><span class="name">d</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">31</span> <span class="literal number integer">12</span></code></pre>
-</section>
-<section id="siniflar">
-<h2>Sınıflar</h2>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">31</span> <span class="literal number integer">12</span>
+</pre>
+<p>Konunun daha iyi anlaşılabilir olması için girilen dizinin sayılarının ortalamasını alan bir fonksiyon yazalım.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">ortalama</span><span class="punctuation">(</span><span class="name">dizi</span><span class="punctuation">):</span><span class="whitespace">
+</span>    <span class="name">toplam</span> <span class="operator">=</span> <span class="literal number integer">0</span> <span class="comment single"># toplam değişkeni tanımladık.</span><span class="whitespace">
+</span>    <span class="keyword">for</span> <span class="name">eleman</span> <span class="operator word">in</span> <span class="name">dizi</span><span class="punctuation">:</span> <span class="comment single"># for döngüsü oluşturduk.</span><span class="whitespace">
+</span>        <span class="name">toplam</span> <span class="operator">+=</span> <span class="name builtin">int</span><span class="punctuation">(</span><span class="name">eleman</span><span class="punctuation">)</span> <span class="comment single"># elemanları topladık.</span><span class="whitespace">
+</span>    <span class="keyword">return</span> <span class="name">toplam</span> <span class="operator">/</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">dizi</span><span class="punctuation">)</span> <span class="comment single"># toplamı eleman sayısına böldük.</span><span class="whitespace">
+
+</span><span class="name">ort</span> <span class="operator">=</span> <span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Dizi giriniz. aralarına , koyunuz&quot;</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">ortalama</span><span class="punctuation">(</span><span class="name">ort</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;,&quot;</span><span class="punctuation">)))</span><span class="whitespace">
+</span><span class="operator">&lt;-</span> <span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">34</span><span class="punctuation">,</span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="operator">-</span><span class="literal number integer">32</span><span class="whitespace">
+</span><span class="operator">-&gt;</span> <span class="literal number float">6.25</span>
+</pre>
+</div>
+<div class="section" id="siniflar">
+<h1>Sınıflar</h1>
 <p>Sınıf kavramı işlevlerin ve değişkenlerin guruplanarak nesneler haline getirilmesinden meydana gelir. Yani bir sınıf ona bağlı işlevlerden ve değişkenlerden oluşur. Sınıflar aşağıdaki gibi tanımlanırlar.</p>
-<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">sinif</span><span class="punctuation">:</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">sinif</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">girdi</span><span class="punctuation">):</span><span class="whitespace">
 </span>        <span class="name">eylem</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">girdi</span><span class="punctuation">):</span><span class="whitespace">
-</span>        <span class="name">eylem</span></code></pre>
+</span>        <span class="name">eylem</span>
+</pre>
 <p>Burada <strong>__init__</strong> işlevi sınıfı oluştururken çalıştırılan ilk eylemleri tanımlamak için kullanılır. sınıf işlevleri tanımlanırken ilk girdi olarak <strong>self</strong> kullanılmalıdır. Bu ifade sınıfın kendisi anlamına gelir. Örneğin bir sınıf tanımlayalım ve bu sınıftaki işlevler ile girdideki sayılara toplama ve çıkartma işlemi uygulayalım.</p>
-<pre class="code python literal-block"><code><span class="keyword">class</span> <span class="name class">sayi_isle</span><span class="punctuation">:</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">sayi_isle</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">ilk</span><span class="punctuation">,</span><span class="name">ikinci</span><span class="punctuation">):</span><span class="whitespace">
 </span>        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi1</span> <span class="operator">=</span> <span class="name">ilk</span><span class="whitespace">
 </span>        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="name">ikinci</span><span class="whitespace">
@@ -388,64 +512,80 @@ if not koşul:
 </span><span class="name">a</span> <span class="operator">=</span> <span class="name">nesne</span><span class="operator">.</span><span class="name">topla</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name">b</span> <span class="operator">=</span> <span class="name">nesne</span><span class="operator">.</span><span class="name">cikart</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">15</span> <span class="literal number integer">9</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">15</span> <span class="literal number integer">9</span>
+</pre>
 <p>Burada işlevlere <strong>nesne.islev()</strong> ifadesi ile erişebiliyoruz. Aynı zamanda değişkenlere de <strong>nesne.degisken</strong> ifadesi ile erişmemiz ve değiştirmemiz mümkündür. Sınıf içerisinden ise <strong>self.islev()</strong> ve <strong>self.degisken</strong> şeklinde bir ifade kullanmamız gerekmektedir.</p>
-</section>
-<section id="dosya-islemleri">
-<h2>Dosya işlemleri</h2>
+</div>
+<div class="section" id="dosya-islemleri">
+<h1>Dosya işlemleri</h1>
 <p>Bir dosyayı açmak için <strong>open</strong> işlevi kullanılır. Açılan dosyadan satır okumak için <strong>readline</strong> işlevi, tamamını okumak için <strong>read</strong> işlevi, tüm satırları okuyup dizi haline getirmek için ise <strong>readlines</strong> işlevi kullanılır.</p>
 <p>deneme.txt adında içeriği aşağıdaki gibi olan bir doysamız olsun:</p>
-<pre class="code text literal-block"><code>Merhaba dünya
+<pre class="code text literal-block">
+Merhaba dünya
 Selam dünya
-sayı:123</code></pre>
+sayı:123
+</pre>
 <p>Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.</p>
-<pre class="code python literal-block"><code><span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span> <span class="comment single"># okumak için r kullanılır.</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;r&quot;</span><span class="punctuation">)</span> <span class="comment single"># okumak için r kullanılır.</span><span class="whitespace">
 </span><span class="name">ilksatir</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">readline</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name">tumu</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name">satirlar</span> <span class="operator">=</span> <span class="name">dosya</span><span class="operator">.</span><span class="name">readlines</span><span class="punctuation">()</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">satirlar</span><span class="punctuation">))</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="literal number integer">3</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="literal number integer">3</span>
+</pre>
 <p>Dosyaya yazmak için ise <strong>write</strong> işlevi kullanılır. Okuma ve yazma işlemleri bittikten sonra <strong>close</strong> işlevi ile dosya kapatılmalıdır. Dosyayı kapatmadan değişiklikleri diske işletmek için <strong>flush</strong> işlevi kullanılır.</p>
-<pre class="code python literal-block"><code><span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;w&quot;</span><span class="punctuation">)</span> <span class="comment single"># yazmak için w eklemek için a kullanılır.</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">dosya</span> <span class="operator">=</span> <span class="name builtin">open</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya.txt&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;w&quot;</span><span class="punctuation">)</span> <span class="comment single"># yazmak için w eklemek için a kullanılır.</span><span class="whitespace">
 </span><span class="name">dosya</span><span class="operator">.</span><span class="name">write</span><span class="punctuation">(</span><span class="literal string double">&quot;Merhaba dünya</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">dosya</span><span class="operator">.</span><span class="name">write</span><span class="punctuation">(</span><span class="literal string double">&quot;Selam dünya</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">dosya</span><span class="operator">.</span><span class="name">write</span><span class="punctuation">(</span><span class="literal string double">&quot;sayı:123</span><span class="literal string escape">\n</span><span class="literal string double">&quot;</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="name">dosya</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-</section>
-<section id="moduller">
-<h2>Modüller</h2>
+</span><span class="name">dosya</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="moduller">
+<h1>Modüller</h1>
 <p>Python programlarında kodların markaşıklaşmasını önlemek ve daha kullanışlı hale getirmek amacıyla modüller bulunur. Modüller <strong>import</strong> ifadesi ile çağırılır. Modüller aslında birer Birer python kütüphanesidir ve sınıf sayılırlar. Örneğin deneme.py dosyamızda aşağıdaki kodlar bulunsun:</p>
-<pre class="code python literal-block"><code><span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="name">yazi</span> <span class="operator">=</span> <span class="literal string double">&quot;Merhaba&quot;</span><span class="whitespace">
 </span><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">12</span><span class="whitespace">
 </span><span class="keyword">def</span> <span class="name function">yazdir</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">yazi</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="keyword">class</span> <span class="name class">sinif</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function">islev</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span><span class="whitespace">
-</span>        <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;selam&quot;</span><span class="punctuation">)</span></code></pre>
+</span>        <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;selam&quot;</span><span class="punctuation">)</span>
+</pre>
 <p>Şimdi bu modülümüzü çağırıp içerisindeki işlevleri ve değişkenleri kullanalım.</p>
-<pre class="code python literal-block"><code><span class="keyword namespace">import</span> <span class="name namespace">deneme</span> <span class="comment single"># deneme modülünü çağırdık</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">deneme</span> <span class="comment single"># deneme modülünü çağırdık</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">deneme</span><span class="operator">.</span><span class="name">yazi</span><span class="punctuation">)</span> <span class="comment single"># değişkeni kullandık</span><span class="whitespace">
 </span><span class="name">deneme</span><span class="operator">.</span><span class="name">yazdir</span><span class="punctuation">()</span> <span class="comment single"># işlevi kullandık.</span><span class="whitespace">
 </span><span class="name">deneme</span><span class="operator">.</span><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">76</span> <span class="comment single"># değişkeni değiştirdik</span><span class="whitespace">
 </span><span class="name">nesne</span> <span class="operator">=</span> <span class="name">deneme</span><span class="operator">.</span><span class="name">sinif</span><span class="punctuation">()</span> <span class="comment single"># sınıftan nesne oluşturduk</span><span class="whitespace">
 </span><span class="name">nesne</span><span class="operator">.</span><span class="name">islev</span><span class="punctuation">()</span> <span class="comment single"># nesneyi kullandık</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="name">Merhaba</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">selam</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="name">selam</span>
+</pre>
 <p>Şimdiye kadar anlatılanların daha iyi anlaşılması için aşağıda ini parser örneği yapalım. Örnek bir ini dosyası aşağıdaki gibidir:</p>
-<pre class="code ini literal-block"><code><span class="keyword">[bölüm1]</span><span class="whitespace">
+<pre class="code ini literal-block">
+<span class="keyword">[bölüm1]</span><span class="whitespace">
 </span><span class="name attribute">veri1</span><span class="operator">=</span><span class="literal string">deger1</span><span class="whitespace">
 </span><span class="name attribute">veri2</span><span class="operator">=</span><span class="literal string">deger2</span><span class="whitespace">
 </span><span class="keyword">[bölüm2]</span><span class="whitespace">
 </span><span class="name attribute">veri3</span><span class="operator">=</span><span class="literal string">deger3</span><span class="whitespace">
-</span><span class="name attribute">veri4</span><span class="operator">=</span><span class="literal string">deger4</span></code></pre>
+</span><span class="name attribute">veri4</span><span class="operator">=</span><span class="literal string">deger4</span>
+</pre>
 <p>Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki değeri bulalım ve döndürelim.</p>
-<pre class="code python literal-block"><code><span class="punctuation">[</span><span class="name">Merhaba</span><span class="punctuation">]</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="punctuation">[</span><span class="name">Merhaba</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name">dünya</span><span class="operator">=</span><span class="literal number integer">12</span><span class="whitespace">
 </span><span class="name">selam</span><span class="operator">=</span><span class="literal number integer">44</span><span class="whitespace">
 </span><span class="punctuation">[</span><span class="name">hmm</span><span class="punctuation">]</span><span class="whitespace">
 </span><span class="name">veri</span><span class="operator">=</span><span class="name">abc123x</span><span class="whitespace">
-</span><span class="name">sayı</span><span class="operator">=</span><span class="literal number integer">44</span></code></pre>
-<pre class="code python literal-block"><code><span class="comment single"># iniparser.py içeriği</span><span class="whitespace">
+</span><span class="name">sayı</span><span class="operator">=</span><span class="literal number integer">44</span>
+</pre>
+<pre class="code python literal-block">
+<span class="comment single"># iniparser.py içeriği</span><span class="whitespace">
 </span><span class="name">dosya</span> <span class="operator">=</span> <span class="keyword constant">None</span> <span class="comment single"># boş dosya nesnesi</span><span class="whitespace">
 </span><span class="keyword">class</span> <span class="name class">inidosya</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span><span class="name">yol</span><span class="punctuation">):</span><span class="whitespace">
@@ -458,15 +598,19 @@ sayı:123</code></pre>
 </span>                <span class="name">etkin</span> <span class="operator">=</span> <span class="keyword constant">True</span> <span class="comment single"># etkinleştir</span><span class="whitespace">
 </span>            <span class="keyword">if</span> <span class="name">etkin</span> <span class="operator word">and</span> <span class="literal string double">&quot;=&quot;</span> <span class="operator word">in</span> <span class="name">satir</span><span class="punctuation">:</span> <span class="comment single"># etkinse ve satırda = bulunuyorsa</span><span class="whitespace">
 </span>                <span class="keyword">if</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="name">veri</span><span class="punctuation">:</span> <span class="comment single"># = işaretine göre 0. eleman aranan mı</span><span class="whitespace">
-</span>                    <span class="keyword">return</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="comment single"># = işaretine göre böl . elemanı al</span></code></pre>
-<pre class="code python literal-block"><code><span class="comment single"># main.py dosyası içeriği</span><span class="whitespace">
+</span>                    <span class="keyword">return</span> <span class="name">satir</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string double">&quot;=&quot;</span><span class="punctuation">)[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="comment single"># = işaretine göre böl . elemanı al</span>
+</pre>
+<pre class="code python literal-block">
+<span class="comment single"># main.py dosyası içeriği</span><span class="whitespace">
 </span><span class="keyword namespace">import</span> <span class="name namespace">iniparser</span> <span class="comment single"># modülü yükle</span><span class="whitespace">
 </span><span class="name">iniparser</span><span class="operator">.</span><span class="name">dosya</span> <span class="operator">=</span> <span class="name">iniparser</span><span class="operator">.</span><span class="name">inidosya</span><span class="punctuation">(</span><span class="literal string double">&quot;dosya&quot;</span><span class="punctuation">)</span> <span class="comment single"># ini dosyasını yükle</span><span class="whitespace">
 </span><span class="name">deger</span><span class="operator">=</span><span class="name">iniparser</span><span class="operator">.</span><span class="name">deger_al</span><span class="punctuation">(</span><span class="literal string double">&quot;hmm&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;veri&quot;</span><span class="punctuation">)</span> <span class="comment single"># değeri al</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">deger</span><span class="operator">.</span><span class="name">strip</span><span class="punctuation">())</span> <span class="comment single"># değerin başında sonunda boşluk varsa sil ve yaz</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">abc123x</span></code></pre>
+</span><span class="operator">-&gt;</span> <span class="name">abc123x</span>
+</pre>
 <p>Bir modülü diğer bir modülün genişletilmişi olarak tanımlayabiliriz. Gelişletilen modül asıl modüldeki tüm fonksiyonlara ve değişkenlere sahip olur. Aşağıdaki örnekteki gibi <strong>super().__init__()</strong> kullanarak üst modülümüzdeki tüm tanımlamalara sahip olmasını sağlayabiliriz.</p>
-<pre class="code python literal-block"><code><span class="comment single"># ornek.py dosyası</span><span class="whitespace">
+<pre class="code python literal-block">
+<span class="comment single"># ornek.py dosyası</span><span class="whitespace">
 </span><span class="keyword">class</span> <span class="name class">deneme</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span><span class="whitespace">
 </span>        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi</span> <span class="operator">=</span> <span class="literal number integer">13</span><span class="whitespace">
@@ -476,14 +620,17 @@ sayı:123</code></pre>
 </span><span class="keyword">class</span> <span class="name class">genis</span><span class="punctuation">(</span><span class="name">deneme</span><span class="punctuation">):</span><span class="whitespace">
 </span>    <span class="keyword">def</span> <span class="name function magic">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span><span class="whitespace">
 </span>        <span class="name builtin">super</span><span class="punctuation">()</span><span class="operator">.</span><span class="name function magic">__init__</span><span class="punctuation">()</span><span class="whitespace">
-</span>        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="literal number integer">44</span></code></pre>
-<pre class="code python literal-block"><code><span class="comment single"># main.py dosyası</span><span class="whitespace">
+</span>        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">sayi2</span> <span class="operator">=</span> <span class="literal number integer">44</span>
+</pre>
+<pre class="code python literal-block">
+<span class="comment single"># main.py dosyası</span><span class="whitespace">
 </span><span class="keyword namespace">from</span> <span class="name namespace">ornek</span> <span class="keyword namespace">import</span> <span class="name">genis</span> <span class="keyword">as</span> <span class="name">g</span> <span class="comment single"># ornek.py dosyasındaki genis sınıfını g olarak içeri aldık.</span><span class="whitespace">
 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">g</span><span class="operator">.</span><span class="name">sayi</span><span class="punctuation">,</span> <span class="name">g</span><span class="operator">.</span><span class="name">sayi2</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="name">g</span><span class="operator">.</span><span class="name">hmm</span><span class="punctuation">(</span><span class="literal string double">&quot;abc123&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span><span class="operator">-&gt;</span> <span class="literal number integer">13</span> <span class="literal number integer">44</span><span class="whitespace">
-</span><span class="operator">-&gt;</span> <span class="name">abc123</span></code></pre>
-</section>
-</main>
+</span><span class="operator">-&gt;</span> <span class="name">abc123</span>
+</pre>
+</div>
+</div>
 </body>
 </html>
