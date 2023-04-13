@@ -677,14 +677,18 @@ Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile 
 
 .. code-block:: shell
 
-	$ valac -C -H libtest.h --vapi libtest.vapi library.vala // Önce C koduna çevirelim
-	$ gcc library.c -o libtest.so -shared `pkg-config --cflags --libs glib-2.0` -fPIC // gcc ile derleyelim.
+	# Önce C koduna çevirelim
+	$ valac -C -H libtest.h --vapi libtest.vapi library.vala
+	# Sonra gcc ile derleyelim.
+	$ gcc library.c -o libtest.so -shared \
+	    `pkg-config --cflags --libs glib-2.0` -fPIC
 
 Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak koduna çevirmeye gerek kalmadan kütüphanemiz derlenmiş olur.
 
 .. code-block:: shell
 
-	$ valac -H libtest.h --vapi libtest.vapi -o libtest.so -X -shared -X -fPIC library.vala
+	$ valac -H libtest.h --vapi libtest.vapi \
+	    -o libtest.so -X -shared -X -fPIC library.vala
 
 Şimdi aşağıdaki gibi bir C kodu yazalım ve kütüphanemizi orada kullanalım. Oluşturulmuş olan **library.h** dosyamızdan yararlanabiliriz.
 

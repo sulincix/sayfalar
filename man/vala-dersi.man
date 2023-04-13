@@ -1039,8 +1039,11 @@ Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile 
 .sp
 .nf
 .ft C
-$ valac \-C \-H libtest.h \-\-vapi libtest.vapi library.vala // Önce C koduna çevirelim
-$ gcc library.c \-o libtest.so \-shared \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC // gcc ile derleyelim.
+# Önce C koduna çevirelim
+$ valac \-C \-H libtest.h \-\-vapi libtest.vapi library.vala
+# Sonra gcc ile derleyelim.
+$ gcc library.c \-o libtest.so \-shared \e
+    \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC
 .ft P
 .fi
 .UNINDENT
@@ -1052,7 +1055,8 @@ Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak ko
 .sp
 .nf
 .ft C
-$ valac \-H libtest.h \-\-vapi libtest.vapi \-o libtest.so \-X \-shared \-X \-fPIC library.vala
+$ valac \-H libtest.h \-\-vapi libtest.vapi \e
+    \-o libtest.so \-X \-shared \-X \-fPIC library.vala
 .ft P
 .fi
 .UNINDENT
