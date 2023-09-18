@@ -289,7 +289,7 @@ Bir sayıya karşılık bir işlem yapmak için **switch - case** yapısı kulla
 	    // break olmadığı için alttan devam eder.
 	  2:
 	    // sayı 1 veya 2 ise burası çalışır.
-      break;
+	    break;
 	  3:
 	    // sayı 3 ise burası çalışır.  
 	  default:
