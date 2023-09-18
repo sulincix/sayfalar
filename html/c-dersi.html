@@ -265,6 +265,48 @@ Bu sayede tek sayılar için koşul sağlanır çift sayılar için sağlanmaz.<
 </tbody>
 </table>
 </div>
+<div class="section" id="donguler">
+<h1>Döngüler</h1>
+<p>Döngüler koşullara benzer fakat döngülerde koşula sağlanmayana kadar block içi tekrarlanır.
+Döngü oluşturmak için <strong>while</strong> kıllanılır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">10</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword">while</span><span class="punctuation">(</span><span class="name">i</span><span class="operator">&lt;</span><span class="literal number integer">0</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">i</span><span class="operator">--</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Yukarıdaki örnekte 10dan 0a kadar geri sayan örnek verilmiştir.
+En son i değişkeni 0 olduğunda koşul sağlanmadığı için döngü sonlanır.</p>
+<p>Aynı işlemi <strong>for</strong> ifadesi ile de yapabiliriz.</p>
+<pre class="code C literal-block">
+<span class="keyword">for</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">10</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">&lt;</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">--</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Burada for içerisinde 3 bölüm bulunur.
+İlkinde değer atanır.
+İkincinde koşul yer alır.
+Üçüncüsünde değişkene yapılacak işlem belirtilir.</p>
+</div>
+<div class="section" id="switch-case">
+<h1>Swıtch - Case</h1>
+<p>Bir sayıya karşılık bir işlem yapmak için <strong>switch - case</strong> yapısı kullanılır.</p>
+<pre class="code C literal-block">
+<span class="whitespace">      </span><span class="keyword">switch</span><span class="punctuation">(</span><span class="name">sayi</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="literal number integer">1</span><span class="operator">:</span><span class="whitespace">
+          </span><span class="comment single">// sayı 1se burası çalışır.
+</span><span class="whitespace">          </span><span class="comment single">// break olmadığı için alttan devam eder.
+</span><span class="whitespace">        </span><span class="literal number integer">2</span><span class="operator">:</span><span class="whitespace">
+          </span><span class="comment single">// sayı 1 veya 2 ise burası çalışır.
+</span><span class="whitespace">    </span><span class="keyword">break</span><span class="punctuation">;</span><span class="whitespace">
+        </span><span class="literal number integer">3</span><span class="operator">:</span><span class="whitespace">
+          </span><span class="comment single">// sayı 3 ise burası çalışır.
+</span><span class="whitespace">        </span><span class="keyword">default</span><span class="operator">:</span><span class="whitespace">
+          </span><span class="comment single">// sayı eşleşmezse burası çalışır.
+</span><span class="punctuation">}</span>
+</pre>
+</div>
 </div>
 </body>
 </html>

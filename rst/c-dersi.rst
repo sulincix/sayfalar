@@ -276,3 +276,52 @@ Koşul ifadeleri aşağıdaki gibi listelenebilir.
 	* - <=
 	  - küçük eşittir
 	  - 12 <= 12
+
+Döngüler
+^^^^^^^^
+Döngüler koşullara benzer fakat döngülerde koşula sağlanmayana kadar block içi tekrarlanır.
+Döngü oluşturmak için **while** kıllanılır.
+
+.. code-block:: C
+
+	int i=10;
+	while(i<0){
+	    printf("%d\n", i);
+	    i--;
+	}
+
+Yukarıdaki örnekte 10dan 0a kadar geri sayan örnek verilmiştir.
+En son i değişkeni 0 olduğunda koşul sağlanmadığı için döngü sonlanır.
+
+Aynı işlemi **for** ifadesi ile de yapabiliriz.
+
+.. code-block:: C
+
+	for(int i=10;i<0;i--){
+	    printf("%d\n", i);	    
+	}
+
+Burada for içerisinde 3 bölüm bulunur.
+İlkinde değer atanır.
+İkincinde koşul yer alır.
+Üçüncüsünde değişkene yapılacak işlem belirtilir.
+
+Swıtch - Case
+^^^^^^^^^^^^^
+Bir sayıya karşılık bir işlem yapmak için **switch - case** yapısı kullanılır.
+
+.. code-block:: C
+
+	switch(sayi) {
+	  1:
+	    // sayı 1se burası çalışır.
+	    // break olmadığı için alttan devam eder.
+	  2:
+	    // sayı 1 veya 2 ise burası çalışır.
+      break;
+	  3:
+	    // sayı 3 ise burası çalışır.  
+	  default:
+	    // sayı eşleşmezse burası çalışır.
+  }
+
