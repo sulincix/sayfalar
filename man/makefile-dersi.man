@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "MAKEFILE DERSI"  "" "" ""
+.TH "MAKEFILE DERSI"  "" ""
 .SH NAME
 makefile dersi \- 
 .sp

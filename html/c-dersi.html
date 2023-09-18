@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<title>C Dersi</title>
+<link rel="stylesheet" href="main.css" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+<body>
+<div class="document" id="c-dersi">
+<h1 class="title">C Dersi</h1>
+
+<p>Bu derste C programlama dersi anlatılacaktır.
+Bu dersin düzgünce anlaşılabilmesi için temel düzey gnu/linux bilmeniz gerekmektedir.</p>
+<div class="section" id="derleme-islemi">
+<h1>Derleme işlemi</h1>
+<p><strong>C</strong> derlemeli bir programlama dilidir.
+Yani yazılan kodun derleneek bilgisayarın anlayacağı hale getirilmesi gerekmektedir.
+Derleme işlemini <strong>gcc</strong> veya <strong>clang</strong> kullanarak yapabiliriz.</p>
+<pre class="code shell literal-block">
+<span class="comment single"># koddan .o dosyası üretelim
+</span>$<span class="whitespace"> </span>gcc<span class="whitespace"> </span>-c<span class="whitespace"> </span>main.c<span class="whitespace">
+</span><span class="comment single"># .o dosyasından derlenmiş dosya üretelim.
+</span>$<span class="whitespace"> </span>gcc<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace"> </span>main.o<span class="whitespace">
+</span><span class="comment single"># kodu çalıştıralım
+</span>$<span class="whitespace"> </span>./main<span class="whitespace">
+</span>-&gt;<span class="whitespace"> </span>Hello<span class="whitespace"> </span>World
+</pre>
+<p>Yukarıdaki örnekte öncelikle <strong>.o</strong> uzantılı object dosyamızı ürettik.
+Bu dosya kodun derlenmiş fakat henüz kullanıma hazır hale getirilmemiş halidir.
+Bu sebeple <strong>.o</strong> dosyalarını linkleme işleminden geçirerek son halini almasını sağlamalıyız.</p>
+<p><strong>Not:</strong> derleyicimiz <strong>.o</strong> üretmeden de doğrudan derleme yapabilir.</p>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>gcc<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace"> </span>main.c
+</pre>
+</div>
+<div class="section" id="aciklama-satiri">
+<h1>Açıklama satırı</h1>
+<p>C kodlarında 3 farklı yolla girintileme yapılabilir.</p>
+<ol class="arabic simple">
+<li><strong>//</strong> kullanarak satırın geri kalanını açıklama satırı yapabiliriz.</li>
+</ol>
+<pre class="code C literal-block">
+<span class="comment single">// bu bir açıklama satırıdır.</span>
+</pre>
+<ol class="arabic simple" start="2">
+<li><strong>/*</strong> ile başlayıp <strong>*/</strong> ile biten alanlar açıklamadır.</li>
+</ol>
+<pre class="code C literal-block">
+<span class="comment multiline">/* Bu
+   bir
+   açıklama
+   satırıdır */</span>
+</pre>
+<ol class="arabic simple" start="3">
+<li><strong>#if 0</strong> ile başlayan satırdan <strong>#endif</strong> satırına kadar olan kısım açıklama satırıdır.</li>
+</ol>
+<pre class="code C literal-block">
+<span class="comment preproc">#if 0</span><span class="comment">
+bu bir
+açıklama
+satırıdır
+</span><span class="comment preproc">#endif</span>
+</pre>
+</div>
+<div class="section" id="girintileme">
+<h1>Girintileme</h1>
+<p>C programlama dilinde blocklar <strong>{}</strong> karakterleri ile belirtilir.
+Kodun okunalı olması için girintilenmesi gereklidir fakat şart değildir.
+Girintileme için 4 boşluk veya 1 tab kullanabilirsiniz.</p>
+<p>Bir block aşağdaki gibi bir yapıya sahiptir.</p>
+<pre class="code C literal-block">
+<span class="name">aaaa</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">bbbb</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">cccc</span><span class="punctuation">;</span><span class="whitespace">
+  </span><span class="name">ddd</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p><strong>Not:</strong> Her satırın sonunda ; işareti bulunmalıdır.</p>
+</div>
+<div class="section" id="ilk-program">
+<h1>İlk program</h1>
+<p>C programları çalıştırıldığında <strong>main</strong> fonsiyonu çalıştırılır.
+Aşağıda örnek main fonksiyonu bulunmaktadır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">argc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="operator">**</span><span class="whitespace"> </span><span class="name">argv</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<ul class="simple">
+<li><strong>int main</strong> kısmında  int döndürülecek derer türü main adıdır.</li>
+<li><strong>int argc</strong> parametre sayısını belirtir.</li>
+<li><strong>char **argv</strong> parametre listesini belirtir.</li>
+<li><strong>return 0</strong> komutu 0 ile çıkış yapar.</li>
+</ul>
+</div>
+<div class="section" id="ekrana-yazi-yazma">
+<h1>Ekrana yazı yazma</h1>
+<p>Öncelikle <strong>stdio.h</strong> kütüphanesine ihtiyacimiz olduğu için onu eklemeliyiz.
+Ardından <strong>printf</strong> fonksiyonu ile ekrana yazı yazabiliriz.</p>
+<p><strong>printf</strong> fonksiyonunun 1. parametresi yazdirma şablonunu diğerleri ise yazdırılacak verileri belirtir.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">argc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="operator">**</span><span class="whitespace"> </span><span class="name">argv</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal string">&quot;Merhaba Dünya!&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<ul class="simple">
+<li><strong>include</strong> ile belirttiğimiz dosyalar sistemde <strong>/usr/include</strong> içerisinde bulunur.</li>
+<li><strong>printf</strong> fonksiyonundaki <strong>%s</strong> yazılar için, <strong>%c</strong> karakterler için, <strong>%d</strong> sayılar için kullanılır.</li>
+</ul>
+</div>
+<div class="section" id="degiskenler">
+<h1>Değişkenler</h1>
+<p>C dilinde değişkenler aşağıdaki gibi tanımlanır.</p>
+<pre class="code C literal-block">
+<span class="punctuation">...</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">12</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">yazi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;test&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword type">char</span><span class="whitespace"> </span><span class="name">karakter</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string char">'c'</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="keyword type">float</span><span class="whitespace"> </span><span class="name">sayi2</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number float">12.42</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
+<p>Bununla birlikte <strong>#define</strong> kullanarak derlemeden önce koddaki alanların karşiliği ile değiştirlmasini sağlayabilirsiniz.
+Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.
+.. code-block:: C</p>
+<blockquote>
+#define sayi 12
+...
+printf(&quot;%dn&quot;,sayi);
+...</blockquote>
+</div>
+<div class="section" id="diziler">
+<h1>Diziler</h1>
+<p>Diziler iki şekilde tanımlanabilir.</p>
+<p>1. Pointer kullanarak tanımlanabilir. Bu konunun detaylarına ilerleyen kısımda değinilecektir.
+Bu şekilde tanımlanan dizilerde başta uzunluk belirtilmek zorunda değildir.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">dizi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">31</span><span class="punctuation">};</span>
+</pre>
+<ol class="arabic simple" start="2">
+<li>Uzunluk belirterek tanımlanabilir. Bu şekilde tanımlanan dizilerin uzunluğu sabittir.</li>
+</ol>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">dizi</span><span class="punctuation">[</span><span class="literal number integer">3</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">31</span><span class="punctuation">};</span>
+</pre>
+<p>C dilinde string kavramı bulunmaz. Onun yerine karakter dizileri kullanılır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">char</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">txt</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;deneme123&quot;</span><span class="punctuation">;</span>
+</pre>
+<p>Dizinin bir elemanına erişmek için aşağıdaki gibi bir yol kullanılır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">dizi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">31</span><span class="punctuation">};</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">c</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">dizi</span><span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">];</span><span class="whitespace"> </span><span class="comment single">// dizinin 2. elemanı</span>
+</pre>
+<p><strong>Not:</strong> Dizi indisleri 0dan başlar.</p>
+<p>Bir dizinin uzunluğunu dizinin bellekteki boyutunu birim boyutuna bölerek buluruz.
+Bunun  için <strong>sizeof</strong> fonksiyonu kullanılır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">dizi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="literal number integer">11</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">22</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">31</span><span class="punctuation">};</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">l</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="keyword">sizeof</span><span class="punctuation">(</span><span class="name">dizi</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="operator">/</span><span class="whitespace"> </span><span class="keyword">sizeof</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="punctuation">);</span>
+</pre>
+</div>
+<div class="section" id="klavyeden-deger-alma">
+<h1>Klavyeden değer alma</h1>
+<p>Klavyeden değer almak için <strong>scanf</strong> kullanılır. İlk parameter şablonu diğerleri ise değişkenlerin bellek adresini belirtir.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="name">scanf</span><span class="punctuation">(</span><span class="literal string">&quot;%d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="operator">&amp;</span><span class="name">sayi</span><span class="punctuation">);</span>
+</pre>
+</div>
+</div>
+</body>
+</html>
