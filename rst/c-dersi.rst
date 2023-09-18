@@ -87,7 +87,7 @@ Aşağıda örnek main fonksiyonu bulunmaktadır.
 	    return 0;
 	}
 
-* **int main** kısmında  int döndürülecek derer türü main adıdır.
+* **int main** kısmında  int döndürülecek değer türü main adıdır.
 * **int argc** parametre sayısını belirtir.
 * **char **argv** parametre listesini belirtir.
 * **return 0** komutu 0 ile çıkış yapar.
@@ -124,7 +124,7 @@ C dilinde değişkenler aşağıdaki gibi tanımlanır.
 	float sayi2 = 12.42;
 	...
 
-Bununla birlikte **#define** kullanarak derlemeden önce koddaki alanların karşiliği ile değiştirlmasini sağlayabilirsiniz.
+Bununla birlikte **#define** kullanarak derlemeden önce koddaki alanların karşılığı ile değiştirilmesini sağlayabilirsiniz.
 Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.
 
 .. code-block:: C
