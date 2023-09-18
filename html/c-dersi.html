@@ -88,11 +88,15 @@ Aşağıda örnek main fonksiyonu bulunmaktadır.</p>
 </span><span class="punctuation">}</span>
 </pre>
 <ul class="simple">
-<li><strong>int main</strong> kısmında  int döndürülecek derer türü main adıdır.</li>
+<li><strong>int main</strong> kısmında  int döndürülecek değer türü main adıdır.</li>
 <li><strong>int argc</strong> parametre sayısını belirtir.</li>
 <li><strong>char **argv</strong> parametre listesini belirtir.</li>
 <li><strong>return 0</strong> komutu 0 ile çıkış yapar.</li>
 </ul>
+<p>Burada <strong>main</strong> fonksiyonunu türünün bir önemi yoktur. <strong>void</strong> olarak da tanımlanabilir. Ayrıca kullanmayacaksak arguman tanımlamaya da gerek yoktur. Kısaca Şu şekilde de yazabilirdik.</p>
+<pre class="code C literal-block">
+<span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){}</span>
+</pre>
 </div>
 <div class="section" id="ekrana-yazi-yazma">
 <h1>Ekrana yazı yazma</h1>
@@ -123,7 +127,7 @@ Ardından <strong>printf</strong> fonksiyonu ile ekrana yazı yazabiliriz.</p>
 </span><span class="keyword type">float</span><span class="whitespace"> </span><span class="name">sayi2</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number float">12.42</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">...</span>
 </pre>
-<p>Bununla birlikte <strong>#define</strong> kullanarak derlemeden önce koddaki alanların karşiliği ile değiştirlmasini sağlayabilirsiniz.
+<p>Bununla birlikte <strong>#define</strong> kullanarak derlemeden önce koddaki alanların karşılığı ile değiştirilmesini sağlayabilirsiniz.
 Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.</p>
 <pre class="code C literal-block">
 <span class="comment preproc">#define sayi 12
@@ -285,8 +289,8 @@ Bu sayede tek sayılar için koşul sağlanır çift sayılar için sağlanmaz.<
 </div>
 <div class="section" id="donguler">
 <h1>Döngüler</h1>
-<p>Döngüler koşullara benzer fakat döngülerde koşula sağlanmayana kadar block içi tekrarlanır.
-Döngü oluşturmak için <strong>while</strong> kıllanılır.</p>
+<p>Döngüler koşullara benzer fakat döngülerde koşul sağlanmayana kadar block içi tekrarlanır.
+Döngü oluşturmak için <strong>while</strong> kullanılır.</p>
 <pre class="code C literal-block">
 <span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">10</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="keyword">while</span><span class="punctuation">(</span><span class="name">i</span><span class="operator">&lt;</span><span class="literal number integer">0</span><span class="punctuation">){</span><span class="whitespace">
@@ -342,6 +346,89 @@ En son i değişkeni 0 olduğunda koşul sağlanmadığı için döngü sonlanı
 </pre>
 <p>Yukarıdaki fonksiyon verilen değişken değere sahipse ekrana yazdırıp 0 döndürür.
 Eğer değeri yoksa 1 döndürür.</p>
+<p>Basit işlemler için <strong>#define</strong> ile de fonksiyon tanımlanabilir.
+Bu şekilde tanımlanan fonksiyonlar derleme öncesi yerine yazılarak çalışır.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#define topla(A,B) A+B
+</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">argc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="operator">**</span><span class="whitespace"> </span><span class="name">argv</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">topla</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">5</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Fonksiyonlar yazılma sırasına göre kullanılabilirler.
+Bu yüzden fonksiyonlar henüz tanımlı değilse kullanılamazlar.
+Bu durumun üstesinden gelmek için <strong>header</strong> tanımlaması yapılır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">yaz</span><span class="punctuation">();</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">yaz</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">yaz</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Header tanımlamaları kütüphane yazarken de kullanılır.
+Bunun için bu tanımlamaları <strong>.h</strong> uzantılı dosyalara yazmanız gereklidir.
+Bu dosyayı <strong>include</strong> kullanarak eklemeliyiz.</p>
+<p>yaz.h dosyası</p>
+<pre class="code C literal-block">
+<span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">yaz</span><span class="punctuation">();</span>
+</pre>
+<p>main.c dosyası</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&quot;yaz.h&quot;</span><span class="comment preproc">
+#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">yaz</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">yaz</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p><strong>Not:</strong> <strong>include</strong> ifadesinde <strong>&lt;&gt;</strong> içine aldığımız dosyalar <strong>/usr/include</strong> <strong>&quot;</strong> içine aldığımız ise mevcut dizinde aranır.</p>
+</div>
+<div class="section" id="pointer-ve-address-kavrami">
+<h1>Pointer ve Address kavramı</h1>
+<p>Pointerlar bir değişkenin bellekte bulunduğu yeri belirtir. ve <strong>*</strong> işareti ile belirtir.
+Örneğin aşağıda bir metin pointer olarak tanımlansın ve 2 birim kaydırılsın.</p>
+<pre class="code C literal-block">
+<span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">msg</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;abcde&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">msg</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="keyword">sizeof</span><span class="punctuation">(</span><span class="keyword type">char</span><span class="punctuation">)</span><span class="operator">*</span><span class="literal number integer">2</span><span class="whitespace"> </span><span class="punctuation">);</span>
+</pre>
+<p>Bura 2 char uzunluğu kadar pointer kaydırıldığı için ekrana ilk iki karakteri silinerek yazdırılmıştır.</p>
+<p>Adres ise bir değişkenin bellek adresini ifade eder. <strong>&amp;</strong> işareti ile belirtilir. Örneğin rastgele bir değişken oluşturup adresini ekrana yazalım.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%p</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="whitespace"> </span><span class="operator">&amp;</span><span class="name">i</span><span class="punctuation">);</span>
+</pre>
+<p>Konunun daha iyi anlaşılması için bir değişken oluşturup adresini bir pointera kopyalayalım. ve sonra değişkenimizi değiştirelim.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// değişken tanımladık.
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">k</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="operator">&amp;</span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// adresini kopyaladık.
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">l</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// değeri kopyaladık.
+</span><span class="name">i</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">1</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// değişkeni değiştirdik.
+</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d %d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">k</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">);</span>
+</pre>
+<p>Bu örnekte ilk iki değer de değişir fakat üçüncüsü değişmez.
+Bunun sebebi ikinci be birinci değişkenlerin adresi aynıyken üçüncü değişkenin adresi farklıdır.</p>
+<p>Bir fonksiyon tanımlarken pointer olarak arguman aldırıp bu değerde değişiklik yapabilir. Buna örnek kullanım olarak <strong>scanf</strong> fonksiyonu verilebilir.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">topla</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">sonuc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi1</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi2</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="operator">*</span><span class="name">sonuc</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">sayi1</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="name">sayi2</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">topla</span><span class="punctuation">(</span><span class="operator">&amp;</span><span class="name">i</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">12</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">22</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="name">i</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.</p>
 </div>
 </div>
 </body>

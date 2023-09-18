@@ -162,13 +162,25 @@ int main(int argc, char** argv) {
 .UNINDENT
 .INDENT 0.0
 .IP \(bu 2
-\fBint main\fP kısmında  int döndürülecek derer türü main adıdır.
+\fBint main\fP kısmında  int döndürülecek değer türü main adıdır.
 .IP \(bu 2
 \fBint argc\fP parametre sayısını belirtir.
 .IP \(bu 2
 \fBchar **argv\fP parametre listesini belirtir.
 .IP \(bu 2
 \fBreturn 0\fP komutu 0 ile çıkış yapar.
+.UNINDENT
+.sp
+Burada \fBmain\fP fonksiyonunu türünün bir önemi yoktur. \fBvoid\fP olarak da tanımlanabilir. Ayrıca kullanmayacaksak arguman tanımlamaya da gerek yoktur. Kısaca Şu şekilde de yazabilirdik.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+void main(){}
+.ft P
+.fi
+.UNINDENT
 .UNINDENT
 .SH EKRANA YAZI YAZMA
 .sp
@@ -216,7 +228,7 @@ float sayi2 = 12.42;
 .UNINDENT
 .UNINDENT
 .sp
-Bununla birlikte \fB#define\fP kullanarak derlemeden önce koddaki alanların karşiliği ile değiştirlmasini sağlayabilirsiniz.
+Bununla birlikte \fB#define\fP kullanarak derlemeden önce koddaki alanların karşılığı ile değiştirilmesini sağlayabilirsiniz.
 Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.
 .INDENT 0.0
 .INDENT 3.5
@@ -495,8 +507,8 @@ Bir sayıya karşılık bir işlem yapmak için \fBswitch \- case\fP yapısı ku
 .UNINDENT
 .SH DÖNGÜLER
 .sp
-Döngüler koşullara benzer fakat döngülerde koşula sağlanmayana kadar block içi tekrarlanır.
-Döngü oluşturmak için \fBwhile\fP kıllanılır.
+Döngüler koşullara benzer fakat döngülerde koşul sağlanmayana kadar block içi tekrarlanır.
+Döngü oluşturmak için \fBwhile\fP kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -592,5 +604,155 @@ return 1;
 .sp
 Yukarıdaki fonksiyon verilen değişken değere sahipse ekrana yazdırıp 0 döndürür.
 Eğer değeri yoksa 1 döndürür.
+.sp
+Basit işlemler için \fB#define\fP ile de fonksiyon tanımlanabilir.
+Bu şekilde tanımlanan fonksiyonlar derleme öncesi yerine yazılarak çalışır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#define topla(A,B) A+B
+
+int main(int argc, char** argv){
+    int sayi = topla(3, 5);
+    return 0;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Fonksiyonlar yazılma sırasına göre kullanılabilirler.
+Bu yüzden fonksiyonlar henüz tanımlı değilse kullanılamazlar.
+Bu durumun üstesinden gelmek için \fBheader\fP tanımlaması yapılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+void yaz();
+int main(){
+    yaz();
+    return 0;
+}
+void yaz(){
+    printf(\(dq%s\en\(dq,\(dqHello World\(dq);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Header tanımlamaları kütüphane yazarken de kullanılır.
+Bunun için bu tanımlamaları \fB\&.h\fP uzantılı dosyalara yazmanız gereklidir.
+Bu dosyayı \fBinclude\fP kullanarak eklemeliyiz.
+.sp
+yaz.h dosyası
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+void yaz();
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+main.c dosyası
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#include \(dqyaz.h\(dq
+#include <stdio.h>
+
+int main(){
+    yaz();
+    return 0;
+}
+
+void yaz(){
+    printf(\(dq%s\en\(dq,\(dqHello World\(dq);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBNot:\fP \fBinclude\fP ifadesinde \fB<>\fP içine aldığımız dosyalar \fB/usr/include\fP \fB\(dq\fP içine aldığımız ise mevcut dizinde aranır.
+.SH POINTER VE ADDRESS KAVRAMI
+.sp
+Pointerlar bir değişkenin bellekte bulunduğu yeri belirtir. ve \fB*\fP işareti ile belirtir.
+Örneğin aşağıda bir metin pointer olarak tanımlansın ve 2 birim kaydırılsın.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+char* msg = \(dqabcde\(dq;
+printf(\(dq%s\en\(dq, msg + sizeof(char)*2 );
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bura 2 char uzunluğu kadar pointer kaydırıldığı için ekrana ilk iki karakteri silinerek yazdırılmıştır.
+.sp
+Adres ise bir değişkenin bellek adresini ifade eder. \fB&\fP işareti ile belirtilir. Örneğin rastgele bir değişken oluşturup adresini ekrana yazalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int i = 0;
+printf(\(dq%p\en\(dq &i);
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Konunun daha iyi anlaşılması için bir değişken oluşturup adresini bir pointera kopyalayalım. ve sonra değişkenimizi değiştirelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int i = 0; // değişken tanımladık.
+int *k = &i; // adresini kopyaladık.
+int l = i; // değeri kopyaladık.
+i = 1; // değişkeni değiştirdik.
+printf(\(dq%d %d\en\(dq, i, *k, l);
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu örnekte ilk iki değer de değişir fakat üçüncüsü değişmez.
+Bunun sebebi ikinci be birinci değişkenlerin adresi aynıyken üçüncü değişkenin adresi farklıdır.
+.sp
+Bir fonksiyon tanımlarken pointer olarak arguman aldırıp bu değerde değişiklik yapabilir. Buna örnek kullanım olarak \fBscanf\fP fonksiyonu verilebilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#include <stdio.h>
+void topla(int* sonuc, int sayi1, int sayi2){
+    *sonuc = sayi1 + sayi2;
+}
+void main(){
+    int i;
+    topla(&i, 12, 22);
+    printf(\(dq%d\en\(dq,i);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.
 .\" Generated by docutils manpage writer.
 .

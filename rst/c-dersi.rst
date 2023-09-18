@@ -92,6 +92,13 @@ Aşağıda örnek main fonksiyonu bulunmaktadır.
 * **char **argv** parametre listesini belirtir.
 * **return 0** komutu 0 ile çıkış yapar.
 
+Burada **main** fonksiyonunu türünün bir önemi yoktur. **void** olarak da tanımlanabilir. Ayrıca kullanmayacaksak arguman tanımlamaya da gerek yoktur. Kısaca Şu şekilde de yazabilirdik.
+
+.. code-block:: C
+
+	void main(){}
+
+
 Ekrana yazı yazma
 ^^^^^^^^^^^^^^^^^
 Öncelikle **stdio.h** kütüphanesine ihtiyacimiz olduğu için onu eklemeliyiz.
@@ -301,8 +308,8 @@ Bir sayıya karşılık bir işlem yapmak için **switch - case** yapısı kulla
 
 Döngüler
 ^^^^^^^^
-Döngüler koşullara benzer fakat döngülerde koşula sağlanmayana kadar block içi tekrarlanır.
-Döngü oluşturmak için **while** kıllanılır.
+Döngüler koşullara benzer fakat döngülerde koşul sağlanmayana kadar block içi tekrarlanır.
+Döngü oluşturmak için **while** kullanılır.
 
 .. code-block:: C
 
@@ -372,3 +379,106 @@ Yukarıdaki fonksiyon verilen değişken değere sahipse ekrana yazdırıp 0 dö
 Eğer değeri yoksa 1 döndürür.
 
 
+Basit işlemler için **#define** ile de fonksiyon tanımlanabilir.
+Bu şekilde tanımlanan fonksiyonlar derleme öncesi yerine yazılarak çalışır.
+
+.. code-block:: C
+
+	#define topla(A,B) A+B
+
+	int main(int argc, char** argv){
+	    int sayi = topla(3, 5);
+	    return 0;
+	}
+
+Fonksiyonlar yazılma sırasına göre kullanılabilirler.
+Bu yüzden fonksiyonlar henüz tanımlı değilse kullanılamazlar.
+Bu durumun üstesinden gelmek için **header** tanımlaması yapılır.
+
+.. code-block:: C
+
+    void yaz();
+    int main(){
+        yaz();
+        return 0;
+    }
+    void yaz(){
+        printf("%s\n","Hello World");
+    }
+
+Header tanımlamaları kütüphane yazarken de kullanılır.
+Bunun için bu tanımlamaları **.h** uzantılı dosyalara yazmanız gereklidir.
+Bu dosyayı **include** kullanarak eklemeliyiz.
+
+yaz.h dosyası
+
+.. code-block:: C
+
+	void yaz();
+
+main.c dosyası
+
+.. code-block:: C
+
+	#include "yaz.h"
+	#include <stdio.h>
+
+	int main(){
+	    yaz();
+	    return 0;
+	}
+
+	void yaz(){
+	    printf("%s\n","Hello World");
+	}
+
+**Not:** **include** ifadesinde **<>** içine aldığımız dosyalar **/usr/include** **"** içine aldığımız ise mevcut dizinde aranır.
+
+
+Pointer ve Address kavramı
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Pointerlar bir değişkenin bellekte bulunduğu yeri belirtir. ve ***** işareti ile belirtir.
+Örneğin aşağıda bir metin pointer olarak tanımlansın ve 2 birim kaydırılsın.
+
+.. code-block:: C
+
+	char* msg = "abcde";
+	printf("%s\n", msg + sizeof(char)*2 );
+
+Bura 2 char uzunluğu kadar pointer kaydırıldığı için ekrana ilk iki karakteri silinerek yazdırılmıştır.
+
+Adres ise bir değişkenin bellek adresini ifade eder. **&** işareti ile belirtilir. Örneğin rastgele bir değişken oluşturup adresini ekrana yazalım.
+
+.. code-block:: C
+
+	int i = 0;
+	printf("%p\n" &i);
+
+Konunun daha iyi anlaşılması için bir değişken oluşturup adresini bir pointera kopyalayalım. ve sonra değişkenimizi değiştirelim.
+
+.. code-block:: C
+
+	int i = 0; // değişken tanımladık.
+	int *k = &i; // adresini kopyaladık.
+	int l = i; // değeri kopyaladık.
+	i = 1; // değişkeni değiştirdik.
+	printf("%d %d\n", i, *k, l);
+
+Bu örnekte ilk iki değer de değişir fakat üçüncüsü değişmez.
+Bunun sebebi ikinci be birinci değişkenlerin adresi aynıyken üçüncü değişkenin adresi farklıdır.
+
+Bir fonksiyon tanımlarken pointer olarak arguman aldırıp bu değerde değişiklik yapabilir. Buna örnek kullanım olarak **scanf** fonksiyonu verilebilir.
+
+.. code-block:: C
+
+	#include <stdio.h>
+	void topla(int* sonuc, int sayi1, int sayi2){
+	    *sonuc = sayi1 + sayi2;
+	}
+	void main(){
+	    int i;
+	    topla(&i, 12, 22);
+	    printf("%d\n",i);
+	}
+
+Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.
