@@ -126,6 +126,7 @@ C dilinde değişkenler aşağıdaki gibi tanımlanır.
 
 Bununla birlikte **#define** kullanarak derlemeden önce koddaki alanların karşiliği ile değiştirlmasini sağlayabilirsiniz.
 Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.
+
 .. code-block:: C
 
 	#define sayi 12
@@ -352,4 +353,22 @@ Bundan faydalanarak döngü oluşturulabilir.
 	}
 
 Burada koşul bloğunun en sonunda tekrar başa dönmesi için **goto** kullandık.
+
+Fonksiyonlar
+^^^^^^^^^^^^
+C dilinde bir fonksiyon aşağıdaki gibi tanımlanır.
+
+.. code-block:: C
+
+	int yazdir(char* yazi){
+	    if(yazi != NULL){
+	        printf("%s\n",yazi);
+	        return 0;
+	    }
+	return 1;
+	}
+
+Yukarıdaki fonksiyon verilen değişken değere sahipse ekrana yazdırıp 0 döndürür.
+Eğer değeri yoksa 1 döndürür.
+
 

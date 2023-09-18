@@ -124,13 +124,13 @@ Ardından <strong>printf</strong> fonksiyonu ile ekrana yazı yazabiliriz.</p>
 </span><span class="punctuation">...</span>
 </pre>
 <p>Bununla birlikte <strong>#define</strong> kullanarak derlemeden önce koddaki alanların karşiliği ile değiştirlmasini sağlayabilirsiniz.
-Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.
-.. code-block:: C</p>
-<blockquote>
-#define sayi 12
-...
-printf(&quot;%dn&quot;,sayi);
-...</blockquote>
+Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için değişken olarak işlem görmezler.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#define sayi 12
+</span><span class="punctuation">...</span><span class="whitespace">
+</span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="name">sayi</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">...</span>
+</pre>
 </div>
 <div class="section" id="diziler">
 <h1>Diziler</h1>
@@ -327,6 +327,21 @@ En son i değişkeni 0 olduğunda koşul sağlanmadığı için döngü sonlanı
 </span><span class="punctuation">}</span>
 </pre>
 <p>Burada koşul bloğunun en sonunda tekrar başa dönmesi için <strong>goto</strong> kullandık.</p>
+</div>
+<div class="section" id="fonksiyonlar">
+<h1>Fonksiyonlar</h1>
+<p>C dilinde bir fonksiyon aşağıdaki gibi tanımlanır.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">yazdir</span><span class="punctuation">(</span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">yazi</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">yazi</span><span class="whitespace"> </span><span class="operator">!=</span><span class="whitespace"> </span><span class="name builtin">NULL</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="name">yazi</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">1</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Yukarıdaki fonksiyon verilen değişken değere sahipse ekrana yazdırıp 0 döndürür.
+Eğer değeri yoksa 1 döndürür.</p>
 </div>
 </div>
 </body>
