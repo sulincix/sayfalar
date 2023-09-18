@@ -277,6 +277,27 @@ Koşul ifadeleri aşağıdaki gibi listelenebilir.
 	  - küçük eşittir
 	  - 12 <= 12
 
+Switch - Case
+^^^^^^^^^^^^^
+Bir sayıya karşılık bir işlem yapmak için **switch - case** yapısı kullanılır.
+
+.. code-block:: C
+
+	switch(sayi) {
+	  1:
+	    // sayı 1se burası çalışır.
+	    // break olmadığı için alttan devam eder.
+	  2:
+	    // sayı 1 veya 2 ise burası çalışır.
+      break;
+	  3:
+	    // sayı 3 ise burası çalışır.  
+	  default:
+	    // sayı eşleşmezse burası çalışır.
+  }
+
+
+
 Döngüler
 ^^^^^^^^
 Döngüler koşullara benzer fakat döngülerde koşula sağlanmayana kadar block içi tekrarlanır.
@@ -306,22 +327,29 @@ Burada for içerisinde 3 bölüm bulunur.
 İkincinde koşul yer alır.
 Üçüncüsünde değişkene yapılacak işlem belirtilir.
 
-Swıtch - Case
-^^^^^^^^^^^^^
-Bir sayıya karşılık bir işlem yapmak için **switch - case** yapısı kullanılır.
+goto
+^^^^
+C dilinde kodun içerisindeki bir yere etiket tanımlanıp **goto** ile bu etikete gidilebilir.
 
 .. code-block:: C
 
-	switch(sayi) {
-	  1:
-	    // sayı 1se burası çalışır.
-	    // break olmadığı için alttan devam eder.
-	  2:
-	    // sayı 1 veya 2 ise burası çalışır.
-      break;
-	  3:
-	    // sayı 3 ise burası çalışır.  
-	  default:
-	    // sayı eşleşmezse burası çalışır.
-  }
+	yaz:
+	printf("%s\n", "Hello World");
+	goto yaz;
+
+Yukarıdaki örnekte sürekli olarak yazı yazdırılır. Bunun sebebi her seferinde **yaz** etiketine gidilmesidir.
+
+Bundan faydalanarak döngü oluşturulabilir.
+
+.. code-block:: C
+
+	int i = 10;
+	islem:
+	if(i < 0){
+	    printf("%d\n",i);
+	    i--;
+	    goto islem;
+	}
+
+Burada koşul bloğunun en sonunda tekrar başa dönmesi için **goto** kullandık.
 
