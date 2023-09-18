@@ -183,3 +183,96 @@ Klavyeden değer almak için **scanf** kullanılır. İlk parameter şablonu di�
 	int sayi;
 	scanf("%d\n", &sayi);
 
+**Not:** Bu şekilde değer alma yaptığımızda formata uygun olmayan şekilde değer girilebilir.
+Eğer böyle bir durum oluşursa değişken **NULL** olarak atanır. yani değeri bulunmaz.
+Buda kodun işleyişinde soruna yol açabilir. Bu yüzden değişkeni kullanmadan ince **NULL** olup olmadığını kontrol etmelisiniz.
+
+Koşullar
+^^^^^^^^
+Koşullar için **if** bloğu kullanılır. Block içindeki ifade **0** veya **NULL** olursa koşul sağlanmaz. Bu durumda varse **else** bloğu çalıştırılır.
+
+.. code-block:: C
+
+	if (koşul1) {
+	    block 1
+	} else if (koşul2) {
+	  block 2
+	} else {
+	  block 3
+	}
+
+Örnek olarak girilen sayının çift olup olmadığını yazan uygulama yazalım.
+
+.. code-block:: C
+
+	#include <stdio.h>
+
+	int main(int argc, char** argv) {
+	    int sayi;
+	    scanf("%d",&sayi);
+	    if (sayi == NULL) {
+	        printf("%s\n", "Geçersiz sayı girdiniz.");
+	    } else if(sayi % 2) {
+	        printf("%d tektir.\n", sayi);
+	    } else {
+	        printf("%d çifttir.\n", sayi);
+	    }
+	    return 0;
+	}
+
+Burada **%** operatörü 2 ile bölümden kalanı bulmaya yarar.
+Sayı tek ise 1 değilse 0 sonucu elde edilir.
+Bu sayede tek sayılar için koşul sağlanır çift sayılar için sağlanmaz.
+
+Tek satırdan oluşan koşullarda **{}** kullanmaya gerek yoktur.
+
+.. code-block:: C
+
+	if (i < 32)
+	  printf("%s\n","32den küçüktür");
+
+Koşul ifadeleri aşağıdaki gibi listelenebilir.
+
+.. list-table:: **Koşul işleyicileri**
+	:widths: 20 40 40
+	:header-rows: 1
+
+	* - ifade
+	  - anlamı
+	  - örnek
+
+	* - >
+	  - büyüktür
+	  - 121 > 12
+
+	* - <
+	  - küçüktür
+	  - 12 < 121
+
+	* - ==
+	  - birbirine eşittir
+	  - 121 == 121
+
+	* - !
+	  - karşıtlık bildirir.
+	  - !(12 > 121)
+
+	* - &&
+	  - logic and
+	  - "fg" == "aa" && 121 > 12
+
+	* - ||
+	  - logic or
+	  - "fg" == "aa" || 121 > 12
+
+	* - !=
+	  - eşit değildir
+	  - "fg" != "aa"
+
+	* - >=
+	  - büyük eşittir
+	  - 121 >= 121
+
+	* - <=
+	  - küçük eşittir
+	  - 12 <= 12

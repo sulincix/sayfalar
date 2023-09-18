@@ -170,6 +170,100 @@ Bunun  için <strong>sizeof</strong> fonksiyonu kullanılır.</p>
 <span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="name">scanf</span><span class="punctuation">(</span><span class="literal string">&quot;%d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="operator">&amp;</span><span class="name">sayi</span><span class="punctuation">);</span>
 </pre>
+<p><strong>Not:</strong> Bu şekilde değer alma yaptığımızda formata uygun olmayan şekilde değer girilebilir.
+Eğer böyle bir durum oluşursa değişken <strong>NULL</strong> olarak atanır. yani değeri bulunmaz.
+Buda kodun işleyişinde soruna yol açabilir. Bu yüzden değişkeni kullanmadan ince <strong>NULL</strong> olup olmadığını kontrol etmelisiniz.</p>
+</div>
+<div class="section" id="kosullar">
+<h1>Koşullar</h1>
+<p>Koşullar için <strong>if</strong> bloğu kullanılır. Block içindeki ifade <strong>0</strong> veya <strong>NULL</strong> olursa koşul sağlanmaz. Bu durumda varse <strong>else</strong> bloğu çalıştırılır.</p>
+<pre class="code C literal-block">
+<span class="keyword">if</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">koşul1</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="name">block</span><span class="whitespace"> </span><span class="literal number integer">1</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace"> </span><span class="keyword">else</span><span class="whitespace"> </span><span class="keyword">if</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">koşul2</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+  </span><span class="name">block</span><span class="whitespace"> </span><span class="literal number integer">2</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace"> </span><span class="keyword">else</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+  </span><span class="name">block</span><span class="whitespace"> </span><span class="literal number integer">3</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Örnek olarak girilen sayının çift olup olmadığını yazan uygulama yazalım.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">argc</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="operator">**</span><span class="whitespace"> </span><span class="name">argv</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">sayi</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">scanf</span><span class="punctuation">(</span><span class="literal string">&quot;%d&quot;</span><span class="punctuation">,</span><span class="operator">&amp;</span><span class="name">sayi</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">if</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">==</span><span class="whitespace"> </span><span class="name builtin">NULL</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal string">&quot;Geçersiz sayı girdiniz.&quot;</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace"> </span><span class="keyword">else</span><span class="whitespace"> </span><span class="keyword">if</span><span class="punctuation">(</span><span class="name">sayi</span><span class="whitespace"> </span><span class="operator">%</span><span class="whitespace"> </span><span class="literal number integer">2</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d tektir.</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">sayi</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace"> </span><span class="keyword">else</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%d çifttir.</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">sayi</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Burada <strong>%</strong> operatörü 2 ile bölümden kalanı bulmaya yarar.
+Sayı tek ise 1 değilse 0 sonucu elde edilir.
+Bu sayede tek sayılar için koşul sağlanır çift sayılar için sağlanmaz.</p>
+<p>Tek satırdan oluşan koşullarda <strong>{}</strong> kullanmaya gerek yoktur.</p>
+<pre class="code C literal-block">
+<span class="keyword">if</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">i</span><span class="whitespace"> </span><span class="operator">&lt;</span><span class="whitespace"> </span><span class="literal number integer">32</span><span class="punctuation">)</span><span class="whitespace">
+  </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="literal string">&quot;32den küçüktür&quot;</span><span class="punctuation">);</span>
+</pre>
+<p>Koşul ifadeleri aşağıdaki gibi listelenebilir.</p>
+<table border="1" class="docutils">
+<caption><strong>Koşul işleyicileri</strong></caption>
+<colgroup>
+<col width="20%" />
+<col width="40%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">ifade</th>
+<th class="head">anlamı</th>
+<th class="head">örnek</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&gt;</td>
+<td>büyüktür</td>
+<td>121 &gt; 12</td>
+</tr>
+<tr><td>&lt;</td>
+<td>küçüktür</td>
+<td>12 &lt; 121</td>
+</tr>
+<tr><td>==</td>
+<td>birbirine eşittir</td>
+<td>121 == 121</td>
+</tr>
+<tr><td>!</td>
+<td>karşıtlık bildirir.</td>
+<td>!(12 &gt; 121)</td>
+</tr>
+<tr><td>&amp;&amp;</td>
+<td>logic and</td>
+<td>&quot;fg&quot; == &quot;aa&quot; &amp;&amp; 121 &gt; 12</td>
+</tr>
+<tr><td>||</td>
+<td>logic or</td>
+<td>&quot;fg&quot; == &quot;aa&quot; || 121 &gt; 12</td>
+</tr>
+<tr><td>!=</td>
+<td>eşit değildir</td>
+<td>&quot;fg&quot; != &quot;aa&quot;</td>
+</tr>
+<tr><td>&gt;=</td>
+<td>büyük eşittir</td>
+<td>121 &gt;= 121</td>
+</tr>
+<tr><td>&lt;=</td>
+<td>küçük eşittir</td>
+<td>12 &lt;= 12</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </body>
