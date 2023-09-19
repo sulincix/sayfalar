@@ -503,7 +503,7 @@ Bu konunun detaylarına ilerleyen kısımlarda yer verilmiştir.
 .. code-block:: C
 
 
-	typedef int (*topla_func)(char*);
+	typedef int (*topla_func)(int, int);
 	int topla(int i, int j){
 	    return i + j;
 	}
