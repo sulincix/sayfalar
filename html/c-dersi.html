@@ -485,6 +485,70 @@ Bu fonksiyonlar <strong>stdlib.h</strong> ile sağlanmaktadır.</p>
 </span><span class="punctuation">}</span>
 </pre>
 </div>
+<div class="section" id="struct">
+<h1>Struct</h1>
+<p><strong>Structure</strong> yapıları bellekte belli bir değişken topluluğu oluşturup kullanabilmek için kullanılır.
+Bu yapılar sayesinde kendi veri türlerinizi tanımlayabilirsiniz.</p>
+<pre class="code C literal-block">
+<span class="keyword">struct</span><span class="whitespace"> </span><span class="name class">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">name</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">};</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="keyword">struct</span><span class="whitespace"> </span><span class="name class">test</span><span class="whitespace"> </span><span class="name">t1</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">12</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">name</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;hello&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Veri türü adına alias tanımlamak için <strong>typedef</strong> kullanılabilir.
+Bu sayede değişken tanımlar gibi tanımlama yapmak mümkündür.</p>
+<pre class="code C literal-block">
+<span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword">struct</span><span class="whitespace"> </span><span class="name class">Test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">name</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">;</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="name">t1</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">12</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">name</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;hello&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>C programlama dili nesne yönelimli bir dil değildir.
+Bu yüzden sınıf kavramı bulunmaz.
+Fakat <strong>struct</strong> kullanarak benzer işler yapılabilir.
+Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir init fonksiyonu kullanarak nesnemizi oluşturalım.</p>
+<pre class="code C literal-block">
+<span class="comment single">// nesne fonksiyonu türü tanımladık
+</span><span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="operator">*</span><span class="name">yazdir_func</span><span class="punctuation">)(</span><span class="keyword type">char</span><span class="operator">*</span><span class="punctuation">);</span><span class="whitespace">
+
+</span><span class="comment single">// nesne struct yapısı tanımladık
+</span><span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword">struct</span><span class="whitespace"> </span><span class="name class">Test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="comment single">// nesne fonksiyonunu tanımladık.
+</span><span class="whitespace">    </span><span class="name">yazdir_func</span><span class="whitespace"> </span><span class="name">yazdir</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">;</span><span class="whitespace">
+
+</span><span class="comment single">// nesne fonksiyon işlevin tanımladık
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">test_yazdir</span><span class="punctuation">(</span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">msg</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="name">msg</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="comment single">// nesneyi oluşturan fonsiyonu tanımladık.
+</span><span class="name">test</span><span class="whitespace"> </span><span class="name function">test_init</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="name">t1</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">num</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">12</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">yazdir</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">test_yazdir</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">t1</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="name">obj</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">test_init</span><span class="punctuation">();</span><span class="whitespace">
+    </span><span class="name">obj</span><span class="punctuation">.</span><span class="name">yazdir</span><span class="punctuation">(</span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+</div>
 </div>
 </body>
 </html>

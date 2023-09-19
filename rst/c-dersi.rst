@@ -548,3 +548,73 @@ Konunun daha iyi anlaşılması için 2 stringi toplayan fonksiyon yazalım.
 	    char *new_str = add( "hello", "world");
 	    printf("%s\n", new_str);
 	}
+
+Struct
+^^^^^^
+**Structure** yapıları bellekte belli bir değişken topluluğu oluşturup kullanabilmek için kullanılır.
+Bu yapılar sayesinde kendi veri türlerinizi tanımlayabilirsiniz.
+
+.. code-block:: C
+
+	struct test {
+	    int num;
+	    char* name;
+	};
+
+	void main(){
+	    struct test t1;
+	    t1.num = 12;
+	    t1.name = "hello";
+	}
+
+
+Veri türü adına alias tanımlamak için **typedef** kullanılabilir.
+Bu sayede değişken tanımlar gibi tanımlama yapmak mümkündür.
+
+.. code-block:: C
+
+	typedef struct Test {
+	    int num;
+	    char* name;
+	} test;
+
+	void main(){
+	    test t1;
+	    t1.num = 12;
+	    t1.name = "hello";
+	}
+
+C programlama dili nesne yönelimli bir dil değildir.
+Bu yüzden sınıf kavramı bulunmaz.
+Fakat **struct** kullanarak benzer işler yapılabilir.
+Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir init fonksiyonu kullanarak nesnemizi oluşturalım.
+
+.. code-block:: C
+
+	// nesne fonksiyonu türü tanımladık
+	typedef void (*yazdir_func)(char*);
+
+	// nesne struct yapısı tanımladık
+	typedef struct Test {
+	    // nesne fonksiyonunu tanımladık.
+	    yazdir_func yazdir;
+	    int num;
+	} test;
+
+	// nesne fonksiyon işlevin tanımladık
+	void test_yazdir(char* msg){
+	    printf("%s\n",msg);
+	}
+
+	// nesneyi oluşturan fonsiyonu tanımladık.
+	test test_init(){
+	    test t1;
+	    t1.num = 12;
+	    t1.yazdir = test_yazdir;
+	    return t1;
+	}
+
+	void main(){
+	    test obj = test_init();
+	    obj.yazdir("Hello World");
+	}
