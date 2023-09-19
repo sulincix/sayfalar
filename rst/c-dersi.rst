@@ -482,3 +482,69 @@ Bir fonksiyon tanımlarken pointer olarak arguman aldırıp bu değerde değişi
 	}
 
 Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.
+
+Dinamik bellek yönetimi
+^^^^^^^^^^^^^^^^^^^^^^^
+Dinamik bellek yönetimi için **malloc**, **realloc**, **calloc**, **free** fonksiyonları kullanılır.
+Bu fonksiyonlar **stdlib.h** ile sağlanmaktadır.
+
+**malloc** fonksiyonu belirtilen boyut kadar boş alanı **void*** olarak tahsis eder.
+
+.. code-block:: C
+
+	// 10 elemanlı sayı dizisi oluşturmak için.
+	int *sayilar = (int*) malloc(10 * sizeof(int));
+	// şununla aynı anlama gelir.
+	int sayilar[10];
+
+**calloc** fonksiyonu malloc ile benzerdir fakat istenen block boyutunu da belirterek kullanılır.
+
+.. code-block:: C
+
+	// 10 elemanlı sayı dizisi oluşturmak için
+	int *sayilar = (int*) calloc(10, sizeof(int));
+	// şununla aynı anlama gelir
+	int *sayilar = (int*) malloc(10 * sizeof(int));
+
+**realloc** bir değişkenin yeniden boyutlandırılmasını sağlar.
+
+.. code-block:: C
+
+	// 5 elemanlı dizi tanımlayalım.
+	int sayilar[5];
+	// boyutu 10 yapalım
+	sayilar = (int*) realloc(sayilar, 10*sizeof(int));
+
+**free** fonksiyonu değişkeni bellekten siler.
+
+.. code-block:: C
+
+	// malloc ile bir alan tanımlayalım.
+	void* alan = malloc(100);
+	// bu alanı silelim.
+	free(alan);
+
+
+Konunun daha iyi anlaşılması için 2 stringi toplayan fonksiyon yazalım.
+
+.. code-block:: C
+
+	#include <stdlib.h>
+	#include <stdio.h>
+	#include <string.h>
+	char* add(char *s1, char *s2){
+	    int ss = strlen(s1); // ilk arguman uzunluğu
+	    int sx = strlen(s2); // ikinci arguman uzunluğu
+	    char* s3 = (char*)malloc(ss+sx*sizeof(char)); // uzunluklar toplamı kadar alan ayır.
+	    for(int i=0;s1[i];i++) // ilkinin tüm elemanlarını kopyala
+	        s3[i] = s1[i];
+	    for(int i=0;s2[i];i++) // ikincinin tüm elemanlarını kopyala
+	        s3[i+ss] = s2[i];
+	    s3[ss+sx]='\0'; // stringler '\0' ile sonlanır
+	    return s3;
+	}
+
+	void main(){
+	    char *new_str = add( "hello", "world");
+	    printf("%s\n", new_str);
+	}
