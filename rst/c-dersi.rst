@@ -483,6 +483,38 @@ Bir fonksiyon tanımlarken pointer olarak arguman aldırıp bu değerde değişi
 
 Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.
 
+
+Fonksiyonun kendisini de pointer olarak kullanmak mümkündür. Bunun için aşağıdaki gibi bir yapı kullanılabilir.
+
+.. code-block:: C
+
+	int topla(int i, int j){
+	    return i + j;
+	}
+
+	void main(){
+	    int (*topla_func)(int, int) = topla;
+	    topla_func(3, 5);
+	}
+
+Ayrıca **typedef** yapısı ile de fonksiyon pointerları oluşturulabilir.
+Bu konunun detaylarına ilerleyen kısımlarda yer verilmiştir.
+
+.. code-block:: C
+
+
+	typedef int (*topla_func)(char*);
+	int topla(int i, int j){
+	    return i + j;
+	}
+
+	void main(){
+	    topla_func topla_fn = topla;
+	    topla_fn(3, 5);
+	}
+
+
+
 Dinamik bellek yönetimi
 ^^^^^^^^^^^^^^^^^^^^^^^
 Dinamik bellek yönetimi için **malloc**, **realloc**, **calloc**, **free** fonksiyonları kullanılır.
@@ -584,6 +616,17 @@ Bu sayede değişken tanımlar gibi tanımlama yapmak mümkündür.
 	    t1.name = "hello";
 	}
 
+**typedef** kullanarak struct dışında değişken türü tanımlamak da mümkündür.
+
+.. code-block:: C
+
+	typedef char* my_string;
+
+	void main(){
+	    my_string str = "Hello World";
+	}
+
+
 C programlama dili nesne yönelimli bir dil değildir.
 Bu yüzden sınıf kavramı bulunmaz.
 Fakat **struct** kullanarak benzer işler yapılabilir.
@@ -591,13 +634,10 @@ Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir ini
 
 .. code-block:: C
 
-	// nesne fonksiyonu türü tanımladık
-	typedef void (*yazdir_func)(char*);
-
 	// nesne struct yapısı tanımladık
 	typedef struct Test {
 	    // nesne fonksiyonunu tanımladık.
-	    yazdir_func yazdir;
+	    void (*yazdir)(char*);
 	    int num;
 	} test;
 

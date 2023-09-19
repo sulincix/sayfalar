@@ -429,6 +429,30 @@ Bunun sebebi ikinci be birinci değişkenlerin adresi aynıyken üçüncü deği
 </span><span class="punctuation">}</span>
 </pre>
 <p>Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.</p>
+<p>Fonksiyonun kendisini de pointer olarak kullanmak mümkündür. Bunun için aşağıdaki gibi bir yapı kullanılabilir.</p>
+<pre class="code C literal-block">
+<span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">topla</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="operator">*</span><span class="name">topla_func</span><span class="punctuation">)(</span><span class="keyword type">int</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">topla</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">topla_func</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">5</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Ayrıca <strong>typedef</strong> yapısı ile de fonksiyon pointerları oluşturulabilir.
+Bu konunun detaylarına ilerleyen kısımlarda yer verilmiştir.</p>
+<pre class="code C literal-block">
+<span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="operator">*</span><span class="name">topla_func</span><span class="punctuation">)(</span><span class="keyword type">char</span><span class="operator">*</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">topla</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">){</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">i</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">topla_func</span><span class="whitespace"> </span><span class="name">topla_fn</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">topla</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">topla_fn</span><span class="punctuation">(</span><span class="literal number integer">3</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="literal number integer">5</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
 </div>
 <div class="section" id="dinamik-bellek-yonetimi">
 <h1>Dinamik bellek yönetimi</h1>
@@ -515,18 +539,23 @@ Bu sayede değişken tanımlar gibi tanımlama yapmak mümkündür.</p>
     </span><span class="name">t1</span><span class="punctuation">.</span><span class="name">name</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;hello&quot;</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">}</span>
 </pre>
+<p><strong>typedef</strong> kullanarak struct dışında değişken türü tanımlamak da mümkündür.</p>
+<pre class="code C literal-block">
+<span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword type">char</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">my_string</span><span class="punctuation">;</span><span class="whitespace">
+
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">my_string</span><span class="whitespace"> </span><span class="name">str</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;Hello World&quot;</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
 <p>C programlama dili nesne yönelimli bir dil değildir.
 Bu yüzden sınıf kavramı bulunmaz.
 Fakat <strong>struct</strong> kullanarak benzer işler yapılabilir.
 Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir init fonksiyonu kullanarak nesnemizi oluşturalım.</p>
 <pre class="code C literal-block">
-<span class="comment single">// nesne fonksiyonu türü tanımladık
-</span><span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="operator">*</span><span class="name">yazdir_func</span><span class="punctuation">)(</span><span class="keyword type">char</span><span class="operator">*</span><span class="punctuation">);</span><span class="whitespace">
-
-</span><span class="comment single">// nesne struct yapısı tanımladık
+<span class="comment single">// nesne struct yapısı tanımladık
 </span><span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword">struct</span><span class="whitespace"> </span><span class="name class">Test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
     </span><span class="comment single">// nesne fonksiyonunu tanımladık.
-</span><span class="whitespace">    </span><span class="name">yazdir_func</span><span class="whitespace"> </span><span class="name">yazdir</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="whitespace">    </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="operator">*</span><span class="name">yazdir</span><span class="punctuation">)(</span><span class="keyword type">char</span><span class="operator">*</span><span class="punctuation">);</span><span class="whitespace">
     </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">num</span><span class="punctuation">;</span><span class="whitespace">
 </span><span class="punctuation">}</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">;</span><span class="whitespace">
 

@@ -754,6 +754,46 @@ void main(){
 .UNINDENT
 .sp
 Burada fonksiyona değişkenin adresi girilir. Fonksiyon bu adrese toplamı yazar. Daha sonra değişkenimizi kullanabilirsiniz.
+.sp
+Fonksiyonun kendisini de pointer olarak kullanmak mümkündür. Bunun için aşağıdaki gibi bir yapı kullanılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int topla(int i, int j){
+    return i + j;
+}
+
+void main(){
+    int (*topla_func)(int, int) = topla;
+    topla_func(3, 5);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Ayrıca \fBtypedef\fP yapısı ile de fonksiyon pointerları oluşturulabilir.
+Bu konunun detaylarına ilerleyen kısımlarda yer verilmiştir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+typedef int (*topla_func)(char*);
+int topla(int i, int j){
+    return i + j;
+}
+
+void main(){
+    topla_func topla_fn = topla;
+    topla_fn(3, 5);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .SH DINAMIK BELLEK YÖNETIMI
 .sp
 Dinamik bellek yönetimi için \fBmalloc\fP, \fBrealloc\fP, \fBcalloc\fP, \fBfree\fP fonksiyonları kullanılır.
@@ -894,6 +934,22 @@ void main(){
 .UNINDENT
 .UNINDENT
 .sp
+\fBtypedef\fP kullanarak struct dışında değişken türü tanımlamak da mümkündür.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+typedef char* my_string;
+
+void main(){
+    my_string str = \(dqHello World\(dq;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
 C programlama dili nesne yönelimli bir dil değildir.
 Bu yüzden sınıf kavramı bulunmaz.
 Fakat \fBstruct\fP kullanarak benzer işler yapılabilir.
@@ -903,13 +959,10 @@ Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir ini
 .sp
 .nf
 .ft C
-// nesne fonksiyonu türü tanımladık
-typedef void (*yazdir_func)(char*);
-
 // nesne struct yapısı tanımladık
 typedef struct Test {
     // nesne fonksiyonunu tanımladık.
-    yazdir_func yazdir;
+    void (*yazdir)(char*);
     int num;
 } test;
 
