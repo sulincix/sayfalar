@@ -545,6 +545,32 @@ Burada for içerisinde 3 bölüm bulunur.
 İlkinde değer atanır.
 İkincinde koşul yer alır.
 Üçüncüsünde değişkene yapılacak işlem belirtilir.
+.sp
+Döngülerde \fBcontinue\fP kullanarak döngünün tamamlanması beklenmeden başa dönülür.
+\fBbreak\fP kullanarak döngüden çıkılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+      int sayi = 10
+      while(1) {
+          printf(\(dq%d\en\(dq,sayi);
+    if(sayi < 0) {
+              break;
+          }
+          sayi\-\-;
+          continue;
+          printf(\(dq%s\en\(dq,\(dqBu satıra gelinmez.\(dq);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekte döngü koşulu sürekli olarak devam etmeye neden olur.
+Sayımız 0dan küçükse döngü \fBbreak\fP kullanarak sonlandırılır.
+Döngü içinde \fBcontinue\fP kısmına gelindiğinde başa dönüldüğü için bir alttaki satır çalıştırılmaz.
 .SH GOTO
 .sp
 C dilinde kodun içerisindeki bir yere etiket tanımlanıp \fBgoto\fP ile bu etikete gidilebilir.
@@ -682,7 +708,7 @@ void yaz(){
 .UNINDENT
 .UNINDENT
 .sp
-\fBNot:\fP \fBinclude\fP ifadesinde \fB<>\fP içine aldığımız dosyalar \fB/usr/include\fP \fB\(dq\fP içine aldığımız ise mevcut dizinde aranır.
+\fBNot:\fP \fBinclude\fP ifadesinde \fB<>\fP içine aldığımız dosyalar \fB/usr/include\fP \fB\(dq\(dq\fP içine aldığımız ise mevcut dizinde aranır.
 .SH POINTER VE ADDRESS KAVRAMI
 .sp
 Pointerlar bir değişkenin bellekte bulunduğu yeri belirtir. ve \fB*\fP işareti ile belirtir.
@@ -987,5 +1013,161 @@ void main(){
 .fi
 .UNINDENT
 .UNINDENT
+.SH KÜTÜPHANE DOSYASI OLUŞTURMA
+.sp
+Kütüphaneler ana kaynak kodun kullandığı yardımcı kodları barındırır.
+Bu sayede her uygulama için tek tek aynı şeyleri yazmak yerine tek bir kütüphaneden yararlanılabilir.
+.sp
+GNU/Linux ortamında kütüphaneler \fB\&.so\fP uzantılıdır ve \fB/lib\fP ve \fB/usr/lib\fP dizinlerinde bulunur.
+.sp
+\fBNot:\fP Ek kütüphane dizinlerini \fB/etc/ld.so.conf\fP ve \fB/etc/lo.so.conf.d/*\fP dosyalarında belirlenir.
+Bunula birlikte \fBLD_LIBRARY_PATH\fP çevresel değişkeni ile kütüphane dizini tanımı yapılabilir.
+.sp
+Bir dosyanın bağımlı olduğu kütüphaneleri \fBldd\fP komutu ile görüntüleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ ldd /bin/bash
+    /lib/ld\-musl\-x86_64.so.1 (0x7fd299f6d000)
+    libreadline.so.8 => /usr/lib/libreadline.so.8 (0x7fd299e5e000)
+    libc.musl\-x86_64.so.1 => /lib/ld\-musl\-x86_64.so.1 (0x7fd299f6d000)
+    libncursesw.so.6 => /usr/lib/libncursesw.so.6 (0x7fd299e0a000)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Kendi kütüphanemizi olşturmak için kaynak kodumuzu \fB\-shared\fP parametresi ile derlememiz gerekmektedir.
+Bunu için örneğin aşağıdaki gibi bir kaynak kodumuz olsun.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int topla (int a, int b) {
+    return a+b;
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Bu kodu derleyelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gcc \-c test.c
+$ gcc \-o libtest.so test.o \-shared
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi de bu kütüphaneyi kullanabilmek için \fBtest.h\fP dosyamızı oluşturalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+int topla (int a, int b);
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Son olarak kütüphaneyi kullanan kodumuzu yazalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#include <test.h>
+void main(){
+    int sayi = topla(3, 5);
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Dikkat ettiyseniz \fBinclude\fP kullanırken \fB\(dq\(dq\fP işareti yerine \fB<>\fP kullandık. Bunun sebebi kütüphanelerin kaynak koddan bağımsız olacak şekilde tasarlanmasıdır.
+Header dosyamızın \fB/usr/include\fP içinde ve kutuphanemizin de \fB/usr/lib\fP içinde olduğunu varsayarak kodladık.
+.sp
+Kütüphanemizin \fBkutuphane\fP adındaki bir dizinde bulunduğunu düşünelim ve aşağıdaki gibi derlemeyi tamamlayalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gcc \-c main.c \-I \&./kutuphane
+$ gcc \-o main main.o \-L \&./kutuphane \-ltest
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Kodu kütüphaneyi sisteme yüklemeden derleyebilmemiz için derleyicimize \fB\-I\fP parametresi eklenir. Bu parametre header aradığı dizinlere belirtilen dizini de ekler.
+Benzer şekilde derlemenin \fBlinkleme\fP aşamasında \fB\-l\fP parametresi ile hangi kütüphanelere ihtiyaç duyulduğu belirtilir.
+\fB\-L\fP parametresi ile kütüphanenin aranacağı dizinler listesine belirtilen dizin eklenir.
+.sp
+Gördüğünüz gibi bu parametreler sisteme göre değişiklik gösterebilmektedir. Bu karmaşanın önüne geçebilmek için \fBpkg\-config\fP kullanılır.
+Bu dosyada belirtilen değerler kütüphane ile beraber gelmekte olup derlemeye nelerin ekleneceğini belirtir.
+.sp
+Örnek olarak aşağıdaki gibi kullanabiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# derleme parametreleri
+$ pkg\-config \-\-cflags readline
+  \-DNCURSES_WIDECHAR
+# linkleme parametreleri
+$ pkg\-config \-\-libs readline
+  \-lreadline
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Kaynak kodu derlerken aşağıdaki gibi kullanılabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ gcc \-c main.c \(gapkg\-config \-\-cflags readline\(ga
+$ gcc \-o main main.o \(gapkg\-config \-\-libs readline\(ga
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\fBpkg\-config\fP dosyaları \fB\&.pc\fP uzantılıdır ve \fB/usr/lib/pkgconfig\fP içinde bulunur.
+\fBpkg\-config\fP dosyaları aşağıdaki formata benzer şekilde yazılır.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+prefix=/usr
+includedir=${prefix}/include
+
+Name: Test
+Description: Test library
+Version: 1.0
+Requires: readline
+Cflags: \-I{includedir}/test
+Libs: \-ltest \-L{libdir}/test
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Yukarıdaki örnekte \fB/usr/include/test/\fP içerisindeki header dosyamızı ve \fB/usr/lib/test/\fP içindeki kütüphane dosyamızı sorunsuzca kullanarak derleme yapabilik.
 .\" Generated by docutils manpage writer.
 .

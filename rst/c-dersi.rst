@@ -335,6 +335,28 @@ Burada for içerisinde 3 bölüm bulunur.
 İkincinde koşul yer alır.
 Üçüncüsünde değişkene yapılacak işlem belirtilir.
 
+Döngülerde **continue** kullanarak döngünün tamamlanması beklenmeden başa dönülür.
+**break** kullanarak döngüden çıkılır.
+
+.. code-block:: C
+
+	int sayi = 10
+	while(1) {
+	    printf("%d\n",sayi);
+      if(sayi < 0) {
+	        break;
+	    }
+	    sayi--;
+	    continue;
+	    printf("%s\n","Bu satıra gelinmez.");
+  }
+
+Yukarıdaki örnekte döngü koşulu sürekli olarak devam etmeye neden olur.
+Sayımız 0dan küçükse döngü **break** kullanarak sonlandırılır.
+Döngü içinde **continue** kısmına gelindiğinde başa dönüldüğü için bir alttaki satır çalıştırılmaz.
+
+
+
 goto
 ^^^^
 C dilinde kodun içerisindeki bir yere etiket tanımlanıp **goto** ile bu etikete gidilebilir.
@@ -432,7 +454,7 @@ main.c dosyası
 	    printf("%s\n","Hello World");
 	}
 
-**Not:** **include** ifadesinde **<>** içine aldığımız dosyalar **/usr/include** **"** içine aldığımız ise mevcut dizinde aranır.
+**Not:** **include** ifadesinde **<>** içine aldığımız dosyalar **/usr/include** **""** içine aldığımız ise mevcut dizinde aranır.
 
 
 Pointer ve Address kavramı
@@ -658,3 +680,107 @@ Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir ini
 	    test obj = test_init();
 	    obj.yazdir("Hello World");
 	}
+
+Kütüphane dosyası oluşturma
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Kütüphaneler ana kaynak kodun kullandığı yardımcı kodları barındırır.
+Bu sayede her uygulama için tek tek aynı şeyleri yazmak yerine tek bir kütüphaneden yararlanılabilir.
+
+GNU/Linux ortamında kütüphaneler **.so** uzantılıdır ve **/lib** ve **/usr/lib** dizinlerinde bulunur.
+
+**Not:** Ek kütüphane dizinlerini **/etc/ld.so.conf** ve **/etc/lo.so.conf.d/*** dosyalarında belirlenir.
+Bunula birlikte **LD_LIBRARY_PATH** çevresel değişkeni ile kütüphane dizini tanımı yapılabilir.
+
+Bir dosyanın bağımlı olduğu kütüphaneleri **ldd** komutu ile görüntüleyebiliriz.
+
+.. code-block:: shell
+
+	$ ldd /bin/bash
+	    /lib/ld-musl-x86_64.so.1 (0x7fd299f6d000)
+	    libreadline.so.8 => /usr/lib/libreadline.so.8 (0x7fd299e5e000)
+	    libc.musl-x86_64.so.1 => /lib/ld-musl-x86_64.so.1 (0x7fd299f6d000)
+	    libncursesw.so.6 => /usr/lib/libncursesw.so.6 (0x7fd299e0a000)
+
+Kendi kütüphanemizi olşturmak için kaynak kodumuzu **-shared** parametresi ile derlememiz gerekmektedir.
+Bunu için örneğin aşağıdaki gibi bir kaynak kodumuz olsun. 
+
+.. code-block:: C
+
+	int topla (int a, int b) {
+	    return a+b;
+	}
+
+Bu kodu derleyelim.
+
+.. code-block:: shell
+
+	$ gcc -c test.c
+	$ gcc -o libtest.so test.o -shared
+
+Şimdi de bu kütüphaneyi kullanabilmek için **test.h** dosyamızı oluşturalım.
+
+.. code-block:: C
+
+	int topla (int a, int b);
+
+Son olarak kütüphaneyi kullanan kodumuzu yazalım.
+
+.. code-block:: C
+
+	#include <test.h>
+	void main(){
+	    int sayi = topla(3, 5);
+	}
+
+Dikkat ettiyseniz **include** kullanırken **""** işareti yerine **<>** kullandık. Bunun sebebi kütüphanelerin kaynak koddan bağımsız olacak şekilde tasarlanmasıdır.
+Header dosyamızın **/usr/include** içinde ve kutuphanemizin de **/usr/lib** içinde olduğunu varsayarak kodladık.
+
+Kütüphanemizin **kutuphane** adındaki bir dizinde bulunduğunu düşünelim ve aşağıdaki gibi derlemeyi tamamlayalım.
+
+.. code-block:: shell
+
+	$ gcc -c main.c -I ./kutuphane
+	$ gcc -o main main.o -L ./kutuphane -ltest
+
+Kodu kütüphaneyi sisteme yüklemeden derleyebilmemiz için derleyicimize **-I** parametresi eklenir. Bu parametre header aradığı dizinlere belirtilen dizini de ekler.
+Benzer şekilde derlemenin **linkleme** aşamasında **-l** parametresi ile hangi kütüphanelere ihtiyaç duyulduğu belirtilir.
+**-L** parametresi ile kütüphanenin aranacağı dizinler listesine belirtilen dizin eklenir.
+
+Gördüğünüz gibi bu parametreler sisteme göre değişiklik gösterebilmektedir. Bu karmaşanın önüne geçebilmek için **pkg-config** kullanılır.
+Bu dosyada belirtilen değerler kütüphane ile beraber gelmekte olup derlemeye nelerin ekleneceğini belirtir.
+
+Örnek olarak aşağıdaki gibi kullanabiliriz.
+
+.. code-block:: shell
+
+	# derleme parametreleri
+	$ pkg-config --cflags readline
+	  -DNCURSES_WIDECHAR
+	# linkleme parametreleri
+	$ pkg-config --libs readline
+	  -lreadline
+
+Kaynak kodu derlerken aşağıdaki gibi kullanılabilir.
+
+.. code-block:: shell
+
+	$ gcc -c main.c `pkg-config --cflags readline`
+	$ gcc -o main main.o `pkg-config --libs readline`
+
+**pkg-config** dosyaları **.pc** uzantılıdır ve **/usr/lib/pkgconfig** içinde bulunur.
+**pkg-config** dosyaları aşağıdaki formata benzer şekilde yazılır.
+
+.. code-block:: C
+
+	prefix=/usr
+	includedir=${prefix}/include
+
+	Name: Test
+	Description: Test library
+	Version: 1.0
+	Requires: readline
+	Cflags: -I{includedir}/test
+	Libs: -ltest -L{libdir}/test
+
+Yukarıdaki örnekte **/usr/include/test/** içerisindeki header dosyamızı ve **/usr/lib/test/** içindeki kütüphane dosyamızı sorunsuzca kullanarak derleme yapabilik.
+
