@@ -784,3 +784,96 @@ Kaynak kodu derlerken aşağıdaki gibi kullanılabilir.
 
 Yukarıdaki örnekte **/usr/include/test/** içerisindeki header dosyamızı ve **/usr/lib/test/** içindeki kütüphane dosyamızı sorunsuzca kullanarak derleme yapabilik.
 
+C++ kodunu C ile kullanma
+^^^^^^^^^^^^^^^^^^^^^^^^^
+Aşağıdaki gibi bir C++ kodumuz olsun. 
+
+.. code-block:: C
+
+	class test {
+	private:
+	    double value;
+
+	public:
+	    test(double l) {
+	        value = l;
+	    }
+	}
+
+
+Bu kodu C ile kullanmak için öncelikle aşağıdaki gibi header dosyamızı oluşturalım.
+
+.. code-block:: C
+
+	#ifdef __cplusplus
+	extern "C" {
+	#endif
+
+	typedef void* test; // class tanımı
+
+	test test_new(double l); // class oluşturmak için
+	void test_set_value(test* ctx, double l); // class içindeki değeri ayarlamak için
+	double test_get_value(test* ctx); // class içindeki değeri okumak için
+
+	#ifdef __cplusplus
+        }
+	#endif
+
+
+Şimdi de bir C++ kodu yazalım ve yukarıdaki fonksiyonları oluşturalım.
+
+.. code-block:: C
+
+	#include <test>
+	extern "C" {
+	    test test_new(double l){
+	        Test* t = new Test(l);
+	        return (test) t;
+	    }
+
+	    void test_set_value(test* ctx, double l){
+	        Test* t = (Test*)ctx;
+	        t->value = l;
+	    }
+	    double test_get_value(test* ctx){
+	        Test* t = (Test*)ctx;
+		return t->value;
+	    }
+	}
+
+Şimdi bu kodu kütüphane haline getirelim.
+
+.. code-block:: shell
+
+	g++ -o libtest.so test.cpp -I. -shared
+
+Şimdi örnek C kodumuz aşağıdaki gibi  olabilir.
+
+
+.. code-block:: C
+
+	#include <test.h>
+	int main(){
+	    test *t = test_new(22);
+	    test_set_value(t,12);
+	    int l = test_get_value(t);
+	    return 0;
+	}
+	
+Bu kodu aşağıdaki gibi derleyebiliriz.
+
+.. code-block:: shell
+
+	gcc main.c -o main -ltest -L. -I.
+
+Yada kütüphane olşturmaya gerek kalmadan da derleyebiliriz.
+
+.. code-block:: shell
+
+	g++ test.cpp -c -o test.o
+	gcc -c main.c -o main.o
+	gcc tast.o main.o -o main -lstdc++
+
+Burada libstdc++ C++ kodunun bağımlılığıdır.
+
+
