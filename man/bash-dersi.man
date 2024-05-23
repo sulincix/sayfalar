@@ -1,3 +1,4 @@
+'\" t
 .\" Man page generated from reStructuredText.
 .
 .
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "BASH DERSI"  "" ""
+.TH "BASH DERSI" "" "" ""
 .SH NAME
 Bash dersi \- 
 .sp
@@ -41,12 +42,10 @@ Bash betiklerinde alt satıra geçmek yerine \fB;\fP kullanabiliriz. Bu sayede k
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #!/bin/bash
 #Bu bir açıklama satırıdır.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -54,12 +53,10 @@ Bash betiklerini çalıştırmak için öncelikle çalıştırılabilir yapmalı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 chmod +x ders1.sh
 \&./ders1.sh
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -69,15 +66,13 @@ chmod +x ders1.sh
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 : \(dq
 Bu bir açıklama satıdırıdır.
 Bu da diğer açıklama satırıdır.
 Bu da sonunca açıklama satırıdır.
 \(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH EKRANA YAZI YAZALIM
@@ -86,12 +81,10 @@ Ekrana yazı yazmak için \fBecho\fP ifadesi kulanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 echo Merhaba dünya
 \-> Merhaba dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -99,13 +92,11 @@ Ekrana özel karakterleri yazmak için \fB\-e\fP parametresi kullanmamız gerekm
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 echo \-e \(dqMerhaba\endünya\(dq
 \-> Merhaba
 \-> dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -113,21 +104,18 @@ Ekrana renkli yazı da yazdırabiliriz. Bunun için \fB\e033[x;..;ym\fP ifadesin
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Mavi renkli kalın merhaba ile normal dünya yazdırır.
 echo \-e \(dq\e033[34;1mMerhaba\e033[0m Dünya\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.
 .SH ÖZELLIK NUMARASI VE ANLAMLARI
 .TS
-center;
-|l|l|l|l|l|l|.
-_
+box center;
+l|l|l|l|l|l.
 T{
 Özellik
 T}	T{
@@ -267,22 +255,19 @@ T}	T{
 T}	T{
 Varsayılan arkaplan
 T}
-_
 .TE
 .sp
 Çift tırnak (\fB\(dq\fP) içine yazılmış yazılardaki değişkenler işlenirken tek tırnak (\fB\(aq\fP) içindekiler işlenmez. Örneğin:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 var=12
 echo \(dq$var\(dq
 echo \(aq$var\(aq
 \-> 12
 \-> $var
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH PARAMETRELER
@@ -293,14 +278,12 @@ Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 echo \(dq$1 \- $# \- $@\(dq
 
 \&./ders1.sh merhaba dünya
 \-> merhaba \- 2 \- merhaba dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DEĞIŞKENLER VE SABITLER
@@ -313,12 +296,10 @@ Normal Değişkenler aşağıdaki gibi tanımlanır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayı=23
 yazi=\(dqmerhaba\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -326,15 +307,13 @@ yazi=\(dqmerhaba\(dq
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 typeset \-i a # Değişkeni sayı olarak belirttik.
 a=1 ; b=1
 a+=1 ; b+=1
 echo \(dq$a $b\(dq
 \-> 2 11
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -342,12 +321,10 @@ echo \(dq$a $b\(dq
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 export sayi=23
 export yazi=\(dqmerhaba\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -355,12 +332,10 @@ Sabitler daha sonradan değeri değiştirilemeyen verilerdir. Sabit tanımlamak 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 declare \-r yazi=\(dqmerhaba\(dq
 declade \-r sayi=23
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -368,13 +343,11 @@ Değişkenler ve sabitler kullanılırken \fB${}\fP işareti içine alınırlar 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 deneme=\(dqabc123\(dq
 echo ${deneme}
 \-> abc123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -382,14 +355,12 @@ Sayı ve yazı türünden değişkenler farklıdır. sayıyı yazıya çevirmek 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi=11
 yazi=\(dqkarpuz\(dq
 echo \(dq${sayi}${karpuz} limon\(dq
 \-> 11karpuz limon
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -397,14 +368,12 @@ Sayı değişkenleri üzerinde matematiksel işlem yapmak için aşağıdaki ifa
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi=12
 sayi=$((${sayi}/2))
 echo ${sayi}
 \-> 6
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -412,25 +381,22 @@ Bununla birlikte matematiksel işlemler için şunlar da kullanılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 expr 3 + 5 # her piri arasında boşluk gerekli
 \-> 8
 echo 6\-1 | bc \-l # Burada \-l virgüllü sayılar için kullanılır.
 \-> 5
 python3 \-c \(dqprint(10/2)\(dq
 \-> 5\&.0
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0\(aqdan başlar. Negatif değerler sondan saymaya başlar.
 .SH DEĞIŞKENE MÜDAHALE (VAR="MERHABA")
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 İfade
 T}	T{
@@ -510,7 +476,6 @@ var tanımlıysı abc dördürür.
 T}	T{
 abc
 T}
-_
 .TE
 .SH DIZILER
 .sp
@@ -518,8 +483,7 @@ Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler a
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 dizi=(muz elma limon armut)
 echo ${dizi[1]}
 \-> elma
@@ -530,8 +494,7 @@ echo ${dizi[@]:2:4}
 dizi+=(kiraz)
 echo ${dizi[\-1]}
 \-> kiraz
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -539,8 +502,7 @@ Diziler eleman indisleri ile kullanmanın yanında şu şekilde de tanımlanabil
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 declare \-A dizi
 dizi=([kirmizi]=elma [sari]=muz [yesil]=limon [turuncu]=portakal)
 for isim in ${!dizi[@]} ; do
@@ -555,8 +517,7 @@ echo
 \-> portakal limon muz elma
 echo ${dizi[kirmizi]}
 \-> elma
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
@@ -565,14 +526,12 @@ Klavyeden değer almak için \fBread\fP komutu kullanılır. Alınan değer değ
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 read deger
 <\- merhaba
 echo $deger
 \-> merhaba
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KOŞULLAR
@@ -581,8 +540,7 @@ Koşullar \fBif\fP ile \fBfi\fP ile biter.  Koşul ifadesi sonrası \fBthen\fP k
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 if ifade ; then
     eylem
 elif ifade ; then
@@ -590,8 +548,7 @@ elif ifade ; then
 else
     eylem
 fi
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -599,8 +556,7 @@ Koşul ifadeleri kısmında çalıştırılan komut 0 döndürüyorsa doğru dö
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 read veri
 if [[ ${veri} \-lt 10 ]] ; then
     echo \(dqVeri 10\(aqdan küçük\(dq
@@ -612,17 +568,15 @@ fi
 \-> Veri 10\(aqdan küçük
 <\- 15
 \-> Veri 10\(aqdan büyük veya 10a eşit
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 \fB[[\fP yerleşiği ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim. \fB[\fP bir komutken \fB[[\fP bir yerleşiktir. \fB[\fP ayrı bir süreç olarak çalıştırılır. Bu yüzden \fB[[\fP kullanmanızı tavsiye ederim.
 .SH [[ IFADELERI VE KULLANIMLARI
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 İfade
 T}	T{
@@ -782,7 +736,6 @@ mantıksal ve bağlacı
 T}	T{
 [[ .... && .... ]] veya [[ .... ]] && [[ .... ]]
 T}
-_
 .TE
 .sp
 \fBtrue\fP komutu her zaman doğru \fBfalse\fP komutu ile her zaman yanlış çıkış verir.
@@ -791,8 +744,7 @@ Bazı basit koşul ifadeleri için if ifadesi yerine aşağıdaki gibi kullanım
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 [[ 12 \-eq ${a} ]] && echo \(dq12ye eşit.\(dq || echo \(dq12ye eşit değil\(dq
 #bunun ile aynı anlama gelir:
 if [[ 12 \-eq ${a} ]] ; then
@@ -800,8 +752,7 @@ if [[ 12 \-eq ${a} ]] ; then
 else
     echo \(dq12ye eşit değil\(dq
 fi
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH CASE YAPISI
@@ -811,8 +762,7 @@ case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısal
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 case deger in
     elma | kiraz)
         echo \(dqmeyve\(dq
@@ -836,8 +786,7 @@ elif [[ \(dq${değer}\(dq == \(dqbalık\(dq ]] ; then
 else
     echo \(dqhiçbiri\(dq
 fi
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DÖNGÜLER
@@ -846,13 +795,11 @@ Döngülerde \fBwhile\fP ifadesi sonrası koşul gelir. \fBdo\fP ile devam eder 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 while ifade ; do
     eylem
 done
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -860,8 +807,7 @@ done
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 i=1
 while [[ ${i} \-le 10 ]] ; do
     echo \-n \(dq$i \(dq # sayıyı yazıya çevirip sonuna yanına boşluk koyduk
@@ -869,8 +815,7 @@ while [[ ${i} \-le 10 ]] ; do
 done
 echo # en son alt satıra geçmesi için
 \-> 1 2 3 4 5 6 7 8 9 10
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -878,13 +823,11 @@ echo # en son alt satıra geçmesi için
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 for degisken in dizi ; do
     eylem
 done
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -892,15 +835,13 @@ Ayrı örneğin for ile yapılmış hali
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 for i in 1 2 3 4 5 6 7 8 9 10 ; do
     echo \-n \(dq${i} \(dq
 done
 echo
 \-> 1 2 3 4 5 6 7 8 9 10
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -908,24 +849,21 @@ Ayrıca uzun uzun 1den 10a kadar yazmak yerine şu şekilde de yapabiliyoruz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 for i in {1\&..10} ; do
     echo \-n \(dq${i} \(dq
 done
 echo
 \-> 1 2 3 4 5 6 7 8 9 10
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Buradaki özel kullanımları aşağıda tablo halinde belirttim.
 .SH KÜME PARANTEZLI IFADELER VE ANLAMLARI
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 İfade
 T}	T{
@@ -957,7 +895,6 @@ kurala uygun küme belirtir
 T}	T{
 ali veli
 T}
-_
 .TE
 .SH FONKSIYONLAR
 .sp
@@ -965,8 +902,7 @@ Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yapt
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 isim(){
     eylem
     return sonuç
@@ -976,8 +912,7 @@ function isim(){
     eylem
     return sonuç
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -989,8 +924,7 @@ Fonksionlar sıradan komutlar gibi parametre alabilirler ve ana programa ait sab
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi=12
 topla(){
     echo $((${sayi}+$1))
@@ -999,8 +933,7 @@ topla(){
 }
 topla 1
 \-> 13
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1010,8 +943,7 @@ Fonksionların çıkış turumlarını koşul ifadesi yerine kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 read sayi
 teksayi(){
     local i=$(($1+1)) # sayıya 1 ekledik ve yerel hale getirdik.
@@ -1027,8 +959,7 @@ fi
 \-> çift sayıdır
 <\- 5
 \-> tek sayıdır
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1036,15 +967,13 @@ Bir fonksionun çıktısını değişkene \fB$(isim)\fP ifadesi yadımı ile ata
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yaz(){
     echo \(dqMerhaba\(dq
 }
 echo \(dq$(yaz) dünya\(dq
 \-> Merhaba dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1052,8 +981,7 @@ Tanımlı bir fonksionu silmek için \fBunset \-f\fP ifadesini kullanmamız gere
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yaz(){
     echo \(dqMerhaba\(dq
 }
@@ -1061,8 +989,7 @@ unset \-f yaz
 echo \(dq$(yaz) dünya\(dq
 \-> bash: yaz: komut yok
 \-> dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1070,8 +997,7 @@ Burada dikkat ederseniz olmayan fonksionu çalıştırmaya çalıştığımız i
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 echo \(dqsatır 1\(dq
 acho \(dqsatır 2\(dq # yanlış yazılan satır fakat devam edecek
 echo \(dqsatır 3\(dq
@@ -1082,8 +1008,7 @@ echo \(dqsatır 5\(dq # bu satır çalışmayacak
 \-> bash: acho: komut yok
 \-> satır 3
 \-> bash: acho: komut yok
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DOSYA IŞLEMLERI
@@ -1091,9 +1016,8 @@ echo \(dqsatır 5\(dq # bu satır çalışmayacak
 Bash betiklerinde \fBstdout\fP \fBstderr\fP ve \fBstdin\fP olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stderr ve stdout beraber yazılır.
 .SH DOSYA IFADELERI VE ANLAMLARI
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 İfade
 T}	T{
@@ -1125,7 +1049,6 @@ T}	T{
 T}	T{
 Hata çıktılarıdır.
 T}
-_
 .TE
 .sp
 \fBcat\fP komutu ile dosya içeriğini ekrana yazdırabiliriz. Dosya içeriğini \fB$(cat dosya.txt)\fP kullanarak değişkene atabiliriz.
@@ -1134,13 +1057,11 @@ dosya.txt içeriğinin aşağıdaki gibi olduğunu varsayalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 Merhaba dünya
 Selam dünya
 sayı:123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1148,15 +1069,13 @@ Ayağıdaki örnekle dosya içeriğini önce değişkene atayıp sonra değişke
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 icerik=$(cat \&./dosya.txt)
 echo \(dq${icerik}\(dq
 \-> Merhaba dünya
 \-> Selam dünya
 \-> sayı:123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1165,24 +1084,21 @@ Eğer filitrelemede hiçbir satır bulunmuyorsa yanlış döner.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 grep \(dqdünya\(dq dosya.txt
 \-> Merhaba dünya
 \-> Selam dünya
 grep \-v \(dqdünya\(dq dosya.txt
 \-> sayi:123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.
 .SH DOSYA IFADELERI VE ANLAMLARI
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 İfade
 T}	T{
@@ -1222,15 +1138,13 @@ T}	T{
 T}	T{
 echo \(dq$(cat /olmayan/dosya) deneme\(dq &> dosya.txt
 T}
-_
 .TE
 .sp
 Ayrıca dosyadan veri girişleri için de aşağıda örnekler verilmiştir:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # <<EOF:
 # EOF ifadesi gelene kadar olan kısmı girdi olarak kullanır:
 cat > dosya.txt <<EOF
@@ -1242,8 +1156,7 @@ EOF
 while read line ; do
     echo ${line:2:5}
 done < dosya.txt
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1254,8 +1167,7 @@ Bash betiklerinde \fBstdin\fP yerine bir önceki komutun çıktısını kullanma
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 topla(){
     read sayi1
     read sayi2
@@ -1271,8 +1183,7 @@ sayiyaz(){
 }
  sayiyaz | topla
 \-> 37
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KOD BLOĞU
@@ -1281,8 +1192,7 @@ sayiyaz(){
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 cikart(){
     read sayi1
     read sayi2
@@ -1300,8 +1210,7 @@ cikart
 # veya kısaca şu şekilde de yapılabilir.
 { echo 25 ; echo 12 ; } | cikart
 \-> 13
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SELECT KOMUTU
@@ -1310,8 +1219,7 @@ cikart
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 select deger in ali veli 49 59 ; do
     echo $REPLY # seçilen sayıyı verir
     echo $deger # seçilen elemanı verir
@@ -1326,8 +1234,7 @@ done
 <\- 1
 \-> 1
 \-> ali
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1340,15 +1247,13 @@ Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBso
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 mesaj=\(dqSelam\(dq
 merhaba(){
     echo ${mesaj}
 }
 echo \(dqdeneme yüklendi\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1356,14 +1261,12 @@ Asıl betiğimizin içeriği de aşağıdaki gibi olsun.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 source deneme.sh # deneme.sh dosyası çalıştırılır.
 merhaba
 \-> deneme yüklendi
 \-> Selam
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1371,8 +1274,7 @@ Ayrıca bir komutun çıktısını da betiğe eklemek mümkündür. Bunun için 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 source <(curl https://gitlab.com/sulincix/outher/\-/raw/gh\-pages/deneme.sh) # Örnekteki adrese takılmayın :D
 merhaba
 merhaba2
@@ -1380,8 +1282,7 @@ echo ${sayi}
 \-> Merhaba dünya
 \-> 50
 \-> 100
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH EXEC KOMUTU
@@ -1390,8 +1291,7 @@ echo ${sayi}
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 echo $$ # pid değeri yazdırır
 bash \-c \(aqecho $$\(aq # yeni süreç oluşturduğu için pid değeri farklıdır.
 exec bash \-c \(aqecho $$\(aq # mevcut komut ile değiştirildiği için pid değeri değişmez
@@ -1399,8 +1299,7 @@ echo \(dqhmm\(dq # Bu kısım çalıştırılamaz.
 \-> 5755
 \-> 5756
 \-> 5755
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1410,13 +1309,11 @@ echo \(dqhmm\(dq # Bu kısım çalıştırılamaz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 exec > log.txt # bütün çıktıları log.txt içine yazdırır.
 echo \(dqmerhaba\(dq # ekrana değil dosyaya yazılır.
 exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH FD KAVRAMI
@@ -1427,8 +1324,7 @@ exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 exec 3> log.txt # yazmak için boş bir 3 numaralı fd açmak için.
 echo \(dqdeneme\(dq >&3
 exec 3>& \- # açık olan 3 nuramalı fd kapatmak için.
@@ -1437,8 +1333,7 @@ exec 4< input.txt # okumak için 4 numaralı fd açmak için.
 echo \(dqhmm\(dq > input.txt # girdi dosyamıza yazı yazalım.
 read line <&4 # 3 nuramalı fd içinden değir okur.
 exec 4<&\- # 4 numaralı fd kapatmak için.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH HATA AYIKLAMA
@@ -1447,13 +1342,11 @@ exec 4<&\- # 4 numaralı fd kapatmak için.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bash \-n script_adi.sh
 bash \-v script_adi.sh
 bash \-x script_adi.sh
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

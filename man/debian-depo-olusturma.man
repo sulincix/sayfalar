@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "DEBIAN IÇIN DEPO OLUŞTURMA"  "" ""
+.TH "DEBIAN IÇIN DEPO OLUŞTURMA" "" "" ""
 .SH NAME
 Debian için depo oluşturma \- 
 .sp
@@ -38,11 +38,9 @@ Aşağıdaki komut ile index almamız için gereken paketi kurabilirsiniz:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get instal apt\-ftparchive
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -57,11 +55,9 @@ Nginx kurmak için:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt install nginx
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -69,11 +65,9 @@ Apache kurmak için:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt install apache2
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DEPO ILE ILGILI TEMEL KAVRAMLAR
@@ -86,8 +80,7 @@ Deponun temel dizin yapısı şu şekilde özetlenebilir:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 repository/
 |\-\- dists
 |   \(ga\-\- stable
@@ -99,8 +92,7 @@ repository/
     |\-\- contrib
     |\-\- main
     \(ga\-\- non\-free
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -115,8 +107,7 @@ Depoya \fBpool\fP ve \fBdists\fP dizinleri içinde olmamak şartı ile istediği
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 dists/
 \(ga\-\- stable
     |\-\- Release
@@ -143,8 +134,7 @@ dists/
             \(ga\-\- Packages.gz
 
 10 directories, 13 files
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Pool
@@ -183,8 +173,7 @@ Alfabetik kurala göre dizilmiş örnek \fBpool\fP dizini:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 pool/
 |\-\- contrib
 |\-\- main
@@ -194,8 +183,7 @@ pool/
 \(ga\-\- non\-free
 
 5 directories, 1 file
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -208,8 +196,7 @@ amd64 mimaride ve 1.0 sürümünde olan test adındaki bir paket için \fBtest_1
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 Origin: Debian
 Label: Debian
 Suite: stable
@@ -265,8 +252,7 @@ SHA512:
   d54bcb50ab9409e3480dc002c520d240a02804ba648b9a581d524e1ae161f33a8d31e2bd4e0528db07c34ef2b0e4c53b7286ebc38fb319ff47be18be9db67db0      1156    main/binary\-i386/Packages
   ff4ee4f90b1ecd861d1adedaa6f0d77684c188add447e81f5131ce8e77ede3f4c99762c6e22c7804f11694b57d160ab46f44075a3ff8305fe285bc43f68700d0      820     main/binary\-i386/Packages.xz
   07524f649a0ffc66192af4925b750d22ce3fc446eb0d890b473713615fde4b2174214e94bdcdac97b5281e2386c5efaf7a8aa139a03f69c10b6d181e99d81c8a      747     main/binary\-i386/Packages.gz
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH İNDEX ALINMASI
@@ -277,13 +263,11 @@ pool içerisindeki paket yerleştirme işlemi bittikten sonra şu komutu kullana
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-ftparchive \-a amd64 packages pool/main > dists/stable/main/binary\-amd64/Packages
 $ gzip \-k dists/stable/main/binary\-amd64/Packages
 $ xz \-k dists/stable/main/binary\-amd64/Packages
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -298,8 +282,7 @@ Başlık dosyamızdaki tarihi sonradan güncelleyebilmek için tarih yerine Xdat
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat baslik
 Origin: Debian
 Label: Debian
@@ -312,8 +295,7 @@ Acquire\-By\-Hash: yes
 Architectures: amd64 i386
 Components: main contrib non\-free
 Description: Test repository
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -321,8 +303,7 @@ Release dosyamızı oluşturmadan önce yardımcı fonksionumuzu tanımlamamız 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
  prepareLine(){
     while read line ; do
         fname=$(echo $line | sed \(dqs/.* //g\(dq)
@@ -330,8 +311,7 @@ Release dosyamızı oluşturmadan önce yardımcı fonksionumuzu tanımlamamız 
         echo \-e \(dq  $fhash\et$(du \-bs $fname| sed \(aqs|\e./||g\(aq)\(dq
     done
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -339,8 +319,7 @@ Başlık ile md5sum birleştirmek için aşağıdakine benzer bir komut dizisi k
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat baslik | sed \(dqs/XdateX/$(date \-R)/g\(dq > dists/stable/Release
 $ cd dists/stable/
 $ echo \(dqMD5Sum:\(dq >>  Release
@@ -351,8 +330,7 @@ $ echo \(dqSHA256:\(dq >>  Release
 $ find \&. \-type f | xargs sha256sum | prepareLine >> Release
 $ echo \(dqSHA512:\(dq >>  Release
 $ find \&. \-type f | xargs sha512sum | prepareLine  >> Release
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Deponun imzalanması
@@ -361,12 +339,10 @@ Depoyu eğer imzalamazsak depoyu güncellerken ve depodan paket kurarken uyarı 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gpg \-\-clearsign \-o InRelease Release
 $ gpg \-abs \-o Release.gpg Release
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -374,11 +350,9 @@ Eğer gpg anahtarınız yoksa oluşturmak için:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gpg \-\-gen\-key
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -386,11 +360,9 @@ Oluşturduğumuz gpg anahtarını listelemek için:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gpg \-\-list\-keys
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -400,11 +372,9 @@ Elimizdeki gpg anahtarını dışarı aktarmak için:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gpg \-\-output Release.key \-\-armor \-\-export gpg_id_değeri
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DEPONUN AĞDA PAYLAŞILMASI
@@ -424,11 +394,9 @@ Depoyu imzalayan gpg anahtarını içeri aktarmalılar.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ wget \-O \- http://depo_sunucusu/depo_konumu/dists/stable/Release.key | apt\-key add \-
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -438,11 +406,9 @@ $ wget \-O \- http://depo_sunucusu/depo_konumu/dists/stable/Release.key | apt\-k
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ echo \(dqdeb http://depo_sunucusu/depo_konumu stable main contrib non\-free\(dq > /etc/apt/sources.list.d/testrepo.list
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -452,11 +418,9 @@ Depoyu güncellemeliler.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get update
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

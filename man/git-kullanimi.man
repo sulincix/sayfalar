@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "GIT KULLANIMI"  "" ""
+.TH "GIT KULLANIMI" "" "" ""
 .SH NAME
 Git kullanımı \- 
 .sp
@@ -38,11 +38,9 @@ git kurulumu debian tabanlı dağıtımlar için aşağıdaki komut kullanılara
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt install git\-core
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -51,13 +49,11 @@ Ardından aşağıdaki adımları uygulayarak derleyelim ve kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&./configure \-\-prefix=/usr
 make
 make install
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH GIT NE IŞE YARAR
@@ -73,12 +69,10 @@ Eğer belli miktarda değişiklikle indirmek isterseniz \fB\-\-depth=\fP paramet
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # sadece son değişikliği almak için \-\-depth=1 eklendi.
 $ git clone https://gitlab.com/sulincix/sayfalar.git \-\-depth=1
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -86,11 +80,9 @@ $ git clone https://gitlab.com/sulincix/sayfalar.git \-\-depth=1
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git clone https://gitlab.com/sulincix/sayfalar.git ~/Belgeler/sayfalar
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH ESKI DEĞIŞIKLIKLERI GÖRMEK VE ESKI SÜRÜME DÖNMEK
@@ -102,8 +94,7 @@ Her commitin bir id değeri bulunur. Bu değer kullanılarak eski sürüme dön�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git log
 \-> commit a983f37db618a06a53adb593dd97aa0282775ef5 (HEAD \-> master, origin/master, origin/HEAD)
 \-> Author: aliriza <aliriza.keskin@pardus.org.tr>
@@ -117,8 +108,7 @@ $ git log
 \->
 \->     commit 1
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -131,14 +121,12 @@ Ayrıca commit id yerine \fIHEAD~n\fP kullanarak \fBn\fP sayıda önceki commite
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # belirtilen commit\-id değerine göre eski sürüme dönmek için (hard reset)
 $ git reset 180a8bcaf81485958fded6a69c97d15161fd1b75 \-\-hard
 # belirtilen sayıda eski sürüme dönmek için (reset)
 $ git reset HEAD~2
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SUNUCUDAKI GÜNCEL DEĞIŞIKLIKLERI ALMAK
@@ -148,11 +136,9 @@ Bu komut sunucu tarafında yapılan değişiklikleri yereldeki git deposuna ekle
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git pull
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH YENI COMMIT OLUŞTURMA
@@ -167,14 +153,12 @@ Eğer bu ekranı kullanmak yerine parametre ile belirtmek istereniz \fB\-m\fP pa
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git add rst/git\-kullanimi.rst
 $ git checkout
 \-> M    rst/git\-kullanimi.rst
 $ git commit \-m \(dqcommit mesajı\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -183,11 +167,9 @@ Bunu değiştirmek için \fB~/.bashrc\fP içerisinde aşağıdaki gibi tanımlam
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 export EDITOR=nano
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -198,8 +180,7 @@ Burada HEAD sizin yerel olarak bulundurduğunuz halini origin ise git sunucusund
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git log
 \-> commit 03d5176f5e5b46e43dd688fd7b884a58e60afcd4 (HEAD \-> master)
 \-> Author: aliriza <aliriza.keskin@pardus.org.tr>
@@ -212,8 +193,7 @@ $ git log
 \-> Date:   Tue Dec 27 16:44:49 2022 +0300
 \->
 \->     commit 1
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH GIT SUNUCUSUNA GÖNDERME
@@ -228,8 +208,7 @@ Github kullanıyorsanız ssh anahtarı ile kullanmanızı öneririm.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git push
 \-> Username for \(aqhttps://gitlab.com\(aq: sulincix
 \-> Password for \(aqhttps://sulincix@gitlab.com\(aq:
@@ -241,8 +220,7 @@ $ git push
 \-> remote: Processed 1 references in total
 \-> To https://gitlab.com/sulincix/git\-dersi.git
 \->    1ac2e12..2742a1f  master \-> master
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -251,15 +229,13 @@ Bu duruma \fBconflict\fP adı verilir. Conflict çözmek için öncelikle \fBgit
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 git push
 \-> Username for \&...
 \-> Password for \&...
 \-> To https://gitlab.com/sulincix/git\-dersi.git
 \->  ! [rejected]        master \-> master (fetch first)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -267,8 +243,7 @@ Yukarıdaki örnekde \fIgit push\fP komutunu sunucudaki değişiklikleri almadan
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git pull \-\-rebase
 \&...
 \-> From https://gitlab.com/sulincix/git\-dersi.git
@@ -277,8 +252,7 @@ $ git pull \-\-rebase
 \-> CONFLICT (add/add): Merge conflict in commit 3
 \-> error: could not apply abaf641... commit 3
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -287,8 +261,7 @@ Conflict durumunda \fBrebase\fP moduna geçilir. Bu modda çakışan dosyalarda 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 <<<<<<< HEAD
 print(\(dqhello world\(dq)
@@ -296,8 +269,7 @@ print(\(dqhello world\(dq)
 print(\(dqhi world\(dq)
 >>>>>>> abaf641 (aaa)
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -306,13 +278,11 @@ Daha sonrasında yeni commit oluşturulur Yukarıdaki örnekte son hali aşağı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 print(\(dqhello world\(dq)
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -320,12 +290,10 @@ print(\(dqhello world\(dq)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git add main.py
 $ git commit \-m \(dqÇakışma giderildi\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -333,12 +301,10 @@ $ git commit \-m \(dqÇakışma giderildi\(dq
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git rebase \-\-continue
 \-> Successfully rebased and updated refs/heads/master.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -346,13 +312,11 @@ Ardından git push komutu ile sunucuya gönderilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git push
 \-> To https://gitlab.com/sulincix/git\-dersi.git
 \->    e2fe24f..19361f6  master \-> master
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -376,12 +340,10 @@ Mecut branchları görüntülemek için \fIgit branch\fP komutu kullanılır. Va
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git branch
 \-> * master
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -389,16 +351,14 @@ Yeni bir branch oluşturmak için \fIgit branch <dal\-adı>\fP komutu kullanıl�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # yeni branch oluşturalım
 $ git branch development
 # branch listeleyelim
 $ git branch
 \->   development
 \-> * master
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -407,15 +367,13 @@ Bulunduğumuz branchı değiştirmek için \fIgit switch <dal\-adı>\fP komutu k
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git switch development
 \-> Switched to branch \(aqdevelopment\(aq
 $ git branch
 \-> * development
 \->   master
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -423,11 +381,9 @@ Dallarda yapılan değişiklikleri birleştirmek için \fIgit merge <dal1> <dal2
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git merge development master
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -435,14 +391,12 @@ Sunucuya değişikliklerimizi istenilen dalda göndermek için \fIgit push <remo
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # master branchına geçelim
 $ git switch master
 # development branchını sunucuya yollayalım.
 $ git push origin development
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -450,14 +404,12 @@ Branch silmek için \fIgit branch \-d <dal\-adı>\fP komutunu kullanabilirsiniz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # önce diğer brancha geçelim
 $ git switch master
 # development branchını silelim
 $ git branch \-d development
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -465,14 +417,12 @@ Bir branchı yeniden adlandırmak için \fIgit branch \-\-move <eski\-ad> <yeni\
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # bir branch oluşturalım.
 $ git branch dev
 # yeniden adlandıralım.
 $ git branch \-\-move dev development
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH REMOTE KAVRAMI
@@ -483,12 +433,10 @@ Mevcut remote listesi için \fIgit remote\fP komutu kullanılır. varsayılan re
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git remote
 \-> origin
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -496,12 +444,10 @@ Bir remotenin hangi adreste olduğunu öğrenmek için \fIgit remote get\-url <r
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git remote get\-url origin
 \-> https://gitlab.com/sulincix/sayfalar.git
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -509,11 +455,9 @@ Remotenin adresini değiştirmek için ise \fIgit remote set\-url <remote\-adı>
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git remote set\-url origin https://gitlab.com/sulincix/git\-dersi.git
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -521,14 +465,12 @@ Yeni bir remote eklemek için ise \fIgit remote add <remote\-adı> <adres>\fP ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git remote add github https://github.com/sulincix/sayfalar.git
 $ git remote
 \-> origin
 \-> github
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -536,14 +478,12 @@ Remote üzerinden değişiklikleri alıp vermek için \fIgit pull <remote\-adı>
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Değişiklikleri alalım
 $ git pull github
 # diğer remote üzerine gönderelim.
 $ git push origin
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -552,14 +492,12 @@ Yeniden adlandırmak için ise \fIgit remote rename <eski\-ad> <yeni\-ad>\fP kom
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # yeniden adlandıralım.
 $ git remote rename github git
 # remote silelim
 $ git remote remove git
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SQUASH COMMIT KAVRAMI
@@ -571,8 +509,7 @@ Bu gibi durumlarda commitleri birleştirerek \fBsquash commit\fP elde edebilirsi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # rebase moduna geçelim.
 $ git rebase \-i HEAD~5
 # metin düzenleyicimizde aşağıdaki gibi metin bulunur.
@@ -580,8 +517,7 @@ pick aa34d35 commit 5
 pick 879917e commit 4
 pick 864dc97 commit 3
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp

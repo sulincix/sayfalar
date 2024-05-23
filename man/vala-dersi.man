@@ -1,3 +1,4 @@
+'\" t
 .\" Man page generated from reStructuredText.
 .
 .
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "VALA DERSI"  "" ""
+.TH "VALA DERSI" "" "" ""
 .SH NAME
 Vala dersi \- 
 .sp
@@ -37,11 +38,9 @@ Vala programlama dili derlemeli bir dil olup yazmış olduğunuz kod valanın ç
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ valac main.vala
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -49,14 +48,12 @@ Vala programlarını main fonksiyonu ile başlar. Bu fonksiyon aşağıdaki gibi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int main(string[] args){
    \&...
    return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -82,8 +79,7 @@ Koşullar döngüler ve fonksiyonlarda \fB{\fP işaretini satır sonuna koyun.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int main(string[] args){
     int i = int\&.parse(stdin\&.read_line());
     int[] liste = {12, 22, 55, 27};
@@ -94,8 +90,7 @@ int main(string[] args){
     }
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -103,8 +98,7 @@ Burada da aynı kodun kötü girintilenmiş hali bulunmaktadır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int main(    string[] args ){
 int i=int\&.parse(  stdin\&.read_line() );
 int[] liste={12,22,55,27};
@@ -113,8 +107,7 @@ if (i== 2)
     else if    (i>=44){i=0;
         }return 0;
             }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -131,12 +124,10 @@ Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında di
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // bu bir açıklamadır
 /* bu bir açıklamadır */
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH EKRANA YAZI YAZDIRMA
@@ -145,14 +136,12 @@ Ekrana yazı yazmak için \fBprintf\fP kullanılır. normal çıktı için \fBst
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int main(string[] args){
     stdout\&.printf(\(dqMerhaba Dünya\(dq);
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DEĞIŞKEN TÜRLERI
@@ -161,15 +150,13 @@ Değişkenler türleri ile beraber tanımlanırlar veya \fBvar\fP ifadesi kullan
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int num = 0;
 val text = \(dqHello world\(dq;
 string abc = \(dqfff\(dq;
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -177,14 +164,12 @@ Bununla birlikte değişkenlere başta değer atamayıp sonradan da değer atama
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int num;
 num = 31;
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -192,15 +177,13 @@ Değişkenler arası tür dönüşümü işlemi için \fBparse\fP ve \fBto_strin
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int num = 15;
 string txt = num\&.to_string(); // int \-> string dönüşümü
 int ff = int\&.parse(\(dq23\(dq); // string \-> int dönüşümü
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -225,14 +208,12 @@ Diziler birden çok eleman tutan değişkenlerdir. tanımlanırken \fBxxx[] yy\f
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int[] nums = {12,22,45,31,48};
 stdout\&.printf(num[3].to_string()); // Ekrana 31 yazar.
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -242,14 +223,12 @@ Diziye aşağıdaki gibi eleman ekleyebiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
     int nums = {14,44,12};
     nums += 98;
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -257,14 +236,12 @@ Dizinin boyutunu aşağıdaki gibi öğrenebiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
     string[] msgs = {\(dqHello\(dq, \(dqWorld\(dq};
     int ff = msgs\&.length;
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -272,11 +249,9 @@ Vala programlama dilinde diziler basit işler için yeterli olsa da genellikle y
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ valac main.vala \-\-pkg gee\-0.8
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -284,8 +259,7 @@ Liste tanımlaması ve eleman ekleyip çıkarılması aşağıdaki gibidir:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 Using gee;
 
 void test(){
@@ -296,8 +270,7 @@ void test(){
     liste\&.remove(18);
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -307,13 +280,11 @@ Listenin belirtilen index sayılı elemanı aşağıdaki gibi getirilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int num = liste\&.get(3); // 4. eleman değeri getirilir.
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -321,13 +292,11 @@ Listenin istenen bir elemanı aşağıdaki gibi değiştirilebilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 liste\&.set(3,144); // 4. eleman değiştirilir.
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -335,13 +304,11 @@ Listenin eleman sayısı aşağıdaki gibi bulunur.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int boyut = liste\&.size;
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
@@ -350,14 +317,12 @@ Klavyeden string türünden değer almak için \fBstdin.read_line()\fP kullanıl
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 var text = stdin\&.read_line();
 stdout\&.printf(text);
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KOŞULLAR
@@ -366,8 +331,7 @@ Koşul tanımlamak için \fBif\fP kullanılır. Bu ifade parametre olarak \fBboo
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 if(koşul){
    \&...
@@ -377,8 +341,7 @@ if(koşul){
    \&...
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -386,8 +349,7 @@ if(koşul){
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 string parola = stdin\&.read_line();
 if(parola == \(dqabc123\(dq){
@@ -396,17 +358,15 @@ if(parola == \(dqabc123\(dq){
     stderr\&.printf(\(dqhatalı parola\(dq);
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Koşullarda kullanılan işleyiciler ve anlamları aşağıda liste halinde verilmiştir.
 .SH KOŞUL IŞLEYICILERI
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 ifade
 T}	T{
@@ -494,18 +454,15 @@ eleman içerme kontrolü
 T}	T{
 12 in {12, 121, 48, 94}
 T}
-_
 .TE
 .sp
 Koşullar için alternatif olarak şu şekilde de kullanım mevcuttur.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 koşul ? durum : diğer\-durum;
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -513,14 +470,12 @@ Burada \fB?\fP işaretinden sonra ilk durum \fB:\fP işaretinden sonra da gerçe
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 string parola = stdin\&.read_line();
 parola == \(dqabc123\(dq ? stdout\&.printf(\(dqDoğru parola\(dq) : stderr\&.printf(\(dqyanlış parola\(dq);
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DÖNGÜLER
@@ -529,13 +484,11 @@ Döngüler aşağıdaki gibi tanımlanır. döngüde koşul sağlandığı süre
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 while(koşul){
     \&...
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -543,8 +496,7 @@ while(koşul){
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int sayi = 0;
 while (sayi <=10){
@@ -552,8 +504,7 @@ while (sayi <=10){
     sayi += 1; // sayi = sayi + 1 ile aynı anlama gelir.
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -563,15 +514,13 @@ Yukarıdaki örnekte \fBwhile\fP ifadesi sayı 10dan küçük ve eşitse çalı�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 for(int i=0; i<=10; i++){ // i += 1 ile aynı anlama gelir
     stdout\&.printf(sayi\&.to_string());
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -581,16 +530,14 @@ Bir listenin tüm elemanları ile döngü oluşturmak için ise \fBforeach\fP ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int[] i = {31, 44, 78, 84, 27};
 foreach(int sayi in i){
     stdout\&.printf(sayi\&.to_string());
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -600,8 +547,7 @@ Döngüden çıkmak için \fBbreak\fP döngünün alt satırlarının çalışma
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 while(true){
     int txt = stdin\&.read_line();
@@ -615,8 +561,7 @@ while(true){
     stdout\&.printf(\(dqtest 123\(dq); // bu satır çalıştırılmaz.
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH FONKSIYONLAR VE PARAMETRELER
@@ -625,8 +570,7 @@ Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağ
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int main(string[] args){
     write(\(dqHello world\(dq);
     return 0;
@@ -634,8 +578,7 @@ int main(string[] args){
 void write(string message){
     stdout\&.printf(message);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -643,16 +586,14 @@ Bir fonksiyon sadece bir kez tanımlanabilir. Fakat fonksiyonu isim olarak oluş
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 void fff(); // isim olarak tanımlanabilir.
 void fff(){
     stdout\&.printf(\(dqhmmm\(dq);
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -660,29 +601,25 @@ Ayrıca fonksiyonu isim olarak tanımlayıp \fBC\fP programlama dili ile yazılm
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // main.vala dosyası
 extern void fff(string msg);
 int main(string[] args){
     fff(\(dqHello World\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // util.c dosyası
 #include <stdio.h>
 void fff(char* msg){
     fputs(msg,stdout);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -690,11 +627,9 @@ Yukarıdaki örnekteki 2 dosyayı derlemek için aşağıdaki gibi bir komut kul
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ valac main.vala util.c
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -702,11 +637,9 @@ C kaynak kodunun gerektirdiği parametreleri \fB\-X\fP kullanarak ekleyebiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ valac main.vala util.c \-X \(dq\-lreadline\(dq # C ile readline kütüphanesini kullanmak için \-lreadline gerekir.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -714,26 +647,22 @@ Vala içinde C kullanabildiğimiz gibi tam tersi de mümkündür. Bunun için C 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 void fff(char* message);
 int main(int argc, char *argv[]){
     fff(\(dqHello world\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 public void fff(string message){
     print(message);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -743,8 +672,7 @@ Bir fonksiyon normal şartlarda başka bir fonksiyona parametre olarak verilemez
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 delegate void fff(string message);
 
 // delegate ile kullanıma uygun fonksiyon tanımladık.
@@ -761,8 +689,7 @@ void f2(fff function, string message){
 void main(string[] args){
     f2(f1,\(dqHello World\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SINIF KAVRAMI
@@ -771,8 +698,7 @@ Vala nesne yönelimli bir programlama dilidir. Bu sebeple sınıflar oluşturabi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 public class test {
     public void write(){
         stdout\&.printf(\(dqtest123\(dq);
@@ -782,8 +708,7 @@ int main(string[] args){
     test t = new test();
     t\&.write();
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -795,8 +720,7 @@ Sınıf içerisinde tanımlanmış değişkenlere ulaşmak için \fBthis\fP ifad
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 public class test {
     private int i;
@@ -808,8 +732,7 @@ public class test {
     }
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SUPER SINIF
@@ -818,8 +741,7 @@ Bir sınıfı başka bir sınıftan türetebiliriz. Bunun için sınıf tanımla
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 public class hello {
     public void write_hello(){
         stdout\&.printf(\(dqHello\(dq);
@@ -839,8 +761,7 @@ int main(){
     w\&.write();
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -848,8 +769,7 @@ Eğer var olan bir fonksiyonun üzerine yazmak istiyorsak \fBoverride\fP ifadesi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 public class hello {
     public void write(){
@@ -862,8 +782,7 @@ public class world : hello {
     }
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -871,8 +790,7 @@ Bir sınıfı birden fazla sınıfın birleşiminden türetebiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 public class hello {
     public void write_hello(){
@@ -892,8 +810,7 @@ public class helloworld : hello, world {
 
 }
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SIGNAL KAVRAMI
@@ -902,8 +819,7 @@ Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması ge
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 public class test {
     public signal void sig1(int i);
 
@@ -919,8 +835,7 @@ int main(string[] args){
     t1\&.run(31);
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH NAMESPACE KAVRAMI
@@ -929,8 +844,7 @@ Valada kodları alan adlarına bölerek yazmamız mümkündür. Bu sayede alan a
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 namespace test {
     void print(){
         stdout\&.printf(\(dqTest\(dq);
@@ -940,8 +854,7 @@ namespace test {
 int main(string[] args){
     test\&.print();
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -949,8 +862,7 @@ Namespace iç içe tanımlanabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 namespace test1 {
     namespace test2 {
         void print(){
@@ -962,8 +874,7 @@ namespace test1 {
 int main(string[] args){
     test1\&.test2\&.print();
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -972,8 +883,7 @@ Bu ifade sayesinde belirtilen alan adındaki tüm fonksiyonlar kaynak kodda doğ
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 using Gtk;
 
 int main(string[] args){
@@ -988,8 +898,7 @@ int main(string[] args){
     Gtk\&.main ();
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -998,8 +907,7 @@ Bunun için sınıfın adının başına namespace adını belirtmek yeterlidir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 public class test\&.cls {
     public void print(){
         stdout\&.printf(\(dqTest\(dq);
@@ -1011,8 +919,7 @@ int main(string[] args){
     tcls\&.print();
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KÜTÜPHANE OLUŞTURMA
@@ -1021,15 +928,13 @@ Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşa�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // library.vala dosyası
 public int test(){
     stdout\&.printf(\(dqHello World\(dq);
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1037,15 +942,13 @@ Vala kaynak kodunu önce C koduna çevirmemiz gerekmektedir. Daha sonra gcc ile 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Önce C koduna çevirelim
 $ valac \-C \-H libtest.h \-\-vapi libtest.vapi library.vala
 # Sonra gcc ile derleyelim.
 $ gcc library.c \-o libtest.so \-shared \e
     \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1053,12 +956,10 @@ Alternatif olarak aşağıdaki gibi de derleyebilirsiniz. Bu durumda C kaynak ko
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ valac \-H libtest.h \-\-vapi libtest.vapi \e
     \-o libtest.so \-X \-shared \-X \-fPIC library.vala
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1066,16 +967,14 @@ $ valac \-H libtest.h \-\-vapi libtest.vapi \e
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // main.c dosyası
 #include <libtest.h>
 int main(){
     gint i = test(); // vala değişken türleri glib kütüphanesinden gelir.
     return (int) i;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1083,11 +982,9 @@ Ve şimdi de C kodunu derleyemlim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gcc \-L. \-I. \-ltest main.c \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1095,15 +992,13 @@ Bununla birlikte \fBlibtest.vapi\fP dosyamızı kullanarak kütüphanemizi vala 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // main.vala dosyası
 int main(string[] args){
     int i = test();
     return i;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1111,11 +1006,9 @@ int main(string[] args){
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ valac \-\-vapidir \&./ main.vala \-\-pkg libtest
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH GOBJECT OLUŞTURMA
@@ -1125,15 +1018,13 @@ Bunun için önce aşağıdaki gibi bir kaynak kodumuz olsun. Burada bin namespa
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 namespace hello {
     public void print(){
         stdout\&.printf(\(dqHello World\en\(dq);
     }
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1141,8 +1032,7 @@ namespace hello {
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Önce C koduna çevirelim ve gir dosyası oluşturalım.
 $ valac \-C main.vala \e
     \-\-gir=hello\-1.0.gir \e
@@ -1151,8 +1041,7 @@ $ valac \-C main.vala \e
 # C kodunu derleyelim.
 $ gcc main.c \-o main \-shared \e
     \(gapkg\-config \-\-cflags \-\-libs glib\-2.0\(ga \-fPIC
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1161,11 +1050,9 @@ Burada yazdığımız nameplace alanına ait fonksiyonları ve sınıfları para
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ g\-ir\-compiler hello\-1.0.gir \-\-shared\-library=libhello \-\-output=hello\-1.0.typelib
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1173,12 +1060,10 @@ Son olarak dosyaları sistemimize kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ install libhello.so /usr/lib/
 $ install hello\-1.0.typelib /usr/share/girepository\-1.0/
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1194,14 +1079,12 @@ $ export LD_LIBRARY_PATH=/home/user/gobject\-ornek
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 import gi
 gi\&.require_version(\(aqhello\(aq, \(aq1.0\(aq)
 from gi.repository import hello
 hello\&.print()
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

@@ -1,3 +1,4 @@
+'\" t
 .\" Man page generated from reStructuredText.
 .
 .
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TEMEL KAVRAMLAR"  "" ""
+.TH "TEMEL KAVRAMLAR" "" "" ""
 .SH NAME
 Temel Kavramlar \- 
 .sp
@@ -39,9 +40,8 @@ Not: \fBUefi\fP kurulum için \fBefi\fP bölümü \fB/dev/sda1\fP, her iki kurul
 .sp
 Not: Bu dokümandaki yazılanları uygulamadan dolayı oluşabilecek zarar veya veri kayıplarından dokümanın yazarı sorumlu tutulamaz.
 .TS
-center;
-|l|l|.
-_
+box center;
+l|l.
 T{
 Terim
 T}	T{
@@ -71,7 +71,6 @@ kök dizin
 T}	T{
 Kurulumu yapılan sistemin kurulacağı yerdir.
 T}
-_
 .TE
 .SH GEREKENLER
 .sp
@@ -81,9 +80,9 @@ Eğer debian tabanlı olmayan bir dağıtım varsa ona debootstrap kurmalısın�
 .sp
 Kaynak kodu derlemeden önce bir tane yamaya ihtiyacınız olabilir.
 .sp
-Kaynak kod: \fI\%https://salsa.debian.org/installer\-team/debootstrap\fP
+Kaynak kod:  <https://salsa.debian.org/installer\-team/debootstrap> 
 .sp
-Yama: \fI\%https://gitlab.com/sulinos/repositories/SulinRepository/\-/raw/master/system/devel/debootstrap/files/0001\-remove\-dpkg\-support.patch\fP
+Yama:  <https://gitlab.com/sulinos/repositories/SulinRepository/\-/raw/master/system/devel/debootstrap/files/0001\-remove\-dpkg\-support.patch> 
 .SH HAZIRLIK AŞAMASI
 .sp
 Elinizdeki isoyu yazdırıp \fBlive\fP olarak açın. Tüm işlemi \fBlive\fP modda halleceğiz.
@@ -95,12 +94,10 @@ Tüm işlemi \fBroot\fP yetkisi ile yapacağız. \fBsudo su\fP yazarak önce \fB
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get update
 $ apt\-get install debootstrap
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -112,11 +109,9 @@ Eğer \fB/sys/firmware/efi\fP adında bir dizin varsa \fBuefi\fP kullanıyorsunu
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 [ \-d /sys/firmware/efi ] && echo UEFI || echo legacy
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -126,11 +121,9 @@ Kurulum yapılacak diski bölümlendirelim. \fBUefi\fP için \fB100mb efi bölü
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cfdisk /dev/sda # Bunun yerine gparted gibi gui araçları da kullanabilirsiniz.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -140,12 +133,10 @@ Diskleri biçimlendirelim:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ mkfs.ext4 /dev/sda2 # kök dizin
 $ mkfs.vfat /dev/sda1 # efi bölümü (sadece uefi kullananlar yapmalı)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KURULUM AŞAMASI
@@ -157,11 +148,9 @@ Diskleri hazırladıktan sonra kuruluma geçebiliriz. Bunun için ilk \fBkök di
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ mount /dev/sda2 /mnt
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -171,11 +160,9 @@ $ mount /dev/sda2 /mnt
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ debootstrap \-\-arch amd64 \-\-no\-merged\-usr sid /mnt https://deb.debian.org/debian
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -195,11 +182,9 @@ Oluşturduğumuz \fBrootfs\fP içine \fBdev sys proc run\fP dizinlerini bağlaya
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ for i in dev dev/pts proc sys run; do mount \-o bind /$i /mnt/$i; done
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -209,12 +194,10 @@ $ for i in dev dev/pts proc sys run; do mount \-o bind /$i /mnt/$i; done
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ chroot /mnt /bin/bash
 $ source /etc/profile # (Bu komut chroot içerisinde çalıştırılmalı)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Chroot içindeki kurulum aşamaları
@@ -225,8 +208,7 @@ $ source /etc/profile # (Bu komut chroot içerisinde çalıştırılmalı)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # sadece uefi kullananların yapması gereken kısım
 $ mkdir \-p /boot/efi
 $ mount /dev/sda1 /boot/efi
@@ -236,8 +218,7 @@ $ apt\-get update
 $ apt\-get install grub\-pc\-bin grub\-efi linux\-image\-amd64 linux\-headers\-amd64
 $ grub\-install /dev/sda
 $ grub\-mkconfig \-o /boot/grub/grub.cfg
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -247,11 +228,9 @@ $ grub\-mkconfig \-o /boot/grub/grub.cfg
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ echo \(aqdeb https://deb.debian.org/debian sid main contrib non\-free\(aq > /etc/apt/sources.list
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -261,8 +240,7 @@ Sürücüleri kuralım (\fIisteğe bağlı\fP)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get install bluez\-firmware firmware\-amd\-graphics firmware\-atheros \e
       firmware\-b43\-installer firmware\-b43legacy\-installer firmware\-bnx2 \e
       firmware\-bnx2x firmware\-brcm80211 firmware\-cavium firmware\-intel\-sound \e
@@ -271,8 +249,7 @@ $ apt\-get install bluez\-firmware firmware\-amd\-graphics firmware\-atheros \e
       firmware\-misc\-nonfree firmware\-myricom firmware\-netxen firmware\-qlogic \e
       firmware\-ralink firmware\-realtek firmware\-samsung firmware\-siano \e
       firmware\-ti\-connectivity firmware\-zd1211 zd1211\-firmware
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -284,12 +261,10 @@ içeriği şu şekilde olmalı:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # UNCONFIGURED FSTAB FOR BASE SYSTEM
 /dev/sda2 / ext4 defaults,rw 0 0
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -299,19 +274,16 @@ Masaüstü ortamı kuralım (\fIisteğe bağlı\fP)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get install xorg xinit
 $ apt\-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS \fBMasaüstü kurulumu\fP
 .TS
-center;
-|l|l|.
-_
+box center;
+l|l.
 T{
 Masaüstü
 T}	T{
@@ -359,7 +331,6 @@ budgie
 T}	T{
 apt\-get install budgie\-desktop
 T}
-_
 .TE
 .INDENT 0.0
 .IP 10. 3
@@ -368,13 +339,11 @@ Yeni \fBkullanıcı\fP oluşturalım ve \fBparola\fP atayalım. Not: \fBSudo\fP 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ useradd \-m kullanıcıadı \-G netdev,audio,video,plugdev,floppy \-s /bin/bash
 $ passwd kullanıcıadı # kullanıcıya parola atamak için
 $ passwd root # root kullancısına parola atamak için
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -384,14 +353,12 @@ Network\-manager kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Bunu tüm kullanıcılar kurmalıdır.
 $ apt\-get install network\-manager
 # Bunu kde ve gnome kullanıcılarının kurmasına gerek yok.
 $ apt\-get install network\-manager\-gnome
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -401,12 +368,10 @@ Sudo kurulumu ve ayarlamasını yapabilirsiniz (Tavsiye etmem :D)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get install sudo
 $ usermod \-aG sudo kullanıcıadı
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -416,12 +381,10 @@ Dil ve klavye ayarlarını yapabiliriz. Türkçe Q klavye için klavye varyantı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ dpkg\-reconfigure locales # dil ayarı için
 $ nano /etc/default/keyboard # bu dosyayı düzenleyin ve kaydedin.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -433,11 +396,9 @@ Eğer \fB0\fP ayarlarsanız grub ekranı gözükmez. \fB\-1\fP yaparsanız siz t
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ sed \-i \(dqs/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/g\(dq /etc/default/grub
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KURULUMU SONRASI AŞAMA
@@ -448,11 +409,9 @@ Temizlik yapalım:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt\-get clean
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0

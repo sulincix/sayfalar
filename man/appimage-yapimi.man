@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "APPIMAGE PAKETLEME"  "" ""
+.TH "APPIMAGE PAKETLEME" "" "" ""
 .SH NAME
 AppImage paketleme \- 
 .sp
@@ -38,16 +38,14 @@ Proje dizinimize aşağıdakine benzer proje dizini açarak işe başlayalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 MyApp.AppDir/
 MyApp.AppDir/AppRun
 MyApp.AppDir/myapp.desktop
 MyApp.AppDir/myapp.png
 MyApp.AppDir/usr/bin/myapp
 MyApp.AppDir/usr/lib/libfoo.so.0
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -58,8 +56,7 @@ Bu dosya uygulama ile ilgili bilgileri içerir. (Uygulama simgesi adı vb.) Dene
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat > myapp.desktop << EOF
 > [Desktop Entry]
 > Name=MyApp
@@ -68,8 +65,7 @@ $ cat > myapp.desktop << EOF
 > Type=Application
 > Categories=Utility;
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Uygulama simgesi
@@ -78,11 +74,9 @@ Bu dosyanın adı desktop dosyası ile aynı olmalıdır. Uygulama simgesini bel
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ touch myapp.png
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS AppRun Dosyası
@@ -91,14 +85,12 @@ AppRun dosyamız çalıştırılabilir dosya olmak zorunda ve \fB$PATH\fP değer
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat > AppRun << EOF
 > #!/bin/bash
 > echo \(dqHello Word\(dq
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -106,11 +98,9 @@ Eğer script dili ile çalışan \fBAppRun\fP yazıyorsanız başına interprete
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ chmod +x AppRun
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -118,19 +108,18 @@ AppRun dosyasında en sona aşağıdaki ifadeyi eklerseniz desktop dosyasındaki
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat >> AppRun << EOF
 > EXEC=$(grep \-e \(dq^Exec=.*\(dq \(dq${HERE}\(dq/*.desktop | head \-n 1 | cut \-d \(dq=\(dq \-f 2 | cut \-d \(dq \(dq \-f 1)\(aq
 > exec \(dq${EXEC}\(dq \(dq$@\(dq
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH PAKETLEME AŞAMASI
 .sp
-\fI\%appimagetool\fP indirin ve çalıştırılabilir yapın.
+appimagetool <https://github.com/AppImage/AppImageKit/releases>
+ indirin ve çalıştırılabilir yapın.
 .sp
 Ardından \fBappimagetool\fP ile projenizi örnekteki gibi paketleyin.
 .sp
@@ -138,8 +127,7 @@ Kullanımı \fIARCH=x86_64 appimagetool [proje dizini]\fP
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ ARCH=x86_64 \&./appimagetool\-x86_64.AppImage MyApp.AppDir/
 appimagetool, continuous build (commit effcebc), build 2084 built on 2019\-05\-01 21:02:41 UTC
 Using architecture x86_64
@@ -186,8 +174,7 @@ Success
 Please consider submitting your AppImage to AppImageHub, the crowd\-sourced
 central directory of available AppImages, by opening a pull request
 at https://github.com/AppImage/appimage.github.io
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -195,12 +182,10 @@ Oluşan \fBAppImage\fP dosyamızı çalıştıralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ \&./MyApp\-x86_64.AppImage
 Hello Word
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH APPIMAGE PAKETI IÇIN ÖNEMLI NOTLAR
@@ -212,11 +197,9 @@ Aşağıdaki komutla hardcoded konum var mı öğrenebiliriz:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ strings MyApp.AppDir/usr/bin/myapp | grep /usr
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -224,11 +207,9 @@ Aşağıdaki komutla yama atabiliriz:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ sed \-i \-e \(aqs#/usr#././#g\(aq MyApp.AppDir/usr/bin/myapp
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -241,13 +222,11 @@ Aşağıdaki ifadeyi \fBAppRun\fP içerisine yazın:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat >> AppRun << EOF
 > export GSETTINGS_SCHEMA_DIR=\(dq${HERE}/usr/share/glib\-2.0/schemas/${GSETTINGS_SCHEMA_DIR:+:$GSETTINGS_SCHEMA_DIR}\(dq
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -255,11 +234,9 @@ $ cat >> AppRun << EOF
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ glib\-compile\-schemas MyApp.AppDir/usr/share/glib\-2.0/schemas/
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Bazı gerekli çevresel değişkenler
@@ -268,8 +245,7 @@ Uygulamaların düzgün çalışabilmesi için \fBLD_LIBRARY_PATH\fP \fBPATH\fP 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat >> AppRun << EOF
 > export SELF=$(readlink \-f \(dq$0\(dq)
 > export HERE=${SELF%/*}
@@ -280,8 +256,7 @@ $ cat >> AppRun << EOF
 > export PYTHONPATH=\(dq${HERE}/usr/share/pyshared/${PYTHONPATH:+:$PYTHONPATH}\(dq
 > export PERLLIB=\(dq${HERE}/usr/share/perl5/:${HERE}/usr/lib/perl5/${PERLLIB:+:$PERLLIB}\(dq
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Xdg dizinleri
@@ -292,13 +267,11 @@ Aşağıdaki ifadeyi \fBAppRun\fP içine yazın:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat >> AppRun << EOF
 > export XDG_DATA_DIRS=\(dq${HERE}/usr/share/${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}\(dq
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Qt plugin dizinleri
@@ -309,8 +282,7 @@ Aşağıdaki ifadeyi \fBAppRun\fP içine yazın:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat >> AppRun << EOF
 > export QT_PLUGIN_PATH=\(dq${HERE}/usr/lib/qt4/plugins/:${HERE}/usr/lib/i386\-linux\-gnu/qt4/plugins/\(dq
 > export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib/x86_64\-linux\-gnu/qt4/plugins/:${HERE}/usr/lib32/qt4/plugins/\(dq
@@ -318,8 +290,7 @@ $ cat >> AppRun << EOF
 > export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib/i386\-linux\-gnu/qt5/plugins/:${HERE}/usr/lib/x86_64\-linux\-gnu/qt5/plugins/\(dq
 > export QT_PLUGIN_PATH+=\(dq:${HERE}/usr/lib32/qt5/plugins/:${HERE}/usr/lib64/qt5/plugins/${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}\(dq
 > EOF
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

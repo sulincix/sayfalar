@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
+<meta name="generator" content="Docutils 0.21.2: https://docutils.sourceforge.io/" />
 <title>C Dersi</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
@@ -673,6 +673,81 @@ $<span class="whitespace"> </span>gcc<span class="whitespace"> </span>-c<span cl
 </span><span class="name label">Libs</span><span class="punctuation">:</span><span class="whitespace"> </span><span class="operator">-</span><span class="name">ltest</span><span class="whitespace"> </span><span class="operator">-</span><span class="name">L</span><span class="punctuation">{</span><span class="name">libdir</span><span class="punctuation">}</span><span class="operator">/</span><span class="name">test</span>
 </pre>
 <p>Yukarıdaki örnekte <strong>/usr/include/test/</strong> içerisindeki header dosyamızı ve <strong>/usr/lib/test/</strong> içindeki kütüphane dosyamızı sorunsuzca kullanarak derleme yapabilik.</p>
+</div>
+<div class="section" id="c-kodunu-c-ile-kullanma">
+<h1>C++ kodunu C ile kullanma</h1>
+<p>Aşağıdaki gibi bir C++ kodumuz olsun.</p>
+<pre class="code C literal-block">
+<span class="name">class</span><span class="whitespace"> </span><span class="name">test</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+</span><span class="name">private</span><span class="operator">:</span><span class="whitespace">
+    </span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">value</span><span class="punctuation">;</span><span class="whitespace">
+
+</span><span class="name">public</span><span class="operator">:</span><span class="whitespace">
+    </span><span class="name">test</span><span class="punctuation">(</span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+        </span><span class="name">value</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Bu kodu C ile kullanmak için öncelikle aşağıdaki gibi header dosyamızı oluşturalım.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#ifdef __cplusplus
+</span><span class="keyword">extern</span><span class="whitespace"> </span><span class="literal string">&quot;C&quot;</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+</span><span class="comment preproc">#endif
+</span><span class="whitespace">
+</span><span class="keyword">typedef</span><span class="whitespace"> </span><span class="keyword type">void</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">test</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// class tanımı
+</span><span class="whitespace">
+</span><span class="name">test</span><span class="whitespace"> </span><span class="name function">test_new</span><span class="punctuation">(</span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// class oluşturmak için
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">test_set_value</span><span class="punctuation">(</span><span class="name">test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">ctx</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// class içindeki değeri ayarlamak için
+</span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name function">test_get_value</span><span class="punctuation">(</span><span class="name">test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">ctx</span><span class="punctuation">);</span><span class="whitespace"> </span><span class="comment single">// class içindeki değeri okumak için
+</span><span class="whitespace">
+</span><span class="comment preproc">#ifdef __cplusplus
+</span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="comment preproc">#endif</span>
+</pre>
+<p>Şimdi de bir C++ kodu yazalım ve yukarıdaki fonksiyonları oluşturalım.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;test&gt;</span><span class="comment preproc">
+</span><span class="keyword">extern</span><span class="whitespace"> </span><span class="literal string">&quot;C&quot;</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="name function">test_new</span><span class="punctuation">(</span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">Test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">t</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">new</span><span class="whitespace"> </span><span class="name">Test</span><span class="punctuation">(</span><span class="name">l</span><span class="punctuation">);</span><span class="whitespace">
+        </span><span class="keyword">return</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">test</span><span class="punctuation">)</span><span class="whitespace"> </span><span class="name">t</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+
+    </span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">test_set_value</span><span class="punctuation">(</span><span class="name">test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">ctx</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">Test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">t</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">Test</span><span class="operator">*</span><span class="punctuation">)</span><span class="name">ctx</span><span class="punctuation">;</span><span class="whitespace">
+        </span><span class="name">t</span><span class="operator">-&gt;</span><span class="name">value</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">l</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+    </span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name function">test_get_value</span><span class="punctuation">(</span><span class="name">test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">ctx</span><span class="punctuation">){</span><span class="whitespace">
+        </span><span class="name">Test</span><span class="operator">*</span><span class="whitespace"> </span><span class="name">t</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="punctuation">(</span><span class="name">Test</span><span class="operator">*</span><span class="punctuation">)</span><span class="name">ctx</span><span class="punctuation">;</span><span class="whitespace">
+        </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">t</span><span class="operator">-&gt;</span><span class="name">value</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="punctuation">}</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Şimdi bu kodu kütüphane haline getirelim.</p>
+<pre class="code shell literal-block">
+g++<span class="whitespace"> </span>-o<span class="whitespace"> </span>libtest.so<span class="whitespace"> </span>test.cpp<span class="whitespace"> </span>-I.<span class="whitespace"> </span>-shared
+</pre>
+<p>Şimdi örnek C kodumuz aşağıdaki gibi  olabilir.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;test.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">(){</span><span class="whitespace">
+    </span><span class="name">test</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">t</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">test_new</span><span class="punctuation">(</span><span class="literal number integer">22</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">test_set_value</span><span class="punctuation">(</span><span class="name">t</span><span class="punctuation">,</span><span class="literal number integer">12</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">l</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">test_get_value</span><span class="punctuation">(</span><span class="name">t</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Bu kodu aşağıdaki gibi derleyebiliriz.</p>
+<pre class="code shell literal-block">
+gcc<span class="whitespace"> </span>main.c<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace"> </span>-ltest<span class="whitespace"> </span>-L.<span class="whitespace"> </span>-I.
+</pre>
+<p>Yada kütüphane olşturmaya gerek kalmadan da derleyebiliriz.</p>
+<pre class="code shell literal-block">
+g++<span class="whitespace"> </span>test.cpp<span class="whitespace"> </span>-c<span class="whitespace"> </span>-o<span class="whitespace"> </span>test.o<span class="whitespace">
+</span>gcc<span class="whitespace"> </span>-c<span class="whitespace"> </span>main.c<span class="whitespace"> </span>-o<span class="whitespace"> </span>main.o<span class="whitespace">
+</span>gcc<span class="whitespace"> </span>tast.o<span class="whitespace"> </span>main.o<span class="whitespace"> </span>-o<span class="whitespace"> </span>main<span class="whitespace"> </span>-lstdc++
+</pre>
+<p>Burada libstdc++ C++ kodunun bağımlılığıdır.</p>
 </div>
 </div>
 </body>

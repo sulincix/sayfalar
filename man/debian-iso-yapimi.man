@@ -1,3 +1,4 @@
+'\" t
 .\" Man page generated from reStructuredText.
 .
 .
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TERIMLER VE ANLAMLARI"  "" ""
+.TH "TERIMLER VE ANLAMLARI" "" "" ""
 .SH NAME
 Terimler ve Anlamları \- 
 .sp
@@ -36,15 +37,14 @@ Bu dokümanda \fBdebian sid\fP kullanarak özelleşmiş bir \fBlive\fP iso yapı
 Debian \fBsid\fP yerine \fBstable\fP kullanmak isterseniz yapmanız gereken dokümanda \fBsid\fP yerine \fBstable\fP yazmaktır.
 .INDENT 0.0
 .INDENT 3.5
-\fBNot:\fP Bu dokümanla ilgili soru ve önerileriniz için : \fI\%https://t.me/iso_calismalari\fP
+\fBNot:\fP Bu dokümanla ilgili soru ve önerileriniz için :  <https://t.me/iso_calismalari> 
 .sp
 \fBNot: Biraz mizah içerir.\fP Şimdiden \fBALLAH\fP sabır versin :D
 .UNINDENT
 .UNINDENT
 .TS
-center;
-|l|l|.
-_
+box center;
+l|l.
 T{
 Terim
 T}	T{
@@ -80,7 +80,6 @@ T{
 T}	T{
 Dağıtımdan bağımsız canlı sistem kurulum aracıdır.
 T}
-_
 .TE
 .SH HAZIRLIK
 .INDENT 0.0
@@ -90,11 +89,9 @@ Gerekli paketleri kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install debootstrap xorriso squashfs\-tools mtools grub\-pc\-bin grub\-efi\-ia32\-bin grub\-efi
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -106,11 +103,9 @@ Kurulum aracını derleyelim. (İsteğe bağlı)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install devscripts
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -118,14 +113,12 @@ Daha sonra kaynak kodu bir dizine çekip \fBdeb\fP paketi haline getirelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ git clone https://gitlab.com/ggggggggggggggggg/17g
 ☭ cd 17g
 ☭ mk\-build\-deps \-\-install
 ☭ debuild \-us \-uc \-b
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -138,12 +131,10 @@ Bir üst dizinde kurulum aracına ait \fBdeb\fP paketi oluşacakdır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ mkdir sid\-chroot
 ☭ debootstrap \-\-arch=amd64 \-\-no\-merged\-usr sid sid\-chroot https://deb.debian.org/debian
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -153,11 +144,9 @@ Eğer \(dqUnpacking the base system...\(dq sırasında sorun yaşıyorsanız \fB
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ chown root sid\-chroot
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -167,11 +156,9 @@ Eğer apt ile ilgili \fBsandbox\fP hatası alırsanız aşağıdaki komutu kulla
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ echo \(dqAPT::Sandbox::User root;\(dq > sid\-chroot/etc/apt/apt.conf.d/99sandboxroot
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -183,11 +170,9 @@ Iso dosyamızı bir dizine bağlayalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ mount \-o loop debian\-live\-orijinal.iso /mnt
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -197,12 +182,10 @@ Iso içerisindeki \fBlive/filesystem.squashfs\fP dosyasını açalım. ve adın�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ unsquashfs /mnt/live/filesystem.squashfs
 ☭ mv squashfs\-root sid\-chroot
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -212,11 +195,9 @@ Iso dosyamızın bağını sökelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ umount \-f /mnt
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH CHROOT IÇINE GIRMEK IÇIN ÖN HAZIRLIK
@@ -227,11 +208,9 @@ Iso dosyamızın bağını sökelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ for i in dev dev/pts proc sys; do mount \-o bind /$i sid\-chroot/$i; done
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH GEREKLI PAKETLERIN KURULMASI
@@ -244,13 +223,11 @@ Chroot komutu ile oluşan \fBchroot\fP içerisine girelim. ve ardından \fBsourc
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ chroot sid\-chroot /bin/bash
 ☭ echo \(aqdeb https://deb.debian.org/debian sid main contrib non\-free\(aq > /etc/apt/sources.list
 ☭ apt\-get update
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -260,11 +237,9 @@ Kernel kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install linux\-headers\-amd64 linux\-image\-amd64
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -272,12 +247,10 @@ Kernel olarak depodaki kernel yerine liquorix kernelini de kurabilirsiniz. (iste
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ bash <(https://liquorix.net/add\-liquorix\-repo.sh)
 ☭ apt\-get install linux\-image\-liquorix\-amd64 linux\-headers\-liquorix\-amd64
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -287,11 +260,9 @@ Grub kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install grub\-pc\-bin grub\-efi\-ia32\-bin grub\-efi
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -301,11 +272,9 @@ Live açılış için gereken paketleri kuralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install live\-config live\-boot
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -315,13 +284,11 @@ Debian tabanlı sistemlerde önerilen paketler varsayılan olarak paket kurulumu
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # /etc/apt/apt.conf.d/01norecommend adında bir dosya açın ve içine şunu yazın
 APT::Install\-Recommends \(dq0\(dq;
 APT::Install\-Suggests \(dq0\(dq;
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -331,16 +298,14 @@ Eğer dil dosyaları, man dosyaları gibi şeylere ihtiyacınız yoksa ve bunlar
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # /etc/apt/apt.conf.d/02antibloat adında dosya açın ve içine şunu yazın
 DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/locale || true\(dq;};
 DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/man || true\(dq;};
 DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/help || true\(dq;};
 DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/doc || true\(dq;};
 DPkg::Post\-Invoke {\(dqrm \-rf /usr/share/info || true\(dq;};
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH ÖZELLEŞTIRME
@@ -355,8 +320,7 @@ Dağıtım adını değiştirmek için \fB/etc/os\-release\fP ve \fB/etc/lsb\-re
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 PRETTY_NAME=\(dqCustom debian (sid)\(dq
 NAME=\(dqCUSTOM\(dq
 VERSION_ID=\(dq1\(dq
@@ -369,8 +333,7 @@ BUG_REPORT_URL=\(dqhttps://example.com/issues/\(dq
 PRIVACY_POLICY_URL=\(dqhttps://www.example.com/privacy/\(dq
 VERSION_CODENAME=custom
 DEBIAN_CODENAME=sid
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -380,14 +343,12 @@ DEBIAN_CODENAME=sid
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 DISTRIB_ID=CustomDebian
 DISTRIB_RELEASE=1
 DISTRIB_CODENAME=sid
 DISTRIB_DESCRIPTION=\(dqCustom Debian sid\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -397,19 +358,16 @@ Masaüstü ortamı kurabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install xorg xinit
 ☭ apt\-get install lightdm # giriş ekranı olarak lightdm yerine istediğinizi kurabilirsiniz.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH MASAÜSTÜ KURULUMU
 .TS
-center;
-|l|l|.
-_
+box center;
+l|l.
 T{
 Masaüstü
 T}	T{
@@ -457,7 +415,6 @@ budgie
 T}	T{
 apt\-get install budgie\-desktop
 T}
-_
 .TE
 .sp
 \fBNot:\fP xfce, lxde, mate gibi bazı masaüstülerindeki ağ bağlantısı aracı için \fBnetwork\-manager\-gnome\fP paketini kurmalısınız.
@@ -470,8 +427,7 @@ Sürücüleri ekleyebiliz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install bluez\-firmware firmware\-amd\-graphics firmware\-atheros \e
       firmware\-b43\-installer firmware\-b43legacy\-installer firmware\-bnx2 \e
       firmware\-bnx2x firmware\-brcm80211 firmware\-cavium firmware\-intel\-sound \e
@@ -480,8 +436,7 @@ Sürücüleri ekleyebiliz.
       firmware\-misc\-nonfree firmware\-myricom firmware\-netxen firmware\-qlogic \e
       firmware\-ralink firmware\-realtek firmware\-samsung firmware\-siano \e
       firmware\-ti\-connectivity firmware\-zd1211 zd1211\-firmware
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -499,12 +454,10 @@ Daha önceden paketlemiş olduğumuz kurulum aracını kurabiliriz. Oluşturduğ
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ dpkg \-i /tmp/17g\-installer.deb # dosya adını uygun şekilde yazınız.
 ☭ apt\-get install \-f # eksik bağımlılıkları tamamlaması için.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -514,11 +467,9 @@ Network manager gvfs\-backends gibi bazı paketlere ihtiyacımız olabilir. Bunl
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ apt\-get install network\-manager\-gnome gvfs\-backends pavucontrol chromium vlc
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH PAKETLEME ÖNCESI
@@ -531,11 +482,9 @@ Chroot içerisindeki \fBbind\fP bağlarını kaldıralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ umount \-lf \-R sid\-chroot/* 2>/dev/null
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH TEMIZLIK
@@ -544,15 +493,13 @@ Squashfs yapmadan önce chroot içerisinde temizlik yapmak gerekebilir. Zorunlu 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ chroot sid\-chroot apt\-get autoremove # boşta kalan paketleri temizler
 ☭ chroot sid\-chroot apt\-get clean # apt önbelleğini temizler
 ☭ rm \-f sid\-chroot/root/.bash_history # iso yaparken oluşturduğunuz historyleri temizler
 ☭ rm \-rf sid\-chroot/var/lib/apt/lists/* # index dosyalarını temizler
 ☭ find sid\-chroot/var/log/ \-type f | xargs rm \-f # logları siler
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH PAKETLEME AŞAMASI
@@ -571,14 +518,12 @@ Debianda varsayılan sıkıştırma formatı \fIxz\fP olmasına ramen ben sizler
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ mkdir isowork
 ☭ mksquashfs sid\-chroot filesystem.squashfs \-comp gzip \-wildcards
 ☭ mkdir \-p isowork/live
 ☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -588,14 +533,12 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ ls sid\-chroot/boot/ # dosyalarımızın adını öğrenmek için
     config\-5.7.0\-1\-amd64  grub  initrd.img\-5.7.0\-1\-amd64  System.map\-5.7.0\-1\-amd64  vmlinuz\-5.7.0\-1\-amd64
 ☭ cp \-pf sid\-chroot/boot/initrd.img\-5.7.0\-1\-amd64 isowork/live/initrd.img
 ☭ cp \-pf sid\-chroot/boot/vmlinuz\-5.7.0\-1\-amd64 isowork/live/vmlinuz
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -605,25 +548,22 @@ Ardından \fBvmlinuz\fP ve \fBinitrd\fP dosyalarını isowork/live içerisine at
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ mkdir \-p isowork/boot/grub/
 ☭ echo \(aqinsmod all_video\(aq > isowork/boot/grub/grub.cfg
 ☭ echo \(aqmenuentry \(dqStart Debian 64\-bit\(dq \-\-class debian {\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    linux /live/vmlinuz boot=live live\-config live\-media\-path=/live \-\-\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq    initrd /live/initrd.img\(aq >> isowork/boot/grub/grub.cfg
 ☭ echo \(aq}\(aq >> isowork/boot/grub/grub.cfg
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Burada \fBlinux\fP ile başlayan satırın sonuna ekleyeceğimiz ek ayarlar ile sistemin dilini ve klavye düzeni gibi şeyleri ayarlayabilirsiniz. Aşağıda Bu parametreler ve anlamları verilmiştir.
 .SH PARAMETRE VE ANLAMLARI
 .TS
-center;
-|l|l|l|l|.
-_
+box center;
+l|l|l|l.
 T{
 Örnek parametre
 T}	T{
@@ -683,7 +623,6 @@ nomodeset
 T}	T{
 Uyumluluk modu ayarı
 T}
-_
 .TE
 .INDENT 0.0
 .IP 4. 3
@@ -692,8 +631,7 @@ Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca i
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ tree isowork
     isowork/
     ├── boot
@@ -703,8 +641,7 @@ Herşey tamamlandıktan sonra dizin yapısı şu şekilde olmalıdır. Ayrıca i
         ├── filesystem.squashfs
         ├── initrd.img
         └── vmlinuz
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -714,11 +651,9 @@ Iso dosyası üretelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ grub\-mkrescue isowork \-o debian\-live.iso
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH ISO ÜZERINDE DÜZENLEME YAPMA
@@ -731,11 +666,9 @@ Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ for i in dev dev/pts proc sys; do mount \-o bind /$i sid\-chroot/$i; done
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -745,11 +678,9 @@ Eğer paketlediğimiz isoda bir şeyleri eksik yaptığımızı düşünüyorsak
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ chroot sid\-chroot /bin/bash
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -761,11 +692,9 @@ Chroot içerisindeki \fBbind\fP bağlarını kaldıralım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ umount \-lf \-R sid\-chroot/* 2>/dev/null
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -775,13 +704,11 @@ Tekrar \fBsquashfs\fP dosyası üretelim ve güncelleyelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ mksquashfs sid\-chroot filesystem.squashfs \-comp gzip \-wildcards
 ☭ rm \-f isowork/live/filesystem.squashfs
 ☭ mv filesystem.squashfs isowork/live/filesystem.squashfs
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -791,13 +718,11 @@ Eğer kernelle ilgili bir değişiklik yaptıysak \fBisowork\fP içerisindeki li
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ rm \-f isowork/live/initrd.img isowork/live/vmlinuz
 ☭ cp \-pf sid\-chroot/boot/initrd.img\-5.7.0\-1\-amd64 isowork/live/initrd.img
 ☭ cp \-pf sid\-chroot/boot/vmlinuz\-5.7.0\-1\-amd64 isowork/live/vmlinuz
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -807,12 +732,10 @@ Yeni iso dosyasını üretelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 ☭ mv debian\-live.iso debian\-live\-eski.iso
 ☭ grub\-mkrescue isowork \-o debian\-live.iso
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

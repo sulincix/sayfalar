@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "PYTHON DERSI"  "" ""
+.TH "PYTHON DERSI" "" "" ""
 .SH NAME
 Python dersi \- 
 .sp
@@ -38,11 +38,9 @@ Python programlama dilinde açıklamalar \fB#\fP işaretinden sonrası için ge�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #bu bir açıklama satırıdır.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -50,13 +48,11 @@ Bununla birlikte çoklu açıklama satırı yapmak için \fB\(dq\(dq\(dq\fP işa
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \(dq\(dq\(dq Bu bir açıklama satırı
 Bu diğer açıklama satırı
 Bu son açıklama satırı \(dq\(dq\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH TEMEL BILGILER
@@ -66,16 +62,14 @@ Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #!/usr/bin/python3
 # Çalıştırma izni vererek çalıştırabiliriz.
 chmod +x dosya.py
 \&./dosya.py
 # Veya doğrudan çalıştırabiliriz.
 python3 dosya.py
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -85,11 +79,9 @@ Python programlarında işler işlevler üzerinden yürür. işlevlerin girdiler
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 cikti = islev(girdi1, girdi2)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -97,13 +89,11 @@ Pythonda girintileme olayı için de \fB{\fP ve \fB}\fP kullanılmak yerine boş
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 f = 12 # f sayısını 12ye eşitledik
 if f == 12: # f sayısı 12ye eşit mi diye sorguladık
     print(\(dqeşit\(dq) # ekrana yazı yazdırık
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -114,12 +104,10 @@ Pythonda ekrana yazı yazmak için \fBprint\fP işlevini kullanıyoruz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 print(\(dqMerhaba Dünya\(dq)
 \-> Merhaba Dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -127,15 +115,13 @@ Birden çok ifadeyi yazdırmak için \fBprint\fP işlevine birden çok girdi ver
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Yazılar tırnak içine alınır.
 # Sayılar tırnak içine alınmaz.
 # True ve False doğruluk belirtir.
 print(\(dqMerhaba\(dq,12,\(dqDünya\(dq,True)
 \-> Merhaba 12 Dünya True
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DEĞIŞKENLER
@@ -145,14 +131,12 @@ Değişkenler tanımlanırken \fBdegisken = deger\fP şeklinde bir ifade kulanı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 i = 12
 yazi = \(dqmerhaba dünya\(dq
 k = 1.2
 hmm = True
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -162,13 +146,11 @@ Değişkenler kullanılırken başına herhangi bir işaret almasına gerek yokt
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 i = 12
 print(i)
 \-> 12
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -178,14 +160,12 @@ Bir değişkenin türünü öğrenmek için \fBtype\fP işlevini kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = \(dqabc123\(dq
 turu = type(veri)
 print(turu)
 \-> <class \(aqstr\(aq>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -193,14 +173,12 @@ Boş bir değişken tanımlamak için onun değerine \fBNone\fP atayabiliriz. Bu
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = None
 tur = type(veri)
 print(tur)
 \-> <class \(aqNoneType\(aq>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS String
@@ -209,13 +187,11 @@ String türünden değişkenler yazı içerir. \fB\(dq\fP veya \fB\(aq\fP veya \
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi1 = \(dqmerhaba\(dq
 yazi2 = \(aqyazım\(aq
 yazi3 = \(dq\(dq\(dqdünya\(dq\(dq\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -223,13 +199,11 @@ String türünden değişkenler \fB+\fP işareti ile uc uca eklenebilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi = \(dqmerhaba\(dq + \(aq \(aq + \(dq\(dq\(dqdünya\(dq\(dq\(dq
 print(yazi)
 \-> merhaba dünya
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -237,13 +211,11 @@ Değişkeni birden çok kez toplamak için \fB*\fP işareti kullanılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi = \(dqali\(dq*5
 print(yazi)
 \-> alialialialiali
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -251,14 +223,12 @@ String türünden bir değişkenin içerisindeki bir bölümü başka bir şey i
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = \(dqMerhaba\(dq
 veri2 = veri\&.replace(\(dqrha\(dq,\(dq123\(dq)
 print(veri2)
 \-> Me123ba
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Integer
@@ -267,8 +237,7 @@ Integer türünden değişkenler tam sayı belirtir. Dört işlem işaretleri il
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi = (((24/2)+4)*2)\-1
 \(dq\(dq\(dq
 24/2 = 12
@@ -278,8 +247,7 @@ sayi = (((24/2)+4)*2)\-1
 \(dq\(dq\(dq
 print(sayi)
 \-> 31
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -287,13 +255,11 @@ Integer değişkenlerin kuvvetlerini almak için \fB**\fP kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi = 2**3
 print(sayi)
 \-> 8
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -301,12 +267,10 @@ String türünden bir değişkeni integer haline getirmek için \fBint\fP işlev
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 print(int(\(dq12\(dq)/2)
 \-> 6
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Float
@@ -315,13 +279,11 @@ Float türünden değişkenler virgüllü sayılardır. Aynı integer sayılar g
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi = 1/2 # sayi = 0.5 şeklinde de tanımlanabilir.
 print(sayi)
 \-> 0.5
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -329,16 +291,14 @@ Bir float değişkenini integer haline getirmek için \fBint\fP işlevi kullanı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 sayi = 3.2
 print(sayi)
 sayi2 = int(3.2)
 print(sayi2)
 \-> 3.2
 \-> 3
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -348,12 +308,10 @@ String türünden bir değişkeni float haline getirmek için \fBfloat\fP işlev
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 print(float(\(dq2.2\(dq)/2)
 \-> 1.1
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Boolean
@@ -362,8 +320,7 @@ Boolean değişkenler sadece \fBTrue\fP veya \fBFalse\fP değerlerini alabilir. 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bool = 12 == 13
 \(dq\(dq\(dq
 == eşit
@@ -375,8 +332,7 @@ bool = 12 == 13
 \(dq\(dq\(dq
 print(bool)
 \-> False
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -384,13 +340,11 @@ boolean değişkeninin tersini almak için \fBnot\fP ifadesi kullanılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = not True
 print(veri)
 \-> False
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -398,14 +352,12 @@ Bir string türünden değişkenin içinde başka bir string türünden değişk
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = \(dqef\(dq in \(dqDünya\(dq
 veri2 = \(dqny\(dq in \(dqDünya\(dq
 print(veri,veri2)
 \-> False True
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -413,13 +365,11 @@ Boolean değişkenlerde mantıksal işlemler \fBand\fP ve \fBor\fP ifadeleri ile
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = 12 < 6 or 4 > 2 # False or True = True
 print(veri)
 \-> True
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
@@ -428,14 +378,12 @@ Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerin
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = input(\(dqBir değer girin >\(dq)
 print(a,type(a))
 <\- 12
 \-> 12 <class \(aqstr\(aq>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -443,13 +391,11 @@ String türünden bir ifadeyi bir değişken üretmek için kullanmak istiyorsak
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = eval(\(dq12/2 == 16\-10\(dq) # string ifade çalıştırılır ve sonucu aktarılır.
 print(a)
 \-> True
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -460,16 +406,14 @@ Koşul tanımı yapmak için \fBif\fP ifadesi kullanılır. Koşul sağlanmıyor
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 if koşul:
     eylem
 elif koşul:
     eylem
 else:
     eylem
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -477,14 +421,12 @@ else:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 if 13 % 2 == 0 : # % işareti bölümden kalanı bulmaya yarar.
     print(\(dqÇift sayı\(dq)
 else:
     print(\(dqTek sayı\(dq)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -492,16 +434,14 @@ Değeri olmayan (None) değişkenler koşul ifadelerinde \fBFalse\fP olarak kabu
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = None
 if veri:
     print(\(dqTanımlı\(dq)
 else:
     print(\(dqTanımsız\(dq)
 \-> Tanımsız
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -509,8 +449,7 @@ Koşul tanımlamayı alternatif olarak şu şekilde de yapabiliriz:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 koşul and eylem
 \(dq\(dq\(dq Şununla aynıdır:
 if koşul:
@@ -521,8 +460,7 @@ koşul or eylem
 if not koşul:
     eylem
 \(dq\(dq\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -530,14 +468,12 @@ Bu konunun daha iyi anlaşılması için:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 12 == 12 and print(\(dqeşittir\(dq)
 12 == 14 or print(\(dqeşit değildir\(dq)
 \-> eşittir
 \-> eşit değildir
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DIZILER
@@ -546,11 +482,9 @@ Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [1, 3, \(dqmerhaba\(dq, True, 1.2, None]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -560,8 +494,7 @@ Dizilerde eleman eklemek için \fBappend\fP veya \fBinsert\fP işlevini eleman s
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [22]
 print(a)
 a\&.append(\(dqMerhaba\(dq) # Sona ekleme yapar.
@@ -575,8 +508,7 @@ print(a)
 \-> [12, 22, \(aqMerhaba\(aq]
 \-> [12, \(aqMerhaba\(aq]
 \-> [\(aqMerhaba\(aq]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -584,8 +516,7 @@ Dizileri sıralamak için \fBsort\fP boşaltmak için ise \fBclear\fP işlevi ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [1, 3, 6, 4, 7, 9, 2]
 print(a[2],a[\-3])
 a\&.sort()
@@ -595,8 +526,7 @@ print(a)
 \-> 3 7
 \-> [1, 2, 3, 4, 6, 7, 9]
 \-> []
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -604,16 +534,14 @@ Dizideki bir elemanın uzunluğunu bulmak için \fBlen\fP işlevi, elemanın diz
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [12, \(dqhmm\(dq, 3.2]
 sayi = len(a)
 sayi2 = a\&.index(3.2)
 print(sayi,sayi2)
 \-> 3
 \-> 2
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -621,15 +549,13 @@ Dizilerin elemanlarını \fB+\fP kullanarak birleştirebiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [1, 2, 3]
 b = [4, 5, 6]
 c = a + b
 print(c)
 \-> [1, 2, 3, 4, 5, 6]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -637,14 +563,12 @@ Dizilerin bir bölümünü aşağıdakine benzer yolla kesebiliriz:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [1, 3, 5, 7, 9, 12, 44, 31, 16]
 b = a[:2] # baştan 3. elemana kadar.
 c = a[4:] # 4. elemandan sonrası
 d = a[3:6] # 4. elemandan 6. elemana kadar (dahil)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -652,8 +576,7 @@ String türünden bir değişkeni belli bir harf veya harf öbeğine göre bölm
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri=\(dq   Bu bir yazıdır   \(dq
 veri2 = veri\&.strip()
 print(len(veri),len(veri2))
@@ -661,8 +584,7 @@ liste = veri2\&.split(\(dq \(dq)
 print(liste)
 \-> 20 14
 \-> [\(aqBu\(aq, \(aqbir\(aq, \(aqyazıdır\(aq]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH WHILE DÖNGÜSÜ
@@ -671,12 +593,10 @@ Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 while koşul:
     eylem
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -684,15 +604,13 @@ while koşul:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 i = 1
 while i < 10:
     print(i)
     i+=1 # i = i + 1 ile aynı anlama gelir.
 \-> 1 2 3 4 5 6 7 8 9 (Bunu alt alta yazdığını hayal edin :D )
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -702,14 +620,12 @@ Bir döngüden çıkmak için \fBbreak\fP ifadesi kullanılır. Döngünün o an
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 while True:
     sayi = int(input(\(dqSayı girin\(dq))
     if sayi % 2 == 0:
         break
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH FOR DÖNGÜSÜ
@@ -718,8 +634,7 @@ For döngüsü while ile benzerdir fakat koşul aranmak yerine iteration yapar. 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 for eleman in dizi:
     eylem
 # Şununla aynıdır
@@ -728,8 +643,7 @@ toplam = len(dizi)
 while i < toplam: # eleman yerine dizi[i] kullanabilirsiniz.
     eylem
     i += 1
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -737,16 +651,14 @@ while i < toplam: # eleman yerine dizi[i] kullanabilirsiniz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 a = [2, 4, 6, 8, 10] # dizi tanımladık
 b = [] # diğer diziyi tanımladık
 for i in a: # a elemanları i içine atılacak
     b\&.append(i/2) # b içine elemanın yarısını ekledik.
 print(b)
 \-> [1, 2, 3, 4, 5]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -754,8 +666,7 @@ Eğer dizi yerine string türünden bir değişken verirsek elemanlar bu stringi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 veri = \(dqMerhaba Dünya\(dq
 toplam = 0
 for i in veri:
@@ -763,8 +674,7 @@ for i in veri:
         toplam += 1
 print(toplam)
 \-> 4
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -772,8 +682,7 @@ print(toplam)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 asallar = [2] # ilk asal sayıyı elle yazdık.
 i = 3 # Şu anki sayı
 while i < 60: # 60a kadar say
@@ -787,8 +696,7 @@ while i < 60: # 60a kadar say
     i += 1 # mevcut sayımızı 1 arttıralım.
 print(asallar) # 60a kadar olan asal sayılar dizisini yazalım.
 \-> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH İŞLEVLER
@@ -797,12 +705,10 @@ Python programlarken işlev tanımlayıp daha sonra bu işlevi kullanabiliriz. �
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def islev(girdi1,girdi2):
     eylem
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -810,16 +716,14 @@ işlevlerde çıktı sonucu olarak bir değişken döndürmek için \fBreturn\fP
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def topla(sayi1,sayi2):
     return sayi1 + sayi2
     print(\(dqMerhaba\(dq) # bu satır çalıştırılmaz
 toplam = topla(3,5)
 print(toplam)
 \-> 8
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -827,8 +731,7 @@ Eğer bir değişken sadece işlevin içerisinde tanımlanırsa o değişken iş
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def yazdir():
     yazi = \(dqMerhaba\(dq
     print(yazi)
@@ -839,8 +742,7 @@ print(yazi)
 \->   File \(dqders.py\(dq, line 5, in <module>
 \->     print(yazi)
 \-> NameError: name \(aqyazi\(aq is not defined
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -848,8 +750,7 @@ Bir işlevin ne işe yaradığını öğrenmek için \fBhelp\fP işlevi kullanı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def abc(sayi):
     \(dq\(dq\(dqGirilen sayıyı 10dan çıkartır\(dq\(dq\(dq
     return 10\-sayi
@@ -858,8 +759,7 @@ help(abc)
 \->
 \->  abc(sayi)
 \->      Girilen sayıyı 10dan çıkartır
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -867,8 +767,7 @@ Bir işlevin birden çok çıktısı olabilir. Bunun için \fBreturn\fP ifadesin
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def yer_degistir(a,b):
     \(dq\(dq\(dqGirilen değişkenlerin yerini değiştirir\(dq\(dq\(dq
     return b,a
@@ -878,8 +777,7 @@ c,d = yer_degistir(c,d)
 # Bunun yerine doğrudan c,d = d,c kullanılabilirdi.
 print(c,d)
 \-> 31 12
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -887,8 +785,7 @@ Konunun daha iyi anlaşılabilir olması için girilen dizinin sayılarının or
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def ortalama(dizi):
     toplam = 0 # toplam değişkeni tanımladık.
     for eleman in dizi: # for döngüsü oluşturduk.
@@ -899,8 +796,7 @@ ort = input(\(dqDizi giriniz. aralarına , koyunuz\(dq)
 print(ortalama(ort\&.split(\(dq,\(dq)))
 <\- 1,34,22,\-32
 \-> 6.25
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SINIFLAR
@@ -909,15 +805,13 @@ Sınıf kavramı işlevlerin ve değişkenlerin guruplanarak nesneler haline get
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 class sinif:
     def __init__(self,girdi):
         eylem
     def islev(self,girdi):
         eylem
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -925,8 +819,7 @@ Burada \fB__init__\fP işlevi sınıfı oluştururken çalıştırılan ilk eyle
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 class sayi_isle:
     def __init__(self,ilk,ikinci):
         self\&.sayi1 = ilk
@@ -941,8 +834,7 @@ a = nesne\&.topla()
 b = nesne\&.cikart()
 print(a,b)
 \-> 15 9
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -955,13 +847,11 @@ deneme.txt adında içeriği aşağıdaki gibi olan bir doysamız olsun:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 Merhaba dünya
 Selam dünya
 sayı:123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -969,16 +859,14 @@ Aşağıdaki örnekte bu dosyayı açıp okuyup ekrana basalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 dosya = open(\(dqdosya.txt\(dq,\(dqr\(dq) # okumak için r kullanılır.
 ilksatir = dosya\&.readline()
 tumu = dosya\&.read()
 satirlar = dosya\&.readlines()
 print(len(satirlar))
 \-> 3
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -986,15 +874,13 @@ Dosyaya yazmak için ise \fBwrite\fP işlevi kullanılır. Okuma ve yazma işlem
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 dosya = open(\(dqdosya.txt\(dq,\(dqw\(dq) # yazmak için w eklemek için a kullanılır.
 dosya\&.write(\(dqMerhaba dünya\en\(dq)
 dosya\&.write(\(dqSelam dünya\en\(dq)
 dosya\&.write(\(dqsayı:123\en\(dq)
 dosya\&.close()
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH MODÜLLER
@@ -1003,8 +889,7 @@ Python programlarında kodların markaşıklaşmasını önlemek ve daha kullan�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi = \(dqMerhaba\(dq
 sayi = 12
 def yazdir():
@@ -1012,8 +897,7 @@ def yazdir():
 class sinif:
     def islev(self):
         print(\(dqselam\(dq)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1021,8 +905,7 @@ class sinif:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 import deneme # deneme modülünü çağırdık
 print(deneme\&.yazi) # değişkeni kullandık
 deneme\&.yazdir() # işlevi kullandık.
@@ -1031,8 +914,7 @@ nesne = deneme\&.sinif() # sınıftan nesne oluşturduk
 nesne\&.islev() # nesneyi kullandık
 \-> Merhaba
 \-> selam
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1040,16 +922,14 @@ nesne\&.islev() # nesneyi kullandık
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 [bölüm1]
 veri1=deger1
 veri2=deger2
 [bölüm2]
 veri3=deger3
 veri4=deger4
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1057,23 +937,20 @@ Bir adet modül yazıp bu modül ile ini dosyası okuyup istenilen bölümdeki d
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 [Merhaba]
 dünya=12
 selam=44
 [hmm]
 veri=abc123x
 sayı=44
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # iniparser.py içeriği
 dosya = None # boş dosya nesnesi
 class inidosya:
@@ -1088,23 +965,20 @@ class inidosya:
             if etkin and \(dq=\(dq in satir: # etkinse ve satırda = bulunuyorsa
                 if satir\&.split(\(dq=\(dq)[0] == veri: # = işaretine göre 0. eleman aranan mı
                     return satir\&.split(\(dq=\(dq)[0] # = işaretine göre böl . elemanı al
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # main.py dosyası içeriği
 import iniparser # modülü yükle
 iniparser\&.dosya = iniparser\&.inidosya(\(dqdosya\(dq) # ini dosyasını yükle
 deger=iniparser\&.deger_al(\(dqhmm\(dq,\(dqveri\(dq) # değeri al
 print(deger\&.strip()) # değerin başında sonunda boşluk varsa sil ve yaz
 \-> abc123x
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1112,8 +986,7 @@ Bir modülü diğer bir modülün genişletilmişi olarak tanımlayabiliriz. Gel
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # ornek.py dosyası
 class deneme:
     def __init__(self):
@@ -1125,23 +998,20 @@ class genis(deneme):
     def __init__(self):
         super()\&.__init__()
         self\&.sayi2 = 44
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # main.py dosyası
 from ornek import genis as g # ornek.py dosyasındaki genis sınıfını g olarak içeri aldık.
 print(g\&.sayi, g\&.sayi2)
 g\&.hmm(\(dqabc123\(dq)
 \-> 13 44
 \-> abc123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

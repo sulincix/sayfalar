@@ -1,3 +1,4 @@
+'\" t
 .\" Man page generated from reStructuredText.
 .
 .
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "C DERSI"  "" ""
+.TH "C DERSI" "" "" ""
 .SH NAME
 C Dersi \- 
 .sp
@@ -41,8 +42,7 @@ Derleme işlemini \fBgcc\fP veya \fBclang\fP kullanarak yapabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # koddan .o dosyası üretelim
 $ gcc \-c main.c
 # .o dosyasından derlenmiş dosya üretelim.
@@ -50,8 +50,7 @@ $ gcc \-o main main.o
 # kodu çalıştıralım
 $ \&./main
 \-> Hello World
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -63,11 +62,9 @@ Bu sebeple \fB\&.o\fP dosyalarını linkleme işleminden geçirerek son halini a
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gcc \-o main main.c
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH AÇIKLAMA SATIRI
@@ -80,11 +77,9 @@ C kodlarında 3 farklı yolla girintileme yapılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // bu bir açıklama satırıdır.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -94,14 +89,12 @@ C kodlarında 3 farklı yolla girintileme yapılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 /* Bu
    bir
    açıklama
    satırıdır */
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -111,15 +104,13 @@ C kodlarında 3 farklı yolla girintileme yapılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #if 0
 bu bir
 açıklama
 satırıdır
 #endif
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH GIRINTILEME
@@ -132,14 +123,12 @@ Bir block aşağdaki gibi bir yapıya sahiptir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 aaaa (bbbb) {
         cccc;
   ddd;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -151,13 +140,11 @@ Aşağıda örnek main fonksiyonu bulunmaktadır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int main(int argc, char** argv) {
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -175,11 +162,9 @@ Burada \fBmain\fP fonksiyonunu türünün bir önemi yoktur. \fBvoid\fP olarak d
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 void main(){}
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH EKRANA YAZI YAZMA
@@ -191,16 +176,14 @@ Ardından \fBprintf\fP fonksiyonu ile ekrana yazı yazabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include <stdio.h>
 
 int main(int argc, char** argv) {
     printf(\(dq%s\en\(dq, \(dqMerhaba Dünya!\(dq);
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -215,16 +198,14 @@ C dilinde değişkenler aşağıdaki gibi tanımlanır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&...
 int sayi = 12;
 char* yazi = \(dqtest\(dq;
 char karakter = \(aqc\(aq;
 float sayi2 = 12.42;
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -233,14 +214,12 @@ Bu şekilde tanımlanan değerler derlemeden önce yerine yazıldığı için de
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #define sayi 12
 \&...
 printf(\(dq%d\en\(dq,sayi);
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DIZILER
@@ -252,11 +231,9 @@ Bu şekilde tanımlanan dizilerde başta uzunluk belirtilmek zorunda değildir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int *dizi = {12, 22, 31};
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -266,11 +243,9 @@ Uzunluk belirterek tanımlanabilir. Bu şekilde tanımlanan dizilerin uzunluğu 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int dizi[3] = {12, 22, 31};
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -278,11 +253,9 @@ C dilinde string kavramı bulunmaz. Onun yerine karakter dizileri kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 char *txt = \(dqdeneme123\(dq;
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -290,12 +263,10 @@ Dizinin bir elemanına erişmek için aşağıdaki gibi bir yol kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int *dizi = {12, 22, 31};
 int c = dizi[1]; // dizinin 2. elemanı
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -306,12 +277,10 @@ Bunun  için \fBsizeof\fP fonksiyonu kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int *dizi = {11, 22, 31};
 int l = sizeof(dizi) / sizeof(int);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KLAVYEDEN DEĞER ALMA
@@ -320,12 +289,10 @@ Klavyeden değer almak için \fBscanf\fP kullanılır. İlk parameter şablonu d
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int sayi;
 scanf(\(dq%d\en\(dq, &sayi);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -338,8 +305,7 @@ Koşullar için \fBif\fP bloğu kullanılır. Block içindeki ifade \fB0\fP veya
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 if (koşul1) {
     block 1
 } else if (koşul2) {
@@ -347,8 +313,7 @@ if (koşul1) {
 } else {
   block 3
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -356,8 +321,7 @@ if (koşul1) {
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include <stdio.h>
 
 int main(int argc, char** argv) {
@@ -372,8 +336,7 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -385,21 +348,18 @@ Tek satırdan oluşan koşullarda \fB{}\fP kullanmaya gerek yoktur.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 if (i < 32)
   printf(\(dq%s\en\(dq,\(dq32den küçüktür\(dq);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Koşul ifadeleri aşağıdaki gibi listelenebilir.
 .SH KOŞUL IŞLEYICILERI
 .TS
-center;
-|l|l|l|.
-_
+box center;
+l|l|l.
 T{
 ifade
 T}	T{
@@ -479,7 +439,6 @@ küçük eşittir
 T}	T{
 12 <= 12
 T}
-_
 .TE
 .SH SWITCH - CASE
 .sp
@@ -487,8 +446,7 @@ Bir sayıya karşılık bir işlem yapmak için \fBswitch \- case\fP yapısı ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
       switch(sayi) {
         1:
           // sayı 1se burası çalışır.
@@ -501,8 +459,7 @@ Bir sayıya karşılık bir işlem yapmak için \fBswitch \- case\fP yapısı ku
         default:
           // sayı eşleşmezse burası çalışır.
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DÖNGÜLER
@@ -512,15 +469,13 @@ Döngü oluşturmak için \fBwhile\fP kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int i=10;
 while(i<0){
     printf(\(dq%d\en\(dq, i);
     i\-\-;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -531,13 +486,11 @@ Aynı işlemi \fBfor\fP ifadesi ile de yapabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 for(int i=10;i<0;i\-\-){
     printf(\(dq%d\en\(dq, i);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -551,8 +504,7 @@ Döngülerde \fBcontinue\fP kullanarak döngünün tamamlanması beklenmeden ba�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
       int sayi = 10
       while(1) {
           printf(\(dq%d\en\(dq,sayi);
@@ -563,8 +515,7 @@ Döngülerde \fBcontinue\fP kullanarak döngünün tamamlanması beklenmeden ba�
           continue;
           printf(\(dq%s\en\(dq,\(dqBu satıra gelinmez.\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -577,13 +528,11 @@ C dilinde kodun içerisindeki bir yere etiket tanımlanıp \fBgoto\fP ile bu eti
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yaz:
 printf(\(dq%s\en\(dq, \(dqHello World\(dq);
 goto yaz;
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -593,8 +542,7 @@ Bundan faydalanarak döngü oluşturulabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int i = 10;
 islem:
 if(i < 0){
@@ -602,8 +550,7 @@ if(i < 0){
     i\-\-;
     goto islem;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -614,8 +561,7 @@ C dilinde bir fonksiyon aşağıdaki gibi tanımlanır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int yazdir(char* yazi){
     if(yazi != NULL){
         printf(\(dq%s\en\(dq,yazi);
@@ -623,8 +569,7 @@ int yazdir(char* yazi){
     }
 return 1;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -636,16 +581,14 @@ Bu şekilde tanımlanan fonksiyonlar derleme öncesi yerine yazılarak çalış�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #define topla(A,B) A+B
 
 int main(int argc, char** argv){
     int sayi = topla(3, 5);
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -655,8 +598,7 @@ Bu durumun üstesinden gelmek için \fBheader\fP tanımlaması yapılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 void yaz();
 int main(){
     yaz();
@@ -665,8 +607,7 @@ int main(){
 void yaz(){
     printf(\(dq%s\en\(dq,\(dqHello World\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -678,11 +619,9 @@ yaz.h dosyası
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 void yaz();
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -690,8 +629,7 @@ main.c dosyası
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include \(dqyaz.h\(dq
 #include <stdio.h>
 
@@ -703,8 +641,7 @@ int main(){
 void yaz(){
     printf(\(dq%s\en\(dq,\(dqHello World\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -716,12 +653,10 @@ Pointerlar bir değişkenin bellekte bulunduğu yeri belirtir. ve \fB*\fP işare
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 char* msg = \(dqabcde\(dq;
 printf(\(dq%s\en\(dq, msg + sizeof(char)*2 );
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -731,12 +666,10 @@ Adres ise bir değişkenin bellek adresini ifade eder. \fB&\fP işareti ile beli
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int i = 0;
 printf(\(dq%p\en\(dq &i);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -744,15 +677,13 @@ Konunun daha iyi anlaşılması için bir değişken oluşturup adresini bir poi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int i = 0; // değişken tanımladık.
 int *k = &i; // adresini kopyaladık.
 int l = i; // değeri kopyaladık.
 i = 1; // değişkeni değiştirdik.
 printf(\(dq%d %d\en\(dq, i, *k, l);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -763,8 +694,7 @@ Bir fonksiyon tanımlarken pointer olarak arguman aldırıp bu değerde değişi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include <stdio.h>
 void topla(int* sonuc, int sayi1, int sayi2){
     *sonuc = sayi1 + sayi2;
@@ -774,8 +704,7 @@ void main(){
     topla(&i, 12, 22);
     printf(\(dq%d\en\(dq,i);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -785,8 +714,7 @@ Fonksiyonun kendisini de pointer olarak kullanmak mümkündür. Bunun için aşa
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int topla(int i, int j){
     return i + j;
 }
@@ -795,8 +723,7 @@ void main(){
     int (*topla_func)(int, int) = topla;
     topla_func(3, 5);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -805,8 +732,7 @@ Bu konunun detaylarına ilerleyen kısımlarda yer verilmiştir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 typedef int (*topla_func)(int, int);
 int topla(int i, int j){
     return i + j;
@@ -816,8 +742,7 @@ void main(){
     topla_func topla_fn = topla;
     topla_fn(3, 5);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DINAMIK BELLEK YÖNETIMI
@@ -829,14 +754,12 @@ Bu fonksiyonlar \fBstdlib.h\fP ile sağlanmaktadır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // 10 elemanlı sayı dizisi oluşturmak için.
 int *sayilar = (int*) malloc(10 * sizeof(int));
 // şununla aynı anlama gelir.
 int sayilar[10];
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -844,14 +767,12 @@ int sayilar[10];
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // 10 elemanlı sayı dizisi oluşturmak için
 int *sayilar = (int*) calloc(10, sizeof(int));
 // şununla aynı anlama gelir
 int *sayilar = (int*) malloc(10 * sizeof(int));
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -859,14 +780,12 @@ int *sayilar = (int*) malloc(10 * sizeof(int));
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // 5 elemanlı dizi tanımlayalım.
 int sayilar[5];
 // boyutu 10 yapalım
 sayilar = (int*) realloc(sayilar, 10*sizeof(int));
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -874,14 +793,12 @@ sayilar = (int*) realloc(sayilar, 10*sizeof(int));
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // malloc ile bir alan tanımlayalım.
 void* alan = malloc(100);
 // bu alanı silelim.
 free(alan);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -889,8 +806,7 @@ Konunun daha iyi anlaşılması için 2 stringi toplayan fonksiyon yazalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -910,8 +826,7 @@ void main(){
     char *new_str = add( \(dqhello\(dq, \(dqworld\(dq);
     printf(\(dq%s\en\(dq, new_str);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH STRUCT
@@ -921,8 +836,7 @@ Bu yapılar sayesinde kendi veri türlerinizi tanımlayabilirsiniz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 struct test {
     int num;
     char* name;
@@ -933,8 +847,7 @@ void main(){
     t1\&.num = 12;
     t1\&.name = \(dqhello\(dq;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -943,8 +856,7 @@ Bu sayede değişken tanımlar gibi tanımlama yapmak mümkündür.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 typedef struct Test {
     int num;
     char* name;
@@ -955,8 +867,7 @@ void main(){
     t1\&.num = 12;
     t1\&.name = \(dqhello\(dq;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -964,15 +875,13 @@ void main(){
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 typedef char* my_string;
 
 void main(){
     my_string str = \(dqHello World\(dq;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -983,8 +892,7 @@ Bunun için fonksiyon pointeri tanımlayıp struct yapımıza ekleyelim. Bir ini
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 // nesne struct yapısı tanımladık
 typedef struct Test {
     // nesne fonksiyonunu tanımladık.
@@ -1009,8 +917,7 @@ void main(){
     test obj = test_init();
     obj\&.yazdir(\(dqHello World\(dq);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KÜTÜPHANE DOSYASI OLUŞTURMA
@@ -1027,15 +934,13 @@ Bir dosyanın bağımlı olduğu kütüphaneleri \fBldd\fP komutu ile görüntü
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ ldd /bin/bash
     /lib/ld\-musl\-x86_64.so.1 (0x7fd299f6d000)
     libreadline.so.8 => /usr/lib/libreadline.so.8 (0x7fd299e5e000)
     libc.musl\-x86_64.so.1 => /lib/ld\-musl\-x86_64.so.1 (0x7fd299f6d000)
     libncursesw.so.6 => /usr/lib/libncursesw.so.6 (0x7fd299e0a000)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1044,13 +949,11 @@ Bunu için örneğin aşağıdaki gibi bir kaynak kodumuz olsun.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int topla (int a, int b) {
     return a+b;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1058,12 +961,10 @@ Bu kodu derleyelim.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gcc \-c test.c
 $ gcc \-o libtest.so test.o \-shared
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1071,11 +972,9 @@ $ gcc \-o libtest.so test.o \-shared
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 int topla (int a, int b);
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1083,14 +982,12 @@ Son olarak kütüphaneyi kullanan kodumuzu yazalım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include <test.h>
 void main(){
     int sayi = topla(3, 5);
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1101,12 +998,10 @@ Kütüphanemizin \fBkutuphane\fP adındaki bir dizinde bulunduğunu düşünelim
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gcc \-c main.c \-I \&./kutuphane
 $ gcc \-o main main.o \-L \&./kutuphane \-ltest
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1121,16 +1016,14 @@ Bu dosyada belirtilen değerler kütüphane ile beraber gelmekte olup derlemeye 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # derleme parametreleri
 $ pkg\-config \-\-cflags readline
   \-DNCURSES_WIDECHAR
 # linkleme parametreleri
 $ pkg\-config \-\-libs readline
   \-lreadline
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1138,12 +1031,10 @@ Kaynak kodu derlerken aşağıdaki gibi kullanılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gcc \-c main.c \(gapkg\-config \-\-cflags readline\(ga
 $ gcc \-o main main.o \(gapkg\-config \-\-libs readline\(ga
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1152,8 +1043,7 @@ $ gcc \-o main main.o \(gapkg\-config \-\-libs readline\(ga
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 prefix=/usr
 includedir=${prefix}/include
 
@@ -1163,11 +1053,126 @@ Version: 1.0
 Requires: readline
 Cflags: \-I{includedir}/test
 Libs: \-ltest \-L{libdir}/test
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Yukarıdaki örnekte \fB/usr/include/test/\fP içerisindeki header dosyamızı ve \fB/usr/lib/test/\fP içindeki kütüphane dosyamızı sorunsuzca kullanarak derleme yapabilik.
+.SH C++ KODUNU C ILE KULLANMA
+.sp
+Aşağıdaki gibi bir C++ kodumuz olsun.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+class test {
+private:
+    double value;
+
+public:
+    test(double l) {
+        value = l;
+    }
+}
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Bu kodu C ile kullanmak için öncelikle aşağıdaki gibi header dosyamızı oluşturalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+#ifdef __cplusplus
+extern \(dqC\(dq {
+#endif
+
+typedef void* test; // class tanımı
+
+test test_new(double l); // class oluşturmak için
+void test_set_value(test* ctx, double l); // class içindeki değeri ayarlamak için
+double test_get_value(test* ctx); // class içindeki değeri okumak için
+
+#ifdef __cplusplus
+}
+#endif
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi de bir C++ kodu yazalım ve yukarıdaki fonksiyonları oluşturalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+#include <test>
+extern \(dqC\(dq {
+    test test_new(double l){
+        Test* t = new Test(l);
+        return (test) t;
+    }
+
+    void test_set_value(test* ctx, double l){
+        Test* t = (Test*)ctx;
+        t\->value = l;
+    }
+    double test_get_value(test* ctx){
+        Test* t = (Test*)ctx;
+        return t\->value;
+    }
+}
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi bu kodu kütüphane haline getirelim.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+g++ \-o libtest.so test.cpp \-I. \-shared
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Şimdi örnek C kodumuz aşağıdaki gibi  olabilir.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+#include <test.h>
+int main(){
+    test *t = test_new(22);
+    test_set_value(t,12);
+    int l = test_get_value(t);
+    return 0;
+}
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Bu kodu aşağıdaki gibi derleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+gcc main.c \-o main \-ltest \-L. \-I.
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Yada kütüphane olşturmaya gerek kalmadan da derleyebiliriz.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+g++ test.cpp \-c \-o test.o
+gcc \-c main.c \-o main.o
+gcc tast.o main.o \-o main \-lstdc++
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Burada libstdc++ C++ kodunun bağımlılığıdır.
 .\" Generated by docutils manpage writer.
 .

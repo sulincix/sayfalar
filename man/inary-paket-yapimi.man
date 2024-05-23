@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "INARY PAKET YAPIMI"  "" ""
+.TH "INARY PAKET YAPIMI" "" "" ""
 .SH NAME
 Inary paket yapımı \- 
 .sp
@@ -47,13 +47,11 @@ Derleme yapacak bilgisayarın yeterince güçlü bir işlemciye sahip olması ge
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 git clone https://gitlab.com/sulinos/inary \-b develop
 cd inary
 make && make install
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -61,11 +59,9 @@ Ardından \fBsystem.devel\fP componentini kuralım. Burada temel derleyiciler bu
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 inary it \-c system.devel
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -74,12 +70,10 @@ Derlemenin hızlı olması ve diske yüklenmemesi için buraya ramdisk bağlaman
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 mkdir /var/inary
 mount \-t tmpfs tmpfs /var/inary
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH TASLAK HAZIRLAMA
@@ -89,11 +83,9 @@ Nasıl kullanıldığını öğrenmek için \fIinary\-template \-\-help\fP çal�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 inary\-template \-n bash \-a \(dqhttps://ftp.gnu.org/gnu/bash/bash\-5.1.8.tar.gz\(dq \-v \(dq5.1.8\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -115,11 +107,9 @@ Derlemeye hazır hale gelmiş talimatları \fBinary bi\fP kullanarak dertiriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 inary bi
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -130,8 +120,7 @@ Bu dosyada python3 ile yazılır. Sırasıyla \fBsetup build check install\fP fo
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 from inary.actionsapi import inarytools
 from inary.actionsapi import autotools
 
@@ -143,8 +132,7 @@ def build():
 
 def install():
     autotools\&.install()
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -152,13 +140,11 @@ Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte k
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \&./configure \-\-prefix=/usr # autotools.configure()
 make \-j$(nproc) # autotools.make()
 make install DESTDIR=/paketleme/dizini # autotools.install()
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -168,8 +154,7 @@ Actions ile inary paket sistemi arasında çevresel değişkenler yardımı ile 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 SRCDIR=/tmp/inary/test\-1.0.0\-1/work
 SRC_RELEASE=1
 OPERATION=setup
@@ -179,8 +164,7 @@ WORK_DIR=/var/inary/test\-1.0.0\-1/work
 SRC_VERSION=1\&.0.0
 INARY_BUILD_TYPE=
 SRC_NAME=test
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -188,8 +172,7 @@ Burada \fBWORK_DIR\fP çevresel değişkeni inary tarafından otomatik olarak be
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 from inary.actionsapi import inarytools
 from inary.actionsapi import autotools
 from inary.actionsapi import get
@@ -209,8 +192,7 @@ def install():
     autotools\&.install()
     if get\&.buildTYPE() == \(dqemul32\(dq:
         inarytools\&.removeDir(\(dq/usr/bin\(dq) # 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -225,14 +207,12 @@ Dizin değiştirmek için \fBcd\fP dizin içeriği listesi almak için \fBls\fP 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- cd(directoryName=\(aq\(aq):
 \- ls(source):
 \- system(command):
 \- export(key, value):
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -240,13 +220,11 @@ Dizin veya dosya isimleri ile ilgili işlemler için aşağıdaki fonksionlar ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- realPath(filePath):
 \- baseName(filePath):
 \- dirName(filePath):
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -254,16 +232,14 @@ Erişim ve varlık kontrolleri aşağıdaki fonksionlar ile yapılır. Bunlar bo
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- can_access_file(filePath):
 \- can_access_directory(destinationDirectory):
 \- isLink(filePath):
 \- isFile(filePath):
 \- isDirectory(filePath):
 \- isEmpty(filePath):
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -271,11 +247,9 @@ Dizin oluşturmak için \fBmakedirs\fP kullanılır. Bu fonksion eğer alt dizin
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- makedirs(destinationDirectory):
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -283,8 +257,7 @@ Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- echo(destionationFile, content):
 \- chmod(filePath, mode=0o755):
 \- chown(filePath, uid=\(aqroot\(aq, gid=\(aqroot\(aq):
@@ -295,8 +268,7 @@ Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
 \- copy(source, destination, sym=True):
 \- copytree(source, destination, sym=True):
 \- touch(filePath):
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH 1. AUTOTOOLS
@@ -307,8 +279,7 @@ Autotools fonksionları aşağıdaki gibidir:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 inary/actionsapi/autotools.py:
   \- configure(parameters=\(aq\(aq): \&./configure \-\-prefix=/usr \&...
   \- rawConfigure(parameters=\(aq\(aq): prefix olmadan configure
@@ -324,8 +295,7 @@ inary/actionsapi/autotools.py:
   \- autoreconf(parameters=\(aq\(aq): autoreconf çalıştırır
   \- automake(parameters=\(aq\(aq): automake çalıştırır
   \- autoheader(parameters=\(aq\(aq): autoheader çalıştırır
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH 2. MESONTOOLS
@@ -336,8 +306,7 @@ Mesontools fonksionları aşağıdaki gibidir:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 inary/actionsapi/mesontools.py:
   \- fixpc(): 32bit pkgconfig dosyalarının konumunu düzeltir
   \- configure(parameters=\(dq\(dq, type=\(dqmeson\(dq): cmake yada meson kullanarak configure işlemi (varsayılan meson)
@@ -349,8 +318,7 @@ inary/actionsapi/mesontools.py:
   \- install(parameters=\(dq\(dq):  ninja_install ile aynı
   \- ninja_check(): ninja \-C build check
   \- check(): ninja_check ile aynı
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH 3. CMAKETOOLS
@@ -361,16 +329,14 @@ Cmake fonksionları aşağıdaki gibidir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 inary/actionsapi/cmaketools.py:
   \- configure(parameters=\(aq\(aq,installPrefix=\(aq\(aq, sourceDir=\(aq.\(aq): cmake kullanarak configure işlemi
   \- make(parameters=\(aq\(aq): make çalıştırır
   \- fixInfoDir(): paketleme dizinindeki /usr/share/info/dir dizinini siler
   \- install(parameters=\(aq\(aq, argument=\(aqinstall\(aq): make install çalıştırır
   \- rawInstall(parameters=\(aq\(aq, argument=\(aqinstall\(aq): destdir olmadan make install
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH 4. INARYTOOLS
@@ -383,8 +349,7 @@ Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örnekle
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- executable_insinto(destinationDirectory, *sourceFiles):
 \- readable_insinto(destinationDirectory, *sourceFiles):
 \- lib_insinto(sourceFile, destinationDirectory, permission=644):
@@ -407,8 +372,7 @@ Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örnekle
 \- newman(sourceFile, destinationFile):
 \- remove(sourceFile):
 \- removeDir(destinationDirectory):
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH 5. GET
@@ -417,8 +381,7 @@ Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \- curDIR():         \- docDIR():            \- srcVERSION():     \- qtDIR():
 \- curKERNEL():      \- sbinDIR():           \- srcRELEASE():     \- existBinary(bin):
 \- curPYTHON():      \- infoDIR():           \- srcTAG():         \- getBinutilsInfo(util):
@@ -431,8 +394,7 @@ Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. 
 \- lsbINFO():        \- defaultprefixDIR():  \- LDFLAGS():        \- RANLIB():
 \- kernelVERSION():  \- emul32prefixDIR():   \- makeJOBS():       \- F77():
 \- srcNAME():        \- kdeDIR():            \- buildTYPE():      \- GCJ():
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Pspec.xml dosyası
@@ -443,8 +405,7 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 <?xml version=\(dq1.0\(dq ?>
 <!DOCTYPE INARY SYSTEM \(dqhttps://raw.githubusercontent.com/Zaryob/inary/master/inary\-spec.dtd\(dq>
 <INARY>
@@ -464,8 +425,7 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
         \&... <!\-\-Burası history bölümüdür.\-\->
     </History>
 </INARY>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SOURCE BÖLÜMÜ
@@ -480,8 +440,7 @@ Archive türü ikili dosyaysa veya açılmayacaksa \fBtype=\(dqbinary\(dq\fP ekl
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 <Source>
        <Name>bash</Name>
        <Homepage>https://www.gnu.org/software/bash</Homepage>
@@ -501,8 +460,7 @@ Archive türü ikili dosyaysa veya açılmayacaksa \fBtype=\(dqbinary\(dq\fP ekl
            <Dependency>readline\-devel</Dependency>
        </BuildDependencies>
    </Source>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -515,8 +473,7 @@ Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. \fBN
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 <Package>
        <Name>bash</Name>
        <IsA>postOps</IsA>
@@ -534,8 +491,7 @@ Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. \fBN
            <Path fileType=\(dqlocaledata\(dq>/usr/share/locale</Path>
        </Files>
    </Package>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -550,8 +506,7 @@ Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 <History>
     <Update release=\(dq1\(dq>
            <Date>2019\-01\-17</Date>
@@ -561,8 +516,7 @@ Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanı
            <Email>paledega@yandex.ru</Email>
     </Update>
 </History>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Pspec.py dosyası
@@ -572,8 +526,7 @@ Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 class inary:
     class source:
         # Source bölümü
@@ -581,8 +534,7 @@ class inary:
         # Package bölümü
     class history:
         # History bölümü
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SOURCE BÖLÜMÜ
@@ -591,8 +543,7 @@ Bu bölümde kaynağın özellikleri belirtilir. \fBpackages\fP dizisindeki elem
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 class source:
     name = \(dqbash\(dq
     homepage = \(dqhttp://cnswww.cns.cwru.edu/~chet/bash/bashtop.html\(dq
@@ -609,8 +560,7 @@ class source:
     ]
     builddependencies = [\(aqncurses\-devel\(aq, \(aqreadline\-devel\(aq]
     packages = [\(aqpkg_bash\(aq, \(aqpkg_bash_devel\(aq, \(aqpkg_bash_docs\(aq, \(aqpkg_bash_pages\(aq]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH PACKAGE BÖLÜMÜ
@@ -619,8 +569,7 @@ Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını \fBSour
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 class pkg_bash
     name = \(dqbash\(dq
     runtimedependencies = [\(dqncurses\(dq]
@@ -631,8 +580,7 @@ class pkg_bash
         (\(dqlibrary\(dq,\(dq/lib\(dq),
         (\(dqlocaledata\(dq,\(dq/usr/share/locale\(dq),
     ]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH HISTORY BÖLÜMÜ
@@ -641,14 +589,12 @@ Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine re
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 class history:
     update = [
         [\(dq2021\-08\-29\(dq,\(dq5.1.8\(dq,\(dqFirst release\(dq,\(dqSüleyman POYRAZ\(dq,\(dqzaryob.dev@gmail.com\(dq],
     ]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SS Postoperations.py dosyası
@@ -657,14 +603,12 @@ Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar \
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 def postInstall(): # paket kurulduktan sonra çalıştırılır.
 def postRemove(): # paket silindikten sonra çalıştırılır.
 def preInstall(): # paket kurulmadan önce çalıştırılır.
 def preRemove(): # paket silinmeden önce çalıştırılır.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp

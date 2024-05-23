@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "DOCKER KULLANIMI"  "" ""
+.TH "DOCKER KULLANIMI" "" "" ""
 .SH NAME
 Docker kullanımı \- 
 .sp
@@ -38,11 +38,9 @@ Docker kurmak için debian tabanlı dağıtımlarda \fBdocker.io\fP paketini kur
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ apt install docker.io \-\-no\-install\-recommends
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -50,8 +48,7 @@ Eğer debian dışında bir dağıtım kullanıyorsanız kendi sitesi üzerinden
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # docker binarylerini indirmek için https://download.docker.com/linux/static/stable/
 # indirdikten sonra arşivden çıkatrıp containerd ve dockerd çalıştıralım. (root kullanarak)
 $ tar \-xf docker\-xxx.tgz
@@ -60,8 +57,7 @@ $ export PATH=$PATH:$(pwd) # path içine mevcut dizini de ekledik
 # containerd ve dockerd çalıştıralım. Bunlar daemon olduğu için sürekli arkada çalışması gerekmektedir.
 $ containerd
 $ dockerd
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -69,11 +65,9 @@ Rootless docker kurmak için
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ curl \-fsSL https://get.docker.com/rootless | bash
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -81,27 +75,23 @@ Docker çalışıyor mu diye kontrol etmek için \fBdocker info\fP komutunu kull
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker info
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
-Rootless olmayan docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz. Bu işlem güvenlik sorunlarına sebep olabilir. Detaylı bilgi için: \fI\%https://docs.docker.com/engine/security/#docker\-daemon\-attack\-surface\fP
+Rootless olmayan docker root kullanıcısı ile çalıştığı için root kullanmadan docker çalışmayacaktır. Bunun için /run/docker.sock dosyamızın aitliğini bir guruba verip kullanıcıyı da o guruba alabiliriz. Bu işlem güvenlik sorunlarına sebep olabilir. Detaylı bilgi için:  <https://docs.docker.com/engine/security/#docker\-daemon\-attack\-surface> 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Bu aşama docker gurubu mevcut olmayanlar için geçerlidir.
 $ groupadd docker
 $ chgrp docker /run/docker.sock # bu işlem her yeniden başlatmada gerekebilir.
 # Bu aşama tüm dağıtımlarda gereklidir.
 $ usermod \-aG docker username # oturumu kapatıp açmak gerekebilir.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DOCKER ÇALIŞMA MANTIĞI
@@ -112,8 +102,7 @@ Docker containerlarını üretmek için öncelikle imaj gerekmektedir. İmajlara
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 kernel (linux)
   |
 system (gentoo)
@@ -121,8 +110,7 @@ system (gentoo)
 docker \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
   |       |    |     |
 alpine debian arch ubuntu
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH İMAJLAR
@@ -131,11 +119,9 @@ Docker imajı indirmek için \fBdocker pull\fP komutu kullanılır. \fBname:tag\
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker pull alpine:latest
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -143,14 +129,12 @@ Mevcut imajları listelemek için \fBdocker images\fP kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker images
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 debian       latest    43d28810c1b4   8 days ago    124MB
 alpine       latest    9c6f07244728   6 weeks ago   5\&.54MB
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -160,13 +144,11 @@ Burada dikkat edilmesi gereken konu her imajın bir \fBID\fP değeri bulunmasıd
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker rmi alpine
 # veya şu da kullanılabilir.
 $ docker rmi 9c6f07244728
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -174,11 +156,9 @@ $ docker rmi 9c6f07244728
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker save debian:latest \-o /home/backup/debian.tar
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -186,11 +166,9 @@ kaydedilmiş bir dosyadan imaj yüklemek için ise \fBdocker load\fP kullanılı
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker load \-i /home/backup/debian.tar
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -198,13 +176,11 @@ tarball dosyasından docker imajı oluşturmak için \fBdocker import\fP kullana
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker import rootfs.tar custom:new
 # veya bir dizinden üretebiliriz
 $ tar \-c \-C rootfs \&. | docker import \- custom:new2
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -212,13 +188,11 @@ Docker imajını tarball olarak çıkartmak için ise \fBdocker export\fP kullan
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker export debian:stable > /home/user/debian\-stable.tar
 # veya şu şekilde de kullanılabilir
 $ docker export \-o /home/user/debian\-stable.tar debian:stable
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH CONTAINERLAR
@@ -227,8 +201,7 @@ Containerlar içerisinde uygulama çalıştırdığımız alanlardır. imajlarda
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #  docker run <seçenekler> <imajın idsi veya ismi> <çalıştırılacak komut>
 $ docker run \-it \-d \-p 8000:80 \-\-name deneme 43d28810c1b4 /bin/bash
 # \-i stdin okumasına izin verir
@@ -236,8 +209,7 @@ $ docker run \-it \-d \-p 8000:80 \-\-name deneme 43d28810c1b4 /bin/bash
 # \-t pseudo\-tty olarak çalıştırır. \-it olarak kullanıp shell çalıştırabiliriz.
 # \-p port yönlendirmesi yapar.
 # \-\-name container ismi ayarlar. Belirtilmemişse rastgele bir isim alır.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -245,11 +217,9 @@ Eğer container çalıştıktan sonra silinmesini istiyorsanız \fB\-\-rm\fP par
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker run \-\-rm alpine echo hello world
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -257,11 +227,9 @@ $ docker run \-\-rm alpine echo hello world
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker create \-\-name deneme2 debian
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -271,14 +239,12 @@ Container oluştururkenki seçenekler için \fBdocker run \-\-help\fP veya \fBdo
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker ps \-a
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                     PORTS     NAMES
 e1e2983bfa34   debian    \(dqbash\(dq    8 seconds ago    Exited (0) 5 seconds ago             test
 b91e04ab5dcc   debian    \(dqbash\(dq    23 seconds ago   Up 22 seconds                        deneme
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -286,12 +252,10 @@ b91e04ab5dcc   debian    \(dqbash\(dq    23 seconds ago   Up 22 seconds         
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # ctrl\-k kısayolu ile bağlantı kesilmesi için ek parametre ekleyelim.
 $ docker attach b91e04ab5dcc \-\-detach\-keys=\(dqctrl\-k\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -299,13 +263,11 @@ $ docker attach b91e04ab5dcc \-\-detach\-keys=\(dqctrl\-k\(dq
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker kill b91e04ab5dcc
 $ docker ps \-q | grep b91e04ab5dcc # çıktı boşsa container çalışmıyor demektir
 $ docker start b91e04ab5dcc
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -313,15 +275,13 @@ Container ile işimiz bittiğinde silmek için \fBdocker rm\fP kullanılır. Sil
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker rm b91e04ab5dcc
 Error response from daemon: You cannot remove a running container \&...
 $ docker rm \-f b91e04ab5dcc
 # Aşağıdaki komutla tüm containerları silebiliriz.
 $ docker rm \-f $(docker ps \-a \-q)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -329,14 +289,12 @@ $ docker rm \-f $(docker ps \-a \-q)
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker container prune
 WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
 Total reclaimed space: 0B
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -346,8 +304,7 @@ Container ile ilgili bilgi almak için \fBdocker inspect\fP kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker stats
 CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
 40f84cb8e4e0   deneme2          0\&.00%     808KiB / 31\&.15GiB   0\&.00%     1\&.87kB / 0B   0B / 0B     1
@@ -359,8 +316,7 @@ $ docker inspect 40f84cb8e4e0
   \(dqId\(dq: \(dq40f84cb8e4e0...\(dq,
   \(dqCreated\(dq: \(dq2022\-09\-21T07:42:18.337126911Z\(dq,
 \&...
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -368,11 +324,9 @@ $ docker inspect 40f84cb8e4e0
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker exec \-it 40f84cb8e4e0 /bin/bash
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -380,12 +334,10 @@ Containerları duraklatıp devam ettirmek için \fBdocker pause\fP ve \fBdocker 
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker pause 40f84cb8e4e0
 $ docker unpause 40f84cb8e4e0
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -393,11 +345,9 @@ Mevcut containerdan imaj elde etmek için \fBdocker commit\fP kullanabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker commit 40f84cb8e4e0 builder:1.0
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH UZAK SUNUCUDA ÇALIŞMAK
@@ -406,12 +356,10 @@ $ docker commit 40f84cb8e4e0 builder:1.0
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ export DOCKER_HOST=ssh://user@server
 $ docker info
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -419,12 +367,10 @@ Bağlantı için ssh anahtarınızı sunucuya atmış olmanız gerekmektedir. Bu
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ ssh\-copy\-id user@server
 user@server\(aqs password:
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH VOLUME KAVRAMI
@@ -437,11 +383,9 @@ Bu gibi durumlar için \fBvolume\fP bulunur. Volume container tarafından kullan
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker volume create data
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -449,13 +393,11 @@ Var olan \fBvolume\fP listesi için \fBdocker volume ls\fP kullanılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker volume ls
 DRIVER    VOLUME NAME
 local     data
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -463,11 +405,9 @@ Bir \fBvolume\fP silmek için \fBdocker volume rm\fP kullanılır. Silmeden önc
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker volume rm data
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -475,11 +415,9 @@ Bir container başlatılırken ona volume eklemek için \fB\-\-mount\fP parametr
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker run \-d \-\-name webserver \-\-mount source=data,target=/var/www/http/ nginx:latest
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -487,11 +425,9 @@ Bağlanacak dizine yazılmasını istemiyorsak \fBreadonly\fP eklemeliyiz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 docker run \-\-mount source=data,target=/app,readonly test321 alpine
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -499,13 +435,11 @@ Container içine bir dizine tmpfs bağlamak için \fBtype\fP belirtilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker run \-\-mount type=tmpfs,target=/app/temp/ \-\-name apptest debian
 # Şu şekilde de kullanılabilir.
 $ docker run \-\-tmpfs /app/temp/ \-\-name apptest debian
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -513,11 +447,9 @@ Ayrıca volume yerine ana sistemdeki bir dizini de bağlayabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 docker run \-\-mount type=bind,source=/home/shared,target=/shared \-\-name test123 alpine
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -525,13 +457,11 @@ Dizinleri aşağıdaki gibi de bağlayabiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # yazılmasını istemiyorsanız ro istiyorsanız rw
 # Hiçbir şey eklemezseniz rw kabul edilir.
 docker run \-v /mnt:/mnt:ro \-v /shared:/shared:rw test456 alpine
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DOCKERFILE
@@ -540,12 +470,10 @@ docker run \-v /mnt:/mnt:ro \-v /shared:/shared:rw test456 alpine
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 FROM alpine
 RUN echo hello world
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -553,11 +481,9 @@ Bir Dockerfile dosyası aşağıdaki gibi çalıştırılır.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker build \-f \&./builder/Dockerfile \&./
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -567,11 +493,9 @@ Ayrıca doğrudan git üzerinden de çalıştırılabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker build git://gitserver.com/username/repository.git
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -579,11 +503,9 @@ Veya bir tarball indirilerek istenen dockerfile ile çalıştırılması sağlan
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ docker build \-f builder/Dockerfile https://example.org/source.tar.gz
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -591,11 +513,9 @@ $ docker build \-f builder/Dockerfile https://example.org/source.tar.gz
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ cat Dockerfile | docker build \-
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH DOCKERFILE YAPISI
@@ -604,8 +524,7 @@ Dockerfile dosyaları komutlar yardımı ile çalışır. Aşağıda komut ve ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 FROM <imaj| scratch>    : hedef imajı kullan veya boş imajla başla
 COPY <src> <trgt>       : Çalışma dizinindeki dosyayı kopyalar.
 ADD <src> <trgt>        : COPY ile benzerdir fakat arşivleri açarak kopyalar.
@@ -617,8 +536,7 @@ ENV <name> <value>      : Çevresel değişken belirler.
 LABEL <key=value>       : Metadata tanımlamak için kullanılır.
 EXPOSE <port/protocol>  : Port açmak için kullanılır. protocol kısmı tcp veya udp olabilir.
 ARG <name=value>        : ENV ile benzerdir fakat sadece imaj oluşturulurken kullanılabilir.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -626,8 +544,7 @@ ARG <name=value>        : ENV ile benzerdir fakat sadece imaj oluşturulurken ku
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 FROM alpine
 RUN apk add \-\-no\-cache build\-base
 ADD bash\-5.0.tar.gz /build
@@ -635,8 +552,7 @@ WORKDIR /build/bash\-5.0
 RUN ./configure \-\-prefix=/usr
 RUN make
 RUN make install
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -644,12 +560,10 @@ RUN make install
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ wget https://ftp.gnu.org/gnu/bash/bash\-5.0.tar.gz
 $ docker build \-t build\-bash:5.0 \&.
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.

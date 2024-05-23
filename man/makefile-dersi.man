@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "MAKEFILE DERSI"  "" ""
+.TH "MAKEFILE DERSI" "" "" ""
 .SH NAME
 makefile dersi \- 
 .sp
@@ -40,15 +40,13 @@ Bu yazıda sizlere makefile dosyası nasıl yazılır anlatacağım.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 #include <stdio.h>
 int main(){
     puts(\(dqHello world!\en\(dq);
     return 0;
 }
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -56,12 +54,10 @@ Bunu aşağıdaki komutu kulanarak derleriz ve kurarız.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ gcc \-o hello hello\&.c
 $ install hello /usr/bin/hello
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -71,16 +67,14 @@ Makefile dosyalarının bölüm tanımlamalarında girintileme amaçlı \fBTab\f
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 PREFIX=/usr
 build:
         $(CC) \-o hello hello.c
 
 install:
         install hello $(DESTDIR)/$(PREFIX)/bin/hello
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -90,12 +84,10 @@ Bu makefile dosyasını kullanarak derlemeyi ve yüklemeyi aşağıdaki gibi yap
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ make
 $ make install
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -118,13 +110,11 @@ Değişken tanımlamak için \fBvariable=value\fP şeklinde tanımlanabilir. de�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi=hello world
 hello:
         echo $(yazi)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -134,15 +124,13 @@ Var olan bir değişkene ekleme yapmak için \fB+=\fP ifadesi kullanılır.  \fB
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi=hello
 yazi+=world
 sayi:=$(shell ls)
 hello:
         echo $(yazi)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -150,12 +138,10 @@ Eğer \fB$\fP işareti kullanmanız gereken bir durum oluşursa \fB$$\fP ifadesi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 hello:
         bash \-c \(dqecho $$HOME\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH BÖLÜMLER
@@ -164,16 +150,14 @@ Makefile yazarken bölümler tanımlanır ve eğer bölümün adı belirtilmemi�
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 yazi: sayi test
         echo \(dqHello world\(dq
 sayi:
         echo 12
 test:
         echo test123
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -183,8 +167,7 @@ Aynı işi yapan birden çok bölüm şu şekilde tanımlanabilir.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bol1 bol2:
         echo Merhaba
 # Şuna eşittir.
@@ -192,8 +175,7 @@ bol1:
         echo Merhaba
 bol2:
         echo Merhaba
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -201,12 +183,10 @@ Bölümün adını \fB$@\fP kullanarak öğrenebiliriz.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bolum:
         echo $@
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -214,14 +194,12 @@ Bölümün tüm bağımlılıklarını almak için için \fB$^\fP kullanabiliriz
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bolum: bol1 bol2
         echo $^
 bol1 bol2:
         true
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -229,16 +207,14 @@ bol1 bol2:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bol1:
         true
 bolum: bol1 bol2
         echo $?
 bol2:
         true
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -246,14 +222,12 @@ bol2:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 bol1 bol2:
         true
 bolum: bol1 bol2
         echo $<
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -261,8 +235,7 @@ Eğer \fBxxxx.o\fP şeklinde bir kural tanımlarsanız bu kural çalıştırıld
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 main: main\&.o
 main.o: main\&.c test\&.c
 
@@ -270,8 +243,7 @@ main.c:
         echo \(dqint main(){}\(dq > main.c
 %.c:
         touch $@
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -283,13 +255,11 @@ Wildcard ifadesi eşleşen dosyaları döndürür.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 files := $(wildcard *.c)
 main:
         gcc \-o main $(files)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -297,13 +267,11 @@ Shell ifadesi ise komut çalıştırarak sonucunu döndürür.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 files := $(shell find \-type f \-iname \(dq*.c\(dq)
 main:
         gcc \-o main $(files)
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH BIRDEN ÇOK DOSYA ILE ÇALIŞMA
@@ -312,12 +280,10 @@ main:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 build:
         make \-C src
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -325,8 +291,7 @@ Ayrıca \fBinclude\fP kullanarak başka bir dosyada bulunan kuralları kullanabi
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 # Makefile dosyası
 include build.mk
 build: main
@@ -334,8 +299,7 @@ build: main
 # build.mk dosyası
 main:
         echo \(dqint main(){return 0;}\(dq > main.c
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KOŞULLAR
@@ -344,16 +308,14 @@ main:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 build:
 ifeq ($(CC),clang)
         echo \(dqclang\(dq
 else
         echo \(dqgcc\(dq
 endif
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH KOMUT ÖZELLIK IFADELERI
@@ -362,13 +324,11 @@ Eğer komutun başına \fB@\fP işareti koyarsanız komut ekrana yazılmadan ça
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 build:
         @echo \(dqMerhaba dünya\(dq
         \-gcc main.c \-o main
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH WHILE VE FOR KULLANIMI
@@ -377,15 +337,13 @@ Bash betiklerinde kullandığımız for ve while yapısı makefile yazarken aşa
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 build:
         @for sayi in 1 2 3 $(dizi) ; do \e
             echo $$sayi ; \e
             echo \(dqdiger satir\(dq ; \e
         done
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SHELL DEĞIŞKENI
@@ -394,15 +352,13 @@ build:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 SHELL=/usr/bin/python3
 build:
         import os ;\e
         liste = os.listdir(\(dq/\(dq) ;\e
         print(liste[0])
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .\" Generated by docutils manpage writer.
