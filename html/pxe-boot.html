@@ -14,12 +14,12 @@
 <p>Bu yazıda bilgisayarı ağ üzerinden (pxe) ile başlatmayı anlatacağız. Bu yazıyı debian üzerinde atlatacağız fakat diğer dağıtımlarda da benzer şekilde uygulayabilirsiniz.</p>
 <div class="section" id="hazirlik">
 <h1>Hazırlık</h1>
-<p>Öncelikle dnsmasq ve grub kuralım. ve tftp için gereken dizinleri oluşturalım.
-.. code-block:: shell</p>
-<blockquote>
-$ apt install dnsmasq grub-common
-$ mkdir -p /srv/tftp
-$ grub-mknetdir --net-directory=/srv/tftp</blockquote>
+<p>Öncelikle dnsmasq ve grub kuralım. ve tftp için gereken dizinleri oluşturalım.</p>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>apt<span class="whitespace"> </span>install<span class="whitespace"> </span>dnsmasq<span class="whitespace"> </span>grub-common<span class="whitespace">
+</span>$<span class="whitespace"> </span>mkdir<span class="whitespace"> </span>-p<span class="whitespace"> </span>/srv/tftp<span class="whitespace">
+</span>$<span class="whitespace"> </span>grub-mknetdir<span class="whitespace"> </span>--net-directory<span class="operator">=</span>/srv/tftp
+</pre>
 <p><strong>Not:</strong> Eğer x86_64 dışı bir mimari ile (örneğin raspberry pi) çalışıyorsanız tftp dosyalarını başka bir yerde oluşturup kopyalayarak kullanabilirsiniz.</p>
 </div>
 <div class="section" id="yapilandirma">

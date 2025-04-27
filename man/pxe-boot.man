@@ -35,12 +35,14 @@ Bu yazıda bilgisayarı ağ üzerinden (pxe) ile başlatmayı anlatacağız. Bu 
 .SH HAZIRLIK
 .sp
 Öncelikle dnsmasq ve grub kuralım. ve tftp için gereken dizinleri oluşturalım.
-\&.. code\-block:: shell
 .INDENT 0.0
 .INDENT 3.5
+.sp
+.EX
 $ apt install dnsmasq grub\-common
 $ mkdir \-p /srv/tftp
 $ grub\-mknetdir \-\-net\-directory=/srv/tftp
+.EE
 .UNINDENT
 .UNINDENT
 .sp

@@ -5,6 +5,7 @@ Bu yazıda bilgisayarı ağ üzerinden (pxe) ile başlatmayı anlatacağız. Bu 
 Hazırlık
 +++++++++
 Öncelikle dnsmasq ve grub kuralım. ve tftp için gereken dizinleri oluşturalım.
+
 .. code-block:: shell
 
 	$ apt install dnsmasq grub-common
