@@ -678,9 +678,9 @@ $ export GI_REPOSITORY_PATH=/home/user/gobject-ornek
 $ export LD_LIBRARY_PATH=/home/user/gobject-ornek</blockquote>
 <p>Şimdi yazdığımız kütüphaneyi python ile çalıştıralım. Bunun için aşağıdaki gibi bir python kodu yazabiliriz.</p>
 <pre class="code python literal-block">
-<span class="keyword namespace">import</span> <span class="name namespace">gi</span><span class="whitespace">
+<span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">gi</span><span class="whitespace">
 </span><span class="name">gi</span><span class="operator">.</span><span class="name">require_version</span><span class="punctuation">(</span><span class="literal string single">'hello'</span><span class="punctuation">,</span> <span class="literal string single">'1.0'</span><span class="punctuation">)</span><span class="whitespace">
-</span><span class="keyword namespace">from</span> <span class="name namespace">gi.repository</span> <span class="keyword namespace">import</span> <span class="name">hello</span><span class="whitespace">
+</span><span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">gi.repository</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">hello</span><span class="whitespace">
 </span><span class="name">hello</span><span class="operator">.</span><span class="name">print</span><span class="punctuation">()</span>
 </pre>
 </div>

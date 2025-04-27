@@ -62,16 +62,16 @@ inary<span class="whitespace"> </span>bi
 <h2>Actions.py dosyası</h2>
 <p>Bu dosyada python3 ile yazılır. Sırasıyla <strong>setup build check install</strong> fonksionları mevcutsa çalıştırılır. Bu dosyada derleme işlemi yapılırken <strong>actionsapi</strong> adı verilen inary kaynak kodu ile beraber gelen bir kütüphane kullanılır. Bash derlemek için aşağıdakine benzer bir actions dosyası yazılabilir.</p>
 <pre class="code python literal-block">
-<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span><span class="whitespace">
-</span><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span><span class="whitespace">
+<span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">inary.actionsapi</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">inarytools</span><span class="whitespace">
+</span><span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">inary.actionsapi</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">autotools</span><span class="whitespace">
 
-</span><span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">setup</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">configure</span><span class="punctuation">()</span><span class="whitespace">
 
-</span><span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">build</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span><span class="whitespace">
 
-</span><span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">install</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span>
 </pre>
 <p>Actionsapi paket yapma işlemini daha kolay hale getirebilir. Bununla birlikte kullanımı zorunlu değildir. Bu actions dosyamız aşağıdakine benzer şekilde bir komut çalıştırarak derleme yapar.</p>
@@ -95,11 +95,11 @@ inary<span class="whitespace"> </span>bi
 </pre>
 <p>Burada <strong>WORK_DIR</strong> çevresel değişkeni inary tarafından otomatik olarak belirlenir. Bunu değiştirmek için actions betiğinin başına <strong>WorkDir=dizinyolu</strong> şeklinde belirtmelisiniz. <strong>INARY_BUILD_TYPE</strong> çevresel değişkeni kullanarak bir paket ile birden çok türde veya yapılandırmada paket üretmek mümkündür. Örneğin Sulin depolarında 32bit kütüphaneleri üretmek için emul32 adında özel bir değer tanımlanır. Inary her tanımlanan build type için tüm fonksionları tekrar çalıştırır. Bu değeri kontrol ederek kodu istediğiniz yönte ayarlayabilirsiniz. Örneğin aşağıda bir paketin 32bit kütüphanesini de derlemek için:</p>
 <pre class="code python literal-block">
-<span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">inarytools</span><span class="whitespace">
-</span><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">autotools</span><span class="whitespace">
-</span><span class="keyword namespace">from</span> <span class="name namespace">inary.actionsapi</span> <span class="keyword namespace">import</span> <span class="name">get</span><span class="whitespace">
+<span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">inary.actionsapi</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">inarytools</span><span class="whitespace">
+</span><span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">inary.actionsapi</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">autotools</span><span class="whitespace">
+</span><span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">inary.actionsapi</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">get</span><span class="whitespace">
 
-</span><span class="keyword">def</span> <span class="name function">setup</span><span class="punctuation">():</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">setup</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">opts</span> <span class="operator">=</span> <span class="literal string double">&quot;--prefix=/usr&quot;</span> <span class="comment single"># parametreler</span><span class="whitespace">
 </span>    <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span> <span class="comment single"># build type türünü çeker</span><span class="whitespace">
 </span>        <span class="name">shelltools</span><span class="operator">.</span><span class="name">export</span><span class="punctuation">(</span><span class="literal string double">&quot;CC&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;</span><span class="literal string interpol">{}</span><span class="literal string double"> -m32&quot;</span><span class="operator">.</span><span class="name">format</span><span class="punctuation">(</span><span class="name">get</span><span class="operator">.</span><span class="name">CC</span><span class="punctuation">()))</span> <span class="comment single"># derleyiciyi 32bit moduna alır</span><span class="whitespace">
@@ -107,10 +107,10 @@ inary<span class="whitespace"> </span>bi
 </span>        <span class="name">opts</span> <span class="operator">+=</span> <span class="literal string double">&quot; --libdir=/usr/lib32&quot;</span><span class="whitespace">
 </span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">rawConfigure</span><span class="punctuation">(</span><span class="name">opts</span><span class="punctuation">)</span><span class="whitespace">
 
-</span><span class="keyword">def</span> <span class="name function">build</span><span class="punctuation">():</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">build</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">make</span><span class="punctuation">()</span><span class="whitespace">
 
-</span><span class="keyword">def</span> <span class="name function">install</span><span class="punctuation">():</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">install</span><span class="punctuation">():</span><span class="whitespace">
 </span>    <span class="name">autotools</span><span class="operator">.</span><span class="name">install</span><span class="punctuation">()</span><span class="whitespace">
 </span>    <span class="keyword">if</span> <span class="name">get</span><span class="operator">.</span><span class="name">buildTYPE</span><span class="punctuation">()</span> <span class="operator">==</span> <span class="literal string double">&quot;emul32&quot;</span><span class="punctuation">:</span><span class="whitespace">
 </span>        <span class="name">inarytools</span><span class="operator">.</span><span class="name">removeDir</span><span class="punctuation">(</span><span class="literal string double">&quot;/usr/bin&quot;</span><span class="punctuation">)</span> <span class="comment single"># 32bit derlenmiş olanın çalıştırılabilir dosyasını sil.</span>
@@ -364,12 +364,12 @@ inary/actionsapi/cmaketools.py:<span class="whitespace">
 <p>Bu dosya doğrudan kullanılmaz. Bu dosyayı <strong>pspec.xml</strong> üretmek için kullanırız. Bu dosyanın bulunduğu dizinde <strong>genpspec</strong> komutunu çalıştırarak <strong>pspec.xml</strong> dosyasını üretebilirsiniz.
 Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
 <pre class="code python literal-block">
-<span class="keyword">class</span> <span class="name class">inary</span><span class="punctuation">:</span><span class="whitespace">
-</span>    <span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span><span class="whitespace">
+<span class="keyword">class</span><span class="whitespace"> </span><span class="name class">inary</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="keyword">class</span><span class="whitespace"> </span><span class="name class">source</span><span class="punctuation">:</span><span class="whitespace">
 </span>        <span class="comment single"># Source bölümü</span><span class="whitespace">
-</span>    <span class="keyword">class</span> <span class="name class">pkg_bash</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="keyword">class</span><span class="whitespace"> </span><span class="name class">pkg_bash</span><span class="punctuation">:</span><span class="whitespace">
 </span>        <span class="comment single"># Package bölümü</span><span class="whitespace">
-</span>    <span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="keyword">class</span><span class="whitespace"> </span><span class="name class">history</span><span class="punctuation">:</span><span class="whitespace">
 </span>        <span class="comment single"># History bölümü</span>
 </pre>
 </div>
@@ -378,10 +378,10 @@ Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
 <h1>Source bölümü</h1>
 <p>Bu bölümde kaynağın özellikleri belirtilir. <strong>packages</strong> dizisindeki elemanların adına sahip olan sınıflar <strong>pspec.xml</strong> oluşturulurken kullanılır.</p>
 <pre class="code python literal-block">
-<span class="keyword">class</span> <span class="name class">source</span><span class="punctuation">:</span><span class="whitespace">
+<span class="keyword">class</span><span class="whitespace"> </span><span class="name class">source</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span><span class="whitespace">
 </span>    <span class="name">homepage</span> <span class="operator">=</span> <span class="literal string double">&quot;http://cnswww.cns.cwru.edu/~chet/bash/bashtop.html&quot;</span><span class="whitespace">
-</span>    <span class="keyword">class</span> <span class="name class">packager</span><span class="punctuation">:</span><span class="whitespace">
+</span>    <span class="keyword">class</span><span class="whitespace"> </span><span class="name class">packager</span><span class="punctuation">:</span><span class="whitespace">
 </span>        <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;Süleyman POYRAZ&quot;</span><span class="whitespace">
 </span>        <span class="name">email</span> <span class="operator">=</span> <span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span><span class="whitespace">
 </span>    <span class="name">license</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string single">'GPLv2'</span><span class="punctuation">]</span><span class="whitespace">
@@ -400,7 +400,7 @@ Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
 <h1>Package bölümü</h1>
 <p>Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını <strong>Source</strong> bölümündeki <strong>packages</strong> dizisi içine eklediğinizde buradaki değerler kullanılır.</p>
 <pre class="code python literal-block">
-<span class="keyword">class</span> <span class="name class">pkg_bash</span><span class="whitespace">
+<span class="keyword">class</span><span class="whitespace"> </span><span class="name class">pkg_bash</span><span class="whitespace">
 </span>    <span class="name">name</span> <span class="operator">=</span> <span class="literal string double">&quot;bash&quot;</span><span class="whitespace">
 </span>    <span class="name">runtimedependencies</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal string double">&quot;ncurses&quot;</span><span class="punctuation">]</span><span class="whitespace">
 </span>    <span class="name">files</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="whitespace">
@@ -416,7 +416,7 @@ Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
 <h1>History bölümü</h1>
 <p>Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine release bilgisi otomatik olarak hesaplanır. <strong>update</strong> dizisine dizi halinde eklenir.</p>
 <pre class="code python literal-block">
-<span class="keyword">class</span> <span class="name class">history</span><span class="punctuation">:</span><span class="whitespace">
+<span class="keyword">class</span><span class="whitespace"> </span><span class="name class">history</span><span class="punctuation">:</span><span class="whitespace">
 </span>    <span class="name">update</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="whitespace">
 </span>        <span class="punctuation">[</span><span class="literal string double">&quot;2021-08-29&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;5.1.8&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;First release&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;Süleyman POYRAZ&quot;</span><span class="punctuation">,</span><span class="literal string double">&quot;zaryob.dev&#64;gmail.com&quot;</span><span class="punctuation">],</span><span class="whitespace">
 </span>    <span class="punctuation">]</span>
@@ -425,10 +425,10 @@ Bu dosya bir olarak python sınıfıdır. Ve alt sınıflardan oluşur.</p>
 <h2>Postoperations.py dosyası</h2>
 <p>Bu dosya basitçe bir python betiğidir ve 4 temel fonksiondan oluşur. Bunlar <strong>postInstall</strong>, <strong>preInstall</strong>, <strong>postRemove</strong>, <strong>preRemove</strong> şeklindedir. Bu fonksionlar argument almazlar.</p>
 <pre class="code python literal-block">
-<span class="keyword">def</span> <span class="name function">postInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulduktan sonra çalıştırılır.</span><span class="whitespace">
-</span><span class="keyword">def</span> <span class="name function">postRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silindikten sonra çalıştırılır.</span><span class="whitespace">
-</span><span class="keyword">def</span> <span class="name function">preInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulmadan önce çalıştırılır.</span><span class="whitespace">
-</span><span class="keyword">def</span> <span class="name function">preRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silinmeden önce çalıştırılır.</span>
+<span class="keyword">def</span><span class="whitespace"> </span><span class="name function">postInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulduktan sonra çalıştırılır.</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">postRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silindikten sonra çalıştırılır.</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">preInstall</span><span class="punctuation">():</span> <span class="comment single"># paket kurulmadan önce çalıştırılır.</span><span class="whitespace">
+</span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">preRemove</span><span class="punctuation">():</span> <span class="comment single"># paket silinmeden önce çalıştırılır.</span>
 </pre>
 <p>Bu dosyada bununan <strong>postInstall</strong> fonksionu aynı zamanda paketler yeniden yapılandırılmaya çalışılırken de çalıştırılır. Bu betiklerde actionsapi kullanımı ile ilgili herhangi bir kısıtlama bulunmamasına karşın kullanımı tavsiye edilmemektedir.</p>
 <p>Inary komutu her çalıştırıldığında işlem bitiminde sysconf modülü tetiklenir. Bu modül dosya sistemindeki değişiklikleri baz alarak çalışır ve önbellek dosyalarını güncelleme gibi bazı işleri otomatik olarak yerine getirir. Bu sebeple postoperations betiklerine nadiren ihtiyaç duyulur.</p>

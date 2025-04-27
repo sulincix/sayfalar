@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.21.2: https://docutils.sourceforge.io/" />
+<title>PXE boot</title>
+<link rel="stylesheet" href="main.css" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+<body>
+<div class="document" id="pxe-boot">
+<h1 class="title">PXE boot</h1>
+
+<p>Bu yazıda bilgisayarı ağ üzerinden (pxe) ile başlatmayı anlatacağız. Bu yazıyı debian üzerinde atlatacağız fakat diğer dağıtımlarda da benzer şekilde uygulayabilirsiniz.</p>
+<div class="section" id="hazirlik">
+<h1>Hazırlık</h1>
+<p>Öncelikle dnsmasq ve grub kuralım. ve tftp için gereken dizinleri oluşturalım.
+.. code-block:: shell</p>
+<blockquote>
+$ apt install dnsmasq grub-common
+$ mkdir -p /srv/tftp
+$ grub-mknetdir --net-directory=/srv/tftp</blockquote>
+<p><strong>Not:</strong> Eğer x86_64 dışı bir mimari ile (örneğin raspberry pi) çalışıyorsanız tftp dosyalarını başka bir yerde oluşturup kopyalayarak kullanabilirsiniz.</p>
+</div>
+<div class="section" id="yapilandirma">
+<h1>Yapılandırma</h1>
+<p><strong>/etc/dnsmasq.d/pxe</strong> dosyamızı aşağıdaki gibi uygun şekilde dolduralım.</p>
+<pre class="code shell literal-block">
+<span class="name variable">interface</span><span class="operator">=</span>eth0<span class="whitespace">
+</span><span class="name variable">domain</span><span class="operator">=</span>localdomain<span class="whitespace">
+</span><span class="comment single"># dhcp ayarı
+</span>dhcp-range<span class="operator">=</span><span class="literal number">192</span>.168.0.3,192.168.0.253,255.255.255.0,1h<span class="whitespace">
+</span>dhcp-boot<span class="operator">=</span>tag:efi-x86_64,boot/grub/x86_64-efi/core.efi<span class="whitespace">
+</span>dhcp-boot<span class="operator">=</span>tag:bios,boot/grub/i386-pc/core.0<span class="whitespace">
+</span><span class="comment single"># gateway için
+</span>dhcp-host<span class="operator">=</span>aa:bb:cc:dd:ee:ff,192.168.0.1<span class="whitespace">
+</span>dhcp-option<span class="operator">=</span><span class="literal number">3</span>,192.168.0.1<span class="whitespace"> </span><span class="comment single"># gateway
+</span>dhcp-option<span class="operator">=</span><span class="literal number">6</span>,192.168.0.1<span class="whitespace"> </span><span class="comment single"># dns
+# tftp ayarı
+</span>enable-tftp<span class="whitespace">
+</span>tftp-root<span class="operator">=</span>/srv/tftp<span class="whitespace">
+</span><span class="comment single"># log tutmak için
+</span>log-dhcp
+</pre>
+<p><strong>Not:</strong> Ağda başka dhcp sağlayan aygıt bulunmamalı.</p>
+<p>Ardından dnsmasq servisini yeniden başlatalım.</p>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>service<span class="whitespace"> </span>dnsmasq<span class="whitespace"> </span>restart
+</pre>
+<p>Ardından boot etmek istediğimiz çekirdeği ve initramfs imajını kopyalayalım.
+Debian için <a class="reference external" href="https://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">https://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/</a> adresinden ulaşabilirsiniz.</p>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>cp<span class="whitespace"> </span>-f<span class="whitespace"> </span>netboot/debian-installer/amd64/linux<span class="whitespace"> </span>/srv/tftp/linux<span class="whitespace">
+</span>$<span class="whitespace"> </span>cp<span class="whitespace"> </span>-f<span class="whitespace"> </span>netboot/debian-installer/amd64/linux<span class="whitespace"> </span>/srv/tftp/initrd.img
+</pre>
+<p>Ardından grub.cfg dosyamızı aşağıdaki gibi doldurabiliriz.</p>
+<pre class="code shell literal-block">
+linux<span class="whitespace"> </span>/linux<span class="whitespace"> </span>quiet<span class="whitespace">
+</span>initrd<span class="whitespace"> </span>/initrd.img<span class="whitespace">
+</span>boot
+</pre>
+</div>
+<div class="section" id="kullanim">
+<h1>Kullanım:</h1>
+<p>pxe boot için sunucu olarak ayarladığımız cihazı bir switch yardımı ile (veya doğrudan) bağlayarak diğer bilgisayarı ağ üzerinden başlatabilirsiniz.</p>
+<p><strong>Not:</strong> Ip adresini dnsmasq ayarlarında belirttiğimiz aralığa uygun şekilde sabitlememiz gerekmektedir.</p>
+<p><strong>Not:</strong></p>
+</div>
+<div class="section" id="hata-ayiklama">
+<h1>Hata ayıklama:</h1>
+<p>Öncelikle <strong>syslogd</strong> başlatmalıyız.</p>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>busybox<span class="whitespace"> </span>syslogd
+</pre>
+<p>Ardından <strong>/var/log/messages</strong> dosyasını dinleyebiliriz.</p>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span>tail<span class="whitespace"> </span>-f<span class="whitespace"> </span>/var/log/messages
+</pre>
+</div>
+</div>
+</body>
+</html>
