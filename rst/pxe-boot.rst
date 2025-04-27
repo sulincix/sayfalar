@@ -50,7 +50,7 @@ Debian için https://ftp.debian.org/debian/dists/stable/main/installer-amd64/cur
 .. code-block:: shell
 
 	$ cp -f netboot/debian-installer/amd64/linux /srv/tftp/linux
-	$ cp -f netboot/debian-installer/amd64/linux /srv/tftp/initrd.img
+	$ cp -f netboot/debian-installer/amd64/initrd.gz /srv/tftp/initrd.img
 
 Ardından grub.cfg dosyamızı aşağıdaki gibi doldurabiliriz.
 

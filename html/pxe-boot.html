@@ -51,7 +51,7 @@ $<span class="whitespace"> </span>service<span class="whitespace"> </span>dnsmas
 Debian için <a class="reference external" href="https://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">https://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/</a> adresinden ulaşabilirsiniz.</p>
 <pre class="code shell literal-block">
 $<span class="whitespace"> </span>cp<span class="whitespace"> </span>-f<span class="whitespace"> </span>netboot/debian-installer/amd64/linux<span class="whitespace"> </span>/srv/tftp/linux<span class="whitespace">
-</span>$<span class="whitespace"> </span>cp<span class="whitespace"> </span>-f<span class="whitespace"> </span>netboot/debian-installer/amd64/linux<span class="whitespace"> </span>/srv/tftp/initrd.img
+</span>$<span class="whitespace"> </span>cp<span class="whitespace"> </span>-f<span class="whitespace"> </span>netboot/debian-installer/amd64/initrd.gz<span class="whitespace"> </span>/srv/tftp/initrd.img
 </pre>
 <p>Ardından grub.cfg dosyamızı aşağıdaki gibi doldurabiliriz.</p>
 <pre class="code shell literal-block">
