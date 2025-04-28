@@ -113,8 +113,6 @@ boot
 pxe boot için sunucu olarak ayarladığımız cihazı bir switch yardımı ile (veya doğrudan) bağlayarak diğer bilgisayarı ağ üzerinden başlatabilirsiniz.
 .sp
 \fBNot:\fP Ip adresini dnsmasq ayarlarında belirttiğimiz aralığa uygun şekilde sabitlememiz gerekmektedir.
-.sp
-\fBNot:\fP
 .SH HATA AYIKLAMA:
 .sp
 Öncelikle \fBsyslogd\fP başlatmalıyız.

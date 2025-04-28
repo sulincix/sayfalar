@@ -66,8 +66,6 @@ pxe boot için sunucu olarak ayarladığımız cihazı bir switch yardımı ile 
 
 **Not:** Ip adresini dnsmasq ayarlarında belirttiğimiz aralığa uygun şekilde sabitlememiz gerekmektedir.
 
-**Not:** 
-
 Hata ayıklama:
 ++++++++++++++
 Öncelikle **syslogd** başlatmalıyız.
