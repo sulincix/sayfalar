@@ -603,6 +603,28 @@ Konunun daha iyi anlaşılması için 2 stringi toplayan fonksiyon yazalım.
 	    printf("%s\n", new_str);
 	}
 
+Bellek yönetimi iki ana kısımda olur:
+
+1. Stack (Yığın): Derleyicinin otomatik olarak yönettiği bellek alanı.
+
+2. Heap (Öbek): Programcı tarafından yönetilen bellek alanı.
+     
+Bu iki bellek alanını kullanarak bir program yazalım. 
+
+.. code-block:: C
+
+	#include <stdio.h>
+	void main() {
+	    int a; // stack'de yer ayırır ve değer atar.
+	    int *b = malloc(sizeof(int)); // öbek'ten bellek ayırır. Değer atanmamış.
+	    int c;
+	    b = &a; // pointer artık işaret ettiği adres değişmiş oluyor.
+	    scanf("%d",b);
+	    printf("Değer: %d\n",*b); 
+	}
+
+Stack belleği derleyici tarafından otomatik olarak serbest bırakılır. Heap bellekleri için de serbest bırakmak gereklidir. 
+
 Struct
 ^^^^^^
 **Structure** yapıları bellekte belli bir değişken topluluğu oluşturup kullanabilmek için kullanılır.
