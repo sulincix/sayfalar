@@ -765,6 +765,8 @@ Son olarak dosyaları sistemimize kuralım.
 
 Bunun yerine aşağıdaki 2 çevresel değişkeni ayarlayarak test etmemiz mümkün dür.
 
+.. code-block:: shell
+
 	$ export GI_REPOSITORY_PATH=/home/user/gobject-ornek
 	$ export LD_LIBRARY_PATH=/home/user/gobject-ornek
 
