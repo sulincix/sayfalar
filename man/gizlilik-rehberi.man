@@ -1,0 +1,143 @@
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.22.2 manpage writer.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "Sulincixin gizlilik rehberi" "" "" ""
+.SH Name
+Sulincixin gizlilik rehberi \- 
+.SH Kolay seviye
+.SS Linux dağıtımı kullanın
+.sp
+Linux dağıtımları kaynak kodu erişiyebilir olduğu için ve gereksiz şeyler barındırmadığı için gizlilik olarak daha iyidir. Bunun dışında eğer farklı bir şeye ihtiyacınız varsa sanallaştırın veya sadece bu iş için ayrı bir cihaz kullanın ve bu cihazda kişisel veri tutmayın.
+.sp
+Özgür olmayan yazılımları kullanmayın. Eğer kullandığınız uygulama özgür değilse siz de özgür olamazsınız.
+.SS Tarayıcı seçimi
+.sp
+Tarayıcı olarak firefox üzerine ublock origin kurabilirsiniz. Veya librewolf kullanabilirsiniz. Chromium tabanlı tarayıcılar gizlilik açısından firefox kadar etkili değildir.
+.sp
+Bununla birlikte tarayıcı kimliğinizi değiştirerek internette hangi işletim sistemini ve tarayıcıyı kullandığınız bilgisini ifşa etmemiş olursunuz.
+.sp
+Chromium tabanlı tarayıcı olarak ungoogled\-chromium tercih edebilirsiniz.
+.sp
+Arama motoru olarak duckduckgo kullanın. Tarayıcınızı her kapattığınızda çerezleri ve geçmişi temizleyecek şekilde ayarlayın.
+.sp
+DRM kapatın.
+.sp
+Dns over https açın. DNS kolaylıkla izlenebilir fakat https üzerinden dns izlemesi daha zordur.
+.SS Mobil cihaz seçimi
+.sp
+Android telefon alıp lineageos kurun. Google uygulamaları veya herhangi bir özgür olmayan uygulama yüklemeyin.
+.sp
+Telefonda tarayıcı olarak fennec fdroid kullanabilirsiniz. Ublock\-origin desteği var.
+.sp
+Root için kernelsu, yoksa magisk kullanın. Root ile cihazda daha fazla kontrole sahip olursunuz.
+.SH Orta seviye
+.SS Daha özgür linux dağıtımı
+.sp
+Özgür olmayan paketlerden kurtulun. Desteklenmeyen donanımları değiştirin. Örneğin wifi kartınızı firmware gerektirmeyen bir kart ile değiştirin.
+.sp
+Uygulama çalıştırırken sandbox ortamlarını tercih edin. Flatpak bu noktada iyi iş görebilir fakat ayarlamalar gerekebilir.
+.sp
+Docker / podman gibi ortamlardan faydalanın. Bu sayede ana sisteminizde çalışmadığı için istediğiniz gibi açıp kapatabilirsiniz ve sadece sizin izin verdiğiniz kadarı ile çalışır.
+.sp
+Sisteminizi şifreleyin. Bütün sistemi şiflemeye gerek yok ev dizinini şifrelemek yeterli olur. Bios parolayı koyabilirsiniz fakat sıfırlaması basit olduğu için bir anlamı olmayabilir.
+.sp
+Ekranınızı kilitlemeden başından ayrılmayın. Evde tek başınıza bile olsanız bunu alışkanlık haline getirin.
+.SS Donanımsal gizlilik
+.sp
+Herkese açık ağlara bağlanmayın. Ağ üzerinde oturum açmanızı gerektiren yerleri kullanmayın. Bağlanacağınız cihazın mac adresi ifşalanmaması için rastgele mac adresi ile bağlanın.
+.sp
+Her önünüze gelen cihazı bilgisayara bağlamayın. Laptop kullanıyorsanız içini açıp web kamerasının kablosunu sökün.
+.sp
+Mümkünse intel MEI (Malware engine) kapatın. Veya intel işlemcili cihaz almayın. Amd için ise PSP (Platform Security Processor) özelliğini mümkünse kapatın.
+.sp
+Kablosuz klavye/mouse kullanmayın. Bu sinyaller dinlenip kolayca hangi tuşlara bastığınız tespit edilebilir. Kablolu klavye/mouse ile sinyal yaymadığı için sorun oluşmaz.
+Ayrıca bazı klavyeler tuş başına farklı ses çıkartabildiği için sesi analiz ederek ne yazdığınız anlaşılabilir. Sessiz bir klavye tercih edebilir veya klavyeyi farklı bir düzende kullanabilirsiniz. (Türkçe için F klavye önerebilirim. Tuşların yerini söküp değiştirin)
+.sp
+Telefonda parmak izi veya yüz tanıma ile ekran kilit açma kullanmayın. Bu kilit açma senaryoları kandırılabilirliğe sahiptir. Pin ile veya desen ile kilit açma ise kandırılamaz.
+.SS Sosyal medya \- Gündelik
+.sp
+Bütün sosyal medya hesaplarınızı kapatıp sahte hesap kullanın. Telefonunuzda uygulama olarak yüklemeyin tarayıcı üzerinden gizli sekme ile kullanın.
+.sp
+Email olarak rastgele isimde ve kişisel bilgi içermeyen hesaplar kullanın. Hatta mümkünse sadece 1 kere kullanın.
+.sp
+Ciddi amaçla kullandığınız bir adet email adresi olsun ve o email adresini biryerlere üyelik açmak için kullanmayın.
+.sp
+Telefonunuzdaki arama yönlendirme kısmından ulaşılamadığında yönlendirilecek numarayı geçersiz bir numara ile değiştirin. (örneğin +900000000000 olabilir) Bu sayede sizi arayan şüpheli numaralara cevap vermediğinizde karşı tarafa numara geçersiz dediği için tekrar rahatsız etmemiş olurlar.
+.sp
+VPN kullanın. Fakat VPN sizin tarafınızdan barındırılan bir sunucuda bulunmalı. Hazır vpn servisleri ağınızı izler ve gizlilik açısından bir fayda sağlamaz. Wireguard veya OpenVPN önerebilirim.
+.sp
+Akıllı saat vb cihazlar kullanmayın. Bu cihazlar sizi izler ve özgür olmayan 3. taraf yerlere istek atabilir. Saat lazımsa klasik saat tercih edin. Hem pili bitti derdi yok rahat.
+.sp
+GSM üzerinden sesli iletişim yerine internet üzerinden iletişimi tercih edin. GSM üzerinden konuştuklarınız şifrelenmez fakat internetten konuştuklarınıza operatörünüz erişemez.
+.sp
+Google maps yerine OpenStreetMap kullanın. Offline harita olarak kullanmanızı öneririm.
+.SS Parolalar
+.sp
+Kendi sunucunuz dışında parola saklama uygulaması kullanmayın. Ya kendi sunucunuzda barındırın yada bütün parolalarınızı ezberleyin. Ezberlemek zor gelebilir ama alışılıyor.
+.sp
+Parolanızın ne olduğundan çok tahmin edilebilirliği önemlidir. Parolanızı tahmin edilemez veya tamamen rastgele oluşturun ve gerekmediği sürece değiştirmeyin. Bir parolayı birden çok yerde kullanmayın.
+.sp
+Önemli olmayan yerlere üye olurken rastgele bir email ve rastgele bir kullanıcı oluşturup işinizi hallettikten sonra bir daha kullanmama yolunu tercih edebilirsiniz.
+.sp
+Sms ile doğrulama güvenli değildir. Sms kolayca ele geçirilebilir. Onun yerine TOTP gibi 2 aşamalı doğrulama yollarını kullanın. Totp uygulaması olarak offline çalışabilen özgür yazılımlar tercih edin.
+.SH Hardcore seviye
+.SS Sistem seçimi
+.sp
+Bir linux dağıtımı kullanacaksanız ana dağıtımı tercih edin ve minimal kurulum yapın. Bu sayede kontrol tamamen sizde olur. Hazır bir dağıtım kullanmak yerine kendi dağıtımınızı oluşturmayı veya buildroot gibi yollarla derlemeyi deneyebilirsiniz. Sistemi güncel tutun ve gerekmedikçe bir şey kurmayın.
+.sp
+Hardened dağıtım kullanın. Sudo komutu yerine su komutu ile root alın. Bu sayede root ile çalıştırdıklarınız root kullanıcısının history kısmında yer alır ve daha kolay takip edilir. Ayrıca diski nosuid olarak bağlayıp gerektiğinde yeniden başlatıp bu özelliği kapatarak roota geçebilirsiniz.
+.sp
+X11 yerine Wayland tercih edebilirsiniz. X11 üzerinde çalışan uygulamalar tüm ekrana hükmedebilir fakat wayland üzerinde bu mümkün olmadığı için daha kısıtlı yetki ile çalışır. Bununla birlikte Xephyr ve Xpra alternatif olarak düşünülebilir.
+.sp
+Kullandığınız android custom romunu kendiniz derleyin. Bu sayede kontrol sizde olur. Romu istediğiniz gibi özelleştirebilir veya istemediğiniz kısımları çıkartabilirsiniz.
+.sp
+Internet servis sağlayıcısının verdiği modemi kullanmayın. Onun yerine OpenWRT uyumlu bir cihaz alıp içine OpenWRT yükleyip onunla kullanın. Bu sayede servis sağlayıcısı ağınıza erişim sağlayamaz ve özgür olmayan bir modem kullanmak zorunda kalmamış olursunuz.
+.sp
+Eğer uyumlu ise bilgisayarınıza Coreboot gibi alternatif firmware yükleyin.
+.SS Gündelik
+.sp
+Mümkün olduğunca sadece nakit para kullanın. Bankalar harcamalarınızı görebilir. Kripto paralar da aynı şekilde borsada tutuyorsanız takip edilebilirdir. Yatırım yapacaksanız fiziksel karşılığı olan ve 3. tarafa bağlı olunmadan elde edilebilen yolları tercih edin. Veya yatırım yapmayın dümdüz paranızı yiyin :D
+.sp
+Belediye otobüslerine binerken kişiselleştirilmemiş kart kullanın. Veya dolmuşa binin. Bu sayede nereye gittiğinizi gizlemiş olursunuz. Ayrıca Eğer otomobil kullanıyorsanız kalabalık yerlerden yakıt alın.
+.sp
+Akıllı sistem içenen otomobil kullanmayın. Araçta müzik açmak için telefonunuzu bluetooth ile bağlayıp kullanabilirsiniz. Carplay gibi özellikleri kullanmayın çünkü özgür değiller.
+.sp
+Bir yerden bir yere giderken rotayı haritalardan bakabilirsiniz fakat GPS açıp takip ederek harita kullanmayın. Çünkü konumunuzu ifşa etmiş oluyorsunuz.
+.sp
+LLM serislerini kullanmayın. Eğer lazım olduğunu düşünüyorsanız kendiniz barındırabilirsiniz. Veya en temizi doküman okuyup araştırma yaparak birşeyler öğrenin.
+.sp
+Iş hayatınızdaki arkadaşlarınız ile özel hayatınızdaki arkadaşlarınızı birbirinden ayırın. Etrafınızdaki kişiler sadece sizin onların bilmesini istediğiniz kadarı ile birşeyler bilsin.
+.sp
+Kafe gibi yerlerde adınız sorulduğunda sahte isim kullanın. Nasılsa doğrulama yapmayacaklar.
+.sp
+Sizin isminizi taşıyan fakat hatalı bilgi içeren birsürü sosyal medya hesabı açın ve içini sahte görsellerle doldurun. Bu sayede sizi araştırmak isteyenler sizin hakkınızda doğru bilgiye erişemezler. Internette size ait bir fotograf paylaşmayın. Paylaştığınız görsellerin metadatalarını silerek paylaşın.
+.sp
+Kullanıcı hesap adınızda aramaya çıkmayı zorlaştırmak için emoji, latin alfasi olmayan karatker vb kullanın. Arayarak bulunmanız daha zor hale gelecektir.
+.\" End of generated man page.

@@ -1,4 +1,5 @@
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.22.2 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -27,21 +28,21 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "INARY PAKET YAPIMI" "" "" ""
-.SH NAME
+.TH "Inary paket yapımı" "" "" ""
+.SH Name
 Inary paket yapımı \- 
 .sp
 Bu anlatımda inary paketi oluşturma anlatılacaktır. Örnek paket olarak bash paketi üzerinden anlatılacakdır.
 .sp
 Tüm adımlar root yetkisi gerektirir.
-.SH GEREKENLER
+.SH Gerekenler
 .sp
 Nosystemd bir dağıtım üzerinde chroot içerisinden çalışan sulin yada kurulu bir sulin gerekmektedir.
 .sp
 Paket yapmak isteyen kişinin python3 programlama dili bilmesi gerekmektedir.
 .sp
 Derleme yapacak bilgisayarın yeterince güçlü bir işlemciye sahip olması gereklidir.
-.SH DERLEME ORTAMININ HAZIRLANMASI
+.SH Derleme ortamının hazırlanması
 .sp
 İlk olarak inary\-devel kaynaktan derlenecektir. Kaynak kodu git üzerinden çekip kuralım.
 .INDENT 0.0
@@ -76,7 +77,7 @@ mount \-t tmpfs tmpfs /var/inary
 .EE
 .UNINDENT
 .UNINDENT
-.SH TASLAK HAZIRLAMA
+.SH Taslak hazırlama
 .sp
 \fBinary\-template\fP komutunu kullanarak şablon oluşturalım. İsim ve adres zorunlu parametredir.
 Nasıl kullanıldığını öğrenmek için \fIinary\-template \-\-help\fP çalıştırın.
@@ -199,7 +200,7 @@ def install():
 Burada önce \fBemul32\fP için çalıştırılır. Sonra tanımlanmamış olan varsayılan tür için çalıştırılır. Yukarıdakö örnekte derleyiciyi 32bit olarak ayarlayıp derleme yaptırdık. daha sonra 32bit olarak derlenen kısımdaki /usr/bin/ dizinini sildik.
 .sp
 Bu yazıda başlıca actionsapi modüllerini anlatacağım. Tamamına inary kaynak kodundan ulaşabilirsiniz. Kaynak kodda bulunan \fIget_actionsapi_functions\fP betiğini çalıştırınız.
-.SH 0. SHELLTOOLS
+.SH 0. Shelltools
 .sp
 Shelltools en önemli modüldür. diğer araçlar shelltools üzerinden çalışmaktadır. Bu sebeple 0. olarak adlandırdım. Buradaki fonksionları guruplandırarak anlatacağım. Diğer araçları ise topluca anlatacağım.
 .sp
@@ -271,7 +272,7 @@ Dosya işlemleri için aşağıdaki fonksionlar kullanılır.
 .EE
 .UNINDENT
 .UNINDENT
-.SH 1. AUTOTOOLS
+.SH 1. Autotools
 .sp
 Autotools kütüphanesi \fI\&./configure\fP, \fImake\fP, \fImake install\fP şeklinde derlenen kaynaklar için kullanılır.
 .sp
@@ -298,7 +299,7 @@ inary/actionsapi/autotools.py:
 .EE
 .UNINDENT
 .UNINDENT
-.SH 2. MESONTOOLS
+.SH 2. Mesontools
 .sp
 Mesontools kütüphanesi \fImeson build\fP, \fIninja \-C build\fP, \fIninja \-C build install\fP şeklinde derlenen kaynaklar için kullanılır.
 .sp
@@ -321,7 +322,7 @@ inary/actionsapi/mesontools.py:
 .EE
 .UNINDENT
 .UNINDENT
-.SH 3. CMAKETOOLS
+.SH 3. Cmaketools
 .sp
 Cmaketools kütüphanesi \fIcmake ..\fP, \fImake\fP, \fImake install\fP şeklinde derlenen kaynaklar için kullanılır.
 .sp
@@ -339,7 +340,7 @@ inary/actionsapi/cmaketools.py:
 .EE
 .UNINDENT
 .UNINDENT
-.SH 4. INARYTOOLS
+.SH 4. Inarytools
 .sp
 Inarytools kütüphanesi derleme işlemine yardımcı olan bir araçtır. Dosya işlemleri ve bazı uzun kodları kısatlma amaçlı yapılmıştır.
 .sp
@@ -375,7 +376,7 @@ Inarytools fonksionları aşağıdaki gibidir. Bunların kullanımı ve örnekle
 .EE
 .UNINDENT
 .UNINDENT
-.SH 5. GET
+.SH 5. Get
 .sp
 Get kütüphanesi ile derlemeye ait bazı değişkenlere ulaşmak mümkündür. get fonksionları parametre almaz ve string türünden değer döndürür.
 .INDENT 0.0
@@ -428,7 +429,7 @@ Anlatımımıza pspec.xml ile devam edeceğim. Bu dosya inary tarafından okunar
 .EE
 .UNINDENT
 .UNINDENT
-.SH SOURCE BÖLÜMÜ
+.SH Source bölümü
 .sp
 Bu bölümde kaynağın özellikleri belirtilir. \fBName\fP, \fBHomepage\fP, \fB*Packager\fP, \fBSummary\fP, \fBDescription\fP, \fBArchive\fP kısımları zorunludur.
 .sp
@@ -465,7 +466,7 @@ Archive türü ikili dosyaysa veya açılmayacaksa \fBtype=\(dqbinary\(dq\fP ekl
 .UNINDENT
 .sp
 Eğer \fBRfp\fP tagı kullanırsanız paket \fBRfp\fP olarak oluşturulur. Bu paketler kararlı olmayan veya deneysel paketlerdir. Derlenirken ve kurulurken onay ister. Onay mesajını bu tagın arasına yazmalısınız. \fBRfp\fP paketler Sulin deposunda bulunmaz.
-.SH PACKAGE BÖLÜMÜ
+.SH Package bölümü
 .sp
 Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. \fBName\fP, \fBFiles\fP kısımları zorunludur.
 .sp
@@ -500,7 +501,7 @@ Bu bölüm birden çok kez bulunabilir. Paket oluşturulurken kullanılır. \fBN
 \fBfileType\fP türüne \fBconfig\fP verirseniz o dizindeki dosyaları ayar dosyası olarak ekler. Paket güncelleme esnasında configleri kullanıcılar isterse güncellemeyebilir.
 .sp
 \fBIsA\fP değerini \fBpostOps\fP ayarlarsanız paketin içine \fBpostoperations.py\fP dosyası eklenir. Bu dosya kurulum aşamasında çalıştırılacak betik dosyasıdır.
-.SH HISTORY BÖLÜMÜ
+.SH History bölümü
 .sp
 Bu bölümde paket geçmişi bulunur. Dernenen paket sürümü en güncel olanın sürümü olarak alınır. \fBUpdate\fP kısmı birden çok kez bulunabilir ve en az 1 tane bulunmalıdır.
 .INDENT 0.0
@@ -537,7 +538,7 @@ class inary:
 .EE
 .UNINDENT
 .UNINDENT
-.SH SOURCE BÖLÜMÜ
+.SH Source bölümü
 .sp
 Bu bölümde kaynağın özellikleri belirtilir. \fBpackages\fP dizisindeki elemanların adına sahip olan sınıflar \fBpspec.xml\fP oluşturulurken kullanılır.
 .INDENT 0.0
@@ -563,7 +564,7 @@ class source:
 .EE
 .UNINDENT
 .UNINDENT
-.SH PACKAGE BÖLÜMÜ
+.SH Package bölümü
 .sp
 Bu bölümde paket özellikleri yer alır. Bu bölümün sınıf adını \fBSource\fP bölümündeki \fBpackages\fP dizisi içine eklediğinizde buradaki değerler kullanılır.
 .INDENT 0.0
@@ -583,7 +584,7 @@ class pkg_bash
 .EE
 .UNINDENT
 .UNINDENT
-.SH HISTORY BÖLÜMÜ
+.SH History bölümü
 .sp
 Bu bölümde paket geçmişi bulunur. Release bilgisi yer almaz. Bunun yerine release bilgisi otomatik olarak hesaplanır. \fBupdate\fP dizisine dizi halinde eklenir.
 .INDENT 0.0
@@ -615,5 +616,4 @@ def preRemove(): # paket silinmeden önce çalıştırılır.
 Bu dosyada bununan \fBpostInstall\fP fonksionu aynı zamanda paketler yeniden yapılandırılmaya çalışılırken de çalıştırılır. Bu betiklerde actionsapi kullanımı ile ilgili herhangi bir kısıtlama bulunmamasına karşın kullanımı tavsiye edilmemektedir.
 .sp
 Inary komutu her çalıştırıldığında işlem bitiminde sysconf modülü tetiklenir. Bu modül dosya sistemindeki değişiklikleri baz alarak çalışır ve önbellek dosyalarını güncelleme gibi bazı işleri otomatik olarak yerine getirir. Bu sebeple postoperations betiklerine nadiren ihtiyaç duyulur.
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.

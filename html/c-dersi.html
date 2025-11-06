@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.21.2: https://docutils.sourceforge.io/" />
+<meta name="generator" content="Docutils 0.22.2: https://docutils.sourceforge.io/" />
 <title>C Dersi</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
@@ -525,6 +525,24 @@ Bu fonksiyonlar <strong>stdlib.h</strong> ile sağlanmaktadır.</p>
     </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;%s</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">new_str</span><span class="punctuation">);</span><span class="whitespace">
 </span><span class="punctuation">}</span>
 </pre>
+<p>Bellek yönetimi iki ana kısımda olur:</p>
+<ol class="arabic simple">
+<li>Stack (Yığın): Derleyicinin otomatik olarak yönettiği bellek alanı.</li>
+<li>Heap (Öbek): Programcı tarafından yönetilen bellek alanı.</li>
+</ol>
+<p>Bu iki bellek alanını kullanarak bir program yazalım.</p>
+<pre class="code C literal-block">
+<span class="comment preproc">#include</span><span class="whitespace"> </span><span class="comment preprocfile">&lt;stdio.h&gt;</span><span class="comment preproc">
+</span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">main</span><span class="punctuation">()</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="whitespace">
+    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">a</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// stack'de yer ayırır ve değer atar.
+</span><span class="whitespace">    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="operator">*</span><span class="name">b</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">malloc</span><span class="punctuation">(</span><span class="keyword">sizeof</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="punctuation">));</span><span class="whitespace"> </span><span class="comment single">// öbek'ten bellek ayırır. Değer atanmamış.
+</span><span class="whitespace">    </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">c</span><span class="punctuation">;</span><span class="whitespace">
+    </span><span class="name">b</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="operator">&amp;</span><span class="name">a</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// pointer artık işaret ettiği adres değişmiş oluyor.
+</span><span class="whitespace">    </span><span class="name">scanf</span><span class="punctuation">(</span><span class="literal string">&quot;%d&quot;</span><span class="punctuation">,</span><span class="name">b</span><span class="punctuation">);</span><span class="whitespace">
+    </span><span class="name">printf</span><span class="punctuation">(</span><span class="literal string">&quot;Değer: %d</span><span class="literal string escape">\n</span><span class="literal string">&quot;</span><span class="punctuation">,</span><span class="operator">*</span><span class="name">b</span><span class="punctuation">);</span><span class="whitespace">
+</span><span class="punctuation">}</span>
+</pre>
+<p>Stack belleği derleyici tarafından otomatik olarak serbest bırakılır. Heap bellekleri için de serbest bırakmak gereklidir.</p>
 </div>
 <div class="section" id="struct">
 <h1>Struct</h1>

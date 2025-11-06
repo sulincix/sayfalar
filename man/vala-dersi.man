@@ -1,5 +1,6 @@
 '\" t
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.22.2 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -28,8 +29,8 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "VALA DERSI" "" "" ""
-.SH NAME
+.TH "Vala dersi" "" "" ""
+.SH Name
 Vala dersi \- 
 .sp
 Bu yazıda vala programlama dilini anlatacağım. Örneklende \fB\&...\fP bulunan satırlar üstünde ve altında başka kodların bulunabileceğini belirtir. Çalıştırılan komutların başında \fB$\fP işareti kullanılmıştır.
@@ -58,7 +59,7 @@ int main(string[] args){
 .UNINDENT
 .sp
 Burada \fBint\fP fonksiyonun çıktı türünü \fBmain\fP adını \fBstring[] args\fP ise parametresini ifade eder. \fBreturn 0\fP ise çıkış kodunu bildirir. Vala programlama dilinde her satırın sonunda \fB;\fP bulunmak zorundadır.
-.SH GIRINTILEME
+.SH Girintileme
 .sp
 Vala girintilemeye dikkat eden bir dil değildir fakat kodun okunaklı olması açısından girintilemeye dikkat etmenizi öneririm.
 Girintileme ile ilgili aşağıdaki kuralları takip edebilirsiniz. Bu kurallar zorunluluk oluşturmadığı gibi kendinize göre farklılaştırabilirziniz.
@@ -112,7 +113,7 @@ if (i== 2)
 .UNINDENT
 .sp
 Her ikisi de aslında tamamen aynı kod fakat ilk örnek daha okunaklı ve düzenli gözükmektedir.
-.SH AÇIKLAMA SATIRI
+.SH Açıklama satırı
 .sp
 Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında dikkate alınmaz.
 .INDENT 0.0
@@ -130,7 +131,7 @@ Açıklamalar 2 şekilde yapılır. Açıklama bölümleri derleme esnasında di
 .EE
 .UNINDENT
 .UNINDENT
-.SH EKRANA YAZI YAZDIRMA
+.SH Ekrana yazı yazdırma
 .sp
 Ekrana yazı yazmak için \fBprintf\fP kullanılır. normal çıktı için \fBstdout.printf\fP, hata çıktısı için ise \fBstderr.printf\fP kullanılır.
 .INDENT 0.0
@@ -144,7 +145,7 @@ int main(string[] args){
 .EE
 .UNINDENT
 .UNINDENT
-.SH DEĞIŞKEN TÜRLERI
+.SH Değişken türleri
 .sp
 Değişkenler türleri ile beraber tanımlanırlar veya \fBvar\fP ifadesi kullanılarak tanımlanırlar.
 .INDENT 0.0
@@ -202,7 +203,7 @@ Başlıca veri türleri şunlardır:
 .IP \(bu 2
 \fBstring\fP yazı tutar.
 .UNINDENT
-.SH DIZILER
+.SH Diziler
 .sp
 Diziler birden çok eleman tutan değişkenlerdir. tanımlanırken \fBxxx[] yy\fP şeklinde tanımlanırlar.
 .INDENT 0.0
@@ -311,7 +312,7 @@ int boyut = liste\&.size;
 .EE
 .UNINDENT
 .UNINDENT
-.SH KLAVYEDEN DEĞER ALMA
+.SH Klavyeden değer alma
 .sp
 Klavyeden string türünden değer almak için \fBstdin.read_line()\fP kullanılır.
 .INDENT 0.0
@@ -325,7 +326,7 @@ stdout\&.printf(text);
 .EE
 .UNINDENT
 .UNINDENT
-.SH KOŞULLAR
+.SH Koşullar
 .sp
 Koşul tanımlamak için \fBif\fP kullanılır. Bu ifade parametre olarak \fBbool\fP türünden değişken alır.  Koşulun gerçekleşmediği durumda \fBelse if\fP kullanılarak diğer koşul karşılanıyor mu diye bakılır. Hiçbiri gerçekleşmiyorsa \fBelse\fP kullanılarak bu durumda yapılacaklar belirtilir.
 .INDENT 0.0
@@ -363,7 +364,7 @@ if(parola == \(dqabc123\(dq){
 .UNINDENT
 .sp
 Koşullarda kullanılan işleyiciler ve anlamları aşağıda liste halinde verilmiştir.
-.SH KOŞUL IŞLEYICILERI
+.SH Koşul işleyicileri
 .TS
 box center;
 l|l|l.
@@ -478,7 +479,7 @@ parola == \(dqabc123\(dq ? stdout\&.printf(\(dqDoğru parola\(dq) : stderr\&.pri
 .EE
 .UNINDENT
 .UNINDENT
-.SH DÖNGÜLER
+.SH Döngüler
 .sp
 Döngüler aşağıdaki gibi tanımlanır. döngüde koşul sağlandığı sürece sürekli olarak içerisindeki kod çalıştırılır.
 .INDENT 0.0
@@ -564,7 +565,7 @@ while(true){
 .EE
 .UNINDENT
 .UNINDENT
-.SH FONKSIYONLAR VE PARAMETRELER
+.SH Fonksiyonlar ve parametreler
 .sp
 Vala yazarken forksiyon tanımlarız ve bu fonksiyonları parametreler ile çağırabiliriz.
 .INDENT 0.0
@@ -692,7 +693,7 @@ void main(string[] args){
 .EE
 .UNINDENT
 .UNINDENT
-.SH SINIF KAVRAMI
+.SH Sınıf kavramı
 .sp
 Vala nesne yönelimli bir programlama dilidir. Bu sebeple sınıflar oluşturabiliriz. Sınıflar \fBGtk\fP gibi arayüz programlamada kullanışlı olmaktadırlar. Sınıf oluşturmak için \fBclass\fP ifadesi kullanılır.
 .INDENT 0.0
@@ -735,7 +736,7 @@ public class test {
 .EE
 .UNINDENT
 .UNINDENT
-.SH SUPER SINIF
+.SH Super sınıf
 .sp
 Bir sınıfı başka bir sınıftan türetebiliriz. Bunun için sınıf tanımlanırken \fIclass xxx : yyy\fP yapısı kullanılır.
 .INDENT 0.0
@@ -813,7 +814,7 @@ public class helloworld : hello, world {
 .EE
 .UNINDENT
 .UNINDENT
-.SH SIGNAL KAVRAMI
+.SH Signal kavramı
 .sp
 Valada sinyal tanımlayarak bir sınıftaki bir işlevin nasıl çalışması gerektiği ayarlanabilir. Bunun için isim olarak tanımlanan fonksiyonun başına \fBsignal\fP ifadesi yerleştirilir.
 .INDENT 0.0
@@ -838,7 +839,7 @@ int main(string[] args){
 .EE
 .UNINDENT
 .UNINDENT
-.SH NAMESPACE KAVRAMI
+.SH Namespace kavramı
 .sp
 Valada kodları alan adlarına bölerek yazmamız mümkündür. Bu sayede alan adı içine tanımladığımız fonksiyonları alan adı ile beraber çağırarak kullanabiliriz. Bunun için \fBnamespace {}\fP ifadesi kullanılır.
 .INDENT 0.0
@@ -922,7 +923,7 @@ int main(string[] args){
 .EE
 .UNINDENT
 .UNINDENT
-.SH KÜTÜPHANE OLUŞTURMA
+.SH Kütüphane oluşturma
 .sp
 Vala kaynak kodu kullanarak kütüphane oluşturabiliriz. Bunun için kodu aşağıdaki gibi derleyebiliriz.
 .INDENT 0.0
@@ -1011,7 +1012,7 @@ $ valac \-\-vapidir \&./ main.vala \-\-pkg libtest
 .EE
 .UNINDENT
 .UNINDENT
-.SH GOBJECT OLUŞTURMA
+.SH Gobject oluşturma
 .sp
 Gobject kulanarak yazdığımız kütüphaneyi farklı dillerde kullanmamız mümkündür.
 Bunun için önce aşağıdaki gibi bir kaynak kodumuz olsun. Burada bin namespace tanımlayalım.
@@ -1070,8 +1071,11 @@ $ install hello\-1.0.typelib /usr/share/girepository\-1.0/
 Bunun yerine aşağıdaki 2 çevresel değişkeni ayarlayarak test etmemiz mümkün dür.
 .INDENT 0.0
 .INDENT 3.5
+.sp
+.EX
 $ export GI_REPOSITORY_PATH=/home/user/gobject\-ornek
 $ export LD_LIBRARY_PATH=/home/user/gobject\-ornek
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -1087,5 +1091,4 @@ hello\&.print()
 .EE
 .UNINDENT
 .UNINDENT
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.

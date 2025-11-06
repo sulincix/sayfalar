@@ -1,5 +1,6 @@
 '\" t
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.22.2 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -28,12 +29,12 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "BASH DERSI" "" "" ""
-.SH NAME
+.TH "Bash dersi" "" "" ""
+.SH Name
 Bash dersi \- 
 .sp
 Bu yazıda bash betiği yazmayı hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
-.SH AÇIKLAMA SATIRI VE DOSYA BAŞLANGICI
+.SH Açıklama satırı ve dosya başlangıcı
 .sp
 Açıklamalar \fB#\fP ifadesiden başlayıp satır sonuna kadar devam eder. Dosyanın ilk satırına \fB#!/bin/bash\fP eklememiz gerekmektedir. Bash betikleri genellikle \fB\&.sh\fP uzantılı olur.
 Bash betikleri girintilemeye duyarlı değildir. Bash betiği yazarken girintileme için 4 boşluk veya tek tab kullanmanızı öneririm.
@@ -75,7 +76,7 @@ Bu da sonunca açıklama satırıdır.
 .EE
 .UNINDENT
 .UNINDENT
-.SH EKRANA YAZI YAZALIM
+.SH Ekrana yazı yazalım
 .sp
 Ekrana yazı yazmak için \fBecho\fP ifadesi kulanılır.
 .INDENT 0.0
@@ -112,7 +113,7 @@ echo \-e \(dq\e033[34;1mMerhaba\e033[0m Dünya\(dq
 .UNINDENT
 .sp
 Aşağıda tablo halinde özellik numarası ve anlamları verilmiştir.
-.SH ÖZELLIK NUMARASI VE ANLAMLARI
+.SH Özellik numarası ve anlamları
 .TS
 box center;
 l|l|l|l|l|l.
@@ -270,7 +271,7 @@ echo \(aq$var\(aq
 .EE
 .UNINDENT
 .UNINDENT
-.SH PARAMETRELER
+.SH Parametreler
 .sp
 Bir bash betiği çalıştırılırken verilen parametreleri \fB$\fP ifadesinden sonra gelen sayı ile kullanabiliriz.
 \fB$#\fP bize kaç tane parametre olduğunu verir.
@@ -286,7 +287,7 @@ echo \(dq$1 \- $# \- $@\(dq
 .EE
 .UNINDENT
 .UNINDENT
-.SH DEĞIŞKENLER VE SABITLER
+.SH Değişkenler ve Sabitler
 .sp
 Değişkenler ve sabitler programımızın içerisinde kullanılan verilerdir. Değişkenler tanımlandıktan sonra değiştirilebilirken sabitler tanımlandıktan sonra değiştirilemez.
 .sp
@@ -393,7 +394,7 @@ python3 \-c \(dqprint(10/2)\(dq
 .UNINDENT
 .sp
 Değişkenlere aşağıdaki tabloda belirttiğim gibi müdahale edilebilir. Karakter sayısı 0\(aqdan başlar. Negatif değerler sondan saymaya başlar.
-.SH DEĞIŞKENE MÜDAHALE (VAR="MERHABA")
+.SH Değişkene müdahale (var="Merhaba")
 .TS
 box center;
 l|l|l.
@@ -477,7 +478,7 @@ T}	T{
 abc
 T}
 .TE
-.SH DIZILER
+.SH Diziler
 .sp
 Diziler birden çok eleman içeren değişkenlerdir. Bash betiklerinde diziler aşağıdaki gibi tanımların ve kullanılır.
 .INDENT 0.0
@@ -520,7 +521,7 @@ echo ${dizi[kirmizi]}
 .EE
 .UNINDENT
 .UNINDENT
-.SH KLAVYEDEN DEĞER ALMA
+.SH Klavyeden değer alma
 .sp
 Klavyeden değer almak için \fBread\fP komutu kullanılır. Alınan değer değişken olarak tanımlanır.
 .INDENT 0.0
@@ -534,7 +535,7 @@ echo $deger
 .EE
 .UNINDENT
 .UNINDENT
-.SH KOŞULLAR
+.SH Koşullar
 .sp
 Koşullar \fBif\fP ile \fBfi\fP ile biter.  Koşul ifadesi sonrası \fBthen\fP kullanılır. ilk koşul sağlanmıyorsa \fBelif\fP ifadesi ile ikinci koşul sorgulanabilir. Eğer hiçbir koşul sağlanmıyorsa \fBelse\fP ifadesi içerisindeki eylem gerçekleştirilir.
 .INDENT 0.0
@@ -573,7 +574,7 @@ fi
 .UNINDENT
 .sp
 \fB[[\fP yerleşiği ile ilgili başlıca ifadeleri ve kullanımlarını aşağıda tablo olarak ifade ettim. \fB[\fP bir komutken \fB[[\fP bir yerleşiktir. \fB[\fP ayrı bir süreç olarak çalıştırılır. Bu yüzden \fB[[\fP kullanmanızı tavsiye ederim.
-.SH [[ IFADELERI VE KULLANIMLARI
+.SH [[ ifadeleri ve kullanımları
 .TS
 box center;
 l|l|l.
@@ -755,7 +756,7 @@ fi
 .EE
 .UNINDENT
 .UNINDENT
-.SH CASE YAPISI
+.SH case yapısı
 .sp
 \fBcase\fP yapısı case ile başlar değerden sonra gelen \fBin\fP ile devam eder ve koşullardan sonra gelen \fBesac\fP ile tamamlanır.
 case yapısı sayesinde if elif else ile yazmamız gereken uzun ifadeleri kısaltabiliriz.
@@ -789,7 +790,7 @@ fi
 .EE
 .UNINDENT
 .UNINDENT
-.SH DÖNGÜLER
+.SH Döngüler
 .sp
 Döngülerde \fBwhile\fP ifadesi sonrası koşul gelir. \fBdo\fP ile devam eder ve eylemden sonra \fBdone\fP ifadesi ile biter. Döngülerde ifade doğru olduğu sürece eylem sürekli olarak tekrar eder.
 .INDENT 0.0
@@ -860,7 +861,7 @@ echo
 .UNINDENT
 .sp
 Buradaki özel kullanımları aşağıda tablo halinde belirttim.
-.SH KÜME PARANTEZLI IFADELER VE ANLAMLARI
+.SH küme parantezli ifadeler ve anlamları
 .TS
 box center;
 l|l|l.
@@ -896,7 +897,7 @@ T}	T{
 ali veli
 T}
 .TE
-.SH FONKSIYONLAR
+.SH Fonksiyonlar
 .sp
 Fonksiyonlar alt programları oluşturur ve çağırıldığında işlerini yaptıktan sonra tekrar ana programdan devam edilmesini sağlar. Bir fonksiyonu aşağıdaki gibi tanımlayabiliriz.
 .INDENT 0.0
@@ -1011,10 +1012,10 @@ echo \(dqsatır 5\(dq # bu satır çalışmayacak
 .EE
 .UNINDENT
 .UNINDENT
-.SH DOSYA IŞLEMLERI
+.SH Dosya işlemleri
 .sp
 Bash betiklerinde \fBstdout\fP \fBstderr\fP ve \fBstdin\fP olmak üzere 2 çıktı ve 1 girdi bulunur. Ekrana stderr ve stdout beraber yazılır.
-.SH DOSYA IFADELERI VE ANLAMLARI
+.SH dosya ifadeleri ve anlamları
 .TS
 box center;
 l|l|l.
@@ -1095,7 +1096,7 @@ grep \-v \(dqdünya\(dq dosya.txt
 .UNINDENT
 .sp
 Aşağıdaki tabloda bazı dosya işlemi ifadeleri ve anlamları verilmiştir.
-.SH DOSYA IFADELERI VE ANLAMLARI
+.SH dosya ifadeleri ve anlamları
 .TS
 box center;
 l|l|l.
@@ -1161,7 +1162,7 @@ done < dosya.txt
 .UNINDENT
 .sp
 \fB/dev/null\fP içine atılan çıktılar yok edilir. \fB/dev/stderr\fP içine atılan çıktılar ise hata çıktısı olur.
-.SH BORU HATTI
+.SH Boru hattı
 .sp
 Bash betiklerinde \fBstdin\fP yerine bir önceki komutun çıktısını kullanmak için boru hattı açabiliriz. Boru hattı açmak için iki komutun arasına \fB|\fP işareti koyulur. Boru hattında soldan sağa doğru çıktı akışı vardır. Boru hattından sadece \fBstdout\fP çıktısı geçmektedir. Eğer \fBstderr\fP çıktısını da boru hattından geçirmek istiyorsanız \fB|&\fP kullanmalısınız.
 .INDENT 0.0
@@ -1186,7 +1187,7 @@ sayiyaz(){
 .EE
 .UNINDENT
 .UNINDENT
-.SH KOD BLOĞU
+.SH Kod bloğu
 .sp
 \fB{\fP ile \fB}\fP arasına yazılan kodlar birer kod bloğudur. Kod blokları fonksionların aksine argument almazlar ve bir isme sahip değillerdir. Kod blokları tanımlandığı yerde çalıştırılırlar. Kod bloğuna boru hattı ile veri girişi ve çıkışı yapılabilir.
 .INDENT 0.0
@@ -1213,7 +1214,7 @@ cikart
 .EE
 .UNINDENT
 .UNINDENT
-.SH SELECT KOMUTU
+.SH select komutu
 .sp
 \fBselect\fP kullanarak basit menü oluşturabiliriz.
 .INDENT 0.0
@@ -1239,7 +1240,7 @@ done
 .UNINDENT
 .sp
 Bu örnekde \fBREPLY\fP değişkeni seçtiğimiz sayıyı \fBdeger\fP değişkeni ise seçtiğimiz elemanı ifade eder. \fBselect\fP komutu sürekli olarak döngü halinde çalışır. Döngüden çıkmak için \fBbreak\fP kullandık.
-.SH BIRDEN ÇOK DOSYA ILE ÇALIŞMAK
+.SH Birden çok dosya ile çalışmak
 .sp
 Bash betikleri içerisinde diğer bash betiği dosyasını kullanmak için \fBsource\fP yada \fB\&.\fP ifadeleri kullanılır. Diğer betik eklendiği zaman içerisinde tanımlanmış olan değişkenler ve fonksionlar kullanılabilir olur.
 .sp
@@ -1285,7 +1286,7 @@ echo ${sayi}
 .EE
 .UNINDENT
 .UNINDENT
-.SH EXEC KOMUTU
+.SH exec komutu
 .sp
 \fBexec\fP komutu betiğin bundan sonraki bölümünü çalıştırmak yerine hedefteki komut ile değiştirilmesini sağlar. \fBexec\fP ile çalıştırılmış olan komut tamamlandığında betik tamamlanmış olur.
 .INDENT 0.0
@@ -1316,7 +1317,7 @@ exec < komutlar.txt # komutlar.txt dosyasındakiler girdi olarak kullanılır.
 .EE
 .UNINDENT
 .UNINDENT
-.SH FD KAVRAMI
+.SH fd kavramı
 .sp
 \fBbash\fP programında birden çok \fBfd\fP kullanılabilir. var olan fdlere ulaşmak için \fB/proc/$$/fd/\fP konumuna bakabiliriz. 0 stdin 1 stdout 2 stderr olarak çalışır.
 .sp
@@ -1336,7 +1337,7 @@ exec 4<&\- # 4 numaralı fd kapatmak için.
 .EE
 .UNINDENT
 .UNINDENT
-.SH HATA AYIKLAMA
+.SH Hata ayıklama
 .sp
 \fBbash\fP komutuna farklı parametreler vererek kolayca script\(aqinizi derleyebilirsiniz. Örneğin \fB\-n\fP parametresi kodu çalıştırmayıp sadece hata kontrolü yapacaktır, \fB\-v\fP komutları çalıştırmadan yazdıracak, \fB\-x\fP ise işlem bittikten sonra kodları yazdıracaktır.
 .INDENT 0.0
@@ -1349,5 +1350,4 @@ bash \-x script_adi.sh
 .EE
 .UNINDENT
 .UNINDENT
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.

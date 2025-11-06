@@ -1,5 +1,6 @@
 '\" t
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.22.2 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -28,13 +29,13 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "C DERSI" "" "" ""
-.SH NAME
+.TH "C Dersi" "" "" ""
+.SH Name
 C Dersi \- 
 .sp
 Bu derste C programlama dersi anlatılacaktır.
 Bu dersin düzgünce anlaşılabilmesi için temel düzey gnu/linux bilmeniz gerekmektedir.
-.SH DERLEME IŞLEMI
+.SH Derleme işlemi
 .sp
 \fBC\fP derlemeli bir programlama dilidir.
 Yani yazılan kodun derleneek bilgisayarın anlayacağı hale getirilmesi gerekmektedir.
@@ -67,7 +68,7 @@ $ gcc \-o main main.c
 .EE
 .UNINDENT
 .UNINDENT
-.SH AÇIKLAMA SATIRI
+.SH Açıklama satırı
 .sp
 C kodlarında 3 farklı yolla girintileme yapılabilir.
 .INDENT 0.0
@@ -113,7 +114,7 @@ satırıdır
 .EE
 .UNINDENT
 .UNINDENT
-.SH GIRINTILEME
+.SH Girintileme
 .sp
 C programlama dilinde blocklar \fB{}\fP karakterleri ile belirtilir.
 Kodun okunalı olması için girintilenmesi gereklidir fakat şart değildir.
@@ -133,7 +134,7 @@ aaaa (bbbb) {
 .UNINDENT
 .sp
 \fBNot:\fP Her satırın sonunda ; işareti bulunmalıdır.
-.SH İLK PROGRAM
+.SH İlk program
 .sp
 C programları çalıştırıldığında \fBmain\fP fonsiyonu çalıştırılır.
 Aşağıda örnek main fonksiyonu bulunmaktadır.
@@ -167,7 +168,7 @@ void main(){}
 .EE
 .UNINDENT
 .UNINDENT
-.SH EKRANA YAZI YAZMA
+.SH Ekrana yazı yazma
 .sp
 Öncelikle \fBstdio.h\fP kütüphanesine ihtiyacimiz olduğu için onu eklemeliyiz.
 Ardından \fBprintf\fP fonksiyonu ile ekrana yazı yazabiliriz.
@@ -192,7 +193,7 @@ int main(int argc, char** argv) {
 .IP \(bu 2
 \fBprintf\fP fonksiyonundaki \fB%s\fP yazılar için, \fB%c\fP karakterler için, \fB%d\fP sayılar için kullanılır.
 .UNINDENT
-.SH DEĞIŞKENLER
+.SH Değişkenler
 .sp
 C dilinde değişkenler aşağıdaki gibi tanımlanır.
 .INDENT 0.0
@@ -222,7 +223,7 @@ printf(\(dq%d\en\(dq,sayi);
 .EE
 .UNINDENT
 .UNINDENT
-.SH DIZILER
+.SH Diziler
 .sp
 Diziler iki şekilde tanımlanabilir.
 .sp
@@ -283,7 +284,7 @@ int l = sizeof(dizi) / sizeof(int);
 .EE
 .UNINDENT
 .UNINDENT
-.SH KLAVYEDEN DEĞER ALMA
+.SH Klavyeden değer alma
 .sp
 Klavyeden değer almak için \fBscanf\fP kullanılır. İlk parameter şablonu diğerleri ise değişkenlerin bellek adresini belirtir.
 .INDENT 0.0
@@ -299,7 +300,7 @@ scanf(\(dq%d\en\(dq, &sayi);
 \fBNot:\fP Bu şekilde değer alma yaptığımızda formata uygun olmayan şekilde değer girilebilir.
 Eğer böyle bir durum oluşursa değişken \fBNULL\fP olarak atanır. yani değeri bulunmaz.
 Buda kodun işleyişinde soruna yol açabilir. Bu yüzden değişkeni kullanmadan ince \fBNULL\fP olup olmadığını kontrol etmelisiniz.
-.SH KOŞULLAR
+.SH Koşullar
 .sp
 Koşullar için \fBif\fP bloğu kullanılır. Block içindeki ifade \fB0\fP veya \fBNULL\fP olursa koşul sağlanmaz. Bu durumda varse \fBelse\fP bloğu çalıştırılır.
 .INDENT 0.0
@@ -356,7 +357,7 @@ if (i < 32)
 .UNINDENT
 .sp
 Koşul ifadeleri aşağıdaki gibi listelenebilir.
-.SH KOŞUL IŞLEYICILERI
+.SH Koşul işleyicileri
 .TS
 box center;
 l|l|l.
@@ -440,7 +441,7 @@ T}	T{
 12 <= 12
 T}
 .TE
-.SH SWITCH - CASE
+.SH Switch - Case
 .sp
 Bir sayıya karşılık bir işlem yapmak için \fBswitch \- case\fP yapısı kullanılır.
 .INDENT 0.0
@@ -462,7 +463,7 @@ Bir sayıya karşılık bir işlem yapmak için \fBswitch \- case\fP yapısı ku
 .EE
 .UNINDENT
 .UNINDENT
-.SH DÖNGÜLER
+.SH Döngüler
 .sp
 Döngüler koşullara benzer fakat döngülerde koşul sağlanmayana kadar block içi tekrarlanır.
 Döngü oluşturmak için \fBwhile\fP kullanılır.
@@ -522,7 +523,7 @@ Döngülerde \fBcontinue\fP kullanarak döngünün tamamlanması beklenmeden ba�
 Yukarıdaki örnekte döngü koşulu sürekli olarak devam etmeye neden olur.
 Sayımız 0dan küçükse döngü \fBbreak\fP kullanarak sonlandırılır.
 Döngü içinde \fBcontinue\fP kısmına gelindiğinde başa dönüldüğü için bir alttaki satır çalıştırılmaz.
-.SH GOTO
+.SH goto
 .sp
 C dilinde kodun içerisindeki bir yere etiket tanımlanıp \fBgoto\fP ile bu etikete gidilebilir.
 .INDENT 0.0
@@ -555,7 +556,7 @@ if(i < 0){
 .UNINDENT
 .sp
 Burada koşul bloğunun en sonunda tekrar başa dönmesi için \fBgoto\fP kullandık.
-.SH FONKSIYONLAR
+.SH Fonksiyonlar
 .sp
 C dilinde bir fonksiyon aşağıdaki gibi tanımlanır.
 .INDENT 0.0
@@ -646,7 +647,7 @@ void yaz(){
 .UNINDENT
 .sp
 \fBNot:\fP \fBinclude\fP ifadesinde \fB<>\fP içine aldığımız dosyalar \fB/usr/include\fP \fB\(dq\(dq\fP içine aldığımız ise mevcut dizinde aranır.
-.SH POINTER VE ADDRESS KAVRAMI
+.SH Pointer ve Address kavramı
 .sp
 Pointerlar bir değişkenin bellekte bulunduğu yeri belirtir. ve \fB*\fP işareti ile belirtir.
 Örneğin aşağıda bir metin pointer olarak tanımlansın ve 2 birim kaydırılsın.
@@ -745,7 +746,7 @@ void main(){
 .EE
 .UNINDENT
 .UNINDENT
-.SH DINAMIK BELLEK YÖNETIMI
+.SH Dinamik bellek yönetimi
 .sp
 Dinamik bellek yönetimi için \fBmalloc\fP, \fBrealloc\fP, \fBcalloc\fP, \fBfree\fP fonksiyonları kullanılır.
 Bu fonksiyonlar \fBstdlib.h\fP ile sağlanmaktadır.
@@ -829,7 +830,35 @@ void main(){
 .EE
 .UNINDENT
 .UNINDENT
-.SH STRUCT
+.sp
+Bellek yönetimi iki ana kısımda olur:
+.INDENT 0.0
+.IP 1. 3
+Stack (Yığın): Derleyicinin otomatik olarak yönettiği bellek alanı.
+.IP 2. 3
+Heap (Öbek): Programcı tarafından yönetilen bellek alanı.
+.UNINDENT
+.sp
+Bu iki bellek alanını kullanarak bir program yazalım.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+#include <stdio.h>
+void main() {
+    int a; // stack\(aqde yer ayırır ve değer atar.
+    int *b = malloc(sizeof(int)); // öbek\(aqten bellek ayırır. Değer atanmamış.
+    int c;
+    b = &a; // pointer artık işaret ettiği adres değişmiş oluyor.
+    scanf(\(dq%d\(dq,b);
+    printf(\(dqDeğer: %d\en\(dq,*b);
+}
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Stack belleği derleyici tarafından otomatik olarak serbest bırakılır. Heap bellekleri için de serbest bırakmak gereklidir.
+.SH Struct
 .sp
 \fBStructure\fP yapıları bellekte belli bir değişken topluluğu oluşturup kullanabilmek için kullanılır.
 Bu yapılar sayesinde kendi veri türlerinizi tanımlayabilirsiniz.
@@ -920,7 +949,7 @@ void main(){
 .EE
 .UNINDENT
 .UNINDENT
-.SH KÜTÜPHANE DOSYASI OLUŞTURMA
+.SH Kütüphane dosyası oluşturma
 .sp
 Kütüphaneler ana kaynak kodun kullandığı yardımcı kodları barındırır.
 Bu sayede her uygulama için tek tek aynı şeyleri yazmak yerine tek bir kütüphaneden yararlanılabilir.
@@ -1058,7 +1087,7 @@ Libs: \-ltest \-L{libdir}/test
 .UNINDENT
 .sp
 Yukarıdaki örnekte \fB/usr/include/test/\fP içerisindeki header dosyamızı ve \fB/usr/lib/test/\fP içindeki kütüphane dosyamızı sorunsuzca kullanarak derleme yapabilik.
-.SH C++ KODUNU C ILE KULLANMA
+.SH C++ kodunu C ile kullanma
 .sp
 Aşağıdaki gibi bir C++ kodumuz olsun.
 .INDENT 0.0
@@ -1174,5 +1203,4 @@ gcc tast.o main.o \-o main \-lstdc++
 .UNINDENT
 .sp
 Burada libstdc++ C++ kodunun bağımlılığıdır.
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.

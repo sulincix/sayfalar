@@ -1,4 +1,5 @@
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.22.2 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -27,12 +28,12 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "PYTHON DERSI" "" "" ""
-.SH NAME
+.TH "Python dersi" "" "" ""
+.SH Name
 Python dersi \- 
 .sp
 Bu yazıda python programlama dilini hızlıca anlatacağım. Bu yazıda karıştırılmaması için girdilerin olduğu satırlar \fI<\-\fP ile çıktıların olduğu satırlar \fI\->\fP ile işaretlenmiştir.
-.SH AÇIKLAMA SATIRLARI
+.SH Açıklama satırları
 .sp
 Python programlama dilinde açıklamalar \fB#\fP işaretinden sonrası için geçerlidir. Örneğin:
 .INDENT 0.0
@@ -55,7 +56,7 @@ Bu son açıklama satırı \(dq\(dq\(dq
 .EE
 .UNINDENT
 .UNINDENT
-.SH TEMEL BILGILER
+.SH Temel bilgiler
 .sp
 Python programlarının ilk satırında \fB#!/usr/bin/python3\fP satırı bulunmalıdır.
 Bir python programını çalıştırmak için Şunları uygulamamız gereklidir.
@@ -98,7 +99,7 @@ if f == 12: # f sayısı 12ye eşit mi diye sorguladık
 .UNINDENT
 .sp
 Girintileme için 4 boşluk, 2 boşluk veya tek tab kullanabilirsiniz. Bu yazıda 4 boşluğu tercih edeceğiz.
-.SH YAZI YAZDIRMA
+.SH Yazı yazdırma
 .sp
 Pythonda ekrana yazı yazmak için \fBprint\fP işlevini kullanıyoruz.
 .INDENT 0.0
@@ -124,7 +125,7 @@ print(\(dqMerhaba\(dq,12,\(dqDünya\(dq,True)
 .EE
 .UNINDENT
 .UNINDENT
-.SH DEĞIŞKENLER
+.SH Değişkenler
 .sp
 Değişkenler içerisinde veri bulunduran ve ihtiyaç durumunda bu veriyi düzenleme imkanı tanıyan kavramlardır.
 Değişkenler tanımlanırken \fBdegisken = deger\fP şeklinde bir ifade kulanılır.
@@ -372,7 +373,7 @@ print(veri)
 .EE
 .UNINDENT
 .UNINDENT
-.SH KLAVYEDEN DEĞER ALMA
+.SH Klavyeden değer alma
 .sp
 Python programlarının kullanıcı ile etkileşime girmesi için klavye üzerinden kullanıcıdan değer alması gerekebilir. Bunun için \fBinput\fP işlevi kullanılır. Bu işlevin çıkışı string türündendir.
 .INDENT 0.0
@@ -400,7 +401,7 @@ print(a)
 .UNINDENT
 .sp
 \fBNot:\fP Bu işlev tehlikelidir. Potansiyel güvenlik açığına neden olabilir! Mümkün olduğu kadar kullanmayın :D
-.SH KOŞULLAR
+.SH Koşullar
 .sp
 Koşul tanımı yapmak için \fBif\fP ifadesi kullanılır. Koşul sağlanmıyorsa \fBelif\fP ifadesi ile yeni bir koşul tanımlanabilir veya \fBelse\fP ifadesi ile koşulun sağlanmadığı durum tanımlanabilir.
 .INDENT 0.0
@@ -476,7 +477,7 @@ Bu konunun daha iyi anlaşılması için:
 .EE
 .UNINDENT
 .UNINDENT
-.SH DIZILER
+.SH Diziler
 .sp
 Diziler birden çok elemanı içerebilen değişkenlerdir. Diziler aşağıdaki gibi tanımlanır:
 .INDENT 0.0
@@ -587,7 +588,7 @@ print(liste)
 .EE
 .UNINDENT
 .UNINDENT
-.SH WHILE DÖNGÜSÜ
+.SH While döngüsü
 .sp
 Döngüler belli bir işi koşul bağlanana kadar tekrar etmeye yarayan işlevdir. Kısaca \fBwhile\fP döngüsü ile \fBif\fP arasındaki fark \fBwhile\fP içerisindeki durum tamamlandığı zaman tekrar başa dönüp koşulu kontrol eder.
 .INDENT 0.0
@@ -628,7 +629,7 @@ while True:
 .EE
 .UNINDENT
 .UNINDENT
-.SH FOR DÖNGÜSÜ
+.SH For döngüsü
 .sp
 For döngüsü while ile benzerdir fakat koşul aranmak yerine iteration yapar. Bu işlemde bir dizinin bütün elemanları tek tek işleme koyulur. Aşağıdaki gibi bir kullanımı vardır:
 .INDENT 0.0
@@ -699,7 +700,7 @@ print(asallar) # 60a kadar olan asal sayılar dizisini yazalım.
 .EE
 .UNINDENT
 .UNINDENT
-.SH İŞLEVLER
+.SH İşlevler
 .sp
 Python programlarken işlev tanımlayıp daha sonra bu işlevi kullanabiliriz. İşlevler aşağıdaki gibi tanımlanırlar:
 .INDENT 0.0
@@ -799,7 +800,7 @@ print(ortalama(ort\&.split(\(dq,\(dq)))
 .EE
 .UNINDENT
 .UNINDENT
-.SH SINIFLAR
+.SH Sınıflar
 .sp
 Sınıf kavramı işlevlerin ve değişkenlerin guruplanarak nesneler haline getirilmesinden meydana gelir. Yani bir sınıf ona bağlı işlevlerden ve değişkenlerden oluşur. Sınıflar aşağıdaki gibi tanımlanırlar.
 .INDENT 0.0
@@ -839,7 +840,7 @@ print(a,b)
 .UNINDENT
 .sp
 Burada işlevlere \fBnesne.islev()\fP ifadesi ile erişebiliyoruz. Aynı zamanda değişkenlere de \fBnesne.degisken\fP ifadesi ile erişmemiz ve değiştirmemiz mümkündür. Sınıf içerisinden ise \fBself.islev()\fP ve \fBself.degisken\fP şeklinde bir ifade kullanmamız gerekmektedir.
-.SH DOSYA IŞLEMLERI
+.SH Dosya işlemleri
 .sp
 Bir dosyayı açmak için \fBopen\fP işlevi kullanılır. Açılan dosyadan satır okumak için \fBreadline\fP işlevi, tamamını okumak için \fBread\fP işlevi, tüm satırları okuyup dizi haline getirmek için ise \fBreadlines\fP işlevi kullanılır.
 .sp
@@ -883,7 +884,7 @@ dosya\&.close()
 .EE
 .UNINDENT
 .UNINDENT
-.SH MODÜLLER
+.SH Modüller
 .sp
 Python programlarında kodların markaşıklaşmasını önlemek ve daha kullanışlı hale getirmek amacıyla modüller bulunur. Modüller \fBimport\fP ifadesi ile çağırılır. Modüller aslında birer Birer python kütüphanesidir ve sınıf sayılırlar. Örneğin deneme.py dosyamızda aşağıdaki kodlar bulunsun:
 .INDENT 0.0
@@ -1014,5 +1015,4 @@ g\&.hmm(\(dqabc123\(dq)
 .EE
 .UNINDENT
 .UNINDENT
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.

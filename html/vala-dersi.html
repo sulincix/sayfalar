@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.21.2: https://docutils.sourceforge.io/" />
+<meta name="generator" content="Docutils 0.22.2: https://docutils.sourceforge.io/" />
 <title>Vala dersi</title>
 <link rel="stylesheet" href="main.css" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
@@ -673,9 +673,10 @@ $<span class="whitespace"> </span>install<span class="whitespace"> </span>libhel
 </span>$<span class="whitespace"> </span>install<span class="whitespace"> </span>hello-1.0.typelib<span class="whitespace"> </span>/usr/share/girepository-1.0/
 </pre>
 <p>Bunun yerine aşağıdaki 2 çevresel değişkeni ayarlayarak test etmemiz mümkün dür.</p>
-<blockquote>
-$ export GI_REPOSITORY_PATH=/home/user/gobject-ornek
-$ export LD_LIBRARY_PATH=/home/user/gobject-ornek</blockquote>
+<pre class="code shell literal-block">
+$<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">GI_REPOSITORY_PATH</span><span class="operator">=</span>/home/user/gobject-ornek<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span><span class="name variable">LD_LIBRARY_PATH</span><span class="operator">=</span>/home/user/gobject-ornek
+</pre>
 <p>Şimdi yazdığımız kütüphaneyi python ile çalıştıralım. Bunun için aşağıdaki gibi bir python kodu yazabiliriz.</p>
 <pre class="code python literal-block">
 <span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">gi</span><span class="whitespace">
